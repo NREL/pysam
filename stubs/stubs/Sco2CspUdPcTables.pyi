@@ -183,6 +183,7 @@ class Sco2CspUdPcTables(object):
 		PHX_co2_deltaP_des = float
 		PHX_cost_bare_erected = float
 		PHX_cost_equipment = float
+		PHX_min_dT = float
 		P_co2_PHX_in = float
 		P_comp_in = float
 		P_comp_out = float

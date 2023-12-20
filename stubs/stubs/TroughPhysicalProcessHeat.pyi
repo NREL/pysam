@@ -252,15 +252,6 @@ class TroughPhysicalProcessHeat(object):
 		disp_steps_per_hour = float
 		disp_time_weighting = float
 		disp_timeout = float
-		dispatch_factor1 = float
-		dispatch_factor2 = float
-		dispatch_factor3 = float
-		dispatch_factor4 = float
-		dispatch_factor5 = float
-		dispatch_factor6 = float
-		dispatch_factor7 = float
-		dispatch_factor8 = float
-		dispatch_factor9 = float
 		dispatch_factors_ts = tuple
 		dispatch_sched_weekday = tuple
 		dispatch_sched_weekend = tuple
@@ -293,6 +284,20 @@ class TroughPhysicalProcessHeat(object):
 
 
 		disp_inventory_incentive = float
+
+
+	class TimeOfDeliveryFactors(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		dispatch_tod_factors = tuple
 
 
 	class System(object):
@@ -336,14 +341,26 @@ class TroughPhysicalProcessHeat(object):
 			pass
 	
 		constant = float
-		dc_constant = float
-		dc_hourly = tuple
-		dc_periods = tuple
+		en_hourly = float
+		en_periods = float
+		en_timeindex = float
 		hourly = tuple
 		periods = tuple
+		imeindex = tuple
+		dc_constant = float
+		dc_en_hourly = float
+		dc_en_periods = float
+		dc_en_timeindex = float
+		dc_hourly = tuple
+		dc_periods = tuple
+		dc_imeindex = tuple
 		sf_constant = float
+		sf_en_hourly = float
+		sf_en_periods = float
+		sf_en_timeindex = float
 		sf_hourly = tuple
 		sf_periods = tuple
+		sf_timeindex = tuple
 
 	class Outputs(object):
 		def assign(self): 

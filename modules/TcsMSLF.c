@@ -273,7 +273,7 @@ Mslf_set_system_capacity(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Mslf_getset[] = {
 {"system_capacity", (getter)Mslf_get_system_capacity,(setter)Mslf_set_system_capacity,
-	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n**Required:**\nTrue\n\nThe value of ``system_capacity`` depends on the following variables:\n\n\t - P_ref\n"),
+	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2266,7 +2266,7 @@ Controller_set_vol_tank(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Controller_getset[] = {
 {"A_aperture", (getter)Controller_get_A_aperture,(setter)Controller_set_A_aperture,
-	PyDoc_STR("*float*: Reflective aperture area of the collector [m2]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``A_aperture``:\n\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n"),
+	PyDoc_STR("*float*: Reflective aperture area of the collector [m2]\n\n**Required:**\nTrue"),
  	NULL},
 {"AbsorberMaterial", (getter)Controller_get_AbsorberMaterial,(setter)Controller_set_AbsorberMaterial,
 	PyDoc_STR("*sequence*: Absorber material type\n\n**Required:**\nTrue"),
@@ -2305,10 +2305,10 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*sequence*: Receiver heat loss at design [W/m]\n\n**Required:**\nTrue"),
  	NULL},
 {"Dirt_mirror", (getter)Controller_get_Dirt_mirror,(setter)Controller_set_Dirt_mirror,
-	PyDoc_STR("*float*: User-defined dirt on mirror derate\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``Dirt_mirror``:\n\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n"),
+	PyDoc_STR("*float*: User-defined dirt on mirror derate\n\n**Required:**\nTrue"),
  	NULL},
 {"Error", (getter)Controller_get_Error,(setter)Controller_set_Error,
-	PyDoc_STR("*float*: User-defined general optical error derate\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``Error``:\n\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n"),
+	PyDoc_STR("*float*: User-defined general optical error derate\n\n**Required:**\nTrue"),
  	NULL},
 {"FieldConfig", (getter)Controller_get_FieldConfig,(setter)Controller_set_FieldConfig,
 	PyDoc_STR("*float*: Number of subfield headers\n\n**Required:**\nTrue"),
@@ -2317,10 +2317,10 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*sequence*: The flow type through the absorber\n\n**Required:**\nTrue"),
  	NULL},
 {"Fluid", (getter)Controller_get_Fluid,(setter)Controller_set_Fluid,
-	PyDoc_STR("*float*: Field HTF fluid number\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``Fluid``:\n\n\t - field_fluid\n\t - is_hx\n"),
+	PyDoc_STR("*float*: Field HTF fluid number\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"GeomEffects", (getter)Controller_get_GeomEffects,(setter)Controller_set_GeomEffects,
-	PyDoc_STR("*float*: Geometry effects derate\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``GeomEffects``:\n\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n"),
+	PyDoc_STR("*float*: Geometry effects derate\n\n**Required:**\nTrue"),
  	NULL},
 {"GlazingIntactIn", (getter)Controller_get_GlazingIntactIn,(setter)Controller_set_GlazingIntactIn,
 	PyDoc_STR("*sequence*: The glazing intact flag\n\n**Required:**\nTrue"),
@@ -2347,13 +2347,13 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: Direct normal incident solar irradiation [kJ/m2-hr]\n\n**Required:**\nTrue"),
  	NULL},
 {"I_bn_des", (getter)Controller_get_I_bn_des,(setter)Controller_set_I_bn_des,
-	PyDoc_STR("*float*: Solar irradiation at design [W/m2]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``I_bn_des``:\n\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n"),
+	PyDoc_STR("*float*: Solar irradiation at design [W/m2]\n\n**Required:**\nTrue"),
  	NULL},
 {"L_crossover", (getter)Controller_get_L_crossover,(setter)Controller_set_L_crossover,
 	PyDoc_STR("*float*: Length of crossover piping in a loop [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"L_mod", (getter)Controller_get_L_mod,(setter)Controller_set_L_mod,
-	PyDoc_STR("*float*: The length of the collector module [m]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``L_mod``:\n\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n"),
+	PyDoc_STR("*float*: The length of the collector module [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"L_mod_spacing", (getter)Controller_get_L_mod_spacing,(setter)Controller_set_L_mod_spacing,
 	PyDoc_STR("*float*: Piping distance between sequential modules in a loop [m]\n\n**Required:**\nTrue"),
@@ -2380,7 +2380,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*sequence*: Receiver bellows shadowing loss factor\n\n**Required:**\nTrue"),
  	NULL},
 {"T_amb_sf_des", (getter)Controller_get_T_amb_sf_des,(setter)Controller_set_T_amb_sf_des,
-	PyDoc_STR("*float*: Ambient design-point temperature for the solar field [C]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``T_amb_sf_des``:\n\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n"),
+	PyDoc_STR("*float*: Ambient design-point temperature for the solar field [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_cold_in", (getter)Controller_get_T_cold_in,(setter)Controller_set_T_cold_in,
 	PyDoc_STR("*float*: HTF return temperature [C]\n\n**Required:**\nTrue"),
@@ -2392,22 +2392,22 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: The dewpoint temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_field_in_des", (getter)Controller_get_T_field_in_des,(setter)Controller_set_T_field_in_des,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``T_field_in_des`` depends on the following variables:\n\n\t - T_loop_in_des\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"T_field_ini", (getter)Controller_get_T_field_ini,(setter)Controller_set_T_field_ini,
 	PyDoc_STR("*float*: Initial field temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_field_out_des", (getter)Controller_get_T_field_out_des,(setter)Controller_set_T_field_out_des,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``T_field_out_des`` depends on the following variables:\n\n\t - T_loop_out\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"T_fp", (getter)Controller_get_T_fp,(setter)Controller_set_T_fp,
 	PyDoc_STR("*float*: Freeze protection temperature (heat trace activation temperature) [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_loop_in_des", (getter)Controller_get_T_loop_in_des,(setter)Controller_set_T_loop_in_des,
-	PyDoc_STR("*float*: Design loop inlet temperature [C]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``T_loop_in_des``:\n\n\t - T_field_in_des\n\t - T_htf_cold_ref\n\t - T_tank_cold_ini\n\t - V_tank_hot_ini\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n\t - tes_temp\n\t - vol_tank\n"),
+	PyDoc_STR("*float*: Design loop inlet temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_loop_out", (getter)Controller_get_T_loop_out,(setter)Controller_set_T_loop_out,
-	PyDoc_STR("*float*: Target loop outlet temperature [C]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``T_loop_out``:\n\n\t - T_field_out_des\n\t - T_htf_hot_ref\n\t - T_tank_hot_ini\n\t - V_tank_hot_ini\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n\t - tes_temp\n\t - vol_tank\n"),
+	PyDoc_STR("*float*: Target loop outlet temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_set_aux", (getter)Controller_get_T_set_aux,(setter)Controller_set_T_set_aux,
 	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
@@ -2416,10 +2416,10 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: Power block startup temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_tank_cold_ini", (getter)Controller_get_T_tank_cold_ini,(setter)Controller_set_T_tank_cold_ini,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``T_tank_cold_ini`` depends on the following variables:\n\n\t - T_loop_in_des\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"T_tank_hot_ini", (getter)Controller_get_T_tank_hot_ini,(setter)Controller_set_T_tank_hot_ini,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``T_tank_hot_ini`` depends on the following variables:\n\n\t - T_loop_out\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"T_tank_hot_inlet_min", (getter)Controller_get_T_tank_hot_inlet_min,(setter)Controller_set_T_tank_hot_inlet_min,
 	PyDoc_STR("*float*: Minimum hot tank htf inlet temperature [C]\n\n**Required:**\nTrue"),
@@ -2428,7 +2428,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*sequence*: Envelope transmittance\n\n**Required:**\nTrue"),
  	NULL},
 {"TrackingError", (getter)Controller_get_TrackingError,(setter)Controller_set_TrackingError,
-	PyDoc_STR("*float*: Tracking error derate\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``TrackingError``:\n\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n"),
+	PyDoc_STR("*float*: Tracking error derate\n\n**Required:**\nTrue"),
  	NULL},
 {"V_hdr_max", (getter)Controller_get_V_hdr_max,(setter)Controller_set_V_hdr_max,
 	PyDoc_STR("*float*: Maximum HTF velocity in the header at design [m/s]\n\n**Required:**\nTrue"),
@@ -2437,7 +2437,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: Minimum HTF velocity in the header at design [m/s]\n\n**Required:**\nTrue"),
  	NULL},
 {"V_tank_hot_ini", (getter)Controller_get_V_tank_hot_ini,(setter)Controller_set_V_tank_hot_ini,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``V_tank_hot_ini`` depends on the following variables:\n\n\t - P_ref\n\t - T_loop_in_des\n\t - T_loop_out\n\t - dt_cold\n\t - dt_hot\n\t - eta_ref\n\t - store_fl_props\n\t - tes_temp\n\t - tshours\n\t - vol_tank\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"V_tes_des", (getter)Controller_get_V_tes_des,(setter)Controller_set_V_tes_des,
 	PyDoc_STR("*float*: Design-point velocity to size the TES pipe diameters [m/s]\n\n**Required:**\nTrue"),
@@ -2449,7 +2449,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: Design-point wind velocity [m/s]\n\n**Required:**\nTrue"),
  	NULL},
 {"W_pb_design", (getter)Controller_get_W_pb_design,(setter)Controller_set_W_pb_design,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``W_pb_design`` depends on the following variables:\n\n\t - P_ref\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"alpha_abs", (getter)Controller_get_alpha_abs,(setter)Controller_set_alpha_abs,
 	PyDoc_STR("*sequence*: Absorber absorptance\n\n**Required:**\nTrue"),
@@ -2488,10 +2488,10 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*sequence*: Loss due to dirt on the receiver envelope\n\n**Required:**\nTrue"),
  	NULL},
 {"dt_cold", (getter)Controller_get_dt_cold,(setter)Controller_set_dt_cold,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``dt_cold``:\n\n\t - V_tank_hot_ini\n\t - vol_tank\n\n\nThe value of ``dt_cold`` depends on the following variables:\n\n\t - dt_hot\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"dt_hot", (getter)Controller_get_dt_hot,(setter)Controller_set_dt_hot,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``dt_hot``:\n\n\t - V_tank_hot_ini\n\t - dt_cold\n\t - vol_tank\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"epsilon_abs_1", (getter)Controller_get_epsilon_abs_1,(setter)Controller_set_epsilon_abs_1,
 	PyDoc_STR("*sequence[sequence]*: Absorber emittance - HCE variation 1\n\n**Required:**\nTrue"),
@@ -2524,19 +2524,19 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Fluid property data\n\n**Required:**\nTrue"),
  	NULL},
 {"field_fluid", (getter)Controller_get_field_fluid,(setter)Controller_set_field_fluid,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``field_fluid`` depends on the following variables:\n\n\t - Fluid\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"fossil_mode", (getter)Controller_get_fossil_mode,(setter)Controller_set_fossil_mode,
 	PyDoc_STR("*float*: Label\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"fthr_ok", (getter)Controller_get_fthr_ok,(setter)Controller_set_fthr_ok,
-	PyDoc_STR("*float*: Label\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue\n\nThe value of ``fthr_ok`` depends on the following variables:\n\n\t - fthrok\n"),
+	PyDoc_STR("*float*: Label\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"fthrctrl", (getter)Controller_get_fthrctrl,(setter)Controller_set_fthrctrl,
 	PyDoc_STR("*float*: Defocusing strategy\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"fthrok", (getter)Controller_get_fthrok,(setter)Controller_set_fthrok,
-	PyDoc_STR("*float*: Flag to allow partial defocusing of the collectors\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``fthrok``:\n\n\t - fthr_ok\n"),
+	PyDoc_STR("*float*: Flag to allow partial defocusing of the collectors\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"h_tank", (getter)Controller_get_h_tank,(setter)Controller_set_h_tank,
 	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
@@ -2554,7 +2554,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"is_hx", (getter)Controller_get_is_hx,(setter)Controller_set_is_hx,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``is_hx`` depends on the following variables:\n\n\t - Fluid\n\t - store_fluid\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"k_tes_loss_coeffs", (getter)Controller_get_k_tes_loss_coeffs,(setter)Controller_set_k_tes_loss_coeffs,
 	PyDoc_STR("*sequence*: Minor loss coeffs for the coll, gen, and bypass loops [-]\n\n**Required:**\nTrue"),
@@ -2575,16 +2575,16 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: Non-HTF heat capacity associated with each SCA - per meter basis [Wht/K-m]\n\n**Required:**\nTrue"),
  	NULL},
 {"nLoops", (getter)Controller_get_nLoops,(setter)Controller_set_nLoops,
-	PyDoc_STR("*float*: Number of loops in the field\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``nLoops``:\n\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n\n\nThe value of ``nLoops`` depends on the following variables:\n\n\t - A_aperture\n\t - Dirt_mirror\n\t - Error\n\t - GeomEffects\n\t - I_bn_des\n\t - L_mod\n\t - P_ref\n\t - T_amb_sf_des\n\t - T_loop_in_des\n\t - T_loop_out\n\t - TrackingError\n\t - eta_ref\n\t - nMod\n\t - reflectivity\n"),
+	PyDoc_STR("*float*: Number of loops in the field\n\n**Required:**\nTrue"),
  	NULL},
 {"nMod", (getter)Controller_get_nMod,(setter)Controller_set_nMod,
-	PyDoc_STR("*float*: Number of collector modules in a loop\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``nMod``:\n\n\t - nLoops\n\t - nSCA\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n"),
+	PyDoc_STR("*float*: Number of collector modules in a loop\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"nRecVar", (getter)Controller_get_nRecVar,(setter)Controller_set_nRecVar,
 	PyDoc_STR("*float*: Number of receiver variantions\n\n**Constraints:**\nINTEGER\n\n**Required:**\nFalse. Automatically set to 4 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"nSCA", (getter)Controller_get_nSCA,(setter)Controller_set_nSCA,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``nSCA`` depends on the following variables:\n\n\t - nMod\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"nodes", (getter)Controller_get_nodes,(setter)Controller_set_nodes,
 	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
@@ -2599,13 +2599,13 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"pb_rated_cap", (getter)Controller_get_pb_rated_cap,(setter)Controller_set_pb_rated_cap,
-	PyDoc_STR("*float*: Rated plant capacity [MWe]\n\n**Required:**\nTrue\n\nThe value of ``pb_rated_cap`` depends on the following variables:\n\n\t - P_ref\n"),
+	PyDoc_STR("*float*: Rated plant capacity [MWe]\n\n**Required:**\nTrue"),
  	NULL},
 {"q_max_aux", (getter)Controller_get_q_max_aux,(setter)Controller_set_q_max_aux,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``q_max_aux`` depends on the following variables:\n\n\t - A_aperture\n\t - Dirt_mirror\n\t - Error\n\t - GeomEffects\n\t - I_bn_des\n\t - L_mod\n\t - P_ref\n\t - T_amb_sf_des\n\t - T_loop_in_des\n\t - T_loop_out\n\t - TrackingError\n\t - eta_ref\n\t - nLoops\n\t - nMod\n\t - reflectivity\n\t - solar_mult\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"q_pb_design", (getter)Controller_get_q_pb_design,(setter)Controller_set_q_pb_design,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``q_pb_design`` depends on the following variables:\n\n\t - P_ref\n\t - eta_ref\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"rec_htf_vol", (getter)Controller_get_rec_htf_vol,(setter)Controller_set_rec_htf_vol,
 	PyDoc_STR("*float*: Volume of HTF in a single collector unit per unit aperture area [L/m2-ap]\n\n**Required:**\nTrue"),
@@ -2614,7 +2614,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: Receiver model type (1=Polynomial ; 2=Evac tube)\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"reflectivity", (getter)Controller_get_reflectivity,(setter)Controller_set_reflectivity,
-	PyDoc_STR("*float*: Solar-weighted mirror reflectivity value\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``reflectivity``:\n\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n"),
+	PyDoc_STR("*float*: Solar-weighted mirror reflectivity value\n\n**Required:**\nTrue"),
  	NULL},
 {"sgs_diams", (getter)Controller_get_sgs_diams,(setter)Controller_set_sgs_diams,
 	PyDoc_STR("*sequence*: Custom SGS diameters [m]\n\n**Required:**\nTrue"),
@@ -2626,16 +2626,16 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*sequence*: Custom SGS wall thicknesses [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"solar_mult", (getter)Controller_get_solar_mult,(setter)Controller_set_solar_mult,
-	PyDoc_STR("*float*: Solar multiple\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``solar_mult``:\n\n\t - q_max_aux\n\t - solarm\n\n\nThe value of ``solar_mult`` depends on the following variables:\n\n\t - A_aperture\n\t - Dirt_mirror\n\t - Error\n\t - GeomEffects\n\t - I_bn_des\n\t - L_mod\n\t - P_ref\n\t - T_amb_sf_des\n\t - T_loop_in_des\n\t - T_loop_out\n\t - TrackingError\n\t - eta_ref\n\t - nLoops\n\t - nMod\n\t - reflectivity\n"),
+	PyDoc_STR("*float*: Solar multiple\n\n**Required:**\nTrue"),
  	NULL},
 {"solarm", (getter)Controller_get_solarm,(setter)Controller_set_solarm,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``solarm`` depends on the following variables:\n\n\t - A_aperture\n\t - Dirt_mirror\n\t - Error\n\t - GeomEffects\n\t - I_bn_des\n\t - L_mod\n\t - P_ref\n\t - T_amb_sf_des\n\t - T_loop_in_des\n\t - T_loop_out\n\t - TrackingError\n\t - eta_ref\n\t - nLoops\n\t - nMod\n\t - reflectivity\n\t - solar_mult\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"store_fl_props", (getter)Controller_get_store_fl_props,(setter)Controller_set_store_fl_props,
-	PyDoc_STR("*sequence[sequence]*: Label\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``store_fl_props``:\n\n\t - V_tank_hot_ini\n\t - vol_tank\n"),
+	PyDoc_STR("*sequence[sequence]*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"store_fluid", (getter)Controller_get_store_fluid,(setter)Controller_set_store_fluid,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``store_fluid``:\n\n\t - is_hx\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"t_ch_out_max", (getter)Controller_get_t_ch_out_max,(setter)Controller_set_t_ch_out_max,
 	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
@@ -2665,7 +2665,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"tes_temp", (getter)Controller_get_tes_temp,(setter)Controller_set_tes_temp,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``tes_temp``:\n\n\t - V_tank_hot_ini\n\t - vol_tank\n\n\nThe value of ``tes_temp`` depends on the following variables:\n\n\t - T_loop_in_des\n\t - T_loop_out\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"tes_type", (getter)Controller_get_tes_type,(setter)Controller_set_tes_type,
 	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
@@ -2677,7 +2677,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: stow angle [deg]\n\n**Required:**\nTrue"),
  	NULL},
 {"tshours", (getter)Controller_get_tshours,(setter)Controller_set_tshours,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``tshours``:\n\n\t - V_tank_hot_ini\n\t - vol_tank\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"tslogic_a", (getter)Controller_get_tslogic_a,(setter)Controller_set_tslogic_a,
 	PyDoc_STR("*sequence*: Label\n\n**Required:**\nTrue"),
@@ -2692,7 +2692,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"vol_tank", (getter)Controller_get_vol_tank,(setter)Controller_set_vol_tank,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``vol_tank``:\n\n\t - V_tank_hot_ini\n\n\nThe value of ``vol_tank`` depends on the following variables:\n\n\t - P_ref\n\t - T_loop_in_des\n\t - T_loop_out\n\t - dt_cold\n\t - dt_hot\n\t - eta_ref\n\t - store_fl_props\n\t - tes_temp\n\t - tshours\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3209,7 +3209,7 @@ static PyGetSetDef Powerblock_getset[] = {
 	PyDoc_STR("*float*: Condenser pressure ratio [none]\n\n**Required:**\nRequired if pc_config=0"),
  	NULL},
 {"P_ref", (getter)Powerblock_get_P_ref,(setter)Powerblock_set_P_ref,
-	PyDoc_STR("*float*: Label [-]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``P_ref``:\n\n\t - V_tank_hot_ini\n\t - W_pb_design\n\t - nLoops\n\t - pb_rated_cap\n\t - q_max_aux\n\t - q_pb_design\n\t - solar_mult\n\t - solarm\n\t - system_capacity\n\t - vol_tank\n"),
+	PyDoc_STR("*float*: Label [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_ITD_des", (getter)Powerblock_get_T_ITD_des,(setter)Powerblock_set_T_ITD_des,
 	PyDoc_STR("*float*: ITD at design for dry system [C]\n\n**Required:**\nRequired if pc_config=0"),
@@ -3221,16 +3221,16 @@ static PyGetSetDef Powerblock_getset[] = {
 	PyDoc_STR("*float*: Cooling tower approach temperature [C]\n\n**Required:**\nRequired if pc_config=0"),
  	NULL},
 {"T_htf_cold_ref", (getter)Powerblock_get_T_htf_cold_ref,(setter)Powerblock_set_T_htf_cold_ref,
-	PyDoc_STR("*float*: Label [-]\n\n**Required:**\nTrue\n\nThe value of ``T_htf_cold_ref`` depends on the following variables:\n\n\t - T_loop_in_des\n"),
+	PyDoc_STR("*float*: Label [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_htf_hot_ref", (getter)Powerblock_get_T_htf_hot_ref,(setter)Powerblock_set_T_htf_hot_ref,
-	PyDoc_STR("*float*: Label [-]\n\n**Required:**\nTrue\n\nThe value of ``T_htf_hot_ref`` depends on the following variables:\n\n\t - T_loop_out\n"),
+	PyDoc_STR("*float*: Label [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"dT_cw_ref", (getter)Powerblock_get_dT_cw_ref,(setter)Powerblock_set_dT_cw_ref,
 	PyDoc_STR("*float*: Reference condenser cooling water inlet/outlet T diff [C]\n\n**Required:**\nRequired if pc_config=0"),
  	NULL},
 {"eta_ref", (getter)Powerblock_get_eta_ref,(setter)Powerblock_set_eta_ref,
-	PyDoc_STR("*float*: Cycle thermal efficiency at design point [-]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``eta_ref``:\n\n\t - V_tank_hot_ini\n\t - nLoops\n\t - q_max_aux\n\t - q_pb_design\n\t - solar_mult\n\t - solarm\n\t - vol_tank\n"),
+	PyDoc_STR("*float*: Cycle thermal efficiency at design point [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"n_pl_inc", (getter)Powerblock_get_n_pl_inc,(setter)Powerblock_set_n_pl_inc,
 	PyDoc_STR("*float*: Number of part-load increments for the heat rejection system [none]\n\n**Required:**\nRequired if pc_config=0"),
@@ -4563,6 +4563,14 @@ TcsMSLF_dealloc(CmodObject *self)
 
 
 static PyObject *
+TcsMSLF_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 TcsMSLF_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -4629,6 +4637,8 @@ TcsMSLF_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef TcsMSLF_methods[] = {
 		{"execute",           (PyCFunction)TcsMSLF_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)TcsMSLF_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)TcsMSLF_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'weather': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)TcsMSLF_replace,  METH_VARARGS,
@@ -4797,7 +4807,7 @@ static PyMethodDef TcsMSLFModule_methods[] = {
 		{"new",             TcsMSLF_new,         METH_VARARGS,
 				PyDoc_STR("new() -> TcsMSLF")},
 		{"default",             TcsMSLF_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> TcsMSLF\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"MSLFAllEquityPartnershipFlip\"*\n\n		- *\"MSLFCommercial\"*\n\n		- *\"MSLFLCOECalculator\"*\n\n		- *\"MSLFLeveragedPartnershipFlip\"*\n\n		- *\"MSLFMerchantPlant\"*\n\n		- *\"MSLFNone\"*\n\n		- *\"MSLFSaleLeaseback\"*\n\n		- *\"MSLFSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> TcsMSLF\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             TcsMSLF_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> TcsMSLF\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   TcsMSLF_from_existing,        METH_VARARGS,
@@ -4819,25 +4829,6 @@ TcsMSLFModule_exec(PyObject *m)
 
 	TcsMSLF_Type.tp_dict = PyDict_New();
 	if (!TcsMSLF_Type.tp_dict) { goto fail; }
-
-	/// Add the AdjustmentFactors type object to TcsMSLF_Type
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-	if (!AdjustmentFactorsModule){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
-	}
-
-	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
-	if (!AdjustmentFactors_Type){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
-	}
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(TcsMSLF_Type.tp_dict,
-						 "AdjustmentFactors",
-						 (PyObject*)AdjustmentFactors_Type);
-	Py_DECREF(&AdjustmentFactors_Type);
-	Py_XDECREF(AdjustmentFactors_Type);
 
 	/// Add the Weather type object to TcsMSLF_Type
 	if (PyType_Ready(&Weather_Type) < 0) { goto fail; }

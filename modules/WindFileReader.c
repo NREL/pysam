@@ -486,6 +486,14 @@ WindFileReader_dealloc(CmodObject *self)
 
 
 static PyObject *
+WindFileReader_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 WindFileReader_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -552,6 +560,8 @@ WindFileReader_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef WindFileReader_methods[] = {
 		{"execute",           (PyCFunction)WindFileReader_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)WindFileReader_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)WindFileReader_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Weather Reader': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)WindFileReader_replace,  METH_VARARGS,

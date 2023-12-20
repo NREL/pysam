@@ -62,6 +62,12 @@ SystemControl Group
 .. autoclass:: PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SystemControl
 	:members:
 
+TimeOfDeliveryFactors Group
+----------------------------
+
+.. autoclass:: PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TimeOfDeliveryFactors
+	:members:
+
 System Group
 -------------
 
@@ -77,8 +83,9 @@ Powerblock Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors
+.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
 	:members:
+	:noindex:
 
 Outputs Group
 --------------

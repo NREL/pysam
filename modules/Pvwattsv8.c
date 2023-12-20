@@ -615,54 +615,6 @@ SystemDesign_set_rotlim(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-SystemDesign_get_shading_azal(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Pvwattsv8_SystemDesign_shading_azal_mget, self->data_ptr);
-}
-
-static int
-SystemDesign_set_shading_azal(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Pvwattsv8_SystemDesign_shading_azal_mset, self->data_ptr);
-}
-
-static PyObject *
-SystemDesign_get_shading_diff(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvwattsv8_SystemDesign_shading_diff_nget, self->data_ptr);
-}
-
-static int
-SystemDesign_set_shading_diff(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Pvwattsv8_SystemDesign_shading_diff_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemDesign_get_shading_mxh(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Pvwattsv8_SystemDesign_shading_mxh_mget, self->data_ptr);
-}
-
-static int
-SystemDesign_set_shading_mxh(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Pvwattsv8_SystemDesign_shading_mxh_mset, self->data_ptr);
-}
-
-static PyObject *
-SystemDesign_get_shading_timestep(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Pvwattsv8_SystemDesign_shading_timestep_mget, self->data_ptr);
-}
-
-static int
-SystemDesign_set_shading_timestep(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Pvwattsv8_SystemDesign_shading_timestep_mset, self->data_ptr);
-}
-
-static PyObject *
 SystemDesign_get_soiling(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvwattsv8_SystemDesign_soiling_aget, self->data_ptr);
@@ -786,18 +738,6 @@ static PyGetSetDef SystemDesign_getset[] = {
 {"rotlim", (getter)SystemDesign_get_rotlim,(setter)SystemDesign_set_rotlim,
 	PyDoc_STR("*float*: Tracker rotation angle limit [degrees]\n\n**Required:**\nFalse. Automatically set to 45.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
-{"shading_azal", (getter)SystemDesign_get_shading_azal,(setter)SystemDesign_set_shading_azal,
-	PyDoc_STR("*sequence[sequence]*: Azimuth x altitude beam shading loss [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
- 	NULL},
-{"shading_diff", (getter)SystemDesign_get_shading_diff,(setter)SystemDesign_set_shading_diff,
-	PyDoc_STR("*float*: Diffuse shading loss [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
- 	NULL},
-{"shading_mxh", (getter)SystemDesign_get_shading_mxh,(setter)SystemDesign_set_shading_mxh,
-	PyDoc_STR("*sequence[sequence]*: Month x Hour beam shading loss [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
- 	NULL},
-{"shading_timestep", (getter)SystemDesign_get_shading_timestep,(setter)SystemDesign_set_shading_timestep,
-	PyDoc_STR("*sequence[sequence]*: Time step beam shading loss [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
- 	NULL},
 {"soiling", (getter)SystemDesign_get_soiling,(setter)SystemDesign_set_soiling,
 	PyDoc_STR("*sequence*: Soiling loss [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
@@ -856,6 +796,278 @@ static PyTypeObject SystemDesign_Type = {
 		SystemDesign_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		SystemDesign_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * Shading Group
+ */ 
+
+static PyTypeObject Shading_Type;
+
+static PyObject *
+Shading_new(SAM_Pvwattsv8 data_ptr)
+{
+	PyObject* new_obj = Shading_Type.tp_alloc(&Shading_Type,0);
+
+	VarGroupObject* Shading_obj = (VarGroupObject*)new_obj;
+
+	Shading_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* Shading methods */
+
+static PyObject *
+Shading_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Pvwattsv8", "Shading")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Shading_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Shading_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvwattsv8", "Shading")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Shading_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Shading_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Shading_methods[] = {
+		{"assign",            (PyCFunction)Shading_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Shading_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Shading_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Shading_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Shading_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Shading_get_shading_azal(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvwattsv8_Shading_shading_azal_mget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_azal(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvwattsv8_Shading_shading_azal_mset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_diff(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Shading_shading_diff_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_diff(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_Shading_shading_diff_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_en_azal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Shading_shading_en_azal_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_en_azal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_Shading_shading_en_azal_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_en_diff(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Shading_shading_en_diff_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_en_diff(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_Shading_shading_en_diff_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_en_mxh(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Shading_shading_en_mxh_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_en_mxh(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_Shading_shading_en_mxh_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_en_string_option(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Shading_shading_en_string_option_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_en_string_option(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_Shading_shading_en_string_option_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_en_timestep(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Shading_shading_en_timestep_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_en_timestep(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_Shading_shading_en_timestep_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_mxh(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvwattsv8_Shading_shading_mxh_mget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_mxh(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvwattsv8_Shading_shading_mxh_mset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_string_option(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Shading_shading_string_option_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_string_option(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_Shading_shading_string_option_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_timestep(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvwattsv8_Shading_shading_timestep_mget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_timestep(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvwattsv8_Shading_shading_timestep_mset, self->data_ptr);
+}
+
+static PyGetSetDef Shading_getset[] = {
+{"shading_azal", (getter)Shading_get_shading_azal,(setter)Shading_set_shading_azal,
+	PyDoc_STR("*sequence[sequence]*: Azimuth x altitude beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
+ 	NULL},
+{"shading_diff", (getter)Shading_get_shading_diff,(setter)Shading_set_shading_diff,
+	PyDoc_STR("*float*: Diffuse shading loss [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
+ 	NULL},
+{"shading_en_azal", (getter)Shading_get_shading_en_azal,(setter)Shading_set_shading_en_azal,
+	PyDoc_STR("*float*: Enable azimuth x altitude beam shading losses [0/1]\n\n**Options:**\n0=false,1=true\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"shading_en_diff", (getter)Shading_get_shading_en_diff,(setter)Shading_set_shading_en_diff,
+	PyDoc_STR("*float*: Enable diffuse shading loss [0/1]\n\n**Options:**\n0=false,1=true\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"shading_en_mxh", (getter)Shading_get_shading_en_mxh,(setter)Shading_set_shading_en_mxh,
+	PyDoc_STR("*float*: Enable month x Hour beam shading losses [0/1]\n\n**Options:**\n0=false,1=true\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"shading_en_string_option", (getter)Shading_get_shading_en_string_option,(setter)Shading_set_shading_en_string_option,
+	PyDoc_STR("*float*: Enable shading string option [0/1]\n\n**Options:**\n0=false,1=true\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"shading_en_timestep", (getter)Shading_get_shading_en_timestep,(setter)Shading_set_shading_en_timestep,
+	PyDoc_STR("*float*: Enable timestep beam shading losses [0/1]\n\n**Options:**\n0=false,1=true\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"shading_mxh", (getter)Shading_get_shading_mxh,(setter)Shading_set_shading_mxh,
+	PyDoc_STR("*sequence[sequence]*: Month x Hour beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
+ 	NULL},
+{"shading_string_option", (getter)Shading_get_shading_string_option,(setter)Shading_set_shading_string_option,
+	PyDoc_STR("*float*: Shading string option\n\n**Options:**\n0=shadingdb,1=average,2=maximum,3=minimum\n\n**Constraints:**\nINTEGER,MIN=-1,MAX=4\n\n**Required:**\nFalse. Automatically set to -1 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"shading_timestep", (getter)Shading_get_shading_timestep,(setter)Shading_set_shading_timestep,
+	PyDoc_STR("*sequence[sequence]*: Timestep beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Shading_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Pvwattsv8.Shading",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Shading_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Shading_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -1004,6 +1216,54 @@ static PyObject *
 Outputs_get_capacity_factor_ac(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvwattsv8_Outputs_capacity_factor_ac_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_battery_replacement_cost_schedule(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_cf_battery_replacement_cost_schedule_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_net(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_cf_energy_net_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_fuelcell_replacement_cost_schedule(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_cf_fuelcell_replacement_cost_schedule_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_cf_om_capacity_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_fixed(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_cf_om_fixed_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_fuel_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_cf_om_fuel_cost_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_land_lease(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_cf_om_land_lease_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_production(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_cf_om_production_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1250,6 +1510,30 @@ static PyGetSetDef Outputs_getset[] = {
 {"capacity_factor_ac", (getter)Outputs_get_capacity_factor_ac,(setter)0,
 	PyDoc_STR("*float*: Capacity factor based on total AC capacity [%]"),
  	NULL},
+{"cf_battery_replacement_cost_schedule", (getter)Outputs_get_cf_battery_replacement_cost_schedule,(setter)0,
+	PyDoc_STR("*sequence*: replacement O&M costs [$]"),
+ 	NULL},
+{"cf_energy_net", (getter)Outputs_get_cf_energy_net,(setter)0,
+	PyDoc_STR("*sequence*: annual energy [kWh]"),
+ 	NULL},
+{"cf_fuelcell_replacement_cost_schedule", (getter)Outputs_get_cf_fuelcell_replacement_cost_schedule,(setter)0,
+	PyDoc_STR("*sequence*: replacement O&M costs [$]"),
+ 	NULL},
+{"cf_om_capacity", (getter)Outputs_get_cf_om_capacity,(setter)0,
+	PyDoc_STR("*sequence*: capacity O&M costs [$]"),
+ 	NULL},
+{"cf_om_fixed", (getter)Outputs_get_cf_om_fixed,(setter)0,
+	PyDoc_STR("*sequence*: fixed O&M costs [$]"),
+ 	NULL},
+{"cf_om_fuel_cost", (getter)Outputs_get_cf_om_fuel_cost,(setter)0,
+	PyDoc_STR("*sequence*: fossil fuel O&M costs [$]"),
+ 	NULL},
+{"cf_om_land_lease", (getter)Outputs_get_cf_om_land_lease,(setter)0,
+	PyDoc_STR("*sequence*: land lease O&M costs [$]"),
+ 	NULL},
+{"cf_om_production", (getter)Outputs_get_cf_om_production,(setter)0,
+	PyDoc_STR("*sequence*: production O&M costs [$]"),
+ 	NULL},
 {"city", (getter)Outputs_get_city,(setter)0,
 	PyDoc_STR("*str*: City"),
  	NULL},
@@ -1430,6 +1714,10 @@ newPvwattsv8Object(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "SystemDesign", SystemDesign_obj);
 	Py_DECREF(SystemDesign_obj);
 
+	PyObject* Shading_obj = Shading_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Shading", Shading_obj);
+	Py_DECREF(Shading_obj);
+
 	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
@@ -1465,6 +1753,14 @@ Pvwattsv8_dealloc(CmodObject *self)
 		PySAM_has_error(error);
 	}
 	PyObject_Del(self);
+}
+
+
+static PyObject *
+Pvwattsv8_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
 }
 
 
@@ -1535,6 +1831,8 @@ Pvwattsv8_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Pvwattsv8_methods[] = {
 		{"execute",           (PyCFunction)Pvwattsv8_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)Pvwattsv8_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Pvwattsv8_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Solar Resource': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Pvwattsv8_replace,  METH_VARARGS,
@@ -1705,7 +2003,7 @@ static PyMethodDef Pvwattsv8Module_methods[] = {
 		{"new",             Pvwattsv8_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Pvwattsv8")},
 		{"default",             Pvwattsv8_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Pvwattsv8\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"FuelCellCommercial\"*\n\n		- *\"FuelCellSingleOwner\"*\n\n		- *\"PVWattsBatteryCommercial\"*\n\n		- *\"PVWattsBatteryHostDeveloper\"*\n\n		- *\"PVWattsBatteryResidential\"*\n\n		- *\"PVWattsBatteryThirdParty\"*\n\n		- *\"PVWattsAllEquityPartnershipFlip\"*\n\n		- *\"PVWattsCommercial\"*\n\n		- *\"PVWattsCommunitySolar\"*\n\n		- *\"PVWattsHostDeveloper\"*\n\n		- *\"PVWattsLCOECalculator\"*\n\n		- *\"PVWattsLeveragedPartnershipFlip\"*\n\n		- *\"PVWattsMerchantPlant\"*\n\n		- *\"PVWattsNone\"*\n\n		- *\"PVWattsResidential\"*\n\n		- *\"PVWattsSaleLeaseback\"*\n\n		- *\"PVWattsSingleOwner\"*\n\n		- *\"PVWattsThirdParty\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> Pvwattsv8\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"FuelCellCommercial\"*\n\n		- *\"FuelCellSingleOwner\"*\n\n		- *\"GenericPVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"GenericPVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsBatteryCommercial\"*\n\n		- *\"PVWattsBatteryHostDeveloper\"*\n\n		- *\"PVWattsBatteryResidential\"*\n\n		- *\"PVWattsBatteryThirdParty\"*\n\n		- *\"PVWattsWindBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsAllEquityPartnershipFlip\"*\n\n		- *\"PVWattsCommercial\"*\n\n		- *\"PVWattsCommunitySolar\"*\n\n		- *\"PVWattsHostDeveloper\"*\n\n		- *\"PVWattsLCOECalculator\"*\n\n		- *\"PVWattsLeveragedPartnershipFlip\"*\n\n		- *\"PVWattsMerchantPlant\"*\n\n		- *\"PVWattsNone\"*\n\n		- *\"PVWattsResidential\"*\n\n		- *\"PVWattsSaleLeaseback\"*\n\n		- *\"PVWattsSingleOwner\"*\n\n		- *\"PVWattsThirdParty\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Pvwattsv8_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Pvwattsv8\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Pvwattsv8_from_existing,        METH_VARARGS,
@@ -1728,25 +2026,6 @@ Pvwattsv8Module_exec(PyObject *m)
 	Pvwattsv8_Type.tp_dict = PyDict_New();
 	if (!Pvwattsv8_Type.tp_dict) { goto fail; }
 
-	/// Add the AdjustmentFactors type object to Pvwattsv8_Type
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-	if (!AdjustmentFactorsModule){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
-	}
-
-	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
-	if (!AdjustmentFactors_Type){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
-	}
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Pvwattsv8_Type.tp_dict,
-						 "AdjustmentFactors",
-						 (PyObject*)AdjustmentFactors_Type);
-	Py_DECREF(&AdjustmentFactors_Type);
-	Py_XDECREF(AdjustmentFactors_Type);
-
 	/// Add the SolarResource type object to Pvwattsv8_Type
 	if (PyType_Ready(&SolarResource_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Pvwattsv8_Type.tp_dict,
@@ -1767,6 +2046,13 @@ Pvwattsv8Module_exec(PyObject *m)
 				"SystemDesign",
 				(PyObject*)&SystemDesign_Type);
 	Py_DECREF(&SystemDesign_Type);
+
+	/// Add the Shading type object to Pvwattsv8_Type
+	if (PyType_Ready(&Shading_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Pvwattsv8_Type.tp_dict,
+				"Shading",
+				(PyObject*)&Shading_Type);
+	Py_DECREF(&Shading_Type);
 
 	/// Add the Outputs type object to Pvwattsv8_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

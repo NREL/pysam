@@ -34,7 +34,7 @@ def test_stateful_lead():
 
     b.Controls.input_power = 0.5
     b.execute(0)
-    assert (b.StatePack.SOC == approx(11.77, 1e-2))
+    assert (b.StatePack.SOC == approx(12.20, 1e-2))
 
 
 def test_stateful_lmolto():

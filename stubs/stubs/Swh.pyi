@@ -73,10 +73,6 @@ class Swh(object):
 		pump_eff = float
 		pump_power = float
 		scaled_draw = tuple
-		shading_azal = tuple
-		shading_diff = float
-		shading_mxh = tuple
-		shading_timestep = tuple
 		sky_model = float
 		system_capacity = float
 		tank_h2d_ratio = float
@@ -85,6 +81,29 @@ class Swh(object):
 		tilt = float
 		use_custom_mains = float
 		use_custom_set = float
+
+
+	class Shading(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		shading_azal = tuple
+		shading_diff = float
+		shading_en_azal = float
+		shading_en_diff = float
+		shading_en_mxh = float
+		shading_en_string_option = float
+		shading_en_timestep = float
+		shading_mxh = tuple
+		shading_string_option = float
+		shading_timestep = tuple
 
 
 	class AdjustmentFactors(object):
@@ -98,14 +117,26 @@ class Swh(object):
 			pass
 	
 		constant = float
-		dc_constant = float
-		dc_hourly = tuple
-		dc_periods = tuple
+		en_hourly = float
+		en_periods = float
+		en_timeindex = float
 		hourly = tuple
 		periods = tuple
+		imeindex = tuple
+		dc_constant = float
+		dc_en_hourly = float
+		dc_en_periods = float
+		dc_en_timeindex = float
+		dc_hourly = tuple
+		dc_periods = tuple
+		dc_imeindex = tuple
 		sf_constant = float
+		sf_en_hourly = float
+		sf_en_periods = float
+		sf_en_timeindex = float
 		sf_hourly = tuple
 		sf_periods = tuple
+		sf_timeindex = tuple
 
 	class Outputs(object):
 		def assign(self): 

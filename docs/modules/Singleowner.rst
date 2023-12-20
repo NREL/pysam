@@ -131,6 +131,18 @@ ChargesByMonth Group
 .. autoclass:: PySAM.Singleowner.Singleowner.ChargesByMonth
 	:members:
 
+HybridFin Group
+----------------
+
+.. autoclass:: PySAM.Singleowner.Singleowner.HybridFin
+	:members:
+
+Monthly Group
+--------------
+
+.. autoclass:: PySAM.Singleowner.Singleowner.Monthly
+	:members:
+
 Outputs Group
 --------------
 

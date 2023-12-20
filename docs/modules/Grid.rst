@@ -39,6 +39,12 @@ Load Group
 .. autoclass:: PySAM.Grid.Grid.Load
 	:members:
 
+Monthly Group
+--------------
+
+.. autoclass:: PySAM.Grid.Grid.Monthly
+	:members:
+
 GridLimits Group
 -----------------
 

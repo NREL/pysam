@@ -38,8 +38,9 @@ Lifetime Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.GenericSystem.GenericSystem.AdjustmentFactors
+.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
 	:members:
+	:noindex:
 
 Outputs Group
 --------------

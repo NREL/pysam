@@ -81,10 +81,6 @@ class Pvwattsv8(object):
 		losses = float
 		module_type = float
 		rotlim = float
-		shading_azal = tuple
-		shading_diff = float
-		shading_mxh = tuple
-		shading_timestep = tuple
 		soiling = tuple
 		stow_wspd = float
 		system_capacity = float
@@ -92,6 +88,29 @@ class Pvwattsv8(object):
 		wind_stow_angle = float
 		xfmr_ll = float
 		xfmr_nll = float
+
+
+	class Shading(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		shading_azal = tuple
+		shading_diff = float
+		shading_en_azal = float
+		shading_en_diff = float
+		shading_en_mxh = float
+		shading_en_string_option = float
+		shading_en_timestep = float
+		shading_mxh = tuple
+		shading_string_option = float
+		shading_timestep = tuple
 
 
 	class AdjustmentFactors(object):
@@ -105,14 +124,26 @@ class Pvwattsv8(object):
 			pass
 	
 		constant = float
-		dc_constant = float
-		dc_hourly = tuple
-		dc_periods = tuple
+		en_hourly = float
+		en_periods = float
+		en_timeindex = float
 		hourly = tuple
 		periods = tuple
+		imeindex = tuple
+		dc_constant = float
+		dc_en_hourly = float
+		dc_en_periods = float
+		dc_en_timeindex = float
+		dc_hourly = tuple
+		dc_periods = tuple
+		dc_imeindex = tuple
 		sf_constant = float
+		sf_en_hourly = float
+		sf_en_periods = float
+		sf_en_timeindex = float
 		sf_hourly = tuple
 		sf_periods = tuple
+		sf_timeindex = tuple
 
 	class Outputs(object):
 		def assign(self): 
@@ -136,6 +167,14 @@ class Pvwattsv8(object):
 		aoi = tuple
 		capacity_factor = float
 		capacity_factor_ac = float
+		cf_battery_replacement_cost_schedule = tuple
+		cf_energy_net = tuple
+		cf_fuelcell_replacement_cost_schedule = tuple
+		cf_om_capacity = tuple
+		cf_om_fixed = tuple
+		cf_om_fuel_cost = tuple
+		cf_om_land_lease = tuple
+		cf_om_production = tuple
 		city = str
 		dc = tuple
 		dc_monthly = tuple

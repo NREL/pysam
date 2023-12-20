@@ -118,6 +118,38 @@ class Windpower(object):
 		wake_int_loss = float
 
 
+	class AdjustmentFactors(object):
+		def assign(self): 
+			pass
+	
+		def export(self): 
+			return {}
+	
+		def __init__(self, *args, **kwargs): # real signature unknown
+			pass
+	
+		constant = float
+		en_hourly = float
+		en_periods = float
+		en_timeindex = float
+		hourly = tuple
+		periods = tuple
+		imeindex = tuple
+		dc_constant = float
+		dc_en_hourly = float
+		dc_en_periods = float
+		dc_en_timeindex = float
+		dc_hourly = tuple
+		dc_periods = tuple
+		dc_imeindex = tuple
+		sf_constant = float
+		sf_en_hourly = float
+		sf_en_periods = float
+		sf_en_timeindex = float
+		sf_hourly = tuple
+		sf_periods = tuple
+		sf_timeindex = tuple
+
 	class Uncertainty(object):
 		def assign(self): 
 			pass
@@ -131,26 +163,6 @@ class Windpower(object):
 
 		total_uncert = float
 
-
-	class AdjustmentFactors(object):
-		def assign(self): 
-			pass
-	
-		def export(self): 
-			return {}
-	
-		def __init__(self, *args, **kwargs): # real signature unknown
-			pass
-	
-		constant = float
-		dc_constant = float
-		dc_hourly = tuple
-		dc_periods = tuple
-		hourly = tuple
-		periods = tuple
-		sf_constant = float
-		sf_hourly = tuple
-		sf_periods = tuple
 
 	class Outputs(object):
 		def assign(self): 
@@ -171,6 +183,14 @@ class Windpower(object):
 		annual_gross_energy = float
 		avail_losses = float
 		capacity_factor = float
+		cf_battery_replacement_cost_schedule = tuple
+		cf_energy_net = tuple
+		cf_fuelcell_replacement_cost_schedule = tuple
+		cf_om_capacity = tuple
+		cf_om_fixed = tuple
+		cf_om_fuel_cost = tuple
+		cf_om_land_lease = tuple
+		cf_om_production = tuple
 		cutoff_losses = float
 		elec_losses = float
 		elev = float

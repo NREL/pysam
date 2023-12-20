@@ -326,6 +326,12 @@ Outputs_get_location_id(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_location_name(VarGroupObject *self, void *closure)
+{
+	return PySAM_string_getter(SAM_WaveFileReader_Outputs_location_name_sget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_lon(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_WaveFileReader_Outputs_lon_nget, self->data_ptr);
@@ -448,6 +454,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"location_id", (getter)Outputs_get_location_id,(setter)0,
 	PyDoc_STR("*float*: Location ID"),
+ 	NULL},
+{"location_name", (getter)Outputs_get_location_name,(setter)0,
+	PyDoc_STR("*str*: Location"),
  	NULL},
 {"lon", (getter)Outputs_get_lon,(setter)0,
 	PyDoc_STR("*float*: Longitude [deg]"),
@@ -585,6 +594,14 @@ WaveFileReader_dealloc(CmodObject *self)
 
 
 static PyObject *
+WaveFileReader_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 WaveFileReader_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -651,6 +668,8 @@ WaveFileReader_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef WaveFileReader_methods[] = {
 		{"execute",           (PyCFunction)WaveFileReader_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)WaveFileReader_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)WaveFileReader_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Weather Reader': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)WaveFileReader_replace,  METH_VARARGS,

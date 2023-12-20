@@ -2907,114 +2907,6 @@ Tou_set_disp_timeout(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-Tou_get_dispatch_factor1(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor1_nget, self->data_ptr);
-}
-
-static int
-Tou_set_dispatch_factor1(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor1_nset, self->data_ptr);
-}
-
-static PyObject *
-Tou_get_dispatch_factor2(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor2_nget, self->data_ptr);
-}
-
-static int
-Tou_set_dispatch_factor2(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor2_nset, self->data_ptr);
-}
-
-static PyObject *
-Tou_get_dispatch_factor3(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor3_nget, self->data_ptr);
-}
-
-static int
-Tou_set_dispatch_factor3(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor3_nset, self->data_ptr);
-}
-
-static PyObject *
-Tou_get_dispatch_factor4(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor4_nget, self->data_ptr);
-}
-
-static int
-Tou_set_dispatch_factor4(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor4_nset, self->data_ptr);
-}
-
-static PyObject *
-Tou_get_dispatch_factor5(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor5_nget, self->data_ptr);
-}
-
-static int
-Tou_set_dispatch_factor5(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor5_nset, self->data_ptr);
-}
-
-static PyObject *
-Tou_get_dispatch_factor6(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor6_nget, self->data_ptr);
-}
-
-static int
-Tou_set_dispatch_factor6(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor6_nset, self->data_ptr);
-}
-
-static PyObject *
-Tou_get_dispatch_factor7(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor7_nget, self->data_ptr);
-}
-
-static int
-Tou_set_dispatch_factor7(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor7_nset, self->data_ptr);
-}
-
-static PyObject *
-Tou_get_dispatch_factor8(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor8_nget, self->data_ptr);
-}
-
-static int
-Tou_set_dispatch_factor8(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor8_nset, self->data_ptr);
-}
-
-static PyObject *
-Tou_get_dispatch_factor9(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor9_nget, self->data_ptr);
-}
-
-static int
-Tou_set_dispatch_factor9(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor9_nset, self->data_ptr);
-}
-
-static PyObject *
 Tou_get_dispatch_factors_ts(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_factors_ts_aget, self->data_ptr);
@@ -3279,35 +3171,8 @@ static PyGetSetDef Tou_getset[] = {
 {"disp_timeout", (getter)Tou_get_disp_timeout,(setter)Tou_set_disp_timeout,
 	PyDoc_STR("*float*: Max. dispatch optimization solve duration [s]\n\n**Required:**\nRequired if is_dispatch=1"),
  	NULL},
-{"dispatch_factor1", (getter)Tou_get_dispatch_factor1,(setter)Tou_set_dispatch_factor1,
-	PyDoc_STR("*float*: Dispatch payment factor 1\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"dispatch_factor2", (getter)Tou_get_dispatch_factor2,(setter)Tou_set_dispatch_factor2,
-	PyDoc_STR("*float*: Dispatch payment factor 2\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"dispatch_factor3", (getter)Tou_get_dispatch_factor3,(setter)Tou_set_dispatch_factor3,
-	PyDoc_STR("*float*: Dispatch payment factor 3\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"dispatch_factor4", (getter)Tou_get_dispatch_factor4,(setter)Tou_set_dispatch_factor4,
-	PyDoc_STR("*float*: Dispatch payment factor 4\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"dispatch_factor5", (getter)Tou_get_dispatch_factor5,(setter)Tou_set_dispatch_factor5,
-	PyDoc_STR("*float*: Dispatch payment factor 5\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"dispatch_factor6", (getter)Tou_get_dispatch_factor6,(setter)Tou_set_dispatch_factor6,
-	PyDoc_STR("*float*: Dispatch payment factor 6\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"dispatch_factor7", (getter)Tou_get_dispatch_factor7,(setter)Tou_set_dispatch_factor7,
-	PyDoc_STR("*float*: Dispatch payment factor 7\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"dispatch_factor8", (getter)Tou_get_dispatch_factor8,(setter)Tou_set_dispatch_factor8,
-	PyDoc_STR("*float*: Dispatch payment factor 8\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"dispatch_factor9", (getter)Tou_get_dispatch_factor9,(setter)Tou_set_dispatch_factor9,
-	PyDoc_STR("*float*: Dispatch payment factor 9\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
- 	NULL},
 {"dispatch_factors_ts", (getter)Tou_get_dispatch_factors_ts,(setter)Tou_set_dispatch_factors_ts,
-	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n**Required:**\nRequired if ppa_multiplier_model=1"),
+	PyDoc_STR("*sequence*: Dispatch payment factor array"),
  	NULL},
 {"dispatch_sched_weekday", (getter)Tou_get_dispatch_sched_weekday,(setter)Tou_set_dispatch_sched_weekday,
 	PyDoc_STR("*sequence[sequence]*: 12x24 PPA pricing Weekday schedule\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
@@ -3534,6 +3399,143 @@ static PyTypeObject SystemControl_Type = {
 		SystemControl_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		SystemControl_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * TimeOfDeliveryFactors Group
+ */ 
+
+static PyTypeObject TimeOfDeliveryFactors_Type;
+
+static PyObject *
+TimeOfDeliveryFactors_new(SAM_TroughPhysicalProcessHeat data_ptr)
+{
+	PyObject* new_obj = TimeOfDeliveryFactors_Type.tp_alloc(&TimeOfDeliveryFactors_Type,0);
+
+	VarGroupObject* TimeOfDeliveryFactors_obj = (VarGroupObject*)new_obj;
+
+	TimeOfDeliveryFactors_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* TimeOfDeliveryFactors methods */
+
+static PyObject *
+TimeOfDeliveryFactors_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TroughPhysicalProcessHeat", "TimeOfDeliveryFactors")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+TimeOfDeliveryFactors_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &TimeOfDeliveryFactors_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TroughPhysicalProcessHeat", "TimeOfDeliveryFactors")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+TimeOfDeliveryFactors_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &TimeOfDeliveryFactors_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef TimeOfDeliveryFactors_methods[] = {
+		{"assign",            (PyCFunction)TimeOfDeliveryFactors_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``TimeOfDeliveryFactors_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)TimeOfDeliveryFactors_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``TimeOfDeliveryFactors_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)TimeOfDeliveryFactors_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+TimeOfDeliveryFactors_get_dispatch_tod_factors(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_TimeOfDeliveryFactors_dispatch_tod_factors_aget, self->data_ptr);
+}
+
+static int
+TimeOfDeliveryFactors_set_dispatch_tod_factors(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_TroughPhysicalProcessHeat_TimeOfDeliveryFactors_dispatch_tod_factors_aset, self->data_ptr);
+}
+
+static PyGetSetDef TimeOfDeliveryFactors_getset[] = {
+{"dispatch_tod_factors", (getter)TimeOfDeliveryFactors_get_dispatch_tod_factors,(setter)TimeOfDeliveryFactors_set_dispatch_tod_factors,
+	PyDoc_STR("*sequence*: TOD factors for periods 1 through 9\n\n**Info:**\nWe added this array input after SAM 2022.12.21 to replace the functionality of former single value inputs dispatch_factor1 through dispatch_factor9\n\n**Required:**\nRequired if is_dispatch=1&sim_type=1"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject TimeOfDeliveryFactors_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"TroughPhysicalProcessHeat.TimeOfDeliveryFactors",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		TimeOfDeliveryFactors_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		TimeOfDeliveryFactors_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -4693,6 +4695,10 @@ newTroughPhysicalProcessHeatObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "SystemControl", SystemControl_obj);
 	Py_DECREF(SystemControl_obj);
 
+	PyObject* TimeOfDeliveryFactors_obj = TimeOfDeliveryFactors_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "TimeOfDeliveryFactors", TimeOfDeliveryFactors_obj);
+	Py_DECREF(TimeOfDeliveryFactors_obj);
+
 	PyObject* System_obj = System_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "System", System_obj);
 	Py_DECREF(System_obj);
@@ -4736,6 +4742,14 @@ TroughPhysicalProcessHeat_dealloc(CmodObject *self)
 		PySAM_has_error(error);
 	}
 	PyObject_Del(self);
+}
+
+
+static PyObject *
+TroughPhysicalProcessHeat_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
 }
 
 
@@ -4806,6 +4820,8 @@ TroughPhysicalProcessHeat_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef TroughPhysicalProcessHeat_methods[] = {
 		{"execute",           (PyCFunction)TroughPhysicalProcessHeat_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)TroughPhysicalProcessHeat_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)TroughPhysicalProcessHeat_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'weather': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)TroughPhysicalProcessHeat_replace,  METH_VARARGS,
@@ -4974,7 +4990,7 @@ static PyMethodDef TroughPhysicalProcessHeatModule_methods[] = {
 		{"new",             TroughPhysicalProcessHeat_new,         METH_VARARGS,
 				PyDoc_STR("new() -> TroughPhysicalProcessHeat")},
 		{"default",             TroughPhysicalProcessHeat_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> TroughPhysicalProcessHeat\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"PhysicalTroughIPHLCOHCalculator\"*\n\n		- *\"PhysicalTroughIPHNone\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> TroughPhysicalProcessHeat\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             TroughPhysicalProcessHeat_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> TroughPhysicalProcessHeat\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   TroughPhysicalProcessHeat_from_existing,        METH_VARARGS,
@@ -4996,25 +5012,6 @@ TroughPhysicalProcessHeatModule_exec(PyObject *m)
 
 	TroughPhysicalProcessHeat_Type.tp_dict = PyDict_New();
 	if (!TroughPhysicalProcessHeat_Type.tp_dict) { goto fail; }
-
-	/// Add the AdjustmentFactors type object to TroughPhysicalProcessHeat_Type
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-	if (!AdjustmentFactorsModule){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
-	}
-
-	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
-	if (!AdjustmentFactors_Type){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
-	}
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(TroughPhysicalProcessHeat_Type.tp_dict,
-						 "AdjustmentFactors",
-						 (PyObject*)AdjustmentFactors_Type);
-	Py_DECREF(&AdjustmentFactors_Type);
-	Py_XDECREF(AdjustmentFactors_Type);
 
 	/// Add the Weather type object to TroughPhysicalProcessHeat_Type
 	if (PyType_Ready(&Weather_Type) < 0) { goto fail; }
@@ -5071,6 +5068,13 @@ TroughPhysicalProcessHeatModule_exec(PyObject *m)
 				"SystemControl",
 				(PyObject*)&SystemControl_Type);
 	Py_DECREF(&SystemControl_Type);
+
+	/// Add the TimeOfDeliveryFactors type object to TroughPhysicalProcessHeat_Type
+	if (PyType_Ready(&TimeOfDeliveryFactors_Type) < 0) { goto fail; }
+	PyDict_SetItemString(TroughPhysicalProcessHeat_Type.tp_dict,
+				"TimeOfDeliveryFactors",
+				(PyObject*)&TimeOfDeliveryFactors_Type);
+	Py_DECREF(&TimeOfDeliveryFactors_Type);
 
 	/// Add the System type object to TroughPhysicalProcessHeat_Type
 	if (PyType_Ready(&System_Type) < 0) { goto fail; }

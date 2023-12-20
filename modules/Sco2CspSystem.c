@@ -1136,10 +1136,10 @@ static PyGetSetDef Common_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Columns: 0) T_htf_C, 1) m_dot_htf_ND, 2) T_amb_C, 3) f_N_rc (=1 use design, =0 optimize, <0, frac_des = abs(input)), 4) f_N_mc (=1 use design, =0 optimize, <0, frac_des = abs(input)), 5) f_N_pc (=1 use design, =0 optimize, <0, frac_des = abs(input)), 6) PHX_f_dP (=1 use design, <0 = abs(input), Rows: cases"),
  	NULL},
 {"od_generate_udpc", (getter)Common_get_od_generate_udpc,(setter)Common_set_od_generate_udpc,
-	PyDoc_STR("*sequence*: True/False, f_N_rc (=1 use design, =0 optimize, <0, frac_des = abs(input), f_N_mc (=1 use design, =0 optimize, <0, frac_des = abs(input), PHX_f_dP (=1 use design, <0 = abs(input)"),
+	PyDoc_STR("*sequence*: Columns 0) True/False,1) f_N_rc (=1 use design, =0 optimize, <0, frac_des = abs(input),2) f_N_mc (=1 use design, =0 optimize, <0, frac_des = abs(input),3) PHX_f_dP (=1 use design, <0 = abs(input)"),
  	NULL},
 {"od_max_htf_m_dot", (getter)Common_get_od_max_htf_m_dot,(setter)Common_set_od_max_htf_m_dot,
-	PyDoc_STR("*sequence[sequence]*: Columns: T_htf_C, T_amb_C, f_N_rc (=1 use design, <0, frac_des = abs(input), f_N_mc (=1 use design, <0, frac_des = abs(input), PHX_f_dP (=1 use design, <0 = abs(input), Rows: cases"),
+	PyDoc_STR("*sequence[sequence]*: Columns: 0) T_htf_C, 1) T_amb_C,2) f_N_rc (=1 use design, <0, frac_des = abs(input),3) f_N_mc (=1 use design, <0, frac_des = abs(input),4) PHX_f_dP (=1 use design, <0 = abs(input), Rows: cases"),
  	NULL},
 {"od_opt_objective", (getter)Common_get_od_opt_objective,(setter)Common_set_od_opt_objective,
 	PyDoc_STR("*float*: 0: find P_LP_in to achieve target power, optimize efficiency 1: find P_LP_in to achieve T_HTF_cold, optimize efficiency\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
@@ -1822,6 +1822,12 @@ static PyObject *
 Outputs_get_PHX_cost_equipment(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_PHX_cost_equipment_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_PHX_min_dT(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_PHX_min_dT_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -3319,6 +3325,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"PHX_cost_equipment", (getter)Outputs_get_PHX_cost_equipment,(setter)0,
 	PyDoc_STR("*float*: PHX cost equipment [M$]"),
  	NULL},
+{"PHX_min_dT", (getter)Outputs_get_PHX_min_dT,(setter)0,
+	PyDoc_STR("*float*: PHX min temperature difference [C]"),
+ 	NULL},
 {"P_co2_PHX_in", (getter)Outputs_get_P_co2_PHX_in,(setter)0,
 	PyDoc_STR("*float*: CO2 pressure at PHX inlet [MPa]"),
  	NULL},
@@ -4125,6 +4134,14 @@ Sco2CspSystem_dealloc(CmodObject *self)
 
 
 static PyObject *
+Sco2CspSystem_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Sco2CspSystem_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -4191,6 +4208,8 @@ Sco2CspSystem_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Sco2CspSystem_methods[] = {
 		{"execute",           (PyCFunction)Sco2CspSystem_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)Sco2CspSystem_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Sco2CspSystem_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'System Design': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Sco2CspSystem_replace,  METH_VARARGS,

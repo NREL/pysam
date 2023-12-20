@@ -471,6 +471,14 @@ Singlediodeparams_dealloc(CmodObject *self)
 
 
 static PyObject *
+Singlediodeparams_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Singlediodeparams_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -537,6 +545,8 @@ Singlediodeparams_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Singlediodeparams_methods[] = {
 		{"execute",           (PyCFunction)Singlediodeparams_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)Singlediodeparams_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Singlediodeparams_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Single Diode Model': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Singlediodeparams_replace,  METH_VARARGS,

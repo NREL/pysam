@@ -272,6 +272,12 @@ Outputs_get_annual_tdry(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_annual_twet(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Wfreader_Outputs_annual_twet_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_annual_wspd(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Wfreader_Outputs_annual_wspd_nget, self->data_ptr);
@@ -491,6 +497,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"annual_tdry", (getter)Outputs_get_annual_tdry,(setter)0,
 	PyDoc_STR("*float*: Average dry bulb temperature ['C]"),
  	NULL},
+{"annual_twet", (getter)Outputs_get_annual_twet,(setter)0,
+	PyDoc_STR("*float*: Average wet bulb temperature ['C]"),
+ 	NULL},
 {"annual_wspd", (getter)Outputs_get_annual_wspd,(setter)0,
 	PyDoc_STR("*float*: Average wind speed [m/s]"),
  	NULL},
@@ -681,6 +690,14 @@ Wfreader_dealloc(CmodObject *self)
 
 
 static PyObject *
+Wfreader_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Wfreader_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -747,6 +764,8 @@ Wfreader_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Wfreader_methods[] = {
 		{"execute",           (PyCFunction)Wfreader_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)Wfreader_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Wfreader_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Weather Reader': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Wfreader_replace,  METH_VARARGS,

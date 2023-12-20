@@ -390,6 +390,14 @@ Timeseq_dealloc(CmodObject *self)
 
 
 static PyObject *
+Timeseq_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Timeseq_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -456,6 +464,8 @@ Timeseq_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Timeseq_methods[] = {
 		{"execute",           (PyCFunction)Timeseq_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)Timeseq_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Timeseq_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Time Sequence': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Timeseq_replace,  METH_VARARGS,

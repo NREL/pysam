@@ -21,7 +21,7 @@ import PySAM.UtilityRateTools
 import PySAM.LoadTools
 
 # Get a key from https://api.openei.org:443
-key = "YOUR_API_KEY"
+key = os.environ.get('NREL_API_KEY')
 
 # Download rate from URDB and save as file. If rate has already been downloaded, use file
 def get_urdb_rate_data(page, key):

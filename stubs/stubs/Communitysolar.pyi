@@ -62,7 +62,6 @@ class Communitysolar(object):
 		property_tax_rate = float
 		real_discount_rate = float
 		reserves_interest = float
-		roe_input = tuple
 		salvage_percentage = float
 		state_tax_rate = tuple
 		system_capacity = float
@@ -85,7 +84,6 @@ class Communitysolar(object):
 		add_om_num_types = float
 		annual_fuel_usage = float
 		annual_fuel_usage_lifetime = tuple
-		fuelcell_annual_energy_discharged = tuple
 		om_batt_capacity_cost = tuple
 		om_batt_fixed_cost = tuple
 		om_batt_nameplate = float
@@ -497,7 +495,9 @@ class Communitysolar(object):
 			pass
 
 
+		annual_fuel_usage_lifetime = tuple
 		en_fuelcell = float
+		fuelcell_annual_energy_discharged = tuple
 		fuelcell_computed_bank_capacity = float
 		fuelcell_per_kWh = float
 		fuelcell_replacement = tuple
@@ -657,7 +657,6 @@ class Communitysolar(object):
 		cf_itc_sta_percent_amount = tuple
 		cf_itc_total = tuple
 		cf_land_lease_expense = tuple
-		cf_lcog_costs = tuple
 		cf_length = float
 		cf_net_salvage_value = tuple
 		cf_om_batt_capacity_expense = tuple
@@ -710,7 +709,6 @@ class Communitysolar(object):
 		cf_property_tax_expense = tuple
 		cf_ptc_fed = tuple
 		cf_ptc_sta = tuple
-		cf_ptc_total = tuple
 		cf_pv_cash_for_ds = tuple
 		cf_pv_interest_factor = tuple
 		cf_recapitalization = tuple
@@ -722,9 +720,6 @@ class Communitysolar(object):
 		cf_reserve_om = tuple
 		cf_reserve_receivables = tuple
 		cf_reserve_total = tuple
-		cf_return_on_equity = tuple
-		cf_return_on_equity_dollars = tuple
-		cf_return_on_equity_input = tuple
 		cf_salvage_cost_lcos = tuple
 		cf_stadepr_custom = tuple
 		cf_stadepr_macrs_15 = tuple
@@ -1071,12 +1066,6 @@ class Communitysolar(object):
 		itc_total_sta = float
 		lcoe_nom = float
 		lcoe_real = float
-		lcog = float
-		lcog_depr = float
-		lcog_loan_int = float
-		lcog_om = float
-		lcog_roe = float
-		lcog_wc_int = float
 		lcoptc_fed_nom = float
 		lcoptc_fed_real = float
 		lcoptc_sta_nom = float

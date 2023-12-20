@@ -1166,10 +1166,6 @@ newMhkWaveObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "MHKWave", MHKWave_obj);
 	Py_DECREF(MHKWave_obj);
 
-	PyObject* Lifetime_obj = Lifetime_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Lifetime", Lifetime_obj);
-	Py_DECREF(Lifetime_obj);
-
 	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
@@ -1184,6 +1180,10 @@ newMhkWaveObject(void* data_ptr)
 
 	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
 	Py_DECREF(Adjust_obj);
+
+	PyObject* Lifetime_obj = Lifetime_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Lifetime", Lifetime_obj);
+	Py_DECREF(Lifetime_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -1205,6 +1205,14 @@ MhkWave_dealloc(CmodObject *self)
 		PySAM_has_error(error);
 	}
 	PyObject_Del(self);
+}
+
+
+static PyObject *
+MhkWave_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
 }
 
 
@@ -1275,6 +1283,8 @@ MhkWave_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef MhkWave_methods[] = {
 		{"execute",           (PyCFunction)MhkWave_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)MhkWave_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)MhkWave_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'MHKWave': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)MhkWave_replace,  METH_VARARGS,
@@ -1465,25 +1475,6 @@ MhkWaveModule_exec(PyObject *m)
 
 	MhkWave_Type.tp_dict = PyDict_New();
 	if (!MhkWave_Type.tp_dict) { goto fail; }
-
-	/// Add the AdjustmentFactors type object to MhkWave_Type
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-	if (!AdjustmentFactorsModule){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
-	}
-
-	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
-	if (!AdjustmentFactors_Type){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
-	}
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(MhkWave_Type.tp_dict,
-						 "AdjustmentFactors",
-						 (PyObject*)AdjustmentFactors_Type);
-	Py_DECREF(&AdjustmentFactors_Type);
-	Py_XDECREF(AdjustmentFactors_Type);
 
 	/// Add the MHKWave type object to MhkWave_Type
 	if (PyType_Ready(&MHKWave_Type) < 0) { goto fail; }

@@ -1,4 +1,4 @@
-class Annualoutput(object):
+class Hybrid(object):
 	def assign(self, dict):
 		pass
 
@@ -20,7 +20,7 @@ class Annualoutput(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	class AnnualOutput(object):
+	class Common(object):
 		def assign(self): 
 			pass
 	
@@ -31,12 +31,7 @@ class Annualoutput(object):
 			pass
 
 
-		analysis_period = float
-		energy_availability = tuple
-		energy_curtailment = tuple
-		energy_degradation = tuple
-		system_hourly_energy = tuple
-		system_use_lifetime_output = float
+		input = dict
 
 
 	class Outputs(object):
@@ -50,25 +45,21 @@ class Annualoutput(object):
 			pass
 
 
-		annual_availability = tuple
-		annual_degradation = tuple
-		annual_energy = tuple
-		hourly_energy = tuple
-		monthly_energy = tuple
+		output = dict
 
 
 
 
-def default(config) -> Annualoutput:
+def default(config) -> Hybrid:
 	pass
 
-def new() -> Annualoutput:
+def new() -> Hybrid:
 	pass
 
-def wrap(ssc_data_t) -> Annualoutput:
+def wrap(ssc_data_t) -> Hybrid:
 	pass
 
-def from_existing(model, config="") -> Annualoutput:
+def from_existing(model, config="") -> Hybrid:
 	pass
 
 __loader__ = None 

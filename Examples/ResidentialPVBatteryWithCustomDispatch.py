@@ -8,7 +8,7 @@ Additional financial models, inputs, and outputs can be found at:
 * PV: https://nrel-pysam.readthedocs.io/en/master/modules/Pvsamv1.html
 * Battery: https://nrel-pysam.readthedocs.io/en/master/modules/Battery.html
 
-Most recently tested against PySAM 4.2.0
+Most recently tested against PySAM 5.0.0
 
 @author: brtietz
 """
@@ -16,8 +16,12 @@ Most recently tested against PySAM 4.2.0
 import PySAM.Battery as battery_model
 import PySAM.Pvsamv1 as pvsam
 from PySAM.PySSC import *
+from pathlib import Path
 
-weather_file = sys.argv[1]  # .csv weather file with tmy format
+if len(sys.argv) > 1:
+    weather_file = sys.argv[1]  # .csv weather file with tmy format
+else:
+    weather_file = str(Path(__file__).parent.parent / "tests" / "blythe_ca_33.617773_-114.588261_nasa_60_tmy.csv")
 
 analysis_period = 1  # years
 days_in_year = 365

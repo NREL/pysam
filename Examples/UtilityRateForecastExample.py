@@ -15,11 +15,11 @@ The forecast code looks at the step-by-step (default hourly) costs of the rate, 
 This can either be run with all of the steps at once (single call to execute()) to generate an array of prices
 or by calling execute repeateadly, potentially in the loop with a model-predictive controller for energy storage
 
-Most recently tested against PySAM 4.2.0
+Most recently tested against PySAM 5.0.0
 """
 
 # Get a key from https://api.openei.org:443
-key = "YOUR_API_KEY"
+key = os.environ.get('NREL_API_KEY')
 
 # Download rate from URDB and save as file. If rate has already been downloaded, use file
 def get_urdb_rate_data(page, key):

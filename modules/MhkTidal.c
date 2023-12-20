@@ -234,6 +234,30 @@ MHKTidal_set_tidal_resource(VarGroupObject *self, PyObject *value, void *closure
 }
 
 static PyObject *
+MHKTidal_get_tidal_resource_model_choice(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkTidal_MHKTidal_tidal_resource_model_choice_nget, self->data_ptr);
+}
+
+static int
+MHKTidal_set_tidal_resource_model_choice(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MhkTidal_MHKTidal_tidal_resource_model_choice_nset, self->data_ptr);
+}
+
+static PyObject *
+MHKTidal_get_tidal_velocity(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkTidal_MHKTidal_tidal_velocity_aget, self->data_ptr);
+}
+
+static int
+MHKTidal_set_tidal_velocity(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_MhkTidal_MHKTidal_tidal_velocity_aset, self->data_ptr);
+}
+
+static PyObject *
 MHKTidal_get_total_operating_cost(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkTidal_MHKTidal_total_operating_cost_nget, self->data_ptr);
@@ -274,16 +298,22 @@ static PyGetSetDef MHKTidal_getset[] = {
 	PyDoc_STR("*float*: Transmission losses [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"number_devices", (getter)MHKTidal_get_number_devices,(setter)MHKTidal_set_number_devices,
-	PyDoc_STR("*float*: Number of tidal devices in the system\n\n**Constraints:**\nINTEGER\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults.\n\nThe value of the following variables depends on ``number_devices``:\n\n\t - system_capacity\n\n\nThe value of ``number_devices`` depends on the following variables:\n\n\t - tidal_power_curve\n"),
+	PyDoc_STR("*float*: Number of tidal devices in the system\n\n**Constraints:**\nINTEGER\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults.\n\nThe value of the following variables depends on ``number_devices``:\n\n\t - system_capacity\n\n\nThe value of ``number_devices`` depends on the following variables:\n\n\t - tidal_power_curve\n\t - tidal_resource\n"),
  	NULL},
 {"system_capacity", (getter)MHKTidal_get_system_capacity,(setter)MHKTidal_set_system_capacity,
-	PyDoc_STR("*float*: System Nameplate Capacity [kW]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of ``system_capacity`` depends on the following variables:\n\n\t - number_devices\n\t - tidal_power_curve\n"),
+	PyDoc_STR("*float*: System Nameplate Capacity [kW]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of ``system_capacity`` depends on the following variables:\n\n\t - number_devices\n\t - tidal_power_curve\n\t - tidal_resource\n"),
  	NULL},
 {"tidal_power_curve", (getter)MHKTidal_get_tidal_power_curve,(setter)MHKTidal_set_tidal_power_curve,
-	PyDoc_STR("*sequence[sequence]*: Power curve of tidal energy device as function of stream speeds [kW]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``tidal_power_curve``:\n\n\t - number_devices\n\t - system_capacity\n"),
+	PyDoc_STR("*sequence[sequence]*: Power curve of tidal energy device as function of stream speeds [kW]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``tidal_power_curve``:\n\n\t - number_devices\n\t - system_capacity\n\n\nThe value of ``tidal_power_curve`` depends on the following variables:\n\n\t - tidal_resource\n"),
  	NULL},
 {"tidal_resource", (getter)MHKTidal_get_tidal_resource,(setter)MHKTidal_set_tidal_resource,
-	PyDoc_STR("*sequence[sequence]*: Frequency distribution of resource as a function of stream speeds\n\n**Required:**\nTrue"),
+	PyDoc_STR("*sequence[sequence]*: Frequency distribution of resource as a function of stream speeds\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``tidal_resource``:\n\n\t - number_devices\n\t - system_capacity\n\t - tidal_power_curve\n"),
+ 	NULL},
+{"tidal_resource_model_choice", (getter)MHKTidal_get_tidal_resource_model_choice,(setter)MHKTidal_set_tidal_resource_model_choice,
+	PyDoc_STR("*float*: Resource distribution or time series tidal resource data [0/1]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"tidal_velocity", (getter)MHKTidal_get_tidal_velocity,(setter)MHKTidal_set_tidal_velocity,
+	PyDoc_STR("*sequence*: Tidal velocity [m/s]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"total_operating_cost", (getter)MHKTidal_get_total_operating_cost,(setter)MHKTidal_set_total_operating_cost,
 	PyDoc_STR("*float*: O&M costs [$]\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
@@ -446,6 +476,12 @@ Outputs_get_device_rated_capacity(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkTidal_Outputs_gen_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_tidal_power_end_velocity(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkTidal_Outputs_tidal_power_end_velocity_nget, self->data_ptr);
@@ -577,6 +613,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"device_rated_capacity", (getter)Outputs_get_device_rated_capacity,(setter)0,
 	PyDoc_STR("*float*: Rated capacity of device [kW]"),
+ 	NULL},
+{"gen", (getter)Outputs_get_gen,(setter)0,
+	PyDoc_STR("*sequence*: System power generated [kW]"),
  	NULL},
 {"tidal_power_end_velocity", (getter)Outputs_get_tidal_power_end_velocity,(setter)0,
 	PyDoc_STR("*float*: Last tidal velocity where power curve is greater than 0  [m/s]"),
@@ -726,6 +765,14 @@ MhkTidal_dealloc(CmodObject *self)
 
 
 static PyObject *
+MhkTidal_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 MhkTidal_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -792,6 +839,8 @@ MhkTidal_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef MhkTidal_methods[] = {
 		{"execute",           (PyCFunction)MhkTidal_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)MhkTidal_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)MhkTidal_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'MHKTidal': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)MhkTidal_replace,  METH_VARARGS,

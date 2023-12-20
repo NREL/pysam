@@ -165,6 +165,7 @@ class EtesElectricResistance(object):
 
 		ud_f_W_dot_cool_des = float
 		ud_ind_od = tuple
+		ud_is_sco2_regr = float
 		ud_m_dot_water_cool_des = float
 
 
@@ -220,18 +221,10 @@ class EtesElectricResistance(object):
 			pass
 
 
-		dispatch_factor1 = float
-		dispatch_factor2 = float
-		dispatch_factor3 = float
-		dispatch_factor4 = float
-		dispatch_factor5 = float
-		dispatch_factor6 = float
-		dispatch_factor7 = float
-		dispatch_factor8 = float
-		dispatch_factor9 = float
 		dispatch_factors_ts = tuple
 		dispatch_sched_weekday = tuple
 		dispatch_sched_weekend = tuple
+		dispatch_tod_factors = tuple
 		ppa_multiplier_model = float
 
 
@@ -333,14 +326,26 @@ class EtesElectricResistance(object):
 			pass
 	
 		constant = float
-		dc_constant = float
-		dc_hourly = tuple
-		dc_periods = tuple
+		en_hourly = float
+		en_periods = float
+		en_timeindex = float
 		hourly = tuple
 		periods = tuple
+		imeindex = tuple
+		dc_constant = float
+		dc_en_hourly = float
+		dc_en_periods = float
+		dc_en_timeindex = float
+		dc_hourly = tuple
+		dc_periods = tuple
+		dc_imeindex = tuple
 		sf_constant = float
+		sf_en_hourly = float
+		sf_en_periods = float
+		sf_en_timeindex = float
 		sf_hourly = tuple
 		sf_periods = tuple
+		sf_timeindex = tuple
 
 	class Outputs(object):
 		def assign(self): 

@@ -39,11 +39,18 @@ SystemDesign Group
 .. autoclass:: PySAM.Pvwattsv7.Pvwattsv7.SystemDesign
 	:members:
 
+Shading Group
+--------------
+
+.. autoclass:: PySAM.Pvwattsv7.Pvwattsv7.Shading
+	:members:
+
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.Pvwattsv7.Pvwattsv7.AdjustmentFactors
+.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
 	:members:
+	:noindex:
 
 Outputs Group
 --------------

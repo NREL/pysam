@@ -215,6 +215,18 @@ static PyMethodDef Common_methods[] = {
 };
 
 static PyObject *
+Common_get_T_htf_cold_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Common_T_htf_cold_des_nget, self->data_ptr);
+}
+
+static int
+Common_set_T_htf_cold_des(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_UiUdpcChecks_Common_T_htf_cold_des_nset, self->data_ptr);
+}
+
+static PyObject *
 Common_get_T_htf_des_in(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_UiUdpcChecks_Common_T_htf_des_in_nget, self->data_ptr);
@@ -226,9 +238,42 @@ Common_set_T_htf_des_in(VarGroupObject *self, PyObject *value, void *closure)
 	return PySAM_double_setter(value, SAM_UiUdpcChecks_Common_T_htf_des_in_nset, self->data_ptr);
 }
 
+static PyObject *
+Common_get_cooler_tot_W_dot_fan(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Common_cooler_tot_W_dot_fan_nget, self->data_ptr);
+}
+
+static int
+Common_set_cooler_tot_W_dot_fan(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_UiUdpcChecks_Common_cooler_tot_W_dot_fan_nset, self->data_ptr);
+}
+
+static PyObject *
+Common_get_is_calc_m_dot_vs_T_amb(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Common_is_calc_m_dot_vs_T_amb_nget, self->data_ptr);
+}
+
+static int
+Common_set_is_calc_m_dot_vs_T_amb(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_UiUdpcChecks_Common_is_calc_m_dot_vs_T_amb_nset, self->data_ptr);
+}
+
 static PyGetSetDef Common_getset[] = {
+{"T_htf_cold_des", (getter)Common_get_T_htf_cold_des,(setter)Common_set_T_htf_cold_des,
+	PyDoc_STR("*float*: Cold outlet HTF design temperature [C]\n\n**Required:**\nRequired if is_calc_m_dot_vs_T_amb=1"),
+ 	NULL},
 {"T_htf_des_in", (getter)Common_get_T_htf_des_in,(setter)Common_set_T_htf_des_in,
 	PyDoc_STR("*float*: Input HTF design temperature [C]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"cooler_tot_W_dot_fan", (getter)Common_get_cooler_tot_W_dot_fan,(setter)Common_set_cooler_tot_W_dot_fan,
+	PyDoc_STR("*float*: Total cooler fan power [MWe]\n\n**Info:**\nCooler Totals\n\n**Required:**\nRequired if is_calc_m_dot_vs_T_amb=1"),
+ 	NULL},
+{"is_calc_m_dot_vs_T_amb", (getter)Common_get_is_calc_m_dot_vs_T_amb,(setter)Common_set_is_calc_m_dot_vs_T_amb,
+	PyDoc_STR("*float*: 0 (defalt) no; 1: return array of max m_dot vs T_amb\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -267,6 +312,143 @@ static PyTypeObject Common_Type = {
 		Common_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		Common_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * SystemDesign Group
+ */ 
+
+static PyTypeObject SystemDesign_Type;
+
+static PyObject *
+SystemDesign_new(SAM_UiUdpcChecks data_ptr)
+{
+	PyObject* new_obj = SystemDesign_Type.tp_alloc(&SystemDesign_Type,0);
+
+	VarGroupObject* SystemDesign_obj = (VarGroupObject*)new_obj;
+
+	SystemDesign_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* SystemDesign methods */
+
+static PyObject *
+SystemDesign_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "UiUdpcChecks", "SystemDesign")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+SystemDesign_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SystemDesign_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "UiUdpcChecks", "SystemDesign")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+SystemDesign_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &SystemDesign_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef SystemDesign_methods[] = {
+		{"assign",            (PyCFunction)SystemDesign_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SystemDesign_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SystemDesign_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SystemDesign_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)SystemDesign_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+SystemDesign_get_W_dot_net_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_SystemDesign_W_dot_net_des_nget, self->data_ptr);
+}
+
+static int
+SystemDesign_set_W_dot_net_des(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_UiUdpcChecks_SystemDesign_W_dot_net_des_nset, self->data_ptr);
+}
+
+static PyGetSetDef SystemDesign_getset[] = {
+{"W_dot_net_des", (getter)SystemDesign_get_W_dot_net_des,(setter)SystemDesign_set_W_dot_net_des,
+	PyDoc_STR("*float*: Design cycle power output (no cooling parasitics) [MWe]\n\n**Required:**\nRequired if is_calc_m_dot_vs_T_amb=1"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject SystemDesign_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"UiUdpcChecks.SystemDesign",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		SystemDesign_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		SystemDesign_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -358,6 +540,18 @@ Outputs_get_Q_dot_HTF_ND_des(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_T_amb_HT(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_T_amb_HT_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_T_amb_LT(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_T_amb_LT_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_T_amb_des(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_T_amb_des_nget, self->data_ptr);
@@ -373,6 +567,18 @@ static PyObject *
 Outputs_get_T_amb_low(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_T_amb_low_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_T_amb_pars(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_T_amb_pars_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_T_amb_sweep(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_T_amb_sweep_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -394,6 +600,60 @@ Outputs_get_T_htf_low(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_T_htf_pars(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_T_htf_pars_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_ND_regr_vs_T_amb__T_HTF_low_level(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_W_dot_ND_regr_vs_T_amb__T_HTF_low_level_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_ND_regr_vs_m_dot__T_amb_HT(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_W_dot_ND_regr_vs_m_dot__T_amb_HT_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_ND_regr_vs_m_dot__T_amb_LT(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_W_dot_ND_regr_vs_m_dot__T_amb_LT_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_ND_regr_vs_m_dot__T_amb_design(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_W_dot_ND_regr_vs_m_dot__T_amb_design_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_ND_regr_vs_m_dot__T_amb_high_level(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_W_dot_ND_regr_vs_m_dot__T_amb_high_level_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_ND_regr_vs_m_dot__T_amb_low_level(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_W_dot_ND_regr_vs_m_dot__T_amb_low_level_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_ND_vs_m_dot__T_amb_HT(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_W_dot_ND_vs_m_dot__T_amb_HT_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_ND_vs_m_dot__T_amb_LT(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_W_dot_ND_vs_m_dot__T_amb_LT_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_W_dot_cooling_ND_des(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_W_dot_cooling_ND_des_nget, self->data_ptr);
@@ -403,6 +663,174 @@ static PyObject *
 Outputs_get_W_dot_gross_ND_des(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_W_dot_gross_ND_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_htf_ND_max_at_T_amb_HT_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_W_dot_htf_ND_max_at_T_amb_HT_regr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_htf_ND_max_at_T_amb_HT_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_W_dot_htf_ND_max_at_T_amb_HT_rule0_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_htf_ND_max_at_T_amb_LT_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_W_dot_htf_ND_max_at_T_amb_LT_regr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_htf_ND_max_at_T_amb_LT_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_W_dot_htf_ND_max_at_T_amb_LT_rule0_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_htf_ND_max_at_T_amb_design_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_W_dot_htf_ND_max_at_T_amb_design_regr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_htf_ND_max_at_T_amb_design_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_W_dot_htf_ND_max_at_T_amb_design_rule0_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_htf_ND_max_at_T_amb_high_level_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_W_dot_htf_ND_max_at_T_amb_high_level_regr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_htf_ND_max_at_T_amb_high_level_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_W_dot_htf_ND_max_at_T_amb_high_level_rule0_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_htf_ND_max_at_T_amb_low_level_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_W_dot_htf_ND_max_at_T_amb_low_level_regr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_htf_ND_max_at_T_amb_low_level_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_W_dot_htf_ND_max_at_T_amb_low_level_rule0_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_eta_ND_max_at_T_amb_HT_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_eta_ND_max_at_T_amb_HT_regr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_eta_ND_max_at_T_amb_HT_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_eta_ND_max_at_T_amb_HT_rule0_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_eta_ND_max_at_T_amb_LT_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_eta_ND_max_at_T_amb_LT_regr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_eta_ND_max_at_T_amb_LT_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_eta_ND_max_at_T_amb_LT_rule0_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_eta_ND_max_at_T_amb_design_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_eta_ND_max_at_T_amb_design_regr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_eta_ND_max_at_T_amb_design_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_eta_ND_max_at_T_amb_design_rule0_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_eta_ND_max_at_T_amb_high_level_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_eta_ND_max_at_T_amb_high_level_regr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_eta_ND_max_at_T_amb_high_level_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_eta_ND_max_at_T_amb_high_level_rule0_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_eta_ND_max_at_T_amb_low_level_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_eta_ND_max_at_T_amb_low_level_regr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_eta_ND_max_at_T_amb_low_level_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_eta_ND_max_at_T_amb_low_level_rule0_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_eta_ND_regr_vs_T_amb__T_HTF_low_level(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_eta_ND_regr_vs_T_amb__T_HTF_low_level_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_eta_ND_regr_vs_m_dot__T_amb_HT(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_eta_ND_regr_vs_m_dot__T_amb_HT_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_eta_ND_regr_vs_m_dot__T_amb_LT(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_eta_ND_regr_vs_m_dot__T_amb_LT_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_eta_ND_regr_vs_m_dot__T_amb_design(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_eta_ND_regr_vs_m_dot__T_amb_design_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_eta_ND_regr_vs_m_dot__T_amb_high_level(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_eta_ND_regr_vs_m_dot__T_amb_high_level_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_eta_ND_regr_vs_m_dot__T_amb_low_level(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_eta_ND_regr_vs_m_dot__T_amb_low_level_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_eta_ND_vs_m_dot__T_amb_HT(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_eta_ND_vs_m_dot__T_amb_HT_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_eta_ND_vs_m_dot__T_amb_LT(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_eta_ND_vs_m_dot__T_amb_LT_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -418,9 +846,81 @@ Outputs_get_m_dot_high(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_m_dot_htf_ND_max_at_T_amb_HT_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_m_dot_htf_ND_max_at_T_amb_HT_regr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_htf_ND_max_at_T_amb_HT_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_m_dot_htf_ND_max_at_T_amb_HT_rule0_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_htf_ND_max_at_T_amb_LT_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_m_dot_htf_ND_max_at_T_amb_LT_regr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_htf_ND_max_at_T_amb_LT_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_m_dot_htf_ND_max_at_T_amb_LT_rule0_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_htf_ND_max_at_T_amb_design_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_m_dot_htf_ND_max_at_T_amb_design_regr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_htf_ND_max_at_T_amb_design_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_m_dot_htf_ND_max_at_T_amb_design_rule0_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_htf_ND_max_at_T_amb_high_level_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_m_dot_htf_ND_max_at_T_amb_high_level_regr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_htf_ND_max_at_T_amb_high_level_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_m_dot_htf_ND_max_at_T_amb_high_level_rule0_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_htf_ND_max_at_T_amb_low_level_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_m_dot_htf_ND_max_at_T_amb_low_level_regr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_htf_ND_max_at_T_amb_low_level_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_m_dot_htf_ND_max_at_T_amb_low_level_rule0_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_htf_ND_max_vs_T_amb_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_m_dot_htf_ND_max_vs_T_amb_rule0_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_m_dot_low(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_m_dot_low_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_pars(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_m_dot_pars_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -447,9 +947,123 @@ Outputs_get_n_m_dot_pars(VarGroupObject *self, void *closure)
 	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_n_m_dot_pars_nget, self->data_ptr);
 }
 
+static PyObject *
+Outputs_get_q_dot_ND_regr_vs_T_amb__T_HTF_low_level(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_q_dot_ND_regr_vs_T_amb__T_HTF_low_level_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_ND_regr_vs_m_dot__T_amb_HT(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_q_dot_ND_regr_vs_m_dot__T_amb_HT_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_ND_regr_vs_m_dot__T_amb_LT(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_q_dot_ND_regr_vs_m_dot__T_amb_LT_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_ND_regr_vs_m_dot__T_amb_design(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_q_dot_ND_regr_vs_m_dot__T_amb_design_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_ND_regr_vs_m_dot__T_amb_high_level(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_q_dot_ND_regr_vs_m_dot__T_amb_high_level_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_ND_regr_vs_m_dot__T_amb_low_level(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_q_dot_ND_regr_vs_m_dot__T_amb_low_level_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_ND_vs_m_dot__T_amb_HT(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_q_dot_ND_vs_m_dot__T_amb_HT_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_ND_vs_m_dot__T_amb_LT(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_UiUdpcChecks_Outputs_q_dot_ND_vs_m_dot__T_amb_LT_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_htf_ND_max_at_T_amb_HT_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_q_dot_htf_ND_max_at_T_amb_HT_regr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_htf_ND_max_at_T_amb_HT_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_q_dot_htf_ND_max_at_T_amb_HT_rule0_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_htf_ND_max_at_T_amb_LT_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_q_dot_htf_ND_max_at_T_amb_LT_regr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_htf_ND_max_at_T_amb_LT_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_q_dot_htf_ND_max_at_T_amb_LT_rule0_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_htf_ND_max_at_T_amb_design_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_q_dot_htf_ND_max_at_T_amb_design_regr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_htf_ND_max_at_T_amb_design_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_q_dot_htf_ND_max_at_T_amb_design_rule0_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_htf_ND_max_at_T_amb_high_level_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_q_dot_htf_ND_max_at_T_amb_high_level_regr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_htf_ND_max_at_T_amb_high_level_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_q_dot_htf_ND_max_at_T_amb_high_level_rule0_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_htf_ND_max_at_T_amb_low_level_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_q_dot_htf_ND_max_at_T_amb_low_level_regr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_htf_ND_max_at_T_amb_low_level_rule0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_q_dot_htf_ND_max_at_T_amb_low_level_rule0_nget, self->data_ptr);
+}
+
 static PyGetSetDef Outputs_getset[] = {
 {"Q_dot_HTF_ND_des", (getter)Outputs_get_Q_dot_HTF_ND_des,(setter)0,
 	PyDoc_STR("*float*: ND cycle heat input at design values of independent parameters [-]"),
+ 	NULL},
+{"T_amb_HT", (getter)Outputs_get_T_amb_HT,(setter)0,
+	PyDoc_STR("*float*: High temp ambient temp of calculated ND outputs [C]"),
+ 	NULL},
+{"T_amb_LT", (getter)Outputs_get_T_amb_LT,(setter)0,
+	PyDoc_STR("*float*: Low temp ambient temp of calculated ND outputs [C]"),
  	NULL},
 {"T_amb_des", (getter)Outputs_get_T_amb_des,(setter)0,
 	PyDoc_STR("*float*: Design ambient temperature [C]"),
@@ -460,6 +1074,12 @@ static PyGetSetDef Outputs_getset[] = {
 {"T_amb_low", (getter)Outputs_get_T_amb_low,(setter)0,
 	PyDoc_STR("*float*: Low ambient temperature [C]"),
  	NULL},
+{"T_amb_pars", (getter)Outputs_get_T_amb_pars,(setter)0,
+	PyDoc_STR("*sequence*: Ambient temperature parametric values [C]"),
+ 	NULL},
+{"T_amb_sweep", (getter)Outputs_get_T_amb_sweep,(setter)0,
+	PyDoc_STR("*sequence*: Ambient temperature sweep for max mass flow calcs"),
+ 	NULL},
 {"T_htf_des", (getter)Outputs_get_T_htf_des,(setter)0,
 	PyDoc_STR("*float*: HTF design temperature [C]"),
  	NULL},
@@ -469,20 +1089,167 @@ static PyGetSetDef Outputs_getset[] = {
 {"T_htf_low", (getter)Outputs_get_T_htf_low,(setter)0,
 	PyDoc_STR("*float*: HTF low temperature [C]"),
  	NULL},
+{"T_htf_pars", (getter)Outputs_get_T_htf_pars,(setter)0,
+	PyDoc_STR("*sequence*: HTF temperature parametric values [C]"),
+ 	NULL},
+{"W_dot_ND_regr_vs_T_amb__T_HTF_low_level", (getter)Outputs_get_W_dot_ND_regr_vs_T_amb__T_HTF_low_level,(setter)0,
+	PyDoc_STR("*sequence*: Regression max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"W_dot_ND_regr_vs_m_dot__T_amb_HT", (getter)Outputs_get_W_dot_ND_regr_vs_m_dot__T_amb_HT,(setter)0,
+	PyDoc_STR("*sequence*: Regression max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"W_dot_ND_regr_vs_m_dot__T_amb_LT", (getter)Outputs_get_W_dot_ND_regr_vs_m_dot__T_amb_LT,(setter)0,
+	PyDoc_STR("*sequence*: Regression max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"W_dot_ND_regr_vs_m_dot__T_amb_design", (getter)Outputs_get_W_dot_ND_regr_vs_m_dot__T_amb_design,(setter)0,
+	PyDoc_STR("*sequence*: Regression max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"W_dot_ND_regr_vs_m_dot__T_amb_high_level", (getter)Outputs_get_W_dot_ND_regr_vs_m_dot__T_amb_high_level,(setter)0,
+	PyDoc_STR("*sequence*: Regression net power ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"W_dot_ND_regr_vs_m_dot__T_amb_low_level", (getter)Outputs_get_W_dot_ND_regr_vs_m_dot__T_amb_low_level,(setter)0,
+	PyDoc_STR("*sequence*: Regression max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"W_dot_ND_vs_m_dot__T_amb_HT", (getter)Outputs_get_W_dot_ND_vs_m_dot__T_amb_HT,(setter)0,
+	PyDoc_STR("*sequence*: Calculated ND power in vs mass flow at HT ambient temp"),
+ 	NULL},
+{"W_dot_ND_vs_m_dot__T_amb_LT", (getter)Outputs_get_W_dot_ND_vs_m_dot__T_amb_LT,(setter)0,
+	PyDoc_STR("*sequence*: Calculated ND power in vs mass flow at LT ambient temp"),
+ 	NULL},
 {"W_dot_cooling_ND_des", (getter)Outputs_get_W_dot_cooling_ND_des,(setter)0,
 	PyDoc_STR("*float*: ND cycle cooling power at design values of independent parameters [C]"),
  	NULL},
 {"W_dot_gross_ND_des", (getter)Outputs_get_W_dot_gross_ND_des,(setter)0,
 	PyDoc_STR("*float*: ND cycle power output at design values of independent parameters [-]"),
  	NULL},
+{"W_dot_htf_ND_max_at_T_amb_HT_regr", (getter)Outputs_get_W_dot_htf_ND_max_at_T_amb_HT_regr,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at HT ambient temp"),
+ 	NULL},
+{"W_dot_htf_ND_max_at_T_amb_HT_rule0", (getter)Outputs_get_W_dot_htf_ND_max_at_T_amb_HT_rule0,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at HT ambient temp"),
+ 	NULL},
+{"W_dot_htf_ND_max_at_T_amb_LT_regr", (getter)Outputs_get_W_dot_htf_ND_max_at_T_amb_LT_regr,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at LT ambient temp"),
+ 	NULL},
+{"W_dot_htf_ND_max_at_T_amb_LT_rule0", (getter)Outputs_get_W_dot_htf_ND_max_at_T_amb_LT_rule0,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at LT ambient temp"),
+ 	NULL},
+{"W_dot_htf_ND_max_at_T_amb_design_regr", (getter)Outputs_get_W_dot_htf_ND_max_at_T_amb_design_regr,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"W_dot_htf_ND_max_at_T_amb_design_rule0", (getter)Outputs_get_W_dot_htf_ND_max_at_T_amb_design_rule0,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"W_dot_htf_ND_max_at_T_amb_high_level_regr", (getter)Outputs_get_W_dot_htf_ND_max_at_T_amb_high_level_regr,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"W_dot_htf_ND_max_at_T_amb_high_level_rule0", (getter)Outputs_get_W_dot_htf_ND_max_at_T_amb_high_level_rule0,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"W_dot_htf_ND_max_at_T_amb_low_level_regr", (getter)Outputs_get_W_dot_htf_ND_max_at_T_amb_low_level_regr,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"W_dot_htf_ND_max_at_T_amb_low_level_rule0", (getter)Outputs_get_W_dot_htf_ND_max_at_T_amb_low_level_rule0,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"eta_ND_max_at_T_amb_HT_regr", (getter)Outputs_get_eta_ND_max_at_T_amb_HT_regr,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at HT ambient temp"),
+ 	NULL},
+{"eta_ND_max_at_T_amb_HT_rule0", (getter)Outputs_get_eta_ND_max_at_T_amb_HT_rule0,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at HT ambient temp"),
+ 	NULL},
+{"eta_ND_max_at_T_amb_LT_regr", (getter)Outputs_get_eta_ND_max_at_T_amb_LT_regr,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at LT ambient temp"),
+ 	NULL},
+{"eta_ND_max_at_T_amb_LT_rule0", (getter)Outputs_get_eta_ND_max_at_T_amb_LT_rule0,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at LT ambient temp"),
+ 	NULL},
+{"eta_ND_max_at_T_amb_design_regr", (getter)Outputs_get_eta_ND_max_at_T_amb_design_regr,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"eta_ND_max_at_T_amb_design_rule0", (getter)Outputs_get_eta_ND_max_at_T_amb_design_rule0,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"eta_ND_max_at_T_amb_high_level_regr", (getter)Outputs_get_eta_ND_max_at_T_amb_high_level_regr,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"eta_ND_max_at_T_amb_high_level_rule0", (getter)Outputs_get_eta_ND_max_at_T_amb_high_level_rule0,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"eta_ND_max_at_T_amb_low_level_regr", (getter)Outputs_get_eta_ND_max_at_T_amb_low_level_regr,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"eta_ND_max_at_T_amb_low_level_rule0", (getter)Outputs_get_eta_ND_max_at_T_amb_low_level_rule0,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"eta_ND_regr_vs_T_amb__T_HTF_low_level", (getter)Outputs_get_eta_ND_regr_vs_T_amb__T_HTF_low_level,(setter)0,
+	PyDoc_STR("*sequence*: Regression max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"eta_ND_regr_vs_m_dot__T_amb_HT", (getter)Outputs_get_eta_ND_regr_vs_m_dot__T_amb_HT,(setter)0,
+	PyDoc_STR("*sequence*: Regression max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"eta_ND_regr_vs_m_dot__T_amb_LT", (getter)Outputs_get_eta_ND_regr_vs_m_dot__T_amb_LT,(setter)0,
+	PyDoc_STR("*sequence*: Regression max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"eta_ND_regr_vs_m_dot__T_amb_design", (getter)Outputs_get_eta_ND_regr_vs_m_dot__T_amb_design,(setter)0,
+	PyDoc_STR("*sequence*: Regression max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"eta_ND_regr_vs_m_dot__T_amb_high_level", (getter)Outputs_get_eta_ND_regr_vs_m_dot__T_amb_high_level,(setter)0,
+	PyDoc_STR("*sequence*: Regression net efficiency ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"eta_ND_regr_vs_m_dot__T_amb_low_level", (getter)Outputs_get_eta_ND_regr_vs_m_dot__T_amb_low_level,(setter)0,
+	PyDoc_STR("*sequence*: Regression max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"eta_ND_vs_m_dot__T_amb_HT", (getter)Outputs_get_eta_ND_vs_m_dot__T_amb_HT,(setter)0,
+	PyDoc_STR("*sequence*: Calculated ND efficiency in vs mass flow at HT ambient temp"),
+ 	NULL},
+{"eta_ND_vs_m_dot__T_amb_LT", (getter)Outputs_get_eta_ND_vs_m_dot__T_amb_LT,(setter)0,
+	PyDoc_STR("*sequence*: Calculated ND efficiency in vs mass flow at LT ambient temp"),
+ 	NULL},
 {"m_dot_des", (getter)Outputs_get_m_dot_des,(setter)0,
-	PyDoc_STR("*float*: Design ambient temperature [C]"),
+	PyDoc_STR("*float*: Design normalized HTF mass flow rate"),
  	NULL},
 {"m_dot_high", (getter)Outputs_get_m_dot_high,(setter)0,
-	PyDoc_STR("*float*: High ambient temperature [C]"),
+	PyDoc_STR("*float*: High normalized HTF mass flow rate"),
+ 	NULL},
+{"m_dot_htf_ND_max_at_T_amb_HT_regr", (getter)Outputs_get_m_dot_htf_ND_max_at_T_amb_HT_regr,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at HT ambient temp"),
+ 	NULL},
+{"m_dot_htf_ND_max_at_T_amb_HT_rule0", (getter)Outputs_get_m_dot_htf_ND_max_at_T_amb_HT_rule0,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at HT ambient temp"),
+ 	NULL},
+{"m_dot_htf_ND_max_at_T_amb_LT_regr", (getter)Outputs_get_m_dot_htf_ND_max_at_T_amb_LT_regr,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at LT ambient temp"),
+ 	NULL},
+{"m_dot_htf_ND_max_at_T_amb_LT_rule0", (getter)Outputs_get_m_dot_htf_ND_max_at_T_amb_LT_rule0,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at LT ambient temp"),
+ 	NULL},
+{"m_dot_htf_ND_max_at_T_amb_design_regr", (getter)Outputs_get_m_dot_htf_ND_max_at_T_amb_design_regr,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"m_dot_htf_ND_max_at_T_amb_design_rule0", (getter)Outputs_get_m_dot_htf_ND_max_at_T_amb_design_rule0,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"m_dot_htf_ND_max_at_T_amb_high_level_regr", (getter)Outputs_get_m_dot_htf_ND_max_at_T_amb_high_level_regr,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"m_dot_htf_ND_max_at_T_amb_high_level_rule0", (getter)Outputs_get_m_dot_htf_ND_max_at_T_amb_high_level_rule0,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"m_dot_htf_ND_max_at_T_amb_low_level_regr", (getter)Outputs_get_m_dot_htf_ND_max_at_T_amb_low_level_regr,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"m_dot_htf_ND_max_at_T_amb_low_level_rule0", (getter)Outputs_get_m_dot_htf_ND_max_at_T_amb_low_level_rule0,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"m_dot_htf_ND_max_vs_T_amb_rule0", (getter)Outputs_get_m_dot_htf_ND_max_vs_T_amb_rule0,(setter)0,
+	PyDoc_STR("*sequence*: Calculated ND max htf mass flow rate vs ambient temp"),
  	NULL},
 {"m_dot_low", (getter)Outputs_get_m_dot_low,(setter)0,
-	PyDoc_STR("*float*: Low ambient temperature [C]"),
+	PyDoc_STR("*float*: Low normalized HTF mass flow rate"),
+ 	NULL},
+{"m_dot_pars", (getter)Outputs_get_m_dot_pars,(setter)0,
+	PyDoc_STR("*sequence*: Normalized mass flow parametric values"),
  	NULL},
 {"m_dot_water_ND_des", (getter)Outputs_get_m_dot_water_ND_des,(setter)0,
 	PyDoc_STR("*float*: ND cycle water use at design values of independent parameters [C]"),
@@ -494,7 +1261,61 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Number of HTF parametrics [-]"),
  	NULL},
 {"n_m_dot_pars", (getter)Outputs_get_n_m_dot_pars,(setter)0,
-	PyDoc_STR("*float*: Number of HTF mass flow parametrics [-]"),
+	PyDoc_STR("*float*: Number of HTF mass flow parametrics"),
+ 	NULL},
+{"q_dot_ND_regr_vs_T_amb__T_HTF_low_level", (getter)Outputs_get_q_dot_ND_regr_vs_T_amb__T_HTF_low_level,(setter)0,
+	PyDoc_STR("*sequence*: Regression max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"q_dot_ND_regr_vs_m_dot__T_amb_HT", (getter)Outputs_get_q_dot_ND_regr_vs_m_dot__T_amb_HT,(setter)0,
+	PyDoc_STR("*sequence*: Regression max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"q_dot_ND_regr_vs_m_dot__T_amb_LT", (getter)Outputs_get_q_dot_ND_regr_vs_m_dot__T_amb_LT,(setter)0,
+	PyDoc_STR("*sequence*: Regression max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"q_dot_ND_regr_vs_m_dot__T_amb_design", (getter)Outputs_get_q_dot_ND_regr_vs_m_dot__T_amb_design,(setter)0,
+	PyDoc_STR("*sequence*: Regression max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"q_dot_ND_regr_vs_m_dot__T_amb_high_level", (getter)Outputs_get_q_dot_ND_regr_vs_m_dot__T_amb_high_level,(setter)0,
+	PyDoc_STR("*sequence*: Regression heat ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"q_dot_ND_regr_vs_m_dot__T_amb_low_level", (getter)Outputs_get_q_dot_ND_regr_vs_m_dot__T_amb_low_level,(setter)0,
+	PyDoc_STR("*sequence*: Regression max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"q_dot_ND_vs_m_dot__T_amb_HT", (getter)Outputs_get_q_dot_ND_vs_m_dot__T_amb_HT,(setter)0,
+	PyDoc_STR("*sequence*: Calculated ND heat in vs mass flow at HT ambient temp"),
+ 	NULL},
+{"q_dot_ND_vs_m_dot__T_amb_LT", (getter)Outputs_get_q_dot_ND_vs_m_dot__T_amb_LT,(setter)0,
+	PyDoc_STR("*sequence*: Calculated ND heat in vs mass flow at LT ambient temp"),
+ 	NULL},
+{"q_dot_htf_ND_max_at_T_amb_HT_regr", (getter)Outputs_get_q_dot_htf_ND_max_at_T_amb_HT_regr,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at HT ambient temp"),
+ 	NULL},
+{"q_dot_htf_ND_max_at_T_amb_HT_rule0", (getter)Outputs_get_q_dot_htf_ND_max_at_T_amb_HT_rule0,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at HT ambient temp"),
+ 	NULL},
+{"q_dot_htf_ND_max_at_T_amb_LT_regr", (getter)Outputs_get_q_dot_htf_ND_max_at_T_amb_LT_regr,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at LT ambient temp"),
+ 	NULL},
+{"q_dot_htf_ND_max_at_T_amb_LT_rule0", (getter)Outputs_get_q_dot_htf_ND_max_at_T_amb_LT_rule0,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at LT ambient temp"),
+ 	NULL},
+{"q_dot_htf_ND_max_at_T_amb_design_regr", (getter)Outputs_get_q_dot_htf_ND_max_at_T_amb_design_regr,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"q_dot_htf_ND_max_at_T_amb_design_rule0", (getter)Outputs_get_q_dot_htf_ND_max_at_T_amb_design_rule0,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"q_dot_htf_ND_max_at_T_amb_high_level_regr", (getter)Outputs_get_q_dot_htf_ND_max_at_T_amb_high_level_regr,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"q_dot_htf_ND_max_at_T_amb_high_level_rule0", (getter)Outputs_get_q_dot_htf_ND_max_at_T_amb_high_level_rule0,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"q_dot_htf_ND_max_at_T_amb_low_level_regr", (getter)Outputs_get_q_dot_htf_ND_max_at_T_amb_low_level_regr,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
+ 	NULL},
+{"q_dot_htf_ND_max_at_T_amb_low_level_rule0", (getter)Outputs_get_q_dot_htf_ND_max_at_T_amb_low_level_rule0,(setter)0,
+	PyDoc_STR("*float*: Calculated max ND HTF mass flow at low level ambient temp"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -567,6 +1388,10 @@ newUiUdpcChecksObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Common", Common_obj);
 	Py_DECREF(Common_obj);
 
+	PyObject* SystemDesign_obj = SystemDesign_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "SystemDesign", SystemDesign_obj);
+	Py_DECREF(SystemDesign_obj);
+
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
@@ -587,6 +1412,14 @@ UiUdpcChecks_dealloc(CmodObject *self)
 		PySAM_has_error(error);
 	}
 	PyObject_Del(self);
+}
+
+
+static PyObject *
+UiUdpcChecks_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
 }
 
 
@@ -657,6 +1490,8 @@ UiUdpcChecks_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef UiUdpcChecks_methods[] = {
 		{"execute",           (PyCFunction)UiUdpcChecks_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)UiUdpcChecks_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)UiUdpcChecks_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'User Defined Power Cycle': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)UiUdpcChecks_replace,  METH_VARARGS,
@@ -861,6 +1696,13 @@ UiUdpcChecksModule_exec(PyObject *m)
 				"Common",
 				(PyObject*)&Common_Type);
 	Py_DECREF(&Common_Type);
+
+	/// Add the SystemDesign type object to UiUdpcChecks_Type
+	if (PyType_Ready(&SystemDesign_Type) < 0) { goto fail; }
+	PyDict_SetItemString(UiUdpcChecks_Type.tp_dict,
+				"SystemDesign",
+				(PyObject*)&SystemDesign_Type);
+	Py_DECREF(&SystemDesign_Type);
 
 	/// Add the Outputs type object to UiUdpcChecks_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

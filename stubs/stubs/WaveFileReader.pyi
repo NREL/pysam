@@ -59,6 +59,7 @@ class WaveFileReader(object):
 		hour = tuple
 		lat = float
 		location_id = float
+		location_name = str
 		lon = float
 		minute = tuple
 		month = tuple

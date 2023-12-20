@@ -6,10 +6,84 @@ import importlib
 import PySAM.GenericSystem as GenericSystem
 from pympler.tracker import SummaryTracker
 from PySAM.PySSC import PySSC
+import PySAM.WaveFileReader as wavefile
 
 ssc = PySSC()
 
 check_error_cases = True
+
+def test_adjustment_factors():
+    m = GenericSystem.new()
+    adj = m.AdjustmentFactors
+    adj.constant = 0
+    adj.en_hourly = 0
+    adj.hourly = [0]
+    adj.en_periods = 0
+    adj.periods = [[0, 0]]
+    adj.en_timeindex = 0
+    adj.timeindex = [0]
+    adj.dc_constant = 0
+    adj.dc_en_hourly = 0
+    adj.dc_hourly = [0]
+    adj.dc_en_periods = 0
+    adj.dc_periods = [[0, 0]]
+    adj.dc_en_timeindex = 0
+    adj.dc_timeindex = [0]
+    adj.sf_constant = 0
+    adj.sf_en_hourly = 0
+    adj.sf_hourly = [0]
+    adj.sf_en_periods = 0
+    adj.sf_periods = [[0, 0]]
+    adj.sf_en_timeindex = 0
+    adj.sf_timeindex = [0]
+    adj.export()
+
+def test_pyssc():
+    var = ssc.var_create()
+    ssc.var_set_value(var, 0)
+    assert int(ssc.var_get_number(var)) == 0
+    test_dat = ssc.data_create()
+    ssc.data_set_var(test_dat, b"test", var)
+    assert ssc.data_get_number(test_dat, b"test") == 0
+
+    var = ssc.var_create()
+    ssc.var_set_value(var, 'zero')
+    assert ssc.var_get_string(var) == b'zero'
+    test_dat = ssc.data_create()
+    ssc.data_set_var(test_dat, b"test", var)
+    assert ssc.data_get_string(test_dat, b"test") == b"zero"
+
+    var = ssc.var_create()
+    ssc.var_set_value(var, [0, 1])
+    assert ssc.var_get_array(var) == [0, 1]
+    test_dat = ssc.data_create()
+    ssc.data_set_var(test_dat, b"test", var)
+    assert ssc.data_get_array(test_dat, b"test") == [0, 1]
+
+    var = ssc.var_create()
+    ssc.var_set_value(var, [[0, 0], [1, 1]])
+    assert ssc.var_get_matrix(var) == [[0, 0], [1, 1]]
+    test_dat = ssc.data_create()
+    ssc.data_set_var(test_dat, b"test", var)
+    assert ssc.data_get_matrix(test_dat, b"test") == [[0, 0], [1, 1]]
+
+    var = ssc.var_create()
+    ssc.var_set_value(var, ["zero", "one"])
+    assert ssc.var_get_data_array(var, 0, ssc.STRING) == b"zero"
+    assert ssc.var_get_data_array(var, 1, ssc.STRING) == b"one"
+    test_dat = ssc.data_create()
+    ssc.data_set_var(test_dat, b"test", var)
+    var0 = ssc.data_get_data_array(test_dat, b"test", [ssc.STRING, ssc.STRING])
+    assert var0 == [b"zero", b"one"]
+
+    var = ssc.var_create()
+    ssc.var_set_value(var, [["zero", "one"], ["zero", "one"]])
+    assert ssc.var_get_data_matrix(var, 0, 0, ssc.STRING) == b"zero"
+    assert ssc.var_get_data_matrix(var, 1, 1, ssc.STRING) == b"one"
+    test_dat = ssc.data_create()
+    ssc.data_set_var(test_dat, b"test", var)
+    var0 = ssc.data_get_data_matrix(test_dat, b"test", [[ssc.STRING, ssc.STRING], [ssc.STRING, ssc.STRING]])
+    assert var0 == [[b'zero', b'one'], [b'zero', b'one']]
 
 
 def test_functionality():
@@ -258,6 +332,8 @@ def try_import(mod, config):
 
 def test_import_all():
     for filename in os.listdir(os.environ['SAMNTDIR'] + "/api/api_autogen/library/defaults"):
+        if 'Hybrid' in filename:
+            continue
         names = os.path.splitext(filename)[0].split('_')
         mod = names[0]
         config = names[1]
@@ -268,16 +344,18 @@ sf = str(Path(__file__).parent / "blythe_ca_33.617773_-114.588261_psmv3_60_tmy.c
 wf = str(Path(__file__).parent / "AR Northwestern-Flat Lands.srw")
 wave_f = str(Path(__file__).parent.parent / "Examples" / "Marine energy examples" / "CalWave_California_Wave Resource _SAM CSV.csv")
 
-import PySAM.WaveFileReader as wavefile
 wavefile_model = wavefile.new()
 wavefile_model.WeatherReader.wave_resource_filename = wave_f
 wavefile_model.WeatherReader.wave_resource_model_choice = 0
 wavefile_model.execute()
+    
 
 def assign_values(mod, i):
     defaults = glob.glob(os.environ['SAMNTDIR'] + "/api/api_autogen/library/defaults/" + mod + "_*.json")
 
     for default in defaults:
+        if 'Hybrid' in default:
+            continue
         default = os.path.basename(default).split('.')[0].split('_')[1]
         m = i.default(default)
         if mod == "Pvsamv1" or mod == "Pvwattsv7" or mod == "Pvwattsv5" or mod =="Pvwattsv8":
@@ -292,7 +370,7 @@ def assign_values(mod, i):
             m.SolarResourceData.file_name = sf
         elif mod == "Pvwattsv5Lifetime" or mod == "TcsdirectSteam" or mod == "Tcsiscc":
             m.Weather.solar_resource_file = sf
-        elif mod == "TroughPhysical":
+        elif "Physical" in mod:
             m.Weather.file_name = sf
         elif mod == "Windpower":
             m.Resource.wind_resource_filename = wf
@@ -341,13 +419,17 @@ def assign_values(mod, i):
 def test_run_all():
     # only run test on first Python version to be built, since this test is very time consuming
     minor_ver = sys.version_info[1]
-    if minor_ver != 6:
+    if minor_ver != 8:
         return
     techs = (
-        "Battery", "Battwatts", "Biomass", "Geothermal", "LinearFresnelDsgIph", "MhkTidal", "MhkWave", "Windpower",
+        "Battery", "Battwatts", "Biomass", "EtesElectricResistance", "Geothermal", 
+        "FresnelPhysical", "FresnelPhysicalIph",
+        "LinearFresnelDsgIph", "MhkTidal", "MhkWave",
+        "MsptIph",
         "Pvsamv1", "Pvwattsv8", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "GenericSystem", "Grid",
-        "TroughPhysicalProcessHeat", "TcsMSLF", "TcsgenericSolar", "TcslinearFresnel", "TcstroughEmpirical",
-        "TroughPhysical", "EtesElectricResistance", )
+        "TroughPhysicalProcessHeat", 
+        "TcsMSLF", "TcsgenericSolar", "TcslinearFresnel", "TcstroughEmpirical",
+        "TroughPhysical", "TroughPhysicalIph", "Windpower")
     for mod in techs:
         mod_name = "PySAM." + mod
         i = importlib.import_module(mod_name)

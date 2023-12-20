@@ -1121,6 +1121,14 @@ Utilityrateforecast_dealloc(CmodStatefulObject *self)
 
 
 static PyObject *
+Utilityrateforecast_get_data_ptr(CmodStatefulObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Utilityrateforecast_setup(CmodStatefulObject *self, PyObject *args)
 {
 	SAM_error error = new_error();
@@ -1200,6 +1208,8 @@ static PyMethodDef Utilityrateforecast_methods[] = {
 				PyDoc_STR("setup() -> None\n Setup parameters in simulation")},
 		{"execute",           (PyCFunction)Utilityrateforecast_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)Utilityrateforecast_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Utilityrateforecast_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Electricity Rates': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Utilityrateforecast_replace,  METH_VARARGS,

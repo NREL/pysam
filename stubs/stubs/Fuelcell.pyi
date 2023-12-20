@@ -76,11 +76,11 @@ class Fuelcell(object):
 			pass
 
 
+		dispatch_manual_fuelcell_sched = tuple
+		dispatch_manual_fuelcell_sched_weekend = tuple
 		dispatch_manual_fuelcellcharge = tuple
 		dispatch_manual_fuelcelldischarge = tuple
 		dispatch_manual_percent_fc_discharge = tuple
-		dispatch_manual_sched = tuple
-		dispatch_manual_sched_weekend = tuple
 		dispatch_manual_units_fc_discharge = tuple
 		fuelcell_availability_schedule = tuple
 		fuelcell_degradation = float
@@ -122,13 +122,23 @@ class Fuelcell(object):
 			pass
 
 
+		annual_energy_discharged = float
 		annual_energy_distribution_time = tuple
 		annual_energy_distribution_time_fc = tuple
 		annual_fuel_usage = float
 		annual_fuel_usage_lifetime = tuple
+		cf_battery_replacement_cost_schedule = tuple
+		cf_energy_net = tuple
+		cf_fuelcell_replacement_cost_schedule = tuple
+		cf_om_capacity = tuple
+		cf_om_fixed = tuple
+		cf_om_fuel_cost = tuple
+		cf_om_land_lease = tuple
+		cf_om_production = tuple
 		fuelcell_annual_energy_discharged = tuple
 		fuelcell_electrical_efficiency = tuple
 		fuelcell_fuel_consumption_mcf = tuple
+		fuelcell_monthly_energy_discharged = tuple
 		fuelcell_percent_load = tuple
 		fuelcell_power = tuple
 		fuelcell_power_max_percent = tuple
