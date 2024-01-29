@@ -94,8 +94,9 @@ Powerblock Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors
+.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
 	:members:
+	:noindex:
 
 Outputs Group
 --------------

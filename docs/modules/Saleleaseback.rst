@@ -113,6 +113,12 @@ BatterySystem Group
 .. autoclass:: PySAM.Saleleaseback.Saleleaseback.BatterySystem
 	:members:
 
+FuelCell Group
+---------------
+
+.. autoclass:: PySAM.Saleleaseback.Saleleaseback.FuelCell
+	:members:
+
 Outputs Group
 --------------
 

@@ -3939,6 +3939,14 @@ WindObos_dealloc(CmodObject *self)
 
 
 static PyObject *
+WindObos_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 WindObos_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -4005,6 +4013,8 @@ WindObos_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef WindObos_methods[] = {
 		{"execute",           (PyCFunction)WindObos_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)WindObos_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)WindObos_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'wobos': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)WindObos_replace,  METH_VARARGS,

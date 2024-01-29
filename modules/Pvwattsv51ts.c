@@ -855,6 +855,14 @@ Pvwattsv51ts_dealloc(CmodObject *self)
 
 
 static PyObject *
+Pvwattsv51ts_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Pvwattsv51ts_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -921,6 +929,8 @@ Pvwattsv51ts_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Pvwattsv51ts_methods[] = {
 		{"execute",           (PyCFunction)Pvwattsv51ts_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)Pvwattsv51ts_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Pvwattsv51ts_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'PVWatts': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Pvwattsv51ts_replace,  METH_VARARGS,

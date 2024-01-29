@@ -68,8 +68,9 @@ Losses Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.Windpower.Windpower.AdjustmentFactors
+.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
 	:members:
+	:noindex:
 
 Uncertainty Group
 ------------------

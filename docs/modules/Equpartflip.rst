@@ -137,6 +137,12 @@ BatterySystem Group
 .. autoclass:: PySAM.Equpartflip.Equpartflip.BatterySystem
 	:members:
 
+FuelCell Group
+---------------
+
+.. autoclass:: PySAM.Equpartflip.Equpartflip.FuelCell
+	:members:
+
 Outputs Group
 --------------
 

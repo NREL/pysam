@@ -2238,6 +2238,14 @@ TcsgenericSolar_dealloc(CmodObject *self)
 
 
 static PyObject *
+TcsgenericSolar_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 TcsgenericSolar_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -2304,6 +2312,8 @@ TcsgenericSolar_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef TcsgenericSolar_methods[] = {
 		{"execute",           (PyCFunction)TcsgenericSolar_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)TcsgenericSolar_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)TcsgenericSolar_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'weather': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)TcsgenericSolar_replace,  METH_VARARGS,

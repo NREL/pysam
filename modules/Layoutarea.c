@@ -324,6 +324,14 @@ Layoutarea_dealloc(CmodObject *self)
 
 
 static PyObject *
+Layoutarea_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Layoutarea_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -390,6 +398,8 @@ Layoutarea_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Layoutarea_methods[] = {
 		{"execute",           (PyCFunction)Layoutarea_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)Layoutarea_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Layoutarea_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Common': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Layoutarea_replace,  METH_VARARGS,

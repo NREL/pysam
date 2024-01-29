@@ -268,7 +268,25 @@ Fuel Cell - PV - Battery -- Single Owner
 
       :doc:`../modules/Pvwattsv8`, :doc:`../modules/Fuelcell`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Thermalrate`, :doc:`../modules/Singleowner`
 
-Generic Model -- Commercial Owner
+Generic PVWatts Wind FuelCell Battery Hybrid -- Single Owner
+-----------------------------------------------------------------------
+
+      Hybrid power system with PVWatts and wind power generation and battery storage). Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
+
+      Configuration name for defaults: *"GenericPVWattsWindFuelCellBatteryHybridSingleOwner"*
+
+      :doc:`../modules/GenericSystem`, :doc:`../modules/Pvwattsv8`, :doc:`../modules/Windpower`, :doc:`../modules/Fuelcell`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
+
+Generic PVWatts Wind FuelCell Battery Hybrid -- Third Party - Host / Developer
+--------------------------------------------------------------------------------
+
+      Hybrid power system with PVWatts and wind power generation and battery storage. Third party ownershop from host and developer perspective for PPA.
+
+      Configuration name for defaults: *"GenericPVWattsWindFuelCellBatteryHybridHostDeveloper"*
+
+      :doc:`../modules/GenericSystem`, :doc:`../modules/Pvwattsv8`, :doc:`../modules/Windpower`, :doc:`../modules/Fuelcell`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/HostDeveloper`
+
+Generic Solar Model -- Commercial Owner
 -----------------------------------------------------------------------
 
       CSP power system with solar field modeled using a table of optical efficiency values. Renewable energy system displaces commercial building electric load.
@@ -277,7 +295,7 @@ Generic Model -- Commercial Owner
 
       :doc:`../modules/TcsgenericSolar`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Cashloan`
 
-Generic Model -- LCOE Calculator (FCR Method)
+Generic Solar Model -- LCOE Calculator (FCR Method)
 -----------------------------------------------------------------------
 
       CSP power system with solar field modeled using a table of optical efficiency values. Calculate LCOE using fixed charge rate method.
@@ -286,7 +304,7 @@ Generic Model -- LCOE Calculator (FCR Method)
 
       :doc:`../modules/TcsgenericSolar`, :doc:`../modules/Grid`, :doc:`../modules/Lcoefcr`
 
-Generic Model -- Merchant Plant
+Generic Solar Model -- Merchant Plant
 -----------------------------------------------------------------------
 
       CSP power system with solar field modeled using a table of optical efficiency values. Merchant plant with constant DSCR and ancillary services revenue, reserve accounts and depreciation allocations.
@@ -295,7 +313,7 @@ Generic Model -- Merchant Plant
 
       :doc:`../modules/TcsgenericSolar`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Merchantplant`
 
-Generic Model -- No Financial Model
+Generic Solar Model -- No Financial Model
 -----------------------------------------------------------------------
 
       CSP power system with solar field modeled using a table of optical efficiency values. Run the performance model with no financial model.
@@ -304,7 +322,7 @@ Generic Model -- No Financial Model
 
       :doc:`../modules/TcsgenericSolar`, :doc:`../modules/Grid`
 
-Generic Model -- Partnership Flip with Debt
+Generic Solar Model -- Partnership Flip with Debt
 -----------------------------------------------------------------------
 
       CSP power system with solar field modeled using a table of optical efficiency values. Developer/investor partnership flip PPA structure with debt.
@@ -313,7 +331,7 @@ Generic Model -- Partnership Flip with Debt
 
       :doc:`../modules/TcsgenericSolar`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Levpartflip`
 
-Generic Model -- Partnership Flip without Debt
+Generic Solar Model -- Partnership Flip without Debt
 -----------------------------------------------------------------------
 
       CSP power system with solar field modeled using a table of optical efficiency values. Developer/investor partnership flip PPA structure without debt.
@@ -322,7 +340,7 @@ Generic Model -- Partnership Flip without Debt
 
       :doc:`../modules/TcsgenericSolar`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Equpartflip`
 
-Generic Model -- Sale Leaseback
+Generic Solar Model -- Sale Leaseback
 -----------------------------------------------------------------------
 
       CSP power system with solar field modeled using a table of optical efficiency values. Sale leaseback partnership PPA structure.
@@ -331,7 +349,7 @@ Generic Model -- Sale Leaseback
 
       :doc:`../modules/TcsgenericSolar`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Saleleaseback`
 
-Generic Model -- Single Owner
+Generic Solar Model -- Single Owner
 -----------------------------------------------------------------------
 
       CSP power system with solar field modeled using a table of optical efficiency values. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
@@ -482,7 +500,7 @@ Generic System-Battery -- Residential Owner
 
       Configuration name for defaults: *"GenericBatteryResidential"*
 
-      :doc:`../modules/Belpe`, :doc:`../modules/GenericSystem`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Cashloan`
+      :doc:`../modules/GenericSystem`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Cashloan`
 
 Generic System-Battery -- Sale Leaseback
 -----------------------------------------------------------------------
@@ -518,7 +536,7 @@ Generic System-Battery -- Third Party Owner - Host
 
       Configuration name for defaults: *"GenericBatteryThirdParty"*
 
-      :doc:`../modules/Belpe`, :doc:`../modules/GenericSystem`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Thirdpartyownership`
+      :doc:`../modules/GenericSystem`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Thirdpartyownership`
 
 Geothermal -- LCOE Calculator (FCR Method)
 -----------------------------------------------------------------------
@@ -646,19 +664,19 @@ High Concentration PV -- Single Owner
 
       :doc:`../modules/Hcpv`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
 
-Linear Fresnel Direct Steam - Heat -- 
+Linear Direct Steam -- 
 -----------------------------------------------------------------------
 
-      Industrial process heat linear collector system. .
+      Industrial process heat linear Fresnel collector system. .
 
       Configuration name for defaults: *"DSGLIPHLCOHCalculator"*
 
       :doc:`../modules/LinearFresnelDsgIph`, :doc:`../modules/IphToLcoefcr`, :doc:`../modules/Lcoefcr`
 
-Linear Fresnel Direct Steam - Heat -- No Financial Model
+Linear Direct Steam -- No Financial Model
 -----------------------------------------------------------------------
 
-      Industrial process heat linear collector system. Run the performance model with no financial model.
+      Industrial process heat linear Fresnel collector system. Run the performance model with no financial model.
 
       Configuration name for defaults: *"DSGLIPHNone"*
 
@@ -736,24 +754,6 @@ Linear Fresnel Direct Steam -- Single Owner
 
       :doc:`../modules/TcslinearFresnel`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
 
-Linear Fresnel Molten Salt -- Commercial Owner
------------------------------------------------------------------------
-
-      CSP power system that uses long small mirrors to line focus sunlight on fixed receiver tubes mounted above them.. Renewable energy system displaces commercial building electric load.
-
-      Configuration name for defaults: *"MSLFCommercial"*
-
-      :doc:`../modules/TcsMSLF`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Cashloan`
-
-Linear Fresnel Molten Salt -- LCOE Calculator (FCR Method)
------------------------------------------------------------------------
-
-      CSP power system that uses long small mirrors to line focus sunlight on fixed receiver tubes mounted above them.. Calculate LCOE using fixed charge rate method.
-
-      Configuration name for defaults: *"MSLFLCOECalculator"*
-
-      :doc:`../modules/TcsMSLF`, :doc:`../modules/Grid`, :doc:`../modules/Lcoefcr`
-
 Linear Fresnel Molten Salt -- Merchant Plant
 -----------------------------------------------------------------------
 
@@ -761,16 +761,7 @@ Linear Fresnel Molten Salt -- Merchant Plant
 
       Configuration name for defaults: *"MSLFMerchantPlant"*
 
-      :doc:`../modules/TcsMSLF`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Merchantplant`
-
-Linear Fresnel Molten Salt -- No Financial Model
------------------------------------------------------------------------
-
-      CSP power system that uses long small mirrors to line focus sunlight on fixed receiver tubes mounted above them.. Run the performance model with no financial model.
-
-      Configuration name for defaults: *"MSLFNone"*
-
-      :doc:`../modules/TcsMSLF`, :doc:`../modules/Grid`
+      :doc:`../modules/FresnelPhysical`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Merchantplant`
 
 Linear Fresnel Molten Salt -- Partnership Flip with Debt
 -----------------------------------------------------------------------
@@ -779,7 +770,7 @@ Linear Fresnel Molten Salt -- Partnership Flip with Debt
 
       Configuration name for defaults: *"MSLFLeveragedPartnershipFlip"*
 
-      :doc:`../modules/TcsMSLF`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Levpartflip`
+      :doc:`../modules/FresnelPhysical`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Levpartflip`
 
 Linear Fresnel Molten Salt -- Partnership Flip without Debt
 -----------------------------------------------------------------------
@@ -788,7 +779,7 @@ Linear Fresnel Molten Salt -- Partnership Flip without Debt
 
       Configuration name for defaults: *"MSLFAllEquityPartnershipFlip"*
 
-      :doc:`../modules/TcsMSLF`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Equpartflip`
+      :doc:`../modules/FresnelPhysical`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Equpartflip`
 
 Linear Fresnel Molten Salt -- Sale Leaseback
 -----------------------------------------------------------------------
@@ -797,7 +788,7 @@ Linear Fresnel Molten Salt -- Sale Leaseback
 
       Configuration name for defaults: *"MSLFSaleLeaseback"*
 
-      :doc:`../modules/TcsMSLF`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Saleleaseback`
+      :doc:`../modules/FresnelPhysical`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Saleleaseback`
 
 Linear Fresnel Molten Salt -- Single Owner
 -----------------------------------------------------------------------
@@ -806,7 +797,25 @@ Linear Fresnel Molten Salt -- Single Owner
 
       Configuration name for defaults: *"MSLFSingleOwner"*
 
-      :doc:`../modules/TcsMSLF`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
+      :doc:`../modules/FresnelPhysical`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
+
+Linear Molten Salt -- 
+-----------------------------------------------------------------------
+
+      Industrial process heat linear collector system with molten salt heat transfer fluid. .
+
+      Configuration name for defaults: *"MSLFIPHLCOHCalculator"*
+
+      :doc:`../modules/FresnelPhysicalIph`, :doc:`../modules/LcoefcrDesign`
+
+Linear Molten Salt -- No Financial Model
+-----------------------------------------------------------------------
+
+      Industrial process heat linear collector system with molten salt heat transfer fluid. Run the performance model with no financial model.
+
+      Configuration name for defaults: *"MSLFIPHNone"*
+
+      :doc:`../modules/FresnelPhysicalIph`
 
 PVWatts -- Commercial Owner
 -----------------------------------------------------------------------
@@ -916,6 +925,42 @@ PVWatts -- Third Party Owner - Host
 
       :doc:`../modules/Pvwattsv8`, :doc:`../modules/Belpe`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Thirdpartyownership`
 
+PVWatts Wind Battery Hybrid -- Single Owner
+-----------------------------------------------------------------------
+
+      Hybrid power system with PVWatts and wind power generation and battery storage). Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
+
+      Configuration name for defaults: *"PVWattsWindBatteryHybridSingleOwner"*
+
+      :doc:`../modules/Pvwattsv8`, :doc:`../modules/Windpower`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
+
+PVWatts Wind Battery Hybrid -- Third Party - Host / Developer
+-----------------------------------------------------------------------
+
+      Hybrid power system with PVWatts and wind power generation and battery storage). Third party ownershop from host and developer perspective for PPA.
+
+      Configuration name for defaults: *"PVWattsWindBatteryHybridHostDeveloper"*
+
+      :doc:`../modules/Pvwattsv8`, :doc:`../modules/Windpower`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/HostDeveloper`
+
+PVWatts Wind Fuel Cell Battery Hybrid -- Single Owner
+-----------------------------------------------------------------------
+
+      Hybrid power system with PVWatts and wind power generation, fuel cell, and battery storage). Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
+
+      Configuration name for defaults: *"PVWattsWindFuelCellBatteryHybridSingleOwner"*
+
+      :doc:`../modules/Pvwattsv8`, :doc:`../modules/Windpower`, :doc:`../modules/Fuelcell`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
+
+PVWatts Wind Fuel Cell Battery Hybrid -- Third Party - Host / Developer
+-----------------------------------------------------------------------
+
+      Hybrid power system with PVWatts and wind power generation, fuel cell, and battery storage). Third party ownershop from host and developer perspective for PPA.
+
+      Configuration name for defaults: *"PVWattsWindFuelCellBatteryHybridHostDeveloper"*
+
+      :doc:`../modules/Pvwattsv8`, :doc:`../modules/Windpower`, :doc:`../modules/Fuelcell`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/HostDeveloper`
+
 PVWatts-Battery -- Commercial Owner
 -----------------------------------------------------------------------
 
@@ -952,7 +997,25 @@ PVWatts-Battery -- Third Party Owner - Host
 
       :doc:`../modules/Pvwattsv8`, :doc:`../modules/Belpe`, :doc:`../modules/Battwatts`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Thirdpartyownership`
 
-Parabolic Trough - Empirical -- Commercial Owner
+Parabolic Trough -- 
+-----------------------------------------------------------------------
+
+      Industrial process heat parabolic trough system using heat transfer and thermodynamic component models. .
+
+      Configuration name for defaults: *"PhysicalTroughIPHLCOHCalculator"*
+
+      :doc:`../modules/TroughPhysicalIph`, :doc:`../modules/LcoefcrDesign`
+
+Parabolic Trough -- No Financial Model
+-----------------------------------------------------------------------
+
+      Industrial process heat parabolic trough system using heat transfer and thermodynamic component models. Run the performance model with no financial model.
+
+      Configuration name for defaults: *"PhysicalTroughIPHNone"*
+
+      :doc:`../modules/TroughPhysicalIph`
+
+Parabolic Trough Empirical Model -- Commercial Owner
 -----------------------------------------------------------------------
 
       CSP parabolic trough system using model with empirically-derived coefficients and equations. Renewable energy system displaces commercial building electric load.
@@ -961,7 +1024,7 @@ Parabolic Trough - Empirical -- Commercial Owner
 
       :doc:`../modules/TcstroughEmpirical`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Cashloan`
 
-Parabolic Trough - Empirical -- LCOE Calculator (FCR Method)
+Parabolic Trough Empirical Model -- LCOE Calculator (FCR Method)
 -----------------------------------------------------------------------
 
       CSP parabolic trough system using model with empirically-derived coefficients and equations. Calculate LCOE using fixed charge rate method.
@@ -970,7 +1033,7 @@ Parabolic Trough - Empirical -- LCOE Calculator (FCR Method)
 
       :doc:`../modules/TcstroughEmpirical`, :doc:`../modules/Lcoefcr`
 
-Parabolic Trough - Empirical -- Merchant Plant
+Parabolic Trough Empirical Model -- Merchant Plant
 -----------------------------------------------------------------------
 
       CSP parabolic trough system using model with empirically-derived coefficients and equations. Merchant plant with constant DSCR and ancillary services revenue, reserve accounts and depreciation allocations.
@@ -979,7 +1042,7 @@ Parabolic Trough - Empirical -- Merchant Plant
 
       :doc:`../modules/TcstroughEmpirical`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Merchantplant`
 
-Parabolic Trough - Empirical -- No Financial Model
+Parabolic Trough Empirical Model -- No Financial Model
 -----------------------------------------------------------------------
 
       CSP parabolic trough system using model with empirically-derived coefficients and equations. Run the performance model with no financial model.
@@ -988,7 +1051,7 @@ Parabolic Trough - Empirical -- No Financial Model
 
       :doc:`../modules/TcstroughEmpirical`
 
-Parabolic Trough - Empirical -- Partnership Flip with Debt
+Parabolic Trough Empirical Model -- Partnership Flip with Debt
 -----------------------------------------------------------------------
 
       CSP parabolic trough system using model with empirically-derived coefficients and equations. Developer/investor partnership flip PPA structure with debt.
@@ -997,7 +1060,7 @@ Parabolic Trough - Empirical -- Partnership Flip with Debt
 
       :doc:`../modules/TcstroughEmpirical`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Levpartflip`
 
-Parabolic Trough - Empirical -- Partnership Flip without Debt
+Parabolic Trough Empirical Model -- Partnership Flip without Debt
 -----------------------------------------------------------------------
 
       CSP parabolic trough system using model with empirically-derived coefficients and equations. Developer/investor partnership flip PPA structure without debt.
@@ -1006,7 +1069,7 @@ Parabolic Trough - Empirical -- Partnership Flip without Debt
 
       :doc:`../modules/TcstroughEmpirical`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Equpartflip`
 
-Parabolic Trough - Empirical -- Sale Leaseback
+Parabolic Trough Empirical Model -- Sale Leaseback
 -----------------------------------------------------------------------
 
       CSP parabolic trough system using model with empirically-derived coefficients and equations. Sale leaseback partnership PPA structure.
@@ -1015,7 +1078,7 @@ Parabolic Trough - Empirical -- Sale Leaseback
 
       :doc:`../modules/TcstroughEmpirical`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Saleleaseback`
 
-Parabolic Trough - Empirical -- Single Owner
+Parabolic Trough Empirical Model -- Single Owner
 -----------------------------------------------------------------------
 
       CSP parabolic trough system using model with empirically-derived coefficients and equations. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
@@ -1024,25 +1087,7 @@ Parabolic Trough - Empirical -- Single Owner
 
       :doc:`../modules/TcstroughEmpirical`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
 
-Parabolic Trough - Heat -- 
------------------------------------------------------------------------
-
-      Industrial process heat parabolic trough system using heat transfer and thermodynamic component models. .
-
-      Configuration name for defaults: *"PhysicalTroughIPHLCOHCalculator"*
-
-      :doc:`../modules/TroughPhysicalProcessHeat`, :doc:`../modules/IphToLcoefcr`, :doc:`../modules/Lcoefcr`
-
-Parabolic Trough - Heat -- No Financial Model
------------------------------------------------------------------------
-
-      Industrial process heat parabolic trough system using heat transfer and thermodynamic component models. Run the performance model with no financial model.
-
-      Configuration name for defaults: *"PhysicalTroughIPHNone"*
-
-      :doc:`../modules/TroughPhysicalProcessHeat`
-
-Parabolic Trough - Physical -- LCOE Calculator (FCR Method)
+Parabolic Trough Physical Model -- LCOE Calculator (FCR Method)
 -----------------------------------------------------------------------
 
       CSP parabolic trough system using heat transfer and thermodynamic component models. Calculate LCOE using fixed charge rate method.
@@ -1051,7 +1096,7 @@ Parabolic Trough - Physical -- LCOE Calculator (FCR Method)
 
       :doc:`../modules/TroughPhysical`, :doc:`../modules/Grid`, :doc:`../modules/Lcoefcr`
 
-Parabolic Trough - Physical -- Merchant Plant
+Parabolic Trough Physical Model -- Merchant Plant
 -----------------------------------------------------------------------
 
       CSP parabolic trough system using heat transfer and thermodynamic component models. Merchant plant with constant DSCR and ancillary services revenue, reserve accounts and depreciation allocations.
@@ -1060,7 +1105,7 @@ Parabolic Trough - Physical -- Merchant Plant
 
       :doc:`../modules/TroughPhysical`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Merchantplant`
 
-Parabolic Trough - Physical -- No Financial Model
+Parabolic Trough Physical Model -- No Financial Model
 -----------------------------------------------------------------------
 
       CSP parabolic trough system using heat transfer and thermodynamic component models. Run the performance model with no financial model.
@@ -1069,7 +1114,7 @@ Parabolic Trough - Physical -- No Financial Model
 
       :doc:`../modules/TroughPhysical`, :doc:`../modules/Grid`
 
-Parabolic Trough - Physical -- Partnership Flip with Debt
+Parabolic Trough Physical Model -- Partnership Flip with Debt
 -----------------------------------------------------------------------
 
       CSP parabolic trough system using heat transfer and thermodynamic component models. Developer/investor partnership flip PPA structure with debt.
@@ -1078,7 +1123,7 @@ Parabolic Trough - Physical -- Partnership Flip with Debt
 
       :doc:`../modules/TroughPhysical`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Levpartflip`
 
-Parabolic Trough - Physical -- Partnership Flip without Debt
+Parabolic Trough Physical Model -- Partnership Flip without Debt
 -----------------------------------------------------------------------
 
       CSP parabolic trough system using heat transfer and thermodynamic component models. Developer/investor partnership flip PPA structure without debt.
@@ -1087,7 +1132,7 @@ Parabolic Trough - Physical -- Partnership Flip without Debt
 
       :doc:`../modules/TroughPhysical`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Equpartflip`
 
-Parabolic Trough - Physical -- Sale Leaseback
+Parabolic Trough Physical Model -- Sale Leaseback
 -----------------------------------------------------------------------
 
       CSP parabolic trough system using heat transfer and thermodynamic component models. Sale leaseback partnership PPA structure.
@@ -1096,7 +1141,7 @@ Parabolic Trough - Physical -- Sale Leaseback
 
       :doc:`../modules/TroughPhysical`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Saleleaseback`
 
-Parabolic Trough - Physical -- Single Owner
+Parabolic Trough Physical Model -- Single Owner
 -----------------------------------------------------------------------
 
       CSP parabolic trough system using heat transfer and thermodynamic component models. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
@@ -1104,6 +1149,24 @@ Parabolic Trough - Physical -- Single Owner
       Configuration name for defaults: *"PhysicalTroughSingleOwner"*
 
       :doc:`../modules/TroughPhysical`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
+
+Photovoltaic Wind Battery Hybrid -- Single Owner
+-----------------------------------------------------------------------
+
+      Hybrid power system with PVWatts and wind power generation and battery storage). Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
+
+      Configuration name for defaults: *"PhotovoltaicWindBatteryHybridSingleOwner"*
+
+      :doc:`../modules/Pvsamv1`, :doc:`../modules/Windpower`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
+
+Photovoltaic Wind Battery Hybrid -- Third Party - Host / Developer
+-----------------------------------------------------------------------
+
+      Hybrid power system with PVWatts and wind power generation and battery storage). Third party ownershop from host and developer perspective for PPA.
+
+      Configuration name for defaults: *"PhotovoltaicWindBatteryHybridHostDeveloper"*
+
+      :doc:`../modules/Pvsamv1`, :doc:`../modules/Windpower`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/HostDeveloper`
 
 Power Tower Molten Salt -- Merchant Plant
 -----------------------------------------------------------------------
@@ -1247,7 +1310,7 @@ Standalone Battery -- Residential Owner
 
       Configuration name for defaults: *"StandaloneBatteryResidential"*
 
-      :doc:`../modules/Belpe`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Cashloan`
+      :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Cashloan`
 
 Standalone Battery -- Sale Leaseback
 -----------------------------------------------------------------------
@@ -1283,7 +1346,7 @@ Standalone Battery -- Third Party Owner - Host
 
       Configuration name for defaults: *"StandaloneBatteryThirdParty"*
 
-      :doc:`../modules/Belpe`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Thirdpartyownership`
+      :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Thirdpartyownership`
 
 Tidal -- LCOE Calculator (FCR Method)
 -----------------------------------------------------------------------
@@ -1292,7 +1355,7 @@ Tidal -- LCOE Calculator (FCR Method)
 
       Configuration name for defaults: *"MEtidalLCOECalculator"*
 
-      :doc:`../modules/MhkTidal`, :doc:`../modules/Lcoefcr`
+      :doc:`../modules/TidalFileReader`, :doc:`../modules/MhkTidal`, :doc:`../modules/Lcoefcr`
 
 Tidal -- No Financial Model
 -----------------------------------------------------------------------
@@ -1301,7 +1364,25 @@ Tidal -- No Financial Model
 
       Configuration name for defaults: *"MEtidalNone"*
 
-      :doc:`../modules/MhkTidal`
+      :doc:`../modules/TidalFileReader`, :doc:`../modules/MhkTidal`
+
+Tower Molten Salt -- 
+-----------------------------------------------------------------------
+
+      Industrial process heat power tower system with molten salt heat transfer fluid. .
+
+      Configuration name for defaults: *"MSPTIPHLCOHCalculator"*
+
+      :doc:`../modules/MsptIph`, :doc:`../modules/LcoefcrDesign`
+
+Tower Molten Salt -- No Financial Model
+-----------------------------------------------------------------------
+
+      Industrial process heat power tower system with molten salt heat transfer fluid. Run the performance model with no financial model.
+
+      Configuration name for defaults: *"MSPTIPHNone"*
+
+      :doc:`../modules/MsptIph`
 
 Wave -- LCOE Calculator (FCR Method)
 -----------------------------------------------------------------------

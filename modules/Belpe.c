@@ -510,6 +510,14 @@ Belpe_dealloc(CmodObject *self)
 
 
 static PyObject *
+Belpe_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Belpe_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -576,6 +584,8 @@ Belpe_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Belpe_methods[] = {
 		{"execute",           (PyCFunction)Belpe_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)Belpe_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Belpe_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Load Profile Estimator': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Belpe_replace,  METH_VARARGS,
@@ -744,7 +754,7 @@ static PyMethodDef BelpeModule_methods[] = {
 		{"new",             Belpe_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Belpe")},
 		{"default",             Belpe_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Belpe\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"FlatPlatePVResidential\"*\n\n		- *\"FlatPlatePVThirdParty\"*\n\n		- *\"GenericBatteryResidential\"*\n\n		- *\"GenericBatteryThirdParty\"*\n\n		- *\"PVBatteryResidential\"*\n\n		- *\"PVBatteryThirdParty\"*\n\n		- *\"PVWattsBatteryResidential\"*\n\n		- *\"PVWattsBatteryThirdParty\"*\n\n		- *\"PVWattsResidential\"*\n\n		- *\"PVWattsThirdParty\"*\n\n		- *\"SolarWaterHeatingResidential\"*\n\n		- *\"StandaloneBatteryResidential\"*\n\n		- *\"StandaloneBatteryThirdParty\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> Belpe\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"FlatPlatePVResidential\"*\n\n		- *\"FlatPlatePVThirdParty\"*\n\n		- *\"PVBatteryResidential\"*\n\n		- *\"PVBatteryThirdParty\"*\n\n		- *\"PVWattsBatteryResidential\"*\n\n		- *\"PVWattsBatteryThirdParty\"*\n\n		- *\"PVWattsResidential\"*\n\n		- *\"PVWattsThirdParty\"*\n\n		- *\"SolarWaterHeatingResidential\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Belpe_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Belpe\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Belpe_from_existing,        METH_VARARGS,

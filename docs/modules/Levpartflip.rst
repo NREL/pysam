@@ -137,6 +137,12 @@ BatterySystem Group
 .. autoclass:: PySAM.Levpartflip.Levpartflip.BatterySystem
 	:members:
 
+FuelCell Group
+---------------
+
+.. autoclass:: PySAM.Levpartflip.Levpartflip.FuelCell
+	:members:
+
 Outputs Group
 --------------
 

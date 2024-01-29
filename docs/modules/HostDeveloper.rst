@@ -131,6 +131,24 @@ ElectricityRates Group
 .. autoclass:: PySAM.HostDeveloper.HostDeveloper.ElectricityRates
 	:members:
 
+HybridFin Group
+----------------
+
+.. autoclass:: PySAM.HostDeveloper.HostDeveloper.HybridFin
+	:members:
+
+Monthly Group
+--------------
+
+.. autoclass:: PySAM.HostDeveloper.HostDeveloper.Monthly
+	:members:
+
+FuelCell Group
+---------------
+
+.. autoclass:: PySAM.HostDeveloper.HostDeveloper.FuelCell
+	:members:
+
 Outputs Group
 --------------
 

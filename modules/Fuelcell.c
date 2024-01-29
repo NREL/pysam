@@ -534,6 +534,30 @@ static PyMethodDef FuelCell_methods[] = {
 };
 
 static PyObject *
+FuelCell_get_dispatch_manual_fuelcell_sched(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Fuelcell_FuelCell_dispatch_manual_fuelcell_sched_mget, self->data_ptr);
+}
+
+static int
+FuelCell_set_dispatch_manual_fuelcell_sched(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Fuelcell_FuelCell_dispatch_manual_fuelcell_sched_mset, self->data_ptr);
+}
+
+static PyObject *
+FuelCell_get_dispatch_manual_fuelcell_sched_weekend(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Fuelcell_FuelCell_dispatch_manual_fuelcell_sched_weekend_mget, self->data_ptr);
+}
+
+static int
+FuelCell_set_dispatch_manual_fuelcell_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Fuelcell_FuelCell_dispatch_manual_fuelcell_sched_weekend_mset, self->data_ptr);
+}
+
+static PyObject *
 FuelCell_get_dispatch_manual_fuelcellcharge(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Fuelcell_FuelCell_dispatch_manual_fuelcellcharge_aget, self->data_ptr);
@@ -567,30 +591,6 @@ static int
 FuelCell_set_dispatch_manual_percent_fc_discharge(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_array_setter(value, SAM_Fuelcell_FuelCell_dispatch_manual_percent_fc_discharge_aset, self->data_ptr);
-}
-
-static PyObject *
-FuelCell_get_dispatch_manual_sched(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Fuelcell_FuelCell_dispatch_manual_sched_mget, self->data_ptr);
-}
-
-static int
-FuelCell_set_dispatch_manual_sched(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Fuelcell_FuelCell_dispatch_manual_sched_mset, self->data_ptr);
-}
-
-static PyObject *
-FuelCell_get_dispatch_manual_sched_weekend(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Fuelcell_FuelCell_dispatch_manual_sched_weekend_mget, self->data_ptr);
-}
-
-static int
-FuelCell_set_dispatch_manual_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Fuelcell_FuelCell_dispatch_manual_sched_weekend_mset, self->data_ptr);
 }
 
 static PyObject *
@@ -930,6 +930,12 @@ FuelCell_set_fuelcell_unit_min_power(VarGroupObject *self, PyObject *value, void
 }
 
 static PyGetSetDef FuelCell_getset[] = {
+{"dispatch_manual_fuelcell_sched", (getter)FuelCell_get_dispatch_manual_fuelcell_sched,(setter)FuelCell_set_dispatch_manual_fuelcell_sched,
+	PyDoc_STR("*sequence[sequence]*: Dispatch schedule for weekday"),
+ 	NULL},
+{"dispatch_manual_fuelcell_sched_weekend", (getter)FuelCell_get_dispatch_manual_fuelcell_sched_weekend,(setter)FuelCell_set_dispatch_manual_fuelcell_sched_weekend,
+	PyDoc_STR("*sequence[sequence]*: Dispatch schedule for weekend"),
+ 	NULL},
 {"dispatch_manual_fuelcellcharge", (getter)FuelCell_get_dispatch_manual_fuelcellcharge,(setter)FuelCell_set_dispatch_manual_fuelcellcharge,
 	PyDoc_STR("*sequence*: Periods 1-6 charging allowed?"),
  	NULL},
@@ -938,12 +944,6 @@ static PyGetSetDef FuelCell_getset[] = {
  	NULL},
 {"dispatch_manual_percent_fc_discharge", (getter)FuelCell_get_dispatch_manual_percent_fc_discharge,(setter)FuelCell_set_dispatch_manual_percent_fc_discharge,
 	PyDoc_STR("*sequence*: Periods 1-6 percent of max fuelcell output\n\nThe value of ``dispatch_manual_percent_fc_discharge`` depends on the following variables:\n\n\t - dispatch_manual_fuelcelldischarge\n"),
- 	NULL},
-{"dispatch_manual_sched", (getter)FuelCell_get_dispatch_manual_sched,(setter)FuelCell_set_dispatch_manual_sched,
-	PyDoc_STR("*sequence[sequence]*: Dispatch schedule for weekday"),
- 	NULL},
-{"dispatch_manual_sched_weekend", (getter)FuelCell_get_dispatch_manual_sched_weekend,(setter)FuelCell_set_dispatch_manual_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: Dispatch schedule for weekend"),
  	NULL},
 {"dispatch_manual_units_fc_discharge", (getter)FuelCell_get_dispatch_manual_units_fc_discharge,(setter)FuelCell_set_dispatch_manual_units_fc_discharge,
 	PyDoc_STR("*sequence*: Periods 1-6 number of fuel cell units?\n\nThe value of ``dispatch_manual_units_fc_discharge`` depends on the following variables:\n\n\t - dispatch_manual_fuelcelldischarge\n"),
@@ -1151,6 +1151,12 @@ static PyMethodDef Outputs_methods[] = {
 };
 
 static PyObject *
+Outputs_get_annual_energy_discharged(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Fuelcell_Outputs_annual_energy_discharged_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Fuelcell_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
@@ -1175,6 +1181,54 @@ Outputs_get_annual_fuel_usage_lifetime(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_cf_battery_replacement_cost_schedule(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Fuelcell_Outputs_cf_battery_replacement_cost_schedule_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_net(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Fuelcell_Outputs_cf_energy_net_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_fuelcell_replacement_cost_schedule(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Fuelcell_Outputs_cf_fuelcell_replacement_cost_schedule_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Fuelcell_Outputs_cf_om_capacity_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_fixed(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Fuelcell_Outputs_cf_om_fixed_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_fuel_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Fuelcell_Outputs_cf_om_fuel_cost_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_land_lease(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Fuelcell_Outputs_cf_om_land_lease_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_production(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Fuelcell_Outputs_cf_om_production_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_fuelcell_annual_energy_discharged(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Fuelcell_Outputs_fuelcell_annual_energy_discharged_aget, self->data_ptr);
@@ -1190,6 +1244,12 @@ static PyObject *
 Outputs_get_fuelcell_fuel_consumption_mcf(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Fuelcell_Outputs_fuelcell_fuel_consumption_mcf_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_fuelcell_monthly_energy_discharged(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Fuelcell_Outputs_fuelcell_monthly_energy_discharged_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1247,6 +1307,9 @@ Outputs_get_system_heat_rate(VarGroupObject *self, void *closure)
 }
 
 static PyGetSetDef Outputs_getset[] = {
+{"annual_energy_discharged", (getter)Outputs_get_annual_energy_discharged,(setter)0,
+	PyDoc_STR("*float*: Annual energy discharged [kWh]"),
+ 	NULL},
 {"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
  	NULL},
@@ -1259,6 +1322,30 @@ static PyGetSetDef Outputs_getset[] = {
 {"annual_fuel_usage_lifetime", (getter)Outputs_get_annual_fuel_usage_lifetime,(setter)0,
 	PyDoc_STR("*sequence*: Annual Fuel Usage (lifetime) [kWht]"),
  	NULL},
+{"cf_battery_replacement_cost_schedule", (getter)Outputs_get_cf_battery_replacement_cost_schedule,(setter)0,
+	PyDoc_STR("*sequence*: replacement O&M costs [$]"),
+ 	NULL},
+{"cf_energy_net", (getter)Outputs_get_cf_energy_net,(setter)0,
+	PyDoc_STR("*sequence*: annual energy [kWh]"),
+ 	NULL},
+{"cf_fuelcell_replacement_cost_schedule", (getter)Outputs_get_cf_fuelcell_replacement_cost_schedule,(setter)0,
+	PyDoc_STR("*sequence*: replacement O&M costs [$]"),
+ 	NULL},
+{"cf_om_capacity", (getter)Outputs_get_cf_om_capacity,(setter)0,
+	PyDoc_STR("*sequence*: capacity O&M costs [$]"),
+ 	NULL},
+{"cf_om_fixed", (getter)Outputs_get_cf_om_fixed,(setter)0,
+	PyDoc_STR("*sequence*: fixed O&M costs [$]"),
+ 	NULL},
+{"cf_om_fuel_cost", (getter)Outputs_get_cf_om_fuel_cost,(setter)0,
+	PyDoc_STR("*sequence*: fossil fuel O&M costs [$]"),
+ 	NULL},
+{"cf_om_land_lease", (getter)Outputs_get_cf_om_land_lease,(setter)0,
+	PyDoc_STR("*sequence*: land lease O&M costs [$]"),
+ 	NULL},
+{"cf_om_production", (getter)Outputs_get_cf_om_production,(setter)0,
+	PyDoc_STR("*sequence*: production O&M costs [$]"),
+ 	NULL},
 {"fuelcell_annual_energy_discharged", (getter)Outputs_get_fuelcell_annual_energy_discharged,(setter)0,
 	PyDoc_STR("*sequence*: Fuel cell annual energy discharged [kWh]"),
  	NULL},
@@ -1267,6 +1354,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"fuelcell_fuel_consumption_mcf", (getter)Outputs_get_fuelcell_fuel_consumption_mcf,(setter)0,
 	PyDoc_STR("*sequence*: Fuel cell fuel consumption [MCf]"),
+ 	NULL},
+{"fuelcell_monthly_energy_discharged", (getter)Outputs_get_fuelcell_monthly_energy_discharged,(setter)0,
+	PyDoc_STR("*sequence*: Fuel cell monthly energy discharged Year 1 [kWh]"),
  	NULL},
 {"fuelcell_percent_load", (getter)Outputs_get_fuelcell_percent_load,(setter)0,
 	PyDoc_STR("*sequence*: Fuel cell percent load [%]"),
@@ -1398,6 +1488,14 @@ Fuelcell_dealloc(CmodObject *self)
 
 
 static PyObject *
+Fuelcell_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Fuelcell_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -1464,6 +1562,8 @@ Fuelcell_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Fuelcell_methods[] = {
 		{"execute",           (PyCFunction)Fuelcell_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)Fuelcell_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Fuelcell_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Lifetime': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Fuelcell_replace,  METH_VARARGS,
@@ -1632,7 +1732,7 @@ static PyMethodDef FuelcellModule_methods[] = {
 		{"new",             Fuelcell_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Fuelcell")},
 		{"default",             Fuelcell_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Fuelcell\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"FuelCellCommercial\"*\n\n		- *\"FuelCellSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> Fuelcell\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"FuelCellCommercial\"*\n\n		- *\"FuelCellSingleOwner\"*\n\n		- *\"GenericPVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"GenericPVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Fuelcell_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Fuelcell\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Fuelcell_from_existing,        METH_VARARGS,

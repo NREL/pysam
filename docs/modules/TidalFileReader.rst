@@ -1,12 +1,12 @@
-.. _Pvwattsv1Poa:
+.. _TidalFileReader:
 
-Pvwattsv1Poa
-=============
+TidalFileReader
+================
 
-.. automodule:: PySAM.Pvwattsv1Poa
+.. automodule:: PySAM.TidalFileReader
 	:members:
 
-Pvwattsv1Poa is a wrapper for the SSC compute module `cmod_pvwattsv1_poa.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_pvwattsv1_poa.cpp>`_
+TidalFileReader is a wrapper for the SSC compute module `cmod_tidal_file_reader.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_tidal_file_reader.cpp>`_
 
 Interdependent Variables
 --------------------------
@@ -18,24 +18,18 @@ The variables listed below are interdependent with other variables. If you chang
 Functions
 -----------
 
-.. autoclass:: PySAM.Pvwattsv1Poa.Pvwattsv1Poa
+.. autoclass:: PySAM.TidalFileReader.TidalFileReader
 	:members:
 
-Weather Group
---------------
+WeatherReader Group
+--------------------
 
-.. autoclass:: PySAM.Pvwattsv1Poa.Pvwattsv1Poa.Weather
-	:members:
-
-PVWatts Group
---------------
-
-.. autoclass:: PySAM.Pvwattsv1Poa.Pvwattsv1Poa.PVWatts
+.. autoclass:: PySAM.TidalFileReader.TidalFileReader.WeatherReader
 	:members:
 
 Outputs Group
 --------------
 
-.. autoclass:: PySAM.Pvwattsv1Poa.Pvwattsv1Poa.Outputs
+.. autoclass:: PySAM.TidalFileReader.TidalFileReader.Outputs
 	:members:
 

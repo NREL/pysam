@@ -3276,6 +3276,14 @@ Sco2CspUdPcTables_dealloc(CmodObject *self)
 
 
 static PyObject *
+Sco2CspUdPcTables_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Sco2CspUdPcTables_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -3342,6 +3350,8 @@ Sco2CspUdPcTables_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Sco2CspUdPcTables_methods[] = {
 		{"execute",           (PyCFunction)Sco2CspUdPcTables_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)Sco2CspUdPcTables_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Sco2CspUdPcTables_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'System Design': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Sco2CspUdPcTables_replace,  METH_VARARGS,

@@ -681,7 +681,7 @@ Outputs_get_surf_tilt(VarGroupObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"axis_rotation", (getter)Outputs_get_axis_rotation,(setter)0,
-	PyDoc_STR("*sequence*: Tracking axis rotation angle [deg]"),
+	PyDoc_STR("*sequence*: Tracker rotation angle [deg]"),
  	NULL},
 {"bt_diff", (getter)Outputs_get_bt_diff,(setter)0,
 	PyDoc_STR("*sequence*: Backtracking difference from ideal rotation [deg]"),
@@ -816,6 +816,14 @@ Irradproc_dealloc(CmodObject *self)
 
 
 static PyObject *
+Irradproc_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Irradproc_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -882,6 +890,8 @@ Irradproc_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Irradproc_methods[] = {
 		{"execute",           (PyCFunction)Irradproc_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)Irradproc_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Irradproc_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Irradiance Processor': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Irradproc_replace,  METH_VARARGS,

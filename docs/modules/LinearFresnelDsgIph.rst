@@ -70,8 +70,9 @@ HeatSink Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.LinearFresnelDsgIph.LinearFresnelDsgIph.AdjustmentFactors
+.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
 	:members:
+	:noindex:
 
 Outputs Group
 --------------

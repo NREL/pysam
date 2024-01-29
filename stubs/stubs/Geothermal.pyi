@@ -43,24 +43,28 @@ class Geothermal(object):
 		T_htf_hot_ref = float
 		ambient_pressure = float
 		analysis_type = float
-		casing_size = float
 		conversion_subtype = float
 		conversion_type = float
 		dT_cw_ref = float
 		decline_type = float
 		delta_pressure_equip = float
 		design_temp = float
+		drilling_success_rate = float
 		dt_prod_well = float
 		eta_ref = float
 		excess_pressure_pump = float
+		exploration_wells_production = float
+		failed_prod_flow_ratio = float
 		file_name = str
 		fracture_angle = float
 		fracture_aperature = float
 		fracture_length = float
 		fracture_spacing = float
 		fracture_width = float
+		geotherm_cost_inj_cost_curve_welldiam = float
 		geotherm_cost_inj_cost_curve_welltype = float
 		geotherm_cost_inj_prod_well_ratio = float
+		geotherm_cost_prod_cost_curve_welldiam = float
 		geotherm_cost_prod_cost_curve_welltype = float
 		geothermal_analysis_period = float
 		hc_ctl1 = float
@@ -74,9 +78,8 @@ class Geothermal(object):
 		hc_ctl9 = float
 		hr_pl_nlev = float
 		hybrid_dispatch_schedule = str
-		inj_casing_size = float
 		inj_prod_well_distance = float
-		inj_well_diam = float
+		injectivity_index = float
 		model_choice = float
 		nameplate = float
 		num_fractures = float
@@ -104,12 +107,13 @@ class Geothermal(object):
 		specify_pump_work = float
 		startup_frac = float
 		startup_time = float
+		stim_success_rate = float
 		subsurface_water_loss = float
 		system_use_lifetime_output = float
 		temp_decline_max = float
 		temp_decline_rate = float
 		ui_calculations_only = float
-		well_diameter = float
+		use_weather_file_conditions = float
 		well_flow_rate = float
 		wet_bulb_temp = float
 
@@ -125,14 +129,26 @@ class Geothermal(object):
 			pass
 	
 		constant = float
-		dc_constant = float
-		dc_hourly = tuple
-		dc_periods = tuple
+		en_hourly = float
+		en_periods = float
+		en_timeindex = float
 		hourly = tuple
 		periods = tuple
+		imeindex = tuple
+		dc_constant = float
+		dc_en_hourly = float
+		dc_en_periods = float
+		dc_en_timeindex = float
+		dc_hourly = tuple
+		dc_periods = tuple
+		dc_imeindex = tuple
 		sf_constant = float
+		sf_en_hourly = float
+		sf_en_periods = float
+		sf_en_timeindex = float
 		sf_hourly = tuple
 		sf_periods = tuple
+		sf_timeindex = tuple
 
 	class Outputs(object):
 		def assign(self): 
@@ -166,6 +182,7 @@ class Geothermal(object):
 		lifetime_output = float
 		lp_flash_pressure = float
 		monthly_energy = tuple
+		monthly_energy_lifetime = tuple
 		monthly_power = tuple
 		monthly_resource_temperature = tuple
 		ncg_condensate_pump = float

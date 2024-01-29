@@ -491,18 +491,6 @@ SystemCosts_set_annual_fuel_usage_lifetime(VarGroupObject *self, PyObject *value
 }
 
 static PyObject *
-SystemCosts_get_fuelcell_annual_energy_discharged(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Cashloan_SystemCosts_fuelcell_annual_energy_discharged_aget, self->data_ptr);
-}
-
-static int
-SystemCosts_set_fuelcell_annual_energy_discharged(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_fuelcell_annual_energy_discharged_aset, self->data_ptr);
-}
-
-static PyObject *
 SystemCosts_get_om_batt_capacity_cost(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Cashloan_SystemCosts_om_batt_capacity_cost_aget, self->data_ptr);
@@ -847,9 +835,6 @@ static PyGetSetDef SystemCosts_getset[] = {
  	NULL},
 {"annual_fuel_usage_lifetime", (getter)SystemCosts_get_annual_fuel_usage_lifetime,(setter)SystemCosts_set_annual_fuel_usage_lifetime,
 	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]"),
- 	NULL},
-{"fuelcell_annual_energy_discharged", (getter)SystemCosts_get_fuelcell_annual_energy_discharged,(setter)SystemCosts_set_fuelcell_annual_energy_discharged,
-	PyDoc_STR("*sequence*: Fuel cell annual energy discharged [kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_batt_capacity_cost", (getter)SystemCosts_get_om_batt_capacity_cost,(setter)SystemCosts_set_om_batt_capacity_cost,
 	PyDoc_STR("*sequence*: Battery capacity-based System Costs amount [$/kWcap]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
@@ -3542,6 +3527,18 @@ static PyMethodDef FuelCell_methods[] = {
 };
 
 static PyObject *
+FuelCell_get_annual_fuel_usage_lifetime(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_FuelCell_annual_fuel_usage_lifetime_aget, self->data_ptr);
+}
+
+static int
+FuelCell_set_annual_fuel_usage_lifetime(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_FuelCell_annual_fuel_usage_lifetime_aset, self->data_ptr);
+}
+
+static PyObject *
 FuelCell_get_en_fuelcell(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Cashloan_FuelCell_en_fuelcell_nget, self->data_ptr);
@@ -3551,6 +3548,18 @@ static int
 FuelCell_set_en_fuelcell(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Cashloan_FuelCell_en_fuelcell_nset, self->data_ptr);
+}
+
+static PyObject *
+FuelCell_get_fuelcell_annual_energy_discharged(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_FuelCell_fuelcell_annual_energy_discharged_aget, self->data_ptr);
+}
+
+static int
+FuelCell_set_fuelcell_annual_energy_discharged(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_FuelCell_fuelcell_annual_energy_discharged_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -3614,8 +3623,14 @@ FuelCell_set_fuelcell_replacement_schedule(VarGroupObject *self, PyObject *value
 }
 
 static PyGetSetDef FuelCell_getset[] = {
+{"annual_fuel_usage_lifetime", (getter)FuelCell_get_annual_fuel_usage_lifetime,(setter)FuelCell_set_annual_fuel_usage_lifetime,
+	PyDoc_STR("*sequence*: Annual Fuel Usage (lifetime) [kWht]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
+ 	NULL},
 {"en_fuelcell", (getter)FuelCell_get_en_fuelcell,(setter)FuelCell_set_en_fuelcell,
 	PyDoc_STR("*float*: Enable fuel cell storage model [0/1]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"fuelcell_annual_energy_discharged", (getter)FuelCell_get_fuelcell_annual_energy_discharged,(setter)FuelCell_set_fuelcell_annual_energy_discharged,
+	PyDoc_STR("*sequence*: Fuel cell annual energy discharged [kWh]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"fuelcell_computed_bank_capacity", (getter)FuelCell_get_fuelcell_computed_bank_capacity,(setter)FuelCell_set_fuelcell_computed_bank_capacity,
 	PyDoc_STR("*float*: Fuel cell capacity [kWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
@@ -5819,12 +5834,6 @@ Outputs_get_cf_ptc_sta(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_cf_ptc_total(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_ptc_total_aget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_cf_salvage_cost_lcos(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_salvage_cost_lcos_aget, self->data_ptr);
@@ -6371,9 +6380,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_ptc_sta", (getter)Outputs_get_cf_ptc_sta,(setter)0,
 	PyDoc_STR("*sequence*: State PTC income [$]"),
  	NULL},
-{"cf_ptc_total", (getter)Outputs_get_cf_ptc_total,(setter)0,
-	PyDoc_STR("*sequence*: Total PTC income [$]"),
- 	NULL},
 {"cf_salvage_cost_lcos", (getter)Outputs_get_cf_salvage_cost_lcos,(setter)0,
 	PyDoc_STR("*sequence*: Annual battery salvage value costs [$]"),
  	NULL},
@@ -6672,6 +6678,14 @@ Cashloan_dealloc(CmodObject *self)
 
 
 static PyObject *
+Cashloan_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Cashloan_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -6738,6 +6752,8 @@ Cashloan_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Cashloan_methods[] = {
 		{"execute",           (PyCFunction)Cashloan_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)Cashloan_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Cashloan_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Financial Parameters': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Cashloan_replace,  METH_VARARGS,
@@ -6906,7 +6922,7 @@ static PyMethodDef CashloanModule_methods[] = {
 		{"new",             Cashloan_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Cashloan")},
 		{"default",             Cashloan_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Cashloan\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"DSLFCommercial\"*\n\n		- *\"EmpiricalTroughCommercial\"*\n\n		- *\"FlatPlatePVCommercial\"*\n\n		- *\"FlatPlatePVResidential\"*\n\n		- *\"FuelCellCommercial\"*\n\n		- *\"GenericBatteryCommercial\"*\n\n		- *\"GenericBatteryResidential\"*\n\n		- *\"GenericCSPSystemCommercial\"*\n\n		- *\"GenericSystemCommercial\"*\n\n		- *\"GenericSystemResidential\"*\n\n		- *\"MSLFCommercial\"*\n\n		- *\"PVBatteryCommercial\"*\n\n		- *\"PVBatteryResidential\"*\n\n		- *\"PVWattsBatteryCommercial\"*\n\n		- *\"PVWattsBatteryResidential\"*\n\n		- *\"PVWattsCommercial\"*\n\n		- *\"PVWattsResidential\"*\n\n		- *\"SolarWaterHeatingCommercial\"*\n\n		- *\"SolarWaterHeatingResidential\"*\n\n		- *\"StandaloneBatteryCommercial\"*\n\n		- *\"StandaloneBatteryResidential\"*\n\n		- *\"WindPowerCommercial\"*\n\n		- *\"WindPowerResidential\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> Cashloan\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"DSLFCommercial\"*\n\n		- *\"EmpiricalTroughCommercial\"*\n\n		- *\"FlatPlatePVCommercial\"*\n\n		- *\"FlatPlatePVResidential\"*\n\n		- *\"FuelCellCommercial\"*\n\n		- *\"GenericBatteryCommercial\"*\n\n		- *\"GenericBatteryResidential\"*\n\n		- *\"GenericCSPSystemCommercial\"*\n\n		- *\"GenericSystemCommercial\"*\n\n		- *\"GenericSystemResidential\"*\n\n		- *\"PVBatteryCommercial\"*\n\n		- *\"PVBatteryResidential\"*\n\n		- *\"PVWattsBatteryCommercial\"*\n\n		- *\"PVWattsBatteryResidential\"*\n\n		- *\"PVWattsCommercial\"*\n\n		- *\"PVWattsResidential\"*\n\n		- *\"SolarWaterHeatingCommercial\"*\n\n		- *\"SolarWaterHeatingResidential\"*\n\n		- *\"StandaloneBatteryCommercial\"*\n\n		- *\"StandaloneBatteryResidential\"*\n\n		- *\"WindPowerCommercial\"*\n\n		- *\"WindPowerResidential\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Cashloan_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Cashloan\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Cashloan_from_existing,        METH_VARARGS,

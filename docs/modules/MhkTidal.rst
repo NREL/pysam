@@ -19,6 +19,8 @@ The variables listed below are interdependent with other variables. If you chang
 
  - tidal_power_curve
 
+ - tidal_resource
+
 Functions
 -----------
 

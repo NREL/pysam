@@ -456,6 +456,14 @@ PvGetShadeLossMpp_dealloc(CmodObject *self)
 
 
 static PyObject *
+PvGetShadeLossMpp_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 PvGetShadeLossMpp_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -522,6 +530,8 @@ PvGetShadeLossMpp_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef PvGetShadeLossMpp_methods[] = {
 		{"execute",           (PyCFunction)PvGetShadeLossMpp_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)PvGetShadeLossMpp_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)PvGetShadeLossMpp_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'PV Shade Loss DB': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)PvGetShadeLossMpp_replace,  METH_VARARGS,

@@ -68,6 +68,20 @@ class Grid(object):
 		load_escalation = tuple
 
 
+	class Monthly(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		monthly_energy = tuple
+
+
 	class GridLimits(object):
 		def assign(self): 
 			pass
