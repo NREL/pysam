@@ -1,5 +1,6 @@
 import os
 import sys
+import pytest
 from pathlib import Path
 import glob
 import importlib
@@ -38,7 +39,8 @@ def test_adjustment_factors():
     adj.sf_timeindex = [0]
     adj.export()
 
-def test_pyssc():
+@pytest.mark.parametrize("execution_number", range(150))
+def test_pyssc(execution_number):
     var = ssc.var_create()
     ssc.var_set_value(var, 0)
     assert int(ssc.var_get_number(var)) == 0
