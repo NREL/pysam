@@ -128,8 +128,15 @@ for filename in os.listdir(os.path.join(this_directory, "stubs", "stubs")):
         continue
     shutil.copy(os.path.join(this_directory, "stubs", "stubs", filename), os.path.join(this_directory, "files"))
     stub_files.append(os.path.join(filename))
-
 libfiles += stub_files
+
+hybrid_stubs = []
+for filename in os.listdir(os.path.join(this_directory, "files", "Hybrids")):
+    if ".pyi" not in filename:
+        continue
+    hybrid_stubs.append(os.path.join("Hybrids", filename))
+libfiles += hybrid_stubs
+
 
 # make list of all extension modules
 extension_modules = [Extension('PySAM.AdjustmentFactors',
@@ -143,8 +150,6 @@ extension_modules = [Extension('PySAM.AdjustmentFactors',
                     )]
 
 for filename in os.listdir(this_directory + "/modules"):
-    if "Hybrid" in filename:
-        continue
     extension_modules.append(Extension('PySAM.' + os.path.splitext(filename)[0],
                              ['modules/' + filename],
                             define_macros=defines,
@@ -155,9 +160,8 @@ for filename in os.listdir(this_directory + "/modules"):
                             extra_link_args=extra_link_args
                             ))
 
+
 # function to rename macosx distribution for Python 3.7 to be minimum version of 10.12 instead of 10.14
-
-
 class PostProcess(Command):
     description = "rename macosx distribution for Python 3.7 to be minimum version of 10.12 instead of 10.14"
     user_options = []
@@ -195,8 +199,8 @@ setup(
     author="dguittet",
     author_email="dguittet@nrel.gov",
     include_package_data=True,
-    packages=['PySAM'],
-    package_dir={'PySAM': 'files'},
+    packages=['PySAM', 'PySAM.Hybrids'],
+    package_dir={'PySAM': 'files', 'PySAM.Hybrids': 'files/Hybrids'},
     package_data={
         '': libfiles},
     setup_requires=["pytest-runner"],

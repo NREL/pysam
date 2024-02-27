@@ -932,6 +932,23 @@ Windbos_get_data_ptr(CmodObject *self, PyObject *args)
 
 
 static PyObject *
+Windbos_set_data_ptr(CmodObject *self, PyObject *args)
+{
+	long long int ptr = 0;  // 64 bit arch
+	if (!PyArg_ParseTuple(args, "L:data_ptr", &ptr)){
+		PyErr_BadArgument();
+		return NULL;
+	}
+	self->data_ptr = (void*)ptr;
+	VarGroupObject* WindBos_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "WindBos");
+	WindBos_obj->data_ptr = (void*)ptr;
+	VarGroupObject* Outputs_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Outputs");
+	Outputs_obj->data_ptr = (void*)ptr;
+	return Py_None;
+}
+
+
+static PyObject *
 Windbos_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -999,7 +1016,9 @@ static PyMethodDef Windbos_methods[] = {
 		{"execute",           (PyCFunction)Windbos_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"get_data_ptr",           (PyCFunction)Windbos_get_data_ptr,  METH_VARARGS,
-				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
+		{"set_data_ptr",           (PyCFunction)Windbos_set_data_ptr,  METH_VARARGS,
+				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Windbos_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'wind_bos': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Windbos_replace,  METH_VARARGS,

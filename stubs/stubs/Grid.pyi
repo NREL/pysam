@@ -14,6 +14,12 @@ class Grid(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
+	def set_data_ptr(self, data_ptr):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
@@ -98,6 +104,30 @@ class Grid(object):
 		grid_interconnection_limit_kwac = float
 
 
+	class HybridCosts(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		degradation = tuple
+		land_area = float
+		om_capacity = tuple
+		om_capacity_escal = float
+		om_fixed = tuple
+		om_fixed_escal = float
+		om_land_lease = tuple
+		om_land_lease_escal = float
+		om_production = tuple
+		om_production_escal = float
+		total_installed_cost = float
+
+
 	class Outputs(object):
 		def assign(self): 
 			pass
@@ -118,6 +148,7 @@ class Grid(object):
 		annual_energy_pre_interconnect_ac = float
 		capacity_factor_curtailment_ac = float
 		capacity_factor_interconnect_ac = float
+		cf_land_lease_expense = tuple
 		full_load = tuple
 		gen = tuple
 		system_pre_curtailment_kwac = tuple

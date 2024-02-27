@@ -745,7 +745,7 @@ static PyGetSetDef SystemDesign_getset[] = {
 	PyDoc_STR("*float*: Tracker stow wind speed threshold [m/s]\n\n**Required:**\nFalse. Automatically set to 10 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"system_capacity", (getter)SystemDesign_get_system_capacity,(setter)SystemDesign_set_system_capacity,
-	PyDoc_STR("*float*: System size (DC nameplate) [kW]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: System size (DC nameplate) [kW]\n\n**Required:**\nTrue\n\nThe value of ``system_capacity`` depends on the following variables:\n\n\t - dc_ac_ratio\n"),
  	NULL},
 {"tilt", (getter)SystemDesign_get_tilt,(setter)SystemDesign_set_tilt,
 	PyDoc_STR("*float*: Tilt angle [degrees]\n\n**Options:**\nH=0,V=90\n\n**Constraints:**\nMIN=0,MAX=90\n\n**Required:**\narray_type<4"),
@@ -1082,6 +1082,293 @@ static PyTypeObject Shading_Type = {
 
 
 /*
+ * HybridCosts Group
+ */ 
+
+static PyTypeObject HybridCosts_Type;
+
+static PyObject *
+HybridCosts_new(SAM_Pvwattsv8 data_ptr)
+{
+	PyObject* new_obj = HybridCosts_Type.tp_alloc(&HybridCosts_Type,0);
+
+	VarGroupObject* HybridCosts_obj = (VarGroupObject*)new_obj;
+
+	HybridCosts_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* HybridCosts methods */
+
+static PyObject *
+HybridCosts_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Pvwattsv8", "HybridCosts")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+HybridCosts_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &HybridCosts_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvwattsv8", "HybridCosts")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+HybridCosts_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &HybridCosts_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef HybridCosts_methods[] = {
+		{"assign",            (PyCFunction)HybridCosts_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``HybridCosts_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)HybridCosts_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``HybridCosts_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)HybridCosts_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+HybridCosts_get_degradation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_HybridCosts_degradation_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_degradation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvwattsv8_HybridCosts_degradation_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_land_area(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_HybridCosts_land_area_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_land_area(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_HybridCosts_land_area_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_HybridCosts_om_capacity_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_capacity(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvwattsv8_HybridCosts_om_capacity_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_capacity_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_HybridCosts_om_capacity_escal_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_capacity_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_HybridCosts_om_capacity_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_fixed(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_HybridCosts_om_fixed_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_fixed(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvwattsv8_HybridCosts_om_fixed_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_fixed_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_HybridCosts_om_fixed_escal_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_fixed_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_HybridCosts_om_fixed_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_land_lease(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_HybridCosts_om_land_lease_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_land_lease(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvwattsv8_HybridCosts_om_land_lease_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_land_lease_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_HybridCosts_om_land_lease_escal_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_land_lease_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_HybridCosts_om_land_lease_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_production(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_HybridCosts_om_production_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_production(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvwattsv8_HybridCosts_om_production_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_production_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_HybridCosts_om_production_escal_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_production_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_HybridCosts_om_production_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_total_installed_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_HybridCosts_total_installed_cost_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_total_installed_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_HybridCosts_total_installed_cost_nset, self->data_ptr);
+}
+
+static PyGetSetDef HybridCosts_getset[] = {
+{"degradation", (getter)HybridCosts_get_degradation,(setter)HybridCosts_set_degradation,
+	PyDoc_STR("*sequence*: Annual AC degradation [%]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"land_area", (getter)HybridCosts_get_land_area,(setter)HybridCosts_set_land_area,
+	PyDoc_STR("*float*: Total land area [acres]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of ``land_area`` depends on the following variables:\n\n\t - dc_ac_ratio\n\t - gcr\n\t - module_type\n"),
+ 	NULL},
+{"om_capacity", (getter)HybridCosts_get_om_capacity,(setter)HybridCosts_set_om_capacity,
+	PyDoc_STR("*sequence*: Capacity-based O&M amount [$/kWcap]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_capacity_escal", (getter)HybridCosts_get_om_capacity_escal,(setter)HybridCosts_set_om_capacity_escal,
+	PyDoc_STR("*float*: Capacity-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_fixed", (getter)HybridCosts_get_om_fixed,(setter)HybridCosts_set_om_fixed,
+	PyDoc_STR("*sequence*: Fixed O&M annual amount [$/year]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_fixed_escal", (getter)HybridCosts_get_om_fixed_escal,(setter)HybridCosts_set_om_fixed_escal,
+	PyDoc_STR("*float*: Fixed O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_land_lease", (getter)HybridCosts_get_om_land_lease,(setter)HybridCosts_set_om_land_lease,
+	PyDoc_STR("*sequence*: Land lease cost [$/acre]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_land_lease_escal", (getter)HybridCosts_get_om_land_lease_escal,(setter)HybridCosts_set_om_land_lease_escal,
+	PyDoc_STR("*float*: Land lease cost escalation [%/yr]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_production", (getter)HybridCosts_get_om_production,(setter)HybridCosts_set_om_production,
+	PyDoc_STR("*sequence*: Production-based O&M amount [$/MWh]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_production_escal", (getter)HybridCosts_get_om_production_escal,(setter)HybridCosts_set_om_production_escal,
+	PyDoc_STR("*float*: Production-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"total_installed_cost", (getter)HybridCosts_get_total_installed_cost,(setter)HybridCosts_set_total_installed_cost,
+	PyDoc_STR("*float*: Total installed cost [$]\n\n**Required:**\nTrue\n\nThe value of ``total_installed_cost`` depends on the following variables:\n\n\t - dc_ac_ratio\n\t - gcr\n\t - module_type\n"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject HybridCosts_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Pvwattsv8.HybridCosts",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		HybridCosts_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		HybridCosts_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * Outputs Group
  */ 
 
@@ -1234,6 +1521,12 @@ static PyObject *
 Outputs_get_cf_fuelcell_replacement_cost_schedule(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_cf_fuelcell_replacement_cost_schedule_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_land_lease_expense(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_cf_land_lease_expense_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1519,6 +1812,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_fuelcell_replacement_cost_schedule", (getter)Outputs_get_cf_fuelcell_replacement_cost_schedule,(setter)0,
 	PyDoc_STR("*sequence*: replacement O&M costs [$]"),
  	NULL},
+{"cf_land_lease_expense", (getter)Outputs_get_cf_land_lease_expense,(setter)0,
+	PyDoc_STR("*sequence*: Land lease expense [$]"),
+ 	NULL},
 {"cf_om_capacity", (getter)Outputs_get_cf_om_capacity,(setter)0,
 	PyDoc_STR("*sequence*: capacity O&M costs [$]"),
  	NULL},
@@ -1733,6 +2029,10 @@ newPvwattsv8Object(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
 	Py_DECREF(Adjust_obj);
 
+	PyObject* HybridCosts_obj = HybridCosts_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "HybridCosts", HybridCosts_obj);
+	Py_DECREF(HybridCosts_obj);
+
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
@@ -1761,6 +2061,33 @@ Pvwattsv8_get_data_ptr(CmodObject *self, PyObject *args)
 {
 	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
 	return ptr;
+}
+
+
+static PyObject *
+Pvwattsv8_set_data_ptr(CmodObject *self, PyObject *args)
+{
+	long long int ptr = 0;  // 64 bit arch
+	if (!PyArg_ParseTuple(args, "L:data_ptr", &ptr)){
+		PyErr_BadArgument();
+		return NULL;
+	}
+	self->data_ptr = (void*)ptr;
+	VarGroupObject* SolarResource_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SolarResource");
+	SolarResource_obj->data_ptr = (void*)ptr;
+	VarGroupObject* Lifetime_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Lifetime");
+	Lifetime_obj->data_ptr = (void*)ptr;
+	VarGroupObject* SystemDesign_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SystemDesign");
+	SystemDesign_obj->data_ptr = (void*)ptr;
+	VarGroupObject* Shading_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Shading");
+	Shading_obj->data_ptr = (void*)ptr;
+	VarGroupObject* AdjustmentFactors_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "AdjustmentFactors");
+	AdjustmentFactors_obj->data_ptr = (void*)ptr;
+	VarGroupObject* HybridCosts_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "HybridCosts");
+	HybridCosts_obj->data_ptr = (void*)ptr;
+	VarGroupObject* Outputs_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Outputs");
+	Outputs_obj->data_ptr = (void*)ptr;
+	return Py_None;
 }
 
 
@@ -1832,7 +2159,9 @@ static PyMethodDef Pvwattsv8_methods[] = {
 		{"execute",           (PyCFunction)Pvwattsv8_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"get_data_ptr",           (PyCFunction)Pvwattsv8_get_data_ptr,  METH_VARARGS,
-				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
+		{"set_data_ptr",           (PyCFunction)Pvwattsv8_set_data_ptr,  METH_VARARGS,
+				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Pvwattsv8_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Solar Resource': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Pvwattsv8_replace,  METH_VARARGS,
@@ -2053,6 +2382,13 @@ Pvwattsv8Module_exec(PyObject *m)
 				"Shading",
 				(PyObject*)&Shading_Type);
 	Py_DECREF(&Shading_Type);
+
+	/// Add the HybridCosts type object to Pvwattsv8_Type
+	if (PyType_Ready(&HybridCosts_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Pvwattsv8_Type.tp_dict,
+				"HybridCosts",
+				(PyObject*)&HybridCosts_Type);
+	Py_DECREF(&HybridCosts_Type);
 
 	/// Add the Outputs type object to Pvwattsv8_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

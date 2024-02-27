@@ -7331,6 +7331,53 @@ MsptIph_get_data_ptr(CmodObject *self, PyObject *args)
 
 
 static PyObject *
+MsptIph_set_data_ptr(CmodObject *self, PyObject *args)
+{
+	long long int ptr = 0;  // 64 bit arch
+	if (!PyArg_ParseTuple(args, "L:data_ptr", &ptr)){
+		PyErr_BadArgument();
+		return NULL;
+	}
+	self->data_ptr = (void*)ptr;
+	VarGroupObject* SolarResource_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SolarResource");
+	SolarResource_obj->data_ptr = (void*)ptr;
+	VarGroupObject* SystemControl_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SystemControl");
+	SystemControl_obj->data_ptr = (void*)ptr;
+	VarGroupObject* FinancialModel_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "FinancialModel");
+	FinancialModel_obj->data_ptr = (void*)ptr;
+	VarGroupObject* SystemDesign_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SystemDesign");
+	SystemDesign_obj->data_ptr = (void*)ptr;
+	VarGroupObject* HeliostatField_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "HeliostatField");
+	HeliostatField_obj->data_ptr = (void*)ptr;
+	VarGroupObject* TowerAndReceiver_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "TowerAndReceiver");
+	TowerAndReceiver_obj->data_ptr = (void*)ptr;
+	VarGroupObject* ParallelHeater_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "ParallelHeater");
+	ParallelHeater_obj->data_ptr = (void*)ptr;
+	VarGroupObject* SystemCosts_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SystemCosts");
+	SystemCosts_obj->data_ptr = (void*)ptr;
+	VarGroupObject* ThermalStorage_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "ThermalStorage");
+	ThermalStorage_obj->data_ptr = (void*)ptr;
+	VarGroupObject* HeatSink_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "HeatSink");
+	HeatSink_obj->data_ptr = (void*)ptr;
+	VarGroupObject* TimeOfDeliveryFactors_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "TimeOfDeliveryFactors");
+	TimeOfDeliveryFactors_obj->data_ptr = (void*)ptr;
+	VarGroupObject* FinancialSolutionMode_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "FinancialSolutionMode");
+	FinancialSolutionMode_obj->data_ptr = (void*)ptr;
+	VarGroupObject* Revenue_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Revenue");
+	Revenue_obj->data_ptr = (void*)ptr;
+	VarGroupObject* FinancialParameters_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "FinancialParameters");
+	FinancialParameters_obj->data_ptr = (void*)ptr;
+	VarGroupObject* Deprecated_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Deprecated");
+	Deprecated_obj->data_ptr = (void*)ptr;
+	VarGroupObject* AdjustmentFactors_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "AdjustmentFactors");
+	AdjustmentFactors_obj->data_ptr = (void*)ptr;
+	VarGroupObject* Outputs_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Outputs");
+	Outputs_obj->data_ptr = (void*)ptr;
+	return Py_None;
+}
+
+
+static PyObject *
 MsptIph_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -7398,7 +7445,9 @@ static PyMethodDef MsptIph_methods[] = {
 		{"execute",           (PyCFunction)MsptIph_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"get_data_ptr",           (PyCFunction)MsptIph_get_data_ptr,  METH_VARARGS,
-				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
+		{"set_data_ptr",           (PyCFunction)MsptIph_set_data_ptr,  METH_VARARGS,
+				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{"assign",            (PyCFunction)MsptIph_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Solar Resource': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)MsptIph_replace,  METH_VARARGS,

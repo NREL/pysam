@@ -1191,94 +1191,94 @@ SystemCosts_set_total_installed_cost(VarGroupObject *self, PyObject *value, void
 
 static PyGetSetDef SystemCosts_getset[] = {
 {"add_om_num_types", (getter)SystemCosts_get_add_om_num_types,(setter)SystemCosts_set_add_om_num_types,
-	PyDoc_STR("*float*: Number of O and M types\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Number of O and M types\n\n**Info:**\nbattery,fuelcell\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"annual_fuel_usage", (getter)SystemCosts_get_annual_fuel_usage,(setter)SystemCosts_set_annual_fuel_usage,
-	PyDoc_STR("*float*: Fuel usage (yr 1) [kWht]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Fuel usage (yr 1) [kWht]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"annual_fuel_usage_lifetime", (getter)SystemCosts_get_annual_fuel_usage_lifetime,(setter)SystemCosts_set_annual_fuel_usage_lifetime,
-	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]"),
+	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical"),
  	NULL},
 {"om_batt_capacity_cost", (getter)SystemCosts_get_om_batt_capacity_cost,(setter)SystemCosts_set_om_batt_capacity_cost,
-	PyDoc_STR("*sequence*: Battery capacity-based System Costs amount [$/kWcap]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Battery capacity-based System Costs amount [$/kWcap]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_batt_fixed_cost", (getter)SystemCosts_get_om_batt_fixed_cost,(setter)SystemCosts_set_om_batt_fixed_cost,
-	PyDoc_STR("*sequence*: Battery fixed System Costs annual amount [$/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Battery fixed System Costs annual amount [$/year]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_batt_nameplate", (getter)SystemCosts_get_om_batt_nameplate,(setter)SystemCosts_set_om_batt_nameplate,
-	PyDoc_STR("*float*: Battery capacity for System Costs values [kW]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Battery capacity for System Costs values [kW]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_batt_replacement_cost", (getter)SystemCosts_get_om_batt_replacement_cost,(setter)SystemCosts_set_om_batt_replacement_cost,
-	PyDoc_STR("*sequence*: Replacement cost 1 [$/kWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Replacement cost 1 [$/kWh]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_batt_variable_cost", (getter)SystemCosts_get_om_batt_variable_cost,(setter)SystemCosts_set_om_batt_variable_cost,
-	PyDoc_STR("*sequence*: Battery production-based System Costs amount [$/MWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Battery production-based System Costs amount [$/MWh]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_capacity", (getter)SystemCosts_get_om_capacity,(setter)SystemCosts_set_om_capacity,
-	PyDoc_STR("*sequence*: Capacity-based O&M amount [$/kWcap]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Capacity-based O&M amount [$/kWcap]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_capacity_escal", (getter)SystemCosts_get_om_capacity_escal,(setter)SystemCosts_set_om_capacity_escal,
 	PyDoc_STR("*float*: Capacity-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fixed", (getter)SystemCosts_get_om_fixed,(setter)SystemCosts_set_om_fixed,
-	PyDoc_STR("*sequence*: Fixed O&M annual amount [$/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Fixed O&M annual amount [$/year]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fixed_escal", (getter)SystemCosts_get_om_fixed_escal,(setter)SystemCosts_set_om_fixed_escal,
 	PyDoc_STR("*float*: Fixed O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuel_cost", (getter)SystemCosts_get_om_fuel_cost,(setter)SystemCosts_set_om_fuel_cost,
-	PyDoc_STR("*sequence*: Fuel cost [$/MMBtu]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Fuel cost [$/MMBtu]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuel_cost_escal", (getter)SystemCosts_get_om_fuel_cost_escal,(setter)SystemCosts_set_om_fuel_cost_escal,
-	PyDoc_STR("*float*: Fuel cost escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Fuel cost escalation [%/year]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuelcell_capacity_cost", (getter)SystemCosts_get_om_fuelcell_capacity_cost,(setter)SystemCosts_set_om_fuelcell_capacity_cost,
-	PyDoc_STR("*sequence*: Fuel cell capacity-based System Costs amount [$/kWcap]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Fuel cell capacity-based System Costs amount [$/kWcap]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuelcell_fixed_cost", (getter)SystemCosts_get_om_fuelcell_fixed_cost,(setter)SystemCosts_set_om_fuelcell_fixed_cost,
-	PyDoc_STR("*sequence*: Fuel cell fixed System Costs annual amount [$/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Fuel cell fixed System Costs annual amount [$/year]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuelcell_nameplate", (getter)SystemCosts_get_om_fuelcell_nameplate,(setter)SystemCosts_set_om_fuelcell_nameplate,
-	PyDoc_STR("*float*: Fuel cell capacity for System Costs values [kW]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Fuel cell capacity for System Costs values [kW]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuelcell_replacement_cost", (getter)SystemCosts_get_om_fuelcell_replacement_cost,(setter)SystemCosts_set_om_fuelcell_replacement_cost,
-	PyDoc_STR("*sequence*: Replacement cost 2 [$/kW]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Replacement cost 2 [$/kW]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuelcell_variable_cost", (getter)SystemCosts_get_om_fuelcell_variable_cost,(setter)SystemCosts_set_om_fuelcell_variable_cost,
-	PyDoc_STR("*sequence*: Fuel cell production-based System Costs amount [$/MWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Fuel cell production-based System Costs amount [$/MWh]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_opt_fuel_1_cost", (getter)SystemCosts_get_om_opt_fuel_1_cost,(setter)SystemCosts_set_om_opt_fuel_1_cost,
-	PyDoc_STR("*sequence*: Biomass feedstock cost [$/unit]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Biomass feedstock cost [$/unit]\n\n**Info:**\nbiomass\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_opt_fuel_1_cost_escal", (getter)SystemCosts_get_om_opt_fuel_1_cost_escal,(setter)SystemCosts_set_om_opt_fuel_1_cost_escal,
-	PyDoc_STR("*float*: Biomass feedstock cost escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Biomass feedstock cost escalation [%/year]\n\n**Info:**\nbiomass\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_opt_fuel_1_usage", (getter)SystemCosts_get_om_opt_fuel_1_usage,(setter)SystemCosts_set_om_opt_fuel_1_usage,
-	PyDoc_STR("*float*: Biomass feedstock usage [unit]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Biomass feedstock usage [unit]\n\n**Info:**\nbiomass\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_opt_fuel_2_cost", (getter)SystemCosts_get_om_opt_fuel_2_cost,(setter)SystemCosts_set_om_opt_fuel_2_cost,
-	PyDoc_STR("*sequence*: Coal feedstock cost [$/unit]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Coal feedstock cost [$/unit]\n\n**Info:**\nbiomass\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_opt_fuel_2_cost_escal", (getter)SystemCosts_get_om_opt_fuel_2_cost_escal,(setter)SystemCosts_set_om_opt_fuel_2_cost_escal,
-	PyDoc_STR("*float*: Coal feedstock cost escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Coal feedstock cost escalation [%/year]\n\n**Info:**\nbiomass\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_opt_fuel_2_usage", (getter)SystemCosts_get_om_opt_fuel_2_usage,(setter)SystemCosts_set_om_opt_fuel_2_usage,
-	PyDoc_STR("*float*: Coal feedstock usage [unit]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Coal feedstock usage [unit]\n\n**Info:**\nbiomass\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_production", (getter)SystemCosts_get_om_production,(setter)SystemCosts_set_om_production,
-	PyDoc_STR("*sequence*: Production-based O&M amount [$/MWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Production-based O&M amount [$/MWh]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_production1_values", (getter)SystemCosts_get_om_production1_values,(setter)SystemCosts_set_om_production1_values,
-	PyDoc_STR("*sequence*: Battery production for System Costs values [kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Battery production for System Costs values [kWh]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_production2_values", (getter)SystemCosts_get_om_production2_values,(setter)SystemCosts_set_om_production2_values,
-	PyDoc_STR("*sequence*: Fuel cell production for System Costs values [kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Fuel cell production for System Costs values [kWh]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_production_escal", (getter)SystemCosts_get_om_production_escal,(setter)SystemCosts_set_om_production_escal,
 	PyDoc_STR("*float*: Production-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_replacement_cost_escal", (getter)SystemCosts_get_om_replacement_cost_escal,(setter)SystemCosts_set_om_replacement_cost_escal,
-	PyDoc_STR("*float*: Replacement cost escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Replacement cost escalation [%/year]\n\n**Info:**\nbattery,fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"system_lifetime_recapitalize", (getter)SystemCosts_get_system_lifetime_recapitalize,(setter)SystemCosts_set_system_lifetime_recapitalize,
 	PyDoc_STR("*sequence*: Recapitalization boolean\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
@@ -11474,6 +11474,55 @@ Merchantplant_get_data_ptr(CmodObject *self, PyObject *args)
 
 
 static PyObject *
+Merchantplant_set_data_ptr(CmodObject *self, PyObject *args)
+{
+	long long int ptr = 0;  // 64 bit arch
+	if (!PyArg_ParseTuple(args, "L:data_ptr", &ptr)){
+		PyErr_BadArgument();
+		return NULL;
+	}
+	self->data_ptr = (void*)ptr;
+	VarGroupObject* FinancialParameters_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "FinancialParameters");
+	FinancialParameters_obj->data_ptr = (void*)ptr;
+	VarGroupObject* SystemCosts_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SystemCosts");
+	SystemCosts_obj->data_ptr = (void*)ptr;
+	VarGroupObject* LandLease_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "LandLease");
+	LandLease_obj->data_ptr = (void*)ptr;
+	VarGroupObject* TaxCreditIncentives_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "TaxCreditIncentives");
+	TaxCreditIncentives_obj->data_ptr = (void*)ptr;
+	VarGroupObject* Depreciation_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Depreciation");
+	Depreciation_obj->data_ptr = (void*)ptr;
+	VarGroupObject* PaymentIncentives_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "PaymentIncentives");
+	PaymentIncentives_obj->data_ptr = (void*)ptr;
+	VarGroupObject* Revenue_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Revenue");
+	Revenue_obj->data_ptr = (void*)ptr;
+	VarGroupObject* BatterySystem_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "BatterySystem");
+	BatterySystem_obj->data_ptr = (void*)ptr;
+	VarGroupObject* ElectricityRates_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "ElectricityRates");
+	ElectricityRates_obj->data_ptr = (void*)ptr;
+	VarGroupObject* SystemOutput_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SystemOutput");
+	SystemOutput_obj->data_ptr = (void*)ptr;
+	VarGroupObject* UtilityBill_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "UtilityBill");
+	UtilityBill_obj->data_ptr = (void*)ptr;
+	VarGroupObject* Lifetime_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Lifetime");
+	Lifetime_obj->data_ptr = (void*)ptr;
+	VarGroupObject* FuelCell_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "FuelCell");
+	FuelCell_obj->data_ptr = (void*)ptr;
+	VarGroupObject* CapacityPayments_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "CapacityPayments");
+	CapacityPayments_obj->data_ptr = (void*)ptr;
+	VarGroupObject* LCOS_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "LCOS");
+	LCOS_obj->data_ptr = (void*)ptr;
+	VarGroupObject* ChargesByMonth_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "ChargesByMonth");
+	ChargesByMonth_obj->data_ptr = (void*)ptr;
+	VarGroupObject* GridLimits_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "GridLimits");
+	GridLimits_obj->data_ptr = (void*)ptr;
+	VarGroupObject* Outputs_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Outputs");
+	Outputs_obj->data_ptr = (void*)ptr;
+	return Py_None;
+}
+
+
+static PyObject *
 Merchantplant_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -11541,7 +11590,9 @@ static PyMethodDef Merchantplant_methods[] = {
 		{"execute",           (PyCFunction)Merchantplant_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"get_data_ptr",           (PyCFunction)Merchantplant_get_data_ptr,  METH_VARARGS,
-				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
+		{"set_data_ptr",           (PyCFunction)Merchantplant_set_data_ptr,  METH_VARARGS,
+				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Merchantplant_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Financial Parameters': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Merchantplant_replace,  METH_VARARGS,

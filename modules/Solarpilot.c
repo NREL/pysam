@@ -1307,6 +1307,23 @@ Solarpilot_get_data_ptr(CmodObject *self, PyObject *args)
 
 
 static PyObject *
+Solarpilot_set_data_ptr(CmodObject *self, PyObject *args)
+{
+	long long int ptr = 0;  // 64 bit arch
+	if (!PyArg_ParseTuple(args, "L:data_ptr", &ptr)){
+		PyErr_BadArgument();
+		return NULL;
+	}
+	self->data_ptr = (void*)ptr;
+	VarGroupObject* SolarPILOT_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SolarPILOT");
+	SolarPILOT_obj->data_ptr = (void*)ptr;
+	VarGroupObject* Outputs_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Outputs");
+	Outputs_obj->data_ptr = (void*)ptr;
+	return Py_None;
+}
+
+
+static PyObject *
 Solarpilot_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -1374,7 +1391,9 @@ static PyMethodDef Solarpilot_methods[] = {
 		{"execute",           (PyCFunction)Solarpilot_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"get_data_ptr",           (PyCFunction)Solarpilot_get_data_ptr,  METH_VARARGS,
-				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
+		{"set_data_ptr",           (PyCFunction)Solarpilot_set_data_ptr,  METH_VARARGS,
+				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Solarpilot_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'SolarPILOT': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Solarpilot_replace,  METH_VARARGS,
