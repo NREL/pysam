@@ -105,7 +105,6 @@ class GenericSystem(object):
 			pass
 
 
-		annual_fuel_usage = float
 		annual_fuel_usage_lifetime = tuple
 		degradation = tuple
 		land_area = float

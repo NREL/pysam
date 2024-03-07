@@ -882,7 +882,7 @@ static PyGetSetDef FinancialParameters_getset[] = {
 	PyDoc_STR("*float*: Limit debt fraction [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"dscr_maximum_debt_fraction", (getter)FinancialParameters_get_dscr_maximum_debt_fraction,(setter)FinancialParameters_set_dscr_maximum_debt_fraction,
-	PyDoc_STR("*float*: Maximum debt fraction [%]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 100 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Maximum debt fraction [%]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nFalse. Automatically set to 100 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"dscr_reserve_months", (getter)FinancialParameters_get_dscr_reserve_months,(setter)FinancialParameters_set_dscr_reserve_months,
 	PyDoc_STR("*float*: Debt service reserve account [months P&I]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 6 if not assigned explicitly or loaded from defaults."),
@@ -5440,7 +5440,7 @@ static PyGetSetDef SystemOutput_getset[] = {
 	PyDoc_STR("*sequence*: Net power to or from the grid [kW]\n\n**Required:**\nTrue"),
  	NULL},
 {"gen_purchases", (getter)SystemOutput_get_gen_purchases,(setter)SystemOutput_set_gen_purchases,
-	PyDoc_STR("*sequence*: Electricity from grid [kW]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
+	PyDoc_STR("*sequence*: Electricity from grid to system [kW]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"gen_without_battery", (getter)SystemOutput_get_gen_without_battery,(setter)SystemOutput_set_gen_without_battery,
 	PyDoc_STR("*sequence*: Electricity to or from the renewable system, without the battery [kW]"),
@@ -7268,114 +7268,6 @@ HybridCosts_set_degradation(VarGroupObject *self, PyObject *value, void *closure
 }
 
 static PyObject *
-HybridCosts_get_land_area(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_HybridCosts_land_area_nget, self->data_ptr);
-}
-
-static int
-HybridCosts_set_land_area(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_HybridCosts_land_area_nset, self->data_ptr);
-}
-
-static PyObject *
-HybridCosts_get_om_capacity(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_HybridCosts_om_capacity_aget, self->data_ptr);
-}
-
-static int
-HybridCosts_set_om_capacity(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Singleowner_HybridCosts_om_capacity_aset, self->data_ptr);
-}
-
-static PyObject *
-HybridCosts_get_om_capacity_escal(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_HybridCosts_om_capacity_escal_nget, self->data_ptr);
-}
-
-static int
-HybridCosts_set_om_capacity_escal(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_HybridCosts_om_capacity_escal_nset, self->data_ptr);
-}
-
-static PyObject *
-HybridCosts_get_om_fixed(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_HybridCosts_om_fixed_aget, self->data_ptr);
-}
-
-static int
-HybridCosts_set_om_fixed(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Singleowner_HybridCosts_om_fixed_aset, self->data_ptr);
-}
-
-static PyObject *
-HybridCosts_get_om_fixed_escal(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_HybridCosts_om_fixed_escal_nget, self->data_ptr);
-}
-
-static int
-HybridCosts_set_om_fixed_escal(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_HybridCosts_om_fixed_escal_nset, self->data_ptr);
-}
-
-static PyObject *
-HybridCosts_get_om_land_lease(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_HybridCosts_om_land_lease_aget, self->data_ptr);
-}
-
-static int
-HybridCosts_set_om_land_lease(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Singleowner_HybridCosts_om_land_lease_aset, self->data_ptr);
-}
-
-static PyObject *
-HybridCosts_get_om_land_lease_escal(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_HybridCosts_om_land_lease_escal_nget, self->data_ptr);
-}
-
-static int
-HybridCosts_set_om_land_lease_escal(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_HybridCosts_om_land_lease_escal_nset, self->data_ptr);
-}
-
-static PyObject *
-HybridCosts_get_om_production(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_HybridCosts_om_production_aget, self->data_ptr);
-}
-
-static int
-HybridCosts_set_om_production(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Singleowner_HybridCosts_om_production_aset, self->data_ptr);
-}
-
-static PyObject *
-HybridCosts_get_om_production_escal(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_HybridCosts_om_production_escal_nget, self->data_ptr);
-}
-
-static int
-HybridCosts_set_om_production_escal(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_HybridCosts_om_production_escal_nset, self->data_ptr);
-}
-
-static PyObject *
 HybridCosts_get_total_installed_cost(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Singleowner_HybridCosts_total_installed_cost_nget, self->data_ptr);
@@ -7390,33 +7282,6 @@ HybridCosts_set_total_installed_cost(VarGroupObject *self, PyObject *value, void
 static PyGetSetDef HybridCosts_getset[] = {
 {"degradation", (getter)HybridCosts_get_degradation,(setter)HybridCosts_set_degradation,
 	PyDoc_STR("*sequence*: Annual AC degradation [%]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"land_area", (getter)HybridCosts_get_land_area,(setter)HybridCosts_set_land_area,
-	PyDoc_STR("*float*: Total land area [acres]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"om_capacity", (getter)HybridCosts_get_om_capacity,(setter)HybridCosts_set_om_capacity,
-	PyDoc_STR("*sequence*: Capacity-based O&M amount [$/kWcap]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"om_capacity_escal", (getter)HybridCosts_get_om_capacity_escal,(setter)HybridCosts_set_om_capacity_escal,
-	PyDoc_STR("*float*: Capacity-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"om_fixed", (getter)HybridCosts_get_om_fixed,(setter)HybridCosts_set_om_fixed,
-	PyDoc_STR("*sequence*: Fixed O&M annual amount [$/year]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"om_fixed_escal", (getter)HybridCosts_get_om_fixed_escal,(setter)HybridCosts_set_om_fixed_escal,
-	PyDoc_STR("*float*: Fixed O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"om_land_lease", (getter)HybridCosts_get_om_land_lease,(setter)HybridCosts_set_om_land_lease,
-	PyDoc_STR("*sequence*: Land lease cost [$/acre]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"om_land_lease_escal", (getter)HybridCosts_get_om_land_lease_escal,(setter)HybridCosts_set_om_land_lease_escal,
-	PyDoc_STR("*float*: Land lease cost escalation [%/yr]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"om_production", (getter)HybridCosts_get_om_production,(setter)HybridCosts_set_om_production,
-	PyDoc_STR("*sequence*: Production-based O&M amount [$/MWh]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"om_production_escal", (getter)HybridCosts_get_om_production_escal,(setter)HybridCosts_set_om_production_escal,
-	PyDoc_STR("*float*: Production-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"total_installed_cost", (getter)HybridCosts_get_total_installed_cost,(setter)HybridCosts_set_total_installed_cost,
 	PyDoc_STR("*float*: Total installed cost [$]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``total_installed_cost``:\n\n\t - battery_total_cost_lcos\n\t - construction_financing_cost\n\n\nThe value of ``total_installed_cost`` depends on the following variables:\n\n\t - battery_per_kWh\n"),
@@ -12933,10 +12798,6 @@ Singleowner_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Singleowner_methods[] = {
 		{"execute",           (PyCFunction)Singleowner_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
-		{"get_data_ptr",           (PyCFunction)Singleowner_get_data_ptr,  METH_VARARGS,
-				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
-		{"set_data_ptr",           (PyCFunction)Singleowner_set_data_ptr,  METH_VARARGS,
-				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Singleowner_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Revenue': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Singleowner_replace,  METH_VARARGS,
@@ -12947,6 +12808,10 @@ static PyMethodDef Singleowner_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Singleowner_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Singleowner_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
+		{"set_data_ptr",           (PyCFunction)Singleowner_set_data_ptr,  METH_VARARGS,
+				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

@@ -1163,30 +1163,6 @@ HybridCosts_set_add_om_num_types(VarGroupObject *self, PyObject *value, void *cl
 }
 
 static PyObject *
-HybridCosts_get_annual_fuel_usage(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Fuelcell_HybridCosts_annual_fuel_usage_nget, self->data_ptr);
-}
-
-static int
-HybridCosts_set_annual_fuel_usage(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Fuelcell_HybridCosts_annual_fuel_usage_nset, self->data_ptr);
-}
-
-static PyObject *
-HybridCosts_get_annual_fuel_usage_lifetime(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Fuelcell_HybridCosts_annual_fuel_usage_lifetime_aget, self->data_ptr);
-}
-
-static int
-HybridCosts_set_annual_fuel_usage_lifetime(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Fuelcell_HybridCosts_annual_fuel_usage_lifetime_aset, self->data_ptr);
-}
-
-static PyObject *
 HybridCosts_get_degradation(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Fuelcell_HybridCosts_degradation_aget, self->data_ptr);
@@ -1393,12 +1369,6 @@ HybridCosts_set_total_installed_cost(VarGroupObject *self, PyObject *value, void
 static PyGetSetDef HybridCosts_getset[] = {
 {"add_om_num_types", (getter)HybridCosts_get_add_om_num_types,(setter)HybridCosts_set_add_om_num_types,
 	PyDoc_STR("*float*: Number of O and M types\n\n**Info:**\nbattery,fuelcell\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"annual_fuel_usage", (getter)HybridCosts_get_annual_fuel_usage,(setter)HybridCosts_set_annual_fuel_usage,
-	PyDoc_STR("*float*: Fuel usage (yr 1) [kWht]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"annual_fuel_usage_lifetime", (getter)HybridCosts_get_annual_fuel_usage_lifetime,(setter)HybridCosts_set_annual_fuel_usage_lifetime,
-	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical"),
  	NULL},
 {"degradation", (getter)HybridCosts_get_degradation,(setter)HybridCosts_set_degradation,
 	PyDoc_STR("*sequence*: Annual AC degradation [%]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
@@ -2022,10 +1992,6 @@ Fuelcell_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Fuelcell_methods[] = {
 		{"execute",           (PyCFunction)Fuelcell_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
-		{"get_data_ptr",           (PyCFunction)Fuelcell_get_data_ptr,  METH_VARARGS,
-				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
-		{"set_data_ptr",           (PyCFunction)Fuelcell_set_data_ptr,  METH_VARARGS,
-				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Fuelcell_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Lifetime': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Fuelcell_replace,  METH_VARARGS,
@@ -2036,6 +2002,10 @@ static PyMethodDef Fuelcell_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Fuelcell_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Fuelcell_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
+		{"set_data_ptr",           (PyCFunction)Fuelcell_set_data_ptr,  METH_VARARGS,
+				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

@@ -281,89 +281,33 @@ The variables listed below are interdependent with other variables. If you chang
 
  - subarray1_gcr
 
- - subarray1_mod_orient
-
  - subarray1_modules_per_string
 
- - subarray1_monthly_tilt
-
- - subarray1_nmodx
-
- - subarray1_nmody
-
  - subarray1_nstrings
-
- - subarray1_shade_mode
-
- - subarray1_tilt
-
- - subarray1_track_mode
 
  - subarray2_enable
 
  - subarray2_gcr
 
- - subarray2_mod_orient
-
  - subarray2_modules_per_string
 
- - subarray2_monthly_tilt
-
- - subarray2_nmodx
-
- - subarray2_nmody
-
  - subarray2_nstrings
-
- - subarray2_shade_mode
-
- - subarray2_tilt
-
- - subarray2_track_mode
 
  - subarray3_enable
 
  - subarray3_gcr
 
- - subarray3_mod_orient
-
  - subarray3_modules_per_string
 
- - subarray3_monthly_tilt
-
- - subarray3_nmodx
-
- - subarray3_nmody
-
  - subarray3_nstrings
-
- - subarray3_shade_mode
-
- - subarray3_tilt
-
- - subarray3_track_mode
 
  - subarray4_enable
 
  - subarray4_gcr
 
- - subarray4_mod_orient
-
  - subarray4_modules_per_string
 
- - subarray4_monthly_tilt
-
- - subarray4_nmodx
-
- - subarray4_nmody
-
  - subarray4_nstrings
-
- - subarray4_shade_mode
-
- - subarray4_tilt
-
- - subarray4_track_mode
 
  - system_capacity
 

@@ -129,8 +129,6 @@ class Fuelcell(object):
 
 
 		add_om_num_types = float
-		annual_fuel_usage = float
-		annual_fuel_usage_lifetime = tuple
 		degradation = tuple
 		land_area = float
 		om_capacity_escal = float

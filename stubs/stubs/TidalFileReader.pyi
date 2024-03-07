@@ -39,7 +39,6 @@ class TidalFileReader(object):
 
 		tidal_resource_filename = str
 		tidal_resource_model_choice = float
-		use_specific_wf_tidal = float
 
 
 	class Outputs(object):

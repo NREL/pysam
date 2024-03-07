@@ -78,6 +78,18 @@ static PyMethodDef PVSnowModel_methods[] = {
 };
 
 static PyObject *
+PVSnowModel_get_snow_slide_coefficient(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Snowmodel_PVSnowModel_snow_slide_coefficient_nget, self->data_ptr);
+}
+
+static int
+PVSnowModel_set_snow_slide_coefficient(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Snowmodel_PVSnowModel_snow_slide_coefficient_nset, self->data_ptr);
+}
+
+static PyObject *
 PVSnowModel_get_snowdepth(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Snowmodel_PVSnowModel_snowdepth_aget, self->data_ptr);
@@ -174,6 +186,9 @@ PVSnowModel_set_wspd(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyGetSetDef PVSnowModel_getset[] = {
+{"snow_slide_coefficient", (getter)PVSnowModel_get_snow_slide_coefficient,(setter)PVSnowModel_set_snow_slide_coefficient,
+	PyDoc_STR("*float*: Snow Slide Coefficient\n\n**Required:**\nFalse. Automatically set to 1.97 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
 {"snowdepth", (getter)PVSnowModel_get_snowdepth,(setter)PVSnowModel_set_snowdepth,
 	PyDoc_STR("*sequence*: Snow Depth [cm]\n\n**Constraints:**\nLENGTH=8760\n\n**Required:**\nTrue"),
  	NULL},
@@ -714,10 +729,6 @@ Snowmodel_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Snowmodel_methods[] = {
 		{"execute",           (PyCFunction)Snowmodel_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
-		{"get_data_ptr",           (PyCFunction)Snowmodel_get_data_ptr,  METH_VARARGS,
-				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
-		{"set_data_ptr",           (PyCFunction)Snowmodel_set_data_ptr,  METH_VARARGS,
-				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Snowmodel_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'PV Snow Model': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Snowmodel_replace,  METH_VARARGS,
@@ -728,6 +739,10 @@ static PyMethodDef Snowmodel_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Snowmodel_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Snowmodel_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
+		{"set_data_ptr",           (PyCFunction)Snowmodel_set_data_ptr,  METH_VARARGS,
+				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

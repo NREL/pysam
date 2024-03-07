@@ -472,18 +472,6 @@ static PyMethodDef HybridCosts_methods[] = {
 };
 
 static PyObject *
-HybridCosts_get_annual_fuel_usage(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_GenericSystem_HybridCosts_annual_fuel_usage_nget, self->data_ptr);
-}
-
-static int
-HybridCosts_set_annual_fuel_usage(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_GenericSystem_HybridCosts_annual_fuel_usage_nset, self->data_ptr);
-}
-
-static PyObject *
 HybridCosts_get_annual_fuel_usage_lifetime(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_GenericSystem_HybridCosts_annual_fuel_usage_lifetime_aget, self->data_ptr);
@@ -652,9 +640,6 @@ HybridCosts_set_total_installed_cost(VarGroupObject *self, PyObject *value, void
 }
 
 static PyGetSetDef HybridCosts_getset[] = {
-{"annual_fuel_usage", (getter)HybridCosts_get_annual_fuel_usage,(setter)HybridCosts_set_annual_fuel_usage,
-	PyDoc_STR("*float*: Fuel usage (yr 1) [kWht]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
 {"annual_fuel_usage_lifetime", (getter)HybridCosts_get_annual_fuel_usage_lifetime,(setter)HybridCosts_set_annual_fuel_usage_lifetime,
 	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical"),
  	NULL},
@@ -1192,10 +1177,6 @@ GenericSystem_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef GenericSystem_methods[] = {
 		{"execute",           (PyCFunction)GenericSystem_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
-		{"get_data_ptr",           (PyCFunction)GenericSystem_get_data_ptr,  METH_VARARGS,
-				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
-		{"set_data_ptr",           (PyCFunction)GenericSystem_set_data_ptr,  METH_VARARGS,
-				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{"assign",            (PyCFunction)GenericSystem_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Plant': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)GenericSystem_replace,  METH_VARARGS,
@@ -1206,6 +1187,10 @@ static PyMethodDef GenericSystem_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)GenericSystem_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)GenericSystem_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
+		{"set_data_ptr",           (PyCFunction)GenericSystem_set_data_ptr,  METH_VARARGS,
+				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

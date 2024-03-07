@@ -441,15 +441,11 @@ class Battery(object):
 		om_batt_capacity_cost = tuple
 		om_batt_fixed_cost = tuple
 		om_batt_nameplate = float
-		om_batt_replacement_cost = tuple
-		om_batt_variable_cost = tuple
 		om_capacity_escal = float
 		om_fixed_escal = float
 		om_land_lease = tuple
 		om_land_lease_escal = float
 		om_production1_values = tuple
-		om_production_escal = float
-		om_replacement_cost_escal = float
 		total_installed_cost = float
 
 

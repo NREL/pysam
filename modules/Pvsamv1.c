@@ -382,6 +382,18 @@ Losses_set_en_snow_model(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+Losses_get_snow_slide_coefficient(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Losses_snow_slide_coefficient_nget, self->data_ptr);
+}
+
+static int
+Losses_set_snow_slide_coefficient(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Losses_snow_slide_coefficient_nset, self->data_ptr);
+}
+
+static PyObject *
 Losses_get_subarray1_dcwiring_loss(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray1_dcwiring_loss_nget, self->data_ptr);
@@ -864,6 +876,9 @@ static PyGetSetDef Losses_getset[] = {
  	NULL},
 {"en_snow_model", (getter)Losses_get_en_snow_model,(setter)Losses_set_en_snow_model,
 	PyDoc_STR("*float*: Toggle snow loss estimation [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"snow_slide_coefficient", (getter)Losses_get_snow_slide_coefficient,(setter)Losses_set_snow_slide_coefficient,
+	PyDoc_STR("*float*: Snow Slide Coefficient\n\n**Required:**\nFalse. Automatically set to 1.97 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray1_dcwiring_loss", (getter)Losses_get_subarray1_dcwiring_loss,(setter)Losses_set_subarray1_dcwiring_loss,
 	PyDoc_STR("*float*: Sub-array 1 DC wiring loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nTrue"),
@@ -10394,6 +10409,18 @@ PVLosses_set_enable_subhourly_clipping(VarGroupObject *self, PyObject *value, vo
 }
 
 static PyObject *
+PVLosses_get_enable_subinterval_distribution(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_PVLosses_enable_subinterval_distribution_nget, self->data_ptr);
+}
+
+static int
+PVLosses_set_enable_subinterval_distribution(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_PVLosses_enable_subinterval_distribution_nset, self->data_ptr);
+}
+
+static PyObject *
 PVLosses_get_subhourly_clipping_matrix(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Pvsamv1_PVLosses_subhourly_clipping_matrix_mget, self->data_ptr);
@@ -10408,6 +10435,9 @@ PVLosses_set_subhourly_clipping_matrix(VarGroupObject *self, PyObject *value, vo
 static PyGetSetDef PVLosses_getset[] = {
 {"enable_subhourly_clipping", (getter)PVLosses_get_enable_subhourly_clipping,(setter)PVLosses_set_enable_subhourly_clipping,
 	PyDoc_STR("*float*: Enable subhourly clipping [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"enable_subinterval_distribution", (getter)PVLosses_get_enable_subinterval_distribution,(setter)PVLosses_set_enable_subinterval_distribution,
+	PyDoc_STR("*float*: Enable subinterval distribution of PV power output [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subhourly_clipping_matrix", (getter)PVLosses_get_subhourly_clipping_matrix,(setter)PVLosses_set_subhourly_clipping_matrix,
 	PyDoc_STR("*sequence[sequence]*: PV Subhourly clipping correction matrix"),
@@ -13808,18 +13838,6 @@ HybridCosts_set_om_production(VarGroupObject *self, PyObject *value, void *closu
 }
 
 static PyObject *
-HybridCosts_get_om_production_escal(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvsamv1_HybridCosts_om_production_escal_nget, self->data_ptr);
-}
-
-static int
-HybridCosts_set_om_production_escal(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Pvsamv1_HybridCosts_om_production_escal_nset, self->data_ptr);
-}
-
-static PyObject *
 HybridCosts_get_total_installed_cost(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_HybridCosts_total_installed_cost_nget, self->data_ptr);
@@ -13836,7 +13854,7 @@ static PyGetSetDef HybridCosts_getset[] = {
 	PyDoc_STR("*sequence*: Annual AC degradation [%]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"land_area", (getter)HybridCosts_get_land_area,(setter)HybridCosts_set_land_area,
-	PyDoc_STR("*float*: Total land area [acres]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of ``land_area`` depends on the following variables:\n\n\t - 6par_area\n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n\t - batt_power_discharge_max_kwdc\n\t - cec_area\n\t - cec_i_mp_ref\n\t - cec_module_length\n\t - cec_module_width\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_c0\n\t - inv_cec_cg_c1\n\t - inv_cec_cg_c2\n\t - inv_cec_cg_c3\n\t - inv_cec_cg_eff_cec\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_pdco\n\t - inv_cec_cg_psco\n\t - inv_cec_cg_vdco\n\t - inv_ds_eff\n\t - inv_ds_paco\n\t - inv_pd_eff\n\t - inv_pd_paco\n\t - inv_snl_c0\n\t - inv_snl_c1\n\t - inv_snl_c2\n\t - inv_snl_c3\n\t - inv_snl_eff_cec\n\t - inv_snl_paco\n\t - inv_snl_pdco\n\t - inv_snl_pso\n\t - inv_snl_vdco\n\t - inverter_count\n\t - inverter_model\n\t - module_aspect_ratio\n\t - module_model\n\t - mppt_hi_inverter\n\t - mppt_low_inverter\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - sd11par_area\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n\t - subarray1_gcr\n\t - subarray1_mod_orient\n\t - subarray1_modules_per_string\n\t - subarray1_monthly_tilt\n\t - subarray1_nmodx\n\t - subarray1_nmody\n\t - subarray1_nstrings\n\t - subarray1_shade_mode\n\t - subarray1_tilt\n\t - subarray1_track_mode\n\t - subarray2_enable\n\t - subarray2_gcr\n\t - subarray2_mod_orient\n\t - subarray2_modules_per_string\n\t - subarray2_monthly_tilt\n\t - subarray2_nmodx\n\t - subarray2_nmody\n\t - subarray2_nstrings\n\t - subarray2_shade_mode\n\t - subarray2_tilt\n\t - subarray2_track_mode\n\t - subarray3_enable\n\t - subarray3_gcr\n\t - subarray3_mod_orient\n\t - subarray3_modules_per_string\n\t - subarray3_monthly_tilt\n\t - subarray3_nmodx\n\t - subarray3_nmody\n\t - subarray3_nstrings\n\t - subarray3_shade_mode\n\t - subarray3_tilt\n\t - subarray3_track_mode\n\t - subarray4_enable\n\t - subarray4_gcr\n\t - subarray4_mod_orient\n\t - subarray4_modules_per_string\n\t - subarray4_monthly_tilt\n\t - subarray4_nmodx\n\t - subarray4_nmody\n\t - subarray4_nstrings\n\t - subarray4_shade_mode\n\t - subarray4_tilt\n\t - subarray4_track_mode\n"),
+	PyDoc_STR("*float*: Total land area [acres]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of ``land_area`` depends on the following variables:\n\n\t - 6par_area\n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n\t - batt_power_discharge_max_kwdc\n\t - cec_area\n\t - cec_i_mp_ref\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_c0\n\t - inv_cec_cg_c1\n\t - inv_cec_cg_c2\n\t - inv_cec_cg_c3\n\t - inv_cec_cg_eff_cec\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_pdco\n\t - inv_cec_cg_psco\n\t - inv_cec_cg_vdco\n\t - inv_ds_eff\n\t - inv_ds_paco\n\t - inv_pd_eff\n\t - inv_pd_paco\n\t - inv_snl_c0\n\t - inv_snl_c1\n\t - inv_snl_c2\n\t - inv_snl_c3\n\t - inv_snl_eff_cec\n\t - inv_snl_paco\n\t - inv_snl_pdco\n\t - inv_snl_pso\n\t - inv_snl_vdco\n\t - inverter_count\n\t - inverter_model\n\t - module_model\n\t - mppt_hi_inverter\n\t - mppt_low_inverter\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - sd11par_area\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n\t - subarray1_gcr\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray2_gcr\n\t - subarray2_modules_per_string\n\t - subarray2_nstrings\n\t - subarray3_enable\n\t - subarray3_gcr\n\t - subarray3_modules_per_string\n\t - subarray3_nstrings\n\t - subarray4_enable\n\t - subarray4_gcr\n\t - subarray4_modules_per_string\n\t - subarray4_nstrings\n"),
  	NULL},
 {"om_capacity", (getter)HybridCosts_get_om_capacity,(setter)HybridCosts_set_om_capacity,
 	PyDoc_STR("*sequence*: Capacity-based O&M amount [$/kWcap]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
@@ -13859,11 +13877,8 @@ static PyGetSetDef HybridCosts_getset[] = {
 {"om_production", (getter)HybridCosts_get_om_production,(setter)HybridCosts_set_om_production,
 	PyDoc_STR("*sequence*: Production-based O&M amount [$/MWh]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
-{"om_production_escal", (getter)HybridCosts_get_om_production_escal,(setter)HybridCosts_set_om_production_escal,
-	PyDoc_STR("*float*: Production-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
 {"total_installed_cost", (getter)HybridCosts_get_total_installed_cost,(setter)HybridCosts_set_total_installed_cost,
-	PyDoc_STR("*float*: Total installed cost [$]\n\n**Required:**\nTrue\n\nThe value of ``total_installed_cost`` depends on the following variables:\n\n\t - 6par_area\n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - cec_area\n\t - cec_i_mp_ref\n\t - cec_module_length\n\t - cec_module_width\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_c0\n\t - inv_cec_cg_c1\n\t - inv_cec_cg_c2\n\t - inv_cec_cg_c3\n\t - inv_cec_cg_eff_cec\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_pdco\n\t - inv_cec_cg_psco\n\t - inv_cec_cg_vdco\n\t - inv_ds_eff\n\t - inv_ds_paco\n\t - inv_pd_eff\n\t - inv_pd_paco\n\t - inv_snl_c0\n\t - inv_snl_c1\n\t - inv_snl_c2\n\t - inv_snl_c3\n\t - inv_snl_eff_cec\n\t - inv_snl_paco\n\t - inv_snl_pdco\n\t - inv_snl_pso\n\t - inv_snl_vdco\n\t - inverter_count\n\t - inverter_model\n\t - module_aspect_ratio\n\t - module_model\n\t - mppt_hi_inverter\n\t - mppt_low_inverter\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - sd11par_area\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n\t - subarray1_gcr\n\t - subarray1_mod_orient\n\t - subarray1_modules_per_string\n\t - subarray1_monthly_tilt\n\t - subarray1_nmodx\n\t - subarray1_nmody\n\t - subarray1_nstrings\n\t - subarray1_shade_mode\n\t - subarray1_tilt\n\t - subarray1_track_mode\n\t - subarray2_enable\n\t - subarray2_gcr\n\t - subarray2_mod_orient\n\t - subarray2_modules_per_string\n\t - subarray2_monthly_tilt\n\t - subarray2_nmodx\n\t - subarray2_nmody\n\t - subarray2_nstrings\n\t - subarray2_shade_mode\n\t - subarray2_tilt\n\t - subarray2_track_mode\n\t - subarray3_enable\n\t - subarray3_gcr\n\t - subarray3_mod_orient\n\t - subarray3_modules_per_string\n\t - subarray3_monthly_tilt\n\t - subarray3_nmodx\n\t - subarray3_nmody\n\t - subarray3_nstrings\n\t - subarray3_shade_mode\n\t - subarray3_tilt\n\t - subarray3_track_mode\n\t - subarray4_enable\n\t - subarray4_gcr\n\t - subarray4_mod_orient\n\t - subarray4_modules_per_string\n\t - subarray4_monthly_tilt\n\t - subarray4_nmodx\n\t - subarray4_nmody\n\t - subarray4_nstrings\n\t - subarray4_shade_mode\n\t - subarray4_tilt\n\t - subarray4_track_mode\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Total installed cost [$]\n\n**Required:**\nTrue\n\nThe value of ``total_installed_cost`` depends on the following variables:\n\n\t - 6par_area\n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - cec_area\n\t - cec_i_mp_ref\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_c0\n\t - inv_cec_cg_c1\n\t - inv_cec_cg_c2\n\t - inv_cec_cg_c3\n\t - inv_cec_cg_eff_cec\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_pdco\n\t - inv_cec_cg_psco\n\t - inv_cec_cg_vdco\n\t - inv_ds_eff\n\t - inv_ds_paco\n\t - inv_pd_eff\n\t - inv_pd_paco\n\t - inv_snl_c0\n\t - inv_snl_c1\n\t - inv_snl_c2\n\t - inv_snl_c3\n\t - inv_snl_eff_cec\n\t - inv_snl_paco\n\t - inv_snl_pdco\n\t - inv_snl_pso\n\t - inv_snl_vdco\n\t - inverter_count\n\t - inverter_model\n\t - module_model\n\t - mppt_hi_inverter\n\t - mppt_low_inverter\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - sd11par_area\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n\t - subarray1_gcr\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray2_gcr\n\t - subarray2_modules_per_string\n\t - subarray2_nstrings\n\t - subarray3_enable\n\t - subarray3_gcr\n\t - subarray3_modules_per_string\n\t - subarray3_nstrings\n\t - subarray4_enable\n\t - subarray4_gcr\n\t - subarray4_modules_per_string\n\t - subarray4_nstrings\n\t - system_capacity\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -14272,6 +14287,18 @@ static PyObject *
 Outputs_get_annual_dc_wiring_loss_percent(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_dc_wiring_loss_percent_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_distribution_clipping_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_distribution_clipping_loss_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_distribution_clipping_loss_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_distribution_clipping_loss_percent_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -15160,6 +15187,12 @@ static PyObject *
 Outputs_get_df_calc(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_df_calc_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_distribution_clipping_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_distribution_clipping_loss_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -16837,6 +16870,12 @@ static PyGetSetDef Outputs_getset[] = {
 {"annual_dc_wiring_loss_percent", (getter)Outputs_get_annual_dc_wiring_loss_percent,(setter)0,
 	PyDoc_STR("*float*: DC wiring loss [%]"),
  	NULL},
+{"annual_distribution_clipping_loss", (getter)Outputs_get_annual_distribution_clipping_loss,(setter)0,
+	PyDoc_STR("*float*: Subinterval distribution clipping correction loss [kWh]"),
+ 	NULL},
+{"annual_distribution_clipping_loss_percent", (getter)Outputs_get_annual_distribution_clipping_loss_percent,(setter)0,
+	PyDoc_STR("*float*: Subinterval distribution clipping correction loss percent [%]"),
+ 	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
 	PyDoc_STR("*float*: Annual AC energy [kWh]"),
  	NULL},
@@ -17280,6 +17319,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"df_calc", (getter)Outputs_get_df_calc,(setter)0,
 	PyDoc_STR("*sequence*: Irradiance DHI calculated [W/m2]"),
+ 	NULL},
+{"distribution_clipping_loss", (getter)Outputs_get_distribution_clipping_loss,(setter)0,
+	PyDoc_STR("*sequence*: Subinterval distribution clipping correction loss [kW]"),
  	NULL},
 {"dn", (getter)Outputs_get_dn,(setter)0,
 	PyDoc_STR("*sequence*: Irradiance DNI from weather file [W/m2]"),
@@ -18425,10 +18467,6 @@ Pvsamv1_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Pvsamv1_methods[] = {
 		{"execute",           (PyCFunction)Pvsamv1_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
-		{"get_data_ptr",           (PyCFunction)Pvsamv1_get_data_ptr,  METH_VARARGS,
-				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
-		{"set_data_ptr",           (PyCFunction)Pvsamv1_set_data_ptr,  METH_VARARGS,
-				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Pvsamv1_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Solar Resource': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Pvsamv1_replace,  METH_VARARGS,
@@ -18439,6 +18477,10 @@ static PyMethodDef Pvsamv1_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Pvsamv1_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Pvsamv1_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
+		{"set_data_ptr",           (PyCFunction)Pvsamv1_set_data_ptr,  METH_VARARGS,
+				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{"Reopt_size_battery_post", (PyCFunction)Reopt_size_battery_post, METH_VARARGS | METH_KEYWORDS,
 			Reopt_size_battery_post_doc},
 		{NULL,              NULL}           /* sentinel */

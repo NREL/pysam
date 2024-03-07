@@ -4997,30 +4997,6 @@ HybridCosts_set_om_batt_nameplate(VarGroupObject *self, PyObject *value, void *c
 }
 
 static PyObject *
-HybridCosts_get_om_batt_replacement_cost(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Battery_HybridCosts_om_batt_replacement_cost_aget, self->data_ptr);
-}
-
-static int
-HybridCosts_set_om_batt_replacement_cost(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Battery_HybridCosts_om_batt_replacement_cost_aset, self->data_ptr);
-}
-
-static PyObject *
-HybridCosts_get_om_batt_variable_cost(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Battery_HybridCosts_om_batt_variable_cost_aget, self->data_ptr);
-}
-
-static int
-HybridCosts_set_om_batt_variable_cost(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Battery_HybridCosts_om_batt_variable_cost_aset, self->data_ptr);
-}
-
-static PyObject *
 HybridCosts_get_om_capacity_escal(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Battery_HybridCosts_om_capacity_escal_nget, self->data_ptr);
@@ -5081,30 +5057,6 @@ HybridCosts_set_om_production1_values(VarGroupObject *self, PyObject *value, voi
 }
 
 static PyObject *
-HybridCosts_get_om_production_escal(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Battery_HybridCosts_om_production_escal_nget, self->data_ptr);
-}
-
-static int
-HybridCosts_set_om_production_escal(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Battery_HybridCosts_om_production_escal_nset, self->data_ptr);
-}
-
-static PyObject *
-HybridCosts_get_om_replacement_cost_escal(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Battery_HybridCosts_om_replacement_cost_escal_nget, self->data_ptr);
-}
-
-static int
-HybridCosts_set_om_replacement_cost_escal(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Battery_HybridCosts_om_replacement_cost_escal_nset, self->data_ptr);
-}
-
-static PyObject *
 HybridCosts_get_total_installed_cost(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Battery_HybridCosts_total_installed_cost_nget, self->data_ptr);
@@ -5135,12 +5087,6 @@ static PyGetSetDef HybridCosts_getset[] = {
 {"om_batt_nameplate", (getter)HybridCosts_get_om_batt_nameplate,(setter)HybridCosts_set_om_batt_nameplate,
 	PyDoc_STR("*float*: Battery capacity for System Costs values [kW]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of ``om_batt_nameplate`` depends on the following variables:\n\n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
-{"om_batt_replacement_cost", (getter)HybridCosts_get_om_batt_replacement_cost,(setter)HybridCosts_set_om_batt_replacement_cost,
-	PyDoc_STR("*sequence*: Replacement cost 1 [$/kWh]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"om_batt_variable_cost", (getter)HybridCosts_get_om_batt_variable_cost,(setter)HybridCosts_set_om_batt_variable_cost,
-	PyDoc_STR("*sequence*: Battery production-based System Costs amount [$/MWh]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
 {"om_capacity_escal", (getter)HybridCosts_get_om_capacity_escal,(setter)HybridCosts_set_om_capacity_escal,
 	PyDoc_STR("*float*: Capacity-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
@@ -5155,12 +5101,6 @@ static PyGetSetDef HybridCosts_getset[] = {
  	NULL},
 {"om_production1_values", (getter)HybridCosts_get_om_production1_values,(setter)HybridCosts_set_om_production1_values,
 	PyDoc_STR("*sequence*: Battery production for System Costs values [kWh]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"om_production_escal", (getter)HybridCosts_get_om_production_escal,(setter)HybridCosts_set_om_production_escal,
-	PyDoc_STR("*float*: Production-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"om_replacement_cost_escal", (getter)HybridCosts_get_om_replacement_cost_escal,(setter)HybridCosts_set_om_replacement_cost_escal,
-	PyDoc_STR("*float*: Replacement cost escalation [%/year]\n\n**Info:**\nbattery,fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"total_installed_cost", (getter)HybridCosts_get_total_installed_cost,(setter)HybridCosts_set_total_installed_cost,
 	PyDoc_STR("*float*: Total installed cost [$]\n\n**Required:**\nTrue\n\nThe value of ``total_installed_cost`` depends on the following variables:\n\n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n"),
@@ -6576,10 +6516,6 @@ Battery_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Battery_methods[] = {
 		{"execute",           (PyCFunction)Battery_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
-		{"get_data_ptr",           (PyCFunction)Battery_get_data_ptr,  METH_VARARGS,
-				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
-		{"set_data_ptr",           (PyCFunction)Battery_set_data_ptr,  METH_VARARGS,
-				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Battery_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Simulation': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Battery_replace,  METH_VARARGS,
@@ -6590,6 +6526,10 @@ static PyMethodDef Battery_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Battery_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Battery_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
+		{"set_data_ptr",           (PyCFunction)Battery_set_data_ptr,  METH_VARARGS,
+				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{"Reopt_size_standalone_battery_post", (PyCFunction)Reopt_size_standalone_battery_post, METH_VARARGS | METH_KEYWORDS,
 			Reopt_size_standalone_battery_post_doc},
 		{NULL,              NULL}           /* sentinel */

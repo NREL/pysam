@@ -609,15 +609,6 @@ class Singleowner(object):
 
 
 		degradation = tuple
-		land_area = float
-		om_capacity = tuple
-		om_capacity_escal = float
-		om_fixed = tuple
-		om_fixed_escal = float
-		om_land_lease = tuple
-		om_land_lease_escal = float
-		om_production = tuple
-		om_production_escal = float
 		total_installed_cost = float
 
 

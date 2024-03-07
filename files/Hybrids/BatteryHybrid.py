@@ -4,8 +4,8 @@ import PySAM.Battery as batt
 from .HybridBase import HybridGenerator
 
 class BatteryHybrid(HybridGenerator):
-    def __init__(self, hybrid_data, name="battery") -> None:
-        super().__init__(batt, name, hybrid_data)
+    def __init__(self, name="battery") -> None:
+        super().__init__(batt, name)
         self._data: batt.Battery
 
     def _collect_inputs(self, input):

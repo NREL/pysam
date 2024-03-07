@@ -65,6 +65,7 @@ class Pvsamv1(object):
 		calculate_rack_shading = float
 		dcoptimizer_loss = float
 		en_snow_model = float
+		snow_slide_coefficient = float
 		subarray1_dcwiring_loss = float
 		subarray1_diodeconn_loss = float
 		subarray1_electrical_mismatch = float
@@ -829,6 +830,7 @@ class Pvsamv1(object):
 
 
 		enable_subhourly_clipping = float
+		enable_subinterval_distribution = float
 		subhourly_clipping_matrix = tuple
 
 
@@ -1134,7 +1136,6 @@ class Pvsamv1(object):
 		om_land_lease = tuple
 		om_land_lease_escal = float
 		om_production = tuple
-		om_production_escal = float
 		total_installed_cost = float
 
 
@@ -1197,6 +1198,8 @@ class Pvsamv1(object):
 		annual_dc_tracking_loss_percent = float
 		annual_dc_wiring_loss = float
 		annual_dc_wiring_loss_percent = float
+		annual_distribution_clipping_loss = float
+		annual_distribution_clipping_loss_percent = float
 		annual_energy = float
 		annual_energy_distribution_time = tuple
 		annual_export_to_grid_energy = tuple
@@ -1345,6 +1348,7 @@ class Pvsamv1(object):
 		dc_snow_loss = tuple
 		df = tuple
 		df_calc = tuple
+		distribution_clipping_loss = tuple
 		dn = tuple
 		dn_calc = tuple
 		elev = float

@@ -37,6 +37,7 @@ class Snowmodel(object):
 			pass
 
 
+		snow_slide_coefficient = float
 		snowdepth = tuple
 		subarray1_nmody = float
 		subarray1_poa_shaded = tuple
