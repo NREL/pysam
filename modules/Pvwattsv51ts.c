@@ -863,25 +863,6 @@ Pvwattsv51ts_get_data_ptr(CmodObject *self, PyObject *args)
 
 
 static PyObject *
-Pvwattsv51ts_set_data_ptr(CmodObject *self, PyObject *args)
-{
-	long long int ptr = 0;  // 64 bit arch
-	if (!PyArg_ParseTuple(args, "L:data_ptr", &ptr)){
-		PyErr_BadArgument();
-		return NULL;
-	}
-	self->data_ptr = (void*)ptr;
-	VarGroupObject* PVWatts_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "PVWatts");
-	PVWatts_obj->data_ptr = (void*)ptr;
-	VarGroupObject* SystemDesign_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SystemDesign");
-	SystemDesign_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Outputs_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Outputs");
-	Outputs_obj->data_ptr = (void*)ptr;
-	return Py_None;
-}
-
-
-static PyObject *
 Pvwattsv51ts_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -960,8 +941,6 @@ static PyMethodDef Pvwattsv51ts_methods[] = {
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{"get_data_ptr",           (PyCFunction)Pvwattsv51ts_get_data_ptr,  METH_VARARGS,
 				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
-		{"set_data_ptr",           (PyCFunction)Pvwattsv51ts_set_data_ptr,  METH_VARARGS,
-				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

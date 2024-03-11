@@ -2437,29 +2437,6 @@ BatteryStateful_get_data_ptr(CmodStatefulObject *self, PyObject *args)
 
 
 static PyObject *
-BatteryStateful_set_data_ptr(CmodStatefulObject *self, PyObject *args)
-{
-	long long int ptr = 0;  // 64 bit arch
-	if (!PyArg_ParseTuple(args, "L:data_ptr", &ptr)){
-		PyErr_BadArgument();
-		return NULL;
-	}
-	self->data_ptr = (void*)ptr;
-	VarGroupObject* Controls_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Controls");
-	Controls_obj->data_ptr = (void*)ptr;
-	VarGroupObject* ParamsCell_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "ParamsCell");
-	ParamsCell_obj->data_ptr = (void*)ptr;
-	VarGroupObject* ParamsPack_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "ParamsPack");
-	ParamsPack_obj->data_ptr = (void*)ptr;
-	VarGroupObject* StatePack_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "StatePack");
-	StatePack_obj->data_ptr = (void*)ptr;
-	VarGroupObject* StateCell_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "StateCell");
-	StateCell_obj->data_ptr = (void*)ptr;
-	return Py_None;
-}
-
-
-static PyObject *
 BatteryStateful_setup(CmodStatefulObject *self, PyObject *args)
 {
 	SAM_error error = new_error();
@@ -2551,8 +2528,6 @@ static PyMethodDef BatteryStateful_methods[] = {
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{"get_data_ptr",           (PyCFunction)BatteryStateful_get_data_ptr,  METH_VARARGS,
 				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
-		{"set_data_ptr",           (PyCFunction)BatteryStateful_set_data_ptr,  METH_VARARGS,
-				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

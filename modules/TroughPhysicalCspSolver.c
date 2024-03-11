@@ -4601,41 +4601,6 @@ TroughPhysicalCspSolver_get_data_ptr(CmodObject *self, PyObject *args)
 
 
 static PyObject *
-TroughPhysicalCspSolver_set_data_ptr(CmodObject *self, PyObject *args)
-{
-	long long int ptr = 0;  // 64 bit arch
-	if (!PyArg_ParseTuple(args, "L:data_ptr", &ptr)){
-		PyErr_BadArgument();
-		return NULL;
-	}
-	self->data_ptr = (void*)ptr;
-	VarGroupObject* Weather_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Weather");
-	Weather_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Trough_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Trough");
-	Trough_obj->data_ptr = (void*)ptr;
-	VarGroupObject* TimeOfDelivery_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "TimeOfDelivery");
-	TimeOfDelivery_obj->data_ptr = (void*)ptr;
-	VarGroupObject* SolarField_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SolarField");
-	SolarField_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Controller_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Controller");
-	Controller_obj->data_ptr = (void*)ptr;
-	VarGroupObject* TouTranslator_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "TouTranslator");
-	TouTranslator_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Powerblock_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Powerblock");
-	Powerblock_obj->data_ptr = (void*)ptr;
-	VarGroupObject* UserDefinedPC_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "UserDefinedPC");
-	UserDefinedPC_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Enet_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Enet");
-	Enet_obj->data_ptr = (void*)ptr;
-	VarGroupObject* AdjustmentFactors_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "AdjustmentFactors");
-	AdjustmentFactors_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Outputs_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Outputs");
-	Outputs_obj->data_ptr = (void*)ptr;
-	return Py_None;
-}
-
-
-static PyObject *
 TroughPhysicalCspSolver_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -4714,8 +4679,6 @@ static PyMethodDef TroughPhysicalCspSolver_methods[] = {
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{"get_data_ptr",           (PyCFunction)TroughPhysicalCspSolver_get_data_ptr,  METH_VARARGS,
 				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
-		{"set_data_ptr",           (PyCFunction)TroughPhysicalCspSolver_set_data_ptr,  METH_VARARGS,
-				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

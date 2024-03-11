@@ -1415,33 +1415,6 @@ Grid_get_data_ptr(CmodObject *self, PyObject *args)
 
 
 static PyObject *
-Grid_set_data_ptr(CmodObject *self, PyObject *args)
-{
-	long long int ptr = 0;  // 64 bit arch
-	if (!PyArg_ParseTuple(args, "L:data_ptr", &ptr)){
-		PyErr_BadArgument();
-		return NULL;
-	}
-	self->data_ptr = (void*)ptr;
-	VarGroupObject* Lifetime_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Lifetime");
-	Lifetime_obj->data_ptr = (void*)ptr;
-	VarGroupObject* SystemOutput_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SystemOutput");
-	SystemOutput_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Load_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Load");
-	Load_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Monthly_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Monthly");
-	Monthly_obj->data_ptr = (void*)ptr;
-	VarGroupObject* GridLimits_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "GridLimits");
-	GridLimits_obj->data_ptr = (void*)ptr;
-	VarGroupObject* HybridCosts_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "HybridCosts");
-	HybridCosts_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Outputs_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Outputs");
-	Outputs_obj->data_ptr = (void*)ptr;
-	return Py_None;
-}
-
-
-static PyObject *
 Grid_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -1520,8 +1493,6 @@ static PyMethodDef Grid_methods[] = {
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{"get_data_ptr",           (PyCFunction)Grid_get_data_ptr,  METH_VARARGS,
 				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
-		{"set_data_ptr",           (PyCFunction)Grid_set_data_ptr,  METH_VARARGS,
-				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

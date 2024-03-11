@@ -11939,55 +11939,6 @@ Communitysolar_get_data_ptr(CmodObject *self, PyObject *args)
 
 
 static PyObject *
-Communitysolar_set_data_ptr(CmodObject *self, PyObject *args)
-{
-	long long int ptr = 0;  // 64 bit arch
-	if (!PyArg_ParseTuple(args, "L:data_ptr", &ptr)){
-		PyErr_BadArgument();
-		return NULL;
-	}
-	self->data_ptr = (void*)ptr;
-	VarGroupObject* FinancialParameters_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "FinancialParameters");
-	FinancialParameters_obj->data_ptr = (void*)ptr;
-	VarGroupObject* SystemCosts_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SystemCosts");
-	SystemCosts_obj->data_ptr = (void*)ptr;
-	VarGroupObject* LandLease_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "LandLease");
-	LandLease_obj->data_ptr = (void*)ptr;
-	VarGroupObject* TaxCreditIncentives_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "TaxCreditIncentives");
-	TaxCreditIncentives_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Depreciation_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Depreciation");
-	Depreciation_obj->data_ptr = (void*)ptr;
-	VarGroupObject* PaymentIncentives_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "PaymentIncentives");
-	PaymentIncentives_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Revenue_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Revenue");
-	Revenue_obj->data_ptr = (void*)ptr;
-	VarGroupObject* BatterySystem_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "BatterySystem");
-	BatterySystem_obj->data_ptr = (void*)ptr;
-	VarGroupObject* ElectricityRates_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "ElectricityRates");
-	ElectricityRates_obj->data_ptr = (void*)ptr;
-	VarGroupObject* SystemOutput_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SystemOutput");
-	SystemOutput_obj->data_ptr = (void*)ptr;
-	VarGroupObject* UtilityBill_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "UtilityBill");
-	UtilityBill_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Lifetime_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Lifetime");
-	Lifetime_obj->data_ptr = (void*)ptr;
-	VarGroupObject* CommunitySolar_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "CommunitySolar");
-	CommunitySolar_obj->data_ptr = (void*)ptr;
-	VarGroupObject* FuelCell_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "FuelCell");
-	FuelCell_obj->data_ptr = (void*)ptr;
-	VarGroupObject* GridLimits_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "GridLimits");
-	GridLimits_obj->data_ptr = (void*)ptr;
-	VarGroupObject* LCOS_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "LCOS");
-	LCOS_obj->data_ptr = (void*)ptr;
-	VarGroupObject* ChargesByMonth_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "ChargesByMonth");
-	ChargesByMonth_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Outputs_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Outputs");
-	Outputs_obj->data_ptr = (void*)ptr;
-	return Py_None;
-}
-
-
-static PyObject *
 Communitysolar_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -12066,8 +12017,6 @@ static PyMethodDef Communitysolar_methods[] = {
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{"get_data_ptr",           (PyCFunction)Communitysolar_get_data_ptr,  METH_VARARGS,
 				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
-		{"set_data_ptr",           (PyCFunction)Communitysolar_set_data_ptr,  METH_VARARGS,
-				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

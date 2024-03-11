@@ -17,9 +17,6 @@ class Pvwattsv8(object):
 	def get_data_ptr(self):
 		pass
 
-	def set_data_ptr(self, data_ptr):
-		pass
-
 	def __getattribute__(self, *args, **kwargs):
 		pass
 

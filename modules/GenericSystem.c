@@ -1088,29 +1088,6 @@ GenericSystem_get_data_ptr(CmodObject *self, PyObject *args)
 
 
 static PyObject *
-GenericSystem_set_data_ptr(CmodObject *self, PyObject *args)
-{
-	long long int ptr = 0;  // 64 bit arch
-	if (!PyArg_ParseTuple(args, "L:data_ptr", &ptr)){
-		PyErr_BadArgument();
-		return NULL;
-	}
-	self->data_ptr = (void*)ptr;
-	VarGroupObject* Plant_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Plant");
-	Plant_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Lifetime_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Lifetime");
-	Lifetime_obj->data_ptr = (void*)ptr;
-	VarGroupObject* AdjustmentFactors_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "AdjustmentFactors");
-	AdjustmentFactors_obj->data_ptr = (void*)ptr;
-	VarGroupObject* HybridCosts_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "HybridCosts");
-	HybridCosts_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Outputs_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Outputs");
-	Outputs_obj->data_ptr = (void*)ptr;
-	return Py_None;
-}
-
-
-static PyObject *
 GenericSystem_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -1189,8 +1166,6 @@ static PyMethodDef GenericSystem_methods[] = {
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{"get_data_ptr",           (PyCFunction)GenericSystem_get_data_ptr,  METH_VARARGS,
 				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
-		{"set_data_ptr",           (PyCFunction)GenericSystem_set_data_ptr,  METH_VARARGS,
-				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

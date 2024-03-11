@@ -4754,45 +4754,6 @@ TroughPhysicalProcessHeat_get_data_ptr(CmodObject *self, PyObject *args)
 
 
 static PyObject *
-TroughPhysicalProcessHeat_set_data_ptr(CmodObject *self, PyObject *args)
-{
-	long long int ptr = 0;  // 64 bit arch
-	if (!PyArg_ParseTuple(args, "L:data_ptr", &ptr)){
-		PyErr_BadArgument();
-		return NULL;
-	}
-	self->data_ptr = (void*)ptr;
-	VarGroupObject* Weather_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Weather");
-	Weather_obj->data_ptr = (void*)ptr;
-	VarGroupObject* SolarField_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SolarField");
-	SolarField_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Controller_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Controller");
-	Controller_obj->data_ptr = (void*)ptr;
-	VarGroupObject* SystemDesign_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SystemDesign");
-	SystemDesign_obj->data_ptr = (void*)ptr;
-	VarGroupObject* TES_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "TES");
-	TES_obj->data_ptr = (void*)ptr;
-	VarGroupObject* TES2tank_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "TES2tank");
-	TES2tank_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Tou_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Tou");
-	Tou_obj->data_ptr = (void*)ptr;
-	VarGroupObject* SystemControl_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SystemControl");
-	SystemControl_obj->data_ptr = (void*)ptr;
-	VarGroupObject* TimeOfDeliveryFactors_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "TimeOfDeliveryFactors");
-	TimeOfDeliveryFactors_obj->data_ptr = (void*)ptr;
-	VarGroupObject* System_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "System");
-	System_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Powerblock_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Powerblock");
-	Powerblock_obj->data_ptr = (void*)ptr;
-	VarGroupObject* AdjustmentFactors_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "AdjustmentFactors");
-	AdjustmentFactors_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Outputs_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Outputs");
-	Outputs_obj->data_ptr = (void*)ptr;
-	return Py_None;
-}
-
-
-static PyObject *
 TroughPhysicalProcessHeat_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -4871,8 +4832,6 @@ static PyMethodDef TroughPhysicalProcessHeat_methods[] = {
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{"get_data_ptr",           (PyCFunction)TroughPhysicalProcessHeat_get_data_ptr,  METH_VARARGS,
 				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
-		{"set_data_ptr",           (PyCFunction)TroughPhysicalProcessHeat_set_data_ptr,  METH_VARARGS,
-				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

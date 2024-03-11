@@ -28,8 +28,6 @@ class HybridGenerator:
         self._data = None
         # Pointer to the simulation data container inside the PySAM model
         self._data_ptr = None
-        # Whether the simulation data is only owned by self._data or shared with HybridSystem
-        self._sole_data_owner = True
 
     def new(self):
         if self._data != None:
@@ -64,18 +62,12 @@ class HybridGenerator:
         """
         Function should only be called after `_collect_inputs` has been called. 
 
-        Get the updated simulation data from the hybrid input data, now with results.
-        Retrieve the old simulation data to be replaced, save it as `old_data` to be freed. 
-        
-        After giving new data to the PySAM model to display, the ownership of the data is shared by the PySAM model and the hybrid input data.
+        Get the updated simulation data from the hybrid input data, now with results, and copy it
         """
         p_pv_ret = self._ssc.pdll.ssc_data_get_table(c_ulong(hybrid_input_data_ptr), self._name.encode("ascii"))
         if not p_pv_ret:
             raise RuntimeError(f"Outputs for {self._name} sub-system does not exist in `hybrid_input_data_ptr`")
-        old_data = self._data_ptr
-        self._data.set_data_ptr(p_pv_ret)
-        self._ssc.data_clear(old_data)
-        self._sole_data_owner = False
+        self._ssc.pdll.ssc_data_deep_copy(c_ulong(p_pv_ret), c_ulong(self._data_ptr))
 
     def __getattr__(self, name: str):
         if name in self.__dir__():
@@ -214,10 +206,3 @@ class HybridGenerator:
         if not isinstance(degradation, Iterable):
             om_capacity = [om_capacity]
         self._ssc.data_set_array(self._data_ptr, b'degradation', degradation)
-
-    def __del__(self):
-        """
-        If the simulation data is shared with the HybridSystem's PySAM model, then release ownership so that it is freed by HybridSystem
-        """
-        if not self._sole_data_owner:
-            self._data.set_data_ptr(0)

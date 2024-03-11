@@ -2112,35 +2112,6 @@ Windpower_get_data_ptr(CmodObject *self, PyObject *args)
 
 
 static PyObject *
-Windpower_set_data_ptr(CmodObject *self, PyObject *args)
-{
-	long long int ptr = 0;  // 64 bit arch
-	if (!PyArg_ParseTuple(args, "L:data_ptr", &ptr)){
-		PyErr_BadArgument();
-		return NULL;
-	}
-	self->data_ptr = (void*)ptr;
-	VarGroupObject* Resource_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Resource");
-	Resource_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Turbine_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Turbine");
-	Turbine_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Farm_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Farm");
-	Farm_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Losses_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Losses");
-	Losses_obj->data_ptr = (void*)ptr;
-	VarGroupObject* AdjustmentFactors_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "AdjustmentFactors");
-	AdjustmentFactors_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Uncertainty_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Uncertainty");
-	Uncertainty_obj->data_ptr = (void*)ptr;
-	VarGroupObject* HybridCosts_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "HybridCosts");
-	HybridCosts_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Outputs_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Outputs");
-	Outputs_obj->data_ptr = (void*)ptr;
-	return Py_None;
-}
-
-
-static PyObject *
 Windpower_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -2219,8 +2190,6 @@ static PyMethodDef Windpower_methods[] = {
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{"get_data_ptr",           (PyCFunction)Windpower_get_data_ptr,  METH_VARARGS,
 				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
-		{"set_data_ptr",           (PyCFunction)Windpower_set_data_ptr,  METH_VARARGS,
-				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

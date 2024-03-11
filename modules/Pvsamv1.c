@@ -18322,85 +18322,6 @@ Pvsamv1_get_data_ptr(CmodObject *self, PyObject *args)
 
 
 static PyObject *
-Pvsamv1_set_data_ptr(CmodObject *self, PyObject *args)
-{
-	long long int ptr = 0;  // 64 bit arch
-	if (!PyArg_ParseTuple(args, "L:data_ptr", &ptr)){
-		PyErr_BadArgument();
-		return NULL;
-	}
-	self->data_ptr = (void*)ptr;
-	VarGroupObject* SolarResource_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SolarResource");
-	SolarResource_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Losses_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Losses");
-	Losses_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Lifetime_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Lifetime");
-	Lifetime_obj->data_ptr = (void*)ptr;
-	VarGroupObject* SystemDesign_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SystemDesign");
-	SystemDesign_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Shading_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Shading");
-	Shading_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Layout_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Layout");
-	Layout_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Module_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Module");
-	Module_obj->data_ptr = (void*)ptr;
-	VarGroupObject* SimpleEfficiencyModuleModel_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SimpleEfficiencyModuleModel");
-	SimpleEfficiencyModuleModel_obj->data_ptr = (void*)ptr;
-	VarGroupObject* CECPerformanceModelWithModuleDatabase_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "CECPerformanceModelWithModuleDatabase");
-	CECPerformanceModelWithModuleDatabase_obj->data_ptr = (void*)ptr;
-	VarGroupObject* CECPerformanceModelWithUserEnteredSpecifications_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "CECPerformanceModelWithUserEnteredSpecifications");
-	CECPerformanceModelWithUserEnteredSpecifications_obj->data_ptr = (void*)ptr;
-	VarGroupObject* SandiaPVArrayPerformanceModelWithModuleDatabase_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SandiaPVArrayPerformanceModelWithModuleDatabase");
-	SandiaPVArrayPerformanceModelWithModuleDatabase_obj->data_ptr = (void*)ptr;
-	VarGroupObject* IEC61853SingleDiodeModel_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "IEC61853SingleDiodeModel");
-	IEC61853SingleDiodeModel_obj->data_ptr = (void*)ptr;
-	VarGroupObject* MermoudLejeuneSingleDiodeModel_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "MermoudLejeuneSingleDiodeModel");
-	MermoudLejeuneSingleDiodeModel_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Inverter_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Inverter");
-	Inverter_obj->data_ptr = (void*)ptr;
-	VarGroupObject* InverterCECDatabase_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "InverterCECDatabase");
-	InverterCECDatabase_obj->data_ptr = (void*)ptr;
-	VarGroupObject* InverterCECCoefficientGenerator_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "InverterCECCoefficientGenerator");
-	InverterCECCoefficientGenerator_obj->data_ptr = (void*)ptr;
-	VarGroupObject* InverterDatasheet_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "InverterDatasheet");
-	InverterDatasheet_obj->data_ptr = (void*)ptr;
-	VarGroupObject* InverterPartLoadCurve_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "InverterPartLoadCurve");
-	InverterPartLoadCurve_obj->data_ptr = (void*)ptr;
-	VarGroupObject* InverterMermoudLejeuneModel_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "InverterMermoudLejeuneModel");
-	InverterMermoudLejeuneModel_obj->data_ptr = (void*)ptr;
-	VarGroupObject* BatterySystem_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "BatterySystem");
-	BatterySystem_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Load_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Load");
-	Load_obj->data_ptr = (void*)ptr;
-	VarGroupObject* PVLosses_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "PVLosses");
-	PVLosses_obj->data_ptr = (void*)ptr;
-	VarGroupObject* AdjustmentFactors_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "AdjustmentFactors");
-	AdjustmentFactors_obj->data_ptr = (void*)ptr;
-	VarGroupObject* BatteryCell_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "BatteryCell");
-	BatteryCell_obj->data_ptr = (void*)ptr;
-	VarGroupObject* BatteryDispatch_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "BatteryDispatch");
-	BatteryDispatch_obj->data_ptr = (void*)ptr;
-	VarGroupObject* SystemCosts_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "SystemCosts");
-	SystemCosts_obj->data_ptr = (void*)ptr;
-	VarGroupObject* FuelCell_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "FuelCell");
-	FuelCell_obj->data_ptr = (void*)ptr;
-	VarGroupObject* PriceSignal_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "PriceSignal");
-	PriceSignal_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Revenue_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Revenue");
-	Revenue_obj->data_ptr = (void*)ptr;
-	VarGroupObject* ElectricityRates_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "ElectricityRates");
-	ElectricityRates_obj->data_ptr = (void*)ptr;
-	VarGroupObject* GridLimits_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "GridLimits");
-	GridLimits_obj->data_ptr = (void*)ptr;
-	VarGroupObject* HybridCosts_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "HybridCosts");
-	HybridCosts_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Outputs_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Outputs");
-	Outputs_obj->data_ptr = (void*)ptr;
-	return Py_None;
-}
-
-
-static PyObject *
 Pvsamv1_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -18479,8 +18400,6 @@ static PyMethodDef Pvsamv1_methods[] = {
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{"get_data_ptr",           (PyCFunction)Pvsamv1_get_data_ptr,  METH_VARARGS,
 				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
-		{"set_data_ptr",           (PyCFunction)Pvsamv1_set_data_ptr,  METH_VARARGS,
-				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{"Reopt_size_battery_post", (PyCFunction)Reopt_size_battery_post, METH_VARARGS | METH_KEYWORDS,
 			Reopt_size_battery_post_doc},
 		{NULL,              NULL}           /* sentinel */

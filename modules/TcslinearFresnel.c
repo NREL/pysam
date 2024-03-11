@@ -3509,35 +3509,6 @@ TcslinearFresnel_get_data_ptr(CmodObject *self, PyObject *args)
 
 
 static PyObject *
-TcslinearFresnel_set_data_ptr(CmodObject *self, PyObject *args)
-{
-	long long int ptr = 0;  // 64 bit arch
-	if (!PyArg_ParseTuple(args, "L:data_ptr", &ptr)){
-		PyErr_BadArgument();
-		return NULL;
-	}
-	self->data_ptr = (void*)ptr;
-	VarGroupObject* Weather_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Weather");
-	Weather_obj->data_ptr = (void*)ptr;
-	VarGroupObject* LinearFresnelr_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "LinearFresnelr");
-	LinearFresnelr_obj->data_ptr = (void*)ptr;
-	VarGroupObject* TouTranslator_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "TouTranslator");
-	TouTranslator_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Solarfield_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Solarfield");
-	Solarfield_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Heliostat_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Heliostat");
-	Heliostat_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Powerblock_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Powerblock");
-	Powerblock_obj->data_ptr = (void*)ptr;
-	VarGroupObject* AdjustmentFactors_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "AdjustmentFactors");
-	AdjustmentFactors_obj->data_ptr = (void*)ptr;
-	VarGroupObject* Outputs_obj = (VarGroupObject*)PyDict_GetItemString(self->x_attr, "Outputs");
-	Outputs_obj->data_ptr = (void*)ptr;
-	return Py_None;
-}
-
-
-static PyObject *
 TcslinearFresnel_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -3616,8 +3587,6 @@ static PyMethodDef TcslinearFresnel_methods[] = {
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{"get_data_ptr",           (PyCFunction)TcslinearFresnel_get_data_ptr,  METH_VARARGS,
 				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
-		{"set_data_ptr",           (PyCFunction)TcslinearFresnel_set_data_ptr,  METH_VARARGS,
-				PyDoc_STR("set_data_ptr(data_ptr)\n Set ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

@@ -25,7 +25,7 @@ class HybridSystem:
 
         # data container for Hybrid module, ownership will belong to self._hybrid
         self._data_ptr = HybridGenerator._ssc.data_create()
-        # input data container, will be inserted into data container and which takes ownership
+        # input data container, will be copied into data container. Ownership stays with HybridSystem
         self._data_input_ptr = HybridGenerator._ssc.data_create()
         # PySAM model that will perform the Hybrid simulation
         self._hybrid = hybrid.wrap(self._data_ptr)
@@ -72,9 +72,6 @@ class HybridSystem:
             else:
                 raise NotImplementedError(f"HybridSystem currently not enabled for module {financial_module}")
         
-        # self._data_ptr = None
-        # self._data_input_ptr = None
-
         self._cmod_list = list(self._generators.keys()) + ['grid'] + list(self._financials.keys())
 
     def new(self):
@@ -133,8 +130,7 @@ class HybridSystem:
 
     def _collect_hybrid_inputs(self):
         """
-        Takes data container from the sub-system models and passes them to the hybrid input data container
-        Data ownership of the sub-system containers passed to the hybrid model
+        Takes data container from the sub-system models and passes them to the hybrid input data container, which makes a copy
         """
         for name, gen in self._generators.items():
             gen._collect_inputs(self._data_input_ptr)
@@ -145,18 +141,14 @@ class HybridSystem:
 
     def _collect_hybrid_outputs(self):
         """
-        Takes sub-system data from the hybrid model and passes them back to the sub-system classes
-        Data ownership now shared between hybrid and sub-system models
+        Gets sub-system data from the hybrid model and copies them back to the sub-system classes
         """
         data_input = HybridGenerator._ssc.pdll.ssc_data_get_table(c_ulong(self._data_ptr), b'input')
         for name, gen in self._generators.items():
             gen._collect_outputs(data_input)
         p_fin_ret = HybridGenerator._ssc.pdll.ssc_data_get_table(c_ulong(data_input), b'hybrid')
-        old_data = self._grid.get_data_ptr()
-        self._grid.set_data_ptr(p_fin_ret)
-        for financial_model in self._financials.values():
-            financial_model.set_data_ptr(p_fin_ret)
-        HybridGenerator._ssc.data_clear(old_data)
+        data_ptr = self._grid.get_data_ptr()
+        HybridGenerator._ssc.pdll.ssc_data_deep_copy(c_ulong(p_fin_ret), c_ulong(data_ptr))
 
     def execute(self, verbosity_int=0):
         self._collect_hybrid_inputs()
