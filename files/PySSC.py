@@ -75,7 +75,7 @@ class PySSC:
                 arr = (c_number * count)()
                 arr[:] = [parr]  # set all at once instead of looping
                 print("input type should be array. Changing to single element array")
-        return self.pdll.ssc_var_set_array(c_void_p(p_var), pointer(arr), c_int(count))
+        self.pdll.ssc_var_set_array(c_void_p(p_var), pointer(arr), c_int(count))
 
     def var_set_matrix(self, p_var, mat):
         nrows = len(mat)
@@ -87,7 +87,7 @@ class PySSC:
             for c in range(ncols):
                 arr[idx] = c_number(mat[r][c])
                 idx = idx + 1
-        return self.pdll.ssc_var_set_matrix(c_void_p(p_var), pointer(arr), c_int(nrows), c_int(ncols))
+        self.pdll.ssc_var_set_matrix(c_void_p(p_var), pointer(arr), c_int(nrows), c_int(ncols))
 
     def var_set_data_array(self, p_var, p_arr, r):
         self.pdll.ssc_var_set_data_array(c_void_p(p_var), c_void_p(p_arr), c_int(r))
@@ -96,7 +96,7 @@ class PySSC:
         self.pdll.ssc_var_set_data_matrix(c_void_p(p_var), c_void_p(p_mat), c_int(r), c_int(c))
 
     def var_set_table(self, p_var, p_tab):
-        return self.pdll.ssc_var_set_table(c_void_p(p_var), c_void_p(p_tab))
+        self.pdll.ssc_var_set_table(c_void_p(p_var), c_void_p(p_tab))
 
     def var_get_string(self, p_var):
         return self.pdll.ssc_var_get_string(c_void_p(p_var))
@@ -186,7 +186,7 @@ class PySSC:
                 arr[:] = [parr]  # set all at once instead of looping
                 print(name, " input type should be array. Changing to single element array")
 
-        return self.pdll.ssc_data_set_array(c_void_p(p_data), c_char_p(name), pointer(arr), c_int(count))
+        self.pdll.ssc_data_set_array(c_void_p(p_data), c_char_p(name), pointer(arr), c_int(count))
 
     def data_set_array_from_csv(self, p_data, name, fn):
         f = open(fn, 'rb')
@@ -194,7 +194,7 @@ class PySSC:
         for line in f:
             data.extend([n for n in map(float, line.split(b','))])
         f.close()
-        return self.data_set_array(p_data, name, data)
+        self.data_set_array(p_data, name, data)
 
     def data_set_matrix(self, p_data, name, mat):
         nrows = len(mat)
@@ -206,7 +206,7 @@ class PySSC:
             for c in range(ncols):
                 arr[idx] = c_number(mat[r][c])
                 idx = idx + 1
-        return self.pdll.ssc_data_set_matrix(c_void_p(p_data), c_char_p(name), pointer(arr), c_int(nrows), c_int(ncols))
+        self.pdll.ssc_data_set_matrix(c_void_p(p_data), c_char_p(name), pointer(arr), c_int(nrows), c_int(ncols))
 
     def data_set_matrix_from_csv(self, p_data, name, fn):
         f = open(fn, 'rb')
@@ -215,23 +215,23 @@ class PySSC:
             lst = ([n for n in map(float, line.split(b','))])
             data.append(lst)
         f.close()
-        return self.data_set_matrix(p_data, name, data)
+        self.data_set_matrix(p_data, name, data)
 
     def data_set_data_array(self, p_data, name, data_arr):
         p_var = self.var_create()
         self.var_set_value(p_var, data_arr)
-        return self.data_set_var(p_data, name, p_var)
+        self.data_set_var(p_data, name, p_var)
     
     def data_set_data_matrix(self, p_data, name, data_mat):
         p_var = self.var_create()
         self.var_set_value(p_var, data_mat)
-        return self.data_set_var(p_data, name, p_var)
+        self.data_set_var(p_data, name, p_var)
 
     def data_set_table(self, p_data, name, tab):
-        return self.pdll.ssc_data_set_table(c_void_p(p_data), c_char_p(name), c_void_p(tab))
+        self.pdll.ssc_data_set_table(c_void_p(p_data), c_char_p(name), c_void_p(tab))
 
     def data_set_var(self, p_var, name, p_val):
-        return self.pdll.ssc_data_set_var(c_void_p(p_var), c_char_p(name), c_void_p(p_val))
+        self.pdll.ssc_data_set_var(c_void_p(p_var), c_char_p(name), c_void_p(p_val))
 
     def data_get_string(self, p_data, name):
         return self.pdll.ssc_data_get_string(c_void_p(p_data), c_char_p(name))
@@ -296,7 +296,7 @@ class PySSC:
     # don't call data_free() on the result, it's an internal
     # pointer inside SSC
     def data_get_table(self, p_data, name):
-        return c_ulong(self.pdll.ssc_data_get_table(c_void_p(p_data), name))
+        return self.pdll.ssc_data_get_table(c_void_p(p_data), name)
 
     def module_entry(self, index):
         self.pdll.ssc_module_entry.restype = c_void_p
@@ -460,16 +460,8 @@ class PySSC:
             elif ssc_data_query == self.TABLE:
                 return self.data_get_table(data, ssc_var_name)
             
-    def data_copy(self, data_source, data_dest):
-        ssc_variables = [self.data_first(data_source)]
-        ssc_name = self.data_next(data_source)
-        while ssc_name:
-            ssc_variables.append(ssc_name)
-            ssc_name = self.data_next(data_source)
-
-        for var in ssc_variables:
-            value = self.data_get_variable(data_source, var)
-            self.data_set_variable(data_dest, var, value)
+    def data_deep_copy(self, data_source, data_dest):
+        return self.pdll.ssc_data_deep_copy(c_void_p(data_source), c_void_p(data_dest))
 
 # Functions to simulate compute modules through dictionaries
 def ssc_sim_from_dict(data_pydict):

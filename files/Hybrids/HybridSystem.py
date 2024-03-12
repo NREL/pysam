@@ -143,12 +143,12 @@ class HybridSystem:
         """
         Gets sub-system data from the hybrid model and copies them back to the sub-system classes
         """
-        data_input = HybridGenerator._ssc.pdll.ssc_data_get_table(c_ulong(self._data_ptr), b'input')
+        data_input = HybridGenerator._ssc.data_get_table(self._data_ptr, b'input')
         for name, gen in self._generators.items():
             gen._collect_outputs(data_input)
-        p_fin_ret = HybridGenerator._ssc.pdll.ssc_data_get_table(c_ulong(data_input), b'hybrid')
+        p_fin_ret = HybridGenerator._ssc.data_get_table(data_input, b'hybrid')
         data_ptr = self._grid.get_data_ptr()
-        HybridGenerator._ssc.pdll.ssc_data_deep_copy(c_ulong(p_fin_ret), c_ulong(data_ptr))
+        HybridGenerator._ssc.data_deep_copy(p_fin_ret, data_ptr)
 
     def execute(self, verbosity_int=0):
         self._collect_hybrid_inputs()

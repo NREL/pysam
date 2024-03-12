@@ -15,8 +15,8 @@ class HybridGenerator:
     All properties that not SSC variables should be prepended with '_'
     """
     _ssc: PySSC = PySSC()
-    _ssc.pdll.ssc_data_get_table.restype = c_long
-    _ssc.pdll.ssc_data_create.restype = c_long
+    _ssc.pdll.ssc_data_get_table.restype = c_void_p
+    _ssc.pdll.ssc_data_create.restype = c_void_p
     _ssc.pdll.ssc_var_get_number.restype = POINTER(c_float)
     
     def __init__(self, pysam_module, name) -> None:
@@ -64,10 +64,10 @@ class HybridGenerator:
 
         Get the updated simulation data from the hybrid input data, now with results, and copy it
         """
-        p_pv_ret = self._ssc.pdll.ssc_data_get_table(c_ulong(hybrid_input_data_ptr), self._name.encode("ascii"))
+        p_pv_ret = self._ssc.data_get_table(hybrid_input_data_ptr, self._name.encode("ascii"))
         if not p_pv_ret:
             raise RuntimeError(f"Outputs for {self._name} sub-system does not exist in `hybrid_input_data_ptr`")
-        self._ssc.pdll.ssc_data_deep_copy(c_ulong(p_pv_ret), c_ulong(self._data_ptr))
+        self._ssc.data_deep_copy(p_pv_ret, self._data_ptr)
 
     def __getattr__(self, name: str):
         if name in self.__dir__():
