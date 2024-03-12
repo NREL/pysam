@@ -11,6 +11,9 @@ jobs:
         os: [ubuntu-latest, windows-latest, macOS-latest]
         python-version: [ '3.8', '3.9', '3.10', '3.11', '3.12' ]
 
+    env: 
+      SAMNTDIR: ${{ github.workspace }}/SAM
+
     name: ${{ matrix.os }} ${{ matrix.python-version }}
     steps:
       - name: Checkout Repo
@@ -21,6 +24,8 @@ jobs:
         run: |
           git config --global url.https://github.com/.insteadOf git://github.com/
           git clone https://github.com/NREL/SAM.git
+          ls
+          pwd
 
       - uses: actions/checkout@v3
       - name: Setup conda
@@ -40,4 +45,6 @@ jobs:
 
       - name: Unit tests
         run: |
+          ls
+          pwd
           pytest tests
