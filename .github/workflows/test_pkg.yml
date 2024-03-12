@@ -33,9 +33,10 @@ jobs:
 
       - name: Install NREL-PySAM
         run: |
+          pip install -r requirements.txt
+          pip install -r tests/requirements.txt
           conda install -c nrel nrel-pysam
 
       - name: Unit tests
         run: |
-          pip install pytest
           pytest tests
