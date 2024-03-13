@@ -4,11 +4,17 @@ import PySAM.Battery as batt
 from .HybridBase import HybridGenerator
 
 class BatteryHybrid(HybridGenerator):
+    """
+    Class that adds Battery to HybridSystem
+    """
     def __init__(self, name="battery") -> None:
         super().__init__(batt, name)
         self._data: batt.Battery
 
     def _collect_inputs(self, input):
+        """
+        Hybrid version requires `system_capacity` and `om_batt_nameplate` inputs, provide these from `batt_computed_bank_capacity`
+        """
         if self._ssc.data_query(self._data_ptr, b'batt_computed_bank_capacity') != self._ssc.NUMBER:
             raise RuntimeError("BatteryHybrid error: BatterySystem.batt_computed_bank_capacity required but not assigned")
         self._ssc.data_set_variable(self._data_ptr, 'system_capacity', self._data.BatterySystem.batt_computed_bank_capacity)

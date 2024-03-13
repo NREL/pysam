@@ -4,6 +4,9 @@ import PySAM.Fuelcell as fuelcell
 from .HybridBase import HybridGenerator
 
 class FuelCellHybrid(HybridGenerator):
+    """
+    Class that adds Fuelcell to HybridSystem
+    """
     def __init__(self, name="fuelcell") -> None:
         super().__init__(fuelcell, name)
         self.data: fuelcell.Fuelcell

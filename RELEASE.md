@@ -1,5 +1,9 @@
 # Release Notes
 
+## Version 5.1.0, Mar 13, 2023 - SAM 2023.12.17, Revision 1, SSC Version 290
+* [SAM Release updates for Version 2023.12.17 Revision 1](https://nrel.github.io/SAM/doc/releasenotes.html)
+* Enable Hybrids in PySAM (#162)
+
 ## Version 5.0.0, Dec 13, 2023 - SAM 2023.12.17, SSC Version 288
 * [SAM Release updates for Version 2023.12.17](https://nrel.github.io/SAM/doc/releasenotes.html)
 * Fix AdjustmentFactors (#158)

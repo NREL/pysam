@@ -12,7 +12,14 @@ import PySAM.HostDeveloper as hd
 
 class HybridGenerator:
     """
-    All properties that not SSC variables should be prepended with '_'
+    Class that wraps around PySAM technology modules as a component of a HybridSystem. 
+
+    All hybrid subsystem models require cost inputs that are added as properties here (e.g. om_fixed)
+
+    The PySAM model contains the simulation data for the hybrid simulation, which are modified simlarly to how they are for PySAM
+    modules: `value`, `assign`, direct access, and `export`.
+
+    The subsystem model data is copied to and from the HybridSystem during execution.
     """
     _ssc: PySSC = PySSC()
     _ssc.pdll.ssc_data_get_table.restype = c_void_p
