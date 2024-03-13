@@ -12,7 +12,7 @@ jobs:
         python-version: [ '3.8', '3.9', '3.10', '3.11', '3.12' ]
 
     env: 
-      SAMNTDIR: ${{ github.workspace }}/SAM
+      SAMNTDIR: ${{ github.workspace }}/../SAM
 
     name: ${{ matrix.os }} ${{ matrix.python-version }}
     steps:
@@ -22,6 +22,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Checkout SAM
         run: |
+          cd ..
           git config --global url.https://github.com/.insteadOf git://github.com/
           git clone https://github.com/NREL/SAM.git
           ls
@@ -47,6 +48,6 @@ jobs:
 
       - name: Unit tests
         run: |
-          ls
           pwd
-          pytest tests
+          ls ${{ env.SAMNTDIR }}/api/api_autogen/library/defaults
+          pytest tests/test_pysam_all.py
