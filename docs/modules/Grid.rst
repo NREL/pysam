@@ -51,6 +51,12 @@ GridLimits Group
 .. autoclass:: PySAM.Grid.Grid.GridLimits
 	:members:
 
+HybridCosts Group
+------------------
+
+.. autoclass:: PySAM.Grid.Grid.HybridCosts
+	:members:
+
 Outputs Group
 --------------
 

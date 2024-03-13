@@ -14,6 +14,9 @@ class Utilityrate5(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
@@ -109,6 +112,30 @@ class Utilityrate5(object):
 		load_escalation = tuple
 
 
+	class HybridCosts(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		degradation = tuple
+		land_area = float
+		om_capacity = tuple
+		om_capacity_escal = float
+		om_fixed = tuple
+		om_fixed_escal = float
+		om_land_lease = tuple
+		om_land_lease_escal = float
+		om_production = tuple
+		om_production_escal = float
+		total_installed_cost = float
+
+
 	class Outputs(object):
 		def assign(self): 
 			pass
@@ -125,6 +152,7 @@ class Utilityrate5(object):
 		bill_load = tuple
 		billing_demand_w_sys_ym = tuple
 		billing_demand_wo_sys_ym = tuple
+		cf_land_lease_expense = tuple
 		charge_w_sys_dc_fixed = tuple
 		charge_w_sys_dc_fixed_ym = tuple
 		charge_w_sys_dc_tou = tuple

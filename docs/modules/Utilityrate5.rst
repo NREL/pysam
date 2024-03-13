@@ -45,6 +45,12 @@ Load Group
 .. autoclass:: PySAM.Utilityrate5.Utilityrate5.Load
 	:members:
 
+HybridCosts Group
+------------------
+
+.. autoclass:: PySAM.Utilityrate5.Utilityrate5.HybridCosts
+	:members:
+
 Outputs Group
 --------------
 

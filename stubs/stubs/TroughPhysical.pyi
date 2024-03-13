@@ -14,6 +14,9 @@ class TroughPhysical(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
@@ -150,7 +153,6 @@ class TroughPhysical(object):
 		nColt = float
 		nHCEVar = float
 		nHCEt = float
-		nSCA = float
 		northsouth_field_sep = float
 		offset_xpan_hdr = float
 		p_start = float
@@ -543,6 +545,8 @@ class TroughPhysical(object):
 		bop_design = float
 		capacity_factor = float
 		conversion_factor = float
+		cp_battery_nameplate = float
+		cp_system_nameplate = float
 		csp_dtr_cost_bop = float
 		csp_dtr_cost_contingency = float
 		csp_dtr_cost_epc_total = float
@@ -633,6 +637,7 @@ class TroughPhysical(object):
 		month = tuple
 		monthly_energy = tuple
 		nLoops = float
+		nSCA = float
 		n_op_modes = tuple
 		nameplate = float
 		op_mode_1 = tuple
@@ -702,6 +707,7 @@ class TroughPhysical(object):
 		solar_mult = float
 		solazi = tuple
 		solzen = tuple
+		system_capacity = float
 		tank_losses = tuple
 		tdry = tuple
 		tes_avail_vol = float

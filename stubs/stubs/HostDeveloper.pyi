@@ -14,6 +14,9 @@ class HostDeveloper(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
@@ -584,6 +587,21 @@ class HostDeveloper(object):
 		annual_fuel_usage_lifetime = tuple
 		fuelcell_annual_energy_discharged = tuple
 		fuelcell_replacement = tuple
+
+
+	class HybridCosts(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		degradation = tuple
+		total_installed_cost = float
 
 
 	class Outputs(object):

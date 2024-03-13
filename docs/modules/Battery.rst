@@ -179,6 +179,12 @@ GridLimits Group
 .. autoclass:: PySAM.Battery.Battery.GridLimits
 	:members:
 
+HybridCosts Group
+------------------
+
+.. autoclass:: PySAM.Battery.Battery.HybridCosts
+	:members:
+
 Outputs Group
 --------------
 

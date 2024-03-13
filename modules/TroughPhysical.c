@@ -1456,18 +1456,6 @@ SolarField_set_nHCEt(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-SolarField_get_nSCA(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysical_SolarField_nSCA_nget, self->data_ptr);
-}
-
-static int
-SolarField_set_nSCA(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysical_SolarField_nSCA_nset, self->data_ptr);
-}
-
-static PyObject *
 SolarField_get_northsouth_field_sep(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TroughPhysical_SolarField_northsouth_field_sep_nget, self->data_ptr);
@@ -1908,9 +1896,6 @@ static PyGetSetDef SolarField_getset[] = {
  	NULL},
 {"nHCEt", (getter)SolarField_get_nHCEt,(setter)SolarField_set_nHCEt,
 	PyDoc_STR("*float*: Number of HCE types [none]\n\n**Required:**\nTrue"),
- 	NULL},
-{"nSCA", (getter)SolarField_get_nSCA,(setter)SolarField_set_nSCA,
-	PyDoc_STR("*float*: Number of SCAs in a loop [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"northsouth_field_sep", (getter)SolarField_get_northsouth_field_sep,(setter)SolarField_set_northsouth_field_sep,
 	PyDoc_STR("*float*: North/south separation between subfields. 0 = SCAs are touching [m]\n\n**Required:**\nTrue"),
@@ -3356,13 +3341,13 @@ static PyGetSetDef Tou_getset[] = {
 	PyDoc_STR("*float*: Max. dispatch optimization solve duration [s]\n\n**Required:**\nRequired if is_dispatch=1"),
  	NULL},
 {"dispatch_factors_ts", (getter)Tou_get_dispatch_factors_ts,(setter)Tou_set_dispatch_factors_ts,
-	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n**Required:**\nRequired if ppa_multiplier_model=1&csp_financial_model<5&is_dispatch=1"),
+	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n**Required:**\nRequired if sim_type=1&ppa_multiplier_model=1&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 {"dispatch_sched_weekday", (getter)Tou_get_dispatch_sched_weekday,(setter)Tou_set_dispatch_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: 12x24 PPA pricing Weekday schedule\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
+	PyDoc_STR("*sequence[sequence]*: 12x24 PPA pricing Weekday schedule\n\n**Required:**\nRequired if sim_type=1&ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 {"dispatch_sched_weekend", (getter)Tou_get_dispatch_sched_weekend,(setter)Tou_set_dispatch_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: 12x24 PPA pricing Weekend schedule\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
+	PyDoc_STR("*sequence[sequence]*: 12x24 PPA pricing Weekend schedule\n\n**Required:**\nRequired if sim_type=1&ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 {"dispatch_series", (getter)Tou_get_dispatch_series,(setter)Tou_set_dispatch_series,
 	PyDoc_STR("*sequence*: Time series dispatch factors"),
@@ -3675,7 +3660,7 @@ FinancialSolutionMode_set_ppa_soln_mode(VarGroupObject *self, PyObject *value, v
 
 static PyGetSetDef FinancialSolutionMode_getset[] = {
 {"ppa_soln_mode", (getter)FinancialSolutionMode_get_ppa_soln_mode,(setter)FinancialSolutionMode_set_ppa_soln_mode,
-	PyDoc_STR("*float*: PPA solution mode (0=Specify IRR target, 1=Specify PPA price)\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
+	PyDoc_STR("*float*: PPA solution mode (0=Specify IRR target, 1=Specify PPA price)\n\n**Required:**\nRequired if sim_type=1&ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3949,7 +3934,7 @@ TimeOfDeliveryFactors_set_dispatch_tod_factors(VarGroupObject *self, PyObject *v
 
 static PyGetSetDef TimeOfDeliveryFactors_getset[] = {
 {"dispatch_tod_factors", (getter)TimeOfDeliveryFactors_get_dispatch_tod_factors,(setter)TimeOfDeliveryFactors_set_dispatch_tod_factors,
-	PyDoc_STR("*sequence*: TOD factors for periods 1 through 9\n\n**Info:**\nWe added this array input after SAM 2022.12.21 to replace the functionality of former single value inputs dispatch_factor1 through dispatch_factor9\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
+	PyDoc_STR("*sequence*: TOD factors for periods 1 through 9\n\n**Info:**\nWe added this array input after SAM 2022.12.21 to replace the functionality of former single value inputs dispatch_factor1 through dispatch_factor9\n\n**Required:**\nRequired if sim_type=1&ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4098,10 +4083,10 @@ Revenue_set_ppa_price_input(VarGroupObject *self, PyObject *value, void *closure
 
 static PyGetSetDef Revenue_getset[] = {
 {"mp_energy_market_revenue", (getter)Revenue_get_mp_energy_market_revenue,(setter)Revenue_set_mp_energy_market_revenue,
-	PyDoc_STR("*sequence[sequence]*: Energy market revenue input\n\n**Info:**\nLifetime x 2[Cleared Capacity(MW),Price($/MWh)]\n\n**Required:**\nRequired if csp_financial_model=6&is_dispatch=1"),
+	PyDoc_STR("*sequence[sequence]*: Energy market revenue input\n\n**Info:**\nLifetime x 2[Cleared Capacity(MW),Price($/MWh)]\n\n**Required:**\nRequired if sim_type=1&csp_financial_model=6&is_dispatch=1"),
  	NULL},
 {"ppa_price_input", (getter)Revenue_get_ppa_price_input,(setter)Revenue_set_ppa_price_input,
-	PyDoc_STR("*sequence*: PPA prices - yearly [$/kWh]\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
+	PyDoc_STR("*sequence*: PPA prices - yearly [$/kWh]\n\n**Required:**\nRequired if sim_type=1&ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -5741,6 +5726,18 @@ Outputs_get_conversion_factor(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_cp_battery_nameplate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysical_Outputs_cp_battery_nameplate_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cp_system_nameplate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysical_Outputs_cp_system_nameplate_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_csp_dtr_cost_bop(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TroughPhysical_Outputs_csp_dtr_cost_bop_nget, self->data_ptr);
@@ -6281,6 +6278,12 @@ Outputs_get_nLoops(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_nSCA(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysical_Outputs_nSCA_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_n_op_modes(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysical_Outputs_n_op_modes_aget, self->data_ptr);
@@ -6695,6 +6698,12 @@ Outputs_get_solzen(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_system_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysical_Outputs_system_capacity_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_tank_losses(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysical_Outputs_tank_losses_aget, self->data_ptr);
@@ -6949,6 +6958,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"conversion_factor", (getter)Outputs_get_conversion_factor,(setter)0,
 	PyDoc_STR("*float*: Gross to Net Conversion Factor [%]"),
+ 	NULL},
+{"cp_battery_nameplate", (getter)Outputs_get_cp_battery_nameplate,(setter)0,
+	PyDoc_STR("*float*: Battery nameplate [MWe]"),
+ 	NULL},
+{"cp_system_nameplate", (getter)Outputs_get_cp_system_nameplate,(setter)0,
+	PyDoc_STR("*float*: System capacity for capacity payments [MWe]"),
  	NULL},
 {"csp_dtr_cost_bop", (getter)Outputs_get_csp_dtr_cost_bop,(setter)0,
 	PyDoc_STR("*float*: Balance of plant cost [$]"),
@@ -7220,6 +7235,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"nLoops", (getter)Outputs_get_nLoops,(setter)0,
 	PyDoc_STR("*float*: Number of loops in the field"),
  	NULL},
+{"nSCA", (getter)Outputs_get_nSCA,(setter)0,
+	PyDoc_STR("*float*: Number of SCAs in a loop [none]"),
+ 	NULL},
 {"n_op_modes", (getter)Outputs_get_n_op_modes,(setter)0,
 	PyDoc_STR("*sequence*: Operating modes in reporting timestep"),
  	NULL},
@@ -7426,6 +7444,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"solzen", (getter)Outputs_get_solzen,(setter)0,
 	PyDoc_STR("*sequence*: Resource Solar Zenith [deg]"),
+ 	NULL},
+{"system_capacity", (getter)Outputs_get_system_capacity,(setter)0,
+	PyDoc_STR("*float*: System capacity [kWe]"),
  	NULL},
 {"tank_losses", (getter)Outputs_get_tank_losses,(setter)0,
 	PyDoc_STR("*sequence*: TES thermal losses [MWt]"),
@@ -7733,8 +7754,6 @@ TroughPhysical_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef TroughPhysical_methods[] = {
 		{"execute",           (PyCFunction)TroughPhysical_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
-		{"get_data_ptr",           (PyCFunction)TroughPhysical_get_data_ptr,  METH_VARARGS,
-				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)TroughPhysical_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'System Control': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)TroughPhysical_replace,  METH_VARARGS,
@@ -7745,6 +7764,8 @@ static PyMethodDef TroughPhysical_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)TroughPhysical_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)TroughPhysical_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

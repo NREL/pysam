@@ -14,6 +14,9 @@ class WaveFileReader(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
@@ -31,7 +34,6 @@ class WaveFileReader(object):
 			pass
 
 
-		use_specific_wf_wave = float
 		wave_resource_filename = str
 		wave_resource_filename_ts = str
 		wave_resource_model_choice = float

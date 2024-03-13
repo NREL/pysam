@@ -14,6 +14,9 @@ class TidalFileReader(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
@@ -33,7 +36,6 @@ class TidalFileReader(object):
 
 		tidal_resource_filename = str
 		tidal_resource_model_choice = float
-		use_specific_wf_tidal = float
 
 
 	class Outputs(object):

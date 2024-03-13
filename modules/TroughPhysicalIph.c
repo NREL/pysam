@@ -1554,18 +1554,6 @@ SolarField_set_nHCEt(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-SolarField_get_nSCA(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysicalIph_SolarField_nSCA_nget, self->data_ptr);
-}
-
-static int
-SolarField_set_nSCA(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysicalIph_SolarField_nSCA_nset, self->data_ptr);
-}
-
-static PyObject *
 SolarField_get_northsouth_field_sep(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TroughPhysicalIph_SolarField_northsouth_field_sep_nget, self->data_ptr);
@@ -2000,9 +1988,6 @@ static PyGetSetDef SolarField_getset[] = {
  	NULL},
 {"nHCEt", (getter)SolarField_get_nHCEt,(setter)SolarField_set_nHCEt,
 	PyDoc_STR("*float*: Number of HCE types [none]\n\n**Required:**\nTrue"),
- 	NULL},
-{"nSCA", (getter)SolarField_get_nSCA,(setter)SolarField_set_nSCA,
-	PyDoc_STR("*float*: Number of SCAs in a loop [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"northsouth_field_sep", (getter)SolarField_get_northsouth_field_sep,(setter)SolarField_set_northsouth_field_sep,
 	PyDoc_STR("*float*: North/south separation between subfields. 0 = SCAs are touching [m]\n\n**Required:**\nTrue"),
@@ -6293,6 +6278,12 @@ Outputs_get_nLoops(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_nSCA(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalIph_Outputs_nSCA_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_n_op_modes(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysicalIph_Outputs_n_op_modes_aget, self->data_ptr);
@@ -7202,6 +7193,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"nLoops", (getter)Outputs_get_nLoops,(setter)0,
 	PyDoc_STR("*float*: Number of loops in the field"),
  	NULL},
+{"nSCA", (getter)Outputs_get_nSCA,(setter)0,
+	PyDoc_STR("*float*: Number of SCAs in a loop [none]"),
+ 	NULL},
 {"n_op_modes", (getter)Outputs_get_n_op_modes,(setter)0,
 	PyDoc_STR("*sequence*: Operating modes in reporting timestep"),
  	NULL},
@@ -7718,8 +7712,6 @@ TroughPhysicalIph_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef TroughPhysicalIph_methods[] = {
 		{"execute",           (PyCFunction)TroughPhysicalIph_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
-		{"get_data_ptr",           (PyCFunction)TroughPhysicalIph_get_data_ptr,  METH_VARARGS,
-				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)TroughPhysicalIph_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'System Control': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)TroughPhysicalIph_replace,  METH_VARARGS,
@@ -7730,6 +7722,8 @@ static PyMethodDef TroughPhysicalIph_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)TroughPhysicalIph_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)TroughPhysicalIph_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

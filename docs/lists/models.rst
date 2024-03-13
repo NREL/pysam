@@ -70,6 +70,12 @@
 :doc:`../modules/HostDeveloper`
       Host Developer Financial Model
 
+:doc:`../modules/Hybrid` (HD)
+      Hybrid processing
+
+:doc:`../modules/HybridSteps` (HD)
+      Hybrid processing with 'steps' passed in on how to combine
+
 :doc:`../modules/Iec61853interp` (HD)
       Determine single diode model parameters from IEC 61853 solution matrix at a given temperature and irradiance.
 
@@ -311,6 +317,8 @@
     ../modules/Grid.rst
     ../modules/Hcpv.rst
     ../modules/HostDeveloper.rst
+    ../modules/Hybrid.rst
+    ../modules/HybridSteps.rst
     ../modules/Iec61853interp.rst
     ../modules/Iec61853par.rst
     ../modules/InvCecCg.rst

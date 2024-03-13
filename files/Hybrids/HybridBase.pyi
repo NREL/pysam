@@ -1,0 +1,9 @@
+class HybridGenerator(object):
+    total_installed_cost: float
+    om_fixed: tuple
+    om_fixed_escal: float
+    om_production: tuple
+    om_production_escal: float
+    om_capacity: tuple
+    om_capacity_escal: float
+    degradation: tuple
