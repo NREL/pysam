@@ -26,8 +26,8 @@ jobs:
           git clone https://github.com/NREL/SAM.git
           ls
           pwd
-          ls ${{ env.SAMNTDIR }}/SAM
-          ls ${{ env.SAMNTDIR }}/SAM/api/api_autogen/library/defaults
+          ls ${{ env.SAMNTDIR }}
+          ls ${{ env.SAMNTDIR }}/api/api_autogen/library/defaults
 
       - uses: actions/checkout@v3
       - name: Setup conda
