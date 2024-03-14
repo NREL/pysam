@@ -81,6 +81,7 @@ jobs:
 
       - name: Install NREL-PySAM
         run: |
+          source /Users/runner/.bash_profile
           conda activate pysam_env
           pip install -r requirements.txt
           pip install -r tests/requirements.txt
@@ -95,4 +96,6 @@ jobs:
 
       - name: Unit tests
         run: |
+          source /Users/runner/.bash_profile
+          conda activate pysam_env
           pytest tests/test_pysam_all.py
