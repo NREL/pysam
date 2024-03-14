@@ -30,7 +30,6 @@ jobs:
 
       - uses: actions/checkout@v3
       - name: Setup conda
-        if: ${{ matrix.os }} != 'macos-14'
         uses: s-weigand/setup-conda@v1
         with:
           update-conda: true
@@ -81,6 +80,7 @@ jobs:
           bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
           rm -rf ~/miniconda3/miniconda.sh
           ~/miniconda3/bin/conda init bash
+          source /Users/runner/.bash_profile
           conda --version
           yes | conda create --name pysam_env python=${{ matrix.python-version }}
           conda activate pysam_env
