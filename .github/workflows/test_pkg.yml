@@ -18,16 +18,6 @@ jobs:
 
     name: ${{ matrix.os }} ${{ matrix.python-version }}
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-
-      - uses: actions/checkout@v3
-      - name: Checkout SAM
-        run: |
-          cd ..
-          git config --global url.https://github.com/.insteadOf git://github.com/
-          git clone https://github.com/NREL/SAM.git
-
       - uses: actions/checkout@v3
       - name: Setup conda
         uses: s-weigand/setup-conda@v1
@@ -38,11 +28,21 @@ jobs:
       - run: conda --version
       - run: which python
 
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
       - name: Install NREL-PySAM
         run: |
           pip install -r requirements.txt
           pip install -r tests/requirements.txt
           conda install -c nrel nrel-pysam
+
+      - uses: actions/checkout@v3
+      - name: Checkout SAM
+        run: |
+          cd ..
+          git config --global url.https://github.com/.insteadOf git://github.com/
+          git clone https://github.com/NREL/SAM.git
 
       - name: Unit tests
         run: |
@@ -62,16 +62,6 @@ jobs:
 
     name: ${{ matrix.os }} ${{ matrix.python-version }}
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-
-      - uses: actions/checkout@v3
-      - name: Checkout SAM
-        run: |
-          cd ..
-          git config --global url.https://github.com/.insteadOf git://github.com/
-          git clone https://github.com/NREL/SAM.git
-
       - name: Install conda Mac arm64
         if: ${{ matrix.os }} == 'macos-14'
         run: |
@@ -80,17 +70,28 @@ jobs:
           bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
           rm -rf ~/miniconda3/miniconda.sh
           ~/miniconda3/bin/conda init bash
-          source /Users/runner/.bash_profile
+          source/Users/runner/.bash_profile
           conda --version
           yes | conda create --name pysam_env python=${{ matrix.python-version }}
           conda activate pysam_env
           which python
 
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
       - name: Install NREL-PySAM
         run: |
+          conda activate pysam_env
           pip install -r requirements.txt
           pip install -r tests/requirements.txt
           conda install -c nrel nrel-pysam
+      
+      - uses: actions/checkout@v3
+      - name: Checkout SAM
+        run: |
+          cd ..
+          git config --global url.https://github.com/.insteadOf git://github.com/
+          git clone https://github.com/NREL/SAM.git
 
       - name: Unit tests
         run: |
