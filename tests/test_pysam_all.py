@@ -39,7 +39,7 @@ def test_adjustment_factors():
     adj.sf_timeindex = [0]
     adj.export()
 
-def test_pyssc(execution_number):
+def test_pyssc():
     var = ssc.var_create()
     ssc.var_set_value(var, 0)
     assert int(ssc.var_get_number(var)) == 0
