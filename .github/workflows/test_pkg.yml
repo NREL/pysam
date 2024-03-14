@@ -3,7 +3,7 @@ name: Test Package
 on: [ push ]
 
 jobs:
-  build:
+  build_1:
 
     runs-on: ${{ matrix.os }}
     strategy:
@@ -38,6 +38,40 @@ jobs:
           conda-channels: anaconda, conda-forge
       - run: conda --version
       - run: which python
+
+      - name: Install NREL-PySAM
+        run: |
+          pip install -r requirements.txt
+          pip install -r tests/requirements.txt
+          conda install -c nrel nrel-pysam
+
+      - name: Unit tests
+        run: |
+          pytest tests/test_pysam_all.py
+    
+  build_2: 
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-14]
+        python-version: [ '3.8', '3.9', '3.10', '3.11', '3.12' ]
+
+    env: 
+      SAMNTDIR: ${{ github.workspace }}/../SAM
+      NREL_API_KEY: ${{ secrets.NREL_API_KEY }}
+      NREL_API_EMAIL: ${{ secrets.NREL_API_EMAIL }}
+
+    name: ${{ matrix.os }} ${{ matrix.python-version }}
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - uses: actions/checkout@v3
+      - name: Checkout SAM
+        run: |
+          cd ..
+          git config --global url.https://github.com/.insteadOf git://github.com/
+          git clone https://github.com/NREL/SAM.git
 
       - name: Install conda Mac arm64
         if: ${{ matrix.os }} == 'macos-14'
