@@ -13,6 +13,8 @@ jobs:
 
     env: 
       SAMNTDIR: ${{ github.workspace }}/../SAM
+      NREL_API_KEY: ${{ secrets.NREL_API_KEY }}
+      NREL_API_EMAIL: ${{ secrets.NREL_API_EMAIL }}
 
     name: ${{ matrix.os }} ${{ matrix.python-version }}
     steps:
@@ -25,10 +27,6 @@ jobs:
           cd ..
           git config --global url.https://github.com/.insteadOf git://github.com/
           git clone https://github.com/NREL/SAM.git
-          ls
-          pwd
-          ls ${{ env.SAMNTDIR }}
-          ls ${{ env.SAMNTDIR }}/api/api_autogen/library/defaults
 
       - uses: actions/checkout@v3
       - name: Setup conda
@@ -48,6 +46,4 @@ jobs:
 
       - name: Unit tests
         run: |
-          pwd
-          ls ${{ env.SAMNTDIR }}/api/api_autogen/library/defaults
           pytest tests/test_pysam_all.py
