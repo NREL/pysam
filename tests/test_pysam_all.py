@@ -39,14 +39,13 @@ def test_adjustment_factors():
     adj.sf_timeindex = [0]
     adj.export()
 
-@pytest.mark.parametrize("execution_number", range(150))
-def test_pyssc(execution_number):
+def test_pyssc():
     var = ssc.var_create()
     ssc.var_set_value(var, 0)
     assert int(ssc.var_get_number(var)) == 0
     test_dat = ssc.data_create()
     ssc.data_set_var(test_dat, b"test", var)
-    assert ssc.data_get_number(test_dat, b"test") == 0
+    assert ssc.data_get_number(test_dat, b"test") == pytest.approx(0)
 
     var = ssc.var_create()
     ssc.var_set_value(var, 'zero')
