@@ -13,12 +13,13 @@ The steps are:
     Run the simulations.
     Print the results.
 
-Most recently tested against PySAM 4.1.0
+Most recently tested against PySAM 5.1.0
 
 @author: frohro
 """
 
 import json
+from pathlib import Path
 import PySAM.Pvwattsv8 as PVWatts
 import PySAM.Grid as Grid
 import PySAM.Utilityrate5 as UtilityRate
@@ -53,6 +54,9 @@ cl = Cashloan.from_existing(pv)
 grid.assign(Grid.wrap(grid_dat).export())
 ur.assign(UtilityRate.wrap(ur_dat).export())
 cl.assign(Cashloan.wrap(cl_dat).export())
+
+weather_file = str(Path(__file__).parent.parent / "tests" / "blythe_ca_33.617773_-114.588261_nasa_60_tmy.csv")
+pv.SolarResource.solar_resource_file = weather_file
 
 # The models are executed in order.  Note that the outputs from the first
 # simulation are automatically available for the next one, and so on.  :-)

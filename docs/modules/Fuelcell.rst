@@ -69,6 +69,12 @@ FuelCell Group
 .. autoclass:: PySAM.Fuelcell.Fuelcell.FuelCell
 	:members:
 
+HybridCosts Group
+------------------
+
+.. autoclass:: PySAM.Fuelcell.Fuelcell.HybridCosts
+	:members:
+
 Outputs Group
 --------------
 

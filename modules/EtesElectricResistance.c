@@ -1644,6 +1644,18 @@ UserDefinedPowerCycle_set_ud_ind_od(VarGroupObject *self, PyObject *value, void 
 }
 
 static PyObject *
+UserDefinedPowerCycle_get_ud_is_sco2_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_UserDefinedPowerCycle_ud_is_sco2_regr_nget, self->data_ptr);
+}
+
+static int
+UserDefinedPowerCycle_set_ud_is_sco2_regr(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_UserDefinedPowerCycle_ud_is_sco2_regr_nset, self->data_ptr);
+}
+
+static PyObject *
 UserDefinedPowerCycle_get_ud_m_dot_water_cool_des(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_EtesElectricResistance_UserDefinedPowerCycle_ud_m_dot_water_cool_des_nget, self->data_ptr);
@@ -1661,6 +1673,9 @@ static PyGetSetDef UserDefinedPowerCycle_getset[] = {
  	NULL},
 {"ud_ind_od", (getter)UserDefinedPowerCycle_get_ud_ind_od,(setter)UserDefinedPowerCycle_set_ud_ind_od,
 	PyDoc_STR("*sequence[sequence]*: Off design user-defined power cycle performance as function of T_htf, m_dot_htf [ND], and T_amb\n\n**Required:**\nRequired if pc_config=1"),
+ 	NULL},
+{"ud_is_sco2_regr", (getter)UserDefinedPowerCycle_get_ud_is_sco2_regr,(setter)UserDefinedPowerCycle_set_ud_is_sco2_regr,
+	PyDoc_STR("*float*: False: default, base udpc interpolation, True: use sco2 heuristic regression\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ud_m_dot_water_cool_des", (getter)UserDefinedPowerCycle_get_ud_m_dot_water_cool_des,(setter)UserDefinedPowerCycle_set_ud_m_dot_water_cool_des,
 	PyDoc_STR("*float*: Mass flow rate of water required at user-defined power cycle design point [kg/s]\n\n**Required:**\nRequired if pc_config=1"),
@@ -4803,6 +4818,14 @@ EtesElectricResistance_dealloc(CmodObject *self)
 
 
 static PyObject *
+EtesElectricResistance_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 EtesElectricResistance_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -4879,6 +4902,8 @@ static PyMethodDef EtesElectricResistance_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)EtesElectricResistance_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)EtesElectricResistance_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

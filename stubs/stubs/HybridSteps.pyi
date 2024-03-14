@@ -1,4 +1,4 @@
-class Annualoutput(object):
+class HybridSteps(object):
 	def assign(self, dict):
 		pass
 
@@ -14,13 +14,16 @@ class Annualoutput(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
 	def __init__(self, *args, **kwargs):
 		pass
 
-	class AnnualOutput(object):
+	class Common(object):
 		def assign(self): 
 			pass
 	
@@ -31,12 +34,7 @@ class Annualoutput(object):
 			pass
 
 
-		analysis_period = float
-		energy_availability = tuple
-		energy_curtailment = tuple
-		energy_degradation = tuple
-		system_hourly_energy = tuple
-		system_use_lifetime_output = float
+		input = dict
 
 
 	class Outputs(object):
@@ -50,25 +48,21 @@ class Annualoutput(object):
 			pass
 
 
-		annual_availability = tuple
-		annual_degradation = tuple
-		annual_energy = tuple
-		hourly_energy = tuple
-		monthly_energy = tuple
+		output = dict
 
 
 
 
-def default(config) -> Annualoutput:
+def default(config) -> HybridSteps:
 	pass
 
-def new() -> Annualoutput:
+def new() -> HybridSteps:
 	pass
 
-def wrap(ssc_data_t) -> Annualoutput:
+def wrap(ssc_data_t) -> HybridSteps:
 	pass
 
-def from_existing(model, config="") -> Annualoutput:
+def from_existing(model, config="") -> HybridSteps:
 	pass
 
 __loader__ = None 

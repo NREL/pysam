@@ -2429,6 +2429,14 @@ BatteryStateful_dealloc(CmodStatefulObject *self)
 
 
 static PyObject *
+BatteryStateful_get_data_ptr(CmodStatefulObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 BatteryStateful_setup(CmodStatefulObject *self, PyObject *args)
 {
 	SAM_error error = new_error();
@@ -2518,6 +2526,8 @@ static PyMethodDef BatteryStateful_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)BatteryStateful_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)BatteryStateful_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

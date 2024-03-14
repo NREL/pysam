@@ -17,6 +17,8 @@ The variables listed below are interdependent with other variables. If you chang
 
  - heat_rate
 
+ - system_capacity
+
 Functions
 -----------
 
@@ -38,7 +40,14 @@ Lifetime Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.GenericSystem.GenericSystem.AdjustmentFactors
+.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+	:members:
+	:noindex:
+
+HybridCosts Group
+------------------
+
+.. autoclass:: PySAM.GenericSystem.GenericSystem.HybridCosts
 	:members:
 
 Outputs Group

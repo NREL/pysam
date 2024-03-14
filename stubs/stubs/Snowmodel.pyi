@@ -14,6 +14,9 @@ class Snowmodel(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
@@ -31,6 +34,7 @@ class Snowmodel(object):
 			pass
 
 
+		snow_slide_coefficient = float
 		snowdepth = tuple
 		subarray1_nmody = float
 		subarray1_poa_shaded = tuple

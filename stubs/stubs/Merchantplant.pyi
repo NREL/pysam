@@ -14,6 +14,9 @@ class Merchantplant(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
@@ -85,7 +88,6 @@ class Merchantplant(object):
 		add_om_num_types = float
 		annual_fuel_usage = float
 		annual_fuel_usage_lifetime = tuple
-		fuelcell_annual_energy_discharged = tuple
 		om_batt_capacity_cost = tuple
 		om_batt_fixed_cost = tuple
 		om_batt_nameplate = float
@@ -464,7 +466,9 @@ class Merchantplant(object):
 			pass
 
 
+		annual_fuel_usage_lifetime = tuple
 		en_fuelcell = float
+		fuelcell_annual_energy_discharged = tuple
 		fuelcell_computed_bank_capacity = float
 		fuelcell_per_kWh = float
 		fuelcell_replacement = tuple
@@ -690,7 +694,6 @@ class Merchantplant(object):
 		cf_property_tax_expense = tuple
 		cf_ptc_fed = tuple
 		cf_ptc_sta = tuple
-		cf_ptc_total = tuple
 		cf_pv_cash_for_ds = tuple
 		cf_pv_interest_factor = tuple
 		cf_recapitalization = tuple

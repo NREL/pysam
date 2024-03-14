@@ -2998,7 +2998,7 @@ static PyGetSetDef BatteryDispatch_getset[] = {
 	PyDoc_STR("*float*: Battery can charge from system only when system output exceeds load [0/1]\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=0"),
  	NULL},
 {"batt_dispatch_choice", (getter)BatteryDispatch_get_batt_dispatch_choice,(setter)BatteryDispatch_set_batt_dispatch_choice,
-	PyDoc_STR("*float*: Battery dispatch algorithm [0/1/2/3/4]\n\n**Options:**\nIf behind the meter: 0=PeakShaving,1=InputGridTarget,2=InputBatteryPower,3=ManualDispatch,4=PriceSignalForecast if front of meter: 0=AutomatedEconomic,1=PV_Smoothing,2=InputBatteryPower,3=ManualDispatch\n\n**Required:**\nRequired if en_batt=1"),
+	PyDoc_STR("*float*: Battery dispatch algorithm [0/1/2/3/4/5]\n\n**Options:**\nIf behind the meter: 0=PeakShaving,1=InputGridTarget,2=InputBatteryPower,3=ManualDispatch,4=RetailRateDispatch,5=SelfConsumption if front of meter: 0=AutomatedEconomic,1=PV_Smoothing,2=InputBatteryPower,3=ManualDispatch\n\n**Required:**\nRequired if en_batt=1"),
  	NULL},
 {"batt_dispatch_discharge_only_load_exceeds_system", (getter)BatteryDispatch_get_batt_dispatch_discharge_only_load_exceeds_system,(setter)BatteryDispatch_set_batt_dispatch_discharge_only_load_exceeds_system,
 	PyDoc_STR("*float*: Battery can discharge battery only when load exceeds system output [0/1]\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=0"),
@@ -3064,7 +3064,7 @@ static PyGetSetDef BatteryDispatch_getset[] = {
 	PyDoc_STR("*sequence*: Annual load escalation for ac power forecast [kW]\n\n**Options:**\nlength <= analysis_period\n\nThe value of ``batt_load_ac_forecast_escalation`` depends on the following variables:\n\n\t - batt_dispatch_load_forecast_choice\n\t - load_escalation\n"),
  	NULL},
 {"batt_look_ahead_hours", (getter)BatteryDispatch_get_batt_look_ahead_hours,(setter)BatteryDispatch_set_batt_look_ahead_hours,
-	PyDoc_STR("*float*: Hours to look ahead in automated dispatch [hours]"),
+	PyDoc_STR("*float*: Hours to look ahead in automated dispatch [hours]\n\n**Constraints:**\nMIN=1"),
  	NULL},
 {"batt_pv_ac_forecast", (getter)BatteryDispatch_get_batt_pv_ac_forecast,(setter)BatteryDispatch_set_batt_pv_ac_forecast,
 	PyDoc_STR("*sequence*: PV ac power forecast [kW]\n\n**Info:**\nLength either 8760 * steps per hour (values repeat each year) or 8760 * steps per hour * analysis period"),
@@ -4854,6 +4854,308 @@ static PyTypeObject GridLimits_Type = {
 
 
 /*
+ * HybridCosts Group
+ */ 
+
+static PyTypeObject HybridCosts_Type;
+
+static PyObject *
+HybridCosts_new(SAM_Battery data_ptr)
+{
+	PyObject* new_obj = HybridCosts_Type.tp_alloc(&HybridCosts_Type,0);
+
+	VarGroupObject* HybridCosts_obj = (VarGroupObject*)new_obj;
+
+	HybridCosts_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* HybridCosts methods */
+
+static PyObject *
+HybridCosts_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Battery", "HybridCosts")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+HybridCosts_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &HybridCosts_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Battery", "HybridCosts")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+HybridCosts_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &HybridCosts_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef HybridCosts_methods[] = {
+		{"assign",            (PyCFunction)HybridCosts_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``HybridCosts_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)HybridCosts_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``HybridCosts_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)HybridCosts_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+HybridCosts_get_add_om_num_types(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_HybridCosts_add_om_num_types_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_add_om_num_types(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_HybridCosts_add_om_num_types_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_degradation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_HybridCosts_degradation_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_degradation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Battery_HybridCosts_degradation_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_land_area(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_HybridCosts_land_area_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_land_area(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_HybridCosts_land_area_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_batt_capacity_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_HybridCosts_om_batt_capacity_cost_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_batt_capacity_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Battery_HybridCosts_om_batt_capacity_cost_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_batt_fixed_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_HybridCosts_om_batt_fixed_cost_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_batt_fixed_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Battery_HybridCosts_om_batt_fixed_cost_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_batt_nameplate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_HybridCosts_om_batt_nameplate_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_batt_nameplate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_HybridCosts_om_batt_nameplate_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_capacity_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_HybridCosts_om_capacity_escal_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_capacity_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_HybridCosts_om_capacity_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_fixed_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_HybridCosts_om_fixed_escal_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_fixed_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_HybridCosts_om_fixed_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_land_lease(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_HybridCosts_om_land_lease_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_land_lease(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Battery_HybridCosts_om_land_lease_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_land_lease_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_HybridCosts_om_land_lease_escal_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_land_lease_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_HybridCosts_om_land_lease_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_production1_values(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_HybridCosts_om_production1_values_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_production1_values(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Battery_HybridCosts_om_production1_values_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_total_installed_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_HybridCosts_total_installed_cost_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_total_installed_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_HybridCosts_total_installed_cost_nset, self->data_ptr);
+}
+
+static PyGetSetDef HybridCosts_getset[] = {
+{"add_om_num_types", (getter)HybridCosts_get_add_om_num_types,(setter)HybridCosts_set_add_om_num_types,
+	PyDoc_STR("*float*: Number of O and M types\n\n**Info:**\nbattery,fuelcell\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"degradation", (getter)HybridCosts_get_degradation,(setter)HybridCosts_set_degradation,
+	PyDoc_STR("*sequence*: Annual AC degradation [%]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"land_area", (getter)HybridCosts_get_land_area,(setter)HybridCosts_set_land_area,
+	PyDoc_STR("*float*: Total land area [acres]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of ``land_area`` depends on the following variables:\n\n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n\t - batt_power_discharge_max_kwac\n"),
+ 	NULL},
+{"om_batt_capacity_cost", (getter)HybridCosts_get_om_batt_capacity_cost,(setter)HybridCosts_set_om_batt_capacity_cost,
+	PyDoc_STR("*sequence*: Battery capacity-based System Costs amount [$/kWcap]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_batt_fixed_cost", (getter)HybridCosts_get_om_batt_fixed_cost,(setter)HybridCosts_set_om_batt_fixed_cost,
+	PyDoc_STR("*sequence*: Battery fixed System Costs annual amount [$/year]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_batt_nameplate", (getter)HybridCosts_get_om_batt_nameplate,(setter)HybridCosts_set_om_batt_nameplate,
+	PyDoc_STR("*float*: Battery capacity for System Costs values [kW]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of ``om_batt_nameplate`` depends on the following variables:\n\n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+ 	NULL},
+{"om_capacity_escal", (getter)HybridCosts_get_om_capacity_escal,(setter)HybridCosts_set_om_capacity_escal,
+	PyDoc_STR("*float*: Capacity-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_fixed_escal", (getter)HybridCosts_get_om_fixed_escal,(setter)HybridCosts_set_om_fixed_escal,
+	PyDoc_STR("*float*: Fixed O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_land_lease", (getter)HybridCosts_get_om_land_lease,(setter)HybridCosts_set_om_land_lease,
+	PyDoc_STR("*sequence*: Land lease cost [$/acre]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_land_lease_escal", (getter)HybridCosts_get_om_land_lease_escal,(setter)HybridCosts_set_om_land_lease_escal,
+	PyDoc_STR("*float*: Land lease cost escalation [%/yr]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_production1_values", (getter)HybridCosts_get_om_production1_values,(setter)HybridCosts_set_om_production1_values,
+	PyDoc_STR("*sequence*: Battery production for System Costs values [kWh]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"total_installed_cost", (getter)HybridCosts_get_total_installed_cost,(setter)HybridCosts_set_total_installed_cost,
+	PyDoc_STR("*float*: Total installed cost [$]\n\n**Required:**\nTrue\n\nThe value of ``total_installed_cost`` depends on the following variables:\n\n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject HybridCosts_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Battery.HybridCosts",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		HybridCosts_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		HybridCosts_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * Outputs Group
  */ 
 
@@ -5315,6 +5617,60 @@ Outputs_get_cdf_of_surviving(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_cf_battery_replacement_cost_schedule(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_Outputs_cf_battery_replacement_cost_schedule_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_net(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_Outputs_cf_energy_net_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_fuelcell_replacement_cost_schedule(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_Outputs_cf_fuelcell_replacement_cost_schedule_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_land_lease_expense(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_Outputs_cf_land_lease_expense_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_Outputs_cf_om_capacity_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_fixed(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_Outputs_cf_om_fixed_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_fuel_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_Outputs_cf_om_fuel_cost_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_land_lease(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_Outputs_cf_om_land_lease_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_production(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_Outputs_cf_om_production_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_crit_load(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battery_Outputs_crit_load_aget, self->data_ptr);
@@ -5453,6 +5809,18 @@ Outputs_get_monthly_system_to_load(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_num_ts_load_met_by_system_lifetime(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_Outputs_num_ts_load_met_by_system_lifetime_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_num_ts_load_met_by_system_yr1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_Outputs_num_ts_load_met_by_system_yr1_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_outage_durations(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battery_Outputs_outage_durations_aget, self->data_ptr);
@@ -5468,6 +5836,18 @@ static PyObject *
 Outputs_get_pdf_of_surviving(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battery_Outputs_pdf_of_surviving_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_percent_ts_load_met_by_system_lifetime(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_Outputs_percent_ts_load_met_by_system_lifetime_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_percent_ts_load_met_by_system_yr1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_Outputs_percent_ts_load_met_by_system_yr1_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -5720,6 +6100,33 @@ static PyGetSetDef Outputs_getset[] = {
 {"cdf_of_surviving", (getter)Outputs_get_cdf_of_surviving,(setter)0,
 	PyDoc_STR("*sequence*: Hours of autonomy during grid outage cumulative probabilities"),
  	NULL},
+{"cf_battery_replacement_cost_schedule", (getter)Outputs_get_cf_battery_replacement_cost_schedule,(setter)0,
+	PyDoc_STR("*sequence*: replacement O&M costs [$]"),
+ 	NULL},
+{"cf_energy_net", (getter)Outputs_get_cf_energy_net,(setter)0,
+	PyDoc_STR("*sequence*: annual energy [kWh]"),
+ 	NULL},
+{"cf_fuelcell_replacement_cost_schedule", (getter)Outputs_get_cf_fuelcell_replacement_cost_schedule,(setter)0,
+	PyDoc_STR("*sequence*: replacement O&M costs [$]"),
+ 	NULL},
+{"cf_land_lease_expense", (getter)Outputs_get_cf_land_lease_expense,(setter)0,
+	PyDoc_STR("*sequence*: Land lease expense [$]"),
+ 	NULL},
+{"cf_om_capacity", (getter)Outputs_get_cf_om_capacity,(setter)0,
+	PyDoc_STR("*sequence*: capacity O&M costs [$]"),
+ 	NULL},
+{"cf_om_fixed", (getter)Outputs_get_cf_om_fixed,(setter)0,
+	PyDoc_STR("*sequence*: fixed O&M costs [$]"),
+ 	NULL},
+{"cf_om_fuel_cost", (getter)Outputs_get_cf_om_fuel_cost,(setter)0,
+	PyDoc_STR("*sequence*: fossil fuel O&M costs [$]"),
+ 	NULL},
+{"cf_om_land_lease", (getter)Outputs_get_cf_om_land_lease,(setter)0,
+	PyDoc_STR("*sequence*: land lease O&M costs [$]"),
+ 	NULL},
+{"cf_om_production", (getter)Outputs_get_cf_om_production,(setter)0,
+	PyDoc_STR("*sequence*: production O&M costs [$]"),
+ 	NULL},
 {"crit_load", (getter)Outputs_get_crit_load,(setter)0,
 	PyDoc_STR("*sequence*: Critical load in this timestep [kW]"),
  	NULL},
@@ -5789,6 +6196,12 @@ static PyGetSetDef Outputs_getset[] = {
 {"monthly_system_to_load", (getter)Outputs_get_monthly_system_to_load,(setter)0,
 	PyDoc_STR("*sequence*: Energy to load from system [kWh]"),
  	NULL},
+{"num_ts_load_met_by_system_lifetime", (getter)Outputs_get_num_ts_load_met_by_system_lifetime,(setter)0,
+	PyDoc_STR("*float*: Number of timesteps electric load met by system (lifetime)"),
+ 	NULL},
+{"num_ts_load_met_by_system_yr1", (getter)Outputs_get_num_ts_load_met_by_system_yr1,(setter)0,
+	PyDoc_STR("*float*: Number of timesteps electric load met by system (year 1)"),
+ 	NULL},
 {"outage_durations", (getter)Outputs_get_outage_durations,(setter)0,
 	PyDoc_STR("*sequence*: Hours of autonomy during grid outage hour list from min to max [hr]"),
  	NULL},
@@ -5797,6 +6210,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"pdf_of_surviving", (getter)Outputs_get_pdf_of_surviving,(setter)0,
 	PyDoc_STR("*sequence*: Hours of autonomy during grid outage probabilities"),
+ 	NULL},
+{"percent_ts_load_met_by_system_lifetime", (getter)Outputs_get_percent_ts_load_met_by_system_lifetime,(setter)0,
+	PyDoc_STR("*float*: Percent of timesteps electric load met by system (lifetime)"),
+ 	NULL},
+{"percent_ts_load_met_by_system_yr1", (getter)Outputs_get_percent_ts_load_met_by_system_yr1,(setter)0,
+	PyDoc_STR("*float*: Percent of timesteps electric load met by system (year 1)"),
  	NULL},
 {"resilience_hrs", (getter)Outputs_get_resilience_hrs,(setter)0,
 	PyDoc_STR("*sequence*: Hours of autonomy during grid outage at each timestep [hr]"),
@@ -5948,6 +6367,10 @@ newBatteryObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "GridLimits", GridLimits_obj);
 	Py_DECREF(GridLimits_obj);
 
+	PyObject* HybridCosts_obj = HybridCosts_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "HybridCosts", HybridCosts_obj);
+	Py_DECREF(HybridCosts_obj);
+
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
@@ -5968,6 +6391,14 @@ Battery_dealloc(CmodObject *self)
 		PySAM_has_error(error);
 	}
 	PyObject_Del(self);
+}
+
+
+static PyObject *
+Battery_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
 }
 
 
@@ -6048,6 +6479,8 @@ static PyMethodDef Battery_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Battery_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Battery_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{"Reopt_size_standalone_battery_post", (PyCFunction)Reopt_size_standalone_battery_post, METH_VARARGS | METH_KEYWORDS,
 			Reopt_size_standalone_battery_post_doc},
 		{NULL,              NULL}           /* sentinel */
@@ -6208,7 +6641,7 @@ static PyMethodDef BatteryModule_methods[] = {
 		{"new",             Battery_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Battery")},
 		{"default",             Battery_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Battery\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"FuelCellCommercial\"*\n\n		- *\"FuelCellSingleOwner\"*\n\n		- *\"GenericBatteryAllEquityPartnershipFlip\"*\n\n		- *\"GenericBatteryCommercial\"*\n\n		- *\"GenericBatteryHostDeveloper\"*\n\n		- *\"GenericBatteryLeveragedPartnershipFlip\"*\n\n		- *\"GenericBatteryMerchantPlant\"*\n\n		- *\"GenericBatteryResidential\"*\n\n		- *\"GenericBatterySaleLeaseback\"*\n\n		- *\"GenericBatterySingleOwner\"*\n\n		- *\"GenericBatteryThirdParty\"*\n\n		- *\"MEwaveBatterySingleOwner\"*\n\n		- *\"StandaloneBatteryAllEquityPartnershipFlip\"*\n\n		- *\"StandaloneBatteryCommercial\"*\n\n		- *\"StandaloneBatteryHostDeveloper\"*\n\n		- *\"StandaloneBatteryLeveragedPartnershipFlip\"*\n\n		- *\"StandaloneBatteryMerchantPlant\"*\n\n		- *\"StandaloneBatteryResidential\"*\n\n		- *\"StandaloneBatterySaleLeaseback\"*\n\n		- *\"StandaloneBatterySingleOwner\"*\n\n		- *\"StandaloneBatteryThirdParty\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> Battery\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"FuelCellCommercial\"*\n\n		- *\"FuelCellSingleOwner\"*\n\n		- *\"GenericBatteryAllEquityPartnershipFlip\"*\n\n		- *\"GenericBatteryCommercial\"*\n\n		- *\"GenericBatteryHostDeveloper\"*\n\n		- *\"GenericBatteryLeveragedPartnershipFlip\"*\n\n		- *\"GenericBatteryMerchantPlant\"*\n\n		- *\"GenericBatteryResidential\"*\n\n		- *\"GenericBatterySaleLeaseback\"*\n\n		- *\"GenericBatterySingleOwner\"*\n\n		- *\"GenericBatteryThirdParty\"*\n\n		- *\"GenericPVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"GenericPVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"MEwaveBatterySingleOwner\"*\n\n		- *\"PVWattsWindBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"PhotovoltaicWindBatteryHybridHostDeveloper\"*\n\n		- *\"PhotovoltaicWindBatteryHybridSingleOwner\"*\n\n		- *\"StandaloneBatteryAllEquityPartnershipFlip\"*\n\n		- *\"StandaloneBatteryCommercial\"*\n\n		- *\"StandaloneBatteryHostDeveloper\"*\n\n		- *\"StandaloneBatteryLeveragedPartnershipFlip\"*\n\n		- *\"StandaloneBatteryMerchantPlant\"*\n\n		- *\"StandaloneBatteryResidential\"*\n\n		- *\"StandaloneBatterySaleLeaseback\"*\n\n		- *\"StandaloneBatterySingleOwner\"*\n\n		- *\"StandaloneBatteryThirdParty\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Battery_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Battery\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Battery_from_existing,        METH_VARARGS,
@@ -6335,6 +6768,13 @@ BatteryModule_exec(PyObject *m)
 				"GridLimits",
 				(PyObject*)&GridLimits_Type);
 	Py_DECREF(&GridLimits_Type);
+
+	/// Add the HybridCosts type object to Battery_Type
+	if (PyType_Ready(&HybridCosts_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Battery_Type.tp_dict,
+				"HybridCosts",
+				(PyObject*)&HybridCosts_Type);
+	Py_DECREF(&HybridCosts_Type);
 
 	/// Add the Outputs type object to Battery_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

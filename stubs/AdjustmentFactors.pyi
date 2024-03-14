@@ -31,16 +31,16 @@ class AdjustmentFactors(object):
         pass
 
     constant = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
-    """type: float"""
+    """AC Constant loss adjustment [%]"""
 
-    dc_constant = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
-    """DC Constant loss adjustment [%]"""
+    en_hourly = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
+    """Enable AC hourly-based adjustment factors [0/1]"""
 
-    dc_hourly = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
-    """DC Hourly Adjustment Factors [%]"""
+    en_periods = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
+    """Enable AC period-based adjustment factors [0/1]"""
 
-    dc_periods = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
-    """DC Period-based Adjustment Factors [%]"""
+    en_timeindex = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
+    """Enable AC lfetime adjustment factors [0/1]"""
 
     hourly = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
     """AC Hourly Adjustment Factors [%]"""
@@ -48,8 +48,41 @@ class AdjustmentFactors(object):
     periods = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
     """AC Period-based Adjustment Factors [%]"""
 
+    timeindex = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
+    """AC Lifetime Adjustment Factors [%]"""
+
+    dc_constant = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
+    """DC Constant loss adjustment [%]"""
+
+    dc_en_hourly = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
+    """Enable DC hourly-based adjustment factors [0/1]"""
+
+    dc_en_periods = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
+    """Enable DC period-based adjustment factors [0/1]"""
+
+    dc_en_timeindex = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
+    """Enable DC lifetime adjustment factors [0/1]"""
+
+    dc_hourly = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
+    """DC Hourly Adjustment Factors [%]"""
+
+    dc_periods = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
+    """DC Period-based Adjustment Factors [%]"""
+
+    dc_timeindex = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
+    """DC Lifetime Adjustment Factors [%]"""
+
     sf_constant = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
     """DC Constant loss adjustment [%]"""
+
+    sf_en_hourly = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
+    """Enable SF hourly-based adjustment factors [0/1]"""
+
+    sf_en_periods = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
+    """Enable SF period-based adjustment factors [0/1]"""
+
+    sf_en_timeindex = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
+    """Enable SF lifetime adjustment factors [0/1]"""
 
     sf_hourly = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
     """DC Hourly Adjustment Factors [%]"""
@@ -57,6 +90,8 @@ class AdjustmentFactors(object):
     sf_periods = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
     """DC Period-based Adjustment Factors [%]"""
 
+    sf_timeindex = property(lambda self: object(), lambda self, v: None, lambda self: None)  # default
+    """SF Lifetime Adjustment Factors [%]"""
 
 
 class error(Exception):

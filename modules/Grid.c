@@ -508,6 +508,143 @@ static PyTypeObject Load_Type = {
 
 
 /*
+ * Monthly Group
+ */ 
+
+static PyTypeObject Monthly_Type;
+
+static PyObject *
+Monthly_new(SAM_Grid data_ptr)
+{
+	PyObject* new_obj = Monthly_Type.tp_alloc(&Monthly_Type,0);
+
+	VarGroupObject* Monthly_obj = (VarGroupObject*)new_obj;
+
+	Monthly_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* Monthly methods */
+
+static PyObject *
+Monthly_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Grid", "Monthly")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Monthly_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Monthly_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Grid", "Monthly")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Monthly_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Monthly_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Monthly_methods[] = {
+		{"assign",            (PyCFunction)Monthly_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Monthly_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Monthly_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Monthly_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Monthly_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Monthly_get_monthly_energy(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Grid_Monthly_monthly_energy_aget, self->data_ptr);
+}
+
+static int
+Monthly_set_monthly_energy(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Grid_Monthly_monthly_energy_aset, self->data_ptr);
+}
+
+static PyGetSetDef Monthly_getset[] = {
+{"monthly_energy", (getter)Monthly_get_monthly_energy,(setter)Monthly_set_monthly_energy,
+	PyDoc_STR("*sequence*: AC energy (year 1) [kWh/mo]\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Constraints:**\nLENGTH=12"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Monthly_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Grid.Monthly",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Monthly_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Monthly_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * GridLimits Group
  */ 
 
@@ -675,6 +812,293 @@ static PyTypeObject GridLimits_Type = {
 
 
 /*
+ * HybridCosts Group
+ */ 
+
+static PyTypeObject HybridCosts_Type;
+
+static PyObject *
+HybridCosts_new(SAM_Grid data_ptr)
+{
+	PyObject* new_obj = HybridCosts_Type.tp_alloc(&HybridCosts_Type,0);
+
+	VarGroupObject* HybridCosts_obj = (VarGroupObject*)new_obj;
+
+	HybridCosts_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* HybridCosts methods */
+
+static PyObject *
+HybridCosts_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Grid", "HybridCosts")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+HybridCosts_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &HybridCosts_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Grid", "HybridCosts")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+HybridCosts_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &HybridCosts_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef HybridCosts_methods[] = {
+		{"assign",            (PyCFunction)HybridCosts_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``HybridCosts_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)HybridCosts_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``HybridCosts_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)HybridCosts_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+HybridCosts_get_degradation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Grid_HybridCosts_degradation_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_degradation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Grid_HybridCosts_degradation_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_land_area(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Grid_HybridCosts_land_area_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_land_area(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Grid_HybridCosts_land_area_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Grid_HybridCosts_om_capacity_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_capacity(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Grid_HybridCosts_om_capacity_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_capacity_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Grid_HybridCosts_om_capacity_escal_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_capacity_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Grid_HybridCosts_om_capacity_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_fixed(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Grid_HybridCosts_om_fixed_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_fixed(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Grid_HybridCosts_om_fixed_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_fixed_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Grid_HybridCosts_om_fixed_escal_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_fixed_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Grid_HybridCosts_om_fixed_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_land_lease(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Grid_HybridCosts_om_land_lease_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_land_lease(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Grid_HybridCosts_om_land_lease_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_land_lease_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Grid_HybridCosts_om_land_lease_escal_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_land_lease_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Grid_HybridCosts_om_land_lease_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_production(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Grid_HybridCosts_om_production_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_production(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Grid_HybridCosts_om_production_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_production_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Grid_HybridCosts_om_production_escal_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_production_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Grid_HybridCosts_om_production_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_total_installed_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Grid_HybridCosts_total_installed_cost_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_total_installed_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Grid_HybridCosts_total_installed_cost_nset, self->data_ptr);
+}
+
+static PyGetSetDef HybridCosts_getset[] = {
+{"degradation", (getter)HybridCosts_get_degradation,(setter)HybridCosts_set_degradation,
+	PyDoc_STR("*sequence*: Annual AC degradation [%]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"land_area", (getter)HybridCosts_get_land_area,(setter)HybridCosts_set_land_area,
+	PyDoc_STR("*float*: Total land area [acres]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_capacity", (getter)HybridCosts_get_om_capacity,(setter)HybridCosts_set_om_capacity,
+	PyDoc_STR("*sequence*: Capacity-based O&M amount [$/kWcap]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_capacity_escal", (getter)HybridCosts_get_om_capacity_escal,(setter)HybridCosts_set_om_capacity_escal,
+	PyDoc_STR("*float*: Capacity-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_fixed", (getter)HybridCosts_get_om_fixed,(setter)HybridCosts_set_om_fixed,
+	PyDoc_STR("*sequence*: Fixed O&M annual amount [$/year]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_fixed_escal", (getter)HybridCosts_get_om_fixed_escal,(setter)HybridCosts_set_om_fixed_escal,
+	PyDoc_STR("*float*: Fixed O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_land_lease", (getter)HybridCosts_get_om_land_lease,(setter)HybridCosts_set_om_land_lease,
+	PyDoc_STR("*sequence*: Land lease cost [$/acre]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_land_lease_escal", (getter)HybridCosts_get_om_land_lease_escal,(setter)HybridCosts_set_om_land_lease_escal,
+	PyDoc_STR("*float*: Land lease cost escalation [%/yr]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_production", (getter)HybridCosts_get_om_production,(setter)HybridCosts_set_om_production,
+	PyDoc_STR("*sequence*: Production-based O&M amount [$/MWh]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_production_escal", (getter)HybridCosts_get_om_production_escal,(setter)HybridCosts_set_om_production_escal,
+	PyDoc_STR("*float*: Production-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"total_installed_cost", (getter)HybridCosts_get_total_installed_cost,(setter)HybridCosts_set_total_installed_cost,
+	PyDoc_STR("*float*: Total installed cost [$]\n\n**Required:**\nTrue"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject HybridCosts_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Grid.HybridCosts",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		HybridCosts_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		HybridCosts_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * Outputs Group
  */ 
 
@@ -800,6 +1224,12 @@ Outputs_get_capacity_factor_interconnect_ac(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_cf_land_lease_expense(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Grid_Outputs_cf_land_lease_expense_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_full_load(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Grid_Outputs_full_load_aget, self->data_ptr);
@@ -850,6 +1280,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"capacity_factor_interconnect_ac", (getter)Outputs_get_capacity_factor_interconnect_ac,(setter)0,
 	PyDoc_STR("*float*: Capacity factor based on AC interconnection limit [%]"),
+ 	NULL},
+{"cf_land_lease_expense", (getter)Outputs_get_cf_land_lease_expense,(setter)0,
+	PyDoc_STR("*sequence*: Land lease expense [$]"),
  	NULL},
 {"full_load", (getter)Outputs_get_full_load,(setter)0,
 	PyDoc_STR("*sequence*: Electricity load prior to grid outage (year 1) [kW]"),
@@ -938,9 +1371,17 @@ newGridObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Load", Load_obj);
 	Py_DECREF(Load_obj);
 
+	PyObject* Monthly_obj = Monthly_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Monthly", Monthly_obj);
+	Py_DECREF(Monthly_obj);
+
 	PyObject* GridLimits_obj = GridLimits_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "GridLimits", GridLimits_obj);
 	Py_DECREF(GridLimits_obj);
+
+	PyObject* HybridCosts_obj = HybridCosts_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "HybridCosts", HybridCosts_obj);
+	Py_DECREF(HybridCosts_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -962,6 +1403,14 @@ Grid_dealloc(CmodObject *self)
 		PySAM_has_error(error);
 	}
 	PyObject_Del(self);
+}
+
+
+static PyObject *
+Grid_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
 }
 
 
@@ -1042,6 +1491,8 @@ static PyMethodDef Grid_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Grid_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Grid_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1200,7 +1651,7 @@ static PyMethodDef GridModule_methods[] = {
 		{"new",             Grid_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Grid")},
 		{"default",             Grid_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Grid\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"BiopowerAllEquityPartnershipFlip\"*\n\n		- *\"BiopowerLCOECalculator\"*\n\n		- *\"BiopowerLeveragedPartnershipFlip\"*\n\n		- *\"BiopowerMerchantPlant\"*\n\n		- *\"BiopowerNone\"*\n\n		- *\"BiopowerSaleLeaseback\"*\n\n		- *\"BiopowerSingleOwner\"*\n\n		- *\"DSLFAllEquityPartnershipFlip\"*\n\n		- *\"DSLFCommercial\"*\n\n		- *\"DSLFLCOECalculator\"*\n\n		- *\"DSLFLeveragedPartnershipFlip\"*\n\n		- *\"DSLFMerchantPlant\"*\n\n		- *\"DSLFNone\"*\n\n		- *\"DSLFSaleLeaseback\"*\n\n		- *\"DSLFSingleOwner\"*\n\n		- *\"FlatPlatePVAllEquityPartnershipFlip\"*\n\n		- *\"FlatPlatePVCommercial\"*\n\n		- *\"FlatPlatePVHostDeveloper\"*\n\n		- *\"FlatPlatePVLCOECalculator\"*\n\n		- *\"FlatPlatePVLeveragedPartnershipFlip\"*\n\n		- *\"FlatPlatePVMerchantPlant\"*\n\n		- *\"FlatPlatePVNone\"*\n\n		- *\"FlatPlatePVResidential\"*\n\n		- *\"FlatPlatePVSaleLeaseback\"*\n\n		- *\"FlatPlatePVSingleOwner\"*\n\n		- *\"FlatPlatePVThirdParty\"*\n\n		- *\"FuelCellCommercial\"*\n\n		- *\"FuelCellSingleOwner\"*\n\n		- *\"GenericBatteryAllEquityPartnershipFlip\"*\n\n		- *\"GenericBatteryCommercial\"*\n\n		- *\"GenericBatteryHostDeveloper\"*\n\n		- *\"GenericBatteryLeveragedPartnershipFlip\"*\n\n		- *\"GenericBatteryMerchantPlant\"*\n\n		- *\"GenericBatteryResidential\"*\n\n		- *\"GenericBatterySaleLeaseback\"*\n\n		- *\"GenericBatterySingleOwner\"*\n\n		- *\"GenericBatteryThirdParty\"*\n\n		- *\"GenericCSPSystemAllEquityPartnershipFlip\"*\n\n		- *\"GenericCSPSystemCommercial\"*\n\n		- *\"GenericCSPSystemLCOECalculator\"*\n\n		- *\"GenericCSPSystemLeveragedPartnershipFlip\"*\n\n		- *\"GenericCSPSystemMerchantPlant\"*\n\n		- *\"GenericCSPSystemNone\"*\n\n		- *\"GenericCSPSystemSaleLeaseback\"*\n\n		- *\"GenericCSPSystemSingleOwner\"*\n\n		- *\"GenericSystemAllEquityPartnershipFlip\"*\n\n		- *\"GenericSystemCommercial\"*\n\n		- *\"GenericSystemHostDeveloper\"*\n\n		- *\"GenericSystemLCOECalculator\"*\n\n		- *\"GenericSystemLeveragedPartnershipFlip\"*\n\n		- *\"GenericSystemMerchantPlant\"*\n\n		- *\"GenericSystemNone\"*\n\n		- *\"GenericSystemResidential\"*\n\n		- *\"GenericSystemSaleLeaseback\"*\n\n		- *\"GenericSystemSingleOwner\"*\n\n		- *\"GenericSystemThirdParty\"*\n\n		- *\"GeothermalPowerAllEquityPartnershipFlip\"*\n\n		- *\"GeothermalPowerLCOECalculator\"*\n\n		- *\"GeothermalPowerLeveragedPartnershipFlip\"*\n\n		- *\"GeothermalPowerMerchantPlant\"*\n\n		- *\"GeothermalPowerNone\"*\n\n		- *\"GeothermalPowerSaleLeaseback\"*\n\n		- *\"GeothermalPowerSingleOwner\"*\n\n		- *\"HighXConcentratingPVAllEquityPartnershipFlip\"*\n\n		- *\"HighXConcentratingPVLCOECalculator\"*\n\n		- *\"HighXConcentratingPVLeveragedPartnershipFlip\"*\n\n		- *\"HighXConcentratingPVMerchantPlant\"*\n\n		- *\"HighXConcentratingPVNone\"*\n\n		- *\"HighXConcentratingPVSaleLeaseback\"*\n\n		- *\"HighXConcentratingPVSingleOwner\"*\n\n		- *\"MEwaveBatterySingleOwner\"*\n\n		- *\"MEwaveSingleOwner\"*\n\n		- *\"MSLFAllEquityPartnershipFlip\"*\n\n		- *\"MSLFCommercial\"*\n\n		- *\"MSLFLCOECalculator\"*\n\n		- *\"MSLFLeveragedPartnershipFlip\"*\n\n		- *\"MSLFMerchantPlant\"*\n\n		- *\"MSLFNone\"*\n\n		- *\"MSLFSaleLeaseback\"*\n\n		- *\"MSLFSingleOwner\"*\n\n		- *\"MSPTAllEquityPartnershipFlip\"*\n\n		- *\"MSPTLeveragedPartnershipFlip\"*\n\n		- *\"MSPTMerchantPlant\"*\n\n		- *\"MSPTSaleLeaseback\"*\n\n		- *\"MSPTSingleOwner\"*\n\n		- *\"PVBatteryAllEquityPartnershipFlip\"*\n\n		- *\"PVBatteryCommercial\"*\n\n		- *\"PVBatteryHostDeveloper\"*\n\n		- *\"PVBatteryLeveragedPartnershipFlip\"*\n\n		- *\"PVBatteryMerchantPlant\"*\n\n		- *\"PVBatteryResidential\"*\n\n		- *\"PVBatterySaleLeaseback\"*\n\n		- *\"PVBatterySingleOwner\"*\n\n		- *\"PVBatteryThirdParty\"*\n\n		- *\"PVWattsBatteryCommercial\"*\n\n		- *\"PVWattsBatteryHostDeveloper\"*\n\n		- *\"PVWattsBatteryResidential\"*\n\n		- *\"PVWattsBatteryThirdParty\"*\n\n		- *\"PVWattsAllEquityPartnershipFlip\"*\n\n		- *\"PVWattsCommercial\"*\n\n		- *\"PVWattsCommunitySolar\"*\n\n		- *\"PVWattsHostDeveloper\"*\n\n		- *\"PVWattsLCOECalculator\"*\n\n		- *\"PVWattsLeveragedPartnershipFlip\"*\n\n		- *\"PVWattsMerchantPlant\"*\n\n		- *\"PVWattsNone\"*\n\n		- *\"PVWattsResidential\"*\n\n		- *\"PVWattsSaleLeaseback\"*\n\n		- *\"PVWattsSingleOwner\"*\n\n		- *\"PVWattsThirdParty\"*\n\n		- *\"PhysicalTroughAllEquityPartnershipFlip\"*\n\n		- *\"PhysicalTroughLCOECalculator\"*\n\n		- *\"PhysicalTroughLeveragedPartnershipFlip\"*\n\n		- *\"PhysicalTroughMerchantPlant\"*\n\n		- *\"PhysicalTroughNone\"*\n\n		- *\"PhysicalTroughSaleLeaseback\"*\n\n		- *\"PhysicalTroughSingleOwner\"*\n\n		- *\"StandaloneBatteryAllEquityPartnershipFlip\"*\n\n		- *\"StandaloneBatteryCommercial\"*\n\n		- *\"StandaloneBatteryHostDeveloper\"*\n\n		- *\"StandaloneBatteryLeveragedPartnershipFlip\"*\n\n		- *\"StandaloneBatteryMerchantPlant\"*\n\n		- *\"StandaloneBatteryResidential\"*\n\n		- *\"StandaloneBatterySaleLeaseback\"*\n\n		- *\"StandaloneBatterySingleOwner\"*\n\n		- *\"StandaloneBatteryThirdParty\"*\n\n		- *\"WindPowerAllEquityPartnershipFlip\"*\n\n		- *\"WindPowerCommercial\"*\n\n		- *\"WindPowerLCOECalculator\"*\n\n		- *\"WindPowerLeveragedPartnershipFlip\"*\n\n		- *\"WindPowerMerchantPlant\"*\n\n		- *\"WindPowerNone\"*\n\n		- *\"WindPowerResidential\"*\n\n		- *\"WindPowerSaleLeaseback\"*\n\n		- *\"WindPowerSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> Grid\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"BiopowerAllEquityPartnershipFlip\"*\n\n		- *\"BiopowerLCOECalculator\"*\n\n		- *\"BiopowerLeveragedPartnershipFlip\"*\n\n		- *\"BiopowerMerchantPlant\"*\n\n		- *\"BiopowerNone\"*\n\n		- *\"BiopowerSaleLeaseback\"*\n\n		- *\"BiopowerSingleOwner\"*\n\n		- *\"DSLFAllEquityPartnershipFlip\"*\n\n		- *\"DSLFCommercial\"*\n\n		- *\"DSLFLCOECalculator\"*\n\n		- *\"DSLFLeveragedPartnershipFlip\"*\n\n		- *\"DSLFMerchantPlant\"*\n\n		- *\"DSLFNone\"*\n\n		- *\"DSLFSaleLeaseback\"*\n\n		- *\"DSLFSingleOwner\"*\n\n		- *\"FlatPlatePVAllEquityPartnershipFlip\"*\n\n		- *\"FlatPlatePVCommercial\"*\n\n		- *\"FlatPlatePVHostDeveloper\"*\n\n		- *\"FlatPlatePVLCOECalculator\"*\n\n		- *\"FlatPlatePVLeveragedPartnershipFlip\"*\n\n		- *\"FlatPlatePVMerchantPlant\"*\n\n		- *\"FlatPlatePVNone\"*\n\n		- *\"FlatPlatePVResidential\"*\n\n		- *\"FlatPlatePVSaleLeaseback\"*\n\n		- *\"FlatPlatePVSingleOwner\"*\n\n		- *\"FlatPlatePVThirdParty\"*\n\n		- *\"FuelCellCommercial\"*\n\n		- *\"FuelCellSingleOwner\"*\n\n		- *\"GenericBatteryAllEquityPartnershipFlip\"*\n\n		- *\"GenericBatteryCommercial\"*\n\n		- *\"GenericBatteryHostDeveloper\"*\n\n		- *\"GenericBatteryLeveragedPartnershipFlip\"*\n\n		- *\"GenericBatteryMerchantPlant\"*\n\n		- *\"GenericBatteryResidential\"*\n\n		- *\"GenericBatterySaleLeaseback\"*\n\n		- *\"GenericBatterySingleOwner\"*\n\n		- *\"GenericBatteryThirdParty\"*\n\n		- *\"GenericCSPSystemAllEquityPartnershipFlip\"*\n\n		- *\"GenericCSPSystemCommercial\"*\n\n		- *\"GenericCSPSystemLCOECalculator\"*\n\n		- *\"GenericCSPSystemLeveragedPartnershipFlip\"*\n\n		- *\"GenericCSPSystemMerchantPlant\"*\n\n		- *\"GenericCSPSystemNone\"*\n\n		- *\"GenericCSPSystemSaleLeaseback\"*\n\n		- *\"GenericCSPSystemSingleOwner\"*\n\n		- *\"GenericPVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"GenericPVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"GenericSystemAllEquityPartnershipFlip\"*\n\n		- *\"GenericSystemCommercial\"*\n\n		- *\"GenericSystemHostDeveloper\"*\n\n		- *\"GenericSystemLCOECalculator\"*\n\n		- *\"GenericSystemLeveragedPartnershipFlip\"*\n\n		- *\"GenericSystemMerchantPlant\"*\n\n		- *\"GenericSystemNone\"*\n\n		- *\"GenericSystemResidential\"*\n\n		- *\"GenericSystemSaleLeaseback\"*\n\n		- *\"GenericSystemSingleOwner\"*\n\n		- *\"GenericSystemThirdParty\"*\n\n		- *\"GeothermalPowerAllEquityPartnershipFlip\"*\n\n		- *\"GeothermalPowerLCOECalculator\"*\n\n		- *\"GeothermalPowerLeveragedPartnershipFlip\"*\n\n		- *\"GeothermalPowerMerchantPlant\"*\n\n		- *\"GeothermalPowerNone\"*\n\n		- *\"GeothermalPowerSaleLeaseback\"*\n\n		- *\"GeothermalPowerSingleOwner\"*\n\n		- *\"HighXConcentratingPVAllEquityPartnershipFlip\"*\n\n		- *\"HighXConcentratingPVLCOECalculator\"*\n\n		- *\"HighXConcentratingPVLeveragedPartnershipFlip\"*\n\n		- *\"HighXConcentratingPVMerchantPlant\"*\n\n		- *\"HighXConcentratingPVNone\"*\n\n		- *\"HighXConcentratingPVSaleLeaseback\"*\n\n		- *\"HighXConcentratingPVSingleOwner\"*\n\n		- *\"MEwaveBatterySingleOwner\"*\n\n		- *\"MEwaveSingleOwner\"*\n\n		- *\"MSLFAllEquityPartnershipFlip\"*\n\n		- *\"MSLFLeveragedPartnershipFlip\"*\n\n		- *\"MSLFMerchantPlant\"*\n\n		- *\"MSLFSaleLeaseback\"*\n\n		- *\"MSLFSingleOwner\"*\n\n		- *\"MSPTAllEquityPartnershipFlip\"*\n\n		- *\"MSPTLeveragedPartnershipFlip\"*\n\n		- *\"MSPTMerchantPlant\"*\n\n		- *\"MSPTSaleLeaseback\"*\n\n		- *\"MSPTSingleOwner\"*\n\n		- *\"PVBatteryAllEquityPartnershipFlip\"*\n\n		- *\"PVBatteryCommercial\"*\n\n		- *\"PVBatteryHostDeveloper\"*\n\n		- *\"PVBatteryLeveragedPartnershipFlip\"*\n\n		- *\"PVBatteryMerchantPlant\"*\n\n		- *\"PVBatteryResidential\"*\n\n		- *\"PVBatterySaleLeaseback\"*\n\n		- *\"PVBatterySingleOwner\"*\n\n		- *\"PVBatteryThirdParty\"*\n\n		- *\"PVWattsBatteryCommercial\"*\n\n		- *\"PVWattsBatteryHostDeveloper\"*\n\n		- *\"PVWattsBatteryResidential\"*\n\n		- *\"PVWattsBatteryThirdParty\"*\n\n		- *\"PVWattsWindBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsAllEquityPartnershipFlip\"*\n\n		- *\"PVWattsCommercial\"*\n\n		- *\"PVWattsCommunitySolar\"*\n\n		- *\"PVWattsHostDeveloper\"*\n\n		- *\"PVWattsLCOECalculator\"*\n\n		- *\"PVWattsLeveragedPartnershipFlip\"*\n\n		- *\"PVWattsMerchantPlant\"*\n\n		- *\"PVWattsNone\"*\n\n		- *\"PVWattsResidential\"*\n\n		- *\"PVWattsSaleLeaseback\"*\n\n		- *\"PVWattsSingleOwner\"*\n\n		- *\"PVWattsThirdParty\"*\n\n		- *\"PhotovoltaicWindBatteryHybridHostDeveloper\"*\n\n		- *\"PhotovoltaicWindBatteryHybridSingleOwner\"*\n\n		- *\"PhysicalTroughAllEquityPartnershipFlip\"*\n\n		- *\"PhysicalTroughLCOECalculator\"*\n\n		- *\"PhysicalTroughLeveragedPartnershipFlip\"*\n\n		- *\"PhysicalTroughMerchantPlant\"*\n\n		- *\"PhysicalTroughNone\"*\n\n		- *\"PhysicalTroughSaleLeaseback\"*\n\n		- *\"PhysicalTroughSingleOwner\"*\n\n		- *\"StandaloneBatteryAllEquityPartnershipFlip\"*\n\n		- *\"StandaloneBatteryCommercial\"*\n\n		- *\"StandaloneBatteryHostDeveloper\"*\n\n		- *\"StandaloneBatteryLeveragedPartnershipFlip\"*\n\n		- *\"StandaloneBatteryMerchantPlant\"*\n\n		- *\"StandaloneBatteryResidential\"*\n\n		- *\"StandaloneBatterySaleLeaseback\"*\n\n		- *\"StandaloneBatterySingleOwner\"*\n\n		- *\"StandaloneBatteryThirdParty\"*\n\n		- *\"WindPowerAllEquityPartnershipFlip\"*\n\n		- *\"WindPowerCommercial\"*\n\n		- *\"WindPowerLCOECalculator\"*\n\n		- *\"WindPowerLeveragedPartnershipFlip\"*\n\n		- *\"WindPowerMerchantPlant\"*\n\n		- *\"WindPowerNone\"*\n\n		- *\"WindPowerResidential\"*\n\n		- *\"WindPowerSaleLeaseback\"*\n\n		- *\"WindPowerSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Grid_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Grid\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Grid_from_existing,        METH_VARARGS,
@@ -1244,12 +1695,26 @@ GridModule_exec(PyObject *m)
 				(PyObject*)&Load_Type);
 	Py_DECREF(&Load_Type);
 
+	/// Add the Monthly type object to Grid_Type
+	if (PyType_Ready(&Monthly_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Grid_Type.tp_dict,
+				"Monthly",
+				(PyObject*)&Monthly_Type);
+	Py_DECREF(&Monthly_Type);
+
 	/// Add the GridLimits type object to Grid_Type
 	if (PyType_Ready(&GridLimits_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Grid_Type.tp_dict,
 				"GridLimits",
 				(PyObject*)&GridLimits_Type);
 	Py_DECREF(&GridLimits_Type);
+
+	/// Add the HybridCosts type object to Grid_Type
+	if (PyType_Ready(&HybridCosts_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Grid_Type.tp_dict,
+				"HybridCosts",
+				(PyObject*)&HybridCosts_Type);
+	Py_DECREF(&HybridCosts_Type);
 
 	/// Add the Outputs type object to Grid_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

@@ -9,12 +9,10 @@ import PySAM.Battery as stbt
 import PySAM.Cashloan as loan
 
 
-@pytest.fixture
-def solar_resource():
-    return str(Path(__file__).parent / "blythe_ca_33.617773_-114.588261_psmv3_60_tmy.csv")
+solar_resource = str(Path(__file__).parent / "blythe_ca_33.617773_-114.588261_psmv3_60_tmy.csv")
 
 
-def test_reopt_sizing_pvwatts(solar_resource):
+def test_reopt_sizing_pvwatts():
     round = 0
 
     tracker = SummaryTracker()
@@ -30,13 +28,13 @@ def test_reopt_sizing_pvwatts(solar_resource):
 
         post = sys.Reopt_size_battery_post()
 
-    assert('Scenario' in post['reopt_post'])
-    assert(post['reopt_post']['Scenario']['Site']['latitude'] == pytest.approx(3, 0.1))
+    assert('ElectricUtility' in post['reopt_post'])
+    assert(post['reopt_post']['Site']['latitude'] == pytest.approx(3, 0.1))
     tracker_diff = tracker.diff()
     tracker.print_diff()
 
 
-def test_reopt_sizing_pvsam(solar_resource):
+def test_reopt_sizing_pvsam():
     import PySAM.Utilityrate5 as ur
     sys = pvsam.default("FlatPlatePVCommercial")
     fin = ur.from_existing(sys, "FlatPlatePVCommercial")
@@ -48,8 +46,8 @@ def test_reopt_sizing_pvsam(solar_resource):
     bt.Load.crit_load = [0] * 8760
     post = sys.Reopt_size_battery_post()
 
-    assert('Scenario' in post['reopt_post'])
-    assert(post['reopt_post']['Scenario']['Site']['latitude'] == pytest.approx(33.6, 0.1))
+    assert('ElectricUtility' in post['reopt_post'])
+    assert(post['reopt_post']['Site']['latitude'] == pytest.approx(33.6, 0.1))
 
 def test_repot_sizing_battery():
     batt = stbt.default("GenericBatteryCommercial")
@@ -58,5 +56,5 @@ def test_repot_sizing_battery():
 
     post = batt.Reopt_size_standalone_battery_post()
 
-    assert('Scenario' in post['reopt_post'])
-    assert(post['reopt_post']['Scenario']['Site']['Storage']['soc_init_pct'] == pytest.approx(0.5, 0.1))
+    assert('ElectricStorage' in post['reopt_post'])
+    assert(post['reopt_post']['ElectricStorage']['soc_init_fraction'] == pytest.approx(0.5, 0.1))

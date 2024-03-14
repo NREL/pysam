@@ -78,8 +78,9 @@ Enet Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.TroughPhysicalCspSolver.TroughPhysicalCspSolver.AdjustmentFactors
+.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
 	:members:
+	:noindex:
 
 Outputs Group
 --------------

@@ -1601,6 +1601,14 @@ Pvwattsv7_dealloc(CmodObject *self)
 
 
 static PyObject *
+Pvwattsv7_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Pvwattsv7_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -1677,6 +1685,8 @@ static PyMethodDef Pvwattsv7_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Pvwattsv7_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Pvwattsv7_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{"Reopt_size_battery_post", (PyCFunction)Reopt_size_battery_post, METH_VARARGS | METH_KEYWORDS,
 			Reopt_size_battery_post_doc},
 		{NULL,              NULL}           /* sentinel */

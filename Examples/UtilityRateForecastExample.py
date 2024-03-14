@@ -14,10 +14,12 @@ This script provides an example of downloading a rate from URDB and processing i
 The forecast code looks at the step-by-step (default hourly) costs of the rate, based on forecasts of generation and load
 This can either be run with all of the steps at once (single call to execute()) to generate an array of prices
 or by calling execute repeateadly, potentially in the loop with a model-predictive controller for energy storage
+
+Most recently tested against PySAM 5.1.0
 """
 
 # Get a key from https://api.openei.org:443
-key = "YOUR_API_KEY"
+key = os.environ.get('NREL_API_KEY')
 
 # Download rate from URDB and save as file. If rate has already been downloaded, use file
 def get_urdb_rate_data(page, key):

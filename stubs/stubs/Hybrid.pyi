@@ -1,4 +1,4 @@
-class Poacalib(object):
+class Hybrid(object):
 	def assign(self, dict):
 		pass
 
@@ -14,13 +14,16 @@ class Poacalib(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
 	def __init__(self, *args, **kwargs):
 		pass
 
-	class POACalibrate(object):
+	class Common(object):
 		def assign(self): 
 			pass
 	
@@ -31,19 +34,7 @@ class Poacalib(object):
 			pass
 
 
-		albedo = float
-		array_az = float
-		array_tilt = float
-		beam = tuple
-		diffuse = tuple
-		elevation = float
-		latitude = float
-		longitude = float
-		poa = tuple
-		pressure = float
-		tamb = float
-		time_zone = float
-		year = float
+		input = dict
 
 
 	class Outputs(object):
@@ -57,21 +48,21 @@ class Poacalib(object):
 			pass
 
 
-		pcalc = tuple
+		output = dict
 
 
 
 
-def default(config) -> Poacalib:
+def default(config) -> Hybrid:
 	pass
 
-def new() -> Poacalib:
+def new() -> Hybrid:
 	pass
 
-def wrap(ssc_data_t) -> Poacalib:
+def wrap(ssc_data_t) -> Hybrid:
 	pass
 
-def from_existing(model, config="") -> Poacalib:
+def from_existing(model, config="") -> Hybrid:
 	pass
 
 __loader__ = None 

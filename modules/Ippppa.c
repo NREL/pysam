@@ -446,18 +446,6 @@ SystemCosts_set_annual_fuel_usage_lifetime(VarGroupObject *self, PyObject *value
 }
 
 static PyObject *
-SystemCosts_get_fuelcell_annual_energy_discharged(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_SystemCosts_fuelcell_annual_energy_discharged_aget, self->data_ptr);
-}
-
-static int
-SystemCosts_set_fuelcell_annual_energy_discharged(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Ippppa_SystemCosts_fuelcell_annual_energy_discharged_aset, self->data_ptr);
-}
-
-static PyObject *
 SystemCosts_get_om_batt_capacity_cost(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Ippppa_SystemCosts_om_batt_capacity_cost_aget, self->data_ptr);
@@ -783,97 +771,94 @@ SystemCosts_set_om_replacement_cost_escal(VarGroupObject *self, PyObject *value,
 
 static PyGetSetDef SystemCosts_getset[] = {
 {"add_om_num_types", (getter)SystemCosts_get_add_om_num_types,(setter)SystemCosts_set_add_om_num_types,
-	PyDoc_STR("*float*: Number of O and M types\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Number of O and M types\n\n**Info:**\nbattery,fuelcell\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"annual_fuel_usage", (getter)SystemCosts_get_annual_fuel_usage,(setter)SystemCosts_set_annual_fuel_usage,
-	PyDoc_STR("*float*: Fuel usage (yr 1) [kWht]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Fuel usage (yr 1) [kWht]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"annual_fuel_usage_lifetime", (getter)SystemCosts_get_annual_fuel_usage_lifetime,(setter)SystemCosts_set_annual_fuel_usage_lifetime,
-	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]"),
- 	NULL},
-{"fuelcell_annual_energy_discharged", (getter)SystemCosts_get_fuelcell_annual_energy_discharged,(setter)SystemCosts_set_fuelcell_annual_energy_discharged,
-	PyDoc_STR("*sequence*: Fuel cell annual energy discharged [kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical"),
  	NULL},
 {"om_batt_capacity_cost", (getter)SystemCosts_get_om_batt_capacity_cost,(setter)SystemCosts_set_om_batt_capacity_cost,
-	PyDoc_STR("*sequence*: Battery capacity-based System Costs amount [$/kWcap]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Battery capacity-based System Costs amount [$/kWcap]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_batt_fixed_cost", (getter)SystemCosts_get_om_batt_fixed_cost,(setter)SystemCosts_set_om_batt_fixed_cost,
-	PyDoc_STR("*sequence*: Battery fixed System Costs annual amount [$/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Battery fixed System Costs annual amount [$/year]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_batt_nameplate", (getter)SystemCosts_get_om_batt_nameplate,(setter)SystemCosts_set_om_batt_nameplate,
-	PyDoc_STR("*float*: Battery capacity for System Costs values [kW]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Battery capacity for System Costs values [kW]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_batt_replacement_cost", (getter)SystemCosts_get_om_batt_replacement_cost,(setter)SystemCosts_set_om_batt_replacement_cost,
-	PyDoc_STR("*sequence*: Replacement cost 1 [$/kWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Replacement cost 1 [$/kWh]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_batt_variable_cost", (getter)SystemCosts_get_om_batt_variable_cost,(setter)SystemCosts_set_om_batt_variable_cost,
-	PyDoc_STR("*sequence*: Battery production-based System Costs amount [$/MWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Battery production-based System Costs amount [$/MWh]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_capacity", (getter)SystemCosts_get_om_capacity,(setter)SystemCosts_set_om_capacity,
-	PyDoc_STR("*sequence*: Capacity-based O&M amount [$/kWcap]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Capacity-based O&M amount [$/kWcap]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_capacity_escal", (getter)SystemCosts_get_om_capacity_escal,(setter)SystemCosts_set_om_capacity_escal,
 	PyDoc_STR("*float*: Capacity-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fixed", (getter)SystemCosts_get_om_fixed,(setter)SystemCosts_set_om_fixed,
-	PyDoc_STR("*sequence*: Fixed O&M annual amount [$/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Fixed O&M annual amount [$/year]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fixed_escal", (getter)SystemCosts_get_om_fixed_escal,(setter)SystemCosts_set_om_fixed_escal,
 	PyDoc_STR("*float*: Fixed O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuel_cost", (getter)SystemCosts_get_om_fuel_cost,(setter)SystemCosts_set_om_fuel_cost,
-	PyDoc_STR("*sequence*: Fuel cost [$/MMBtu]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Fuel cost [$/MMBtu]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuel_cost_escal", (getter)SystemCosts_get_om_fuel_cost_escal,(setter)SystemCosts_set_om_fuel_cost_escal,
-	PyDoc_STR("*float*: Fuel cost escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Fuel cost escalation [%/year]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuelcell_capacity_cost", (getter)SystemCosts_get_om_fuelcell_capacity_cost,(setter)SystemCosts_set_om_fuelcell_capacity_cost,
-	PyDoc_STR("*sequence*: Fuel cell capacity-based System Costs amount [$/kWcap]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Fuel cell capacity-based System Costs amount [$/kWcap]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuelcell_fixed_cost", (getter)SystemCosts_get_om_fuelcell_fixed_cost,(setter)SystemCosts_set_om_fuelcell_fixed_cost,
-	PyDoc_STR("*sequence*: Fuel cell fixed System Costs annual amount [$/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Fuel cell fixed System Costs annual amount [$/year]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuelcell_nameplate", (getter)SystemCosts_get_om_fuelcell_nameplate,(setter)SystemCosts_set_om_fuelcell_nameplate,
-	PyDoc_STR("*float*: Fuel cell capacity for System Costs values [kW]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Fuel cell capacity for System Costs values [kW]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuelcell_replacement_cost", (getter)SystemCosts_get_om_fuelcell_replacement_cost,(setter)SystemCosts_set_om_fuelcell_replacement_cost,
-	PyDoc_STR("*sequence*: Replacement cost 2 [$/kW]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Replacement cost 2 [$/kW]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuelcell_variable_cost", (getter)SystemCosts_get_om_fuelcell_variable_cost,(setter)SystemCosts_set_om_fuelcell_variable_cost,
-	PyDoc_STR("*sequence*: Fuel cell production-based System Costs amount [$/MWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Fuel cell production-based System Costs amount [$/MWh]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_opt_fuel_1_cost", (getter)SystemCosts_get_om_opt_fuel_1_cost,(setter)SystemCosts_set_om_opt_fuel_1_cost,
-	PyDoc_STR("*sequence*: Biomass feedstock cost [$/unit]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Biomass feedstock cost [$/unit]\n\n**Info:**\nbiomass\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_opt_fuel_1_cost_escal", (getter)SystemCosts_get_om_opt_fuel_1_cost_escal,(setter)SystemCosts_set_om_opt_fuel_1_cost_escal,
-	PyDoc_STR("*float*: Biomass feedstock cost escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Biomass feedstock cost escalation [%/year]\n\n**Info:**\nbiomass\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_opt_fuel_1_usage", (getter)SystemCosts_get_om_opt_fuel_1_usage,(setter)SystemCosts_set_om_opt_fuel_1_usage,
-	PyDoc_STR("*float*: Biomass feedstock usage [unit]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Biomass feedstock usage [unit]\n\n**Info:**\nbiomass\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_opt_fuel_2_cost", (getter)SystemCosts_get_om_opt_fuel_2_cost,(setter)SystemCosts_set_om_opt_fuel_2_cost,
-	PyDoc_STR("*sequence*: Coal feedstock cost [$/unit]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Coal feedstock cost [$/unit]\n\n**Info:**\nbiomass\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_opt_fuel_2_cost_escal", (getter)SystemCosts_get_om_opt_fuel_2_cost_escal,(setter)SystemCosts_set_om_opt_fuel_2_cost_escal,
-	PyDoc_STR("*float*: Coal feedstock cost escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Coal feedstock cost escalation [%/year]\n\n**Info:**\nbiomass\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_opt_fuel_2_usage", (getter)SystemCosts_get_om_opt_fuel_2_usage,(setter)SystemCosts_set_om_opt_fuel_2_usage,
-	PyDoc_STR("*float*: Coal feedstock usage [unit]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Coal feedstock usage [unit]\n\n**Info:**\nbiomass\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_production", (getter)SystemCosts_get_om_production,(setter)SystemCosts_set_om_production,
-	PyDoc_STR("*sequence*: Production-based O&M amount [$/MWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Production-based O&M amount [$/MWh]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_production1_values", (getter)SystemCosts_get_om_production1_values,(setter)SystemCosts_set_om_production1_values,
-	PyDoc_STR("*sequence*: Battery production for System Costs values [kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Battery production for System Costs values [kWh]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_production2_values", (getter)SystemCosts_get_om_production2_values,(setter)SystemCosts_set_om_production2_values,
-	PyDoc_STR("*sequence*: Fuel cell production for System Costs values [kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Fuel cell production for System Costs values [kWh]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_production_escal", (getter)SystemCosts_get_om_production_escal,(setter)SystemCosts_set_om_production_escal,
 	PyDoc_STR("*float*: Production-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_replacement_cost_escal", (getter)SystemCosts_get_om_replacement_cost_escal,(setter)SystemCosts_set_om_replacement_cost_escal,
-	PyDoc_STR("*float*: Replacement cost escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Replacement cost escalation [%/year]\n\n**Info:**\nbattery,fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4037,189 +4022,189 @@ Outputs_get_cf_energy_net(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_cf_energy_net_apr(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_apr_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_aug(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_aug_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dec(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_dec_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch1(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_dispatch1_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch2(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_dispatch2_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch3(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_dispatch3_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch4(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_dispatch4_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch5(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_dispatch5_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch6(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_dispatch6_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch7(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_dispatch7_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch8(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_dispatch8_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch9(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_dispatch9_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_feb(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_feb_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_jan(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_jan_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_jul(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_jul_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_jun(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_jun_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_mar(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_mar_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_may(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_may_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD1(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_monthly_firstyear_TOD1_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD2(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_monthly_firstyear_TOD2_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD3(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_monthly_firstyear_TOD3_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD4(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_monthly_firstyear_TOD4_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD5(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_monthly_firstyear_TOD5_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD6(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_monthly_firstyear_TOD6_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD7(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_monthly_firstyear_TOD7_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD8(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_monthly_firstyear_TOD8_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD9(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_monthly_firstyear_TOD9_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_nov(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_nov_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_oct(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_oct_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_sep(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_net_sep_aget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_cf_energy_price(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_price_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_apr(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_apr_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_aug(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_aug_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dec(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_dec_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch1(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_dispatch1_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch2(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_dispatch2_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch3(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_dispatch3_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch4(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_dispatch4_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch5(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_dispatch5_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch6(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_dispatch6_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch7(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_dispatch7_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch8(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_dispatch8_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch9(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_dispatch9_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_feb(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_feb_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_jan(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_jan_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_jul(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_jul_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_jun(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_jun_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_mar(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_mar_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_may(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_may_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD1(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_monthly_firstyear_TOD1_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD2(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_monthly_firstyear_TOD2_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD3(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_monthly_firstyear_TOD3_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD4(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_monthly_firstyear_TOD4_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD5(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_monthly_firstyear_TOD5_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD6(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_monthly_firstyear_TOD6_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD7(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_monthly_firstyear_TOD7_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD8(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_monthly_firstyear_TOD8_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD9(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_monthly_firstyear_TOD9_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_nov(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_nov_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_oct(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_oct_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_sep(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_energy_sales_sep_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -5135,98 +5120,98 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_energy_net", (getter)Outputs_get_cf_energy_net,(setter)0,
 	PyDoc_STR("*sequence*: Energy [kWh]"),
  	NULL},
-{"cf_energy_net_apr", (getter)Outputs_get_cf_energy_net_apr,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in April"),
- 	NULL},
-{"cf_energy_net_aug", (getter)Outputs_get_cf_energy_net_aug,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in August"),
- 	NULL},
-{"cf_energy_net_dec", (getter)Outputs_get_cf_energy_net_dec,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in December"),
- 	NULL},
-{"cf_energy_net_dispatch1", (getter)Outputs_get_cf_energy_net_dispatch1,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in dispatch period 1"),
- 	NULL},
-{"cf_energy_net_dispatch2", (getter)Outputs_get_cf_energy_net_dispatch2,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in dispatch period 2"),
- 	NULL},
-{"cf_energy_net_dispatch3", (getter)Outputs_get_cf_energy_net_dispatch3,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in dispatch period 3"),
- 	NULL},
-{"cf_energy_net_dispatch4", (getter)Outputs_get_cf_energy_net_dispatch4,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in dispatch period 4"),
- 	NULL},
-{"cf_energy_net_dispatch5", (getter)Outputs_get_cf_energy_net_dispatch5,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in dispatch period 5"),
- 	NULL},
-{"cf_energy_net_dispatch6", (getter)Outputs_get_cf_energy_net_dispatch6,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in dispatch period 6"),
- 	NULL},
-{"cf_energy_net_dispatch7", (getter)Outputs_get_cf_energy_net_dispatch7,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in dispatch period 7"),
- 	NULL},
-{"cf_energy_net_dispatch8", (getter)Outputs_get_cf_energy_net_dispatch8,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in dispatch period 8"),
- 	NULL},
-{"cf_energy_net_dispatch9", (getter)Outputs_get_cf_energy_net_dispatch9,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in dispatch period 9"),
- 	NULL},
-{"cf_energy_net_feb", (getter)Outputs_get_cf_energy_net_feb,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in February"),
- 	NULL},
-{"cf_energy_net_jan", (getter)Outputs_get_cf_energy_net_jan,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in January"),
- 	NULL},
-{"cf_energy_net_jul", (getter)Outputs_get_cf_energy_net_jul,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in July"),
- 	NULL},
-{"cf_energy_net_jun", (getter)Outputs_get_cf_energy_net_jun,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in June"),
- 	NULL},
-{"cf_energy_net_mar", (getter)Outputs_get_cf_energy_net_mar,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in March"),
- 	NULL},
-{"cf_energy_net_may", (getter)Outputs_get_cf_energy_net_may,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in May"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD1", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD1,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD1"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD2", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD2,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD2"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD3", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD3,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD3"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD4", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD4,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD4"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD5", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD5,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD5"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD6", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD6,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD6"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD7", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD7,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD7"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD8", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD8,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD8"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD9", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD9,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD9"),
- 	NULL},
-{"cf_energy_net_nov", (getter)Outputs_get_cf_energy_net_nov,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in November"),
- 	NULL},
-{"cf_energy_net_oct", (getter)Outputs_get_cf_energy_net_oct,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in October"),
- 	NULL},
-{"cf_energy_net_sep", (getter)Outputs_get_cf_energy_net_sep,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in September"),
- 	NULL},
 {"cf_energy_price", (getter)Outputs_get_cf_energy_price,(setter)0,
 	PyDoc_STR("*sequence*: Energy Price [$/kWh]"),
+ 	NULL},
+{"cf_energy_sales_apr", (getter)Outputs_get_cf_energy_sales_apr,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in April"),
+ 	NULL},
+{"cf_energy_sales_aug", (getter)Outputs_get_cf_energy_sales_aug,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in August"),
+ 	NULL},
+{"cf_energy_sales_dec", (getter)Outputs_get_cf_energy_sales_dec,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in December"),
+ 	NULL},
+{"cf_energy_sales_dispatch1", (getter)Outputs_get_cf_energy_sales_dispatch1,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in dispatch period 1"),
+ 	NULL},
+{"cf_energy_sales_dispatch2", (getter)Outputs_get_cf_energy_sales_dispatch2,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in dispatch period 2"),
+ 	NULL},
+{"cf_energy_sales_dispatch3", (getter)Outputs_get_cf_energy_sales_dispatch3,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in dispatch period 3"),
+ 	NULL},
+{"cf_energy_sales_dispatch4", (getter)Outputs_get_cf_energy_sales_dispatch4,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in dispatch period 4"),
+ 	NULL},
+{"cf_energy_sales_dispatch5", (getter)Outputs_get_cf_energy_sales_dispatch5,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in dispatch period 5"),
+ 	NULL},
+{"cf_energy_sales_dispatch6", (getter)Outputs_get_cf_energy_sales_dispatch6,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in dispatch period 6"),
+ 	NULL},
+{"cf_energy_sales_dispatch7", (getter)Outputs_get_cf_energy_sales_dispatch7,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in dispatch period 7"),
+ 	NULL},
+{"cf_energy_sales_dispatch8", (getter)Outputs_get_cf_energy_sales_dispatch8,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in dispatch period 8"),
+ 	NULL},
+{"cf_energy_sales_dispatch9", (getter)Outputs_get_cf_energy_sales_dispatch9,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in dispatch period 9"),
+ 	NULL},
+{"cf_energy_sales_feb", (getter)Outputs_get_cf_energy_sales_feb,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in February"),
+ 	NULL},
+{"cf_energy_sales_jan", (getter)Outputs_get_cf_energy_sales_jan,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in January"),
+ 	NULL},
+{"cf_energy_sales_jul", (getter)Outputs_get_cf_energy_sales_jul,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in July"),
+ 	NULL},
+{"cf_energy_sales_jun", (getter)Outputs_get_cf_energy_sales_jun,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in June"),
+ 	NULL},
+{"cf_energy_sales_mar", (getter)Outputs_get_cf_energy_sales_mar,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in March"),
+ 	NULL},
+{"cf_energy_sales_may", (getter)Outputs_get_cf_energy_sales_may,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in May"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD1", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD1,(setter)0,
+	PyDoc_STR("*sequence*: First year energy from the system by month for TOD1"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD2", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD2,(setter)0,
+	PyDoc_STR("*sequence*: First year energy from the system by month for TOD2"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD3", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD3,(setter)0,
+	PyDoc_STR("*sequence*: First year energy from the system by month for TOD3"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD4", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD4,(setter)0,
+	PyDoc_STR("*sequence*: First year energy from the system by month for TOD4"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD5", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD5,(setter)0,
+	PyDoc_STR("*sequence*: First year energy from the system by month for TOD5"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD6", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD6,(setter)0,
+	PyDoc_STR("*sequence*: First year energy from the system by month for TOD6"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD7", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD7,(setter)0,
+	PyDoc_STR("*sequence*: First year energy from the system by month for TOD7"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD8", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD8,(setter)0,
+	PyDoc_STR("*sequence*: First year energy from the system by month for TOD8"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD9", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD9,(setter)0,
+	PyDoc_STR("*sequence*: First year energy from the system by month for TOD9"),
+ 	NULL},
+{"cf_energy_sales_nov", (getter)Outputs_get_cf_energy_sales_nov,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in November"),
+ 	NULL},
+{"cf_energy_sales_oct", (getter)Outputs_get_cf_energy_sales_oct,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in October"),
+ 	NULL},
+{"cf_energy_sales_sep", (getter)Outputs_get_cf_energy_sales_sep,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in September"),
  	NULL},
 {"cf_energy_value", (getter)Outputs_get_cf_energy_value,(setter)0,
 	PyDoc_STR("*sequence*: Energy Value [$]"),
@@ -5769,6 +5754,14 @@ Ippppa_dealloc(CmodObject *self)
 
 
 static PyObject *
+Ippppa_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Ippppa_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -5845,6 +5838,8 @@ static PyMethodDef Ippppa_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Ippppa_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Ippppa_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

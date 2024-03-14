@@ -14,6 +14,9 @@ class Wfreader(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
@@ -53,6 +56,7 @@ class Wfreader(object):
 		annual_glob = float
 		annual_snow = float
 		annual_tdry = float
+		annual_twet = float
 		annual_wspd = float
 		beam = tuple
 		city = str

@@ -14,6 +14,9 @@ class Pvsamv1(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
@@ -59,6 +62,7 @@ class Pvsamv1(object):
 		calculate_rack_shading = float
 		dcoptimizer_loss = float
 		en_snow_model = float
+		snow_slide_coefficient = float
 		subarray1_dcwiring_loss = float
 		subarray1_diodeconn_loss = float
 		subarray1_electrical_mismatch = float
@@ -135,9 +139,10 @@ class Pvsamv1(object):
 
 		enable_mismatch_vmax_calc = float
 		inverter_count = float
-		measured_temp_array = tuple
 		subarray1_azimuth = float
 		subarray1_backtrack = float
+		subarray1_custom_cell_temp_array = tuple
+		subarray1_custom_rot_angles_array = tuple
 		subarray1_gcr = float
 		subarray1_modules_per_string = float
 		subarray1_monthly_tilt = tuple
@@ -149,8 +154,12 @@ class Pvsamv1(object):
 		subarray1_tilt = float
 		subarray1_tilt_eq_lat = float
 		subarray1_track_mode = float
+		subarray1_use_custom_cell_temp = float
+		subarray1_use_custom_rot_angles = float
 		subarray2_azimuth = float
 		subarray2_backtrack = float
+		subarray2_custom_cell_temp_array = tuple
+		subarray2_custom_rot_angles_array = tuple
 		subarray2_enable = float
 		subarray2_gcr = float
 		subarray2_modules_per_string = float
@@ -163,8 +172,12 @@ class Pvsamv1(object):
 		subarray2_tilt = float
 		subarray2_tilt_eq_lat = float
 		subarray2_track_mode = float
+		subarray2_use_custom_cell_temp = float
+		subarray2_use_custom_rot_angles = float
 		subarray3_azimuth = float
 		subarray3_backtrack = float
+		subarray3_custom_cell_temp_array = tuple
+		subarray3_custom_rot_angles_array = tuple
 		subarray3_enable = float
 		subarray3_gcr = float
 		subarray3_modules_per_string = float
@@ -177,8 +190,12 @@ class Pvsamv1(object):
 		subarray3_tilt = float
 		subarray3_tilt_eq_lat = float
 		subarray3_track_mode = float
+		subarray3_use_custom_cell_temp = float
+		subarray3_use_custom_rot_angles = float
 		subarray4_azimuth = float
 		subarray4_backtrack = float
+		subarray4_custom_cell_temp_array = tuple
+		subarray4_custom_rot_angles_array = tuple
 		subarray4_enable = float
 		subarray4_gcr = float
 		subarray4_modules_per_string = float
@@ -191,8 +208,9 @@ class Pvsamv1(object):
 		subarray4_tilt = float
 		subarray4_tilt_eq_lat = float
 		subarray4_track_mode = float
+		subarray4_use_custom_cell_temp = float
+		subarray4_use_custom_rot_angles = float
 		system_capacity = float
-		use_measured_temp = float
 
 
 	class Shading(object):
@@ -797,6 +815,22 @@ class Pvsamv1(object):
 		run_resiliency_calcs = float
 
 
+	class PVLosses(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		enable_subhourly_clipping = float
+		enable_subinterval_distribution = float
+		subhourly_clipping_matrix = tuple
+
+
 	class AdjustmentFactors(object):
 		def assign(self): 
 			pass
@@ -808,14 +842,26 @@ class Pvsamv1(object):
 			pass
 	
 		constant = float
-		dc_constant = float
-		dc_hourly = tuple
-		dc_periods = tuple
+		en_hourly = float
+		en_periods = float
+		en_timeindex = float
 		hourly = tuple
 		periods = tuple
+		imeindex = tuple
+		dc_constant = float
+		dc_en_hourly = float
+		dc_en_periods = float
+		dc_en_timeindex = float
+		dc_hourly = tuple
+		dc_periods = tuple
+		dc_imeindex = tuple
 		sf_constant = float
+		sf_en_hourly = float
+		sf_en_periods = float
+		sf_en_timeindex = float
 		sf_hourly = tuple
 		sf_periods = tuple
+		sf_timeindex = tuple
 
 	class BatteryCell(object):
 		def assign(self): 
@@ -1067,6 +1113,29 @@ class Pvsamv1(object):
 		grid_interconnection_limit_kwac = float
 
 
+	class HybridCosts(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		degradation = tuple
+		land_area = float
+		om_capacity = tuple
+		om_capacity_escal = float
+		om_fixed = tuple
+		om_fixed_escal = float
+		om_land_lease = tuple
+		om_land_lease_escal = float
+		om_production = tuple
+		total_installed_cost = float
+
+
 	class Outputs(object):
 		def assign(self): 
 			pass
@@ -1126,6 +1195,8 @@ class Pvsamv1(object):
 		annual_dc_tracking_loss_percent = float
 		annual_dc_wiring_loss = float
 		annual_dc_wiring_loss_percent = float
+		annual_distribution_clipping_loss = float
+		annual_distribution_clipping_loss_percent = float
 		annual_energy = float
 		annual_energy_distribution_time = tuple
 		annual_export_to_grid_energy = tuple
@@ -1189,6 +1260,8 @@ class Pvsamv1(object):
 		annual_subarray4_dc_nameplate_loss = float
 		annual_subarray4_dc_tracking_loss = float
 		annual_subarray4_dc_wiring_loss = float
+		annual_subhourly_clipping_loss = float
+		annual_subhourly_clipping_loss_percent = float
 		annual_total_loss_percent = float
 		annual_transmission_loss = float
 		annual_transmission_loss_percent = float
@@ -1254,6 +1327,15 @@ class Pvsamv1(object):
 		capacity_factor = float
 		capacity_factor_ac = float
 		cdf_of_surviving = tuple
+		cf_battery_replacement_cost_schedule = tuple
+		cf_energy_net = tuple
+		cf_fuelcell_replacement_cost_schedule = tuple
+		cf_land_lease_expense = tuple
+		cf_om_capacity = tuple
+		cf_om_fixed = tuple
+		cf_om_fuel_cost = tuple
+		cf_om_land_lease = tuple
+		cf_om_production = tuple
 		crit_load = tuple
 		crit_load_unmet = tuple
 		dc_degrade_factor = tuple
@@ -1263,6 +1345,7 @@ class Pvsamv1(object):
 		dc_snow_loss = tuple
 		df = tuple
 		df_calc = tuple
+		distribution_clipping_loss = tuple
 		dn = tuple
 		dn_calc = tuple
 		elev = float
@@ -1315,9 +1398,13 @@ class Pvsamv1(object):
 		monthly_system_to_grid = tuple
 		monthly_system_to_load = tuple
 		nameplate_dc_rating = float
+		num_ts_load_met_by_system_lifetime = float
+		num_ts_load_met_by_system_yr1 = float
 		outage_durations = tuple
 		outage_losses_unmet = tuple
 		pdf_of_surviving = tuple
+		percent_ts_load_met_by_system_lifetime = float
+		percent_ts_load_met_by_system_yr1 = float
 		performance_ratio = float
 		poa_beam_eff = tuple
 		poa_beam_nom = tuple
@@ -1365,12 +1452,16 @@ class Pvsamv1(object):
 		subarray1_isc = tuple
 		subarray1_linear_derate = tuple
 		subarray1_modeff = tuple
+		subarray1_poa_beam_front_cs = tuple
+		subarray1_poa_diffuse_front_cs = tuple
 		subarray1_poa_eff = tuple
 		subarray1_poa_eff_beam = tuple
 		subarray1_poa_eff_diff = tuple
 		subarray1_poa_front = tuple
+		subarray1_poa_ground_front_cs = tuple
 		subarray1_poa_nom = tuple
 		subarray1_poa_rear = tuple
+		subarray1_poa_rear_cs = tuple
 		subarray1_poa_rear_spatial = tuple
 		subarray1_poa_shaded = tuple
 		subarray1_poa_shaded_soiled = tuple
@@ -1397,12 +1488,16 @@ class Pvsamv1(object):
 		subarray2_isc = tuple
 		subarray2_linear_derate = tuple
 		subarray2_modeff = tuple
+		subarray2_poa_beam_front_cs = tuple
+		subarray2_poa_diffuse_front_cs = tuple
 		subarray2_poa_eff = tuple
 		subarray2_poa_eff_beam = tuple
 		subarray2_poa_eff_diff = tuple
 		subarray2_poa_front = tuple
+		subarray2_poa_ground_front_cs = tuple
 		subarray2_poa_nom = tuple
 		subarray2_poa_rear = tuple
+		subarray2_poa_rear_cs = tuple
 		subarray2_poa_rear_spatial = tuple
 		subarray2_poa_shaded = tuple
 		subarray2_poa_shaded_soiled = tuple
@@ -1429,12 +1524,16 @@ class Pvsamv1(object):
 		subarray3_isc = tuple
 		subarray3_linear_derate = tuple
 		subarray3_modeff = tuple
+		subarray3_poa_beam_front_cs = tuple
+		subarray3_poa_diffuse_front_cs = tuple
 		subarray3_poa_eff = tuple
 		subarray3_poa_eff_beam = tuple
 		subarray3_poa_eff_diff = tuple
 		subarray3_poa_front = tuple
+		subarray3_poa_ground_front_cs = tuple
 		subarray3_poa_nom = tuple
 		subarray3_poa_rear = tuple
+		subarray3_poa_rear_cs = tuple
 		subarray3_poa_rear_spatial = tuple
 		subarray3_poa_shaded = tuple
 		subarray3_poa_shaded_soiled = tuple
@@ -1461,12 +1560,16 @@ class Pvsamv1(object):
 		subarray4_isc = tuple
 		subarray4_linear_derate = tuple
 		subarray4_modeff = tuple
+		subarray4_poa_beam_front_cs = tuple
+		subarray4_poa_diffuse_front_cs = tuple
 		subarray4_poa_eff = tuple
 		subarray4_poa_eff_beam = tuple
 		subarray4_poa_eff_diff = tuple
 		subarray4_poa_front = tuple
+		subarray4_poa_ground_front_cs = tuple
 		subarray4_poa_nom = tuple
 		subarray4_poa_rear = tuple
+		subarray4_poa_rear_cs = tuple
 		subarray4_poa_rear_spatial = tuple
 		subarray4_poa_shaded = tuple
 		subarray4_poa_shaded_soiled = tuple
@@ -1479,6 +1582,7 @@ class Pvsamv1(object):
 		subarray4_surf_azi = tuple
 		subarray4_surf_tilt = tuple
 		subarray4_voc = tuple
+		subhourly_clipping_loss = tuple
 		sunpos_hour = tuple
 		sunup = tuple
 		survival_function = tuple

@@ -34,7 +34,7 @@ resp = requests.get("https://api.github.com/repos/NREL/pysam/releases").json()
 old_release = resp[previous_release]['name']
 sam_resp = requests.get("https://api.github.com/repos/NREL/sam/tags").json()
 for r in sam_resp:
-    if r['name'] == old_release.lower().replace(' ', '-'):
+    if old_release.lower().replace(' ', '-') in r['name']:
         old_release = r['tarball_url']
         break
 print(
@@ -55,7 +55,7 @@ with tarfile.open(sam_old_file, "r:gz") as tf:
     # To save the extracted file in directory of choice with same name as downloaded file.
     file_list_old = []
     for tarinfo in tf:
-        if "defaults" in tarinfo.name and os.path.splitext(tarinfo.name)[1] == '.json':
+        if "api_autogen" in tarinfo.name and "defaults" in tarinfo.name and os.path.splitext(tarinfo.name)[1] == '.json':
             file_list_old.append(tarinfo.name)
 
 sam_path = os.environ.get('SAMNTDIR')
@@ -243,7 +243,7 @@ old_cmod_variables = get_var_dict()
 cmod_int = set(new_cmod_variables.keys()).intersection(set(old_cmod_variables.keys()))
 
 
-for name in cmod_int:
+for name in sorted(cmod_int):
     pysam_name = "".join([s.capitalize() for s in name.split('_')])
     mod_variables = dict()
 
@@ -333,3 +333,6 @@ with open(os.path.join(pysam_dir, "docs", "version_changes", __version__ + ".rst
                 f.write(f"     - {k}\n\n        {list(v.keys())}\n\n")
             f.write("\n")
         f.write('\n')
+
+    if len(doc_dict) == 0:
+        f.write(f'No changes\n')

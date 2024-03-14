@@ -1455,6 +1455,968 @@ static PyTypeObject SystemDesign_Type = {
 
 
 /*
+ * TowerAndReceiver Group
+ */ 
+
+static PyTypeObject TowerAndReceiver_Type;
+
+static PyObject *
+TowerAndReceiver_new(SAM_TcsmoltenSalt data_ptr)
+{
+	PyObject* new_obj = TowerAndReceiver_Type.tp_alloc(&TowerAndReceiver_Type,0);
+
+	VarGroupObject* TowerAndReceiver_obj = (VarGroupObject*)new_obj;
+
+	TowerAndReceiver_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* TowerAndReceiver methods */
+
+static PyObject *
+TowerAndReceiver_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsmoltenSalt", "TowerAndReceiver")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+TowerAndReceiver_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &TowerAndReceiver_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "TowerAndReceiver")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+TowerAndReceiver_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &TowerAndReceiver_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef TowerAndReceiver_methods[] = {
+		{"assign",            (PyCFunction)TowerAndReceiver_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``TowerAndReceiver_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)TowerAndReceiver_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``TowerAndReceiver_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)TowerAndReceiver_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+TowerAndReceiver_get_D_rec(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_D_rec_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_D_rec(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_D_rec_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_Flow_type(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_Flow_type_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_Flow_type(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_Flow_type_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_N_panels(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_N_panels_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_N_panels(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_N_panels_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_W_dot_pb_pump_target(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_W_dot_pb_pump_target_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_W_dot_pb_pump_target(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_W_dot_pb_pump_target_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_W_dot_rec_target(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_W_dot_rec_target_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_W_dot_rec_target(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_W_dot_rec_target_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_cav_rec_height(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_height_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_cav_rec_height(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_height_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_cav_rec_passive_abs(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_passive_abs_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_cav_rec_passive_abs(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_passive_abs_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_cav_rec_passive_eps(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_passive_eps_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_cav_rec_passive_eps(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_passive_eps_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_cav_rec_span(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_span_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_cav_rec_span(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_span_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_cav_rec_width(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_width_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_cav_rec_width(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_width_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_crossover_shift(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_crossover_shift_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_crossover_shift(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_crossover_shift_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_csp_pt_rec_max_oper_frac(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_csp_pt_rec_max_oper_frac_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_csp_pt_rec_max_oper_frac(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_csp_pt_rec_max_oper_frac_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_d_tube_out(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_d_tube_out_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_d_tube_out(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_d_tube_out_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_delta_flux_hrs(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_delta_flux_hrs_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_delta_flux_hrs(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_delta_flux_hrs_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_downc_tm_mult(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_downc_tm_mult_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_downc_tm_mult(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_downc_tm_mult_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_epsilon(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_epsilon_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_epsilon(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_epsilon_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_eta_pump(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_eta_pump_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_eta_pump(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_eta_pump_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_f_rec_min(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_f_rec_min_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_f_rec_min(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_f_rec_min_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_field_fl_props(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_TcsmoltenSalt_TowerAndReceiver_field_fl_props_mget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_field_fl_props(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_field_fl_props_mset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_flux_max(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_flux_max_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_flux_max(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_flux_max_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_h_tower(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_h_tower_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_h_tower(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_h_tower_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_heat_trace_power(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_heat_trace_power_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_heat_trace_power(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_heat_trace_power_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_hl_ffact(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_hl_ffact_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_hl_ffact(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_hl_ffact_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_is_calc_od_tube(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_is_calc_od_tube_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_is_calc_od_tube(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_is_calc_od_tube_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_is_calc_pb_pump_coef(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_is_calc_pb_pump_coef_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_is_calc_pb_pump_coef(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_is_calc_pb_pump_coef_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_is_calc_sm(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_is_calc_sm_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_is_calc_sm(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_is_calc_sm_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_is_rec_enforce_min_startup(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_is_rec_enforce_min_startup_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_is_rec_enforce_min_startup(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_is_rec_enforce_min_startup_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_is_rec_model_trans(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_is_rec_model_trans_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_is_rec_model_trans(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_is_rec_model_trans_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_is_rec_startup_from_T_soln(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_is_rec_startup_from_T_soln_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_is_rec_startup_from_T_soln(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_is_rec_startup_from_T_soln_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_is_rec_startup_trans(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_is_rec_startup_trans_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_is_rec_startup_trans(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_is_rec_startup_trans_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_mat_tube(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_mat_tube_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_mat_tube(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_mat_tube_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_min_fill_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_min_fill_time_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_min_fill_time(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_min_fill_time_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_min_preheat_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_min_preheat_time_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_min_preheat_time(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_min_preheat_time_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_n_cav_rec_panels(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_n_cav_rec_panels_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_n_cav_rec_panels(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_n_cav_rec_panels_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_n_flux_days(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_n_flux_days_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_n_flux_days(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_n_flux_days_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_piping_length_const(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_piping_length_const_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_piping_length_const(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_piping_length_const_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_piping_length_mult(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_piping_length_mult_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_piping_length_mult(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_piping_length_mult_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_piping_loss_coefficient(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_piping_loss_coefficient_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_piping_loss_coefficient(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_piping_loss_coefficient_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_preheat_flux(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_preheat_flux_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_preheat_flux(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_preheat_flux_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_q_dot_rec_des_target(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_q_dot_rec_des_target_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_q_dot_rec_des_target(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_q_dot_rec_des_target_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_rec_absorptance(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_absorptance_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_rec_absorptance(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_absorptance_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_rec_clearsky_dni(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_clearsky_dni_aget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_rec_clearsky_dni(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_clearsky_dni_aset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_rec_clearsky_fraction(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_clearsky_fraction_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_rec_clearsky_fraction(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_clearsky_fraction_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_rec_clearsky_model(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_clearsky_model_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_rec_clearsky_model(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_clearsky_model_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_rec_height(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_height_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_rec_height(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_height_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_rec_hl_perm2(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_hl_perm2_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_rec_hl_perm2(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_hl_perm2_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_rec_htf(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_htf_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_rec_htf(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_htf_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_rec_qf_delay(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_qf_delay_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_rec_qf_delay(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_qf_delay_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_rec_su_delay(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_su_delay_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_rec_su_delay(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_su_delay_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_rec_tm_mult(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_tm_mult_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_rec_tm_mult(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_tm_mult_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_riser_tm_mult(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_riser_tm_mult_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_riser_tm_mult(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_riser_tm_mult_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_startup_ramp_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_startup_ramp_time_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_startup_ramp_time(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_startup_ramp_time_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_startup_target_Tdiff(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_startup_target_Tdiff_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_startup_target_Tdiff(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_startup_target_Tdiff_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_th_riser(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_th_riser_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_th_riser(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_th_riser_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_th_tube(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_th_tube_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_th_tube(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_th_tube_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_u_riser(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_u_riser_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_u_riser(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_u_riser_nset, self->data_ptr);
+}
+
+static PyGetSetDef TowerAndReceiver_getset[] = {
+{"D_rec", (getter)TowerAndReceiver_get_D_rec,(setter)TowerAndReceiver_set_D_rec,
+	PyDoc_STR("*float*: The overall outer diameter of the receiver - in [m]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"Flow_type", (getter)TowerAndReceiver_get_Flow_type,(setter)TowerAndReceiver_set_Flow_type,
+	PyDoc_STR("*float*: Receiver flow pattern: see figure on SAM Receiver page\n\n**Required:**\nTrue"),
+ 	NULL},
+{"N_panels", (getter)TowerAndReceiver_get_N_panels,(setter)TowerAndReceiver_set_N_panels,
+	PyDoc_STR("*float*: Number of individual panels on the receiver\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
+ 	NULL},
+{"W_dot_pb_pump_target", (getter)TowerAndReceiver_get_W_dot_pb_pump_target,(setter)TowerAndReceiver_set_W_dot_pb_pump_target,
+	PyDoc_STR("*float*: Target HTF pumping power loss through cycle primary heat exchanger [MWe]\n\n**Required:**\nRequired if is_calc_pb_pump_coef=1"),
+ 	NULL},
+{"W_dot_rec_target", (getter)TowerAndReceiver_get_W_dot_rec_target,(setter)TowerAndReceiver_set_W_dot_rec_target,
+	PyDoc_STR("*float*: Target pumping power loss through receiver (not including riser/downcomer) [MWe]\n\n**Required:**\nRequired if is_calc_od_tube=1"),
+ 	NULL},
+{"cav_rec_height", (getter)TowerAndReceiver_get_cav_rec_height,(setter)TowerAndReceiver_set_cav_rec_height,
+	PyDoc_STR("*float*: Cavity receiver height - in [m]\n\n**Required:**\nRequired if receiver_type=1"),
+ 	NULL},
+{"cav_rec_passive_abs", (getter)TowerAndReceiver_get_cav_rec_passive_abs,(setter)TowerAndReceiver_set_cav_rec_passive_abs,
+	PyDoc_STR("*float*: Cavity receiver passive surface solar absorptance\n\n**Required:**\nRequired if receiver_type=1"),
+ 	NULL},
+{"cav_rec_passive_eps", (getter)TowerAndReceiver_get_cav_rec_passive_eps,(setter)TowerAndReceiver_set_cav_rec_passive_eps,
+	PyDoc_STR("*float*: Cavity receiver passive surface thermal emissivity\n\n**Required:**\nRequired if receiver_type=1"),
+ 	NULL},
+{"cav_rec_span", (getter)TowerAndReceiver_get_cav_rec_span,(setter)TowerAndReceiver_set_cav_rec_span,
+	PyDoc_STR("*float*: Cavity receiver span angle [deg]\n\n**Required:**\nRequired if receiver_type=1"),
+ 	NULL},
+{"cav_rec_width", (getter)TowerAndReceiver_get_cav_rec_width,(setter)TowerAndReceiver_set_cav_rec_width,
+	PyDoc_STR("*float*: Cavity receiver aperture width - in [m]\n\n**Required:**\nRequired if receiver_type=1"),
+ 	NULL},
+{"crossover_shift", (getter)TowerAndReceiver_get_crossover_shift,(setter)TowerAndReceiver_set_crossover_shift,
+	PyDoc_STR("*float*: Number of panels shift in receiver crossover position\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"csp_pt_rec_max_oper_frac", (getter)TowerAndReceiver_get_csp_pt_rec_max_oper_frac,(setter)TowerAndReceiver_set_csp_pt_rec_max_oper_frac,
+	PyDoc_STR("*float*: Maximum receiver mass flow rate fraction\n\n**Required:**\nTrue"),
+ 	NULL},
+{"d_tube_out", (getter)TowerAndReceiver_get_d_tube_out,(setter)TowerAndReceiver_set_d_tube_out,
+	PyDoc_STR("*float*: The outer diameter of an individual receiver tube [mm]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"delta_flux_hrs", (getter)TowerAndReceiver_get_delta_flux_hrs,(setter)TowerAndReceiver_set_delta_flux_hrs,
+	PyDoc_STR("*float*: Hourly frequency in flux map lookup\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"downc_tm_mult", (getter)TowerAndReceiver_get_downc_tm_mult,(setter)TowerAndReceiver_set_downc_tm_mult,
+	PyDoc_STR("*float*: Downcomer thermal mass multiplier\n\n**Required:**\nFalse. Automatically set to 1.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"epsilon", (getter)TowerAndReceiver_get_epsilon,(setter)TowerAndReceiver_set_epsilon,
+	PyDoc_STR("*float*: The emissivity of the receiver surface coating\n\n**Required:**\nTrue"),
+ 	NULL},
+{"eta_pump", (getter)TowerAndReceiver_get_eta_pump,(setter)TowerAndReceiver_set_eta_pump,
+	PyDoc_STR("*float*: Receiver HTF pump efficiency\n\n**Required:**\nTrue"),
+ 	NULL},
+{"f_rec_min", (getter)TowerAndReceiver_get_f_rec_min,(setter)TowerAndReceiver_set_f_rec_min,
+	PyDoc_STR("*float*: Minimum receiver mass flow rate turn down fraction\n\n**Required:**\nTrue"),
+ 	NULL},
+{"field_fl_props", (getter)TowerAndReceiver_get_field_fl_props,(setter)TowerAndReceiver_set_field_fl_props,
+	PyDoc_STR("*sequence[sequence]*: User defined field fluid property data [-]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"flux_max", (getter)TowerAndReceiver_get_flux_max,(setter)TowerAndReceiver_set_flux_max,
+	PyDoc_STR("*float*: Maximum allowable flux\n\n**Required:**\nFalse. Automatically set to 1000 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"h_tower", (getter)TowerAndReceiver_get_h_tower,(setter)TowerAndReceiver_set_h_tower,
+	PyDoc_STR("*float*: Tower height - in [m]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"heat_trace_power", (getter)TowerAndReceiver_get_heat_trace_power,(setter)TowerAndReceiver_set_heat_trace_power,
+	PyDoc_STR("*float*: Riser/downcomer heat trace power during startup [kW/m]\n\n**Required:**\nFalse. Automatically set to 500.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"hl_ffact", (getter)TowerAndReceiver_get_hl_ffact,(setter)TowerAndReceiver_set_hl_ffact,
+	PyDoc_STR("*float*: The heat loss factor (thermal loss fudge factor)\n\n**Required:**\nTrue"),
+ 	NULL},
+{"is_calc_od_tube", (getter)TowerAndReceiver_get_is_calc_od_tube,(setter)TowerAndReceiver_set_is_calc_od_tube,
+	PyDoc_STR("*float*: False (default): use input d_tube_output, True: calc OD tube to achieve W_dot_rec_target\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"is_calc_pb_pump_coef", (getter)TowerAndReceiver_get_is_calc_pb_pump_coef,(setter)TowerAndReceiver_set_is_calc_pb_pump_coef,
+	PyDoc_STR("*float*: False (default): use input pb_pump_coef, True: calc pb_pump_coef to achieve W_dot_pb_pump_target\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"is_calc_sm", (getter)TowerAndReceiver_get_is_calc_sm,(setter)TowerAndReceiver_set_is_calc_sm,
+	PyDoc_STR("*float*: False (default): use input solarm, True: calc solar multiple to achieve q_dot_rec_des_target\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"is_rec_enforce_min_startup", (getter)TowerAndReceiver_get_is_rec_enforce_min_startup,(setter)TowerAndReceiver_set_is_rec_enforce_min_startup,
+	PyDoc_STR("*float*: Always enforce minimum startup time\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"is_rec_model_trans", (getter)TowerAndReceiver_get_is_rec_model_trans,(setter)TowerAndReceiver_set_is_rec_model_trans,
+	PyDoc_STR("*float*: Formulate receiver model as transient?\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"is_rec_startup_from_T_soln", (getter)TowerAndReceiver_get_is_rec_startup_from_T_soln,(setter)TowerAndReceiver_set_is_rec_startup_from_T_soln,
+	PyDoc_STR("*float*: Begin receiver startup from solved temperature profiles?\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"is_rec_startup_trans", (getter)TowerAndReceiver_get_is_rec_startup_trans,(setter)TowerAndReceiver_set_is_rec_startup_trans,
+	PyDoc_STR("*float*: Formulate receiver startup model as transient?\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"mat_tube", (getter)TowerAndReceiver_get_mat_tube,(setter)TowerAndReceiver_set_mat_tube,
+	PyDoc_STR("*float*: Receiver tube material, 2=Stainless AISI316\n\n**Required:**\nTrue"),
+ 	NULL},
+{"min_fill_time", (getter)TowerAndReceiver_get_min_fill_time,(setter)TowerAndReceiver_set_min_fill_time,
+	PyDoc_STR("*float*: Startup time delay for filling the receiver/piping [hr]\n\n**Required:**\nFalse. Automatically set to 0.1333 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"min_preheat_time", (getter)TowerAndReceiver_get_min_preheat_time,(setter)TowerAndReceiver_set_min_preheat_time,
+	PyDoc_STR("*float*: Minimum time required in preheat startup stage [hr]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"n_cav_rec_panels", (getter)TowerAndReceiver_get_n_cav_rec_panels,(setter)TowerAndReceiver_set_n_cav_rec_panels,
+	PyDoc_STR("*float*: Cavity receiver number of panels\n\n**Required:**\nRequired if receiver_type=1"),
+ 	NULL},
+{"n_flux_days", (getter)TowerAndReceiver_get_n_flux_days,(setter)TowerAndReceiver_set_n_flux_days,
+	PyDoc_STR("*float*: Number of days in flux map lookup\n\n**Required:**\nFalse. Automatically set to 8 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"piping_length_const", (getter)TowerAndReceiver_get_piping_length_const,(setter)TowerAndReceiver_set_piping_length_const,
+	PyDoc_STR("*float*: Piping constant length [m]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"piping_length_mult", (getter)TowerAndReceiver_get_piping_length_mult,(setter)TowerAndReceiver_set_piping_length_mult,
+	PyDoc_STR("*float*: Piping length multiplier\n\n**Required:**\nTrue"),
+ 	NULL},
+{"piping_loss_coefficient", (getter)TowerAndReceiver_get_piping_loss_coefficient,(setter)TowerAndReceiver_set_piping_loss_coefficient,
+	PyDoc_STR("*float*: Thermal loss per meter of piping [Wt/m2-K]"),
+ 	NULL},
+{"preheat_flux", (getter)TowerAndReceiver_get_preheat_flux,(setter)TowerAndReceiver_set_preheat_flux,
+	PyDoc_STR("*float*: Tube absorbed solar flux during preheat [kW/m2]\n\n**Required:**\nFalse. Automatically set to 50.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"q_dot_rec_des_target", (getter)TowerAndReceiver_get_q_dot_rec_des_target,(setter)TowerAndReceiver_set_q_dot_rec_des_target,
+	PyDoc_STR("*float*: Target design receiver thermal power [MWe]\n\n**Required:**\nRequired if is_calc_sm=1"),
+ 	NULL},
+{"rec_absorptance", (getter)TowerAndReceiver_get_rec_absorptance,(setter)TowerAndReceiver_set_rec_absorptance,
+	PyDoc_STR("*float*: Receiver absorptance\n\n**Required:**\nTrue"),
+ 	NULL},
+{"rec_clearsky_dni", (getter)TowerAndReceiver_get_rec_clearsky_dni,(setter)TowerAndReceiver_set_rec_clearsky_dni,
+	PyDoc_STR("*sequence*: User-defined clear-sky DNI [W/m2]\n\n**Required:**\nRequired if rec_clearsky_model=0"),
+ 	NULL},
+{"rec_clearsky_fraction", (getter)TowerAndReceiver_get_rec_clearsky_fraction,(setter)TowerAndReceiver_set_rec_clearsky_fraction,
+	PyDoc_STR("*float*: Weighting fraction on clear-sky DNI for receiver flow control\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"rec_clearsky_model", (getter)TowerAndReceiver_get_rec_clearsky_model,(setter)TowerAndReceiver_set_rec_clearsky_model,
+	PyDoc_STR("*float*: Clearsky model: None = -1, User-defined data = 0, Meinel = 1; Hottel = 2; Allen = 3; Moon = 4\n\n**Required:**\nFalse. Automatically set to -1 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"rec_height", (getter)TowerAndReceiver_get_rec_height,(setter)TowerAndReceiver_set_rec_height,
+	PyDoc_STR("*float*: Receiver height - in [m]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"rec_hl_perm2", (getter)TowerAndReceiver_get_rec_hl_perm2,(setter)TowerAndReceiver_set_rec_hl_perm2,
+	PyDoc_STR("*float*: Receiver design heatloss [kW/m2]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"rec_htf", (getter)TowerAndReceiver_get_rec_htf,(setter)TowerAndReceiver_set_rec_htf,
+	PyDoc_STR("*float*: Receiver HTF, 17=Salt (60% NaNO3, 40% KNO3) 10=Salt (46.5% LiF 11.5% NaF 42% KF) 50=Lookup tables\n\n**Required:**\nTrue"),
+ 	NULL},
+{"rec_qf_delay", (getter)TowerAndReceiver_get_rec_qf_delay,(setter)TowerAndReceiver_set_rec_qf_delay,
+	PyDoc_STR("*float*: Energy-based receiver startup delay (fraction of rated thermal power)\n\n**Required:**\nTrue"),
+ 	NULL},
+{"rec_su_delay", (getter)TowerAndReceiver_get_rec_su_delay,(setter)TowerAndReceiver_set_rec_su_delay,
+	PyDoc_STR("*float*: Fixed startup delay time for the receiver [hr]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"rec_tm_mult", (getter)TowerAndReceiver_get_rec_tm_mult,(setter)TowerAndReceiver_set_rec_tm_mult,
+	PyDoc_STR("*float*: Receiver thermal mass multiplier\n\n**Required:**\nFalse. Automatically set to 1.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"riser_tm_mult", (getter)TowerAndReceiver_get_riser_tm_mult,(setter)TowerAndReceiver_set_riser_tm_mult,
+	PyDoc_STR("*float*: Riser thermal mass multiplier\n\n**Required:**\nFalse. Automatically set to 1.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"startup_ramp_time", (getter)TowerAndReceiver_get_startup_ramp_time,(setter)TowerAndReceiver_set_startup_ramp_time,
+	PyDoc_STR("*float*: Time required to reach full flux during receiver startup [hr]\n\n**Required:**\nFalse. Automatically set to 0.1333 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"startup_target_Tdiff", (getter)TowerAndReceiver_get_startup_target_Tdiff,(setter)TowerAndReceiver_set_startup_target_Tdiff,
+	PyDoc_STR("*float*: Target HTF T at end of startup - steady state hot HTF temperature [C]\n\n**Required:**\nFalse. Automatically set to -5.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"th_riser", (getter)TowerAndReceiver_get_th_riser,(setter)TowerAndReceiver_set_th_riser,
+	PyDoc_STR("*float*: Riser or downcomer tube wall thickness [mm]\n\n**Required:**\nFalse. Automatically set to 15.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"th_tube", (getter)TowerAndReceiver_get_th_tube,(setter)TowerAndReceiver_set_th_tube,
+	PyDoc_STR("*float*: The wall thickness of a single receiver tube [mm]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"u_riser", (getter)TowerAndReceiver_get_u_riser,(setter)TowerAndReceiver_set_u_riser,
+	PyDoc_STR("*float*: Design point HTF velocity in riser [m/s]\n\n**Required:**\nFalse. Automatically set to 4.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject TowerAndReceiver_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"TcsmoltenSalt.TowerAndReceiver",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		TowerAndReceiver_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		TowerAndReceiver_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * HeliostatField Group
  */ 
 
@@ -2223,878 +3185,6 @@ static PyTypeObject HeliostatField_Type = {
 		HeliostatField_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		HeliostatField_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * TowerAndReceiver Group
- */ 
-
-static PyTypeObject TowerAndReceiver_Type;
-
-static PyObject *
-TowerAndReceiver_new(SAM_TcsmoltenSalt data_ptr)
-{
-	PyObject* new_obj = TowerAndReceiver_Type.tp_alloc(&TowerAndReceiver_Type,0);
-
-	VarGroupObject* TowerAndReceiver_obj = (VarGroupObject*)new_obj;
-
-	TowerAndReceiver_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* TowerAndReceiver methods */
-
-static PyObject *
-TowerAndReceiver_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsmoltenSalt", "TowerAndReceiver")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-TowerAndReceiver_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &TowerAndReceiver_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "TowerAndReceiver")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-TowerAndReceiver_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &TowerAndReceiver_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef TowerAndReceiver_methods[] = {
-		{"assign",            (PyCFunction)TowerAndReceiver_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``TowerAndReceiver_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)TowerAndReceiver_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``TowerAndReceiver_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)TowerAndReceiver_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-TowerAndReceiver_get_D_rec(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_D_rec_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_D_rec(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_D_rec_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_Flow_type(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_Flow_type_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_Flow_type(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_Flow_type_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_N_panels(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_N_panels_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_N_panels(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_N_panels_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_cav_rec_height(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_height_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_cav_rec_height(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_height_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_cav_rec_passive_abs(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_passive_abs_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_cav_rec_passive_abs(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_passive_abs_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_cav_rec_passive_eps(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_passive_eps_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_cav_rec_passive_eps(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_passive_eps_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_cav_rec_span(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_span_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_cav_rec_span(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_span_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_cav_rec_width(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_width_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_cav_rec_width(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_width_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_crossover_shift(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_crossover_shift_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_crossover_shift(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_crossover_shift_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_csp_pt_rec_max_oper_frac(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_csp_pt_rec_max_oper_frac_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_csp_pt_rec_max_oper_frac(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_csp_pt_rec_max_oper_frac_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_d_tube_out(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_d_tube_out_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_d_tube_out(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_d_tube_out_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_delta_flux_hrs(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_delta_flux_hrs_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_delta_flux_hrs(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_delta_flux_hrs_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_downc_tm_mult(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_downc_tm_mult_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_downc_tm_mult(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_downc_tm_mult_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_epsilon(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_epsilon_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_epsilon(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_epsilon_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_eta_pump(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_eta_pump_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_eta_pump(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_eta_pump_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_f_rec_min(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_f_rec_min_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_f_rec_min(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_f_rec_min_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_field_fl_props(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_TcsmoltenSalt_TowerAndReceiver_field_fl_props_mget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_field_fl_props(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_field_fl_props_mset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_flux_max(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_flux_max_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_flux_max(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_flux_max_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_h_tower(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_h_tower_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_h_tower(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_h_tower_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_heat_trace_power(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_heat_trace_power_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_heat_trace_power(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_heat_trace_power_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_hl_ffact(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_hl_ffact_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_hl_ffact(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_hl_ffact_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_is_rec_enforce_min_startup(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_is_rec_enforce_min_startup_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_is_rec_enforce_min_startup(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_is_rec_enforce_min_startup_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_is_rec_model_trans(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_is_rec_model_trans_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_is_rec_model_trans(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_is_rec_model_trans_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_is_rec_startup_from_T_soln(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_is_rec_startup_from_T_soln_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_is_rec_startup_from_T_soln(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_is_rec_startup_from_T_soln_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_is_rec_startup_trans(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_is_rec_startup_trans_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_is_rec_startup_trans(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_is_rec_startup_trans_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_mat_tube(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_mat_tube_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_mat_tube(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_mat_tube_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_min_fill_time(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_min_fill_time_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_min_fill_time(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_min_fill_time_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_min_preheat_time(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_min_preheat_time_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_min_preheat_time(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_min_preheat_time_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_n_cav_rec_panels(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_n_cav_rec_panels_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_n_cav_rec_panels(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_n_cav_rec_panels_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_n_flux_days(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_n_flux_days_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_n_flux_days(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_n_flux_days_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_piping_length_const(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_piping_length_const_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_piping_length_const(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_piping_length_const_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_piping_length_mult(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_piping_length_mult_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_piping_length_mult(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_piping_length_mult_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_piping_loss_coefficient(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_piping_loss_coefficient_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_piping_loss_coefficient(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_piping_loss_coefficient_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_preheat_flux(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_preheat_flux_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_preheat_flux(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_preheat_flux_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_rec_absorptance(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_absorptance_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_rec_absorptance(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_absorptance_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_rec_clearsky_dni(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_clearsky_dni_aget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_rec_clearsky_dni(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_clearsky_dni_aset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_rec_clearsky_fraction(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_clearsky_fraction_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_rec_clearsky_fraction(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_clearsky_fraction_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_rec_clearsky_model(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_clearsky_model_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_rec_clearsky_model(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_clearsky_model_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_rec_height(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_height_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_rec_height(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_height_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_rec_hl_perm2(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_hl_perm2_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_rec_hl_perm2(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_hl_perm2_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_rec_htf(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_htf_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_rec_htf(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_htf_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_rec_qf_delay(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_qf_delay_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_rec_qf_delay(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_qf_delay_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_rec_su_delay(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_su_delay_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_rec_su_delay(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_su_delay_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_rec_tm_mult(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_tm_mult_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_rec_tm_mult(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_tm_mult_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_riser_tm_mult(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_riser_tm_mult_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_riser_tm_mult(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_riser_tm_mult_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_startup_ramp_time(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_startup_ramp_time_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_startup_ramp_time(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_startup_ramp_time_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_startup_target_Tdiff(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_startup_target_Tdiff_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_startup_target_Tdiff(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_startup_target_Tdiff_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_th_riser(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_th_riser_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_th_riser(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_th_riser_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_th_tube(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_th_tube_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_th_tube(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_th_tube_nset, self->data_ptr);
-}
-
-static PyObject *
-TowerAndReceiver_get_u_riser(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_u_riser_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_u_riser(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_u_riser_nset, self->data_ptr);
-}
-
-static PyGetSetDef TowerAndReceiver_getset[] = {
-{"D_rec", (getter)TowerAndReceiver_get_D_rec,(setter)TowerAndReceiver_set_D_rec,
-	PyDoc_STR("*float*: The overall outer diameter of the receiver - in [m]\n\n**Required:**\nTrue"),
- 	NULL},
-{"Flow_type", (getter)TowerAndReceiver_get_Flow_type,(setter)TowerAndReceiver_set_Flow_type,
-	PyDoc_STR("*float*: Receiver flow pattern: see figure on SAM Receiver page\n\n**Required:**\nTrue"),
- 	NULL},
-{"N_panels", (getter)TowerAndReceiver_get_N_panels,(setter)TowerAndReceiver_set_N_panels,
-	PyDoc_STR("*float*: Number of individual panels on the receiver\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
- 	NULL},
-{"cav_rec_height", (getter)TowerAndReceiver_get_cav_rec_height,(setter)TowerAndReceiver_set_cav_rec_height,
-	PyDoc_STR("*float*: Cavity receiver height - in [m]\n\n**Required:**\nRequired if receiver_type=1"),
- 	NULL},
-{"cav_rec_passive_abs", (getter)TowerAndReceiver_get_cav_rec_passive_abs,(setter)TowerAndReceiver_set_cav_rec_passive_abs,
-	PyDoc_STR("*float*: Cavity receiver passive surface solar absorptance\n\n**Required:**\nRequired if receiver_type=1"),
- 	NULL},
-{"cav_rec_passive_eps", (getter)TowerAndReceiver_get_cav_rec_passive_eps,(setter)TowerAndReceiver_set_cav_rec_passive_eps,
-	PyDoc_STR("*float*: Cavity receiver passive surface thermal emissivity\n\n**Required:**\nRequired if receiver_type=1"),
- 	NULL},
-{"cav_rec_span", (getter)TowerAndReceiver_get_cav_rec_span,(setter)TowerAndReceiver_set_cav_rec_span,
-	PyDoc_STR("*float*: Cavity receiver span angle [deg]\n\n**Required:**\nRequired if receiver_type=1"),
- 	NULL},
-{"cav_rec_width", (getter)TowerAndReceiver_get_cav_rec_width,(setter)TowerAndReceiver_set_cav_rec_width,
-	PyDoc_STR("*float*: Cavity receiver aperture width - in [m]\n\n**Required:**\nRequired if receiver_type=1"),
- 	NULL},
-{"crossover_shift", (getter)TowerAndReceiver_get_crossover_shift,(setter)TowerAndReceiver_set_crossover_shift,
-	PyDoc_STR("*float*: Number of panels shift in receiver crossover position\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"csp_pt_rec_max_oper_frac", (getter)TowerAndReceiver_get_csp_pt_rec_max_oper_frac,(setter)TowerAndReceiver_set_csp_pt_rec_max_oper_frac,
-	PyDoc_STR("*float*: Maximum receiver mass flow rate fraction\n\n**Required:**\nTrue"),
- 	NULL},
-{"d_tube_out", (getter)TowerAndReceiver_get_d_tube_out,(setter)TowerAndReceiver_set_d_tube_out,
-	PyDoc_STR("*float*: The outer diameter of an individual receiver tube [mm]\n\n**Required:**\nTrue"),
- 	NULL},
-{"delta_flux_hrs", (getter)TowerAndReceiver_get_delta_flux_hrs,(setter)TowerAndReceiver_set_delta_flux_hrs,
-	PyDoc_STR("*float*: Hourly frequency in flux map lookup\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"downc_tm_mult", (getter)TowerAndReceiver_get_downc_tm_mult,(setter)TowerAndReceiver_set_downc_tm_mult,
-	PyDoc_STR("*float*: Downcomer thermal mass multiplier\n\n**Required:**\nFalse. Automatically set to 1.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"epsilon", (getter)TowerAndReceiver_get_epsilon,(setter)TowerAndReceiver_set_epsilon,
-	PyDoc_STR("*float*: The emissivity of the receiver surface coating\n\n**Required:**\nTrue"),
- 	NULL},
-{"eta_pump", (getter)TowerAndReceiver_get_eta_pump,(setter)TowerAndReceiver_set_eta_pump,
-	PyDoc_STR("*float*: Receiver HTF pump efficiency\n\n**Required:**\nTrue"),
- 	NULL},
-{"f_rec_min", (getter)TowerAndReceiver_get_f_rec_min,(setter)TowerAndReceiver_set_f_rec_min,
-	PyDoc_STR("*float*: Minimum receiver mass flow rate turn down fraction\n\n**Required:**\nTrue"),
- 	NULL},
-{"field_fl_props", (getter)TowerAndReceiver_get_field_fl_props,(setter)TowerAndReceiver_set_field_fl_props,
-	PyDoc_STR("*sequence[sequence]*: User defined field fluid property data [-]\n\n**Required:**\nTrue"),
- 	NULL},
-{"flux_max", (getter)TowerAndReceiver_get_flux_max,(setter)TowerAndReceiver_set_flux_max,
-	PyDoc_STR("*float*: Maximum allowable flux\n\n**Required:**\nFalse. Automatically set to 1000 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"h_tower", (getter)TowerAndReceiver_get_h_tower,(setter)TowerAndReceiver_set_h_tower,
-	PyDoc_STR("*float*: Tower height - in [m]\n\n**Required:**\nTrue"),
- 	NULL},
-{"heat_trace_power", (getter)TowerAndReceiver_get_heat_trace_power,(setter)TowerAndReceiver_set_heat_trace_power,
-	PyDoc_STR("*float*: Riser/downcomer heat trace power during startup [kW/m]\n\n**Required:**\nFalse. Automatically set to 500.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"hl_ffact", (getter)TowerAndReceiver_get_hl_ffact,(setter)TowerAndReceiver_set_hl_ffact,
-	PyDoc_STR("*float*: The heat loss factor (thermal loss fudge factor)\n\n**Required:**\nTrue"),
- 	NULL},
-{"is_rec_enforce_min_startup", (getter)TowerAndReceiver_get_is_rec_enforce_min_startup,(setter)TowerAndReceiver_set_is_rec_enforce_min_startup,
-	PyDoc_STR("*float*: Always enforce minimum startup time\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"is_rec_model_trans", (getter)TowerAndReceiver_get_is_rec_model_trans,(setter)TowerAndReceiver_set_is_rec_model_trans,
-	PyDoc_STR("*float*: Formulate receiver model as transient?\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"is_rec_startup_from_T_soln", (getter)TowerAndReceiver_get_is_rec_startup_from_T_soln,(setter)TowerAndReceiver_set_is_rec_startup_from_T_soln,
-	PyDoc_STR("*float*: Begin receiver startup from solved temperature profiles?\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"is_rec_startup_trans", (getter)TowerAndReceiver_get_is_rec_startup_trans,(setter)TowerAndReceiver_set_is_rec_startup_trans,
-	PyDoc_STR("*float*: Formulate receiver startup model as transient?\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"mat_tube", (getter)TowerAndReceiver_get_mat_tube,(setter)TowerAndReceiver_set_mat_tube,
-	PyDoc_STR("*float*: Receiver tube material, 2=Stainless AISI316\n\n**Required:**\nTrue"),
- 	NULL},
-{"min_fill_time", (getter)TowerAndReceiver_get_min_fill_time,(setter)TowerAndReceiver_set_min_fill_time,
-	PyDoc_STR("*float*: Startup time delay for filling the receiver/piping [hr]\n\n**Required:**\nFalse. Automatically set to 0.1333 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"min_preheat_time", (getter)TowerAndReceiver_get_min_preheat_time,(setter)TowerAndReceiver_set_min_preheat_time,
-	PyDoc_STR("*float*: Minimum time required in preheat startup stage [hr]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"n_cav_rec_panels", (getter)TowerAndReceiver_get_n_cav_rec_panels,(setter)TowerAndReceiver_set_n_cav_rec_panels,
-	PyDoc_STR("*float*: Cavity receiver number of panels\n\n**Required:**\nRequired if receiver_type=1"),
- 	NULL},
-{"n_flux_days", (getter)TowerAndReceiver_get_n_flux_days,(setter)TowerAndReceiver_set_n_flux_days,
-	PyDoc_STR("*float*: Number of days in flux map lookup\n\n**Required:**\nFalse. Automatically set to 8 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"piping_length_const", (getter)TowerAndReceiver_get_piping_length_const,(setter)TowerAndReceiver_set_piping_length_const,
-	PyDoc_STR("*float*: Piping constant length [m]\n\n**Required:**\nTrue"),
- 	NULL},
-{"piping_length_mult", (getter)TowerAndReceiver_get_piping_length_mult,(setter)TowerAndReceiver_set_piping_length_mult,
-	PyDoc_STR("*float*: Piping length multiplier\n\n**Required:**\nTrue"),
- 	NULL},
-{"piping_loss_coefficient", (getter)TowerAndReceiver_get_piping_loss_coefficient,(setter)TowerAndReceiver_set_piping_loss_coefficient,
-	PyDoc_STR("*float*: Thermal loss per meter of piping [Wt/m2-K]"),
- 	NULL},
-{"preheat_flux", (getter)TowerAndReceiver_get_preheat_flux,(setter)TowerAndReceiver_set_preheat_flux,
-	PyDoc_STR("*float*: Tube absorbed solar flux during preheat [kW/m2]\n\n**Required:**\nFalse. Automatically set to 50.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"rec_absorptance", (getter)TowerAndReceiver_get_rec_absorptance,(setter)TowerAndReceiver_set_rec_absorptance,
-	PyDoc_STR("*float*: Receiver absorptance\n\n**Required:**\nTrue"),
- 	NULL},
-{"rec_clearsky_dni", (getter)TowerAndReceiver_get_rec_clearsky_dni,(setter)TowerAndReceiver_set_rec_clearsky_dni,
-	PyDoc_STR("*sequence*: User-defined clear-sky DNI [W/m2]\n\n**Required:**\nRequired if rec_clearsky_model=0"),
- 	NULL},
-{"rec_clearsky_fraction", (getter)TowerAndReceiver_get_rec_clearsky_fraction,(setter)TowerAndReceiver_set_rec_clearsky_fraction,
-	PyDoc_STR("*float*: Weighting fraction on clear-sky DNI for receiver flow control\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"rec_clearsky_model", (getter)TowerAndReceiver_get_rec_clearsky_model,(setter)TowerAndReceiver_set_rec_clearsky_model,
-	PyDoc_STR("*float*: Clearsky model: None = -1, User-defined data = 0, Meinel = 1; Hottel = 2; Allen = 3; Moon = 4\n\n**Required:**\nFalse. Automatically set to -1 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"rec_height", (getter)TowerAndReceiver_get_rec_height,(setter)TowerAndReceiver_set_rec_height,
-	PyDoc_STR("*float*: Receiver height - in [m]\n\n**Required:**\nTrue"),
- 	NULL},
-{"rec_hl_perm2", (getter)TowerAndReceiver_get_rec_hl_perm2,(setter)TowerAndReceiver_set_rec_hl_perm2,
-	PyDoc_STR("*float*: Receiver design heatloss [kW/m2]\n\n**Required:**\nTrue"),
- 	NULL},
-{"rec_htf", (getter)TowerAndReceiver_get_rec_htf,(setter)TowerAndReceiver_set_rec_htf,
-	PyDoc_STR("*float*: Receiver HTF, 17=Salt (60% NaNO3, 40% KNO3) 10=Salt (46.5% LiF 11.5% NaF 42% KF) 50=Lookup tables\n\n**Required:**\nTrue"),
- 	NULL},
-{"rec_qf_delay", (getter)TowerAndReceiver_get_rec_qf_delay,(setter)TowerAndReceiver_set_rec_qf_delay,
-	PyDoc_STR("*float*: Energy-based receiver startup delay (fraction of rated thermal power)\n\n**Required:**\nTrue"),
- 	NULL},
-{"rec_su_delay", (getter)TowerAndReceiver_get_rec_su_delay,(setter)TowerAndReceiver_set_rec_su_delay,
-	PyDoc_STR("*float*: Fixed startup delay time for the receiver [hr]\n\n**Required:**\nTrue"),
- 	NULL},
-{"rec_tm_mult", (getter)TowerAndReceiver_get_rec_tm_mult,(setter)TowerAndReceiver_set_rec_tm_mult,
-	PyDoc_STR("*float*: Receiver thermal mass multiplier\n\n**Required:**\nFalse. Automatically set to 1.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"riser_tm_mult", (getter)TowerAndReceiver_get_riser_tm_mult,(setter)TowerAndReceiver_set_riser_tm_mult,
-	PyDoc_STR("*float*: Riser thermal mass multiplier\n\n**Required:**\nFalse. Automatically set to 1.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"startup_ramp_time", (getter)TowerAndReceiver_get_startup_ramp_time,(setter)TowerAndReceiver_set_startup_ramp_time,
-	PyDoc_STR("*float*: Time required to reach full flux during receiver startup [hr]\n\n**Required:**\nFalse. Automatically set to 0.1333 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"startup_target_Tdiff", (getter)TowerAndReceiver_get_startup_target_Tdiff,(setter)TowerAndReceiver_set_startup_target_Tdiff,
-	PyDoc_STR("*float*: Target HTF T at end of startup - steady state hot HTF temperature [C]\n\n**Required:**\nFalse. Automatically set to -5.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"th_riser", (getter)TowerAndReceiver_get_th_riser,(setter)TowerAndReceiver_set_th_riser,
-	PyDoc_STR("*float*: Riser or downcomer tube wall thickness [mm]\n\n**Required:**\nFalse. Automatically set to 15.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"th_tube", (getter)TowerAndReceiver_get_th_tube,(setter)TowerAndReceiver_set_th_tube,
-	PyDoc_STR("*float*: The wall thickness of a single receiver tube [mm]\n\n**Required:**\nTrue"),
- 	NULL},
-{"u_riser", (getter)TowerAndReceiver_get_u_riser,(setter)TowerAndReceiver_set_u_riser,
-	PyDoc_STR("*float*: Design point HTF velocity in riser [m/s]\n\n**Required:**\nFalse. Automatically set to 4.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject TowerAndReceiver_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"TcsmoltenSalt.TowerAndReceiver",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		TowerAndReceiver_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		TowerAndReceiver_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -5241,6 +5331,18 @@ UserDefinedPowerCycle_set_ud_ind_od(VarGroupObject *self, PyObject *value, void 
 }
 
 static PyObject *
+UserDefinedPowerCycle_get_ud_is_sco2_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_UserDefinedPowerCycle_ud_is_sco2_regr_nget, self->data_ptr);
+}
+
+static int
+UserDefinedPowerCycle_set_ud_is_sco2_regr(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_UserDefinedPowerCycle_ud_is_sco2_regr_nset, self->data_ptr);
+}
+
+static PyObject *
 UserDefinedPowerCycle_get_ud_m_dot_water_cool_des(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsmoltenSalt_UserDefinedPowerCycle_ud_m_dot_water_cool_des_nget, self->data_ptr);
@@ -5252,6 +5354,18 @@ UserDefinedPowerCycle_set_ud_m_dot_water_cool_des(VarGroupObject *self, PyObject
 	return PySAM_double_setter(value, SAM_TcsmoltenSalt_UserDefinedPowerCycle_ud_m_dot_water_cool_des_nset, self->data_ptr);
 }
 
+static PyObject *
+UserDefinedPowerCycle_get_use_net_cycle_output_as_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_UserDefinedPowerCycle_use_net_cycle_output_as_capacity_nget, self->data_ptr);
+}
+
+static int
+UserDefinedPowerCycle_set_use_net_cycle_output_as_capacity(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_UserDefinedPowerCycle_use_net_cycle_output_as_capacity_nset, self->data_ptr);
+}
+
 static PyGetSetDef UserDefinedPowerCycle_getset[] = {
 {"ud_f_W_dot_cool_des", (getter)UserDefinedPowerCycle_get_ud_f_W_dot_cool_des,(setter)UserDefinedPowerCycle_set_ud_f_W_dot_cool_des,
 	PyDoc_STR("*float*: Percent of user-defined power cycle design gross output consumed by cooling [%]\n\n**Required:**\nRequired if pc_config=1"),
@@ -5259,8 +5373,14 @@ static PyGetSetDef UserDefinedPowerCycle_getset[] = {
 {"ud_ind_od", (getter)UserDefinedPowerCycle_get_ud_ind_od,(setter)UserDefinedPowerCycle_set_ud_ind_od,
 	PyDoc_STR("*sequence[sequence]*: Off design user-defined power cycle performance as function of T_htf, m_dot_htf [ND], and T_amb\n\n**Required:**\nRequired if pc_config=1"),
  	NULL},
+{"ud_is_sco2_regr", (getter)UserDefinedPowerCycle_get_ud_is_sco2_regr,(setter)UserDefinedPowerCycle_set_ud_is_sco2_regr,
+	PyDoc_STR("*float*: False: default, base udpc interpolation, True: use sco2 heuristic regression\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
 {"ud_m_dot_water_cool_des", (getter)UserDefinedPowerCycle_get_ud_m_dot_water_cool_des,(setter)UserDefinedPowerCycle_set_ud_m_dot_water_cool_des,
 	PyDoc_STR("*float*: Mass flow rate of water required at user-defined power cycle design point [kg/s]\n\n**Required:**\nRequired if pc_config=1"),
+ 	NULL},
+{"use_net_cycle_output_as_capacity", (getter)UserDefinedPowerCycle_get_use_net_cycle_output_as_capacity,(setter)UserDefinedPowerCycle_set_use_net_cycle_output_as_capacity,
+	PyDoc_STR("*float*: False: default, use net calculation including system parasitics, True: for UDPC only, set as cycle output less cooling power\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -7016,6 +7136,24 @@ Outputs_get_W_dot_rec_pump_tower_share_des(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_all_hours_electricity_sales(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_all_hours_electricity_sales_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_all_hours_revenue_fraction(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_all_hours_revenue_fraction_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_E_tower_pump(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_annual_E_tower_pump_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_annual_W_cooling_tower(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_annual_W_cooling_tower_nget, self->data_ptr);
@@ -7052,6 +7190,24 @@ Outputs_get_annual_eta_rec_th_incl_refl(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_annual_q_defocus_est(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_annual_q_defocus_est_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_q_piping_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_annual_q_piping_loss_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_q_rec_htf(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_annual_q_rec_htf_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_annual_q_rec_inc(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_annual_q_rec_inc_nget, self->data_ptr);
@@ -7061,6 +7217,12 @@ static PyObject *
 Outputs_get_annual_q_rec_loss(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_annual_q_rec_loss_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_q_rec_startup(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_annual_q_rec_startup_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -7103,6 +7265,12 @@ static PyObject *
 Outputs_get_capacity_factor_highest_2000_ppas(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_capacity_factor_highest_2000_ppas_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_capacity_factor_warmest_100_Tambs(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_capacity_factor_warmest_100_Tambs_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -7634,6 +7802,18 @@ Outputs_get_heliostat_area(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_hot_hours_electricity_sales(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_hot_hours_electricity_sales_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_hot_hours_revenue_fraction(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_hot_hours_revenue_fraction_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_is_PAR_HTR_allowed(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_is_PAR_HTR_allowed_aget, self->data_ptr);
@@ -7841,6 +8021,12 @@ static PyObject *
 Outputs_get_nameplate(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_nameplate_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_od_tube_calc(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_od_tube_calc_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -8111,6 +8297,12 @@ static PyObject *
 Outputs_get_sim_cpu_run_time(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_sim_cpu_run_time_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_solar_mult_calc(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_solar_mult_calc_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -8408,6 +8600,15 @@ static PyGetSetDef Outputs_getset[] = {
 {"W_dot_rec_pump_tower_share_des", (getter)Outputs_get_W_dot_rec_pump_tower_share_des,(setter)0,
 	PyDoc_STR("*float*: Receiver estimated pump power due to tower height at design [MWe]"),
  	NULL},
+{"all_hours_electricity_sales", (getter)Outputs_get_all_hours_electricity_sales,(setter)0,
+	PyDoc_STR("*float*: Electricity sales [$]"),
+ 	NULL},
+{"all_hours_revenue_fraction", (getter)Outputs_get_all_hours_revenue_fraction,(setter)0,
+	PyDoc_STR("*float*: Fraction of potential annual revenue (based on system capacity) [-]"),
+ 	NULL},
+{"annual_E_tower_pump", (getter)Outputs_get_annual_E_tower_pump,(setter)0,
+	PyDoc_STR("*float*: Annual tower pumping power [MWe-hr]"),
+ 	NULL},
 {"annual_W_cooling_tower", (getter)Outputs_get_annual_W_cooling_tower,(setter)0,
 	PyDoc_STR("*float*: Total of condenser operation parasitics [kWhe]"),
  	NULL},
@@ -8426,11 +8627,23 @@ static PyGetSetDef Outputs_getset[] = {
 {"annual_eta_rec_th_incl_refl", (getter)Outputs_get_annual_eta_rec_th_incl_refl,(setter)0,
 	PyDoc_STR("*float*: Annual receiver thermal efficiency including reflective loss"),
  	NULL},
+{"annual_q_defocus_est", (getter)Outputs_get_annual_q_defocus_est,(setter)0,
+	PyDoc_STR("*float*: Annual defocus loss estimate [MWt-hr]"),
+ 	NULL},
+{"annual_q_piping_loss", (getter)Outputs_get_annual_q_piping_loss,(setter)0,
+	PyDoc_STR("*float*: Annual tower piping losses [MWt-hr]"),
+ 	NULL},
+{"annual_q_rec_htf", (getter)Outputs_get_annual_q_rec_htf,(setter)0,
+	PyDoc_STR("*float*: Annual receiver power delivered to HTF [MWt-hr]"),
+ 	NULL},
 {"annual_q_rec_inc", (getter)Outputs_get_annual_q_rec_inc,(setter)0,
-	PyDoc_STR("*float*: Annual receiver incident thermal power after reflective losses [MWt-hr]"),
+	PyDoc_STR("*float*: Annual receiver incident thermal power after reflective and defocus losses [MWt-hr]"),
  	NULL},
 {"annual_q_rec_loss", (getter)Outputs_get_annual_q_rec_loss,(setter)0,
 	PyDoc_STR("*float*: Annual receiver convective and radiative losses [MWt-hr]"),
+ 	NULL},
+{"annual_q_rec_startup", (getter)Outputs_get_annual_q_rec_startup,(setter)0,
+	PyDoc_STR("*float*: Annual receiver startup energy [MWt-hr]"),
  	NULL},
 {"annual_total_water_use", (getter)Outputs_get_annual_total_water_use,(setter)0,
 	PyDoc_STR("*float*: Total annual water usage, cycle + mirror washing [m3]"),
@@ -8452,6 +8665,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"capacity_factor_highest_2000_ppas", (getter)Outputs_get_capacity_factor_highest_2000_ppas,(setter)0,
 	PyDoc_STR("*float*: Capacity factor at 2000 highest ppa timesteps [-]"),
+ 	NULL},
+{"capacity_factor_warmest_100_Tambs", (getter)Outputs_get_capacity_factor_warmest_100_Tambs,(setter)0,
+	PyDoc_STR("*float*: Capacity factor at 100 warmest ambient temperatures [-]"),
  	NULL},
 {"cav_panel_width", (getter)Outputs_get_cav_panel_width,(setter)0,
 	PyDoc_STR("*float*: Cavity panel width [m]"),
@@ -8717,6 +8933,12 @@ static PyGetSetDef Outputs_getset[] = {
 {"heliostat_area", (getter)Outputs_get_heliostat_area,(setter)0,
 	PyDoc_STR("*float*: Active area of heliostat [m^2]"),
  	NULL},
+{"hot_hours_electricity_sales", (getter)Outputs_get_hot_hours_electricity_sales,(setter)0,
+	PyDoc_STR("*float*: Electricity sales during hours hotter than 33 C [$]"),
+ 	NULL},
+{"hot_hours_revenue_fraction", (getter)Outputs_get_hot_hours_revenue_fraction,(setter)0,
+	PyDoc_STR("*float*: Fraction of potential revenue (based on system capacity) earned during hours hotter than 33 C [-]"),
+ 	NULL},
 {"is_PAR_HTR_allowed", (getter)Outputs_get_is_PAR_HTR_allowed,(setter)0,
 	PyDoc_STR("*sequence*: Is parallel electric heater operation allowed"),
  	NULL},
@@ -8822,6 +9044,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"nameplate", (getter)Outputs_get_nameplate,(setter)0,
 	PyDoc_STR("*float*: Nameplate capacity [MWe]"),
  	NULL},
+{"od_tube_calc", (getter)Outputs_get_od_tube_calc,(setter)0,
+	PyDoc_STR("*float*: Receiver tube outer diameter - out [mm]"),
+ 	NULL},
 {"op_mode_1", (getter)Outputs_get_op_mode_1,(setter)0,
 	PyDoc_STR("*sequence*: 1st operating mode"),
  	NULL},
@@ -8907,7 +9132,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Receiver thermal output at design [MWt]"),
  	NULL},
 {"q_dot_rec_inc", (getter)Outputs_get_q_dot_rec_inc,(setter)0,
-	PyDoc_STR("*sequence*: Receiver incident thermal power [MWt]"),
+	PyDoc_STR("*sequence*: Receiver incident power after refl and defocus [MWt]"),
  	NULL},
 {"q_dot_reflection_loss", (getter)Outputs_get_q_dot_reflection_loss,(setter)0,
 	PyDoc_STR("*sequence*: Receiver reflection losses [MWt]"),
@@ -8956,6 +9181,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"sim_cpu_run_time", (getter)Outputs_get_sim_cpu_run_time,(setter)0,
 	PyDoc_STR("*float*: Simulation duration clock time [s]"),
+ 	NULL},
+{"solar_mult_calc", (getter)Outputs_get_solar_mult_calc,(setter)0,
+	PyDoc_STR("*float*: Receiver solar multiple - out"),
  	NULL},
 {"solaz", (getter)Outputs_get_solaz,(setter)0,
 	PyDoc_STR("*sequence*: Resource solar azimuth [deg]"),
@@ -9093,13 +9321,13 @@ newTcsmoltenSaltObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "SystemDesign", SystemDesign_obj);
 	Py_DECREF(SystemDesign_obj);
 
-	PyObject* HeliostatField_obj = HeliostatField_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "HeliostatField", HeliostatField_obj);
-	Py_DECREF(HeliostatField_obj);
-
 	PyObject* TowerAndReceiver_obj = TowerAndReceiver_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "TowerAndReceiver", TowerAndReceiver_obj);
 	Py_DECREF(TowerAndReceiver_obj);
+
+	PyObject* HeliostatField_obj = HeliostatField_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "HeliostatField", HeliostatField_obj);
+	Py_DECREF(HeliostatField_obj);
 
 	PyObject* ParallelHeater_obj = ParallelHeater_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "ParallelHeater", ParallelHeater_obj);
@@ -9192,6 +9420,14 @@ TcsmoltenSalt_dealloc(CmodObject *self)
 
 
 static PyObject *
+TcsmoltenSalt_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 TcsmoltenSalt_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -9268,6 +9504,8 @@ static PyMethodDef TcsmoltenSalt_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)TcsmoltenSalt_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)TcsmoltenSalt_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -9477,19 +9715,19 @@ TcsmoltenSaltModule_exec(PyObject *m)
 				(PyObject*)&SystemDesign_Type);
 	Py_DECREF(&SystemDesign_Type);
 
-	/// Add the HeliostatField type object to TcsmoltenSalt_Type
-	if (PyType_Ready(&HeliostatField_Type) < 0) { goto fail; }
-	PyDict_SetItemString(TcsmoltenSalt_Type.tp_dict,
-				"HeliostatField",
-				(PyObject*)&HeliostatField_Type);
-	Py_DECREF(&HeliostatField_Type);
-
 	/// Add the TowerAndReceiver type object to TcsmoltenSalt_Type
 	if (PyType_Ready(&TowerAndReceiver_Type) < 0) { goto fail; }
 	PyDict_SetItemString(TcsmoltenSalt_Type.tp_dict,
 				"TowerAndReceiver",
 				(PyObject*)&TowerAndReceiver_Type);
 	Py_DECREF(&TowerAndReceiver_Type);
+
+	/// Add the HeliostatField type object to TcsmoltenSalt_Type
+	if (PyType_Ready(&HeliostatField_Type) < 0) { goto fail; }
+	PyDict_SetItemString(TcsmoltenSalt_Type.tp_dict,
+				"HeliostatField",
+				(PyObject*)&HeliostatField_Type);
+	Py_DECREF(&HeliostatField_Type);
 
 	/// Add the ParallelHeater type object to TcsmoltenSalt_Type
 	if (PyType_Ready(&ParallelHeater_Type) < 0) { goto fail; }

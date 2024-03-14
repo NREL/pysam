@@ -14,6 +14,9 @@ class Battwatts(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
@@ -192,9 +195,13 @@ class Battwatts(object):
 		monthly_system_to_batt = tuple
 		monthly_system_to_grid = tuple
 		monthly_system_to_load = tuple
+		num_ts_load_met_by_system_lifetime = float
+		num_ts_load_met_by_system_yr1 = float
 		outage_durations = tuple
 		outage_losses_unmet = tuple
 		pdf_of_surviving = tuple
+		percent_ts_load_met_by_system_lifetime = float
+		percent_ts_load_met_by_system_yr1 = float
 		resilience_hrs = tuple
 		resilience_hrs_avg = float
 		resilience_hrs_max = float

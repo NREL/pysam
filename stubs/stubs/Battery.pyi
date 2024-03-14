@@ -14,6 +14,9 @@ class Battery(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
@@ -418,6 +421,31 @@ class Battery(object):
 		grid_interconnection_limit_kwac = float
 
 
+	class HybridCosts(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		add_om_num_types = float
+		degradation = tuple
+		land_area = float
+		om_batt_capacity_cost = tuple
+		om_batt_fixed_cost = tuple
+		om_batt_nameplate = float
+		om_capacity_escal = float
+		om_fixed_escal = float
+		om_land_lease = tuple
+		om_land_lease_escal = float
+		om_production1_values = tuple
+		total_installed_cost = float
+
+
 	class Outputs(object):
 		def assign(self): 
 			pass
@@ -494,6 +522,15 @@ class Battery(object):
 		batt_voltage_cell = tuple
 		capacity_factor_sales = float
 		cdf_of_surviving = tuple
+		cf_battery_replacement_cost_schedule = tuple
+		cf_energy_net = tuple
+		cf_fuelcell_replacement_cost_schedule = tuple
+		cf_land_lease_expense = tuple
+		cf_om_capacity = tuple
+		cf_om_fixed = tuple
+		cf_om_fuel_cost = tuple
+		cf_om_land_lease = tuple
+		cf_om_production = tuple
 		crit_load = tuple
 		crit_load_unmet = tuple
 		fuelcell_to_batt = tuple
@@ -517,9 +554,13 @@ class Battery(object):
 		monthly_system_to_batt = tuple
 		monthly_system_to_grid = tuple
 		monthly_system_to_load = tuple
+		num_ts_load_met_by_system_lifetime = float
+		num_ts_load_met_by_system_yr1 = float
 		outage_durations = tuple
 		outage_losses_unmet = tuple
 		pdf_of_surviving = tuple
+		percent_ts_load_met_by_system_lifetime = float
+		percent_ts_load_met_by_system_yr1 = float
 		resilience_hrs = tuple
 		resilience_hrs_avg = float
 		resilience_hrs_max = float

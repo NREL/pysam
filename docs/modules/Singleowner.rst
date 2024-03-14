@@ -13,13 +13,19 @@ Interdependent Variables
 
 The variables listed below are interdependent with other variables. If you change the value of one of these variables, you may need to change values of other variables. The SAM user interface manages these interdependent variables, but in PySAM, it is up to you change the value of all interdependent variables so they are consistent. See :doc:`../interdependent-variables` for examples and details.
 
+ - battery_per_kWh
+
+ - battery_total_cost_lcos
+
  - construction_financing_cost
 
  - cp_battery_nameplate
 
  - cp_system_nameplate
 
- - system_capacity
+ - land_area
+
+ - om_batt_nameplate
 
  - total_installed_cost
 
@@ -129,6 +135,24 @@ ChargesByMonth Group
 ---------------------
 
 .. autoclass:: PySAM.Singleowner.Singleowner.ChargesByMonth
+	:members:
+
+HybridFin Group
+----------------
+
+.. autoclass:: PySAM.Singleowner.Singleowner.HybridFin
+	:members:
+
+Monthly Group
+--------------
+
+.. autoclass:: PySAM.Singleowner.Singleowner.Monthly
+	:members:
+
+HybridCosts Group
+------------------
+
+.. autoclass:: PySAM.Singleowner.Singleowner.HybridCosts
 	:members:
 
 Outputs Group

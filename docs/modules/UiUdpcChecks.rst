@@ -33,6 +33,12 @@ Common Group
 .. autoclass:: PySAM.UiUdpcChecks.UiUdpcChecks.Common
 	:members:
 
+SystemDesign Group
+-------------------
+
+.. autoclass:: PySAM.UiUdpcChecks.UiUdpcChecks.SystemDesign
+	:members:
+
 Outputs Group
 --------------
 

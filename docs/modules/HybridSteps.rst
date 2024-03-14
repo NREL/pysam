@@ -1,12 +1,12 @@
-.. _Poacalib:
+.. _HybridSteps:
 
-Poacalib
-=========
+HybridSteps
+============
 
-.. automodule:: PySAM.Poacalib
+.. automodule:: PySAM.HybridSteps
 	:members:
 
-Poacalib is a wrapper for the SSC compute module `cmod_poacalib.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_poacalib.cpp>`_
+HybridSteps is a wrapper for the SSC compute module `cmod_hybrid_steps.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_hybrid_steps.cpp>`_
 
 Interdependent Variables
 --------------------------
@@ -18,18 +18,18 @@ The variables listed below are interdependent with other variables. If you chang
 Functions
 -----------
 
-.. autoclass:: PySAM.Poacalib.Poacalib
+.. autoclass:: PySAM.HybridSteps.HybridSteps
 	:members:
 
-POACalibrate Group
--------------------
+Common Group
+-------------
 
-.. autoclass:: PySAM.Poacalib.Poacalib.POACalibrate
+.. autoclass:: PySAM.HybridSteps.HybridSteps.Common
 	:members:
 
 Outputs Group
 --------------
 
-.. autoclass:: PySAM.Poacalib.Poacalib.Outputs
+.. autoclass:: PySAM.HybridSteps.HybridSteps.Outputs
 	:members:
 

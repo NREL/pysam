@@ -681,7 +681,7 @@ Outputs_get_surf_tilt(VarGroupObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"axis_rotation", (getter)Outputs_get_axis_rotation,(setter)0,
-	PyDoc_STR("*sequence*: Tracking axis rotation angle [deg]"),
+	PyDoc_STR("*sequence*: Tracker rotation angle [deg]"),
  	NULL},
 {"bt_diff", (getter)Outputs_get_bt_diff,(setter)0,
 	PyDoc_STR("*sequence*: Backtracking difference from ideal rotation [deg]"),
@@ -816,6 +816,14 @@ Irradproc_dealloc(CmodObject *self)
 
 
 static PyObject *
+Irradproc_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Irradproc_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -892,6 +900,8 @@ static PyMethodDef Irradproc_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Irradproc_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Irradproc_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

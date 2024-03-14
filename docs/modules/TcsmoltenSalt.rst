@@ -38,16 +38,16 @@ SystemDesign Group
 .. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.SystemDesign
 	:members:
 
-HeliostatField Group
----------------------
-
-.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.HeliostatField
-	:members:
-
 TowerAndReceiver Group
 -----------------------
 
 .. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.TowerAndReceiver
+	:members:
+
+HeliostatField Group
+---------------------
+
+.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.HeliostatField
 	:members:
 
 ParallelHeater Group
@@ -131,8 +131,9 @@ Deprecated Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.AdjustmentFactors
+.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
 	:members:
+	:noindex:
 
 Outputs Group
 --------------

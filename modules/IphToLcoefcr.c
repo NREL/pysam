@@ -336,6 +336,14 @@ IphToLcoefcr_dealloc(CmodObject *self)
 
 
 static PyObject *
+IphToLcoefcr_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 IphToLcoefcr_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -412,6 +420,8 @@ static PyMethodDef IphToLcoefcr_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)IphToLcoefcr_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)IphToLcoefcr_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -570,7 +580,7 @@ static PyMethodDef IphToLcoefcrModule_methods[] = {
 		{"new",             IphToLcoefcr_new,         METH_VARARGS,
 				PyDoc_STR("new() -> IphToLcoefcr")},
 		{"default",             IphToLcoefcr_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> IphToLcoefcr\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"DSGLIPHLCOHCalculator\"*\n\n		- *\"PhysicalTroughIPHLCOHCalculator\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> IphToLcoefcr\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"DSGLIPHLCOHCalculator\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             IphToLcoefcr_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> IphToLcoefcr\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   IphToLcoefcr_from_existing,        METH_VARARGS,

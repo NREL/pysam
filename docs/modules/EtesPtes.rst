@@ -140,8 +140,9 @@ FinancialParameters Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.EtesPtes.EtesPtes.AdjustmentFactors
+.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
 	:members:
+	:noindex:
 
 Outputs Group
 --------------

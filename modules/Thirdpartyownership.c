@@ -1473,6 +1473,14 @@ Thirdpartyownership_dealloc(CmodObject *self)
 
 
 static PyObject *
+Thirdpartyownership_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Thirdpartyownership_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -1549,6 +1557,8 @@ static PyMethodDef Thirdpartyownership_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Thirdpartyownership_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Thirdpartyownership_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

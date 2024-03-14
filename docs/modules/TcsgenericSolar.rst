@@ -56,8 +56,9 @@ Type260 Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors
+.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
 	:members:
+	:noindex:
 
 Outputs Group
 --------------

@@ -14,10 +14,10 @@ Below are lists for each PySAM Module:
     3. Modified Variables: New variables, Removed variables and Type-changed variables
     4. Modified Default Values
 
-Biopower
+Biomass
 ************************************************
 
-:doc:`../modules/Biopower` Removed Default files
+:doc:`../modules/Biomass` Removed Default files
 
      - All Equity Partnership Flip
      - LCOE Calculator

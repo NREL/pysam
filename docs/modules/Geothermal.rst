@@ -19,8 +19,6 @@ The variables listed below are interdependent with other variables. If you chang
 
  - analysis_type
 
- - casing_size
-
  - conversion_subtype
 
  - conversion_type
@@ -31,9 +29,13 @@ The variables listed below are interdependent with other variables. If you chang
 
  - design_temp
 
+ - drilling_success_rate
+
  - dt_prod_well
 
  - excess_pressure_pump
+
+ - failed_prod_flow_ratio
 
  - fracture_angle
 
@@ -49,11 +51,9 @@ The variables listed below are interdependent with other variables. If you chang
 
  - hr_pl_nlev
 
- - inj_casing_size
-
  - inj_prod_well_distance
 
- - inj_well_diam
+ - injectivity_index
 
  - model_choice
 
@@ -99,13 +99,15 @@ The variables listed below are interdependent with other variables. If you chang
 
  - specify_pump_work
 
+ - stim_success_rate
+
  - subsurface_water_loss
 
  - temp_decline_max
 
  - temp_decline_rate
 
- - well_diameter
+ - use_weather_file_conditions
 
  - well_flow_rate
 
@@ -126,8 +128,9 @@ GeoHourly Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.Geothermal.Geothermal.AdjustmentFactors
+.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
 	:members:
+	:noindex:
 
 Outputs Group
 --------------

@@ -14,6 +14,12 @@ Functions
 .. autoclass:: PySAM.TroughPhysical.TroughPhysical
 	:members:
 
+SystemControl Group
+--------------------
+
+.. autoclass:: PySAM.TroughPhysical.TroughPhysical.SystemControl
+	:members:
+
 Weather Group
 --------------
 
@@ -42,12 +48,6 @@ Tou Group
 ----------
 
 .. autoclass:: PySAM.TroughPhysical.TroughPhysical.Tou
-	:members:
-
-SystemControl Group
---------------------
-
-.. autoclass:: PySAM.TroughPhysical.TroughPhysical.SystemControl
 	:members:
 
 FinancialModel Group
@@ -98,11 +98,24 @@ TowerAndReceiver Group
 .. autoclass:: PySAM.TroughPhysical.TroughPhysical.TowerAndReceiver
 	:members:
 
+SolarResourceData Group
+------------------------
+
+.. autoclass:: PySAM.TroughPhysical.TroughPhysical.SolarResourceData
+	:members:
+
+CapitalCosts Group
+-------------------
+
+.. autoclass:: PySAM.TroughPhysical.TroughPhysical.CapitalCosts
+	:members:
+
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.TroughPhysical.TroughPhysical.AdjustmentFactors
+.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
 	:members:
+	:noindex:
 
 Outputs Group
 --------------

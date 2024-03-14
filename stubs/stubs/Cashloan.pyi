@@ -14,6 +14,9 @@ class Cashloan(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
@@ -64,7 +67,6 @@ class Cashloan(object):
 		add_om_num_types = float
 		annual_fuel_usage = float
 		annual_fuel_usage_lifetime = tuple
-		fuelcell_annual_energy_discharged = tuple
 		om_batt_capacity_cost = tuple
 		om_batt_fixed_cost = tuple
 		om_batt_nameplate = float
@@ -296,7 +298,9 @@ class Cashloan(object):
 			pass
 
 
+		annual_fuel_usage_lifetime = tuple
 		en_fuelcell = float
+		fuelcell_annual_energy_discharged = tuple
 		fuelcell_computed_bank_capacity = float
 		fuelcell_per_kWh = float
 		fuelcell_replacement = tuple
@@ -542,7 +546,6 @@ class Cashloan(object):
 		cf_property_tax_expense = tuple
 		cf_ptc_fed = tuple
 		cf_ptc_sta = tuple
-		cf_ptc_total = tuple
 		cf_salvage_cost_lcos = tuple
 		cf_sta_and_fed_tax_savings = tuple
 		cf_sta_depr_sched = tuple
