@@ -25,7 +25,7 @@ def test_PVWattsv8WindBatterySingleOwner():
     with open(nfc1, "r") as f:
         defs = json.load(f)['input']
 
-    m = HybridSystem([pv, wind, batt], [so])
+    m = HybridSystem([pv, wind, batt], 'singleowner')
     m.new()
     m.pvwatts.SolarResource.solar_resource_file = str(solar_resource_path)
     m.wind.Resource.wind_resource_filename = str(wind_resource_path)
@@ -52,7 +52,7 @@ def test_PVWattsv8WindBatteryHostDeveloper():
     with open(nfc1, "r") as f:
         defs = json.load(f)['input']
 
-    m = HybridSystem([pv, wind, batt], [ur, hd])
+    m = HybridSystem([pv, wind, batt], 'hostdeveloper')
     m.new()
     m.pvwatts.SolarResource.solar_resource_file = str(solar_resource_path)
     m.wind.Resource.wind_resource_filename = str(wind_resource_path)
@@ -78,7 +78,7 @@ def test_GenericPVWattsWindFuelCellBatteryHybrid_SingleOwner():
     with open(nfc1, "r") as f:
         defs = json.load(f)['input']
 
-    m = HybridSystem([gensys, pv, wind, fuelcell, batt], [so])
+    m = HybridSystem([gensys, pv, wind, fuelcell, batt], 'singleowner')
     m.new()
     m.pvwatts.SolarResource.solar_resource_file = str(solar_resource_path)
     m.wind.Resource.wind_resource_filename = str(wind_resource_path)
