@@ -69,7 +69,9 @@ fi
 rename -s linux manylinux2014 $PYSAMDIR/dist/*-linux_*
 
 
-twine upload $PYSAMDIR/dist/*.whl
 anaconda upload -u nrel $PYSAMDIR/dist/osx-64/*.tar.bz2
 anaconda upload -u nrel $PYSAMDIR/dist/linux-64/*.tar.bz2
+
+# only upload to PyPi after Github Actions test of new package passes
+# twine upload $PYSAMDIR/dist/*.whl
 
