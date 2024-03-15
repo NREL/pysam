@@ -32,13 +32,13 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Get PySAM Version Unix
-        if: ${{ matrix.os }} != 'windows-latest'
+        if: ${{ matrix.os != 'windows-latest' }}
         run: |
           VER=$(python -c "from files.version import __version__; print(__version__)")
           echo "VERSION=$VER" >> $GITHUB_ENV
 
       - name: Get PySAM Version Windows
-        if: ${{ matrix.os }} == 'windows-latest'
+        if: ${{ matrix.os == 'windows-latest'}}
         run: |
           $VER=$(python -c "from files.version import __version__; print(__version__)")
           echo "VERSION=$VER" >> $env:GITHUB_ENV
