@@ -90,15 +90,12 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Get PySAM Version
-        run: |
-          VER=$(python -c "from files.version import __version__; print(__version__)")
-          echo "VERSION=$VER" >> $GITHUB_ENV
-
       - name: Install NREL-PySAM
         run: |
           source /Users/runner/.bash_profile
           conda activate pysam_env
+          VER=$(python -c "from files.version import __version__; print(__version__)")
+          echo "VERSION=$VER" >> $GITHUB_ENV
           pip install -r requirements.txt
           pip install -r tests/requirements.txt
           conda install -c nrel nrel-pysam==${{ env.VERSION }}
