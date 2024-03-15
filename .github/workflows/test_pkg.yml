@@ -95,9 +95,10 @@ jobs:
           source /Users/runner/.bash_profile
           conda activate pysam_env
           VER=$(python -c "from files.version import __version__; print(__version__)")
+          echo $VER
           pip install -r requirements.txt
           pip install -r tests/requirements.txt
-          conda install -c nrel nrel-pysam==VER
+          conda install -c nrel nrel-pysam==$VER
       
       - uses: actions/checkout@v3
       - name: Checkout SAM
