@@ -111,4 +111,4 @@ jobs:
         run: |
           source /Users/runner/.bash_profile
           conda activate pysam_env
-          pytest tests/test_pysam_all.py
+          pytest tests

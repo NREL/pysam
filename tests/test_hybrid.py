@@ -15,12 +15,12 @@ import PySAM.Utilityrate5 as ur
 from PySAM.Hybrids.HybridSystem import HybridSystem
 
 
-SSCDIR = Path(os.getenv("SSCDIR"))
-solar_resource_path = SSCDIR / "test/input_cases/general_data/phoenix_az_33.450495_-111.983688_psmv3_60_tmy.csv"
-wind_resource_path = SSCDIR / "test/input_cases/general_data/AZ Eastern-Rolling Hills.srw"
+test_dir = Path(__file__).parent
+solar_resource_path = test_dir / "phoenix_az_33.450495_-111.983688_psmv3_60_tmy.csv"
+wind_resource_path = test_dir / "AZ Eastern-Rolling Hills.srw"
 
 def test_PVWattsv8WindBatterySingleOwner():
-    nfc1 = SSCDIR / "test/input_json/hybrids/PVWatts Wind Battery Hybrid_Single Owner.json"
+    nfc1 = test_dir / "PVWatts Wind Battery Hybrid_Single Owner.json"
 
     with open(nfc1, "r") as f:
         defs = json.load(f)['input']
@@ -47,7 +47,7 @@ def test_PVWattsv8WindBatterySingleOwner():
 
 
 def test_PVWattsv8WindBatteryHostDeveloper():
-    nfc1 = SSCDIR / "test/input_json/hybrids/PVWatts Wind Battery Hybrid_Host Developer.json"
+    nfc1 = test_dir / "PVWatts Wind Battery Hybrid_Host Developer.json"
 
     with open(nfc1, "r") as f:
         defs = json.load(f)['input']
@@ -73,7 +73,7 @@ def test_PVWattsv8WindBatteryHostDeveloper():
 
 
 def test_GenericPVWattsWindFuelCellBatteryHybrid_SingleOwner():
-    nfc1 = SSCDIR / "test/input_json/hybrids/Generic PVWatts Wind FuelCell Battery Hybrid_Single Owner.json"
+    nfc1 = test_dir / "Generic PVWatts Wind FuelCell Battery Hybrid_Single Owner.json"
 
     with open(nfc1, "r") as f:
         defs = json.load(f)['input']
