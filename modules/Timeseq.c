@@ -464,8 +464,6 @@ Timeseq_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Timeseq_methods[] = {
 		{"execute",           (PyCFunction)Timeseq_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
-		{"get_data_ptr",           (PyCFunction)Timeseq_get_data_ptr,  METH_VARARGS,
-				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Timeseq_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Time Sequence': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Timeseq_replace,  METH_VARARGS,
@@ -476,6 +474,8 @@ static PyMethodDef Timeseq_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Timeseq_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Timeseq_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

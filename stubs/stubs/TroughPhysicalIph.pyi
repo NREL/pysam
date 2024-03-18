@@ -14,6 +14,9 @@ class TroughPhysicalIph(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
@@ -161,7 +164,6 @@ class TroughPhysicalIph(object):
 		nColt = float
 		nHCEVar = float
 		nHCEt = float
-		nSCA = float
 		northsouth_field_sep = float
 		offset_xpan_hdr = float
 		p_start = float
@@ -646,6 +648,7 @@ class TroughPhysicalIph(object):
 		month = tuple
 		monthly_energy = tuple
 		nLoops = float
+		nSCA = float
 		n_op_modes = tuple
 		nameplate = float
 		op_mode_1 = tuple

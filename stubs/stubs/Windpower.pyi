@@ -14,6 +14,9 @@ class Windpower(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
@@ -164,6 +167,30 @@ class Windpower(object):
 		total_uncert = float
 
 
+	class HybridCosts(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		degradation = tuple
+		land_area = float
+		om_capacity = tuple
+		om_capacity_escal = float
+		om_fixed = tuple
+		om_fixed_escal = float
+		om_land_lease = tuple
+		om_land_lease_escal = float
+		om_production = tuple
+		om_production_escal = float
+		total_installed_cost = float
+
+
 	class Outputs(object):
 		def assign(self): 
 			pass
@@ -186,6 +213,7 @@ class Windpower(object):
 		cf_battery_replacement_cost_schedule = tuple
 		cf_energy_net = tuple
 		cf_fuelcell_replacement_cost_schedule = tuple
+		cf_land_lease_expense = tuple
 		cf_om_capacity = tuple
 		cf_om_fixed = tuple
 		cf_om_fuel_cost = tuple

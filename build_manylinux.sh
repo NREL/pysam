@@ -11,7 +11,7 @@ cd /io/build_linux_ssc
 rm -rf *
 cmake ${SSCDIR} -DCMAKE_BUILD_TYPE=Release -DSAM_SKIP_TOOLS=1 -DSAMAPI_EXPORT=1 -DSAM_SKIP_TESTS=1 ../ssc || exit
 cmake --build . --target shared -j 6 || exit
-cmake --build . --target ssc -j 1 || exit
+cmake --build . --target ssc -j 6 || exit
 
 mkdir -p /io/build_linux_sam
 cd /io/build_linux_sam

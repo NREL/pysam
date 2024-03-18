@@ -101,27 +101,12 @@ WeatherReader_set_tidal_resource_model_choice(VarGroupObject *self, PyObject *va
 	return PySAM_double_setter(value, SAM_TidalFileReader_WeatherReader_tidal_resource_model_choice_nset, self->data_ptr);
 }
 
-static PyObject *
-WeatherReader_get_use_specific_wf_tidal(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TidalFileReader_WeatherReader_use_specific_wf_tidal_nget, self->data_ptr);
-}
-
-static int
-WeatherReader_set_use_specific_wf_tidal(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TidalFileReader_WeatherReader_use_specific_wf_tidal_nset, self->data_ptr);
-}
-
 static PyGetSetDef WeatherReader_getset[] = {
 {"tidal_resource_filename", (getter)WeatherReader_get_tidal_resource_filename,(setter)WeatherReader_set_tidal_resource_filename,
 	PyDoc_STR("*str*: File path with tidal resource data\n\n**Constraints:**\nLOCAL_FILE\n\n**Required:**\nRequired if tidal_resource_model_choice=0"),
  	NULL},
 {"tidal_resource_model_choice", (getter)WeatherReader_get_tidal_resource_model_choice,(setter)WeatherReader_set_tidal_resource_model_choice,
 	PyDoc_STR("*float*: Resource distribution or time series tidal resource data [0/1]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"use_specific_wf_tidal", (getter)WeatherReader_get_use_specific_wf_tidal,(setter)WeatherReader_set_use_specific_wf_tidal,
-	PyDoc_STR("*float*: user specified file [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -644,8 +629,6 @@ TidalFileReader_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef TidalFileReader_methods[] = {
 		{"execute",           (PyCFunction)TidalFileReader_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
-		{"get_data_ptr",           (PyCFunction)TidalFileReader_get_data_ptr,  METH_VARARGS,
-				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)TidalFileReader_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Weather Reader': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)TidalFileReader_replace,  METH_VARARGS,
@@ -656,6 +639,8 @@ static PyMethodDef TidalFileReader_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)TidalFileReader_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)TidalFileReader_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 

@@ -15,6 +15,8 @@ The variables listed below are interdependent with other variables. If you chang
 
  - 6par_aisc
 
+ - 6par_area
+
  - 6par_bvoc
 
  - 6par_imp
@@ -24,6 +26,64 @@ The variables listed below are interdependent with other variables. If you chang
  - 6par_vmp
 
  - 6par_voc
+
+ - LeadAcid_q10_computed
+
+ - LeadAcid_q20_computed
+
+ - LeadAcid_qn_computed
+
+ - batt_Qexp
+
+ - batt_Qfull
+
+ - batt_Qfull_flow
+
+ - batt_Qnom
+
+ - batt_Vnom_default
+
+ - batt_ac_dc_efficiency
+
+ - batt_ac_or_dc
+
+ - batt_chem
+
+ - batt_computed_bank_capacity
+
+ - batt_computed_series
+
+ - batt_computed_strings
+
+ - batt_current_charge_max
+
+ - batt_current_choice
+
+ - batt_current_discharge_max
+
+ - batt_dc_ac_efficiency
+
+ - batt_dc_dc_efficiency
+
+ - batt_dispatch_load_forecast_choice
+
+ - batt_load_ac_forecast
+
+ - batt_load_ac_forecast_escalation
+
+ - batt_mass
+
+ - batt_power_charge_max_kwac
+
+ - batt_power_charge_max_kwdc
+
+ - batt_power_discharge_max_kwac
+
+ - batt_power_discharge_max_kwdc
+
+ - batt_room_temperature_celsius
+
+ - batt_surface_area
 
  - cec_area
 
@@ -36,6 +96,16 @@ The variables listed below are interdependent with other variables. If you chang
  - cec_v_mp_ref
 
  - cec_v_oc_ref
+
+ - dispatch_manual_discharge
+
+ - dispatch_manual_gridcharge
+
+ - dispatch_manual_percent_discharge
+
+ - dispatch_manual_percent_gridcharge
+
+ - grid_curtailment
 
  - inv_cec_cg_c0
 
@@ -54,6 +124,8 @@ The variables listed below are interdependent with other variables. If you chang
  - inv_cec_cg_psco
 
  - inv_cec_cg_vdco
+
+ - inv_ds_eff
 
  - inv_ds_paco
 
@@ -87,6 +159,10 @@ The variables listed below are interdependent with other variables. If you chang
 
  - inverter_model
 
+ - load
+
+ - load_escalation
+
  - module_aspect_ratio
 
  - module_model
@@ -98,6 +174,8 @@ The variables listed below are interdependent with other variables. If you chang
  - sd11par_Vmp0
 
  - sd11par_Voc0
+
+ - sd11par_area
 
  - snl_a
 
@@ -171,6 +249,8 @@ The variables listed below are interdependent with other variables. If you chang
 
  - snl_voco
 
+ - solar_resource_file
+
  - spe_area
 
  - spe_eff0
@@ -199,11 +279,15 @@ The variables listed below are interdependent with other variables. If you chang
 
  - spe_voc
 
+ - subarray1_gcr
+
  - subarray1_modules_per_string
 
  - subarray1_nstrings
 
  - subarray2_enable
+
+ - subarray2_gcr
 
  - subarray2_modules_per_string
 
@@ -211,11 +295,15 @@ The variables listed below are interdependent with other variables. If you chang
 
  - subarray3_enable
 
+ - subarray3_gcr
+
  - subarray3_modules_per_string
 
  - subarray3_nstrings
 
  - subarray4_enable
+
+ - subarray4_gcr
 
  - subarray4_modules_per_string
 
@@ -414,6 +502,12 @@ GridLimits Group
 -----------------
 
 .. autoclass:: PySAM.Pvsamv1.Pvsamv1.GridLimits
+	:members:
+
+HybridCosts Group
+------------------
+
+.. autoclass:: PySAM.Pvsamv1.Pvsamv1.HybridCosts
 	:members:
 
 Outputs Group

@@ -13,7 +13,11 @@ Interdependent Variables
 
 The variables listed below are interdependent with other variables. If you change the value of one of these variables, you may need to change values of other variables. The SAM user interface manages these interdependent variables, but in PySAM, it is up to you change the value of all interdependent variables so they are consistent. See :doc:`../interdependent-variables` for examples and details.
 
-- None
+ - dc_ac_ratio
+
+ - gcr
+
+ - module_type
 
 Functions
 -----------
@@ -51,6 +55,12 @@ AdjustmentFactors Group
 .. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
 	:members:
 	:noindex:
+
+HybridCosts Group
+------------------
+
+.. autoclass:: PySAM.Pvwattsv8.Pvwattsv8.HybridCosts
+	:members:
 
 Outputs Group
 --------------

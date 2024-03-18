@@ -13,8 +13,6 @@ Interdependent Variables
 
 The variables listed below are interdependent with other variables. If you change the value of one of these variables, you may need to change values of other variables. The SAM user interface manages these interdependent variables, but in PySAM, it is up to you change the value of all interdependent variables so they are consistent. See :doc:`../interdependent-variables` for examples and details.
 
- - system_capacity
-
  - wake_int_loss
 
  - wind_farm_wake_model
@@ -76,6 +74,12 @@ Uncertainty Group
 ------------------
 
 .. autoclass:: PySAM.Windpower.Windpower.Uncertainty
+	:members:
+
+HybridCosts Group
+------------------
+
+.. autoclass:: PySAM.Windpower.Windpower.HybridCosts
 	:members:
 
 Outputs Group

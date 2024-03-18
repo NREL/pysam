@@ -14,6 +14,9 @@ class Pvsamv1(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
@@ -59,6 +62,7 @@ class Pvsamv1(object):
 		calculate_rack_shading = float
 		dcoptimizer_loss = float
 		en_snow_model = float
+		snow_slide_coefficient = float
 		subarray1_dcwiring_loss = float
 		subarray1_diodeconn_loss = float
 		subarray1_electrical_mismatch = float
@@ -823,6 +827,7 @@ class Pvsamv1(object):
 
 
 		enable_subhourly_clipping = float
+		enable_subinterval_distribution = float
 		subhourly_clipping_matrix = tuple
 
 
@@ -1108,6 +1113,29 @@ class Pvsamv1(object):
 		grid_interconnection_limit_kwac = float
 
 
+	class HybridCosts(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		degradation = tuple
+		land_area = float
+		om_capacity = tuple
+		om_capacity_escal = float
+		om_fixed = tuple
+		om_fixed_escal = float
+		om_land_lease = tuple
+		om_land_lease_escal = float
+		om_production = tuple
+		total_installed_cost = float
+
+
 	class Outputs(object):
 		def assign(self): 
 			pass
@@ -1167,6 +1195,8 @@ class Pvsamv1(object):
 		annual_dc_tracking_loss_percent = float
 		annual_dc_wiring_loss = float
 		annual_dc_wiring_loss_percent = float
+		annual_distribution_clipping_loss = float
+		annual_distribution_clipping_loss_percent = float
 		annual_energy = float
 		annual_energy_distribution_time = tuple
 		annual_export_to_grid_energy = tuple
@@ -1300,6 +1330,7 @@ class Pvsamv1(object):
 		cf_battery_replacement_cost_schedule = tuple
 		cf_energy_net = tuple
 		cf_fuelcell_replacement_cost_schedule = tuple
+		cf_land_lease_expense = tuple
 		cf_om_capacity = tuple
 		cf_om_fixed = tuple
 		cf_om_fuel_cost = tuple
@@ -1314,6 +1345,7 @@ class Pvsamv1(object):
 		dc_snow_loss = tuple
 		df = tuple
 		df_calc = tuple
+		distribution_clipping_loss = tuple
 		dn = tuple
 		dn_calc = tuple
 		elev = float
