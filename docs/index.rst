@@ -31,3 +31,4 @@ Contents
     building-pysam.rst
     sam-configurations.rst
     ssc-modules.rst
+    hybrids.rst

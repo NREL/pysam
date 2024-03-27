@@ -44,6 +44,9 @@ class HybridGenerator:
         self._sole_data_owner = True
 
     def default(self, config_name: str):
+        """
+        Load defaults for the configuration config. Available configurations depend on the technology
+        """
         if self._data != None:
             raise NotImplementedError("Model data already created. Replacing model data is currently not supported. Create a new instance of HybridGenerator instead")
         self._data = self._factory.default(config_name)
@@ -90,6 +93,9 @@ class HybridGenerator:
                                      "and is not a HybridGenerator financial variable.")
 
     def value(self, name, value=None):
+        """
+        Get or set by name a value in any of the variable groups.
+        """
         if name == 'value':
             return
         elif name in self.__dir__():
@@ -105,6 +111,10 @@ class HybridGenerator:
         
     def assign(self, input_dict):
         """
+        Assign attributes from nested dictionary, except for Outputs
+
+        nested_dict = { 'Solar Resource': { var: val, ...}, ...}
+
         Returns list of variables that weren't assigned
         """
         unassigned = []
@@ -116,6 +126,9 @@ class HybridGenerator:
         return unassigned
     
     def export(self):
+        """
+        Export attributes into nested dictionary
+        """
         return self._data.export()
 
     @property
@@ -191,20 +204,20 @@ class HybridGenerator:
         self._ssc.data_set_array(self._data_ptr, b'om_capacity', om_capacity)
 
     @property
-    def om_production_escal(self):
+    def om_capacity_escal(self):
         """
         Capacity-based O&M escalation [%/year]
         """
-        return self._ssc.data_get_number(self._data_ptr, b'om_production_escal')
+        return self._ssc.data_get_number(self._data_ptr, b'om_capacity_escal')
     
-    @om_production_escal.setter
-    def om_production_escal(self, om_production_escal: float):
-        self._ssc.data_set_number(self._data_ptr, b'om_production_escal', om_production_escal)
+    @om_capacity_escal.setter
+    def om_capacity_escal(self, om_capacity_escal: float):
+        self._ssc.data_set_number(self._data_ptr, b'om_capacity_escal', om_capacity_escal)
 
     @property
     def degradation(self):
         """
-        Annual AC degradation [%]. If not provided, defaults to 0
+        Annual AC degradation [%/yr]. If not provided, defaults to [0]
         """
         return self._ssc.data_get_array(self._data_ptr, b'degradation')
     

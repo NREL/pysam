@@ -209,7 +209,7 @@ High-X Concentrating PV
 MEtidal
 ************************************************
 
-:doc:`../modules/METidal` Removed Default files
+:doc:`../modules/MhkTidal` Removed Default files
 
      - LCOE Calculator
      - None
@@ -218,7 +218,7 @@ MEtidal
 MEwave
 ************************************************
 
-:doc:`../modules/MEWave` Removed Default files
+:doc:`../modules/MhkWave` Removed Default files
 
      - LCOE Calculator
      - None
@@ -228,7 +228,7 @@ MEwave
 MEwave Battery
 ************************************************
 
-:doc:`../modules/MEWaveBattery` Removed Default files
+:doc:`../modules/MhkWaveBattery` Removed Default files
 
      - Single Owner
 
