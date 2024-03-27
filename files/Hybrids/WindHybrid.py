@@ -6,6 +6,6 @@ class WindHybrid(HybridGenerator):
     """
     Class that adds Windpower to HybridSystem
     """
-    def __init__(self, name="windpower") -> None:
-        super().__init__(wind, name)
+    def __init__(self) -> None:
+        super().__init__(wind, "windpower")
         self._data: wind.Windpower

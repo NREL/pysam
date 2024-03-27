@@ -7,8 +7,8 @@ class BatteryHybrid(HybridGenerator):
     """
     Class that adds Battery to HybridSystem
     """
-    def __init__(self, name="battery") -> None:
-        super().__init__(batt, name)
+    def __init__(self) -> None:
+        super().__init__(batt, 'battery')
         self._data: batt.Battery
 
     def _collect_inputs(self, input):

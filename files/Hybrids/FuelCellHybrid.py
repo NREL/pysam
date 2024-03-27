@@ -7,9 +7,9 @@ class FuelCellHybrid(HybridGenerator):
     """
     Class that adds Fuelcell to HybridSystem
     """
-    def __init__(self, name="fuelcell") -> None:
-        super().__init__(fuelcell, name)
-        self.data: fuelcell.Fuelcell
+    def __init__(self) -> None:
+        super().__init__(fuelcell, "fuelcell")
+        self._data: fuelcell.Fuelcell
 
     @property
     def om_fixed(self):

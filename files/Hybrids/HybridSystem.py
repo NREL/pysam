@@ -21,6 +21,17 @@ class HybridSystem:
     Class that contains PySAM technology subsystem models with a financial model and runs them in a PySAM.Hybrid simulation
 
     Currently only Singleowner and HostDeveloper financial models are supported
+
+    HybridSystem.pv = PVHybrid (PySAM.Pvsamv1)
+    HybridSystem.pvwatts = PVWattsHybrid (PySAM.Pvwattsv8)
+    HybridSystem.wind = WindHybrid (PySAM.Windpower)
+    HybridSystem.gensys = GenericSystemHybrid (PySAM.GenericSystem)
+    HybridSystem.battery = BatteryHybrid (PySAM.Battery)
+    HybridSystem.fuelcell = FuelCellHybrid (PySAM.Fuelcell)
+    HybridSystem._grid = PySAM.Grid
+    HybridSystem.singleowner = PySAM.Singleowner
+    HybridSystem.utilityrate5 = PySAM.Utilityrate5
+    HybridSystem.host_developer = PySAM.HostDeveloper
     """
     supported_financial_modules = {"singleowner": so, "utilityrate5": ur, "host_developer": hd}
 
@@ -94,7 +105,16 @@ class HybridSystem:
 
     def default(self, config_name: str):
         """
-        Create model with variables set to defaults of a configuration
+        Create model with variables set to defaults of a configuration. Available configurations are:
+
+            "GenericPVWattsWindFuelCellBatteryHybridHostDeveloper"
+            "GenericPVWattsWindFuelCellBatteryHybridSingleOwner"
+            "PVWattsWindBatteryHybridHostDeveloper"
+            "PVWattsWindBatteryHybridSingleOwner"
+            "PVWattsWindFuelCellBatteryHybridHostDeveloper"
+            "PVWattsWindFuelCellBatteryHybridSingleOwner"
+            "PhotovoltaicWindBatteryHybridHostDeveloper"
+            "PhotovoltaicWindBatteryHybridSingleOwner"
         """
         for gen in self._generators.values():
             gen.default(config_name)
@@ -105,7 +125,21 @@ class HybridSystem:
 
     def assign(self, input_dict):
         """
-        Assign attributes from nested dictionary, except for Outputs. e.g. {"pvwattsv8": {var: value, ...}, ...}
+        Assign attributes from nested dictionary, except for Outputs::
+
+            nested_dict = { 
+                'pvsamv1': {
+                    'SolarResource': { 
+                        'solar_resource_file': val, ...
+                    }, ...
+                },
+                'pvwattsv8': {...}
+
+        Names of the technology models: pvsamv1, pvwattsv8, windpower, generic_system, battery, fuelcell
+        Names of the financial models: singleowner, utilityrate5, host_developer
+
+        Returns dictionary of variables that weren't assigned
+
         """
         unassigned_dict = {}
         for k, v in input_dict.items():
