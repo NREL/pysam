@@ -622,17 +622,6 @@ Pvsamv1
          - subarray3_rear_irradiance_loss
          - subarray4_rear_irradiance_loss
 
-
-Pvwattsv1
-************************************************
-
-:doc:`../modules/Pvwattsv1` Modified Input Variables:
-
-    New variables:
-
-         - adjust:timeindex
-
-
 Pvwattsv5
 ************************************************
 

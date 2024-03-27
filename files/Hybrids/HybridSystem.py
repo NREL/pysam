@@ -17,11 +17,20 @@ import PySAM.Hybrid as hybrid
 
 
 class HybridSystem:
+    """
+    Class that contains PySAM technology subsystem models with a financial model and runs them in a PySAM.Hybrid simulation
+
+    Currently only Singleowner and HostDeveloper financial models are supported
+    """
     supported_financial_modules = {"singleowner": so, "utilityrate5": ur, "host_developer": hd}
 
-    def __init__(self, technology_modules, financial_modules) -> None:
+    def __init__(self, technology_modules, financial_model: str) -> None:
+        """
+        `technology_modules` is a list of PySAM modules of the technology subsystems
+        `financial_modules` is "singleowner" or "hostdeveloper"
+        """
         self._technology_modules = technology_modules
-        self._financial_module = financial_modules
+        self._financial_module = financial_model
 
         # data container for Hybrid module, ownership will belong to self._hybrid
         self._data_ptr = HybridGenerator._ssc.data_create()
@@ -59,22 +68,23 @@ class HybridSystem:
 
         self._grid: grid.Grid
         
-        for financial_module in financial_modules:
-            if financial_module == so:
-                self.singleowner: so.Singleowner
-                self._financials['singleowner'] = None
-            elif financial_module == ur:
-                self.utilityrate5: ur.Utilityrate5
-                self._financials['utilityrate5'] = None
-            elif financial_module == hd:
-                self.host_developer: hd.HostDeveloper
-                self._financials['host_developer'] = None
-            else:
-                raise NotImplementedError(f"HybridSystem currently not enabled for module {financial_module}")
-        
+        if financial_model.lower() == "singleowner":
+            self.singleowner: so.Singleowner
+            self._financials['singleowner'] = None
+        elif financial_model.lower() == "hostdeveloper":
+            self.utilityrate5: ur.Utilityrate5
+            self._financials['utilityrate5'] = None
+            self.host_developer: hd.HostDeveloper
+            self._financials['host_developer'] = None
+        else:
+            raise NotImplementedError(f"HybridSystem currently not enabled for {financial_model}")
+
         self._cmod_list = list(self._generators.keys()) + ['grid'] + list(self._financials.keys())
 
     def new(self):
+        """
+        Create model
+        """
         for gen in self._generators.values():
             gen.new()
         self._grid = grid.new()
@@ -83,6 +93,9 @@ class HybridSystem:
             self._financials[k] = getattr(self, k)
 
     def default(self, config_name: str):
+        """
+        Create model with variables set to defaults of a configuration
+        """
         for gen in self._generators.values():
             gen.default(config_name)
         self._grid = grid.default(config_name)
@@ -91,6 +104,9 @@ class HybridSystem:
             self._financials[k] = getattr(self, k)
 
     def assign(self, input_dict):
+        """
+        Assign attributes from nested dictionary, except for Outputs. e.g. {"pvwattsv8": {var: value, ...}, ...}
+        """
         unassigned_dict = {}
         for k, v in input_dict.items():
             if k in self._generators.keys():
@@ -123,6 +139,9 @@ class HybridSystem:
         return unassigned
 
     def value(self, name):
+        """
+        Get the value of a Hybrid output
+        """
         outputs = self._hybrid.Outputs.output
         if name not in outputs.keys:
             raise ValueError(f"{name} is not an output of HybridSystem")
@@ -151,9 +170,15 @@ class HybridSystem:
         HybridGenerator._ssc.data_deep_copy(p_fin_ret, data_ptr)
 
     def execute(self, verbosity_int=0):
+        """
+        Runs simulation
+        """
         self._collect_hybrid_inputs()
         self._hybrid.execute(verbosity_int)
         self._collect_hybrid_outputs()
 
     def export(self):
+        """
+        Dictionary of input and outputs
+        """
         return self._hybrid.export()

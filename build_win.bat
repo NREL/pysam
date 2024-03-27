@@ -28,8 +28,10 @@ FOR %%i IN (pysam_build_3.8 pysam_build_3.9 pysam_build_3.10 pysam_build_3.11, p
 	)
     python setup.py bdist_wheel
 )
-REM twine upload dist/*.whl
 REM %bash% build_conda.sh
 REM anaconda upload -u nrel dist/*.tar.bz2
+
+REM only upload to PyPi after Github Actions test of new package passes
+REM twine upload dist/*.whl
 
 REM rmdir %SSCDIR%\..\build_pysam /s

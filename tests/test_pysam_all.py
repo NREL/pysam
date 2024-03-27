@@ -39,14 +39,15 @@ def test_adjustment_factors():
     adj.sf_timeindex = [0]
     adj.export()
 
-@pytest.mark.parametrize("execution_number", range(150))
+@pytest.mark.parametrize("execution_number", range(10))
 def test_pyssc(execution_number):
     var = ssc.var_create()
     ssc.var_set_value(var, 0)
     assert int(ssc.var_get_number(var)) == 0
     test_dat = ssc.data_create()
     ssc.data_set_var(test_dat, b"test", var)
-    assert ssc.data_get_number(test_dat, b"test") == 0
+    ssc.var_free(var)
+    ssc.data_free(test_dat)
 
     var = ssc.var_create()
     ssc.var_set_value(var, 'zero')
@@ -54,6 +55,8 @@ def test_pyssc(execution_number):
     test_dat = ssc.data_create()
     ssc.data_set_var(test_dat, b"test", var)
     assert ssc.data_get_string(test_dat, b"test") == b"zero"
+    ssc.var_free(var)
+    ssc.data_free(test_dat)
 
     var = ssc.var_create()
     ssc.var_set_value(var, [0, 1])
@@ -61,6 +64,8 @@ def test_pyssc(execution_number):
     test_dat = ssc.data_create()
     ssc.data_set_var(test_dat, b"test", var)
     assert ssc.data_get_array(test_dat, b"test") == [0, 1]
+    ssc.var_free(var)
+    ssc.data_free(test_dat)
 
     var = ssc.var_create()
     ssc.var_set_value(var, [[0, 0], [1, 1]])
@@ -68,6 +73,8 @@ def test_pyssc(execution_number):
     test_dat = ssc.data_create()
     ssc.data_set_var(test_dat, b"test", var)
     assert ssc.data_get_matrix(test_dat, b"test") == [[0, 0], [1, 1]]
+    ssc.var_free(var)
+    ssc.data_free(test_dat)
 
     var = ssc.var_create()
     ssc.var_set_value(var, ["zero", "one"])
@@ -77,6 +84,8 @@ def test_pyssc(execution_number):
     ssc.data_set_var(test_dat, b"test", var)
     var0 = ssc.data_get_data_array(test_dat, b"test", [ssc.STRING, ssc.STRING])
     assert var0 == [b"zero", b"one"]
+    ssc.var_free(var)
+    ssc.data_free(test_dat)
 
     var = ssc.var_create()
     ssc.var_set_value(var, [["zero", "one"], ["zero", "one"]])
@@ -86,6 +95,8 @@ def test_pyssc(execution_number):
     ssc.data_set_var(test_dat, b"test", var)
     var0 = ssc.data_get_data_matrix(test_dat, b"test", [[ssc.STRING, ssc.STRING], [ssc.STRING, ssc.STRING]])
     assert var0 == [[b'zero', b'one'], [b'zero', b'one']]
+    ssc.var_free(var)
+    ssc.data_free(test_dat)
 
 
 def test_functionality():

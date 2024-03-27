@@ -7,8 +7,8 @@
 # Building libssc and libSAM_api
 # requires SAM-Dev/CMakeList.txt that contains lk, wex, ssc and sam as subdirectories
 
-# rm -rf ${SAMNTDIR}/../cmake-build-release
-# mkdir -p ${SAMNTDIR}/../cmake-build-release
+rm -rf ${SAMNTDIR}/../cmake-build-release
+mkdir -p ${SAMNTDIR}/../cmake-build-release
 cd ${SAMNTDIR}/../cmake-build-release || exit
 cmake .. -DCMAKE_BUILD_TYPE=Release -DSAMAPI_EXPORT=1 -DSAM_SKIP_AUTOGEN=0
 cmake --build . --target SAM_api -j 6
@@ -49,27 +49,20 @@ if [ "$(python3 -c "import platform; print(platform.processor())")" = "arm" ]
 then
     docker pull quay.io/pypa/manylinux2014_aarch64
     # docker run --rm -dit -v $(pwd):/io quay.io/pypa/manylinux2010_x86_64 /bin/bash
-    docker run --rm -v $(pwd):/io quay.io/pypa/manylinux2014_aarch64 /io/pysam/build_manylinux.sh
-
-    rename -s linux manylinux2014 $PYSAMDIR/dist/*-linux_*
-
-    docker pull continuumio/anaconda3
-    docker run --rm --env PYSAMDIR=/io/pysam -v $(pwd):/io continuumio/anaconda3 /io/pysam/build_conda.sh
+    docker run --rm -v $(pwd):/io quay.io/pypa/manylinux2014_aarch64 /io/pysam/build_manylinux.sh || exit
 else
     docker pull quay.io/pypa/manylinux2014_x86_64
     # docker run --rm -dit -v $(pwd):/io quay.io/pypa/manylinux2014_x86_64 /bin/bash
     docker run --rm -v $(pwd):/io quay.io/pypa/manylinux2014_x86_64 /io/pysam/build_manylinux.sh || exit
-
-    rename -s linux manylinux2014 $PYSAMDIR/dist/*-linux_*
-
-    docker pull continuumio/anaconda
-    docker run --rm --env PYSAMDIR=/io/pysam -v $(pwd):/io continuumio/anaconda /io/pysam/build_conda.sh
 fi
 
 rename -s linux manylinux2014 $PYSAMDIR/dist/*-linux_*
+docker pull continuumio/anaconda3
+docker run --rm --env PYSAMDIR=/io/pysam -v $(pwd):/io continuumio/anaconda /io/pysam/build_conda.sh
 
-
-twine upload $PYSAMDIR/dist/*.whl
 anaconda upload -u nrel $PYSAMDIR/dist/osx-64/*.tar.bz2
 anaconda upload -u nrel $PYSAMDIR/dist/linux-64/*.tar.bz2
+
+# only upload to PyPi after Github Actions test of new package passes
+# twine upload $PYSAMDIR/dist/*.whl
 
