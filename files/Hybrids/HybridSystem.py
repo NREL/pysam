@@ -170,7 +170,8 @@ class HybridSystem:
                                 break
                         if not assigned:
                             unassigned.append(key)
-        return unassigned
+                unassigned_dict['hybrid'] = unassigned
+        return unassigned_dict
 
     def value(self, name):
         """

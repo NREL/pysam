@@ -120,6 +120,8 @@ class HybridGenerator:
         unassigned = []
         for k, v in input_dict.items():
             try:
+                if 'adjust' in k:
+                    k = k.split('adjust_')[1]
                 self._data.value(k, v)
             except:
                 unassigned.append(k)
