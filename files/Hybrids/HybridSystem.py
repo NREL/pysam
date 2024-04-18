@@ -215,6 +215,8 @@ class HybridSystem:
         """
         Runs a hybrid system simulation
         """
+        HybridGenerator._ssc.data_clear(self._data_input_ptr)
+        HybridGenerator._ssc.data_clear(self._data_ptr)
         self._collect_hybrid_inputs()
         self._hybrid.execute(verbosity_int)
         self._collect_hybrid_outputs()
