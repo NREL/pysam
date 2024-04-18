@@ -18,9 +18,15 @@ import PySAM.Hybrid as hybrid
 
 class HybridSystem:
     """
-    Class that contains PySAM technology subsystem models with a financial model and runs them in a PySAM.Hybrid simulation
+    Class for hybrid systems that combines a performance model with a financial model and runs a PySAM.Hybrid simulation
 
-    Currently only Singleowner and HostDeveloper financial models are supported
+    Supported performance model modules: Pvsamv1, Pvwattsv8, Windpower, GenericSystem, Battery, Fuelcell
+
+    Supported financial model modules: Singleowner, HostDeveloper
+
+    Intermediate modules for financial models: Grid, Utililityrate5
+
+    Modules for hybrid systems are defined as follows:
 
     HybridSystem.pv = PVHybrid (PySAM.Pvsamv1)
     HybridSystem.pvwatts = PVWattsHybrid (PySAM.Pvwattsv8)
@@ -105,7 +111,7 @@ class HybridSystem:
 
     def default(self, config_name: str):
         """
-        Create model with variables set to defaults of a configuration. Available configurations are:
+        Create model with input variables set to default values. Available default configurations are:
 
             "GenericPVWattsWindFuelCellBatteryHybridHostDeveloper"
             "GenericPVWattsWindFuelCellBatteryHybridSingleOwner"
@@ -135,8 +141,9 @@ class HybridSystem:
                 },
                 'pvwattsv8': {...}
 
-        Names of the technology models: pvsamv1, pvwattsv8, windpower, generic_system, battery, fuelcell
-        Names of the financial models: singleowner, utilityrate5, host_developer
+        Names of performance model modules: pvsamv1, pvwattsv8, windpower, generic_system, battery, fuelcell
+        Names of financial model modules: singleowner, utilityrate5, host_developer
+        Names of intermediate modules: _grid, utilityrate5
 
         Returns dictionary of variables that weren't assigned
 
@@ -175,7 +182,7 @@ class HybridSystem:
 
     def value(self, name):
         """
-        Get the value of a Hybrid output
+        Get the value of a hybrid system model output
         """
         outputs = self._hybrid.Outputs.output
         if name not in outputs.keys:
@@ -184,7 +191,7 @@ class HybridSystem:
 
     def _collect_hybrid_inputs(self):
         """
-        Takes data container from the sub-system models and passes them to the hybrid input data container, which makes a copy
+        Takes data container from the sub-system models and passes them to the hybrid system input data container, which makes a copy
         """
         for name, gen in self._generators.items():
             gen._collect_inputs(self._data_input_ptr)
@@ -195,7 +202,7 @@ class HybridSystem:
 
     def _collect_hybrid_outputs(self):
         """
-        Gets sub-system data from the hybrid model and copies them back to the sub-system classes
+        Gets sub-system data from the hybrid system model and copies them back to the sub-system classes
         """
         data_input = HybridGenerator._ssc.data_get_table(self._data_ptr, b'input')
         for name, gen in self._generators.items():
@@ -206,7 +213,7 @@ class HybridSystem:
 
     def execute(self, verbosity_int=0):
         """
-        Runs simulation
+        Runs a hybrid system simulation
         """
         self._collect_hybrid_inputs()
         self._hybrid.execute(verbosity_int)
@@ -214,6 +221,6 @@ class HybridSystem:
 
     def export(self):
         """
-        Dictionary of input and outputs
+        Dictionary of hybrid system input and outputs
         """
         return self._hybrid.export()
