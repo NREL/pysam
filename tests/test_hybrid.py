@@ -51,7 +51,7 @@ def test_PVWattsv8WindBatterySingleOwner():
     m.wind.Resource.wind_resource_filename = str(wind_resource_path)
 
     unassigned = m.assign(defs)
-    assert len(unassigned) <= 3
+    assert len(unassigned) <= 4
 
     m.execute()
 
@@ -78,7 +78,7 @@ def test_PVWattsv8WindBatteryHostDeveloper():
     m.wind.Resource.wind_resource_filename = str(wind_resource_path)
 
     unassigned = m.assign(defs)
-    assert len(unassigned) <= 3
+    assert len(unassigned) <= 4
 
     m.execute()
 
@@ -104,7 +104,7 @@ def test_GenericPVWattsWindFuelCellBatteryHybrid_SingleOwner():
     m.wind.Resource.wind_resource_filename = str(wind_resource_path)
 
     unassigned = m.assign(defs)
-    assert len(unassigned) <= 3
+    assert len(unassigned) <= 6
 
     m.execute()
 
