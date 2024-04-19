@@ -6,6 +6,6 @@ class GenericSystemHybrid(HybridGenerator):
     """
     Class that adds GenericSystem to HybridSystem
     """
-    def __init__(self, name="generic_system") -> None:
-        super().__init__(gensys, name)
+    def __init__(self) -> None:
+        super().__init__(gensys, "generic_system")
         self._data : gensys.GenericSystem

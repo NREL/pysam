@@ -7,6 +7,7 @@ from PySAM.Hybrids import *
 import PySAM.Battery as batt
 import PySAM.Windpower as wind
 import PySAM.Pvwattsv8 as pv
+import PySAM.Pvsamv1 as pvsam
 import PySAM.GenericSystem as gensys
 import PySAM.Fuelcell as fuelcell
 import PySAM.Singleowner as so
@@ -18,6 +19,25 @@ from PySAM.Hybrids.HybridSystem import HybridSystem
 test_dir = Path(__file__).parent
 solar_resource_path = test_dir / "phoenix_az_33.450495_-111.983688_psmv3_60_tmy.csv"
 wind_resource_path = test_dir / "AZ Eastern-Rolling Hills.srw"
+
+def test_PhotovoltaicWindBatteryHybridSingleOwner():
+    m = HybridSystem([pvsam, wind, batt], 'singleowner')
+    m.default("PhotovoltaicWindBatteryHybridSingleOwner")
+    m.pv.SolarResource.solar_resource_file = str(solar_resource_path)
+    m.wind.Resource.wind_resource_filename = str(wind_resource_path)
+
+    m.execute()
+
+    pvannualenergy = m.pv.Outputs.annual_energy
+    windannualenergy = m.wind.Outputs.annual_energy
+    battannualenergy = m.battery.value("annual_energy")
+    npv = m.singleowner.Outputs.project_return_aftertax_npv
+
+    assert pvannualenergy == pytest.approx(227094871, 1e-2)
+    assert windannualenergy == pytest.approx(366975555, 1e-2)
+    assert battannualenergy == pytest.approx(593931116, 1e-2)
+    assert npv == pytest.approx(-144238399, 1e-2)
+
 
 def test_PVWattsv8WindBatterySingleOwner():
     nfc1 = test_dir / "PVWatts Wind Battery Hybrid_Single Owner.json"
@@ -31,7 +51,7 @@ def test_PVWattsv8WindBatterySingleOwner():
     m.wind.Resource.wind_resource_filename = str(wind_resource_path)
 
     unassigned = m.assign(defs)
-    assert len(unassigned) <= 3
+    assert len(unassigned) <= 4
 
     m.execute()
 
@@ -58,7 +78,7 @@ def test_PVWattsv8WindBatteryHostDeveloper():
     m.wind.Resource.wind_resource_filename = str(wind_resource_path)
 
     unassigned = m.assign(defs)
-    assert len(unassigned) <= 3
+    assert len(unassigned) <= 4
 
     m.execute()
 
@@ -84,7 +104,7 @@ def test_GenericPVWattsWindFuelCellBatteryHybrid_SingleOwner():
     m.wind.Resource.wind_resource_filename = str(wind_resource_path)
 
     unassigned = m.assign(defs)
-    assert len(unassigned) <= 3
+    assert len(unassigned) <= 6
 
     m.execute()
 

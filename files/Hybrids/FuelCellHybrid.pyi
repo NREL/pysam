@@ -156,5 +156,3 @@ class FuelCellHybrid(HybridGenerator):
         fuelcell_to_load = tuple
         gen = tuple
         system_heat_rate = float
-
-    om_fuel_cost: float

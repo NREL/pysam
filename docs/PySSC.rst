@@ -3,6 +3,9 @@ Working Directly with PySSC
 
 PySSC is a wrapper for the `SAM Simulation Core (SSC) API <https://github.com/NREL/ssc/blob/develop/ssc/sscapi.h>`_ PySSC is part of the `SAM Software Development Kit (SDK) <https://sam.nrel.gov/sdk>`_. The PySAM package is built on PySSC.
 
+.. note::
+	PySSC was the original method for running SSC from Python before PySAM was developed. Unless you are very familiar with SSC, we recommend using PySAM instead of PySSC because PySAM provides tools for creating models and accessing variables that are not available with PySSC.
+
 The `SSC Guide <https://sam.nrel.gov/images/web_page_files/ssc_guide.pdf>`_ is a reference to SSC.
 
 To use PySSC, import it with:
