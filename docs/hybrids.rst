@@ -122,7 +122,7 @@ methods to access inputs and output variables for a PVWatts Wind Battery / Singl
 Creating models
 ----------------
 
-Create a hybrid model by either first creating it in SAM and using the code generator to export inputs as JSON, or by loading defaults for the hybrid configuration
+Create a hybrid system model by either first creating it in SAM and using the code generator to export inputs as JSON, or by loading defaults for the hybrid configuration
 you want to model. 
 
 Example 1: Create a PVWatts Wind Battery / Single Owner hybrid model from SAM
