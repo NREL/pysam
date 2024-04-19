@@ -7,6 +7,9 @@ Because of the large number of inputs required to run most PySAM models, it may 
 
     When you change the value of one or more inputs after importing them from SAM, be careful to check for dependencies between variables. See :doc:`interdependent-variables` for details.
 
+
+.. _sam_code_generator:
+
 SAM Code Generator
 -------------------
 

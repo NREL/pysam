@@ -6,6 +6,6 @@ class PVHybrid(HybridGenerator):
     """
     Class that adds Pvsamv1 to HybridSystem
     """
-    def __init__(self, name="pvsamv1") -> None:
-        super().__init__(pv, name)
+    def __init__(self) -> None:
+        super().__init__(pv, "pvsamv1")
         self._data: pv.Pvsamv1
