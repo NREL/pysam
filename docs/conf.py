@@ -81,3 +81,7 @@ html_theme_options = {
 }
 
 html_sidebars = { '**': [ 'about.html', 'navigation.html', 'searchbox.html' ]}
+
+html_static_path = ['_static']
+
+html_css_files = ["custom.css"]

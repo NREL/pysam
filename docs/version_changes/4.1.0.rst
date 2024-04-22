@@ -31,7 +31,7 @@ Biomass
 DSGL IPH
 ************************************************
 
-:doc:`../modules/DSGL IPH` Removed Default files
+:doc:`../modules/LinearFresnelDsgIph` Removed Default files
 
      - LCOH Calculator
      - None
@@ -40,7 +40,7 @@ DSGL IPH
 DSLF
 ************************************************
 
-:doc:`../modules/DSLF` Removed Default files
+:doc:`../modules/TcslinearFresnel` Removed Default files
 
      - All Equity Partnership Flip
      - Commercial
@@ -67,7 +67,7 @@ DSPT
 Dish Stirling
 ************************************************
 
-:doc:`../modules/Dish Stirling` Removed Default files
+:doc:`../modules/Tcsdish` Removed Default files
 
      - All Equity Partnership Flip
      - Commercial
@@ -82,7 +82,7 @@ Dish Stirling
 ETES
 ************************************************
 
-:doc:`../modules/ETES` Removed Default files
+:doc:`../modules/EtesElectricResistance` Removed Default files
 
      - Single Owner
 
@@ -90,7 +90,7 @@ ETES
 Empirical Trough
 ************************************************
 
-:doc:`../modules/Empirical Trough` Removed Default files
+:doc:`../modules/TcstroughEmpirical` Removed Default files
 
      - All Equity Partnership Flip
      - Commercial
@@ -105,7 +105,7 @@ Empirical Trough
 Flat Plate PV
 ************************************************
 
-:doc:`../modules/Flat Plate PV` Removed Default files
+:doc:`../modules/Pvsamv1` Removed Default files
 
      - All Equity Partnership Flip
      - Commercial
@@ -123,7 +123,7 @@ Flat Plate PV
 Fuel Cell
 ************************************************
 
-:doc:`../modules/Fuel Cell` Removed Default files
+:doc:`../modules/Fuelcell` Removed Default files
 
      - Commercial
      - Single Owner
@@ -132,7 +132,7 @@ Fuel Cell
 Generic Battery
 ************************************************
 
-:doc:`../modules/Generic Battery` Removed Default files
+:doc:`../modules/GenericBattery` Removed Default files
 
      - All Equity Partnership Flip
      - Commercial
@@ -163,7 +163,7 @@ Generic CSP System
 Generic System
 ************************************************
 
-:doc:`../modules/Generic System` Removed Default files
+:doc:`../modules/GenericSystem` Removed Default files
 
      - All Equity Partnership Flip
      - Commercial
@@ -181,7 +181,7 @@ Generic System
 Geothermal Power
 ************************************************
 
-:doc:`../modules/Geothermal Power` Removed Default files
+:doc:`../modules/Geothermal` Removed Default files
 
      - All Equity Partnership Flip
      - LCOE Calculator
@@ -195,7 +195,7 @@ Geothermal Power
 High-X Concentrating PV
 ************************************************
 
-:doc:`../modules/High-X Concentrating PV` Removed Default files
+:doc:`../modules/Hcpv` Removed Default files
 
      - All Equity Partnership Flip
      - LCOE Calculator
@@ -209,7 +209,7 @@ High-X Concentrating PV
 MEtidal
 ************************************************
 
-:doc:`../modules/MEtidal` Removed Default files
+:doc:`../modules/MhkTidal` Removed Default files
 
      - LCOE Calculator
      - None
@@ -218,7 +218,7 @@ MEtidal
 MEwave
 ************************************************
 
-:doc:`../modules/MEwave` Removed Default files
+:doc:`../modules/MhkWave` Removed Default files
 
      - LCOE Calculator
      - None
@@ -228,7 +228,7 @@ MEwave
 MEwave Battery
 ************************************************
 
-:doc:`../modules/MEwave Battery` Removed Default files
+:doc:`../modules/MhkWaveBattery` Removed Default files
 
      - Single Owner
 
@@ -236,7 +236,7 @@ MEwave Battery
 MSLF
 ************************************************
 
-:doc:`../modules/MSLF` Removed Default files
+:doc:`../modules/FresnelPhysical` Removed Default files
 
      - All Equity Partnership Flip
      - Commercial
@@ -251,7 +251,7 @@ MSLF
 MSPT
 ************************************************
 
-:doc:`../modules/MSPT` Removed Default files
+:doc:`../modules/TcsmoltenSalt` Removed Default files
 
      - All Equity Partnership Flip
      - Leveraged Partnership Flip
@@ -263,11 +263,11 @@ MSPT
 PTES
 ************************************************
 
-:doc:`../modules/PTES` Removed Default files
+:doc:`../modules/EtesPtes` Removed Default files
 
      - Single Owner
 
-:doc:`../modules/PTES` Modified Default Values:
+:doc:`../modules/EtesPtes` Modified Default Values:
 
      - Singleowner_PTESSingleOwner
 
@@ -282,7 +282,7 @@ PTES
 PV Battery
 ************************************************
 
-:doc:`../modules/PV Battery` Removed Default files
+:doc:`../modules/PVBattery` Removed Default files
 
      - All Equity Partnership Flip
      - Commercial
@@ -298,7 +298,7 @@ PV Battery
 PVWatts
 ************************************************
 
-:doc:`../modules/PVWatts` Removed Default files
+:doc:`../modules/Pvwattsv8` Removed Default files
 
      - All Equity Partnership Flip
      - Commercial
@@ -313,7 +313,7 @@ PVWatts
      - Single Owner
      - Third Party
 
-:doc:`../modules/PVWatts` Modified Default Values:
+:doc:`../modules/Pvwattsv8` Modified Default Values:
 
      - Cashloan_PVWattsBatteryResidential
 
@@ -332,7 +332,7 @@ PVWatts
 PVWatts Battery
 ************************************************
 
-:doc:`../modules/PVWatts Battery` Removed Default files
+:doc:`../modules/Battwatts` Removed Default files
 
      - Commercial
      - Host Developer
@@ -343,7 +343,7 @@ PVWatts Battery
 Physical Trough
 ************************************************
 
-:doc:`../modules/Physical Trough` Removed Default files
+:doc:`../modules/TroughPhysical` Removed Default files
 
      - All Equity Partnership Flip
      - LCOE Calculator
@@ -357,7 +357,7 @@ Physical Trough
 Physical Trough IPH
 ************************************************
 
-:doc:`../modules/Physical Trough IPH` Removed Default files
+:doc:`../modules/TroughPhysicalProcessHeat` Removed Default files
 
      - LCOH Calculator
      - None
@@ -374,7 +374,7 @@ Retired
 Solar Water Heating
 ************************************************
 
-:doc:`../modules/Solar Water Heating` Removed Default files
+:doc:`../modules/Swh` Removed Default files
 
      - Commercial
      - LCOE Calculator
@@ -385,7 +385,7 @@ Solar Water Heating
 Standalone Battery
 ************************************************
 
-:doc:`../modules/Standalone Battery` Removed Default files
+:doc:`../modules/Battery` Removed Default files
 
      - All Equity Partnership Flip
      - Commercial
@@ -401,7 +401,7 @@ Standalone Battery
 Wind Power
 ************************************************
 
-:doc:`../modules/Wind Power` Removed Default files
+:doc:`../modules/Windpower` Removed Default files
 
      - All Equity Partnership Flip
      - Commercial

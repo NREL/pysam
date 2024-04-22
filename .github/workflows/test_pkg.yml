@@ -3,7 +3,7 @@ name: Test Package
 on: [ push ]
 
 jobs:
-  build:
+  build_1:
 
     runs-on: ${{ matrix.os }}
     strategy:
@@ -13,23 +13,11 @@ jobs:
 
     env: 
       SAMNTDIR: ${{ github.workspace }}/../SAM
+      NREL_API_KEY: ${{ secrets.NREL_API_KEY }}
+      NREL_API_EMAIL: ${{ secrets.NREL_API_EMAIL }}
 
     name: ${{ matrix.os }} ${{ matrix.python-version }}
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-
-      - uses: actions/checkout@v3
-      - name: Checkout SAM
-        run: |
-          cd ..
-          git config --global url.https://github.com/.insteadOf git://github.com/
-          git clone https://github.com/NREL/SAM.git
-          ls
-          pwd
-          ls ${{ env.SAMNTDIR }}
-          ls ${{ env.SAMNTDIR }}/api/api_autogen/library/defaults
-
       - uses: actions/checkout@v3
       - name: Setup conda
         uses: s-weigand/setup-conda@v1
@@ -40,14 +28,87 @@ jobs:
       - run: conda --version
       - run: which python
 
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Get PySAM Version Unix
+        if: ${{ matrix.os != 'windows-latest' }}
+        run: |
+          VER=$(python -c "from files.version import __version__; print(__version__)")
+          echo "VERSION=$VER" >> $GITHUB_ENV
+
+      - name: Get PySAM Version Windows
+        if: ${{ matrix.os == 'windows-latest'}}
+        run: |
+          $VER=$(python -c "from files.version import __version__; print(__version__)")
+          echo "VERSION=$VER" >> $env:GITHUB_ENV
+
       - name: Install NREL-PySAM
         run: |
           pip install -r requirements.txt
           pip install -r tests/requirements.txt
-          conda install -c nrel nrel-pysam
+          conda install -c nrel nrel-pysam==${{ env.VERSION }}
+
+      - uses: actions/checkout@v3
+      - name: Checkout SAM
+        run: |
+          cd ..
+          git config --global url.https://github.com/.insteadOf git://github.com/
+          git clone https://github.com/NREL/SAM.git
 
       - name: Unit tests
         run: |
-          pwd
-          ls ${{ env.SAMNTDIR }}/api/api_autogen/library/defaults
           pytest tests/test_pysam_all.py
+    
+  build_2: 
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-14]
+        python-version: [ '3.8', '3.9', '3.10', '3.11', '3.12' ]
+
+    env: 
+      SAMNTDIR: ${{ github.workspace }}/../SAM
+      NREL_API_KEY: ${{ secrets.NREL_API_KEY }}
+      NREL_API_EMAIL: ${{ secrets.NREL_API_EMAIL }}
+
+    name: ${{ matrix.os }} ${{ matrix.python-version }}
+    steps:
+      - name: Install conda Mac arm64
+        run: |
+          mkdir -p ~/miniconda3
+          curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh -o ~/miniconda3/miniconda.sh
+          bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+          rm -rf ~/miniconda3/miniconda.sh
+          ~/miniconda3/bin/conda init bash
+          source /Users/runner/.bash_profile
+          conda --version
+          yes | conda create --name pysam_env python=${{ matrix.python-version }}
+          conda activate pysam_env
+          which python
+
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Install NREL-PySAM
+        run: |
+          source /Users/runner/.bash_profile
+          conda activate pysam_env
+          VER=$(python -c "from files.version import __version__; print(__version__)")
+          echo $VER
+          pip install -r requirements.txt
+          pip install -r tests/requirements.txt
+          conda install -c nrel nrel-pysam==$VER
+      
+      - uses: actions/checkout@v3
+      - name: Checkout SAM
+        run: |
+          cd ..
+          git config --global url.https://github.com/.insteadOf git://github.com/
+          git clone https://github.com/NREL/SAM.git
+
+      - name: Unit tests
+        run: |
+          source /Users/runner/.bash_profile
+          conda activate pysam_env
+          pytest tests
