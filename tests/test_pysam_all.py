@@ -355,7 +355,7 @@ def test_import_all():
 
 sf = str(Path(__file__).parent / "blythe_ca_33.617773_-114.588261_psmv3_60_tmy.csv")
 wf = str(Path(__file__).parent / "AR Northwestern-Flat Lands.srw")
-wave_f = str(Path(__file__).parent.parent / "Examples" / "Marine_energy_examples" / "CalWave_California_Wave Resource _SAM CSV.csv")
+wave_f = str(Path(__file__).parent.parent / "CalWave_California_Wave Resource _SAM CSV.csv")
 
 wavefile_model = wavefile.new()
 wavefile_model.WeatherReader.wave_resource_filename = wave_f
