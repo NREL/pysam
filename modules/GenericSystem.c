@@ -900,6 +900,18 @@ Outputs_get_monthly_energy(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_output_file(VarGroupObject *self, void *closure)
+{
+	return PySAM_string_getter(SAM_GenericSystem_Outputs_output_file_sget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_sim_cpu_run_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GenericSystem_Outputs_sim_cpu_run_time_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_system_heat_rate(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_GenericSystem_Outputs_system_heat_rate_nget, self->data_ptr);
@@ -959,6 +971,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
 	PyDoc_STR("*sequence*: Monthly Energy Gross [kWh]"),
+ 	NULL},
+{"output_file", (getter)Outputs_get_output_file,(setter)0,
+	PyDoc_STR("*str*: Output filepath [s]"),
+ 	NULL},
+{"sim_cpu_run_time", (getter)Outputs_get_sim_cpu_run_time,(setter)0,
+	PyDoc_STR("*float*: Simulation duration clock time [s]"),
  	NULL},
 {"system_heat_rate", (getter)Outputs_get_system_heat_rate,(setter)0,
 	PyDoc_STR("*float*: Heat Rate Conversion Factor [MMBTUs/MWhe]"),

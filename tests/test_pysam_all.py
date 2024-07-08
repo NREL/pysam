@@ -440,7 +440,6 @@ def test_run_all():
         "LinearFresnelDsgIph", "MhkTidal", "MhkWave",
         "MsptIph",
         "Pvsamv1", "Pvwattsv8", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "GenericSystem", "Grid",
-        "TroughPhysicalProcessHeat", 
         "TcsMSLF", "TcsgenericSolar", "TcslinearFresnel", "TcstroughEmpirical",
         "TroughPhysical", "TroughPhysicalIph", "Windpower")
     for mod in techs:

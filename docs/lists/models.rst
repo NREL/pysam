@@ -226,14 +226,8 @@
 :doc:`../modules/TroughPhysical`
       Physical trough applications
 
-:doc:`../modules/TroughPhysicalCspSolver` (HD)
-      Physical trough using CSP Solver
-
 :doc:`../modules/TroughPhysicalIph` (HD)
       Physical trough iph applications
-
-:doc:`../modules/TroughPhysicalProcessHeat`
-      Physical trough process heat applications
 
 :doc:`../modules/UiTesCalcs` (HD)
       Calculates values for all calculated values on UI TES page(s)
@@ -369,9 +363,7 @@
     ../modules/TidalFileReader.rst
     ../modules/Timeseq.rst
     ../modules/TroughPhysical.rst
-    ../modules/TroughPhysicalCspSolver.rst
     ../modules/TroughPhysicalIph.rst
-    ../modules/TroughPhysicalProcessHeat.rst
     ../modules/UiTesCalcs.rst
     ../modules/UiUdpcChecks.rst
     ../modules/UserHtfComparison.rst

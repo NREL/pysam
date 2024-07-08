@@ -145,6 +145,8 @@ class GenericSystem(object):
 		gen = tuple
 		kwh_per_kw = float
 		monthly_energy = tuple
+		output_file = str
+		sim_cpu_run_time = float
 		system_heat_rate = float
 		water_usage = float
 

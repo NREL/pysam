@@ -476,13 +476,13 @@ static PyGetSetDef SystemDesign_getset[] = {
 	PyDoc_STR("*float*: Design heat input to power block [MWt]\n\n**Required:**\nTrue"),
  	NULL},
 {"solar_mult_in", (getter)SystemDesign_get_solar_mult_in,(setter)SystemDesign_set_solar_mult_in,
-	PyDoc_STR("*float*: Solar multiple Input"),
+	PyDoc_STR("*float*: Solar multiple Input\n\n**Required:**\nTrue"),
  	NULL},
 {"solar_mult_or_Ap", (getter)SystemDesign_get_solar_mult_or_Ap,(setter)SystemDesign_set_solar_mult_or_Ap,
-	PyDoc_STR("*float*: Design using specified solar mult or field aperture [m3]"),
+	PyDoc_STR("*float*: Design using specified solar mult or field aperture [m3]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"total_Ap_in", (getter)SystemDesign_get_total_Ap_in,(setter)SystemDesign_set_total_Ap_in,
-	PyDoc_STR("*float*: Field aperture Input [m3]"),
+	PyDoc_STR("*float*: Field aperture Input [m3]\n\n**Required:**\nTrue"),
  	NULL},
 {"tshours", (getter)SystemDesign_get_tshours,(setter)SystemDesign_set_tshours,
 	PyDoc_STR("*float*: Equivalent full-load thermal storage hours [hr]\n\n**Required:**\nTrue"),
@@ -789,30 +789,6 @@ SolarField_set_land_mult(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-SolarField_get_m_dot_htfmax(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_m_dot_htfmax_nget, self->data_ptr);
-}
-
-static int
-SolarField_set_m_dot_htfmax(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_m_dot_htfmax_nset, self->data_ptr);
-}
-
-static PyObject *
-SolarField_get_m_dot_htfmin(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_m_dot_htfmin_nget, self->data_ptr);
-}
-
-static int
-SolarField_set_m_dot_htfmin(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_m_dot_htfmin_nset, self->data_ptr);
-}
-
-static PyObject *
 SolarField_get_mc_bal_cold(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_mc_bal_cold_nget, self->data_ptr);
@@ -1002,12 +978,6 @@ static PyGetSetDef SolarField_getset[] = {
 {"land_mult", (getter)SolarField_get_land_mult,(setter)SolarField_set_land_mult,
 	PyDoc_STR("*float*: Non-solar field land area multiplier [-]\n\n**Required:**\nTrue"),
  	NULL},
-{"m_dot_htfmax", (getter)SolarField_get_m_dot_htfmax,(setter)SolarField_set_m_dot_htfmax,
-	PyDoc_STR("*float*: Maximum loop HTF flow rate [kg/s]\n\n**Required:**\nTrue"),
- 	NULL},
-{"m_dot_htfmin", (getter)SolarField_get_m_dot_htfmin,(setter)SolarField_set_m_dot_htfmin,
-	PyDoc_STR("*float*: Minimum loop HTF flow rate [kg/s]\n\n**Required:**\nTrue"),
- 	NULL},
 {"mc_bal_cold", (getter)SolarField_get_mc_bal_cold,(setter)SolarField_set_mc_bal_cold,
 	PyDoc_STR("*float*: The heat capacity of the balance of plant on the cold side [kWht/K-MWt]\n\n**Required:**\nTrue"),
  	NULL},
@@ -1043,6 +1013,203 @@ static PyGetSetDef SolarField_getset[] = {
  	NULL},
 {"water_per_wash", (getter)SolarField_get_water_per_wash,(setter)SolarField_set_water_per_wash,
 	PyDoc_STR("*float*: Water usage per wash [L/m2_aper]\n\n**Required:**\nTrue"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject SolarField_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"FresnelPhysicalIph.SolarField",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		SolarField_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		SolarField_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * SolarField Group
+ */ 
+
+static PyTypeObject SolarField_Type;
+
+static PyObject *
+SolarField_new(SAM_FresnelPhysicalIph data_ptr)
+{
+	PyObject* new_obj = SolarField_Type.tp_alloc(&SolarField_Type,0);
+
+	VarGroupObject* SolarField_obj = (VarGroupObject*)new_obj;
+
+	SolarField_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* SolarField methods */
+
+static PyObject *
+SolarField_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "FresnelPhysicalIph", "SolarField")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+SolarField_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SolarField_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "FresnelPhysicalIph", "SolarField")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+SolarField_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &SolarField_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef SolarField_methods[] = {
+		{"assign",            (PyCFunction)SolarField_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SolarField_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SolarField_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SolarField_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)SolarField_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+SolarField_get_f_htfmax(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_f_htfmax_nget, self->data_ptr);
+}
+
+static int
+SolarField_set_f_htfmax(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_f_htfmax_nset, self->data_ptr);
+}
+
+static PyObject *
+SolarField_get_f_htfmin(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_f_htfmin_nget, self->data_ptr);
+}
+
+static int
+SolarField_set_f_htfmin(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_f_htfmin_nset, self->data_ptr);
+}
+
+static PyObject *
+SolarField_get_m_dot_htfmax(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_m_dot_htfmax_nget, self->data_ptr);
+}
+
+static int
+SolarField_set_m_dot_htfmax(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_m_dot_htfmax_nset, self->data_ptr);
+}
+
+static PyObject *
+SolarField_get_m_dot_htfmin(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_m_dot_htfmin_nget, self->data_ptr);
+}
+
+static int
+SolarField_set_m_dot_htfmin(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_m_dot_htfmin_nset, self->data_ptr);
+}
+
+static PyObject *
+SolarField_get_use_abs_or_rel_mdot_limit(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_use_abs_or_rel_mdot_limit_nget, self->data_ptr);
+}
+
+static int
+SolarField_set_use_abs_or_rel_mdot_limit(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_use_abs_or_rel_mdot_limit_nset, self->data_ptr);
+}
+
+static PyGetSetDef SolarField_getset[] = {
+{"f_htfmax", (getter)SolarField_get_f_htfmax,(setter)SolarField_set_f_htfmax,
+	PyDoc_STR("*float*: Maximum loop mass flow rate fraction of design\n\n**Required:**\nRequired if use_abs_or_rel_mdot_limit=1"),
+ 	NULL},
+{"f_htfmin", (getter)SolarField_get_f_htfmin,(setter)SolarField_set_f_htfmin,
+	PyDoc_STR("*float*: Minimum loop mass flow rate fraction of design\n\n**Required:**\nRequired if use_abs_or_rel_mdot_limit=1"),
+ 	NULL},
+{"m_dot_htfmax", (getter)SolarField_get_m_dot_htfmax,(setter)SolarField_set_m_dot_htfmax,
+	PyDoc_STR("*float*: Maximum loop HTF flow rate [kg/s]\n\n**Required:**\nRequired if use_abs_or_rel_mdot_limit=0"),
+ 	NULL},
+{"m_dot_htfmin", (getter)SolarField_get_m_dot_htfmin,(setter)SolarField_set_m_dot_htfmin,
+	PyDoc_STR("*float*: Minimum loop HTF flow rate [kg/s]\n\n**Required:**\nRequired if use_abs_or_rel_mdot_limit=0"),
+ 	NULL},
+{"use_abs_or_rel_mdot_limit", (getter)SolarField_get_use_abs_or_rel_mdot_limit,(setter)SolarField_set_use_abs_or_rel_mdot_limit,
+	PyDoc_STR("*float*: Use mass flow abs (0) or relative (1) limits\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4951,6 +5118,18 @@ Outputs_get_eta_optical_des_SS(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_f_htfmax_actual(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_f_htfmax_actual_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_f_htfmin_actual(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_f_htfmin_actual_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_field_area(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_field_area_nget, self->data_ptr);
@@ -5098,6 +5277,18 @@ static PyObject *
 Outputs_get_m_dot_htf_heat_sink(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_FresnelPhysicalIph_Outputs_m_dot_htf_heat_sink_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_htfmax_actual(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_m_dot_htfmax_actual_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_htfmin_actual(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_m_dot_htfmin_actual_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -5914,6 +6105,12 @@ static PyGetSetDef Outputs_getset[] = {
 {"eta_optical_des_SS", (getter)Outputs_get_eta_optical_des_SS,(setter)0,
 	PyDoc_STR("*float*: Steady State optical efficiency"),
  	NULL},
+{"f_htfmax_actual", (getter)Outputs_get_f_htfmax_actual,(setter)0,
+	PyDoc_STR("*float*: Actual maximum loop mass flow rate fraction of design"),
+ 	NULL},
+{"f_htfmin_actual", (getter)Outputs_get_f_htfmin_actual,(setter)0,
+	PyDoc_STR("*float*: Actual minimum loop mass flow rate fraction of design"),
+ 	NULL},
 {"field_area", (getter)Outputs_get_field_area,(setter)0,
 	PyDoc_STR("*float*: Solar field area [acres]"),
  	NULL},
@@ -5988,6 +6185,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"m_dot_htf_heat_sink", (getter)Outputs_get_m_dot_htf_heat_sink,(setter)0,
 	PyDoc_STR("*sequence*: Heat sink HTF mass flow [kg/s]"),
+ 	NULL},
+{"m_dot_htfmax_actual", (getter)Outputs_get_m_dot_htfmax_actual,(setter)0,
+	PyDoc_STR("*float*: Actual maximum loop HTF flow rate [kg/s]"),
+ 	NULL},
+{"m_dot_htfmin_actual", (getter)Outputs_get_m_dot_htfmin_actual,(setter)0,
+	PyDoc_STR("*float*: Actual minimum loop HTF flow rate [kg/s]"),
  	NULL},
 {"m_dot_loop", (getter)Outputs_get_m_dot_loop,(setter)0,
 	PyDoc_STR("*sequence*: Receiver mass flow rate [kg/s]"),
@@ -6327,6 +6530,10 @@ newFresnelPhysicalIphObject(void* data_ptr)
 	PyObject* SystemDesign_obj = SystemDesign_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SystemDesign", SystemDesign_obj);
 	Py_DECREF(SystemDesign_obj);
+
+	PyObject* SolarField_obj = SolarField_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "SolarField", SolarField_obj);
+	Py_DECREF(SolarField_obj);
 
 	PyObject* SolarField_obj = SolarField_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SolarField", SolarField_obj);
@@ -6698,6 +6905,13 @@ FresnelPhysicalIphModule_exec(PyObject *m)
 				"SystemDesign",
 				(PyObject*)&SystemDesign_Type);
 	Py_DECREF(&SystemDesign_Type);
+
+	/// Add the SolarField type object to FresnelPhysicalIph_Type
+	if (PyType_Ready(&SolarField_Type) < 0) { goto fail; }
+	PyDict_SetItemString(FresnelPhysicalIph_Type.tp_dict,
+				"SolarField",
+				(PyObject*)&SolarField_Type);
+	Py_DECREF(&SolarField_Type);
 
 	/// Add the SolarField type object to FresnelPhysicalIph_Type
 	if (PyType_Ready(&SolarField_Type) < 0) { goto fail; }

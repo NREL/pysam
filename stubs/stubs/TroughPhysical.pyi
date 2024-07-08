@@ -34,10 +34,31 @@ class TroughPhysical(object):
 			pass
 
 
+		T_in_loop_initial = float
+		T_out_loop_initial = float
+		T_out_scas_initial = tuple
+		T_tank_cold_init = float
+		T_tank_hot_init = float
+		defocus_initial = float
 		disp_csu_cost = float
 		disp_inventory_incentive = float
 		disp_rsu_cost = float
+		is_dispatch_targets = float
+		is_pc_sb_allowed_in = tuple
+		is_pc_su_allowed_in = tuple
+		is_rec_su_allowed_in = tuple
+		pc_op_mode_initial = float
+		pc_startup_energy_remain_initial = float
+		pc_startup_time_remain_init = float
+		q_pc_max_in = tuple
+		q_pc_target_on_in = tuple
+		q_pc_target_su_in = tuple
+		rec_op_mode_initial = float
 		sim_type = float
+		time_start = float
+		time_steps_per_hour = float
+		time_stop = float
+		vacuum_arrays = float
 
 
 	class Weather(object):
@@ -143,6 +164,8 @@ class TroughPhysical(object):
 		epsilon_3_43 = tuple
 		epsilon_3_44 = tuple
 		eta_pump = float
+		f_htfmax = float
+		f_htfmin = float
 		field_fl_props = tuple
 		include_fixed_power_block_runner = float
 		m_dot_htfmax = float
@@ -167,6 +190,7 @@ class TroughPhysical(object):
 		theta_dep = float
 		theta_stow = float
 		tilt = float
+		use_abs_or_rel_mdot_limit = float
 		wind_stow_speed = float
 
 
@@ -266,11 +290,9 @@ class TroughPhysical(object):
 		dispatch_factors_ts = tuple
 		dispatch_sched_weekday = tuple
 		dispatch_sched_weekend = tuple
-		dispatch_series = tuple
 		f_turb_tou_periods = tuple
 		is_ampl_engine = float
 		is_dispatch = float
-		is_dispatch_series = float
 		is_tod_pc_target_also_pc_max = float
 		is_write_ampl_dat = float
 		ppa_multiplier_model = float
@@ -387,7 +409,6 @@ class TroughPhysical(object):
 		V_tes_des = float
 		custom_tes_p_loss = float
 		custom_tes_pipe_sizes = float
-		disp_wlim_maxspec = float
 		has_hot_tank_bypass = float
 		k_tes_loss_coeffs = tuple
 		non_solar_field_land_area_multiplier = float
@@ -414,20 +435,6 @@ class TroughPhysical(object):
 
 
 		piping_loss = float
-
-
-	class SolarResourceData(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		lat = float
 
 
 	class CapitalCosts(object):
@@ -522,6 +529,9 @@ class TroughPhysical(object):
 		SCAs_def = tuple
 		T_field_cold_in = tuple
 		T_field_hot_out = tuple
+		T_in_loop_final = tuple
+		T_out_loop_final = tuple
+		T_out_scas_last_final = tuple
 		T_pc_in = tuple
 		T_pc_out = tuple
 		T_rec_cold_in = tuple
@@ -532,6 +542,7 @@ class TroughPhysical(object):
 		Type_cpnt = tuple
 		V_tank_hot_ini = float
 		W_dot_field_pump = tuple
+		W_dot_pump_SS = float
 		W_dot_sca_track = tuple
 		annual_W_cycle_gross = float
 		annual_energy = float
@@ -573,8 +584,12 @@ class TroughPhysical(object):
 		csp_dtr_sca_calc_zenith = float
 		csp_pt_tes_htf_density = float
 		csp_pt_tes_tank_diameter = float
+		cycle_Tdb_table = tuple
+		cycle_eff_load_table = tuple
 		cycle_htf_pump_power = tuple
+		dP_sf_SS = float
 		defocus = tuple
+		defocus_final = tuple
 		deltaP_field = tuple
 		direct_subtotal = float
 		disp_obj_relax = tuple
@@ -594,12 +609,13 @@ class TroughPhysical(object):
 		disp_subopt_flag = tuple
 		disp_tes_expected = tuple
 		disp_thermeff_expected = tuple
-		disp_wlim_max = float
 		disp_wpb_expected = tuple
 		dni_costh = tuple
 		e_ch_tes = tuple
 		e_dot_field_int_energy = tuple
 		eta = tuple
+		f_htfmax_actual = float
+		f_htfmin_actual = float
 		field_htf_cp_avg_des = float
 		field_htf_max_temp = float
 		field_htf_min_temp = float
@@ -607,12 +623,12 @@ class TroughPhysical(object):
 		field_thermal_output_ideal = float
 		fixed_land_area = float
 		gen = tuple
+		hot_tank_htf_percent_final = tuple
 		hour_day = tuple
 		is_hx = float
 		is_pc_sb_allowed = tuple
 		is_pc_su_allowed = tuple
 		is_rec_su_allowed = tuple
-		is_wlim_series = float
 		kwh_per_kw = float
 		loop_optical_efficiency = float
 		m_dot_balance = tuple
@@ -623,6 +639,8 @@ class TroughPhysical(object):
 		m_dot_field_recirc = tuple
 		m_dot_field_to_cycle = tuple
 		m_dot_htf_cycle_des = float
+		m_dot_htfmax_actual = float
+		m_dot_htfmin_actual = float
 		m_dot_loop = tuple
 		m_dot_pc = tuple
 		m_dot_pc_to_tes_cold = tuple
@@ -632,8 +650,10 @@ class TroughPhysical(object):
 		mass_tes_cold = tuple
 		mass_tes_hot = tuple
 		max_field_flow_velocity = float
+		max_loop_flow_vel_des = float
 		min_field_flow_velocity = float
 		min_inner_diameter = float
+		min_loop_flow_vel_des = float
 		month = tuple
 		monthly_energy = tuple
 		nLoops = float
@@ -646,6 +666,9 @@ class TroughPhysical(object):
 		operating_modes_a = tuple
 		operating_modes_b = tuple
 		operating_modes_c = tuple
+		pc_op_mode_final = tuple
+		pc_startup_energy_remain_final = tuple
+		pc_startup_time_remain_final = tuple
 		pipe_header_P_dsn = tuple
 		pipe_header_T_dsn = tuple
 		pipe_header_diams = tuple
@@ -699,6 +722,7 @@ class TroughPhysical(object):
 		q_tes = float
 		q_tes_heater = tuple
 		qinc_costh = tuple
+		rec_op_mode_final = tuple
 		recirculating = tuple
 		required_number_of_loops_for_SM1 = float
 		rh = tuple
@@ -726,9 +750,10 @@ class TroughPhysical(object):
 		total_tracking_power = float
 		tou_value = tuple
 		twet = tuple
+		vel_loop_max = tuple
+		vel_loop_min = tuple
 		vol_min = float
 		vol_tank = float
-		wlim_series = tuple
 		wspd = tuple
 
 

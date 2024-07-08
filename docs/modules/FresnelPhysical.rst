@@ -89,6 +89,12 @@ SolarField Group
 .. autoclass:: PySAM.FresnelPhysical.FresnelPhysical.SolarField
 	:members:
 
+SolarField Group
+-----------------
+
+.. autoclass:: PySAM.FresnelPhysical.FresnelPhysical.SolarField
+	:members:
+
 ColRec Group
 -------------
 

@@ -98,12 +98,6 @@ TowerAndReceiver Group
 .. autoclass:: PySAM.TroughPhysical.TroughPhysical.TowerAndReceiver
 	:members:
 
-SolarResourceData Group
-------------------------
-
-.. autoclass:: PySAM.TroughPhysical.TroughPhysical.SolarResourceData
-	:members:
-
 CapitalCosts Group
 -------------------
 

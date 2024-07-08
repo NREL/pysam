@@ -99,8 +99,6 @@ class FresnelPhysicalIph(object):
 		eta_pump = float
 		field_fl_props = tuple
 		land_mult = float
-		m_dot_htfmax = float
-		m_dot_htfmin = float
 		mc_bal_cold = float
 		mc_bal_hot = float
 		mc_bal_sca = float
@@ -113,6 +111,24 @@ class FresnelPhysicalIph(object):
 		theta_stow = float
 		washes_per_year = float
 		water_per_wash = float
+
+
+	class SolarField(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		f_htfmax = float
+		f_htfmin = float
+		m_dot_htfmax = float
+		m_dot_htfmin = float
+		use_abs_or_rel_mdot_limit = float
 
 
 	class ColRec(object):
@@ -516,6 +532,8 @@ class FresnelPhysicalIph(object):
 		eff_loop_des_SS = float
 		epc_total_cost = float
 		eta_optical_des_SS = float
+		f_htfmax_actual = float
+		f_htfmin_actual = float
 		field_area = float
 		field_htf_max_temp = float
 		field_htf_min_temp = float
@@ -541,6 +559,8 @@ class FresnelPhysicalIph(object):
 		m_dot_field_recirc = tuple
 		m_dot_field_to_cycle = tuple
 		m_dot_htf_heat_sink = tuple
+		m_dot_htfmax_actual = float
+		m_dot_htfmin_actual = float
 		m_dot_loop = tuple
 		m_dot_loop_des_SS = float
 		m_dot_pc_to_tes_cold = tuple
