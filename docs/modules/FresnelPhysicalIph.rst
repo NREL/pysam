@@ -47,12 +47,6 @@ SolarField Group
 .. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.SolarField
 	:members:
 
-SolarField Group
------------------
-
-.. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.SolarField
-	:members:
-
 ColRec Group
 -------------
 
@@ -87,18 +81,6 @@ FinancialModel Group
 ---------------------
 
 .. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.FinancialModel
-	:members:
-
-FinancialSolutionMode Group
-----------------------------
-
-.. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.FinancialSolutionMode
-	:members:
-
-TimeOfDeliveryFactors Group
-----------------------------
-
-.. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.TimeOfDeliveryFactors
 	:members:
 
 CapitalCosts Group

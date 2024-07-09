@@ -34,7 +34,6 @@ class FresnelPhysicalIph(object):
 			pass
 
 
-		disp_inventory_incentive = float
 		sim_type = float
 
 
@@ -97,8 +96,12 @@ class FresnelPhysicalIph(object):
 		V_hdr_min = float
 		V_wind_des = float
 		eta_pump = float
+		f_htfmax = float
+		f_htfmin = float
 		field_fl_props = tuple
 		land_mult = float
+		m_dot_htfmax = float
+		m_dot_htfmin = float
 		mc_bal_cold = float
 		mc_bal_hot = float
 		mc_bal_sca = float
@@ -109,26 +112,9 @@ class FresnelPhysicalIph(object):
 		rec_su_delay = float
 		theta_dep = float
 		theta_stow = float
+		use_abs_or_rel_mdot_limit = float
 		washes_per_year = float
 		water_per_wash = float
-
-
-	class SolarField(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		f_htfmax = float
-		f_htfmin = float
-		m_dot_htfmax = float
-		m_dot_htfmin = float
-		use_abs_or_rel_mdot_limit = float
 
 
 	class ColRec(object):
@@ -249,6 +235,9 @@ class FresnelPhysicalIph(object):
 		disp_spec_scaling = float
 		disp_steps_per_hour = float
 		dispatch_factors_ts = tuple
+		dispatch_sched_weekday = tuple
+		dispatch_sched_weekend = tuple
+		dispatch_tod_factors = tuple
 		f_turb_tou_periods = tuple
 		is_ampl_engine = float
 		is_timestep_load_fractions = float
@@ -275,6 +264,7 @@ class FresnelPhysicalIph(object):
 		bop_array = tuple
 		disp_frequency = float
 		disp_horizon = float
+		disp_inventory_incentive = float
 		disp_max_iter = float
 		disp_mip_gap = float
 		disp_rsu_cost_rel = float
@@ -298,37 +288,8 @@ class FresnelPhysicalIph(object):
 
 
 		csp_financial_model = float
-
-
-	class FinancialSolutionMode(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
 		ppa_price_input = tuple
 		ppa_soln_mode = float
-
-
-	class TimeOfDeliveryFactors(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		dispatch_sched_weekday = tuple
-		dispatch_sched_weekend = tuple
-		dispatch_tod_factors = tuple
 
 
 	class CapitalCosts(object):

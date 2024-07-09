@@ -78,18 +78,6 @@ static PyMethodDef SystemControl_methods[] = {
 };
 
 static PyObject *
-SystemControl_get_disp_inventory_incentive(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SystemControl_disp_inventory_incentive_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_disp_inventory_incentive(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SystemControl_disp_inventory_incentive_nset, self->data_ptr);
-}
-
-static PyObject *
 SystemControl_get_sim_type(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_FresnelPhysicalIph_SystemControl_sim_type_nget, self->data_ptr);
@@ -102,9 +90,6 @@ SystemControl_set_sim_type(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyGetSetDef SystemControl_getset[] = {
-{"disp_inventory_incentive", (getter)SystemControl_get_disp_inventory_incentive,(setter)SystemControl_set_disp_inventory_incentive,
-	PyDoc_STR("*float*: Dispatch storage terminal inventory incentive multiplier\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
 {"sim_type", (getter)SystemControl_get_sim_type,(setter)SystemControl_set_sim_type,
 	PyDoc_STR("*float*: 1 (default): timeseries, 2: design only\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
@@ -765,6 +750,30 @@ SolarField_set_eta_pump(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+SolarField_get_f_htfmax(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_f_htfmax_nget, self->data_ptr);
+}
+
+static int
+SolarField_set_f_htfmax(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_f_htfmax_nset, self->data_ptr);
+}
+
+static PyObject *
+SolarField_get_f_htfmin(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_f_htfmin_nget, self->data_ptr);
+}
+
+static int
+SolarField_set_f_htfmin(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_f_htfmin_nset, self->data_ptr);
+}
+
+static PyObject *
 SolarField_get_field_fl_props(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_SolarField_field_fl_props_mget, self->data_ptr);
@@ -786,6 +795,30 @@ static int
 SolarField_set_land_mult(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_land_mult_nset, self->data_ptr);
+}
+
+static PyObject *
+SolarField_get_m_dot_htfmax(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_m_dot_htfmax_nget, self->data_ptr);
+}
+
+static int
+SolarField_set_m_dot_htfmax(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_m_dot_htfmax_nset, self->data_ptr);
+}
+
+static PyObject *
+SolarField_get_m_dot_htfmin(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_m_dot_htfmin_nget, self->data_ptr);
+}
+
+static int
+SolarField_set_m_dot_htfmin(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_m_dot_htfmin_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -909,6 +942,18 @@ SolarField_set_theta_stow(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+SolarField_get_use_abs_or_rel_mdot_limit(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_use_abs_or_rel_mdot_limit_nget, self->data_ptr);
+}
+
+static int
+SolarField_set_use_abs_or_rel_mdot_limit(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_use_abs_or_rel_mdot_limit_nset, self->data_ptr);
+}
+
+static PyObject *
 SolarField_get_washes_per_year(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_washes_per_year_nget, self->data_ptr);
@@ -972,11 +1017,23 @@ static PyGetSetDef SolarField_getset[] = {
 {"eta_pump", (getter)SolarField_get_eta_pump,(setter)SolarField_set_eta_pump,
 	PyDoc_STR("*float*: HTF pump efficiency\n\n**Required:**\nTrue"),
  	NULL},
+{"f_htfmax", (getter)SolarField_get_f_htfmax,(setter)SolarField_set_f_htfmax,
+	PyDoc_STR("*float*: Maximum loop mass flow rate fraction of design\n\n**Required:**\nRequired if use_abs_or_rel_mdot_limit=1"),
+ 	NULL},
+{"f_htfmin", (getter)SolarField_get_f_htfmin,(setter)SolarField_set_f_htfmin,
+	PyDoc_STR("*float*: Minimum loop mass flow rate fraction of design\n\n**Required:**\nRequired if use_abs_or_rel_mdot_limit=1"),
+ 	NULL},
 {"field_fl_props", (getter)SolarField_get_field_fl_props,(setter)SolarField_set_field_fl_props,
 	PyDoc_STR("*sequence[sequence]*: Fluid property data\n\n**Required:**\nTrue"),
  	NULL},
 {"land_mult", (getter)SolarField_get_land_mult,(setter)SolarField_set_land_mult,
 	PyDoc_STR("*float*: Non-solar field land area multiplier [-]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"m_dot_htfmax", (getter)SolarField_get_m_dot_htfmax,(setter)SolarField_set_m_dot_htfmax,
+	PyDoc_STR("*float*: Maximum loop HTF flow rate [kg/s]\n\n**Required:**\nRequired if use_abs_or_rel_mdot_limit=0"),
+ 	NULL},
+{"m_dot_htfmin", (getter)SolarField_get_m_dot_htfmin,(setter)SolarField_set_m_dot_htfmin,
+	PyDoc_STR("*float*: Minimum loop HTF flow rate [kg/s]\n\n**Required:**\nRequired if use_abs_or_rel_mdot_limit=0"),
  	NULL},
 {"mc_bal_cold", (getter)SolarField_get_mc_bal_cold,(setter)SolarField_set_mc_bal_cold,
 	PyDoc_STR("*float*: The heat capacity of the balance of plant on the cold side [kWht/K-MWt]\n\n**Required:**\nTrue"),
@@ -1008,208 +1065,14 @@ static PyGetSetDef SolarField_getset[] = {
 {"theta_stow", (getter)SolarField_get_theta_stow,(setter)SolarField_set_theta_stow,
 	PyDoc_STR("*float*: stow angle [deg]\n\n**Required:**\nTrue"),
  	NULL},
+{"use_abs_or_rel_mdot_limit", (getter)SolarField_get_use_abs_or_rel_mdot_limit,(setter)SolarField_set_use_abs_or_rel_mdot_limit,
+	PyDoc_STR("*float*: Use mass flow abs (0) or relative (1) limits\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
 {"washes_per_year", (getter)SolarField_get_washes_per_year,(setter)SolarField_set_washes_per_year,
 	PyDoc_STR("*float*: Mirror washing frequency [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"water_per_wash", (getter)SolarField_get_water_per_wash,(setter)SolarField_set_water_per_wash,
 	PyDoc_STR("*float*: Water usage per wash [L/m2_aper]\n\n**Required:**\nTrue"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject SolarField_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"FresnelPhysicalIph.SolarField",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		SolarField_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		SolarField_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * SolarField Group
- */ 
-
-static PyTypeObject SolarField_Type;
-
-static PyObject *
-SolarField_new(SAM_FresnelPhysicalIph data_ptr)
-{
-	PyObject* new_obj = SolarField_Type.tp_alloc(&SolarField_Type,0);
-
-	VarGroupObject* SolarField_obj = (VarGroupObject*)new_obj;
-
-	SolarField_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* SolarField methods */
-
-static PyObject *
-SolarField_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "FresnelPhysicalIph", "SolarField")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-SolarField_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &SolarField_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "FresnelPhysicalIph", "SolarField")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-SolarField_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &SolarField_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef SolarField_methods[] = {
-		{"assign",            (PyCFunction)SolarField_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SolarField_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)SolarField_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SolarField_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)SolarField_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-SolarField_get_f_htfmax(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_f_htfmax_nget, self->data_ptr);
-}
-
-static int
-SolarField_set_f_htfmax(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_f_htfmax_nset, self->data_ptr);
-}
-
-static PyObject *
-SolarField_get_f_htfmin(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_f_htfmin_nget, self->data_ptr);
-}
-
-static int
-SolarField_set_f_htfmin(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_f_htfmin_nset, self->data_ptr);
-}
-
-static PyObject *
-SolarField_get_m_dot_htfmax(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_m_dot_htfmax_nget, self->data_ptr);
-}
-
-static int
-SolarField_set_m_dot_htfmax(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_m_dot_htfmax_nset, self->data_ptr);
-}
-
-static PyObject *
-SolarField_get_m_dot_htfmin(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_m_dot_htfmin_nget, self->data_ptr);
-}
-
-static int
-SolarField_set_m_dot_htfmin(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_m_dot_htfmin_nset, self->data_ptr);
-}
-
-static PyObject *
-SolarField_get_use_abs_or_rel_mdot_limit(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_use_abs_or_rel_mdot_limit_nget, self->data_ptr);
-}
-
-static int
-SolarField_set_use_abs_or_rel_mdot_limit(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_use_abs_or_rel_mdot_limit_nset, self->data_ptr);
-}
-
-static PyGetSetDef SolarField_getset[] = {
-{"f_htfmax", (getter)SolarField_get_f_htfmax,(setter)SolarField_set_f_htfmax,
-	PyDoc_STR("*float*: Maximum loop mass flow rate fraction of design\n\n**Required:**\nRequired if use_abs_or_rel_mdot_limit=1"),
- 	NULL},
-{"f_htfmin", (getter)SolarField_get_f_htfmin,(setter)SolarField_set_f_htfmin,
-	PyDoc_STR("*float*: Minimum loop mass flow rate fraction of design\n\n**Required:**\nRequired if use_abs_or_rel_mdot_limit=1"),
- 	NULL},
-{"m_dot_htfmax", (getter)SolarField_get_m_dot_htfmax,(setter)SolarField_set_m_dot_htfmax,
-	PyDoc_STR("*float*: Maximum loop HTF flow rate [kg/s]\n\n**Required:**\nRequired if use_abs_or_rel_mdot_limit=0"),
- 	NULL},
-{"m_dot_htfmin", (getter)SolarField_get_m_dot_htfmin,(setter)SolarField_set_m_dot_htfmin,
-	PyDoc_STR("*float*: Minimum loop HTF flow rate [kg/s]\n\n**Required:**\nRequired if use_abs_or_rel_mdot_limit=0"),
- 	NULL},
-{"use_abs_or_rel_mdot_limit", (getter)SolarField_get_use_abs_or_rel_mdot_limit,(setter)SolarField_set_use_abs_or_rel_mdot_limit,
-	PyDoc_STR("*float*: Use mass flow abs (0) or relative (1) limits\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2695,6 +2558,42 @@ Tou_set_dispatch_factors_ts(VarGroupObject *self, PyObject *value, void *closure
 }
 
 static PyObject *
+Tou_get_dispatch_sched_weekday(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_Tou_dispatch_sched_weekday_mget, self->data_ptr);
+}
+
+static int
+Tou_set_dispatch_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_FresnelPhysicalIph_Tou_dispatch_sched_weekday_mset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_dispatch_sched_weekend(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_Tou_dispatch_sched_weekend_mget, self->data_ptr);
+}
+
+static int
+Tou_set_dispatch_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_FresnelPhysicalIph_Tou_dispatch_sched_weekend_mset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_dispatch_tod_factors(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_Tou_dispatch_tod_factors_aget, self->data_ptr);
+}
+
+static int
+Tou_set_dispatch_tod_factors(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_Tou_dispatch_tod_factors_aset, self->data_ptr);
+}
+
+static PyObject *
 Tou_get_f_turb_tou_periods(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_FresnelPhysicalIph_Tou_f_turb_tou_periods_aget, self->data_ptr);
@@ -2826,6 +2725,15 @@ static PyGetSetDef Tou_getset[] = {
  	NULL},
 {"dispatch_factors_ts", (getter)Tou_get_dispatch_factors_ts,(setter)Tou_set_dispatch_factors_ts,
 	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n**Required:**\nRequired if ppa_multiplier_model=1&csp_financial_model<5&is_dispatch=1&sim_type=1"),
+ 	NULL},
+{"dispatch_sched_weekday", (getter)Tou_get_dispatch_sched_weekday,(setter)Tou_set_dispatch_sched_weekday,
+	PyDoc_STR("*sequence[sequence]*: PPA pricing weekday schedule, 12x24\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
+ 	NULL},
+{"dispatch_sched_weekend", (getter)Tou_get_dispatch_sched_weekend,(setter)Tou_set_dispatch_sched_weekend,
+	PyDoc_STR("*sequence[sequence]*: PPA pricing weekend schedule, 12x24\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
+ 	NULL},
+{"dispatch_tod_factors", (getter)Tou_get_dispatch_tod_factors,(setter)Tou_set_dispatch_tod_factors,
+	PyDoc_STR("*sequence*: TOD factors for periods 1 through 9\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
 {"f_turb_tou_periods", (getter)Tou_get_f_turb_tou_periods,(setter)Tou_set_f_turb_tou_periods,
 	PyDoc_STR("*sequence*: Dispatch logic for turbine load fraction [-]\n\n**Required:**\nTrue"),
@@ -3024,6 +2932,18 @@ SysControl_set_disp_horizon(VarGroupObject *self, PyObject *value, void *closure
 }
 
 static PyObject *
+SysControl_get_disp_inventory_incentive(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_inventory_incentive_nget, self->data_ptr);
+}
+
+static int
+SysControl_set_disp_inventory_incentive(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_inventory_incentive_nset, self->data_ptr);
+}
+
+static PyObject *
 SysControl_get_disp_max_iter(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_max_iter_nget, self->data_ptr);
@@ -3143,6 +3063,9 @@ static PyGetSetDef SysControl_getset[] = {
  	NULL},
 {"disp_horizon", (getter)SysControl_get_disp_horizon,(setter)SysControl_set_disp_horizon,
 	PyDoc_STR("*float*: Time horizon for dispatch optimization [hour]\n\n**Required:**\nRequired if is_dispatch=1"),
+ 	NULL},
+{"disp_inventory_incentive", (getter)SysControl_get_disp_inventory_incentive,(setter)SysControl_set_disp_inventory_incentive,
+	PyDoc_STR("*float*: Dispatch storage terminal inventory incentive multiplier\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"disp_max_iter", (getter)SysControl_get_disp_max_iter,(setter)SysControl_set_disp_max_iter,
 	PyDoc_STR("*float*: Max. no. dispatch optimization iterations [-]\n\n**Required:**\nRequired if is_dispatch=1"),
@@ -3304,9 +3227,39 @@ FinancialModel_set_csp_financial_model(VarGroupObject *self, PyObject *value, vo
 	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_FinancialModel_csp_financial_model_nset, self->data_ptr);
 }
 
+static PyObject *
+FinancialModel_get_ppa_price_input(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_FinancialModel_ppa_price_input_aget, self->data_ptr);
+}
+
+static int
+FinancialModel_set_ppa_price_input(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_FinancialModel_ppa_price_input_aset, self->data_ptr);
+}
+
+static PyObject *
+FinancialModel_get_ppa_soln_mode(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_FinancialModel_ppa_soln_mode_nget, self->data_ptr);
+}
+
+static int
+FinancialModel_set_ppa_soln_mode(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_FinancialModel_ppa_soln_mode_nset, self->data_ptr);
+}
+
 static PyGetSetDef FinancialModel_getset[] = {
 {"csp_financial_model", (getter)FinancialModel_get_csp_financial_model,(setter)FinancialModel_set_csp_financial_model,
 	PyDoc_STR("*float*:  [1-8]\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nTrue"),
+ 	NULL},
+{"ppa_price_input", (getter)FinancialModel_get_ppa_price_input,(setter)FinancialModel_set_ppa_price_input,
+	PyDoc_STR("*sequence*: PPA solution mode (0=Specify IRR target, 1=Specify PPA price)\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
+ 	NULL},
+{"ppa_soln_mode", (getter)FinancialModel_get_ppa_soln_mode,(setter)FinancialModel_set_ppa_soln_mode,
+	PyDoc_STR("*float*: PPA solution mode (0=Specify IRR target, 1=Specify PPA price)\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3345,325 +3298,6 @@ static PyTypeObject FinancialModel_Type = {
 		FinancialModel_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		FinancialModel_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * FinancialSolutionMode Group
- */ 
-
-static PyTypeObject FinancialSolutionMode_Type;
-
-static PyObject *
-FinancialSolutionMode_new(SAM_FresnelPhysicalIph data_ptr)
-{
-	PyObject* new_obj = FinancialSolutionMode_Type.tp_alloc(&FinancialSolutionMode_Type,0);
-
-	VarGroupObject* FinancialSolutionMode_obj = (VarGroupObject*)new_obj;
-
-	FinancialSolutionMode_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* FinancialSolutionMode methods */
-
-static PyObject *
-FinancialSolutionMode_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "FresnelPhysicalIph", "FinancialSolutionMode")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-FinancialSolutionMode_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &FinancialSolutionMode_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "FresnelPhysicalIph", "FinancialSolutionMode")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-FinancialSolutionMode_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &FinancialSolutionMode_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef FinancialSolutionMode_methods[] = {
-		{"assign",            (PyCFunction)FinancialSolutionMode_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``FinancialSolutionMode_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)FinancialSolutionMode_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``FinancialSolutionMode_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)FinancialSolutionMode_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-FinancialSolutionMode_get_ppa_price_input(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_FresnelPhysicalIph_FinancialSolutionMode_ppa_price_input_aget, self->data_ptr);
-}
-
-static int
-FinancialSolutionMode_set_ppa_price_input(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_FinancialSolutionMode_ppa_price_input_aset, self->data_ptr);
-}
-
-static PyObject *
-FinancialSolutionMode_get_ppa_soln_mode(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_FinancialSolutionMode_ppa_soln_mode_nget, self->data_ptr);
-}
-
-static int
-FinancialSolutionMode_set_ppa_soln_mode(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_FinancialSolutionMode_ppa_soln_mode_nset, self->data_ptr);
-}
-
-static PyGetSetDef FinancialSolutionMode_getset[] = {
-{"ppa_price_input", (getter)FinancialSolutionMode_get_ppa_price_input,(setter)FinancialSolutionMode_set_ppa_price_input,
-	PyDoc_STR("*sequence*: PPA solution mode (0=Specify IRR target, 1=Specify PPA price)\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-{"ppa_soln_mode", (getter)FinancialSolutionMode_get_ppa_soln_mode,(setter)FinancialSolutionMode_set_ppa_soln_mode,
-	PyDoc_STR("*float*: PPA solution mode (0=Specify IRR target, 1=Specify PPA price)\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject FinancialSolutionMode_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"FresnelPhysicalIph.FinancialSolutionMode",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		FinancialSolutionMode_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		FinancialSolutionMode_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * TimeOfDeliveryFactors Group
- */ 
-
-static PyTypeObject TimeOfDeliveryFactors_Type;
-
-static PyObject *
-TimeOfDeliveryFactors_new(SAM_FresnelPhysicalIph data_ptr)
-{
-	PyObject* new_obj = TimeOfDeliveryFactors_Type.tp_alloc(&TimeOfDeliveryFactors_Type,0);
-
-	VarGroupObject* TimeOfDeliveryFactors_obj = (VarGroupObject*)new_obj;
-
-	TimeOfDeliveryFactors_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* TimeOfDeliveryFactors methods */
-
-static PyObject *
-TimeOfDeliveryFactors_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "FresnelPhysicalIph", "TimeOfDeliveryFactors")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-TimeOfDeliveryFactors_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &TimeOfDeliveryFactors_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "FresnelPhysicalIph", "TimeOfDeliveryFactors")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-TimeOfDeliveryFactors_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &TimeOfDeliveryFactors_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef TimeOfDeliveryFactors_methods[] = {
-		{"assign",            (PyCFunction)TimeOfDeliveryFactors_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``TimeOfDeliveryFactors_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)TimeOfDeliveryFactors_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``TimeOfDeliveryFactors_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)TimeOfDeliveryFactors_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_sched_weekday(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_TimeOfDeliveryFactors_dispatch_sched_weekday_mget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_FresnelPhysicalIph_TimeOfDeliveryFactors_dispatch_sched_weekday_mset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_sched_weekend(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_TimeOfDeliveryFactors_dispatch_sched_weekend_mget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_FresnelPhysicalIph_TimeOfDeliveryFactors_dispatch_sched_weekend_mset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_tod_factors(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_FresnelPhysicalIph_TimeOfDeliveryFactors_dispatch_tod_factors_aget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_tod_factors(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_TimeOfDeliveryFactors_dispatch_tod_factors_aset, self->data_ptr);
-}
-
-static PyGetSetDef TimeOfDeliveryFactors_getset[] = {
-{"dispatch_sched_weekday", (getter)TimeOfDeliveryFactors_get_dispatch_sched_weekday,(setter)TimeOfDeliveryFactors_set_dispatch_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: PPA pricing weekday schedule, 12x24\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-{"dispatch_sched_weekend", (getter)TimeOfDeliveryFactors_get_dispatch_sched_weekend,(setter)TimeOfDeliveryFactors_set_dispatch_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: PPA pricing weekend schedule, 12x24\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-{"dispatch_tod_factors", (getter)TimeOfDeliveryFactors_get_dispatch_tod_factors,(setter)TimeOfDeliveryFactors_set_dispatch_tod_factors,
-	PyDoc_STR("*sequence*: TOD factors for periods 1 through 9\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject TimeOfDeliveryFactors_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"FresnelPhysicalIph.TimeOfDeliveryFactors",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		TimeOfDeliveryFactors_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		TimeOfDeliveryFactors_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -6535,10 +6169,6 @@ newFresnelPhysicalIphObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "SolarField", SolarField_obj);
 	Py_DECREF(SolarField_obj);
 
-	PyObject* SolarField_obj = SolarField_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "SolarField", SolarField_obj);
-	Py_DECREF(SolarField_obj);
-
 	PyObject* ColRec_obj = ColRec_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "ColRec", ColRec_obj);
 	Py_DECREF(ColRec_obj);
@@ -6562,14 +6192,6 @@ newFresnelPhysicalIphObject(void* data_ptr)
 	PyObject* FinancialModel_obj = FinancialModel_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "FinancialModel", FinancialModel_obj);
 	Py_DECREF(FinancialModel_obj);
-
-	PyObject* FinancialSolutionMode_obj = FinancialSolutionMode_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "FinancialSolutionMode", FinancialSolutionMode_obj);
-	Py_DECREF(FinancialSolutionMode_obj);
-
-	PyObject* TimeOfDeliveryFactors_obj = TimeOfDeliveryFactors_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "TimeOfDeliveryFactors", TimeOfDeliveryFactors_obj);
-	Py_DECREF(TimeOfDeliveryFactors_obj);
 
 	PyObject* CapitalCosts_obj = CapitalCosts_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "CapitalCosts", CapitalCosts_obj);
@@ -6913,13 +6535,6 @@ FresnelPhysicalIphModule_exec(PyObject *m)
 				(PyObject*)&SolarField_Type);
 	Py_DECREF(&SolarField_Type);
 
-	/// Add the SolarField type object to FresnelPhysicalIph_Type
-	if (PyType_Ready(&SolarField_Type) < 0) { goto fail; }
-	PyDict_SetItemString(FresnelPhysicalIph_Type.tp_dict,
-				"SolarField",
-				(PyObject*)&SolarField_Type);
-	Py_DECREF(&SolarField_Type);
-
 	/// Add the ColRec type object to FresnelPhysicalIph_Type
 	if (PyType_Ready(&ColRec_Type) < 0) { goto fail; }
 	PyDict_SetItemString(FresnelPhysicalIph_Type.tp_dict,
@@ -6961,20 +6576,6 @@ FresnelPhysicalIphModule_exec(PyObject *m)
 				"FinancialModel",
 				(PyObject*)&FinancialModel_Type);
 	Py_DECREF(&FinancialModel_Type);
-
-	/// Add the FinancialSolutionMode type object to FresnelPhysicalIph_Type
-	if (PyType_Ready(&FinancialSolutionMode_Type) < 0) { goto fail; }
-	PyDict_SetItemString(FresnelPhysicalIph_Type.tp_dict,
-				"FinancialSolutionMode",
-				(PyObject*)&FinancialSolutionMode_Type);
-	Py_DECREF(&FinancialSolutionMode_Type);
-
-	/// Add the TimeOfDeliveryFactors type object to FresnelPhysicalIph_Type
-	if (PyType_Ready(&TimeOfDeliveryFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(FresnelPhysicalIph_Type.tp_dict,
-				"TimeOfDeliveryFactors",
-				(PyObject*)&TimeOfDeliveryFactors_Type);
-	Py_DECREF(&TimeOfDeliveryFactors_Type);
 
 	/// Add the CapitalCosts type object to FresnelPhysicalIph_Type
 	if (PyType_Ready(&CapitalCosts_Type) < 0) { goto fail; }
