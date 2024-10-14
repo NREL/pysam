@@ -1,0 +1,5 @@
+NREL-PySAM==5.1.0
+openpyxl==3.0.10
+pvlib==0.10.4
+pvmismatch==4.1
+scipy==1.11.4
