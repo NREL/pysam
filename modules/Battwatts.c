@@ -986,6 +986,12 @@ Outputs_get_batt_annual_energy_system_loss(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_batt_availability_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_availability_loss_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_batt_bank_installed_capacity(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Battwatts_Outputs_batt_bank_installed_capacity_nget, self->data_ptr);
@@ -1043,6 +1049,12 @@ static PyObject *
 Outputs_get_batt_dispatch_sched(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Battwatts_Outputs_batt_dispatch_sched_mget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_grid_charge_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_batt_grid_charge_percent_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1247,6 +1259,18 @@ static PyObject *
 Outputs_get_batt_voltage_cell(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_voltage_cell_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_year1_charge_from_grid(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_batt_year1_charge_from_grid_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_year1_charge_from_system(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_batt_year1_charge_from_system_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1556,6 +1580,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"batt_annual_energy_system_loss", (getter)Outputs_get_batt_annual_energy_system_loss,(setter)0,
 	PyDoc_STR("*sequence*: Battery annual system energy loss [kWh]"),
  	NULL},
+{"batt_availability_loss", (getter)Outputs_get_batt_availability_loss,(setter)0,
+	PyDoc_STR("*sequence*: Battery availability loss [%]"),
+ 	NULL},
 {"batt_bank_installed_capacity", (getter)Outputs_get_batt_bank_installed_capacity,(setter)0,
 	PyDoc_STR("*float*: Battery bank installed capacity [kWh]"),
  	NULL},
@@ -1585,6 +1612,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"batt_dispatch_sched", (getter)Outputs_get_batt_dispatch_sched,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Battery dispatch schedule"),
+ 	NULL},
+{"batt_grid_charge_percent", (getter)Outputs_get_batt_grid_charge_percent,(setter)0,
+	PyDoc_STR("*float*: Battery charge energy charged from grid [%]"),
  	NULL},
 {"batt_power", (getter)Outputs_get_batt_power,(setter)0,
 	PyDoc_STR("*sequence*: Electricity to/from battery AC [kW]"),
@@ -1687,6 +1717,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"batt_voltage_cell", (getter)Outputs_get_batt_voltage_cell,(setter)0,
 	PyDoc_STR("*sequence*: Battery cell voltage [V]"),
+ 	NULL},
+{"batt_year1_charge_from_grid", (getter)Outputs_get_batt_year1_charge_from_grid,(setter)0,
+	PyDoc_STR("*float*: Battery annual energy charged from grid (year 1) [kWh]"),
+ 	NULL},
+{"batt_year1_charge_from_system", (getter)Outputs_get_batt_year1_charge_from_system,(setter)0,
+	PyDoc_STR("*float*: Battery annual energy charged from system (year 1) [kWh]"),
  	NULL},
 {"cdf_of_surviving", (getter)Outputs_get_cdf_of_surviving,(setter)0,
 	PyDoc_STR("*sequence*: Hours of autonomy during grid outage cumulative probabilities"),
@@ -1885,6 +1921,21 @@ newBattwattsObject(void* data_ptr)
 	PyObject* Load_obj = Load_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Load", Load_obj);
 	Py_DECREF(Load_obj);
+
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+
+	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
+	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
+	Py_XDECREF(data_cap);
+	Py_XDECREF(AdjustmentFactorsModule);
+
+	if (!Adjust_obj){
+		PyErr_SetString(PyExc_Exception, "Couldn't create AdjustmentFactorsObject\n");
+		return NULL;
+	}
+
+	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
+	Py_DECREF(Adjust_obj);
 
 	PyObject* GridLimits_obj = GridLimits_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "GridLimits", GridLimits_obj);

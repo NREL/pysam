@@ -1065,6 +1065,8 @@ class Saleleaseback(object):
 		ppa_escalation = float
 		ppa_multipliers = tuple
 		ppa_price = float
+		pre_depr_alloc_basis = float
+		pre_itc_qual_basis = float
 		present_value_fuel = float
 		present_value_insandproptax = float
 		present_value_oandm = float

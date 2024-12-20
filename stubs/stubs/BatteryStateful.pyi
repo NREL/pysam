@@ -95,6 +95,7 @@ class BatteryStateful(object):
 
 		Cp = float
 		T_room_init = float
+		availabilty_loss = tuple
 		cap_vs_temp = tuple
 		h = float
 		loss_choice = float
@@ -183,6 +184,8 @@ class BatteryStateful(object):
 		dq_relative_li3 = float
 		dq_relative_neg = float
 		n_cycles = float
+		percent_unavailable = float
+		percent_unavailable_prev = float
 		prev_charge = float
 		q0 = float
 		q1_0 = float

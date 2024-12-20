@@ -39,16 +39,16 @@ TES Group
 .. autoclass:: PySAM.CspSubcomponent.CspSubcomponent.TES
 	:members:
 
-SolarField Group
------------------
-
-.. autoclass:: PySAM.CspSubcomponent.CspSubcomponent.SolarField
-	:members:
-
 Powerblock Group
 -----------------
 
 .. autoclass:: PySAM.CspSubcomponent.CspSubcomponent.Powerblock
+	:members:
+
+SolarField Group
+-----------------
+
+.. autoclass:: PySAM.CspSubcomponent.CspSubcomponent.SolarField
 	:members:
 
 Controller Group

@@ -49,8 +49,6 @@ class MsptIph(object):
 			pass
 
 
-		ampl_data_dir = str
-		ampl_exec_call = str
 		aux_par = float
 		aux_par_0 = float
 		aux_par_1 = float
@@ -76,12 +74,10 @@ class MsptIph(object):
 		disp_time_weighting = float
 		disp_timeout = float
 		f_turb_tou_periods = tuple
-		is_ampl_engine = float
 		is_dispatch = float
 		is_parallel_htr = float
 		is_timestep_load_fractions = float
 		is_tod_pc_target_also_pc_max = float
-		is_write_ampl_dat = float
 		pb_fixed_par = float
 		q_rec_heattrace = float
 		q_rec_standby = float
@@ -336,6 +332,14 @@ class MsptIph(object):
 			pass
 
 
+		hs_phys_N_sub = float
+		hs_phys_P_steam_hot_des = float
+		hs_phys_Q_steam_hot_des = float
+		hs_phys_T_steam_cold_des = float
+		hs_phys_f_mdot_steam_max = float
+		hs_phys_f_mdot_steam_min = float
+		hs_phys_tol = float
+		hs_type = float
 		pb_pump_coef = float
 
 
@@ -382,7 +386,7 @@ class MsptIph(object):
 			pass
 
 
-		ppa_price_input = tuple
+		ppa_price_input_heat_btu = tuple
 
 
 	class FinancialParameters(object):
@@ -448,27 +452,27 @@ class MsptIph(object):
 		def __init__(self, *args, **kwargs): # real signature unknown
 			pass
 	
-		constant = float
-		en_hourly = float
-		en_periods = float
-		en_timeindex = float
-		hourly = tuple
-		periods = tuple
-		imeindex = tuple
-		dc_constant = float
-		dc_en_hourly = float
-		dc_en_periods = float
-		dc_en_timeindex = float
-		dc_hourly = tuple
-		dc_periods = tuple
-		dc_imeindex = tuple
-		sf_constant = float
-		sf_en_hourly = float
-		sf_en_periods = float
-		sf_en_timeindex = float
-		sf_hourly = tuple
-		sf_periods = tuple
-		sf_timeindex = tuple
+		adjust_constant = float
+		adjust_en_hourly = float
+		adjust_en_periods = float
+		adjust_en_timeindex = float
+		adjust_hourly = tuple
+		adjust_periods = tuple
+		adjust_timeindex = tuple
+		dc_adjust_constant = float
+		dc_adjust_en_hourly = float
+		dc_adjust_en_periods = float
+		dc_adjust_en_timeindex = float
+		dc_adjust_hourly = tuple
+		dc_adjust_periods = tuple
+		dc_adjust_timeindex = tuple
+		sf_adjust_constant = float
+		sf_adjust_en_hourly = float
+		sf_adjust_en_periods = float
+		sf_adjust_en_timeindex = float
+		sf_adjust_hourly = tuple
+		sf_adjust_periods = tuple
+		sf_adjust_timeindex = tuple
 
 	class Outputs(object):
 		def assign(self): 
@@ -526,6 +530,7 @@ class MsptIph(object):
 		annual_electricity_consumption = float
 		annual_energy = float
 		annual_energy_distribution_time = tuple
+		annual_energy_heat_btu = float
 		annual_eta_rec_th = float
 		annual_eta_rec_th_incl_refl = float
 		annual_q_defocus_est = float
@@ -609,6 +614,8 @@ class MsptIph(object):
 		flux_maps_for_import = tuple
 		flux_maps_out = tuple
 		gen = tuple
+		gen_heat = tuple
+		gen_heat_btu = tuple
 		h_rec_input_to_cost_model = float
 		h_tower_calc = float
 		heater_cost = float
@@ -645,6 +652,7 @@ class MsptIph(object):
 		operating_modes_a = tuple
 		operating_modes_b = tuple
 		operating_modes_c = tuple
+		ppa_price_input = tuple
 		pparasi = tuple
 		pricing_mult = tuple
 		q_balance = tuple

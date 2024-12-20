@@ -15,6 +15,8 @@ The variables listed below are interdependent with other variables. If you chang
 
  - T_htf_hot_ref
 
+ - allow_reservoir_replacements
+
  - ambient_pressure
 
  - analysis_type
