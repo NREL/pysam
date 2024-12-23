@@ -432,7 +432,7 @@ def assign_values(mod, i):
 def test_run_all():
     # only run test on first Python version to be built, since this test is very time consuming
     minor_ver = sys.version_info[1]
-    if minor_ver != 10:
+    if minor_ver != 8:
         return
     techs = (
         "Battery", "Battwatts", "Biomass", "EtesElectricResistance", "Geothermal", 
