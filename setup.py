@@ -1,7 +1,6 @@
 import json, marshal, os, shutil
 from setuptools import setup, Extension
 import sys
-from distutils.core import Command
 from files.version import __version__
 from pathlib import Path
 
@@ -161,23 +160,6 @@ for filename in os.listdir(this_directory + "/modules"):
                             ))
 
 
-# function to rename macosx distribution for Python 3.7 to be minimum version of 10.12 instead of 10.14
-class PostProcess(Command):
-    description = "rename macosx distribution for Python 3.7 to be minimum version of 10.12 instead of 10.14"
-    user_options = []
-
-    def initialize_options(self):
-        self.cwd = None
-
-    def finalize_options(self):
-        self.cwd = os.getcwd()
-
-    def run(self):
-        assert os.getcwd() == self.cwd, 'Must be in package root: %s' % self.cwd
-        name = "NREL_PySAM-" + latest_version + "-" + "cp37-cp37m-macosx_10_14_x86_64.whl"
-        newname = "NREL_PySAM-" + latest_version + "-" + "cp37-cp37m-macosx_10_12_x86_64.whl"
-        os.system('mv ./dist/' + name + ' ./dist/' + newname)
-
 ###################################################################################################
 #
 # setup script
@@ -203,12 +185,8 @@ setup(
     package_dir={'PySAM': 'files', 'PySAM.Hybrids': 'files/Hybrids'},
     package_data={
         '': libfiles},
-    setup_requires=["pytest-runner"],
+    setup_requires=read_lines(Path(__file__).parent / "requirements.txt"),
     tests_require=["pytest"],
-    install_requires=read_lines(Path(__file__).parent / "requirements.txt"),
-    cmdclass={
-        'post': PostProcess
-    },
     ext_modules=extension_modules
 )
 

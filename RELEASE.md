@@ -4,6 +4,7 @@
 * [SAM Release updates for Version 2024.12.12](https://nrel.github.io/SAM/doc/releasenotes.html)
 * GenericSystem renamed to CustomGeneration
 * Fix attribute error when using "value" on non-existing attribute (#178)
+* Added Python 3.13 support
 
 ## Version 5.1.0, Mar 13, 2024 - SAM 2023.12.17, Revision 1, SSC Version 290
 * [SAM Release updates for Version 2023.12.17 Revision 1](https://nrel.github.io/SAM/doc/releasenotes.html)

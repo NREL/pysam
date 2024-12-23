@@ -10,7 +10,7 @@ https://nrel-pysam.readthedocs.io
 
 
 ## Requirements
-1. Python 3.8 - 3.12, 64 bit
+1. Python 3.8 - 3.13, 64 bit
 2. Operating system:
 	- MacOSX 10.7+
 	- Most Linux
@@ -24,7 +24,7 @@ https://nrel-pysam.readthedocs.io
 	pip install nrel-pysam
 	```
 
-2. Anaconda (Versions > 1.2.1 only):
+2. Anaconda (Versions > 1.2.1, < 6.0.0 only):
 	```
 	conda install -c nrel nrel-pysam
 	```
