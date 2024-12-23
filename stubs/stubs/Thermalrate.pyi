@@ -64,6 +64,30 @@ class Thermalrate(object):
 		system_use_lifetime_output = float
 
 
+	class HybridCosts(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		degradation = tuple
+		land_area = float
+		om_capacity = tuple
+		om_capacity_escal = float
+		om_fixed = tuple
+		om_fixed_escal = float
+		om_land_lease = tuple
+		om_land_lease_escal = float
+		om_production = tuple
+		om_production_escal = float
+		total_installed_cost = float
+
+
 	class Outputs(object):
 		def assign(self): 
 			pass
@@ -76,7 +100,10 @@ class Thermalrate(object):
 
 
 		annual_thermal_value = tuple
+		cf_land_lease_expense = tuple
+		thermal_cost_with_system = tuple
 		thermal_cost_with_system_year1 = float
+		thermal_cost_without_system = tuple
 		thermal_cost_without_system_year1 = float
 		thermal_load_year1 = float
 		thermal_revenue_with_system = tuple

@@ -39,6 +39,13 @@ Load Group
 .. autoclass:: PySAM.Battwatts.Battwatts.Load
 	:members:
 
+AdjustmentFactors Group
+------------------------
+
+.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+	:members:
+	:noindex:
+
 GridLimits Group
 -----------------
 

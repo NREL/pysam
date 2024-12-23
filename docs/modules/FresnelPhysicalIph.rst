@@ -95,6 +95,12 @@ TimeOfDeliveryFactors Group
 .. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.TimeOfDeliveryFactors
 	:members:
 
+Revenue Group
+--------------
+
+.. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.Revenue
+	:members:
+
 CapitalCosts Group
 -------------------
 
@@ -113,6 +119,18 @@ AdjustmentFactors Group
 .. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
 	:members:
 	:noindex:
+
+ElectricityRates Group
+-----------------------
+
+.. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.ElectricityRates
+	:members:
+
+Lifetime Group
+---------------
+
+.. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.Lifetime
+	:members:
 
 Outputs Group
 --------------

@@ -99,6 +99,8 @@ class FresnelPhysical(object):
 		V_hdr_min = float
 		V_wind_des = float
 		eta_pump = float
+		f_htfmax = float
+		f_htfmin = float
 		field_fl_props = tuple
 		land_mult = float
 		m_dot_htfmax = float
@@ -109,10 +111,9 @@ class FresnelPhysical(object):
 		nMod = float
 		p_start = float
 		rec_htf_vol = float
-		rec_qf_delay = float
-		rec_su_delay = float
 		theta_dep = float
 		theta_stow = float
+		use_abs_or_rel_mdot_limit = float
 		washes_per_year = float
 		water_per_wash = float
 
@@ -218,6 +219,7 @@ class FresnelPhysical(object):
 
 		ud_f_W_dot_cool_des = float
 		ud_ind_od = tuple
+		ud_is_sco2_regr = float
 		ud_m_dot_water_cool_des = float
 
 
@@ -250,6 +252,33 @@ class FresnelPhysical(object):
 		u_tank = float
 
 
+	class Tou(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		can_cycle_use_standby = float
+		disp_reporting = float
+		disp_spec_bb = float
+		disp_spec_presolve = float
+		disp_spec_scaling = float
+		disp_steps_per_hour = float
+		dispatch_factors_ts = tuple
+		f_turb_tou_periods = tuple
+		is_timestep_load_fractions = float
+		is_tod_pc_target_also_pc_max = float
+		ppa_multiplier_model = float
+		q_rec_heattrace = float
+		q_rec_standby = float
+		timestep_load_fractions = tuple
+
+
 	class SysControl(object):
 		def assign(self): 
 			pass
@@ -272,42 +301,12 @@ class FresnelPhysical(object):
 		disp_rsu_cost_rel = float
 		disp_time_weighting = float
 		disp_timeout = float
-		dispatch_series = tuple
 		is_dispatch = float
-		is_dispatch_series = float
 		pb_fixed_par = float
+		rec_qf_delay = float
+		rec_su_delay = float
 		weekday_schedule = tuple
 		weekend_schedule = tuple
-
-
-	class Tou(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		ampl_data_dir = str
-		ampl_exec_call = str
-		can_cycle_use_standby = float
-		disp_reporting = float
-		disp_spec_bb = float
-		disp_spec_presolve = float
-		disp_spec_scaling = float
-		disp_steps_per_hour = float
-		dispatch_factors_ts = tuple
-		f_turb_tou_periods = tuple
-		is_ampl_engine = float
-		is_tod_pc_target_also_pc_max = float
-		is_write_ampl_dat = float
-		ppa_multiplier_model = float
-		q_rec_heattrace = float
-		q_rec_standby = float
-		timestep_load_fractions = tuple
 
 
 	class FinancialModel(object):
@@ -457,27 +456,27 @@ class FresnelPhysical(object):
 		def __init__(self, *args, **kwargs): # real signature unknown
 			pass
 	
-		constant = float
-		en_hourly = float
-		en_periods = float
-		en_timeindex = float
-		hourly = tuple
-		periods = tuple
-		imeindex = tuple
-		dc_constant = float
-		dc_en_hourly = float
-		dc_en_periods = float
-		dc_en_timeindex = float
-		dc_hourly = tuple
-		dc_periods = tuple
-		dc_imeindex = tuple
-		sf_constant = float
-		sf_en_hourly = float
-		sf_en_periods = float
-		sf_en_timeindex = float
-		sf_hourly = tuple
-		sf_periods = tuple
-		sf_timeindex = tuple
+		adjust_constant = float
+		adjust_en_hourly = float
+		adjust_en_periods = float
+		adjust_en_timeindex = float
+		adjust_hourly = tuple
+		adjust_periods = tuple
+		adjust_timeindex = tuple
+		dc_adjust_constant = float
+		dc_adjust_en_hourly = float
+		dc_adjust_en_periods = float
+		dc_adjust_en_timeindex = float
+		dc_adjust_hourly = tuple
+		dc_adjust_periods = tuple
+		dc_adjust_timeindex = tuple
+		sf_adjust_constant = float
+		sf_adjust_en_hourly = float
+		sf_adjust_en_periods = float
+		sf_adjust_en_timeindex = float
+		sf_adjust_hourly = tuple
+		sf_adjust_periods = tuple
+		sf_adjust_timeindex = tuple
 
 	class Outputs(object):
 		def assign(self): 
@@ -587,6 +586,8 @@ class FresnelPhysical(object):
 		epc_total_cost = float
 		eta = tuple
 		eta_optical_des_SS = float
+		f_htfmax_actual = float
+		f_htfmin_actual = float
 		field_area = float
 		field_htf_max_temp = float
 		field_htf_min_temp = float
@@ -611,6 +612,8 @@ class FresnelPhysical(object):
 		m_dot_field_delivered = tuple
 		m_dot_field_recirc = tuple
 		m_dot_field_to_cycle = tuple
+		m_dot_htfmax_actual = float
+		m_dot_htfmin_actual = float
 		m_dot_loop = tuple
 		m_dot_loop_des_SS = float
 		m_dot_pc = tuple

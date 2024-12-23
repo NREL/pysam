@@ -524,7 +524,7 @@ Outputs_get_monthly_energy_before_snow(VarGroupObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	PyDoc_STR("*float*: Annual Energy [kwh]"),
+	PyDoc_STR("*float*: Annual AC energy in Year 1 [kwh]"),
  	NULL},
 {"annual_energy_before_snow", (getter)Outputs_get_annual_energy_before_snow,(setter)0,
 	PyDoc_STR("*float*: Annual Energy Without Snow Losses [kwh]"),
@@ -536,7 +536,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Hourly Energy [kwh]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	PyDoc_STR("*sequence*: Monthly Energy [kwh]"),
+	PyDoc_STR("*sequence*: Monthly AC energy in Year 1 [kwh]"),
  	NULL},
 {"monthly_energy_before_snow", (getter)Outputs_get_monthly_energy_before_snow,(setter)0,
 	PyDoc_STR("*sequence*: Monthly Energy Without Snow Loss [kwh]"),

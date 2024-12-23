@@ -1,21 +1,21 @@
-.. _GenericSystemHybrid:
+.. _CustomGenerationHybrid:
 
-GenericSystemHybrid
-===================
+CustomGenerationHybrid
+======================
 
-.. py:class:: PySAM.Hybrids.GenericSystemHybrid.GenericSystemHybrid()
+.. py:class:: PySAM.Hybrids.CustomGenerationHybrid.CustomGenerationHybrid()
 
-    Class that adds :mod:`PySAM.GenericSystem.GenericSystem` to :mod:`PySAM.Hybrids.HybridSystem.HybridSystem`
+    Class that adds :mod:`PySAM.CustomGeneration.CustomGeneration` to :mod:`PySAM.Hybrids.HybridSystem.HybridSystem`
     
     .. py:function:: new() -> 
 
-    .. py:function:: default(config) -> GenericSystemHybrid
+    .. py:function:: default(config) -> CustomGenerationHybrid
 
         Load defaults for the configuration config. Available configurations:
 
-            "GenericPVWattsWindFuelCellBatteryHybridHostDeveloper"
+            "CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper"
             
-            "GenericPVWattsWindFuelCellBatteryHybridSingleOwner"
+            "CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner"
     
     .. py:function:: value(name, value=None) -> None | float | dict | sequence | str
 
@@ -83,16 +83,16 @@ GenericSystemHybrid
 
     .. py:class:: Plant
         
-        See :mod:`PySAM.GenericSystemHybrid.GenericSystemHybrid.Plant`
+        See :mod:`PySAM.CustomGenerationHybrid.CustomGenerationHybrid.Plant`
 
     .. py:class:: Lifetime
                 
-        See :mod:`PySAM.GenericSystemHybrid.GenericSystemHybrid.Lifetime`
+        See :mod:`PySAM.CustomGenerationHybrid.CustomGenerationHybrid.Lifetime`
 
     .. py:class:: AdjustmentFactors
                 
-        See :mod:`PySAM.GenericSystemHybrid.GenericSystemHybrid.AdjustmentFactors`
+        See :mod:`PySAM.CustomGenerationHybrid.CustomGenerationHybrid.AdjustmentFactors`
 
     .. py:class:: Outputs
                 
-        See :mod:`PySAM.GenericSystemHybrid.GenericSystemHybrid.Outputs`
+        See :mod:`PySAM.CustomGenerationHybrid.CustomGenerationHybrid.Outputs`
