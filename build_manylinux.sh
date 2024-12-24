@@ -4,8 +4,6 @@ export SSCDIR=/io/ssc
 export SAMNTDIR=/io/sam
 export PYSAMDIR=/io/pysam
 
-/opt/python/cp39-cp39m/bin/pip install cmake
-
 mkdir -p /io/build_linux_ssc
 cd /io/build_linux_ssc
 rm -rf *

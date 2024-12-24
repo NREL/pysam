@@ -38,7 +38,7 @@ do
    python setup.py bdist_wheel
 done
 
-yes | $PYSAMDIR/build_conda.sh || exit
+# yes | $PYSAMDIR/build_conda.sh || exit
 
 #
 # Building for Manylinux1
@@ -60,8 +60,8 @@ rename -s linux manylinux2014 $PYSAMDIR/dist/*-linux_*
 docker pull continuumio/anaconda3
 docker run --rm --env PYSAMDIR=/io/pysam -v $(pwd):/io continuumio/anaconda /io/pysam/build_conda.sh
 
-anaconda upload -u nrel $PYSAMDIR/dist/osx-64/*.tar.bz2
-anaconda upload -u nrel $PYSAMDIR/dist/linux-64/*.tar.bz2
+# anaconda upload -u nrel $PYSAMDIR/dist/osx-64/*.tar.bz2
+# anaconda upload -u nrel $PYSAMDIR/dist/linux-64/*.tar.bz2
 
 # only upload to PyPi after Github Actions test of new package passes
 # twine upload $PYSAMDIR/dist/*.whl
