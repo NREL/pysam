@@ -1143,9 +1143,7 @@ static PyObject* PySAM_run_getset(PyObject *self, PyObject *arg, PyObject * x_at
             getset++;
         }
     }
-    char str[256];
-    PySAM_concat_msg(str, "'value' error, could not find attribute: ", name);
-    PyErr_SetString(PyExc_AttributeError, str);
+    PyErr_SetString(PyExc_AttributeError, "\"value\" error, could not find attribute by that name");
     return NULL;
 }
 
@@ -1165,7 +1163,7 @@ static PyObject * Cmod_value(CmodObject *self, PyObject *args)
     PyObject* value = NULL;
     if (!PyArg_ParseTuple(args, "s|O", &name, &value))
 		return NULL;
-
+        
     return PySAM_run_getset((PyObject *)self, value, self->x_attr, name, NULL);
 }
 

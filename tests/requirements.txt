@@ -5,3 +5,4 @@ pytest
 python-dotenv
 pympler
 requests
+setuptools

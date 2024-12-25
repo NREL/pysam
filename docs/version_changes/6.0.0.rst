@@ -1,0 +1,1902 @@
+.. 6.0.0:
+
+Version 6.0.0
+===============================================
+
+This page compares the PySAM Modules' input variables and the defaults for these input variables 
+between the current release and the last release.
+
+This helps track which variables and defaults have changed between releases to make it easier to notify users during version upgrade.
+
+Below are lists for each PySAM Module:
+    1. New Default configurations
+    2. Removed Default configurations
+    3. Modified Variables: New variables, Removed variables and Type-changed variables
+    4. Modified Default Values
+
+Battery
+************************************************
+
+:doc:`../modules/Battery` Modified Input Variables:
+
+    New variables:
+
+         - batt_adjust_constant
+         - batt_adjust_en_periods
+         - batt_adjust_en_timeindex
+         - batt_adjust_periods
+         - batt_adjust_timeindex
+         - batt_dispatch_auto_can_curtailcharge
+         - mp_ancserv1_percent_gen
+         - mp_ancserv2_percent_gen
+         - mp_ancserv3_percent_gen
+         - mp_ancserv4_percent_gen
+         - mp_market_percent_gen
+         - timestep_minutes
+         - ur_nb_apply_credit_current_month
+         - ur_nb_credit_expire
+
+:doc:`../modules/Battery` New Default files:
+
+     - CustomGenerationBatteryAllEquityPartnershipFlip
+     - CustomGenerationBatteryCommercial
+     - CustomGenerationBatteryHostDeveloper
+     - CustomGenerationBatteryLeveragedPartnershipFlip
+     - CustomGenerationBatteryMerchantPlant
+     - CustomGenerationBatteryResidential
+     - CustomGenerationBatterySaleLeaseback
+     - CustomGenerationBatterySingleOwner
+     - CustomGenerationBatteryThirdParty
+     - CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner
+
+:doc:`../modules/Battery` Removed Default files
+
+     - GenericBatteryAllEquityPartnershipFlip
+     - GenericBatteryCommercial
+     - GenericBatteryHostDeveloper
+     - GenericBatteryLeveragedPartnershipFlip
+     - GenericBatteryMerchantPlant
+     - GenericBatteryResidential
+     - GenericBatterySaleLeaseback
+     - GenericBatterySingleOwner
+     - GenericBatteryThirdParty
+     - GenericPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - GenericPVWattsWindFuelCellBatteryHybridSingleOwner
+
+:doc:`../modules/Battery` Modified Default Values:
+
+     - Cashloan_PVBatteryCommercial
+
+        ['total_installed_cost', 'batt_computed_bank_capacity', 'battery_total_cost_lcos', 'om_batt_replacement_cost', 'om_batt_nameplate', 'om_batt_capacity_cost', 'battery_per_kWh', 'system_capacity']
+
+     - Grid_PVWattsWindBatteryHybridSingleOwner
+
+        ['total_installed_cost']
+
+     - Utilityrate5_PVBatterySaleLeaseback
+
+        ['ur_nm_credit_month']
+
+     - Grid_PVWattsWindFuelCellBatteryHybridHostDeveloper
+
+        ['total_installed_cost']
+
+     - Battery_StandaloneBatteryResidential
+
+        ['LeadAcid_qn_computed', 'batt_mass', 'batt_Vfull', 'batt_computed_bank_capacity', 'batt_Qfull', 'batt_computed_strings', 'batt_Vcut', 'batt_life_model', 'LeadAcid_q20_computed', 'batt_current_discharge_max', 'batt_power_discharge_max_kwdc', 'om_batt_replacement_cost', 'batt_Vnom', 'batt_Qnom', 'batt_Qexp', 'LeadAcid_q10_computed', 'batt_Qfull_flow', 'batt_room_temperature_celsius', 'batt_computed_series', 'batt_power_discharge_max_kwac', 'batt_surface_area', 'cap_vs_temp', 'batt_power_charge_max_kwdc', 'batt_Vexp', 'batt_replacement_capacity', 'batt_resistance', 'batt_current_charge_max', 'batt_power_charge_max_kwac']
+
+     - Cashloan_StandaloneBatteryCommercial
+
+        ['total_installed_cost', 'batt_computed_bank_capacity', 'battery_total_cost_lcos', 'om_batt_replacement_cost', 'om_batt_nameplate', 'om_batt_capacity_cost', 'battery_per_kWh', 'system_capacity']
+
+     - Pvsamv1_PVBatteryResidential
+
+        ['batt_Vcut', 'sixpar_voc', 'cec_i_l_ref', 'LeadAcid_q20_computed', 'batt_current_discharge_max', 'sixpar_vmp', 'batt_Vnom', 'sixpar_aisc', 'batt_Qexp', 'cec_alpha_sc', 'sixpar_area', 'mppt_hi_inverter', 'batt_Vexp', 'cec_module_length', 'batt_resistance', 'batt_current_charge_max', 'inv_snl_c0', 'batt_Vfull', 'mppt_low_inverter', 'cec_a_ref', 'spe_vmp', 'batt_computed_strings', 'spe_temp_coeff', 'batt_Qfull_flow', 'sixpar_bvoc', 'cec_n_s', 'cec_beta_oc', 'batt_computed_series', 'spe_eff4', 'inv_snl_pso', 'batt_surface_area', 'spe_eff2', 'cec_r_sh_ref', 'spe_voc', 'ur_ec_tou_mat', 'batt_power_charge_max_kwac', 'inv_snl_pnt', 'spe_eff1', 'LeadAcid_qn_computed', 'spe_eff0', 'cec_module_width', 'inv_snl_pdco', 'batt_power_discharge_max_kwdc', 'batt_room_temperature_celsius', 'cec_adjust', 'cec_t_noct', 'subarray1_modules_per_string', 'batt_power_discharge_max_kwac', 'cec_v_mp_ref', 'sixpar_gpmp', 'sixpar_imp', 'inv_snl_paco', 'spe_eff3', 'cec_i_sc_ref', 'inv_snl_vdco', 'batt_mass', 'cec_area', 'batt_computed_bank_capacity', 'sixpar_nser', 'batt_Qfull', 'cec_i_mp_ref', 'inv_snl_eff_cec', 'inv_snl_c3', 'subarray1_nstrings', 'cec_i_o_ref', 'module_aspect_ratio', 'batt_life_model', 'om_batt_replacement_cost', 'batt_Qnom', 'spe_area', 'LeadAcid_q10_computed', 'cec_r_s', 'cap_vs_temp', 'batt_power_charge_max_kwdc', 'inv_snl_c2', 'batt_replacement_capacity', 'subarray1_nmodx', 'sixpar_isc', 'system_capacity', 'cec_v_oc_ref', 'inv_snl_c1']
+
+     - Levpartflip_PVBatteryLeveragedPartnershipFlip
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'battery_total_cost_lcos', 'ptc_fed_amount', 'ptc_fed_escal', 'construction_financing_cost', 'om_batt_replacement_cost', 'om_batt_capacity_cost', 'pbi_fed_term', 'pbi_uti_term', 'itc_fed_percent', 'battery_per_kWh', 'om_capacity', 'land_area', 'system_capacity']
+
+     - Utilityrate5_PVWattsWindBatteryHybridSingleOwner
+
+        ['total_installed_cost']
+
+     - Saleleaseback_StandaloneBatterySaleLeaseback
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'battery_total_cost_lcos', 'construction_financing_cost', 'om_batt_replacement_cost', 'pbi_fed_term', 'pbi_uti_term', 'battery_per_kWh', 'system_capacity']
+
+     - Battery_PhotovoltaicWindBatteryHybridSingleOwner
+
+        ['LeadAcid_qn_computed', 'total_installed_cost', 'batt_mass', 'batt_computed_bank_capacity', 'batt_computed_strings', 'dispatch_tod_factors', 'LeadAcid_q20_computed', 'batt_current_discharge_max', 'batt_power_discharge_max_kwdc', 'om_batt_replacement_cost', 'om_batt_nameplate', 'batt_Qexp', 'om_batt_capacity_cost', 'LeadAcid_q10_computed', 'batt_Qfull_flow', 'batt_room_temperature_celsius', 'batt_power_discharge_max_kwac', 'batt_surface_area', 'dispatch_sched_weekday', 'batt_power_charge_max_kwdc', 'batt_replacement_capacity', 'batt_h_to_ambient', 'batt_current_charge_max', 'batt_power_charge_max_kwac']
+
+     - Battery_PVWattsWindFuelCellBatteryHybridSingleOwner
+
+        ['total_installed_cost', 'dispatch_tod_factors', 'om_batt_replacement_cost', 'batt_Qexp', 'om_batt_capacity_cost', 'batt_replacement_capacity']
+
+     - Battery_PVWattsWindFuelCellBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'om_batt_replacement_cost', 'batt_Qexp', 'om_batt_capacity_cost', 'batt_replacement_capacity']
+
+     - Singleowner_PVBatterySingleOwner
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'cp_system_nameplate', 'battery_total_cost_lcos', 'ptc_fed_amount', 'ptc_fed_escal', 'construction_financing_cost', 'om_batt_replacement_cost', 'om_batt_capacity_cost', 'pbi_fed_term', 'pbi_uti_term', 'itc_fed_percent', 'ur_nm_credit_month', 'battery_per_kWh', 'om_capacity', 'land_area', 'system_capacity']
+
+     - Pvsamv1_PhotovoltaicWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'subarray1_tilt', 'inv_pd_pdco', 'sd11par_n', 'sd11par_d1', 'subarray2_monthly_tilt', 'sixpar_voc', 'cec_i_l_ref', 'sixpar_vmp', 'sixpar_aisc', 'spe_bifacial_ground_clearance_height', 'cec_alpha_sc', 'sd11par_d3', 'sixpar_bifaciality', 'snl_c0', 'sixpar_area', 'sd11par_Voc0', 'subarray3_monthly_tilt', 'cec_module_length', 'sd11par_Vmp0', 'sd11par_AMa1', 'use_wf_albedo', 'sd11par_d2', 'sd11par_tnoct', 'cec_a_ref', 'snl_c4', 'spe_vmp', 'spe_temp_coeff', 'spe_b', 'snl_a4', 'subarray2_nmodx', 'sd11par_c1', 'snl_vmpo', 'snl_c6', 'inv_cec_cg_eff_cec', 'snl_b2', 'sixpar_bvoc', 'cec_n_s', 'snl_n', 'snl_isco', 'cec_beta_oc', 'inv_cec_cg_c2', 'spe_module_structure', 'spe_eff4', 'subarray2_mppt_input', 'sd11par_Imp0', 'snl_c1', 'spe_eff2', 'inv_cec_cg_c1', 'cec_r_sh_ref', 'snl_ixxo', 'snl_bvmpo', 'sd11par_nser', 'subarray3_mppt_input', 'land_area', 'spe_voc', 'subarray4_nmodx', 'snl_a2', 'sd11par_Egref', 'spe_eff1', 'spe_eff0', 'snl_ixo', 'cec_module_width', 'sd11par_c3', 'sd11par_Il', 'snl_voco', 'subarray4_mppt_input', 'sd11par_Io', 'cec_adjust', 'cec_t_noct', 'subarray1_modules_per_string', 'snl_area', 'inv_pd_eff', 'cec_v_mp_ref', 'subarray1_monthly_tilt', 'sixpar_gpmp', 'sixpar_imp', 'spe_eff3', 'snl_impo', 'inv_cec_cg_c3', 'subarray3_nmodx', 'snl_bvoco', 'snl_series_cells', 'cec_i_sc_ref', 'snl_a1', 'snl_a0', 'inv_cec_cg_psco', 'snl_a3', 'sixpar_is_bifacial', 'sd11par_c2', 'sd11par_Isc0', 'subarray4_monthly_tilt', 'spe_a', 'cec_area', 'inv_cec_cg_c0', 'sixpar_nser', 'cec_i_mp_ref', 'spe_is_bifacial', 'sd11par_alphaIsc', 'subarray1_nstrings', 'cec_i_o_ref', 'sixpar_tnoct', 'module_aspect_ratio', 'snl_transient_thermal_model_unit_mass', 'dc_degradation', 'cec_is_bifacial', 'snl_c5', 'snl_aisc', 'spe_area', 'snl_c7', 'cec_r_s', 'snl_c2', 'sixpar_celltech', 'sd11par_area', 'snl_c3', 'subarray1_nmodx', 'sixpar_isc', 'system_capacity', 'cec_v_oc_ref']
+
+     - Windpower_PhotovoltaicWindBatteryHybridSingleOwner
+
+        ['total_installed_cost']
+
+     - HostDeveloper_PVBatteryHostDeveloper
+
+        ['total_installed_cost', 'batt_computed_bank_capacity', 'battery_total_cost_lcos', 'ptc_fed_amount', 'construction_financing_cost', 'om_batt_replacement_cost', 'om_batt_nameplate', 'om_batt_capacity_cost', 'battery_per_kWh', 'system_capacity']
+
+     - Grid_PVWattsWindFuelCellBatteryHybridSingleOwner
+
+        ['total_installed_cost']
+
+     - Equpartflip_PVBatteryAllEquityPartnershipFlip
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'battery_total_cost_lcos', 'ptc_fed_amount', 'ptc_fed_escal', 'construction_financing_cost', 'om_batt_replacement_cost', 'om_batt_capacity_cost', 'pbi_fed_term', 'pbi_uti_term', 'itc_fed_percent', 'battery_per_kWh', 'om_capacity', 'land_area', 'system_capacity']
+
+     - Utilityrate5_PVWattsWindFuelCellBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'ur_dc_sched_weekend']
+
+     - Battery_StandaloneBatteryMerchantPlant
+
+        ['batt_mass', 'batt_Vfull', 'batt_Qfull', 'batt_computed_strings', 'batt_Vcut', 'batt_life_model', 'LeadAcid_q20_computed', 'batt_power_discharge_max_kwdc', 'om_batt_replacement_cost', 'batt_Vnom', 'batt_Qnom', 'batt_Qexp', 'LeadAcid_q10_computed', 'batt_Qfull_flow', 'batt_room_temperature_celsius', 'batt_power_discharge_max_kwac', 'cap_vs_temp', 'batt_power_charge_max_kwdc', 'batt_Vexp', 'batt_replacement_capacity', 'batt_resistance', 'batt_power_charge_max_kwac']
+
+     - HostDeveloper_PVWattsWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'construction_financing_cost', 'depr_itc_sta_macrs_5', 'depr_itc_fed_macrs_5', 'depr_bonus_sta_macrs_5']
+
+     - Pvsamv1_PVBatteryMerchantPlant
+
+        ['sixpar_bifacial_ground_clearance_height', 'subarray4_track_mode', 'subarray3_track_mode', 'batt_dispatch_pvs_ac_lb', 'batt_dispatch_pvs_ac_lb_enable', 'batt_Vcut', 'sixpar_voc', 'cec_i_l_ref', 'LeadAcid_q20_computed', 'sixpar_vmp', 'batt_Vnom', 'sixpar_aisc', 'spe_bifacial_ground_clearance_height', 'batt_Qexp', 'cec_alpha_sc', 'sixpar_area', 'mppt_hi_inverter', 'batt_Vexp', 'ur_nm_credit_month', 'cec_module_length', 'batt_resistance', 'batt_Vfull', 'mppt_low_inverter', 'cec_a_ref', 'spe_vmp', 'batt_computed_strings', 'spe_temp_coeff', 'spe_b', 'batt_Qfull_flow', 'sixpar_bvoc', 'cec_n_s', 'cec_beta_oc', 'spe_module_structure', 'spe_eff4', 'spe_eff2', 'cec_r_sh_ref', 'spe_voc', 'batt_power_charge_max_kwac', 'subarray4_tilt', 'spe_eff1', 'LeadAcid_qn_computed', 'spe_eff0', 'cec_module_width', 'batt_power_discharge_max_kwdc', 'batt_room_temperature_celsius', 'cec_adjust', 'cec_t_noct', 'subarray1_modules_per_string', 'batt_power_discharge_max_kwac', 'cec_v_mp_ref', 'sixpar_gpmp', 'sixpar_imp', 'spe_eff3', 'cec_i_sc_ref', 'batt_dispatch_pvs_ac_ub_enable', 'sixpar_is_bifacial', 'spe_a', 'batt_mass', 'cec_area', 'subarray2_tilt', 'sixpar_nser', 'batt_Qfull', 'cec_bifacial_ground_clearance_height', 'cec_i_mp_ref', 'spe_is_bifacial', 'subarray1_nstrings', 'cec_i_o_ref', 'sixpar_tnoct', 'module_aspect_ratio', 'batt_life_model', 'om_batt_replacement_cost', 'cec_is_bifacial', 'batt_dispatch_pvs_timestep_multiplier', 'batt_Qnom', 'spe_area', 'LeadAcid_q10_computed', 'cec_r_s', 'subarray3_tilt', 'cap_vs_temp', 'batt_power_charge_max_kwdc', 'subarray2_track_mode', 'batt_replacement_capacity', 'batt_dispatch_pvs_max_ramp', 'subarray1_nmodx', 'sixpar_isc', 'system_capacity', 'cec_v_oc_ref']
+
+     - Singleowner_PVWattsWindFuelCellBatteryHybridSingleOwner
+
+        ['total_installed_cost', 'dispatch_tod_factors', 'construction_financing_cost', 'depr_itc_sta_macrs_5', 'depr_itc_fed_macrs_5', 'depr_bonus_sta_macrs_5']
+
+     - Pvsamv1_PVBatteryCommercial
+
+        ['batt_Vcut', 'sixpar_voc', 'cec_i_l_ref', 'dispatch_manual_percent_discharge', 'LeadAcid_q20_computed', 'batt_current_discharge_max', 'sixpar_vmp', 'batt_Vnom', 'sixpar_aisc', 'spe_bifacial_ground_clearance_height', 'batt_Qexp', 'cec_alpha_sc', 'sixpar_area', 'mppt_hi_inverter', 'batt_Vexp', 'cec_module_length', 'batt_resistance', 'batt_current_charge_max', 'batt_Vfull', 'mppt_low_inverter', 'cec_a_ref', 'spe_vmp', 'batt_computed_strings', 'spe_temp_coeff', 'spe_b', 'inv_cec_cg_eff_cec', 'batt_Qfull_flow', 'sixpar_bvoc', 'cec_n_s', 'cec_beta_oc', 'inv_cec_cg_c2', 'spe_module_structure', 'spe_eff4', 'batt_surface_area', 'spe_eff2', 'inv_cec_cg_c1', 'cec_r_sh_ref', 'spe_voc', 'batt_power_charge_max_kwac', 'spe_eff1', 'LeadAcid_qn_computed', 'spe_eff0', 'cec_module_width', 'batt_power_discharge_max_kwdc', 'dispatch_manual_discharge', 'batt_room_temperature_celsius', 'cec_adjust', 'cec_t_noct', 'subarray1_modules_per_string', 'batt_power_discharge_max_kwac', 'cec_v_mp_ref', 'sixpar_gpmp', 'sixpar_imp', 'spe_eff3', 'inv_cec_cg_c3', 'cec_i_sc_ref', 'sixpar_is_bifacial', 'spe_a', 'batt_mass', 'cec_area', 'inv_cec_cg_c0', 'batt_computed_bank_capacity', 'sixpar_nser', 'batt_Qfull', 'cec_i_mp_ref', 'spe_is_bifacial', 'subarray1_nstrings', 'cec_i_o_ref', 'sixpar_tnoct', 'module_aspect_ratio', 'batt_life_model', 'om_batt_replacement_cost', 'cec_is_bifacial', 'batt_Qnom', 'spe_area', 'LeadAcid_q10_computed', 'cec_r_s', 'cap_vs_temp', 'batt_power_charge_max_kwdc', 'batt_replacement_capacity', 'ur_dc_tou_mat', 'subarray1_nmodx', 'sixpar_isc', 'system_capacity', 'cec_v_oc_ref']
+
+     - Battery_PVWattsWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'dispatch_manual_system_charge_first', 'om_batt_replacement_cost', 'batt_Qexp', 'om_batt_capacity_cost', 'batt_replacement_capacity']
+
+     - Battery_MEwaveBatterySingleOwner
+
+        ['om_batt_replacement_cost', 'batt_room_temperature_celsius', 'batt_replacement_capacity']
+
+     - Utilityrate5_PVWattsWindFuelCellBatteryHybridSingleOwner
+
+        ['total_installed_cost']
+
+     - Pvsamv1_PVBatterySingleOwner
+
+        ['sixpar_bifacial_ground_clearance_height', 'subarray4_track_mode', 'subarray3_track_mode', 'sixpar_voc', 'cec_i_l_ref', 'sixpar_vmp', 'sixpar_aisc', 'spe_bifacial_ground_clearance_height', 'batt_Qexp', 'cec_alpha_sc', 'sixpar_area', 'ur_nm_credit_month', 'cec_module_length', 'cec_a_ref', 'spe_vmp', 'spe_temp_coeff', 'spe_b', 'sixpar_bvoc', 'cec_n_s', 'cec_beta_oc', 'spe_module_structure', 'spe_eff4', 'spe_eff2', 'cec_r_sh_ref', 'spe_voc', 'subarray4_tilt', 'spe_eff1', 'spe_eff0', 'cec_module_width', 'cec_adjust', 'cec_t_noct', 'subarray1_modules_per_string', 'cec_v_mp_ref', 'sixpar_gpmp', 'sixpar_imp', 'spe_eff3', 'cec_i_sc_ref', 'sixpar_is_bifacial', 'spe_a', 'cec_area', 'subarray2_tilt', 'sixpar_nser', 'cec_bifacial_ground_clearance_height', 'cec_i_mp_ref', 'spe_is_bifacial', 'subarray1_nstrings', 'cec_i_o_ref', 'sixpar_tnoct', 'module_aspect_ratio', 'om_batt_replacement_cost', 'cec_is_bifacial', 'spe_area', 'cec_r_s', 'subarray3_tilt', 'subarray2_track_mode', 'batt_replacement_capacity', 'subarray1_nmodx', 'sixpar_isc', 'system_capacity', 'cec_v_oc_ref']
+
+     - Battery_StandaloneBatterySingleOwner
+
+        ['batt_mass', 'batt_Vfull', 'batt_Qfull', 'batt_computed_strings', 'batt_Vcut', 'batt_life_model', 'LeadAcid_q20_computed', 'batt_power_discharge_max_kwdc', 'om_batt_replacement_cost', 'batt_Vnom', 'batt_Qnom', 'batt_Qexp', 'LeadAcid_q10_computed', 'batt_Qfull_flow', 'batt_room_temperature_celsius', 'batt_power_discharge_max_kwac', 'cap_vs_temp', 'batt_power_charge_max_kwdc', 'batt_Vexp', 'batt_replacement_capacity', 'batt_resistance', 'batt_power_charge_max_kwac']
+
+     - Utilityrate5_PhotovoltaicWindBatteryHybridHostDeveloper
+
+        ['ur_dc_sched_weekday', 'total_installed_cost', 'ur_dc_tou_mat', 'ur_dc_sched_weekend', 'ur_dc_enable']
+
+     - Pvsamv1_PVBatteryThirdParty
+
+        ['batt_Vcut', 'sixpar_voc', 'cec_i_l_ref', 'LeadAcid_q20_computed', 'batt_current_discharge_max', 'sixpar_vmp', 'batt_Vnom', 'sixpar_aisc', 'batt_Qexp', 'cec_alpha_sc', 'sixpar_area', 'mppt_hi_inverter', 'batt_Vexp', 'cec_module_length', 'batt_resistance', 'batt_current_charge_max', 'inv_snl_c0', 'batt_Vfull', 'mppt_low_inverter', 'cec_a_ref', 'spe_vmp', 'batt_computed_strings', 'spe_temp_coeff', 'batt_Qfull_flow', 'sixpar_bvoc', 'cec_n_s', 'cec_beta_oc', 'batt_computed_series', 'spe_eff4', 'inv_snl_pso', 'batt_surface_area', 'spe_eff2', 'cec_r_sh_ref', 'spe_voc', 'ur_ec_tou_mat', 'batt_power_charge_max_kwac', 'inv_snl_pnt', 'spe_eff1', 'LeadAcid_qn_computed', 'spe_eff0', 'cec_module_width', 'inv_snl_pdco', 'batt_power_discharge_max_kwdc', 'batt_room_temperature_celsius', 'cec_adjust', 'cec_t_noct', 'subarray1_modules_per_string', 'batt_power_discharge_max_kwac', 'cec_v_mp_ref', 'sixpar_gpmp', 'sixpar_imp', 'inv_snl_paco', 'spe_eff3', 'cec_i_sc_ref', 'inv_snl_vdco', 'batt_mass', 'cec_area', 'batt_computed_bank_capacity', 'sixpar_nser', 'batt_Qfull', 'cec_i_mp_ref', 'inv_snl_eff_cec', 'inv_snl_c3', 'subarray1_nstrings', 'cec_i_o_ref', 'module_aspect_ratio', 'batt_life_model', 'batt_Qnom', 'spe_area', 'LeadAcid_q10_computed', 'cec_r_s', 'cap_vs_temp', 'batt_power_charge_max_kwdc', 'inv_snl_c2', 'batt_replacement_capacity', 'subarray1_nmodx', 'sixpar_isc', 'system_capacity', 'cec_v_oc_ref', 'inv_snl_c1']
+
+     - Utilityrate5_PhotovoltaicWindBatteryHybridSingleOwner
+
+        ['total_installed_cost']
+
+     - Fuelcell_PVWattsWindFuelCellBatteryHybridSingleOwner
+
+        ['fuelcell_lhv', 'fuelcell_fuel_type']
+
+     - Battery_StandaloneBatteryHostDeveloper
+
+        ['LeadAcid_qn_computed', 'batt_mass', 'batt_Vfull', 'batt_computed_bank_capacity', 'batt_Qfull', 'batt_computed_strings', 'batt_Vcut', 'batt_life_model', 'dispatch_manual_percent_discharge', 'LeadAcid_q20_computed', 'batt_current_discharge_max', 'batt_power_discharge_max_kwdc', 'om_batt_replacement_cost', 'batt_Vnom', 'dispatch_manual_discharge', 'batt_Qnom', 'batt_Qexp', 'LeadAcid_q10_computed', 'batt_Qfull_flow', 'batt_room_temperature_celsius', 'batt_power_discharge_max_kwac', 'batt_surface_area', 'cap_vs_temp', 'batt_power_charge_max_kwdc', 'batt_Vexp', 'batt_replacement_capacity', 'batt_resistance', 'batt_current_charge_max', 'batt_power_charge_max_kwac']
+
+     - Battery_PVWattsWindBatteryHybridSingleOwner
+
+        ['total_installed_cost', 'om_batt_replacement_cost', 'batt_Qexp', 'om_batt_capacity_cost', 'batt_replacement_capacity']
+
+     - Merchantplant_StandaloneBatteryMerchantPlant
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'cp_system_nameplate', 'battery_total_cost_lcos', 'construction_financing_cost', 'om_batt_replacement_cost', 'cp_battery_nameplate', 'pbi_fed_term', 'pbi_uti_term', 'battery_per_kWh', 'system_capacity']
+
+     - Pvsamv1_PVBatteryHostDeveloper
+
+        ['batt_Vcut', 'sixpar_voc', 'cec_i_l_ref', 'dispatch_manual_percent_discharge', 'LeadAcid_q20_computed', 'batt_current_discharge_max', 'sixpar_vmp', 'batt_Vnom', 'sixpar_aisc', 'spe_bifacial_ground_clearance_height', 'batt_Qexp', 'cec_alpha_sc', 'sixpar_area', 'mppt_hi_inverter', 'batt_Vexp', 'cec_module_length', 'batt_resistance', 'batt_current_charge_max', 'batt_Vfull', 'mppt_low_inverter', 'cec_a_ref', 'spe_vmp', 'batt_computed_strings', 'spe_temp_coeff', 'spe_b', 'inv_cec_cg_eff_cec', 'batt_Qfull_flow', 'sixpar_bvoc', 'cec_n_s', 'cec_beta_oc', 'inv_cec_cg_c2', 'spe_module_structure', 'spe_eff4', 'batt_surface_area', 'spe_eff2', 'inv_cec_cg_c1', 'cec_r_sh_ref', 'spe_voc', 'batt_power_charge_max_kwac', 'spe_eff1', 'LeadAcid_qn_computed', 'spe_eff0', 'cec_module_width', 'batt_power_discharge_max_kwdc', 'dispatch_manual_discharge', 'batt_room_temperature_celsius', 'cec_adjust', 'cec_t_noct', 'subarray1_modules_per_string', 'batt_power_discharge_max_kwac', 'cec_v_mp_ref', 'sixpar_gpmp', 'sixpar_imp', 'spe_eff3', 'inv_cec_cg_c3', 'cec_i_sc_ref', 'sixpar_is_bifacial', 'spe_a', 'batt_mass', 'cec_area', 'inv_cec_cg_c0', 'batt_computed_bank_capacity', 'sixpar_nser', 'batt_Qfull', 'cec_i_mp_ref', 'spe_is_bifacial', 'subarray1_nstrings', 'cec_i_o_ref', 'sixpar_tnoct', 'module_aspect_ratio', 'batt_life_model', 'om_batt_replacement_cost', 'cec_is_bifacial', 'batt_Qnom', 'spe_area', 'LeadAcid_q10_computed', 'cec_r_s', 'cap_vs_temp', 'batt_power_charge_max_kwdc', 'batt_replacement_capacity', 'subarray1_nmodx', 'sixpar_isc', 'system_capacity', 'cec_v_oc_ref']
+
+     - Levpartflip_StandaloneBatteryLeveragedPartnershipFlip
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'battery_total_cost_lcos', 'construction_financing_cost', 'om_batt_replacement_cost', 'pbi_fed_term', 'pbi_uti_term', 'battery_per_kWh', 'system_capacity']
+
+     - Singleowner_StandaloneBatterySingleOwner
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'cp_system_nameplate', 'battery_total_cost_lcos', 'construction_financing_cost', 'om_batt_replacement_cost', 'cp_battery_nameplate', 'pbi_fed_term', 'pbi_uti_term', 'battery_per_kWh', 'system_capacity']
+
+     - Windpower_PVWattsWindFuelCellBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'om_capacity']
+
+     - Pvwattsv8_PVWattsWindBatteryHybridSingleOwner
+
+        ['total_installed_cost', 'om_capacity', 'land_area']
+
+     - Equpartflip_StandaloneBatteryAllEquityPartnershipFlip
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'battery_total_cost_lcos', 'construction_financing_cost', 'om_batt_replacement_cost', 'pbi_fed_term', 'pbi_uti_term', 'battery_per_kWh', 'system_capacity']
+
+     - Pvsamv1_PVBatteryAllEquityPartnershipFlip
+
+        ['sixpar_bifacial_ground_clearance_height', 'subarray4_track_mode', 'subarray3_track_mode', 'batt_dispatch_pvs_ac_lb', 'batt_dispatch_pvs_ac_lb_enable', 'batt_Vcut', 'sixpar_voc', 'cec_i_l_ref', 'LeadAcid_q20_computed', 'sixpar_vmp', 'batt_Vnom', 'sixpar_aisc', 'spe_bifacial_ground_clearance_height', 'batt_Qexp', 'cec_alpha_sc', 'sixpar_area', 'mppt_hi_inverter', 'batt_Vexp', 'ur_nm_credit_month', 'cec_module_length', 'batt_resistance', 'batt_Vfull', 'mppt_low_inverter', 'cec_a_ref', 'spe_vmp', 'batt_computed_strings', 'spe_temp_coeff', 'spe_b', 'batt_Qfull_flow', 'sixpar_bvoc', 'cec_n_s', 'cec_beta_oc', 'spe_module_structure', 'spe_eff4', 'spe_eff2', 'cec_r_sh_ref', 'spe_voc', 'batt_power_charge_max_kwac', 'subarray4_tilt', 'spe_eff1', 'LeadAcid_qn_computed', 'spe_eff0', 'cec_module_width', 'batt_power_discharge_max_kwdc', 'batt_room_temperature_celsius', 'cec_adjust', 'cec_t_noct', 'subarray1_modules_per_string', 'batt_power_discharge_max_kwac', 'cec_v_mp_ref', 'sixpar_gpmp', 'sixpar_imp', 'spe_eff3', 'cec_i_sc_ref', 'batt_dispatch_pvs_ac_ub_enable', 'sixpar_is_bifacial', 'spe_a', 'batt_mass', 'cec_area', 'subarray2_tilt', 'sixpar_nser', 'batt_Qfull', 'cec_bifacial_ground_clearance_height', 'cec_i_mp_ref', 'spe_is_bifacial', 'subarray1_nstrings', 'cec_i_o_ref', 'sixpar_tnoct', 'module_aspect_ratio', 'batt_life_model', 'om_batt_replacement_cost', 'cec_is_bifacial', 'batt_dispatch_pvs_timestep_multiplier', 'batt_Qnom', 'spe_area', 'LeadAcid_q10_computed', 'cec_r_s', 'subarray3_tilt', 'cap_vs_temp', 'batt_power_charge_max_kwdc', 'subarray2_track_mode', 'batt_replacement_capacity', 'batt_dispatch_pvs_max_ramp', 'subarray1_nmodx', 'sixpar_isc', 'system_capacity', 'cec_v_oc_ref']
+
+     - Battery_FuelCellCommercial
+
+        ['om_batt_replacement_cost', 'batt_room_temperature_celsius', 'batt_replacement_capacity']
+
+     - Windpower_PVWattsWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'om_capacity']
+
+     - Utilityrate5_PVBatteryAllEquityPartnershipFlip
+
+        ['ur_nm_credit_month']
+
+     - Cashloan_PVWattsBatteryResidential
+
+        ['total_installed_cost', 'battery_total_cost_lcos', 'battery_per_kWh']
+
+     - Utilityrate5_PVBatteryMerchantPlant
+
+        ['ur_nm_credit_month']
+
+     - Utilityrate5_PVWattsWindBatteryHybridHostDeveloper
+
+        ['ur_dc_sched_weekday', 'total_installed_cost', 'ur_dc_tou_mat', 'ur_dc_sched_weekend', 'ur_dc_enable']
+
+     - Fuelcell_PVWattsWindFuelCellBatteryHybridHostDeveloper
+
+        ['fuelcell_lhv', 'fuelcell_fuel_type']
+
+     - Windpower_PVWattsWindBatteryHybridSingleOwner
+
+        ['total_installed_cost']
+
+     - Pvsamv1_PhotovoltaicWindBatteryHybridSingleOwner
+
+        ['total_installed_cost', 'sixpar_bifacial_ground_clearance_height', 'subarray4_track_mode', 'inv_pd_pdco', 'subarray3_track_mode', 'sd11par_n', 'sd11par_d1', 'subarray2_monthly_tilt', 'sixpar_voc', 'cec_i_l_ref', 'sixpar_vmp', 'sixpar_aisc', 'spe_bifacial_ground_clearance_height', 'cec_alpha_sc', 'sd11par_d3', 'sixpar_bifaciality', 'snl_c0', 'sixpar_area', 'sd11par_Voc0', 'om_capacity', 'subarray3_monthly_tilt', 'cec_module_length', 'sd11par_Vmp0', 'sd11par_AMa1', 'use_wf_albedo', 'sd11par_d2', 'sd11par_tnoct', 'cec_a_ref', 'snl_c4', 'spe_vmp', 'spe_temp_coeff', 'spe_b', 'snl_a4', 'subarray2_nmodx', 'sd11par_c1', 'snl_vmpo', 'snl_c6', 'inv_cec_cg_eff_cec', 'snl_b2', 'sixpar_bvoc', 'cec_n_s', 'snl_n', 'snl_isco', 'cec_beta_oc', 'inv_cec_cg_c2', 'spe_module_structure', 'spe_eff4', 'subarray2_mppt_input', 'sd11par_Imp0', 'snl_c1', 'spe_eff2', 'inv_cec_cg_c1', 'cec_r_sh_ref', 'snl_ixxo', 'snl_bvmpo', 'sd11par_nser', 'subarray3_mppt_input', 'land_area', 'spe_voc', 'subarray4_nmodx', 'snl_a2', 'sd11par_Egref', 'subarray4_tilt', 'spe_eff1', 'spe_eff0', 'snl_ixo', 'cec_module_width', 'sd11par_c3', 'sd11par_Il', 'snl_voco', 'subarray4_mppt_input', 'sd11par_Io', 'cec_adjust', 'cec_t_noct', 'subarray1_modules_per_string', 'snl_area', 'inv_pd_eff', 'cec_v_mp_ref', 'subarray1_monthly_tilt', 'sixpar_gpmp', 'sixpar_imp', 'spe_eff3', 'snl_impo', 'inv_cec_cg_c3', 'subarray3_nmodx', 'snl_bvoco', 'snl_series_cells', 'cec_i_sc_ref', 'snl_a1', 'snl_a0', 'inv_cec_cg_psco', 'snl_a3', 'sixpar_is_bifacial', 'sd11par_c2', 'sd11par_Isc0', 'subarray4_monthly_tilt', 'spe_a', 'cec_area', 'inv_cec_cg_c0', 'subarray2_tilt', 'sixpar_nser', 'cec_bifacial_ground_clearance_height', 'cec_i_mp_ref', 'dispatch_tod_factors', 'spe_is_bifacial', 'sd11par_alphaIsc', 'subarray1_nstrings', 'cec_i_o_ref', 'sixpar_tnoct', 'module_aspect_ratio', 'snl_transient_thermal_model_unit_mass', 'cec_is_bifacial', 'snl_c5', 'snl_aisc', 'spe_area', 'snl_c7', 'cec_r_s', 'subarray3_tilt', 'snl_c2', 'dispatch_sched_weekday', 'subarray2_track_mode', 'sixpar_celltech', 'sd11par_area', 'snl_c3', 'subarray1_nmodx', 'sixpar_isc', 'system_capacity', 'cec_v_oc_ref']
+
+     - Cashloan_PVBatteryResidential
+
+        ['total_installed_cost', 'batt_computed_bank_capacity', 'battery_total_cost_lcos', 'om_batt_replacement_cost', 'om_batt_nameplate', 'om_batt_capacity_cost', 'battery_per_kWh', 'om_capacity', 'system_capacity']
+
+     - Singleowner_PhotovoltaicWindBatteryHybridSingleOwner
+
+        ['total_installed_cost', 'dispatch_tod_factors', 'construction_financing_cost', 'depr_itc_sta_macrs_5', 'depr_itc_fed_macrs_5', 'depr_bonus_sta_macrs_5', 'dispatch_sched_weekday', 'debt_option']
+
+     - Battery_StandaloneBatteryAllEquityPartnershipFlip
+
+        ['batt_mass', 'batt_Vfull', 'batt_Qfull', 'batt_computed_strings', 'batt_Vcut', 'batt_life_model', 'LeadAcid_q20_computed', 'batt_power_discharge_max_kwdc', 'om_batt_replacement_cost', 'batt_Vnom', 'batt_Qnom', 'batt_Qexp', 'LeadAcid_q10_computed', 'batt_Qfull_flow', 'batt_room_temperature_celsius', 'batt_power_discharge_max_kwac', 'cap_vs_temp', 'batt_power_charge_max_kwdc', 'batt_Vexp', 'batt_replacement_capacity', 'batt_resistance', 'batt_power_charge_max_kwac']
+
+     - Cashloan_PVWattsBatteryCommercial
+
+        ['total_installed_cost', 'battery_total_cost_lcos', 'battery_per_kWh']
+
+     - Utilityrate5_PVBatterySingleOwner
+
+        ['ur_nm_credit_month']
+
+     - Battery_StandaloneBatteryLeveragedPartnershipFlip
+
+        ['batt_mass', 'batt_Vfull', 'batt_Qfull', 'batt_computed_strings', 'batt_Vcut', 'batt_life_model', 'LeadAcid_q20_computed', 'batt_power_discharge_max_kwdc', 'om_batt_replacement_cost', 'batt_Vnom', 'batt_Qnom', 'batt_Qexp', 'LeadAcid_q10_computed', 'batt_Qfull_flow', 'batt_room_temperature_celsius', 'batt_power_discharge_max_kwac', 'cap_vs_temp', 'batt_power_charge_max_kwdc', 'batt_Vexp', 'batt_replacement_capacity', 'batt_resistance', 'batt_power_charge_max_kwac']
+
+     - Cashloan_StandaloneBatteryResidential
+
+        ['total_installed_cost', 'batt_computed_bank_capacity', 'battery_total_cost_lcos', 'om_batt_replacement_cost', 'om_batt_nameplate', 'battery_per_kWh', 'system_capacity']
+
+     - HostDeveloper_PVWattsWindFuelCellBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'construction_financing_cost', 'depr_itc_sta_macrs_5', 'depr_itc_fed_macrs_5', 'depr_bonus_sta_macrs_5']
+
+     - Utilityrate5_PVBatteryResidential
+
+        ['ur_ec_tou_mat']
+
+     - Battery_StandaloneBatteryCommercial
+
+        ['LeadAcid_qn_computed', 'batt_mass', 'batt_Vfull', 'batt_computed_bank_capacity', 'batt_Qfull', 'batt_computed_strings', 'batt_Vcut', 'batt_life_model', 'LeadAcid_q20_computed', 'batt_current_discharge_max', 'batt_power_discharge_max_kwdc', 'om_batt_replacement_cost', 'batt_Vnom', 'batt_Qnom', 'batt_Qexp', 'LeadAcid_q10_computed', 'batt_Qfull_flow', 'batt_room_temperature_celsius', 'batt_power_discharge_max_kwac', 'batt_surface_area', 'cap_vs_temp', 'batt_power_charge_max_kwdc', 'batt_Vexp', 'batt_replacement_capacity', 'batt_resistance', 'batt_current_charge_max', 'batt_power_charge_max_kwac']
+
+     - Grid_PhotovoltaicWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost']
+
+     - HostDeveloper_PVWattsBatteryHostDeveloper
+
+        ['total_installed_cost', 'battery_total_cost_lcos', 'construction_financing_cost', 'battery_per_kWh']
+
+     - Saleleaseback_PVBatterySaleLeaseback
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'battery_total_cost_lcos', 'ptc_fed_amount', 'ptc_fed_escal', 'construction_financing_cost', 'om_batt_replacement_cost', 'om_batt_capacity_cost', 'pbi_fed_term', 'pbi_uti_term', 'itc_fed_percent', 'battery_per_kWh', 'om_capacity', 'land_area', 'system_capacity']
+
+     - HostDeveloper_StandaloneBatteryHostDeveloper
+
+        ['total_installed_cost', 'batt_computed_bank_capacity', 'battery_total_cost_lcos', 'construction_financing_cost', 'om_batt_replacement_cost', 'om_batt_nameplate', 'om_batt_capacity_cost', 'battery_per_kWh', 'system_capacity']
+
+     - Battery_PhotovoltaicWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'om_batt_replacement_cost', 'batt_Qexp', 'om_batt_capacity_cost', 'batt_replacement_capacity']
+
+     - MhkWave_MEwaveBatterySingleOwner
+
+        ['financial_cost_total', 'balance_of_system_cost_total']
+
+     - Utilityrate5_PVBatteryLeveragedPartnershipFlip
+
+        ['ur_nm_credit_month']
+
+     - Pvwattsv8_PVWattsWindFuelCellBatteryHybridSingleOwner
+
+        ['total_installed_cost', 'om_capacity', 'land_area']
+
+     - Singleowner_PVWattsWindBatteryHybridSingleOwner
+
+        ['total_installed_cost', 'term_int_rate', 'construction_financing_cost', 'depr_itc_sta_macrs_5', 'depr_itc_fed_macrs_5', 'depr_bonus_sta_macrs_5']
+
+     - Utilityrate5_PVBatteryThirdParty
+
+        ['ur_ec_tou_mat']
+
+     - Merchantplant_PVBatteryMerchantPlant
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'cp_system_nameplate', 'battery_total_cost_lcos', 'ptc_fed_amount', 'ptc_fed_escal', 'construction_financing_cost', 'om_batt_replacement_cost', 'cp_battery_nameplate', 'om_batt_capacity_cost', 'pbi_fed_term', 'pbi_uti_term', 'itc_fed_percent', 'battery_per_kWh', 'om_capacity', 'land_area', 'system_capacity']
+
+     - Utilityrate5_PVBatteryCommercial
+
+        ['ur_dc_tou_mat']
+
+     - Singleowner_MEwaveBatterySingleOwner
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'battery_total_cost_lcos', 'construction_financing_cost', 'om_batt_replacement_cost', 'om_batt_capacity_cost', 'pbi_fed_term', 'pbi_uti_term', 'battery_per_kWh']
+
+     - Battery_StandaloneBatterySaleLeaseback
+
+        ['batt_mass', 'batt_Vfull', 'batt_Qfull', 'batt_computed_strings', 'batt_Vcut', 'batt_life_model', 'LeadAcid_q20_computed', 'batt_power_discharge_max_kwdc', 'om_batt_replacement_cost', 'batt_Vnom', 'batt_Qnom', 'batt_Qexp', 'LeadAcid_q10_computed', 'batt_Qfull_flow', 'batt_room_temperature_celsius', 'batt_power_discharge_max_kwac', 'cap_vs_temp', 'batt_power_charge_max_kwdc', 'batt_Vexp', 'batt_replacement_capacity', 'batt_resistance', 'batt_power_charge_max_kwac']
+
+     - Grid_PVWattsWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost']
+
+     - Pvsamv1_PVBatterySaleLeaseback
+
+        ['sixpar_bifacial_ground_clearance_height', 'subarray4_track_mode', 'subarray3_track_mode', 'batt_dispatch_pvs_ac_lb', 'batt_dispatch_pvs_ac_lb_enable', 'batt_Vcut', 'sixpar_voc', 'cec_i_l_ref', 'LeadAcid_q20_computed', 'sixpar_vmp', 'batt_Vnom', 'sixpar_aisc', 'spe_bifacial_ground_clearance_height', 'batt_Qexp', 'cec_alpha_sc', 'sixpar_area', 'mppt_hi_inverter', 'batt_Vexp', 'ur_nm_credit_month', 'cec_module_length', 'batt_resistance', 'batt_Vfull', 'mppt_low_inverter', 'cec_a_ref', 'spe_vmp', 'batt_computed_strings', 'spe_temp_coeff', 'spe_b', 'batt_Qfull_flow', 'sixpar_bvoc', 'cec_n_s', 'cec_beta_oc', 'spe_module_structure', 'spe_eff4', 'spe_eff2', 'cec_r_sh_ref', 'spe_voc', 'batt_power_charge_max_kwac', 'subarray4_tilt', 'spe_eff1', 'LeadAcid_qn_computed', 'spe_eff0', 'cec_module_width', 'batt_power_discharge_max_kwdc', 'batt_room_temperature_celsius', 'cec_adjust', 'cec_t_noct', 'subarray1_modules_per_string', 'batt_power_discharge_max_kwac', 'cec_v_mp_ref', 'sixpar_gpmp', 'sixpar_imp', 'spe_eff3', 'cec_i_sc_ref', 'batt_dispatch_pvs_ac_ub_enable', 'sixpar_is_bifacial', 'spe_a', 'batt_mass', 'cec_area', 'subarray2_tilt', 'sixpar_nser', 'batt_Qfull', 'cec_bifacial_ground_clearance_height', 'cec_i_mp_ref', 'spe_is_bifacial', 'subarray1_nstrings', 'cec_i_o_ref', 'sixpar_tnoct', 'module_aspect_ratio', 'batt_life_model', 'om_batt_replacement_cost', 'cec_is_bifacial', 'batt_dispatch_pvs_timestep_multiplier', 'batt_Qnom', 'spe_area', 'LeadAcid_q10_computed', 'cec_r_s', 'subarray3_tilt', 'cap_vs_temp', 'batt_power_charge_max_kwdc', 'subarray2_track_mode', 'batt_replacement_capacity', 'batt_dispatch_pvs_max_ramp', 'subarray1_nmodx', 'sixpar_isc', 'system_capacity', 'cec_v_oc_ref']
+
+     - HostDeveloper_PhotovoltaicWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'construction_financing_cost', 'depr_itc_sta_macrs_5', 'depr_itc_fed_macrs_5', 'depr_bonus_sta_macrs_5']
+
+     - Windpower_PVWattsWindFuelCellBatteryHybridSingleOwner
+
+        ['total_installed_cost']
+
+     - Battery_StandaloneBatteryThirdParty
+
+        ['LeadAcid_qn_computed', 'batt_mass', 'batt_Vfull', 'batt_computed_bank_capacity', 'batt_Qfull', 'batt_computed_strings', 'batt_Vcut', 'batt_life_model', 'LeadAcid_q20_computed', 'batt_current_discharge_max', 'batt_power_discharge_max_kwdc', 'batt_Vnom', 'batt_Qnom', 'batt_Qexp', 'LeadAcid_q10_computed', 'batt_Qfull_flow', 'batt_room_temperature_celsius', 'batt_power_discharge_max_kwac', 'batt_surface_area', 'cap_vs_temp', 'batt_power_charge_max_kwdc', 'batt_Vexp', 'batt_replacement_capacity', 'batt_resistance', 'batt_current_charge_max', 'batt_power_charge_max_kwac']
+
+     - Battery_FuelCellSingleOwner
+
+        ['om_batt_replacement_cost', 'batt_room_temperature_celsius', 'batt_replacement_capacity']
+
+     - Windpower_PhotovoltaicWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'om_capacity']
+
+     - Pvsamv1_PVBatteryLeveragedPartnershipFlip
+
+        ['sixpar_bifacial_ground_clearance_height', 'subarray4_track_mode', 'subarray3_track_mode', 'batt_dispatch_pvs_ac_lb', 'batt_dispatch_pvs_ac_lb_enable', 'batt_Vcut', 'sixpar_voc', 'cec_i_l_ref', 'LeadAcid_q20_computed', 'sixpar_vmp', 'batt_Vnom', 'sixpar_aisc', 'spe_bifacial_ground_clearance_height', 'batt_Qexp', 'cec_alpha_sc', 'sixpar_area', 'mppt_hi_inverter', 'batt_Vexp', 'ur_nm_credit_month', 'cec_module_length', 'batt_resistance', 'batt_Vfull', 'mppt_low_inverter', 'cec_a_ref', 'spe_vmp', 'batt_computed_strings', 'spe_temp_coeff', 'spe_b', 'batt_Qfull_flow', 'sixpar_bvoc', 'cec_n_s', 'cec_beta_oc', 'spe_module_structure', 'spe_eff4', 'spe_eff2', 'cec_r_sh_ref', 'spe_voc', 'batt_power_charge_max_kwac', 'subarray4_tilt', 'spe_eff1', 'LeadAcid_qn_computed', 'spe_eff0', 'cec_module_width', 'batt_power_discharge_max_kwdc', 'batt_room_temperature_celsius', 'cec_adjust', 'cec_t_noct', 'subarray1_modules_per_string', 'batt_power_discharge_max_kwac', 'cec_v_mp_ref', 'sixpar_gpmp', 'sixpar_imp', 'spe_eff3', 'cec_i_sc_ref', 'batt_dispatch_pvs_ac_ub_enable', 'sixpar_is_bifacial', 'spe_a', 'batt_mass', 'cec_area', 'subarray2_tilt', 'sixpar_nser', 'batt_Qfull', 'cec_bifacial_ground_clearance_height', 'cec_i_mp_ref', 'spe_is_bifacial', 'subarray1_nstrings', 'cec_i_o_ref', 'sixpar_tnoct', 'module_aspect_ratio', 'batt_life_model', 'om_batt_replacement_cost', 'cec_is_bifacial', 'batt_dispatch_pvs_timestep_multiplier', 'batt_Qnom', 'spe_area', 'LeadAcid_q10_computed', 'cec_r_s', 'subarray3_tilt', 'cap_vs_temp', 'batt_power_charge_max_kwdc', 'subarray2_track_mode', 'batt_replacement_capacity', 'batt_dispatch_pvs_max_ramp', 'subarray1_nmodx', 'sixpar_isc', 'system_capacity', 'cec_v_oc_ref']
+
+     - Grid_PhotovoltaicWindBatteryHybridSingleOwner
+
+        ['total_installed_cost']
+
+
+
+BatteryStateful
+************************************************
+
+:doc:`../modules/BatteryStateful` Modified Input Variables:
+
+    New variables:
+
+         - availabilty_loss
+         - percent_unavailable
+         - percent_unavailable_prev
+
+
+Battwatts
+************************************************
+
+:doc:`../modules/Battwatts` Modified Input Variables:
+
+    New variables:
+
+         - batt_adjust_constant
+         - batt_adjust_en_periods
+         - batt_adjust_en_timeindex
+         - batt_adjust_periods
+         - batt_adjust_timeindex
+
+
+Cashloan
+************************************************
+
+:doc:`../modules/Cashloan` New Default files:
+
+     - CustomGenerationBatteryCommercial
+     - CustomGenerationBatteryResidential
+     - CustomGenerationProfileCommercial
+     - CustomGenerationProfileResidential
+     - PhysicalTroughCommercial
+
+:doc:`../modules/Cashloan` Removed Default files
+
+     - GenericBatteryCommercial
+     - GenericBatteryResidential
+     - GenericSystemCommercial
+     - GenericSystemResidential
+
+:doc:`../modules/Cashloan` Modified Default Values:
+
+     - Cashloan_PVBatteryCommercial
+
+        ['total_installed_cost', 'batt_computed_bank_capacity', 'battery_total_cost_lcos', 'om_batt_replacement_cost', 'om_batt_nameplate', 'om_batt_capacity_cost', 'battery_per_kWh', 'system_capacity']
+
+     - Cashloan_FuelCellCommercial
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'battery_total_cost_lcos', 'om_batt_replacement_cost', 'om_batt_capacity_cost', 'pbi_fed_term', 'pbi_uti_term', 'battery_per_kWh']
+
+     - Cashloan_StandaloneBatteryCommercial
+
+        ['total_installed_cost', 'batt_computed_bank_capacity', 'battery_total_cost_lcos', 'om_batt_replacement_cost', 'om_batt_nameplate', 'om_batt_capacity_cost', 'battery_per_kWh', 'system_capacity']
+
+     - Cashloan_PVWattsResidential
+
+        ['total_installed_cost', 'om_capacity']
+
+     - Cashloan_WindPowerResidential
+
+        ['total_installed_cost', 'itc_fed_amount', 'itc_fed_percent', 'om_capacity']
+
+     - Cashloan_WindPowerCommercial
+
+        ['total_installed_cost', 'itc_fed_amount', 'itc_fed_percent', 'om_capacity']
+
+     - Cashloan_FlatPlatePVCommercial
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'pbi_fed_term', 'pbi_uti_term', 'system_capacity']
+
+     - Cashloan_PVWattsCommercial
+
+        ['pbi_oth_term', 'pbi_sta_term', 'pbi_fed_term', 'pbi_uti_term']
+
+     - Cashloan_PVWattsBatteryResidential
+
+        ['total_installed_cost', 'battery_total_cost_lcos', 'battery_per_kWh']
+
+     - Cashloan_PVBatteryResidential
+
+        ['total_installed_cost', 'batt_computed_bank_capacity', 'battery_total_cost_lcos', 'om_batt_replacement_cost', 'om_batt_nameplate', 'om_batt_capacity_cost', 'battery_per_kWh', 'om_capacity', 'system_capacity']
+
+     - Cashloan_PVWattsBatteryCommercial
+
+        ['total_installed_cost', 'battery_total_cost_lcos', 'battery_per_kWh']
+
+     - Cashloan_StandaloneBatteryResidential
+
+        ['total_installed_cost', 'batt_computed_bank_capacity', 'battery_total_cost_lcos', 'om_batt_replacement_cost', 'om_batt_nameplate', 'battery_per_kWh', 'system_capacity']
+
+     - Cashloan_FlatPlatePVResidential
+
+        ['total_installed_cost', 'system_capacity']
+
+
+
+CashloanHeat
+************************************************
+
+:doc:`../modules/CashloanHeat` New Default files:
+
+     - MSLFIPHCommercial
+     - PhysicalTroughIPHCommercial
+
+
+CspSubcomponent
+************************************************
+
+:doc:`../modules/CspSubcomponent` Modified Input Variables:
+
+    New variables:
+
+         - T_tank_cold_ini
+         - T_tank_hot_ini
+         - d_tank_in
+         - h_tank_in
+         - is_h_tank_fixed
+         - tes_cyl_piston_loss_poly
+         - tes_cyl_tank_cp
+         - tes_cyl_tank_dens
+         - tes_cyl_tank_insul_percent
+         - tes_cyl_tank_thick
+         - tes_n_tsteps
+         - tes_pb_T_charge_min
+         - tes_pb_T_cold_delta
+         - tes_pb_T_grad_ini
+         - tes_pb_T_hot_delta
+         - tes_pb_cp_solid
+         - tes_pb_dens_solid
+         - tes_pb_f_oversize
+         - tes_pb_k_eff
+         - tes_pb_n_xsteps
+         - tes_pb_void_frac
+         - tes_type
+
+    Removed variables:
+
+         - h_tank
+
+
+CustomGeneration
+************************************************
+
+:doc:`../modules/CustomGeneration` New Default files:
+
+     - CustomGenerationBatteryAllEquityPartnershipFlip
+     - CustomGenerationBatteryCommercial
+     - CustomGenerationBatteryHostDeveloper
+     - CustomGenerationBatteryLeveragedPartnershipFlip
+     - CustomGenerationBatteryMerchantPlant
+     - CustomGenerationBatteryResidential
+     - CustomGenerationBatterySaleLeaseback
+     - CustomGenerationBatterySingleOwner
+     - CustomGenerationBatteryThirdParty
+     - CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner
+     - CustomGenerationProfileAllEquityPartnershipFlip
+     - CustomGenerationProfileCommercial
+     - CustomGenerationProfileHostDeveloper
+     - CustomGenerationProfileLCOECalculator
+     - CustomGenerationProfileLeveragedPartnershipFlip
+     - CustomGenerationProfileMerchantPlant
+     - CustomGenerationProfileNone
+     - CustomGenerationProfileResidential
+     - CustomGenerationProfileSaleLeaseback
+     - CustomGenerationProfileSingleOwner
+     - CustomGenerationProfileThirdParty
+
+
+Equpartflip
+************************************************
+
+:doc:`../modules/Equpartflip` New Default files:
+
+     - CustomGenerationBatteryAllEquityPartnershipFlip
+     - CustomGenerationProfileAllEquityPartnershipFlip
+
+:doc:`../modules/Equpartflip` Removed Default files
+
+     - GenericBatteryAllEquityPartnershipFlip
+     - GenericSystemAllEquityPartnershipFlip
+
+:doc:`../modules/Equpartflip` Modified Default Values:
+
+     - Equpartflip_WindPowerAllEquityPartnershipFlip
+
+        ['ppa_price_input', 'total_installed_cost', 'ptc_fed_amount', 'construction_financing_cost']
+
+     - Equpartflip_FlatPlatePVAllEquityPartnershipFlip
+
+        ['pbi_oth_term', 'ppa_price_input', 'total_installed_cost', 'pbi_sta_term', 'ptc_fed_amount', 'construction_financing_cost', 'pbi_fed_term', 'pbi_uti_term', 'land_area', 'system_capacity']
+
+     - Equpartflip_PVBatteryAllEquityPartnershipFlip
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'battery_total_cost_lcos', 'ptc_fed_amount', 'ptc_fed_escal', 'construction_financing_cost', 'om_batt_replacement_cost', 'om_batt_capacity_cost', 'pbi_fed_term', 'pbi_uti_term', 'itc_fed_percent', 'battery_per_kWh', 'om_capacity', 'land_area', 'system_capacity']
+
+     - Equpartflip_GeothermalPowerAllEquityPartnershipFlip
+
+        ['total_installed_cost', 'construction_financing_cost', 'system_recapitalization_cost']
+
+     - Equpartflip_StandaloneBatteryAllEquityPartnershipFlip
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'battery_total_cost_lcos', 'construction_financing_cost', 'om_batt_replacement_cost', 'pbi_fed_term', 'pbi_uti_term', 'battery_per_kWh', 'system_capacity']
+
+     - Equpartflip_PVWattsAllEquityPartnershipFlip
+
+        ['ppa_price_input', 'total_installed_cost', 'ptc_fed_amount', 'construction_financing_cost', 'om_capacity', 'land_area']
+
+
+
+FresnelPhysical
+************************************************
+
+:doc:`../modules/FresnelPhysical` Modified Input Variables:
+
+    New variables:
+
+         - f_htfmax
+         - f_htfmin
+         - is_timestep_load_fractions
+         - ud_is_sco2_regr
+         - use_abs_or_rel_mdot_limit
+
+    Removed variables:
+
+         - ampl_data_dir
+         - ampl_exec_call
+         - dispatch_series
+         - is_ampl_engine
+         - is_dispatch_series
+         - is_write_ampl_dat
+
+
+FresnelPhysicalIph
+************************************************
+
+:doc:`../modules/FresnelPhysicalIph` Modified Input Variables:
+
+    New variables:
+
+         - en_electricity_rates
+         - f_htfmax
+         - f_htfmin
+         - hs_phys_N_sub
+         - hs_phys_P_steam_hot_des
+         - hs_phys_Q_steam_hot_des
+         - hs_phys_T_steam_cold_des
+         - hs_phys_f_mdot_steam_max
+         - hs_phys_f_mdot_steam_min
+         - hs_phys_tol
+         - hs_type
+         - inflation_rate
+         - ppa_price_input_heat_btu
+         - rate_escalation
+         - timestep_load_abs
+         - timestep_load_abs_factor
+         - ur_annual_min_charge
+         - ur_billing_demand_lookback_percentages
+         - ur_billing_demand_lookback_period
+         - ur_billing_demand_minimum
+         - ur_dc_billing_demand_periods
+         - ur_dc_enable
+         - ur_dc_flat_mat
+         - ur_dc_sched_weekday
+         - ur_dc_sched_weekend
+         - ur_dc_tou_mat
+         - ur_ec_sched_weekday
+         - ur_ec_sched_weekend
+         - ur_ec_tou_mat
+         - ur_en_ts_buy_rate
+         - ur_en_ts_sell_rate
+         - ur_enable_billing_demand
+         - ur_metering_option
+         - ur_monthly_fixed_charge
+         - ur_monthly_min_charge
+         - ur_nb_apply_credit_current_month
+         - ur_nb_credit_expire
+         - ur_nm_credit_month
+         - ur_nm_credit_rollover
+         - ur_nm_yearend_sell_rate
+         - ur_sell_eq_buy
+         - ur_ts_buy_rate
+         - ur_ts_sell_rate
+         - ur_yearzero_usage_peaks
+         - use_abs_or_rel_mdot_limit
+
+    Removed variables:
+
+         - ampl_data_dir
+         - ampl_exec_call
+         - is_ampl_engine
+         - is_write_ampl_dat
+         - ppa_price_input
+
+:doc:`../modules/FresnelPhysicalIph` New Default files:
+
+     - MSLFIPHCommercial
+     - MSLFIPHSingleOwner
+
+:doc:`../modules/FresnelPhysicalIph` Modified Default Values:
+
+     - FresnelPhysicalIph_MSLFIPHLCOHCalculator
+
+        ['heat_sink_spec_cost', 'htf_system_spec_cost', 'q_pb_design', 'bop_spec_cost']
+
+     - FresnelPhysicalIph_MSLFIPHNone
+
+        ['heat_sink_spec_cost', 'htf_system_spec_cost', 'q_pb_design', 'bop_spec_cost']
+
+
+
+Fuelcell
+************************************************
+
+:doc:`../modules/Fuelcell` New Default files:
+
+     - CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner
+
+:doc:`../modules/Fuelcell` Removed Default files
+
+     - GenericPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - GenericPVWattsWindFuelCellBatteryHybridSingleOwner
+
+:doc:`../modules/Fuelcell` Modified Default Values:
+
+     - Fuelcell_FuelCellCommercial
+
+        ['fuelcell_lhv', 'fuelcell_fuel_type']
+
+     - Fuelcell_PVWattsWindFuelCellBatteryHybridSingleOwner
+
+        ['fuelcell_lhv', 'fuelcell_fuel_type']
+
+     - Fuelcell_FuelCellSingleOwner
+
+        ['fuelcell_lhv', 'fuelcell_fuel_type']
+
+     - Fuelcell_PVWattsWindFuelCellBatteryHybridHostDeveloper
+
+        ['fuelcell_lhv', 'fuelcell_fuel_type']
+
+
+
+GenericSystem
+************************************************
+
+Renamed to :doc:`../modules/CustomGeneration`
+
+
+Geothermal
+************************************************
+
+:doc:`../modules/Geothermal` Modified Input Variables:
+
+    New variables:
+
+         - allow_reservoir_replacements
+
+
+GeothermalCosts
+************************************************
+
+:doc:`../modules/GeothermalCosts` Modified Input Variables:
+
+    New variables:
+
+         - calc_drill_costs
+         - geotherm.cost.inj_cost_curve
+         - geotherm.cost.inj_cost_curve_welldiam
+         - geotherm.cost.inj_cost_curve_welltype
+         - geotherm.cost.inj_wells_drilled
+         - geotherm.cost.prod_cost_curve
+         - geotherm.cost.prod_cost_curve_welldiam
+         - geotherm.cost.prod_cost_curve_welltype
+         - geotherm.cost.prod_wells_drilled
+         - resource_depth
+
+
+Grid
+************************************************
+
+:doc:`../modules/Grid` New Default files:
+
+     - CustomGenerationBatteryAllEquityPartnershipFlip
+     - CustomGenerationBatteryCommercial
+     - CustomGenerationBatteryHostDeveloper
+     - CustomGenerationBatteryLeveragedPartnershipFlip
+     - CustomGenerationBatteryMerchantPlant
+     - CustomGenerationBatteryResidential
+     - CustomGenerationBatterySaleLeaseback
+     - CustomGenerationBatterySingleOwner
+     - CustomGenerationBatteryThirdParty
+     - CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner
+     - CustomGenerationProfileAllEquityPartnershipFlip
+     - CustomGenerationProfileCommercial
+     - CustomGenerationProfileHostDeveloper
+     - CustomGenerationProfileLCOECalculator
+     - CustomGenerationProfileLeveragedPartnershipFlip
+     - CustomGenerationProfileMerchantPlant
+     - CustomGenerationProfileNone
+     - CustomGenerationProfileResidential
+     - CustomGenerationProfileSaleLeaseback
+     - CustomGenerationProfileSingleOwner
+     - CustomGenerationProfileThirdParty
+     - PhysicalTroughCommercial
+
+:doc:`../modules/Grid` Removed Default files
+
+     - GenericBatteryAllEquityPartnershipFlip
+     - GenericBatteryCommercial
+     - GenericBatteryHostDeveloper
+     - GenericBatteryLeveragedPartnershipFlip
+     - GenericBatteryMerchantPlant
+     - GenericBatteryResidential
+     - GenericBatterySaleLeaseback
+     - GenericBatterySingleOwner
+     - GenericBatteryThirdParty
+     - GenericPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - GenericPVWattsWindFuelCellBatteryHybridSingleOwner
+     - GenericSystemAllEquityPartnershipFlip
+     - GenericSystemCommercial
+     - GenericSystemHostDeveloper
+     - GenericSystemLCOECalculator
+     - GenericSystemLeveragedPartnershipFlip
+     - GenericSystemMerchantPlant
+     - GenericSystemNone
+     - GenericSystemResidential
+     - GenericSystemSaleLeaseback
+     - GenericSystemSingleOwner
+     - GenericSystemThirdParty
+
+:doc:`../modules/Grid` Modified Default Values:
+
+     - Grid_PVWattsWindBatteryHybridSingleOwner
+
+        ['total_installed_cost']
+
+     - Grid_PVWattsWindFuelCellBatteryHybridHostDeveloper
+
+        ['total_installed_cost']
+
+     - Grid_PVWattsWindFuelCellBatteryHybridSingleOwner
+
+        ['total_installed_cost']
+
+     - Grid_PhotovoltaicWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost']
+
+     - Grid_PVWattsWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost']
+
+     - Grid_PhotovoltaicWindBatteryHybridSingleOwner
+
+        ['total_installed_cost']
+
+
+
+HostDeveloper
+************************************************
+
+:doc:`../modules/HostDeveloper` New Default files:
+
+     - CustomGenerationBatteryHostDeveloper
+     - CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - CustomGenerationProfileHostDeveloper
+
+:doc:`../modules/HostDeveloper` Removed Default files
+
+     - GenericBatteryHostDeveloper
+     - GenericPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - GenericSystemHostDeveloper
+
+:doc:`../modules/HostDeveloper` Modified Default Values:
+
+     - Grid_PVWattsWindFuelCellBatteryHybridHostDeveloper
+
+        ['total_installed_cost']
+
+     - Battery_PVWattsWindFuelCellBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'om_batt_replacement_cost', 'batt_Qexp', 'om_batt_capacity_cost', 'batt_replacement_capacity']
+
+     - Pvsamv1_PhotovoltaicWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'subarray1_tilt', 'inv_pd_pdco', 'sd11par_n', 'sd11par_d1', 'subarray2_monthly_tilt', 'sixpar_voc', 'cec_i_l_ref', 'sixpar_vmp', 'sixpar_aisc', 'spe_bifacial_ground_clearance_height', 'cec_alpha_sc', 'sd11par_d3', 'sixpar_bifaciality', 'snl_c0', 'sixpar_area', 'sd11par_Voc0', 'subarray3_monthly_tilt', 'cec_module_length', 'sd11par_Vmp0', 'sd11par_AMa1', 'use_wf_albedo', 'sd11par_d2', 'sd11par_tnoct', 'cec_a_ref', 'snl_c4', 'spe_vmp', 'spe_temp_coeff', 'spe_b', 'snl_a4', 'subarray2_nmodx', 'sd11par_c1', 'snl_vmpo', 'snl_c6', 'inv_cec_cg_eff_cec', 'snl_b2', 'sixpar_bvoc', 'cec_n_s', 'snl_n', 'snl_isco', 'cec_beta_oc', 'inv_cec_cg_c2', 'spe_module_structure', 'spe_eff4', 'subarray2_mppt_input', 'sd11par_Imp0', 'snl_c1', 'spe_eff2', 'inv_cec_cg_c1', 'cec_r_sh_ref', 'snl_ixxo', 'snl_bvmpo', 'sd11par_nser', 'subarray3_mppt_input', 'land_area', 'spe_voc', 'subarray4_nmodx', 'snl_a2', 'sd11par_Egref', 'spe_eff1', 'spe_eff0', 'snl_ixo', 'cec_module_width', 'sd11par_c3', 'sd11par_Il', 'snl_voco', 'subarray4_mppt_input', 'sd11par_Io', 'cec_adjust', 'cec_t_noct', 'subarray1_modules_per_string', 'snl_area', 'inv_pd_eff', 'cec_v_mp_ref', 'subarray1_monthly_tilt', 'sixpar_gpmp', 'sixpar_imp', 'spe_eff3', 'snl_impo', 'inv_cec_cg_c3', 'subarray3_nmodx', 'snl_bvoco', 'snl_series_cells', 'cec_i_sc_ref', 'snl_a1', 'snl_a0', 'inv_cec_cg_psco', 'snl_a3', 'sixpar_is_bifacial', 'sd11par_c2', 'sd11par_Isc0', 'subarray4_monthly_tilt', 'spe_a', 'cec_area', 'inv_cec_cg_c0', 'sixpar_nser', 'cec_i_mp_ref', 'spe_is_bifacial', 'sd11par_alphaIsc', 'subarray1_nstrings', 'cec_i_o_ref', 'sixpar_tnoct', 'module_aspect_ratio', 'snl_transient_thermal_model_unit_mass', 'dc_degradation', 'cec_is_bifacial', 'snl_c5', 'snl_aisc', 'spe_area', 'snl_c7', 'cec_r_s', 'snl_c2', 'sixpar_celltech', 'sd11par_area', 'snl_c3', 'subarray1_nmodx', 'sixpar_isc', 'system_capacity', 'cec_v_oc_ref']
+
+     - HostDeveloper_PVBatteryHostDeveloper
+
+        ['total_installed_cost', 'batt_computed_bank_capacity', 'battery_total_cost_lcos', 'ptc_fed_amount', 'construction_financing_cost', 'om_batt_replacement_cost', 'om_batt_nameplate', 'om_batt_capacity_cost', 'battery_per_kWh', 'system_capacity']
+
+     - Utilityrate5_PVWattsWindFuelCellBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'ur_dc_sched_weekend']
+
+     - HostDeveloper_PVWattsWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'construction_financing_cost', 'depr_itc_sta_macrs_5', 'depr_itc_fed_macrs_5', 'depr_bonus_sta_macrs_5']
+
+     - Battery_PVWattsWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'dispatch_manual_system_charge_first', 'om_batt_replacement_cost', 'batt_Qexp', 'om_batt_capacity_cost', 'batt_replacement_capacity']
+
+     - Utilityrate5_PhotovoltaicWindBatteryHybridHostDeveloper
+
+        ['ur_dc_sched_weekday', 'total_installed_cost', 'ur_dc_tou_mat', 'ur_dc_sched_weekend', 'ur_dc_enable']
+
+     - Battery_StandaloneBatteryHostDeveloper
+
+        ['LeadAcid_qn_computed', 'batt_mass', 'batt_Vfull', 'batt_computed_bank_capacity', 'batt_Qfull', 'batt_computed_strings', 'batt_Vcut', 'batt_life_model', 'dispatch_manual_percent_discharge', 'LeadAcid_q20_computed', 'batt_current_discharge_max', 'batt_power_discharge_max_kwdc', 'om_batt_replacement_cost', 'batt_Vnom', 'dispatch_manual_discharge', 'batt_Qnom', 'batt_Qexp', 'LeadAcid_q10_computed', 'batt_Qfull_flow', 'batt_room_temperature_celsius', 'batt_power_discharge_max_kwac', 'batt_surface_area', 'cap_vs_temp', 'batt_power_charge_max_kwdc', 'batt_Vexp', 'batt_replacement_capacity', 'batt_resistance', 'batt_current_charge_max', 'batt_power_charge_max_kwac']
+
+     - Pvsamv1_PVBatteryHostDeveloper
+
+        ['batt_Vcut', 'sixpar_voc', 'cec_i_l_ref', 'dispatch_manual_percent_discharge', 'LeadAcid_q20_computed', 'batt_current_discharge_max', 'sixpar_vmp', 'batt_Vnom', 'sixpar_aisc', 'spe_bifacial_ground_clearance_height', 'batt_Qexp', 'cec_alpha_sc', 'sixpar_area', 'mppt_hi_inverter', 'batt_Vexp', 'cec_module_length', 'batt_resistance', 'batt_current_charge_max', 'batt_Vfull', 'mppt_low_inverter', 'cec_a_ref', 'spe_vmp', 'batt_computed_strings', 'spe_temp_coeff', 'spe_b', 'inv_cec_cg_eff_cec', 'batt_Qfull_flow', 'sixpar_bvoc', 'cec_n_s', 'cec_beta_oc', 'inv_cec_cg_c2', 'spe_module_structure', 'spe_eff4', 'batt_surface_area', 'spe_eff2', 'inv_cec_cg_c1', 'cec_r_sh_ref', 'spe_voc', 'batt_power_charge_max_kwac', 'spe_eff1', 'LeadAcid_qn_computed', 'spe_eff0', 'cec_module_width', 'batt_power_discharge_max_kwdc', 'dispatch_manual_discharge', 'batt_room_temperature_celsius', 'cec_adjust', 'cec_t_noct', 'subarray1_modules_per_string', 'batt_power_discharge_max_kwac', 'cec_v_mp_ref', 'sixpar_gpmp', 'sixpar_imp', 'spe_eff3', 'inv_cec_cg_c3', 'cec_i_sc_ref', 'sixpar_is_bifacial', 'spe_a', 'batt_mass', 'cec_area', 'inv_cec_cg_c0', 'batt_computed_bank_capacity', 'sixpar_nser', 'batt_Qfull', 'cec_i_mp_ref', 'spe_is_bifacial', 'subarray1_nstrings', 'cec_i_o_ref', 'sixpar_tnoct', 'module_aspect_ratio', 'batt_life_model', 'om_batt_replacement_cost', 'cec_is_bifacial', 'batt_Qnom', 'spe_area', 'LeadAcid_q10_computed', 'cec_r_s', 'cap_vs_temp', 'batt_power_charge_max_kwdc', 'batt_replacement_capacity', 'subarray1_nmodx', 'sixpar_isc', 'system_capacity', 'cec_v_oc_ref']
+
+     - Windpower_PVWattsWindFuelCellBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'om_capacity']
+
+     - Windpower_PVWattsWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'om_capacity']
+
+     - Utilityrate5_PVWattsWindBatteryHybridHostDeveloper
+
+        ['ur_dc_sched_weekday', 'total_installed_cost', 'ur_dc_tou_mat', 'ur_dc_sched_weekend', 'ur_dc_enable']
+
+     - HostDeveloper_FlatPlatePVHostDeveloper
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'construction_financing_cost', 'pbi_fed_term', 'pbi_uti_term', 'system_capacity']
+
+     - HostDeveloper_PVWattsHostDeveloper
+
+        ['pbi_oth_term', 'pbi_sta_term', 'pbi_fed_term', 'pbi_uti_term']
+
+     - Fuelcell_PVWattsWindFuelCellBatteryHybridHostDeveloper
+
+        ['fuelcell_lhv', 'fuelcell_fuel_type']
+
+     - Pvsamv1_FlatPlatePVHostDeveloper
+
+        ['sixpar_voc', 'cec_i_l_ref', 'sixpar_vmp', 'sixpar_aisc', 'spe_bifacial_ground_clearance_height', 'cec_alpha_sc', 'sixpar_area', 'mppt_hi_inverter', 'cec_module_length', 'mppt_low_inverter', 'cec_a_ref', 'spe_vmp', 'spe_temp_coeff', 'spe_b', 'sixpar_bvoc', 'cec_n_s', 'cec_beta_oc', 'spe_module_structure', 'spe_eff4', 'spe_eff2', 'cec_r_sh_ref', 'spe_voc', 'spe_eff1', 'spe_eff0', 'cec_module_width', 'cec_adjust', 'cec_t_noct', 'subarray1_modules_per_string', 'cec_v_mp_ref', 'sixpar_gpmp', 'sixpar_imp', 'spe_eff3', 'cec_i_sc_ref', 'sixpar_is_bifacial', 'spe_a', 'cec_area', 'sixpar_nser', 'cec_i_mp_ref', 'spe_is_bifacial', 'subarray1_nstrings', 'cec_i_o_ref', 'sixpar_tnoct', 'module_aspect_ratio', 'cec_is_bifacial', 'spe_area', 'cec_r_s', 'subarray1_nmodx', 'sixpar_isc', 'system_capacity', 'cec_v_oc_ref']
+
+     - HostDeveloper_PVWattsWindFuelCellBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'construction_financing_cost', 'depr_itc_sta_macrs_5', 'depr_itc_fed_macrs_5', 'depr_bonus_sta_macrs_5']
+
+     - Grid_PhotovoltaicWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost']
+
+     - HostDeveloper_PVWattsBatteryHostDeveloper
+
+        ['total_installed_cost', 'battery_total_cost_lcos', 'construction_financing_cost', 'battery_per_kWh']
+
+     - HostDeveloper_StandaloneBatteryHostDeveloper
+
+        ['total_installed_cost', 'batt_computed_bank_capacity', 'battery_total_cost_lcos', 'construction_financing_cost', 'om_batt_replacement_cost', 'om_batt_nameplate', 'om_batt_capacity_cost', 'battery_per_kWh', 'system_capacity']
+
+     - Battery_PhotovoltaicWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'om_batt_replacement_cost', 'batt_Qexp', 'om_batt_capacity_cost', 'batt_replacement_capacity']
+
+     - Grid_PVWattsWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost']
+
+     - HostDeveloper_PhotovoltaicWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'construction_financing_cost', 'depr_itc_sta_macrs_5', 'depr_itc_fed_macrs_5', 'depr_bonus_sta_macrs_5']
+
+     - Windpower_PhotovoltaicWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'om_capacity']
+
+
+
+Lcoefcr
+************************************************
+
+:doc:`../modules/Lcoefcr` New Default files:
+
+     - CustomGenerationProfileLCOECalculator
+
+:doc:`../modules/Lcoefcr` Removed Default files
+
+     - GenericSystemLCOECalculator
+
+:doc:`../modules/Lcoefcr` Modified Default Values:
+
+     - LcoefcrDesign_PhysicalTroughIPHLCOHCalculator
+
+        ['ui_fixed_charge_rate', 'c_equity_return', 'c_debt_percent', 'variable_operating_cost', 'c_lifetime', 'total_installed_cost']
+
+     - Lcoefcr_WindPowerLCOECalculator
+
+        ['fixed_charge_rate', 'capital_cost']
+
+     - Lcoefcr_GeothermalPowerLCOECalculator
+
+        ['capital_cost']
+
+     - Lcoefcr_FlatPlatePVLCOECalculator
+
+        ['fixed_charge_rate', 'fixed_operating_cost', 'capital_cost']
+
+     - Lcoefcr_PVWattsLCOECalculator
+
+        ['fixed_charge_rate', 'fixed_operating_cost', 'capital_cost']
+
+     - Lcoefcr_MEwaveLCOECalculator
+
+        ['capital_cost']
+
+     - LcoefcrDesign_MSLFIPHLCOHCalculator
+
+        ['c_construction_interest', 'total_installed_cost']
+
+     - Lcoefcr_MEtidalLCOECalculator
+
+        ['capital_cost']
+
+     - Lcoefcr_PhysicalTroughLCOECalculator
+
+        ['fixed_charge_rate']
+
+
+
+Levpartflip
+************************************************
+
+:doc:`../modules/Levpartflip` New Default files:
+
+     - CustomGenerationBatteryLeveragedPartnershipFlip
+     - CustomGenerationProfileLeveragedPartnershipFlip
+
+:doc:`../modules/Levpartflip` Removed Default files
+
+     - GenericBatteryLeveragedPartnershipFlip
+     - GenericSystemLeveragedPartnershipFlip
+
+:doc:`../modules/Levpartflip` Modified Default Values:
+
+     - Levpartflip_PVBatteryLeveragedPartnershipFlip
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'battery_total_cost_lcos', 'ptc_fed_amount', 'ptc_fed_escal', 'construction_financing_cost', 'om_batt_replacement_cost', 'om_batt_capacity_cost', 'pbi_fed_term', 'pbi_uti_term', 'itc_fed_percent', 'battery_per_kWh', 'om_capacity', 'land_area', 'system_capacity']
+
+     - Levpartflip_GeothermalPowerLeveragedPartnershipFlip
+
+        ['total_installed_cost', 'construction_financing_cost', 'system_recapitalization_cost']
+
+     - Levpartflip_WindPowerLeveragedPartnershipFlip
+
+        ['ppa_price_input', 'total_installed_cost', 'ptc_fed_amount', 'construction_financing_cost']
+
+     - Levpartflip_StandaloneBatteryLeveragedPartnershipFlip
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'battery_total_cost_lcos', 'construction_financing_cost', 'om_batt_replacement_cost', 'pbi_fed_term', 'pbi_uti_term', 'battery_per_kWh', 'system_capacity']
+
+     - Levpartflip_FlatPlatePVLeveragedPartnershipFlip
+
+        ['pbi_oth_term', 'ppa_price_input', 'total_installed_cost', 'pbi_sta_term', 'ptc_fed_amount', 'construction_financing_cost', 'pbi_fed_term', 'pbi_uti_term', 'land_area', 'system_capacity']
+
+     - Levpartflip_PVWattsLeveragedPartnershipFlip
+
+        ['ppa_price_input', 'total_installed_cost', 'ptc_fed_amount', 'construction_financing_cost', 'om_capacity', 'land_area']
+
+
+
+LinearFresnelDsgIph
+************************************************
+
+:doc:`../modules/LinearFresnelDsgIph` Modified Input Variables:
+
+    New variables:
+
+         - ppa_price_input_heat_btu
+
+:doc:`../modules/LinearFresnelDsgIph` New Default files:
+
+     - DSGLIPHSingleOwner
+
+
+Merchantplant
+************************************************
+
+:doc:`../modules/Merchantplant` New Default files:
+
+     - CustomGenerationBatteryMerchantPlant
+     - CustomGenerationProfileMerchantPlant
+
+:doc:`../modules/Merchantplant` Removed Default files
+
+     - GenericBatteryMerchantPlant
+     - GenericSystemMerchantPlant
+
+:doc:`../modules/Merchantplant` Modified Default Values:
+
+     - Merchantplant_FlatPlatePVMerchantPlant
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'cp_system_nameplate', 'ptc_fed_amount', 'construction_financing_cost', 'pbi_fed_term', 'pbi_uti_term', 'land_area', 'system_capacity']
+
+     - Merchantplant_PhysicalTroughMerchantPlant
+
+        ['total_installed_cost', 'cp_system_nameplate', 'construction_financing_cost', 'land_area', 'system_capacity']
+
+     - Merchantplant_PVWattsMerchantPlant
+
+        ['total_installed_cost', 'ptc_fed_amount', 'construction_financing_cost', 'om_capacity', 'land_area']
+
+     - Merchantplant_StandaloneBatteryMerchantPlant
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'cp_system_nameplate', 'battery_total_cost_lcos', 'construction_financing_cost', 'om_batt_replacement_cost', 'cp_battery_nameplate', 'pbi_fed_term', 'pbi_uti_term', 'battery_per_kWh', 'system_capacity']
+
+     - Merchantplant_WindPowerMerchantPlant
+
+        ['total_installed_cost', 'ptc_fed_amount', 'construction_financing_cost']
+
+     - Merchantplant_GeothermalPowerMerchantPlant
+
+        ['total_installed_cost', 'construction_financing_cost', 'system_recapitalization_cost']
+
+     - Merchantplant_PVBatteryMerchantPlant
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'cp_system_nameplate', 'battery_total_cost_lcos', 'ptc_fed_amount', 'ptc_fed_escal', 'construction_financing_cost', 'om_batt_replacement_cost', 'cp_battery_nameplate', 'om_batt_capacity_cost', 'pbi_fed_term', 'pbi_uti_term', 'itc_fed_percent', 'battery_per_kWh', 'om_capacity', 'land_area', 'system_capacity']
+
+
+
+MhkTidal
+************************************************
+
+:doc:`../modules/MhkTidal` Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+
+
+MhkWave
+************************************************
+
+:doc:`../modules/MhkWave` Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+
+    Removed variables:
+
+         - me_adjust:constant
+         - me_adjust:hourly
+         - me_adjust:periods
+         - me_adjust:timeindex
+
+
+MsptIph
+************************************************
+
+:doc:`../modules/MsptIph` Modified Input Variables:
+
+    New variables:
+
+         - hs_phys_N_sub
+         - hs_phys_P_steam_hot_des
+         - hs_phys_Q_steam_hot_des
+         - hs_phys_T_steam_cold_des
+         - hs_phys_f_mdot_steam_max
+         - hs_phys_f_mdot_steam_min
+         - hs_phys_tol
+         - hs_type
+         - ppa_price_input_heat_btu
+
+    Removed variables:
+
+         - ampl_data_dir
+         - ampl_exec_call
+         - is_ampl_engine
+         - is_write_ampl_dat
+         - ppa_price_input
+
+:doc:`../modules/MsptIph` New Default files:
+
+     - MSPTIPHSingleOwner
+
+:doc:`../modules/MsptIph` Modified Default Values:
+
+     - MsptIph_MSPTIPHNone
+
+        ['adjust_constant']
+
+     - MsptIph_MSPTIPHLCOHCalculator
+
+        ['adjust_constant']
+
+
+
+Pv6parmod
+************************************************
+
+:doc:`../modules/Pv6parmod` Modified Input Variables:
+
+    Removed variables:
+
+         - gamma_pmp
+
+
+Pvsamv1
+************************************************
+
+:doc:`../modules/Pvsamv1` Modified Input Variables:
+
+    New variables:
+
+         - batt_adjust_constant
+         - batt_adjust_en_periods
+         - batt_adjust_en_timeindex
+         - batt_adjust_periods
+         - batt_adjust_timeindex
+         - batt_dispatch_auto_can_curtailcharge
+         - mp_ancserv1_percent_gen
+         - mp_ancserv2_percent_gen
+         - mp_ancserv3_percent_gen
+         - mp_ancserv4_percent_gen
+         - mp_market_percent_gen
+         - ur_nb_apply_credit_current_month
+         - ur_nb_credit_expire
+
+    Removed variables:
+
+         - cec_gamma_r
+
+
+Pvwattsv8
+************************************************
+
+:doc:`../modules/Pvwattsv8` New Default files:
+
+     - CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner
+
+:doc:`../modules/Pvwattsv8` Removed Default files
+
+     - GenericPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - GenericPVWattsWindFuelCellBatteryHybridSingleOwner
+
+:doc:`../modules/Pvwattsv8` Modified Default Values:
+
+     - Pvwattsv8_PVWattsCommunitySolar
+
+        ['system_capacity']
+
+     - Pvwattsv8_PVWattsWindBatteryHybridSingleOwner
+
+        ['total_installed_cost', 'om_capacity', 'land_area']
+
+     - Pvwattsv8_PVWattsWindFuelCellBatteryHybridSingleOwner
+
+        ['total_installed_cost', 'om_capacity', 'land_area']
+
+
+
+Saleleaseback
+************************************************
+
+:doc:`../modules/Saleleaseback` New Default files:
+
+     - CustomGenerationBatterySaleLeaseback
+     - CustomGenerationProfileSaleLeaseback
+
+:doc:`../modules/Saleleaseback` Removed Default files
+
+     - GenericBatterySaleLeaseback
+     - GenericSystemSaleLeaseback
+
+:doc:`../modules/Saleleaseback` Modified Default Values:
+
+     - Saleleaseback_StandaloneBatterySaleLeaseback
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'battery_total_cost_lcos', 'construction_financing_cost', 'om_batt_replacement_cost', 'pbi_fed_term', 'pbi_uti_term', 'battery_per_kWh', 'system_capacity']
+
+     - Saleleaseback_FlatPlatePVSaleLeaseback
+
+        ['pbi_oth_term', 'ppa_price_input', 'total_installed_cost', 'pbi_sta_term', 'ptc_fed_amount', 'construction_financing_cost', 'pbi_fed_term', 'pbi_uti_term', 'land_area', 'system_capacity']
+
+     - Saleleaseback_PVWattsSaleLeaseback
+
+        ['ppa_price_input', 'total_installed_cost', 'ptc_fed_amount', 'construction_financing_cost', 'om_capacity', 'land_area']
+
+     - Saleleaseback_WindPowerSaleLeaseback
+
+        ['ppa_price_input', 'total_installed_cost', 'ptc_fed_amount', 'construction_financing_cost']
+
+     - Saleleaseback_PVBatterySaleLeaseback
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'battery_total_cost_lcos', 'ptc_fed_amount', 'ptc_fed_escal', 'construction_financing_cost', 'om_batt_replacement_cost', 'om_batt_capacity_cost', 'pbi_fed_term', 'pbi_uti_term', 'itc_fed_percent', 'battery_per_kWh', 'om_capacity', 'land_area', 'system_capacity']
+
+     - Saleleaseback_GeothermalPowerSaleLeaseback
+
+        ['total_installed_cost', 'construction_financing_cost', 'system_recapitalization_cost']
+
+
+
+Singleowner
+************************************************
+
+:doc:`../modules/Singleowner` Modified Input Variables:
+
+    New variables:
+
+         - ur_nb_apply_credit_current_month
+         - ur_nb_credit_expire
+
+:doc:`../modules/Singleowner` New Default files:
+
+     - CustomGenerationBatterySingleOwner
+     - CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner
+     - CustomGenerationProfileSingleOwner
+
+:doc:`../modules/Singleowner` Removed Default files
+
+     - GenericBatterySingleOwner
+     - GenericPVWattsWindFuelCellBatteryHybridSingleOwner
+     - GenericSystemSingleOwner
+
+:doc:`../modules/Singleowner` Modified Default Values:
+
+     - Singleowner_FlatPlatePVSingleOwner
+
+        ['pbi_oth_term', 'ppa_price_input', 'total_installed_cost', 'pbi_sta_term', 'cp_system_nameplate', 'ptc_fed_amount', 'construction_financing_cost', 'pbi_fed_term', 'pbi_uti_term', 'land_area', 'system_capacity']
+
+     - Singleowner_PVWattsSingleOwner
+
+        ['ppa_price_input', 'total_installed_cost', 'ptc_fed_amount', 'construction_financing_cost', 'om_capacity', 'land_area']
+
+     - Singleowner_PVBatterySingleOwner
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'cp_system_nameplate', 'battery_total_cost_lcos', 'ptc_fed_amount', 'ptc_fed_escal', 'construction_financing_cost', 'om_batt_replacement_cost', 'om_batt_capacity_cost', 'pbi_fed_term', 'pbi_uti_term', 'itc_fed_percent', 'ur_nm_credit_month', 'battery_per_kWh', 'om_capacity', 'land_area', 'system_capacity']
+
+     - Singleowner_GeothermalPowerSingleOwner
+
+        ['total_installed_cost', 'construction_financing_cost', 'system_recapitalization_cost']
+
+     - Singleowner_PVWattsWindFuelCellBatteryHybridSingleOwner
+
+        ['total_installed_cost', 'dispatch_tod_factors', 'construction_financing_cost', 'depr_itc_sta_macrs_5', 'depr_itc_fed_macrs_5', 'depr_bonus_sta_macrs_5']
+
+     - Singleowner_StandaloneBatterySingleOwner
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'cp_system_nameplate', 'battery_total_cost_lcos', 'construction_financing_cost', 'om_batt_replacement_cost', 'cp_battery_nameplate', 'pbi_fed_term', 'pbi_uti_term', 'battery_per_kWh', 'system_capacity']
+
+     - Singleowner_MEwaveSingleOwner
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'construction_financing_cost', 'pbi_fed_term', 'pbi_uti_term']
+
+     - Singleowner_WindPowerSingleOwner
+
+        ['ppa_price_input', 'total_installed_cost', 'ptc_fed_amount', 'construction_financing_cost']
+
+     - Singleowner_PhotovoltaicWindBatteryHybridSingleOwner
+
+        ['total_installed_cost', 'dispatch_tod_factors', 'construction_financing_cost', 'depr_itc_sta_macrs_5', 'depr_itc_fed_macrs_5', 'depr_bonus_sta_macrs_5', 'dispatch_sched_weekday', 'debt_option']
+
+     - Singleowner_PVWattsWindBatteryHybridSingleOwner
+
+        ['total_installed_cost', 'term_int_rate', 'construction_financing_cost', 'depr_itc_sta_macrs_5', 'depr_itc_fed_macrs_5', 'depr_bonus_sta_macrs_5']
+
+     - Singleowner_MEwaveBatterySingleOwner
+
+        ['pbi_oth_term', 'total_installed_cost', 'pbi_sta_term', 'battery_total_cost_lcos', 'construction_financing_cost', 'om_batt_replacement_cost', 'om_batt_capacity_cost', 'pbi_fed_term', 'pbi_uti_term', 'battery_per_kWh']
+
+     - Singleowner_FuelCellSingleOwner
+
+        ['total_installed_cost', 'battery_total_cost_lcos', 'construction_financing_cost', 'depr_itc_sta_macrs_5', 'om_batt_replacement_cost', 'depr_itc_fed_macrs_5', 'om_batt_capacity_cost', 'depr_bonus_sta_macrs_5', 'battery_per_kWh', 'om_capacity', 'land_area']
+
+
+
+SingleownerHeat
+************************************************
+
+:doc:`../modules/SingleownerHeat` New Default files:
+
+     - DSGLIPHSingleOwner
+     - MSLFIPHSingleOwner
+     - MSPTIPHSingleOwner
+     - PhysicalTroughIPHSingleOwner
+
+
+TcsmoltenSalt
+************************************************
+
+:doc:`../modules/TcsmoltenSalt` Modified Input Variables:
+
+    New variables:
+
+         - T_tank_cold_init
+         - T_tank_hot_init
+         - is_PAR_HTR_allowed_in
+         - is_dispatch_targets
+         - is_field_tracking_init
+         - is_pc_sb_allowed_in
+         - is_pc_su_allowed_in
+         - is_rec_su_allowed_in
+         - pc_op_mode_initial
+         - pc_startup_energy_remain_initial
+         - pc_startup_time_remain_init
+         - q_dot_elec_to_PAR_HTR_in
+         - q_pc_max_in
+         - q_pc_target_on_in
+         - q_pc_target_su_in
+         - rec_op_mode_initial
+         - rec_startup_energy_remain_init
+         - rec_startup_time_remain_init
+
+    Removed variables:
+
+         - disp_wlim_maxspec
+         - dispatch_series
+         - is_dispatch_series
+         - is_wlim_design
+         - is_wlim_series
+         - wlim_series
+
+
+Thermalrate
+************************************************
+
+:doc:`../modules/Thermalrate` New Default files:
+
+     - CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - PVWattsWindFuelCellBatteryHybridHostDeveloper
+
+
+ThermalrateIph
+************************************************
+
+:doc:`../modules/ThermalrateIph` New Default files:
+
+     - MSLFIPHCommercial
+     - PhysicalTroughIPHCommercial
+
+
+Thirdpartyownership
+************************************************
+
+:doc:`../modules/Thirdpartyownership` New Default files:
+
+     - CustomGenerationBatteryThirdParty
+     - CustomGenerationProfileThirdParty
+
+:doc:`../modules/Thirdpartyownership` Removed Default files
+
+     - GenericBatteryThirdParty
+     - GenericSystemThirdParty
+
+
+TroughPhysical
+************************************************
+
+:doc:`../modules/TroughPhysical` Modified Input Variables:
+
+    New variables:
+
+         - T_in_loop_initial
+         - T_out_loop_initial
+         - T_out_scas_initial
+         - T_shutdown
+         - T_startup
+         - T_tank_cold_init
+         - T_tank_hot_init
+         - const_per_interest_rate1
+         - const_per_interest_rate2
+         - const_per_interest_rate3
+         - const_per_interest_rate4
+         - const_per_interest_rate5
+         - const_per_months1
+         - const_per_months2
+         - const_per_months3
+         - const_per_months4
+         - const_per_months5
+         - const_per_percent1
+         - const_per_percent2
+         - const_per_percent3
+         - const_per_percent4
+         - const_per_percent5
+         - const_per_upfront_rate1
+         - const_per_upfront_rate2
+         - const_per_upfront_rate3
+         - const_per_upfront_rate4
+         - const_per_upfront_rate5
+         - d_tank_in
+         - defocus_initial
+         - f_htfmax
+         - f_htfmin
+         - h_tank_in
+         - is_dispatch_targets
+         - is_h_tank_fixed
+         - is_pc_sb_allowed_in
+         - is_pc_su_allowed_in
+         - is_rec_su_allowed_in
+         - is_timestep_load_fractions
+         - pc_op_mode_initial
+         - pc_startup_energy_remain_initial
+         - pc_startup_time_remain_init
+         - q_pc_max_in
+         - q_pc_target_on_in
+         - q_pc_target_su_in
+         - rec_op_mode_initial
+         - tes_cyl_piston_loss_poly
+         - tes_cyl_tank_cp
+         - tes_cyl_tank_dens
+         - tes_cyl_tank_insul_percent
+         - tes_cyl_tank_thick
+         - tes_n_tsteps
+         - tes_pb_T_charge_min
+         - tes_pb_T_cold_delta
+         - tes_pb_T_hot_delta
+         - tes_pb_cp_solid
+         - tes_pb_dens_solid
+         - tes_pb_f_oversize
+         - tes_pb_k_eff
+         - tes_pb_n_xsteps
+         - tes_pb_void_frac
+         - tes_type
+         - time_start
+         - time_steps_per_hour
+         - time_stop
+         - ud_is_sco2_regr
+         - use_abs_or_rel_mdot_limit
+         - vacuum_arrays
+
+    Removed variables:
+
+         - disp_wlim_maxspec
+         - dispatch_series
+         - h_tank
+         - is_dispatch_series
+         - lat
+
+:doc:`../modules/TroughPhysical` New Default files:
+
+     - PhysicalTroughCommercial
+
+:doc:`../modules/TroughPhysical` Modified Default Values:
+
+     - TroughPhysicalIph_PhysicalTroughIPHLCOHCalculator
+
+        ['Error', 'GeomEffects', 'Fluid', 'csp_dtr_cost_site_improvements_cost_per_m2', 'T_loop_out', 'specified_solar_multiple', 'Rho_mirror_clean', 'IAM_matrix', 'TrackingError', 'W_aperture', 'store_fl_props', 'store_fluid', 'csp_dtr_cost_solar_field_cost_per_m2', 'specified_total_aperture', 'q_pb_design', 'Ave_Focal_Length', 'L_SCA', 'A_aperture']
+
+     - TroughPhysicalIph_PhysicalTroughIPHNone
+
+        ['Error', 'GeomEffects', 'Fluid', 'csp_dtr_cost_site_improvements_cost_per_m2', 'T_loop_out', 'specified_solar_multiple', 'Rho_mirror_clean', 'IAM_matrix', 'TrackingError', 'W_aperture', 'store_fl_props', 'store_fluid', 'csp_dtr_cost_solar_field_cost_per_m2', 'q_pb_design', 'Ave_Focal_Length', 'L_SCA', 'A_aperture']
+
+
+
+TroughPhysicalIph
+************************************************
+
+:doc:`../modules/TroughPhysicalIph` Modified Input Variables:
+
+    New variables:
+
+         - T_shutdown
+         - T_startup
+         - allow_heater_no_dispatch_opt
+         - d_tank_in
+         - disp_frequency
+         - disp_horizon
+         - disp_max_iter
+         - disp_mip_gap
+         - disp_reporting
+         - disp_spec_bb
+         - disp_spec_presolve
+         - disp_spec_scaling
+         - disp_steps_per_hour
+         - disp_time_weighting
+         - disp_timeout
+         - f_htfmax
+         - f_htfmin
+         - f_q_dot_des_allowable_su
+         - f_q_dot_heater_min
+         - h_tank_in
+         - heater_efficiency
+         - heater_mult
+         - heater_spec_cost
+         - hrs_startup_at_max_rate
+         - hs_phys_N_sub
+         - hs_phys_P_steam_hot_des
+         - hs_phys_Q_steam_hot_des
+         - hs_phys_T_steam_cold_des
+         - hs_phys_f_mdot_steam_max
+         - hs_phys_f_mdot_steam_min
+         - hs_phys_tol
+         - hs_type
+         - inflation_rate
+         - is_dispatch
+         - is_h_tank_fixed
+         - is_parallel_htr
+         - ppa_price_input_heat_btu
+         - rate_escalation
+         - tes_cyl_piston_loss_poly
+         - tes_cyl_tank_cp
+         - tes_cyl_tank_dens
+         - tes_cyl_tank_insul_percent
+         - tes_cyl_tank_thick
+         - tes_n_tsteps
+         - tes_pb_T_charge_min
+         - tes_pb_T_cold_delta
+         - tes_pb_T_hot_delta
+         - tes_pb_cp_solid
+         - tes_pb_dens_solid
+         - tes_pb_f_oversize
+         - tes_pb_k_eff
+         - tes_pb_n_xsteps
+         - tes_pb_void_frac
+         - tes_type
+         - timestep_load_abs
+         - timestep_load_abs_factor
+         - ur_annual_min_charge
+         - ur_billing_demand_lookback_percentages
+         - ur_billing_demand_lookback_period
+         - ur_billing_demand_minimum
+         - ur_dc_billing_demand_periods
+         - ur_dc_enable
+         - ur_dc_flat_mat
+         - ur_dc_sched_weekday
+         - ur_dc_sched_weekend
+         - ur_dc_tou_mat
+         - ur_ec_sched_weekday
+         - ur_ec_sched_weekend
+         - ur_ec_tou_mat
+         - ur_en_ts_buy_rate
+         - ur_en_ts_sell_rate
+         - ur_enable_billing_demand
+         - ur_metering_option
+         - ur_monthly_fixed_charge
+         - ur_monthly_min_charge
+         - ur_nb_apply_credit_current_month
+         - ur_nb_credit_expire
+         - ur_nm_credit_month
+         - ur_nm_credit_rollover
+         - ur_nm_yearend_sell_rate
+         - ur_sell_eq_buy
+         - ur_ts_buy_rate
+         - ur_ts_sell_rate
+         - ur_yearzero_usage_peaks
+         - use_abs_or_rel_mdot_limit
+
+    Removed variables:
+
+         - P_boil
+         - ampl_data_dir
+         - ampl_exec_call
+         - can_cycle_use_standby
+         - disp_csu_cost
+         - disp_pen_delta_w
+         - disp_rsu_cost
+         - dispatch_series
+         - h_tank
+         - is_ampl_engine
+         - is_dispatch_series
+         - is_write_ampl_dat
+         - lat
+         - mp_energy_market_revenue
+         - piping_loss
+         - ppa_price_input
+         - q_rec_heattrace
+         - q_rec_standby
+
+:doc:`../modules/TroughPhysicalIph` New Default files:
+
+     - PhysicalTroughIPHCommercial
+     - PhysicalTroughIPHSingleOwner
+
+:doc:`../modules/TroughPhysicalIph` Modified Default Values:
+
+     - TroughPhysicalIph_PhysicalTroughIPHLCOHCalculator
+
+        ['Error', 'GeomEffects', 'Fluid', 'csp_dtr_cost_site_improvements_cost_per_m2', 'T_loop_out', 'specified_solar_multiple', 'Rho_mirror_clean', 'IAM_matrix', 'TrackingError', 'W_aperture', 'store_fl_props', 'store_fluid', 'csp_dtr_cost_solar_field_cost_per_m2', 'specified_total_aperture', 'q_pb_design', 'Ave_Focal_Length', 'L_SCA', 'A_aperture']
+
+     - TroughPhysicalIph_PhysicalTroughIPHNone
+
+        ['Error', 'GeomEffects', 'Fluid', 'csp_dtr_cost_site_improvements_cost_per_m2', 'T_loop_out', 'specified_solar_multiple', 'Rho_mirror_clean', 'IAM_matrix', 'TrackingError', 'W_aperture', 'store_fl_props', 'store_fluid', 'csp_dtr_cost_solar_field_cost_per_m2', 'q_pb_design', 'Ave_Focal_Length', 'L_SCA', 'A_aperture']
+
+
+
+Utilityrate5
+************************************************
+
+:doc:`../modules/Utilityrate5` Modified Input Variables:
+
+    New variables:
+
+         - ur_nb_apply_credit_current_month
+         - ur_nb_credit_expire
+
+:doc:`../modules/Utilityrate5` New Default files:
+
+     - CustomGenerationBatteryAllEquityPartnershipFlip
+     - CustomGenerationBatteryCommercial
+     - CustomGenerationBatteryHostDeveloper
+     - CustomGenerationBatteryLeveragedPartnershipFlip
+     - CustomGenerationBatteryMerchantPlant
+     - CustomGenerationBatteryResidential
+     - CustomGenerationBatterySaleLeaseback
+     - CustomGenerationBatterySingleOwner
+     - CustomGenerationBatteryThirdParty
+     - CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner
+     - CustomGenerationProfileAllEquityPartnershipFlip
+     - CustomGenerationProfileCommercial
+     - CustomGenerationProfileHostDeveloper
+     - CustomGenerationProfileLeveragedPartnershipFlip
+     - CustomGenerationProfileMerchantPlant
+     - CustomGenerationProfileResidential
+     - CustomGenerationProfileSaleLeaseback
+     - CustomGenerationProfileSingleOwner
+     - CustomGenerationProfileThirdParty
+     - DSGLIPHSingleOwner
+     - MSLFIPHCommercial
+     - MSLFIPHSingleOwner
+     - MSPTIPHSingleOwner
+     - PhysicalTroughCommercial
+     - PhysicalTroughIPHCommercial
+     - PhysicalTroughIPHSingleOwner
+
+:doc:`../modules/Utilityrate5` Removed Default files
+
+     - GenericBatteryAllEquityPartnershipFlip
+     - GenericBatteryCommercial
+     - GenericBatteryHostDeveloper
+     - GenericBatteryLeveragedPartnershipFlip
+     - GenericBatteryMerchantPlant
+     - GenericBatteryResidential
+     - GenericBatterySaleLeaseback
+     - GenericBatterySingleOwner
+     - GenericBatteryThirdParty
+     - GenericPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - GenericPVWattsWindFuelCellBatteryHybridSingleOwner
+     - GenericSystemAllEquityPartnershipFlip
+     - GenericSystemCommercial
+     - GenericSystemHostDeveloper
+     - GenericSystemLeveragedPartnershipFlip
+     - GenericSystemMerchantPlant
+     - GenericSystemResidential
+     - GenericSystemSaleLeaseback
+     - GenericSystemSingleOwner
+     - GenericSystemThirdParty
+
+:doc:`../modules/Utilityrate5` Modified Default Values:
+
+     - Utilityrate5_PVBatterySaleLeaseback
+
+        ['ur_nm_credit_month']
+
+     - Utilityrate5_PVWattsWindBatteryHybridSingleOwner
+
+        ['total_installed_cost']
+
+     - Utilityrate5_PVWattsWindFuelCellBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'ur_dc_sched_weekend']
+
+     - Utilityrate5_PVWattsWindFuelCellBatteryHybridSingleOwner
+
+        ['total_installed_cost']
+
+     - Utilityrate5_FlatPlatePVMerchantPlant
+
+        ['ur_nm_credit_month']
+
+     - Utilityrate5_PhotovoltaicWindBatteryHybridHostDeveloper
+
+        ['ur_dc_sched_weekday', 'total_installed_cost', 'ur_dc_tou_mat', 'ur_dc_sched_weekend', 'ur_dc_enable']
+
+     - Utilityrate5_PhotovoltaicWindBatteryHybridSingleOwner
+
+        ['total_installed_cost']
+
+     - Utilityrate5_PVBatteryAllEquityPartnershipFlip
+
+        ['ur_nm_credit_month']
+
+     - Utilityrate5_PVBatteryMerchantPlant
+
+        ['ur_nm_credit_month']
+
+     - Utilityrate5_PVWattsWindBatteryHybridHostDeveloper
+
+        ['ur_dc_sched_weekday', 'total_installed_cost', 'ur_dc_tou_mat', 'ur_dc_sched_weekend', 'ur_dc_enable']
+
+     - Utilityrate5_PVBatterySingleOwner
+
+        ['ur_nm_credit_month']
+
+     - Utilityrate5_PVBatteryResidential
+
+        ['ur_ec_tou_mat']
+
+     - Utilityrate5_PVBatteryLeveragedPartnershipFlip
+
+        ['ur_nm_credit_month']
+
+     - Utilityrate5_PVBatteryThirdParty
+
+        ['ur_ec_tou_mat']
+
+     - Utilityrate5_PVBatteryCommercial
+
+        ['ur_dc_tou_mat']
+
+
+
+Utilityrateforecast
+************************************************
+
+:doc:`../modules/Utilityrateforecast` Modified Input Variables:
+
+    New variables:
+
+         - ur_nb_apply_credit_current_month
+         - ur_nb_credit_expire
+
+
+Windpower
+************************************************
+
+:doc:`../modules/Windpower` Modified Input Variables:
+
+    New variables:
+
+         - icing_persistence_timesteps
+         - park_wake_decay_constant
+         - wake_loss_multiplier
+         - wind_turbine_ct_curve
+
+:doc:`../modules/Windpower` New Default files:
+
+     - CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner
+
+:doc:`../modules/Windpower` Removed Default files
+
+     - GenericPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - GenericPVWattsWindFuelCellBatteryHybridSingleOwner
+
+:doc:`../modules/Windpower` Modified Default Values:
+
+     - Windpower_PhotovoltaicWindBatteryHybridSingleOwner
+
+        ['total_installed_cost']
+
+     - Windpower_PVWattsWindFuelCellBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'om_capacity']
+
+     - Windpower_PVWattsWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'om_capacity']
+
+     - Windpower_PVWattsWindBatteryHybridSingleOwner
+
+        ['total_installed_cost']
+
+     - Windpower_PVWattsWindFuelCellBatteryHybridSingleOwner
+
+        ['total_installed_cost']
+
+     - Windpower_PhotovoltaicWindBatteryHybridHostDeveloper
+
+        ['total_installed_cost', 'om_capacity']
+
+
+
