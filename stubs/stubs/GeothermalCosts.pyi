@@ -23,6 +23,8 @@ class GeothermalCosts(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
+	def getem_om_cost_calc(self, args):
+		pass
 	class GeoHourly(object):
 		def assign(self): 
 			pass
@@ -45,6 +47,12 @@ class GeothermalCosts(object):
 		dt_prod_well = float
 		eff_secondlaw = float
 		flash_count = float
+		geotherm_cost_conf_multiplier = float
+		geotherm_cost_conf_non_drill = float
+		geotherm_cost_conf_num_wells = float
+		geotherm_cost_expl_multiplier = float
+		geotherm_cost_expl_non_drill = float
+		geotherm_cost_expl_num_wells = float
 		geotherm_cost_inj_cost_curve = float
 		geotherm_cost_inj_cost_curve_welldiam = float
 		geotherm_cost_inj_cost_curve_welltype = float
@@ -53,6 +61,7 @@ class GeothermalCosts(object):
 		geotherm_cost_prod_cost_curve_welldiam = float
 		geotherm_cost_prod_cost_curve_welltype = float
 		geotherm_cost_prod_wells_drilled = float
+		geotherm_cost_stim_non_drill = float
 		gross_cost_output = float
 		gross_output = float
 		hp_flash_pressure = float
@@ -89,8 +98,12 @@ class GeothermalCosts(object):
 
 
 		baseline_cost = float
+		conf_total_cost = float
+		drilling_total_cost = float
+		expl_total_cost = float
 		inj_total_cost = float
 		prod_total_cost = float
+		stim_total_cost = float
 
 
 

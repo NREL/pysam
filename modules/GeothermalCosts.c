@@ -5,6 +5,8 @@
 
 #include "PySAM_utils.h"
 
+#include "GeothermalCosts_eqns.c"
+
 
 /*
  * GeoHourly Group
@@ -210,6 +212,78 @@ GeoHourly_set_flash_count(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+GeoHourly_get_geotherm_cost_conf_multiplier(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_GeoHourly_geotherm_cost_conf_multiplier_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_geotherm_cost_conf_multiplier(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_GeothermalCosts_GeoHourly_geotherm_cost_conf_multiplier_nset, self->data_ptr);
+}
+
+static PyObject *
+GeoHourly_get_geotherm_cost_conf_non_drill(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_GeoHourly_geotherm_cost_conf_non_drill_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_geotherm_cost_conf_non_drill(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_GeothermalCosts_GeoHourly_geotherm_cost_conf_non_drill_nset, self->data_ptr);
+}
+
+static PyObject *
+GeoHourly_get_geotherm_cost_conf_num_wells(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_GeoHourly_geotherm_cost_conf_num_wells_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_geotherm_cost_conf_num_wells(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_GeothermalCosts_GeoHourly_geotherm_cost_conf_num_wells_nset, self->data_ptr);
+}
+
+static PyObject *
+GeoHourly_get_geotherm_cost_expl_multiplier(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_GeoHourly_geotherm_cost_expl_multiplier_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_geotherm_cost_expl_multiplier(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_GeothermalCosts_GeoHourly_geotherm_cost_expl_multiplier_nset, self->data_ptr);
+}
+
+static PyObject *
+GeoHourly_get_geotherm_cost_expl_non_drill(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_GeoHourly_geotherm_cost_expl_non_drill_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_geotherm_cost_expl_non_drill(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_GeothermalCosts_GeoHourly_geotherm_cost_expl_non_drill_nset, self->data_ptr);
+}
+
+static PyObject *
+GeoHourly_get_geotherm_cost_expl_num_wells(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_GeoHourly_geotherm_cost_expl_num_wells_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_geotherm_cost_expl_num_wells(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_GeothermalCosts_GeoHourly_geotherm_cost_expl_num_wells_nset, self->data_ptr);
+}
+
+static PyObject *
 GeoHourly_get_geotherm_cost_inj_cost_curve(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_GeothermalCosts_GeoHourly_geotherm_cost_inj_cost_curve_nget, self->data_ptr);
@@ -303,6 +377,18 @@ static int
 GeoHourly_set_geotherm_cost_prod_wells_drilled(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_GeothermalCosts_GeoHourly_geotherm_cost_prod_wells_drilled_nset, self->data_ptr);
+}
+
+static PyObject *
+GeoHourly_get_geotherm_cost_stim_non_drill(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_GeoHourly_geotherm_cost_stim_non_drill_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_geotherm_cost_stim_non_drill(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_GeothermalCosts_GeoHourly_geotherm_cost_stim_non_drill_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -603,6 +689,24 @@ static PyGetSetDef GeoHourly_getset[] = {
 {"flash_count", (getter)GeoHourly_get_flash_count,(setter)GeoHourly_set_flash_count,
 	PyDoc_STR("*float*: Flash Count [(1 -2)]\n\n**Required:**\nRequired if conversion_type=1"),
  	NULL},
+{"geotherm_cost_conf_multiplier", (getter)GeoHourly_get_geotherm_cost_conf_multiplier,(setter)GeoHourly_set_geotherm_cost_conf_multiplier,
+	PyDoc_STR("*float*: Confirmation cost multiplier\n\n**Options:**\n?=1.2\n\n**Required:**\nRequired if calc_drill_costs=1"),
+ 	NULL},
+{"geotherm_cost_conf_non_drill", (getter)GeoHourly_get_geotherm_cost_conf_non_drill,(setter)GeoHourly_set_geotherm_cost_conf_non_drill,
+	PyDoc_STR("*float*: Confirmation non drilling costs [$]\n\n**Options:**\n?=250000\n\n**Required:**\nRequired if calc_drill_costs=1"),
+ 	NULL},
+{"geotherm_cost_conf_num_wells", (getter)GeoHourly_get_geotherm_cost_conf_num_wells,(setter)GeoHourly_set_geotherm_cost_conf_num_wells,
+	PyDoc_STR("*float*: Number of confirmation wells\n\n**Options:**\n?=2\n\n**Required:**\nRequired if calc_drill_costs=1"),
+ 	NULL},
+{"geotherm_cost_expl_multiplier", (getter)GeoHourly_get_geotherm_cost_expl_multiplier,(setter)GeoHourly_set_geotherm_cost_expl_multiplier,
+	PyDoc_STR("*float*: Exploration cost multiplier\n\n**Options:**\n?=0.5\n\n**Required:**\nRequired if calc_drill_costs=1"),
+ 	NULL},
+{"geotherm_cost_expl_non_drill", (getter)GeoHourly_get_geotherm_cost_expl_non_drill,(setter)GeoHourly_set_geotherm_cost_expl_non_drill,
+	PyDoc_STR("*float*: Exploration non drilling costs [$]\n\n**Options:**\n?=750000\n\n**Required:**\nRequired if calc_drill_costs=1"),
+ 	NULL},
+{"geotherm_cost_expl_num_wells", (getter)GeoHourly_get_geotherm_cost_expl_num_wells,(setter)GeoHourly_set_geotherm_cost_expl_num_wells,
+	PyDoc_STR("*float*: Number of exploration wells\n\n**Options:**\n?=2\n\n**Required:**\nRequired if calc_drill_costs=1"),
+ 	NULL},
 {"geotherm_cost_inj_cost_curve", (getter)GeoHourly_get_geotherm_cost_inj_cost_curve,(setter)GeoHourly_set_geotherm_cost_inj_cost_curve,
 	PyDoc_STR("*float*: Injection well diameter type [0/1]\n\n**Options:**\n0=LargerDiameter,1=SmallerDiameter\n\n**Required:**\nRequired if calc_drill_costs=1"),
  	NULL},
@@ -626,6 +730,9 @@ static PyGetSetDef GeoHourly_getset[] = {
  	NULL},
 {"geotherm_cost_prod_wells_drilled", (getter)GeoHourly_get_geotherm_cost_prod_wells_drilled,(setter)GeoHourly_set_geotherm_cost_prod_wells_drilled,
 	PyDoc_STR("*float*: Number of drilled production wells [0/1]\n\n**Options:**\n0=LargerDiameter,1=SmallerDiameter\n\n**Required:**\nRequired if calc_drill_costs=1"),
+ 	NULL},
+{"geotherm_cost_stim_non_drill", (getter)GeoHourly_get_geotherm_cost_stim_non_drill,(setter)GeoHourly_set_geotherm_cost_stim_non_drill,
+	PyDoc_STR("*float*: Stimulation non drilling costs [$]\n\n**Options:**\n?=0\n\n**Required:**\nRequired if calc_drill_costs=1"),
  	NULL},
 {"gross_cost_output", (getter)GeoHourly_get_gross_cost_output,(setter)GeoHourly_set_gross_cost_output,
 	PyDoc_STR("*float*: Gross output from GETEM for cost calculations [MW]\n\n**Required:**\nTrue"),
@@ -821,6 +928,24 @@ Outputs_get_baseline_cost(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_conf_total_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_conf_total_cost_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_drilling_total_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_drilling_total_cost_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_expl_total_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_expl_total_cost_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_inj_total_cost(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_inj_total_cost_nget, self->data_ptr);
@@ -832,15 +957,33 @@ Outputs_get_prod_total_cost(VarGroupObject *self, void *closure)
 	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_prod_total_cost_nget, self->data_ptr);
 }
 
+static PyObject *
+Outputs_get_stim_total_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_stim_total_cost_nget, self->data_ptr);
+}
+
 static PyGetSetDef Outputs_getset[] = {
 {"baseline_cost", (getter)Outputs_get_baseline_cost,(setter)0,
-	PyDoc_STR("*float*: Baseline Cost [$/kW]"),
+	PyDoc_STR("*float*: Baseline cost [$/kW]"),
+ 	NULL},
+{"conf_total_cost", (getter)Outputs_get_conf_total_cost,(setter)0,
+	PyDoc_STR("*float*: Total confirmation well cost [$]"),
+ 	NULL},
+{"drilling_total_cost", (getter)Outputs_get_drilling_total_cost,(setter)0,
+	PyDoc_STR("*float*: Total drilling cost [$]"),
+ 	NULL},
+{"expl_total_cost", (getter)Outputs_get_expl_total_cost,(setter)0,
+	PyDoc_STR("*float*: Total exploration well cost [$]"),
  	NULL},
 {"inj_total_cost", (getter)Outputs_get_inj_total_cost,(setter)0,
-	PyDoc_STR("*float*: Total Injection well cost [$/kW]"),
+	PyDoc_STR("*float*: Total injection well cost [$]"),
  	NULL},
 {"prod_total_cost", (getter)Outputs_get_prod_total_cost,(setter)0,
-	PyDoc_STR("*float*: Total Production well cost [$/kW]"),
+	PyDoc_STR("*float*: Total production well cost [$]"),
+ 	NULL},
+{"stim_total_cost", (getter)Outputs_get_stim_total_cost,(setter)0,
+	PyDoc_STR("*float*: Total stimulation well cost [$]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1019,6 +1162,8 @@ static PyMethodDef GeothermalCosts_methods[] = {
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{"get_data_ptr",           (PyCFunction)GeothermalCosts_get_data_ptr,  METH_VARARGS,
 				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
+		{"getem_om_cost_calc", (PyCFunction)getem_om_cost_calc, METH_VARARGS | METH_KEYWORDS,
+			getem_om_cost_calc_doc},
 		{NULL,              NULL}           /* sentinel */
 };
 
