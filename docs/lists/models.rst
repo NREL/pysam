@@ -62,7 +62,7 @@
       Geothermal monthly and hourly models using general power block code from TRNSYS Type 224 code by M.Wagner, and some GETEM model code.
 
 :doc:`../modules/GeothermalCosts` (HD)
-      Geothermal monthly and hourly models using general power block code from TRNSYS Type 224 code by M.Wagner, and some GETEM model code.
+      Geothermal cost equations.
 
 :doc:`../modules/Grid` (HD)
       Grid model
