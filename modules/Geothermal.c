@@ -1014,6 +1014,18 @@ GeoHourly_set_stim_success_rate(VarGroupObject *self, PyObject *value, void *clo
 }
 
 static PyObject *
+GeoHourly_get_stimulation_type(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_GeoHourly_stimulation_type_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_stimulation_type(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Geothermal_GeoHourly_stimulation_type_nset, self->data_ptr);
+}
+
+static PyObject *
 GeoHourly_get_subsurface_water_loss(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Geothermal_GeoHourly_subsurface_water_loss_nget, self->data_ptr);
@@ -1343,6 +1355,9 @@ static PyGetSetDef GeoHourly_getset[] = {
  	NULL},
 {"stim_success_rate", (getter)GeoHourly_get_stim_success_rate,(setter)GeoHourly_set_stim_success_rate,
 	PyDoc_STR("*float*: Stimulation success rate [%]\n\nThe value of the following variables depends on ``stim_success_rate``:\n\n\t - num_wells_getem\n"),
+ 	NULL},
+{"stimulation_type", (getter)GeoHourly_get_stimulation_type,(setter)GeoHourly_set_stimulation_type,
+	PyDoc_STR("*float*: Which wells are stimulated [0/1/2/3]\n\n**Options:**\n0=Injection,1=Production,2=Both,3=Neither\n\n**Required:**\nFalse. Automatically set to 3 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subsurface_water_loss", (getter)GeoHourly_get_subsurface_water_loss,(setter)GeoHourly_set_subsurface_water_loss,
 	PyDoc_STR("*float*: Subsurface water loss [%]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``subsurface_water_loss``:\n\n\t - num_wells_getem\n"),
