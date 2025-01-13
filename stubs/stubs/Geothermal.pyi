@@ -192,7 +192,10 @@ class Geothermal(object):
 		monthly_resource_temperature = tuple
 		ncg_condensate_pump = float
 		num_wells_getem_inj = float
+		num_wells_getem_inj_drilled = float
 		num_wells_getem_output = float
+		num_wells_getem_prod_drilled = float
+		num_wells_getem_prod_failed = float
 		plant_brine_eff = float
 		pressure_ratio_1 = float
 		pressure_ratio_2 = float

@@ -56,12 +56,10 @@ class GeothermalCosts(object):
 		geotherm_cost_inj_cost_curve = float
 		geotherm_cost_inj_cost_curve_welldiam = float
 		geotherm_cost_inj_cost_curve_welltype = float
-		geotherm_cost_inj_wells_drilled = float
 		geotherm_cost_prod_cost_curve = float
 		geotherm_cost_prod_cost_curve_welldiam = float
 		geotherm_cost_prod_cost_curve_welltype = float
 		geotherm_cost_prod_req = float
-		geotherm_cost_prod_wells_drilled = float
 		geotherm_cost_pump_depth = float
 		geotherm_cost_pump_fixed = float
 		geotherm_cost_pump_per_foot = float
@@ -73,6 +71,9 @@ class GeothermalCosts(object):
 		inj_pump_hp = float
 		lp_flash_pressure = float
 		ncg_condensate_pump = float
+		num_wells_getem_inj_drilled = float
+		num_wells_getem_prod_drilled = float
+		num_wells_getem_prod_failed = float
 		ppi_base_year = float
 		pressure_ratio_1 = float
 		pressure_ratio_2 = float
@@ -106,11 +107,11 @@ class GeothermalCosts(object):
 
 		baseline_cost = float
 		conf_total_cost = float
-		drilling_total_cost = float
 		expl_total_cost = float
 		inj_total_cost = float
 		prod_total_cost = float
 		stim_total_cost = float
+		total_drilling_cost = float
 		total_gathering_cost = float
 		total_pump_cost = float
 

@@ -1661,9 +1661,27 @@ Outputs_get_num_wells_getem_inj(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_num_wells_getem_inj_drilled(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_Outputs_num_wells_getem_inj_drilled_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_num_wells_getem_output(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Geothermal_Outputs_num_wells_getem_output_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_num_wells_getem_prod_drilled(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_Outputs_num_wells_getem_prod_drilled_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_num_wells_getem_prod_failed(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_Outputs_num_wells_getem_prod_failed_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1923,10 +1941,19 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Condensate Pump Work [kW]"),
  	NULL},
 {"num_wells_getem_inj", (getter)Outputs_get_num_wells_getem_inj,(setter)0,
-	PyDoc_STR("*float*: Number of wells calculated by GETEM"),
+	PyDoc_STR("*float*: Number of required injection wells calculated by GETEM"),
+ 	NULL},
+{"num_wells_getem_inj_drilled", (getter)Outputs_get_num_wells_getem_inj_drilled,(setter)0,
+	PyDoc_STR("*float*: Number of injection wells drilled"),
  	NULL},
 {"num_wells_getem_output", (getter)Outputs_get_num_wells_getem_output,(setter)0,
-	PyDoc_STR("*float*: Number of wells calculated by GETEM"),
+	PyDoc_STR("*float*: Number of production wells required"),
+ 	NULL},
+{"num_wells_getem_prod_drilled", (getter)Outputs_get_num_wells_getem_prod_drilled,(setter)0,
+	PyDoc_STR("*float*: Number of production wells drilled"),
+ 	NULL},
+{"num_wells_getem_prod_failed", (getter)Outputs_get_num_wells_getem_prod_failed,(setter)0,
+	PyDoc_STR("*float*: Number of production wells failed during drilling"),
  	NULL},
 {"plant_brine_eff", (getter)Outputs_get_plant_brine_eff,(setter)0,
 	PyDoc_STR("*float*: Plant Brine Efficiency"),
