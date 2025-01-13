@@ -1652,6 +1652,143 @@ static PyTypeObject HeatSink_Type = {
 
 
 /*
+ * Revenue Group
+ */ 
+
+static PyTypeObject Revenue_Type;
+
+static PyObject *
+Revenue_new(SAM_LinearFresnelDsgIph data_ptr)
+{
+	PyObject* new_obj = Revenue_Type.tp_alloc(&Revenue_Type,0);
+
+	VarGroupObject* Revenue_obj = (VarGroupObject*)new_obj;
+
+	Revenue_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* Revenue methods */
+
+static PyObject *
+Revenue_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "LinearFresnelDsgIph", "Revenue")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Revenue_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Revenue_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "LinearFresnelDsgIph", "Revenue")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Revenue_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Revenue_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Revenue_methods[] = {
+		{"assign",            (PyCFunction)Revenue_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Revenue_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Revenue_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Revenue_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Revenue_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Revenue_get_ppa_price_input_heat_btu(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_LinearFresnelDsgIph_Revenue_ppa_price_input_heat_btu_aget, self->data_ptr);
+}
+
+static int
+Revenue_set_ppa_price_input_heat_btu(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_LinearFresnelDsgIph_Revenue_ppa_price_input_heat_btu_aset, self->data_ptr);
+}
+
+static PyGetSetDef Revenue_getset[] = {
+{"ppa_price_input_heat_btu", (getter)Revenue_get_ppa_price_input_heat_btu,(setter)Revenue_set_ppa_price_input_heat_btu,
+	PyDoc_STR("*sequence*: PPA prices - yearly [$/MMBtu]"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Revenue_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"LinearFresnelDsgIph.Revenue",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Revenue_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Revenue_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * Outputs Group
  */ 
 
@@ -1789,6 +1926,12 @@ Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_annual_energy_heat_btu(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Outputs_annual_energy_heat_btu_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_annual_field_energy(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Outputs_annual_field_energy_nget, self->data_ptr);
@@ -1816,6 +1959,12 @@ static PyObject *
 Outputs_get_capacity_factor(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Outputs_capacity_factor_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cp_system_nameplate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Outputs_cp_system_nameplate_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1849,6 +1998,18 @@ Outputs_get_gen(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_gen_heat(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_LinearFresnelDsgIph_Outputs_gen_heat_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_gen_heat_btu(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_LinearFresnelDsgIph_Outputs_gen_heat_btu_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_hour_day(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_LinearFresnelDsgIph_Outputs_hour_day_aget, self->data_ptr);
@@ -1879,6 +2040,12 @@ Outputs_get_month(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_nameplate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Outputs_nameplate_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_op_mode_1(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_LinearFresnelDsgIph_Outputs_op_mode_1_aget, self->data_ptr);
@@ -1894,6 +2061,12 @@ static PyObject *
 Outputs_get_op_mode_3(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_LinearFresnelDsgIph_Outputs_op_mode_3_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_ppa_price_input(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_LinearFresnelDsgIph_Outputs_ppa_price_input_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1960,6 +2133,12 @@ static PyObject *
 Outputs_get_solzen(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_LinearFresnelDsgIph_Outputs_solzen_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_system_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Outputs_system_capacity_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2036,19 +2215,22 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Field collector tracking power [MWe]"),
  	NULL},
 {"annual_electricity_consumption", (getter)Outputs_get_annual_electricity_consumption,(setter)0,
-	PyDoc_STR("*float*: Annual electricity consumptoin w/ avail derate [kWe-hr]"),
+	PyDoc_STR("*float*: Annual electricity consumptoin w/ avail derate [kWhe]"),
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	PyDoc_STR("*float*: Annual Net Thermal Energy Production w/ avail derate [kWt-hr]"),
+	PyDoc_STR("*float*: Annual net thermal energy w/ avail. derate [kWht]"),
  	NULL},
 {"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
  	NULL},
+{"annual_energy_heat_btu", (getter)Outputs_get_annual_energy_heat_btu,(setter)0,
+	PyDoc_STR("*float*: Annual net thermal energy w/ avail. derate [MMBtu]"),
+ 	NULL},
 {"annual_field_energy", (getter)Outputs_get_annual_field_energy,(setter)0,
-	PyDoc_STR("*float*: Annual Gross Thermal Energy Production w/ avail derate [kWt-hr]"),
+	PyDoc_STR("*float*: Annual Gross Thermal Energy Production w/ avail derate [kWht]"),
  	NULL},
 {"annual_thermal_consumption", (getter)Outputs_get_annual_thermal_consumption,(setter)0,
-	PyDoc_STR("*float*: Annual thermal freeze protection required [kWt-hr]"),
+	PyDoc_STR("*float*: Annual thermal freeze protection required [kWht]"),
  	NULL},
 {"annual_total_water_use", (getter)Outputs_get_annual_total_water_use,(setter)0,
 	PyDoc_STR("*float*: Total Annual Water Usage [m^3]"),
@@ -2058,6 +2240,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
 	PyDoc_STR("*float*: Capacity factor [%]"),
+ 	NULL},
+{"cp_system_nameplate", (getter)Outputs_get_cp_system_nameplate,(setter)0,
+	PyDoc_STR("*float*: System capacity for capacity payments [MWt]"),
  	NULL},
 {"defocus", (getter)Outputs_get_defocus,(setter)0,
 	PyDoc_STR("*sequence*: Field collector focus fraction"),
@@ -2072,7 +2257,13 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Field optical efficiency before defocus [deg]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
-	PyDoc_STR("*sequence*: System power generated [kW]"),
+	PyDoc_STR("*sequence*: System net electrical power w/ avail. derate [kWe]"),
+ 	NULL},
+{"gen_heat", (getter)Outputs_get_gen_heat,(setter)0,
+	PyDoc_STR("*sequence*: System net thermal power w/ avail. derate [kWt]"),
+ 	NULL},
+{"gen_heat_btu", (getter)Outputs_get_gen_heat_btu,(setter)0,
+	PyDoc_STR("*sequence*: System net thermal power w/ avail. derate [MMBtu/hr]"),
  	NULL},
 {"hour_day", (getter)Outputs_get_hour_day,(setter)0,
 	PyDoc_STR("*sequence*: Resource Hour of Day"),
@@ -2089,6 +2280,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"month", (getter)Outputs_get_month,(setter)0,
 	PyDoc_STR("*sequence*: Resource Month"),
  	NULL},
+{"nameplate", (getter)Outputs_get_nameplate,(setter)0,
+	PyDoc_STR("*float*: Nameplate capacity [MWt]"),
+ 	NULL},
 {"op_mode_1", (getter)Outputs_get_op_mode_1,(setter)0,
 	PyDoc_STR("*sequence*: 1st operating mode"),
  	NULL},
@@ -2097,6 +2291,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"op_mode_3", (getter)Outputs_get_op_mode_3,(setter)0,
 	PyDoc_STR("*sequence*: 3rd op. mode, if applicable"),
+ 	NULL},
+{"ppa_price_input", (getter)Outputs_get_ppa_price_input,(setter)0,
+	PyDoc_STR("*sequence*: PPA prices - yearly [$/kWh]"),
  	NULL},
 {"pres", (getter)Outputs_get_pres,(setter)0,
 	PyDoc_STR("*sequence*: Resource Pressure [mbar]"),
@@ -2130,6 +2327,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"solzen", (getter)Outputs_get_solzen,(setter)0,
 	PyDoc_STR("*sequence*: Resource Solar Zenith [deg]"),
+ 	NULL},
+{"system_capacity", (getter)Outputs_get_system_capacity,(setter)0,
+	PyDoc_STR("*float*: System capacity [kWt]"),
  	NULL},
 {"tdry", (getter)Outputs_get_tdry,(setter)0,
 	PyDoc_STR("*sequence*: Resource Dry bulb temperature [C]"),
@@ -2237,6 +2437,10 @@ newLinearFresnelDsgIphObject(void* data_ptr)
 	PyObject* HeatSink_obj = HeatSink_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "HeatSink", HeatSink_obj);
 	Py_DECREF(HeatSink_obj);
+
+	PyObject* Revenue_obj = Revenue_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Revenue", Revenue_obj);
+	Py_DECREF(Revenue_obj);
 
 	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
@@ -2521,7 +2725,7 @@ static PyMethodDef LinearFresnelDsgIphModule_methods[] = {
 		{"new",             LinearFresnelDsgIph_new,         METH_VARARGS,
 				PyDoc_STR("new() -> LinearFresnelDsgIph")},
 		{"default",             LinearFresnelDsgIph_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> LinearFresnelDsgIph\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"DSGLIPHLCOHCalculator\"*\n\n		- *\"DSGLIPHNone\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> LinearFresnelDsgIph\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"DSGLIPHLCOHCalculator\"*\n\n		- *\"DSGLIPHNone\"*\n\n		- *\"DSGLIPHSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             LinearFresnelDsgIph_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> LinearFresnelDsgIph\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   LinearFresnelDsgIph_from_existing,        METH_VARARGS,
@@ -2578,6 +2782,13 @@ LinearFresnelDsgIphModule_exec(PyObject *m)
 				"HeatSink",
 				(PyObject*)&HeatSink_Type);
 	Py_DECREF(&HeatSink_Type);
+
+	/// Add the Revenue type object to LinearFresnelDsgIph_Type
+	if (PyType_Ready(&Revenue_Type) < 0) { goto fail; }
+	PyDict_SetItemString(LinearFresnelDsgIph_Type.tp_dict,
+				"Revenue",
+				(PyObject*)&Revenue_Type);
+	Py_DECREF(&Revenue_Type);
 
 	/// Add the Outputs type object to LinearFresnelDsgIph_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

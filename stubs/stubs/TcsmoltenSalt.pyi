@@ -50,6 +50,8 @@ class TcsmoltenSalt(object):
 
 
 		F_wc = tuple
+		T_tank_cold_init = float
+		T_tank_hot_init = float
 		ampl_data_dir = str
 		ampl_exec_call = str
 		aux_par = float
@@ -79,20 +81,31 @@ class TcsmoltenSalt(object):
 		disp_steps_per_hour = float
 		disp_time_weighting = float
 		disp_timeout = float
-		disp_wlim_maxspec = float
-		dispatch_series = tuple
 		f_turb_tou_periods = tuple
+		is_PAR_HTR_allowed_in = tuple
 		is_ampl_engine = float
 		is_dispatch = float
-		is_dispatch_series = float
+		is_dispatch_targets = float
+		is_field_tracking_init = float
 		is_parallel_htr = float
+		is_pc_sb_allowed_in = tuple
+		is_pc_su_allowed_in = tuple
+		is_rec_su_allowed_in = tuple
 		is_tod_pc_target_also_pc_max = float
-		is_wlim_design = float
-		is_wlim_series = float
 		is_write_ampl_dat = float
 		pb_fixed_par = float
+		pc_op_mode_initial = float
+		pc_startup_energy_remain_initial = float
+		pc_startup_time_remain_init = float
+		q_dot_elec_to_PAR_HTR_in = tuple
+		q_pc_max_in = tuple
+		q_pc_target_on_in = tuple
+		q_pc_target_su_in = tuple
 		q_rec_heattrace = float
 		q_rec_standby = float
+		rec_op_mode_initial = float
+		rec_startup_energy_remain_init = float
+		rec_startup_time_remain_init = float
 		sim_type = float
 		time_start = float
 		time_steps_per_hour = float
@@ -101,7 +114,6 @@ class TcsmoltenSalt(object):
 		vacuum_arrays = float
 		weekday_schedule = tuple
 		weekend_schedule = tuple
-		wlim_series = tuple
 
 
 	class FinancialModel(object):
@@ -572,27 +584,27 @@ class TcsmoltenSalt(object):
 		def __init__(self, *args, **kwargs): # real signature unknown
 			pass
 	
-		constant = float
-		en_hourly = float
-		en_periods = float
-		en_timeindex = float
-		hourly = tuple
-		periods = tuple
-		imeindex = tuple
-		dc_constant = float
-		dc_en_hourly = float
-		dc_en_periods = float
-		dc_en_timeindex = float
-		dc_hourly = tuple
-		dc_periods = tuple
-		dc_imeindex = tuple
-		sf_constant = float
-		sf_en_hourly = float
-		sf_en_periods = float
-		sf_en_timeindex = float
-		sf_hourly = tuple
-		sf_periods = tuple
-		sf_timeindex = tuple
+		adjust_constant = float
+		adjust_en_hourly = float
+		adjust_en_periods = float
+		adjust_en_timeindex = float
+		adjust_hourly = tuple
+		adjust_periods = tuple
+		adjust_timeindex = tuple
+		dc_adjust_constant = float
+		dc_adjust_en_hourly = float
+		dc_adjust_en_periods = float
+		dc_adjust_en_timeindex = float
+		dc_adjust_hourly = tuple
+		dc_adjust_periods = tuple
+		dc_adjust_timeindex = tuple
+		sf_adjust_constant = float
+		sf_adjust_en_hourly = float
+		sf_adjust_en_periods = float
+		sf_adjust_en_timeindex = float
+		sf_adjust_hourly = tuple
+		sf_adjust_periods = tuple
+		sf_adjust_timeindex = tuple
 
 	class Outputs(object):
 		def assign(self): 
@@ -732,6 +744,8 @@ class TcsmoltenSalt(object):
 		csp_pt_cost_site_improvements = float
 		csp_pt_cost_storage = float
 		csp_pt_cost_tower = float
+		cycle_Tdb_table = tuple
+		cycle_eff_load_table = tuple
 		cycle_htf_pump_power = tuple
 		d_tank_tes = float
 		defocus = tuple
@@ -778,7 +792,9 @@ class TcsmoltenSalt(object):
 		heliostat_area = float
 		hot_hours_electricity_sales = float
 		hot_hours_revenue_fraction = float
+		hot_tank_htf_percent_final = tuple
 		is_PAR_HTR_allowed = tuple
+		is_field_tracking_final = tuple
 		is_pc_sb_allowed = tuple
 		is_pc_su_allowed = tuple
 		is_rec_su_allowed = tuple
@@ -820,6 +836,9 @@ class TcsmoltenSalt(object):
 		operating_modes_a = tuple
 		operating_modes_b = tuple
 		operating_modes_c = tuple
+		pc_op_mode_final = tuple
+		pc_startup_energy_remain_final = tuple
+		pc_startup_time_remain_final = tuple
 		pparasi = tuple
 		pricing_mult = tuple
 		q_balance = tuple
@@ -854,6 +873,9 @@ class TcsmoltenSalt(object):
 		radcool_control = tuple
 		rec_defocus = tuple
 		rec_height_calc = float
+		rec_op_mode_final = tuple
+		rec_startup_energy_remain_final = tuple
+		rec_startup_time_remain_final = tuple
 		refl_image_error = float
 		rh = tuple
 		sales_energy_capacity_factor = float

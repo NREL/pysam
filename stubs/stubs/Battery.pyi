@@ -37,6 +37,7 @@ class Battery(object):
 
 
 		percent_complete = float
+		timestep_minutes = float
 
 
 	class Lifetime(object):
@@ -236,6 +237,7 @@ class Battery(object):
 		batt_dispatch_auto_btm_can_discharge_to_grid = float
 		batt_dispatch_auto_can_charge = float
 		batt_dispatch_auto_can_clipcharge = float
+		batt_dispatch_auto_can_curtailcharge = float
 		batt_dispatch_auto_can_fuelcellcharge = float
 		batt_dispatch_auto_can_gridcharge = float
 		batt_dispatch_charge_only_system_exceeds_load = float
@@ -352,9 +354,13 @@ class Battery(object):
 			pass
 
 
+		mp_ancserv1_percent_gen = float
 		mp_ancserv1_revenue_single = tuple
+		mp_ancserv2_percent_gen = float
 		mp_ancserv2_revenue_single = tuple
+		mp_ancserv3_percent_gen = float
 		mp_ancserv3_revenue_single = tuple
+		mp_ancserv4_percent_gen = float
 		mp_ancserv4_revenue_single = tuple
 		mp_enable_ancserv1_percent_gen = float
 		mp_enable_ancserv2_percent_gen = float
@@ -362,7 +368,40 @@ class Battery(object):
 		mp_enable_ancserv4_percent_gen = float
 		mp_enable_market_percent_gen = float
 		mp_energy_market_revenue_single = tuple
+		mp_market_percent_gen = float
 
+
+	class AdjustmentFactors(object):
+		def assign(self): 
+			pass
+	
+		def export(self): 
+			return {}
+	
+		def __init__(self, *args, **kwargs): # real signature unknown
+			pass
+	
+		adjust_constant = float
+		adjust_en_hourly = float
+		adjust_en_periods = float
+		adjust_en_timeindex = float
+		adjust_hourly = tuple
+		adjust_periods = tuple
+		adjust_timeindex = tuple
+		dc_adjust_constant = float
+		dc_adjust_en_hourly = float
+		dc_adjust_en_periods = float
+		dc_adjust_en_timeindex = float
+		dc_adjust_hourly = tuple
+		dc_adjust_periods = tuple
+		dc_adjust_timeindex = tuple
+		sf_adjust_constant = float
+		sf_adjust_en_hourly = float
+		sf_adjust_en_periods = float
+		sf_adjust_en_timeindex = float
+		sf_adjust_hourly = tuple
+		sf_adjust_periods = tuple
+		sf_adjust_timeindex = tuple
 
 	class ElectricityRates(object):
 		def assign(self): 
@@ -396,6 +435,8 @@ class Battery(object):
 		ur_metering_option = float
 		ur_monthly_fixed_charge = float
 		ur_monthly_min_charge = float
+		ur_nb_apply_credit_current_month = float
+		ur_nb_credit_expire = float
 		ur_nm_credit_month = float
 		ur_nm_credit_rollover = float
 		ur_nm_yearend_sell_rate = float
@@ -476,6 +517,7 @@ class Battery(object):
 		batt_annual_discharge_energy = tuple
 		batt_annual_energy_loss = tuple
 		batt_annual_energy_system_loss = tuple
+		batt_availability_loss = tuple
 		batt_bank_installed_capacity = float
 		batt_bank_replacement = tuple
 		batt_capacity_percent = tuple
@@ -486,6 +528,7 @@ class Battery(object):
 		batt_cost_to_cycle = tuple
 		batt_cycles = tuple
 		batt_dispatch_sched = tuple
+		batt_grid_charge_percent = float
 		batt_power = tuple
 		batt_power_dc = tuple
 		batt_power_target = tuple
@@ -520,6 +563,8 @@ class Battery(object):
 		batt_to_system_load = tuple
 		batt_voltage = tuple
 		batt_voltage_cell = tuple
+		batt_year1_charge_from_grid = float
+		batt_year1_charge_from_system = float
 		capacity_factor_sales = float
 		cdf_of_surviving = tuple
 		cf_battery_replacement_cost_schedule = tuple

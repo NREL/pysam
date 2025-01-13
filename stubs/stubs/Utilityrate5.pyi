@@ -72,6 +72,8 @@ class Utilityrate5(object):
 		ur_metering_option = float
 		ur_monthly_fixed_charge = float
 		ur_monthly_min_charge = float
+		ur_nb_apply_credit_current_month = float
+		ur_nb_credit_expire = float
 		ur_nm_credit_month = float
 		ur_nm_credit_rollover = float
 		ur_nm_yearend_sell_rate = float

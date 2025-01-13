@@ -43,6 +43,12 @@ Lifetime Group
 .. autoclass:: PySAM.Thermalrate.Thermalrate.Lifetime
 	:members:
 
+HybridCosts Group
+------------------
+
+.. autoclass:: PySAM.Thermalrate.Thermalrate.HybridCosts
+	:members:
+
 Outputs Group
 --------------
 

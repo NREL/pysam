@@ -600,7 +600,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Cumulative annual energy production of array as function of speed [kWh]"),
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	PyDoc_STR("*float*: Annual energy production of array [kWh]"),
+	PyDoc_STR("*float*: Annual AC energy in Year 1 [kWh]"),
  	NULL},
 {"annual_energy_distribution", (getter)Outputs_get_annual_energy_distribution,(setter)0,
 	PyDoc_STR("*sequence*: Annual energy production of array as function of speed [kWh]"),
@@ -740,6 +740,21 @@ newMhkTidalObject(void* data_ptr)
 	PyObject* MHKTidal_obj = MHKTidal_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "MHKTidal", MHKTidal_obj);
 	Py_DECREF(MHKTidal_obj);
+
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+
+	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
+	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
+	Py_XDECREF(data_cap);
+	Py_XDECREF(AdjustmentFactorsModule);
+
+	if (!Adjust_obj){
+		PyErr_SetString(PyExc_Exception, "Couldn't create AdjustmentFactorsObject\n");
+		return NULL;
+	}
+
+	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
+	Py_DECREF(Adjust_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);

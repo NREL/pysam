@@ -569,6 +569,7 @@ class Cashloan(object):
 		ibi_total_oth = float
 		ibi_total_sta = float
 		ibi_total_uti = float
+		irr = float
 		itc_total = float
 		itc_total_fed = float
 		itc_total_sta = float
@@ -583,6 +584,7 @@ class Cashloan(object):
 		lnte_nom = float
 		lnte_real = float
 		loan_amount = float
+		nominal_discount_rate = float
 		npv = float
 		npv_annual_costs_lcos = float
 		npv_energy_lcos_nom = float

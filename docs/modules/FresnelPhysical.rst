@@ -113,16 +113,16 @@ Storage Group
 .. autoclass:: PySAM.FresnelPhysical.FresnelPhysical.Storage
 	:members:
 
-SysControl Group
------------------
-
-.. autoclass:: PySAM.FresnelPhysical.FresnelPhysical.SysControl
-	:members:
-
 Tou Group
 ----------
 
 .. autoclass:: PySAM.FresnelPhysical.FresnelPhysical.Tou
+	:members:
+
+SysControl Group
+-----------------
+
+.. autoclass:: PySAM.FresnelPhysical.FresnelPhysical.SysControl
 	:members:
 
 FinancialModel Group
