@@ -692,6 +692,18 @@ GeoHourly_set_spec_vol_lp(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+GeoHourly_get_stimulation_type(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_GeoHourly_stimulation_type_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_stimulation_type(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_GeothermalCosts_GeoHourly_stimulation_type_nset, self->data_ptr);
+}
+
+static PyObject *
 GeoHourly_get_v_stage_1(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_GeothermalCosts_GeoHourly_v_stage_1_nget, self->data_ptr);
@@ -840,7 +852,7 @@ static PyGetSetDef GeoHourly_getset[] = {
 	PyDoc_STR("*float*: Gross output from GETEM for cost calculations [MW]\n\n**Required:**\nTrue"),
  	NULL},
 {"gross_output", (getter)GeoHourly_get_gross_output,(setter)GeoHourly_set_gross_output,
-	PyDoc_STR("*float*: Gross output from GETEM [kW]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Gross output from GETEM [MW]\n\n**Required:**\nTrue"),
  	NULL},
 {"hp_flash_pressure", (getter)GeoHourly_get_hp_flash_pressure,(setter)GeoHourly_set_hp_flash_pressure,
 	PyDoc_STR("*float*: HP Flash Pressure [psia]\n\n**Required:**\nRequired if conversion_type=1"),
@@ -904,6 +916,9 @@ static PyGetSetDef GeoHourly_getset[] = {
  	NULL},
 {"spec_vol_lp", (getter)GeoHourly_get_spec_vol_lp,(setter)GeoHourly_set_spec_vol_lp,
 	PyDoc_STR("*float*: LP Specific Volume [cft/lb]\n\n**Required:**\nRequired if conversion_type=1"),
+ 	NULL},
+{"stimulation_type", (getter)GeoHourly_get_stimulation_type,(setter)GeoHourly_set_stimulation_type,
+	PyDoc_STR("*float*: Which wells are stimulated [0/1/2/3]"),
  	NULL},
 {"v_stage_1", (getter)GeoHourly_get_v_stage_1,(setter)GeoHourly_set_v_stage_1,
 	PyDoc_STR("*float*: Vacumm Pump Stage 1 [kW]\n\n**Required:**\nRequired if conversion_type=1"),
@@ -1060,6 +1075,12 @@ Outputs_get_expl_total_cost(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_indirect_pump_gathering_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_indirect_pump_gathering_cost_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_inj_total_cost(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_inj_total_cost_nget, self->data_ptr);
@@ -1069,6 +1090,18 @@ static PyObject *
 Outputs_get_prod_total_cost(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_prod_total_cost_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_pump_cost_install(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_pump_cost_install_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_pump_only_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_pump_only_cost_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1095,6 +1128,12 @@ Outputs_get_total_pump_cost(VarGroupObject *self, void *closure)
 	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_total_pump_cost_nget, self->data_ptr);
 }
 
+static PyObject *
+Outputs_get_total_pump_gathering_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_total_pump_gathering_cost_nget, self->data_ptr);
+}
+
 static PyGetSetDef Outputs_getset[] = {
 {"baseline_cost", (getter)Outputs_get_baseline_cost,(setter)0,
 	PyDoc_STR("*float*: Baseline cost [$/kW]"),
@@ -1105,11 +1144,20 @@ static PyGetSetDef Outputs_getset[] = {
 {"expl_total_cost", (getter)Outputs_get_expl_total_cost,(setter)0,
 	PyDoc_STR("*float*: Total exploration well cost [$]"),
  	NULL},
+{"indirect_pump_gathering_cost", (getter)Outputs_get_indirect_pump_gathering_cost,(setter)0,
+	PyDoc_STR("*float*: Indirect pump and field gathering cost [$]"),
+ 	NULL},
 {"inj_total_cost", (getter)Outputs_get_inj_total_cost,(setter)0,
 	PyDoc_STR("*float*: Total injection well cost [$]"),
  	NULL},
 {"prod_total_cost", (getter)Outputs_get_prod_total_cost,(setter)0,
 	PyDoc_STR("*float*: Total production well cost [$]"),
+ 	NULL},
+{"pump_cost_install", (getter)Outputs_get_pump_cost_install,(setter)0,
+	PyDoc_STR("*float*: Production pump installation cost [$/well]"),
+ 	NULL},
+{"pump_only_cost", (getter)Outputs_get_pump_only_cost,(setter)0,
+	PyDoc_STR("*float*: Production pump cost per well [$/well]"),
  	NULL},
 {"stim_total_cost", (getter)Outputs_get_stim_total_cost,(setter)0,
 	PyDoc_STR("*float*: Total stimulation well cost [$]"),
@@ -1118,10 +1166,13 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Total drilling cost [$]"),
  	NULL},
 {"total_gathering_cost", (getter)Outputs_get_total_gathering_cost,(setter)0,
-	PyDoc_STR("*float*: Total gathering well cost [$/kW]"),
+	PyDoc_STR("*float*: Total gathering well cost [$]"),
  	NULL},
 {"total_pump_cost", (getter)Outputs_get_total_pump_cost,(setter)0,
-	PyDoc_STR("*float*: Total pumping cost [$/kW]"),
+	PyDoc_STR("*float*: Total pumping cost [$]"),
+ 	NULL},
+{"total_pump_gathering_cost", (getter)Outputs_get_total_pump_gathering_cost,(setter)0,
+	PyDoc_STR("*float*: Total pump and field gathering system cost [$]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

@@ -1908,7 +1908,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Gross output from GETEM for cost"),
  	NULL},
 {"gross_output", (getter)Outputs_get_gross_output,(setter)0,
-	PyDoc_STR("*float*: Gross output from GETEM"),
+	PyDoc_STR("*float*: Gross output from GETEM [MW]"),
  	NULL},
 {"hp_flash_pressure", (getter)Outputs_get_hp_flash_pressure,(setter)0,
 	PyDoc_STR("*float*: HP Flash Pressure [psia]"),

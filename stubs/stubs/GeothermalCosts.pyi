@@ -87,6 +87,7 @@ class GeothermalCosts(object):
 		resource_depth = float
 		spec_vol = float
 		spec_vol_lp = float
+		stimulation_type = float
 		v_stage_1 = float
 		v_stage_2 = float
 		v_stage_3 = float
@@ -108,12 +109,16 @@ class GeothermalCosts(object):
 		baseline_cost = float
 		conf_total_cost = float
 		expl_total_cost = float
+		indirect_pump_gathering_cost = float
 		inj_total_cost = float
 		prod_total_cost = float
+		pump_cost_install = float
+		pump_only_cost = float
 		stim_total_cost = float
 		total_drilling_cost = float
 		total_gathering_cost = float
 		total_pump_cost = float
+		total_pump_gathering_cost = float
 
 
 
