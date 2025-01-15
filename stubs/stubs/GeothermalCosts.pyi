@@ -60,6 +60,7 @@ class GeothermalCosts(object):
 		geotherm_cost_prod_cost_curve_welldiam = float
 		geotherm_cost_prod_cost_curve_welltype = float
 		geotherm_cost_prod_req = float
+		geotherm_cost_pump_casing_cost = float
 		geotherm_cost_pump_depth = float
 		geotherm_cost_pump_fixed = float
 		geotherm_cost_pump_per_foot = float

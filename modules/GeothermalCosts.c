@@ -368,6 +368,18 @@ GeoHourly_set_geotherm_cost_prod_req(VarGroupObject *self, PyObject *value, void
 }
 
 static PyObject *
+GeoHourly_get_geotherm_cost_pump_casing_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_GeoHourly_geotherm_cost_pump_casing_cost_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_geotherm_cost_pump_casing_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_GeothermalCosts_GeoHourly_geotherm_cost_pump_casing_cost_nset, self->data_ptr);
+}
+
+static PyObject *
 GeoHourly_get_geotherm_cost_pump_depth(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_GeothermalCosts_GeoHourly_geotherm_cost_pump_depth_nget, self->data_ptr);
@@ -835,6 +847,9 @@ static PyGetSetDef GeoHourly_getset[] = {
  	NULL},
 {"geotherm_cost_prod_req", (getter)GeoHourly_get_geotherm_cost_prod_req,(setter)GeoHourly_set_geotherm_cost_prod_req,
 	PyDoc_STR("*float*: Number of production wells required"),
+ 	NULL},
+{"geotherm_cost_pump_casing_cost", (getter)GeoHourly_get_geotherm_cost_pump_casing_cost,(setter)GeoHourly_set_geotherm_cost_pump_casing_cost,
+	PyDoc_STR("*float*: Pump casing cost per foot [$/ft]"),
  	NULL},
 {"geotherm_cost_pump_depth", (getter)GeoHourly_get_geotherm_cost_pump_depth,(setter)GeoHourly_set_geotherm_cost_pump_depth,
 	PyDoc_STR("*float*: Pump depth [ft]"),
