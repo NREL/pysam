@@ -1149,6 +1149,12 @@ Outputs_get_total_pump_gathering_cost(VarGroupObject *self, void *closure)
 	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_total_pump_gathering_cost_nget, self->data_ptr);
 }
 
+static PyObject *
+Outputs_get_total_surface_equipment_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_total_surface_equipment_cost_nget, self->data_ptr);
+}
+
 static PyGetSetDef Outputs_getset[] = {
 {"baseline_cost", (getter)Outputs_get_baseline_cost,(setter)0,
 	PyDoc_STR("*float*: Baseline cost [$/kW]"),
@@ -1188,6 +1194,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"total_pump_gathering_cost", (getter)Outputs_get_total_pump_gathering_cost,(setter)0,
 	PyDoc_STR("*float*: Total pump and field gathering system cost [$]"),
+ 	NULL},
+{"total_surface_equipment_cost", (getter)Outputs_get_total_surface_equipment_cost,(setter)0,
+	PyDoc_STR("*float*: Total surface equipment cost [$]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

@@ -120,6 +120,7 @@ class GeothermalCosts(object):
 		total_gathering_cost = float
 		total_pump_cost = float
 		total_pump_gathering_cost = float
+		total_surface_equipment_cost = float
 
 
 
