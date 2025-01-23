@@ -864,7 +864,7 @@ static PyGetSetDef GeoHourly_getset[] = {
 	PyDoc_STR("*float*: Stimulation non drilling costs [$]\n\n**Required:**\nRequired if calc_drill_costs=1"),
  	NULL},
 {"gross_cost_output", (getter)GeoHourly_get_gross_cost_output,(setter)GeoHourly_set_gross_cost_output,
-	PyDoc_STR("*float*: Gross output from GETEM for cost calculations [MW]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Gross output from GETEM for cost calculations [kW]\n\n**Required:**\nTrue"),
  	NULL},
 {"gross_output", (getter)GeoHourly_get_gross_output,(setter)GeoHourly_set_gross_output,
 	PyDoc_STR("*float*: Gross output from GETEM [MW]\n\n**Required:**\nTrue"),
