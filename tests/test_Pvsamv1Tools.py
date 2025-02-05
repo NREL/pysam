@@ -1,8 +1,7 @@
 import pytest
 
-import PySAM.Pvsamv1Tools as PVTools
+import PySAM.Pvsamv1Tools
 import PySAM.Pvsamv1 as pvsamv1
-import PySAM.BatteryStateful as battstfl
 
 
 def test_default_system_sizing():
