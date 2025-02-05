@@ -986,7 +986,7 @@ Outputs_get_wave_resource_start_period(VarGroupObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	PyDoc_STR("*float*: Annual energy production of array [kWh]"),
+	PyDoc_STR("*float*: Annual AC energy in Year 1 [kWh]"),
  	NULL},
 {"annual_energy_distribution", (getter)Outputs_get_annual_energy_distribution,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of Hs and Te [kWh]"),
@@ -1166,6 +1166,10 @@ newMhkWaveObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "MHKWave", MHKWave_obj);
 	Py_DECREF(MHKWave_obj);
 
+	PyObject* Lifetime_obj = Lifetime_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Lifetime", Lifetime_obj);
+	Py_DECREF(Lifetime_obj);
+
 	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
@@ -1180,10 +1184,6 @@ newMhkWaveObject(void* data_ptr)
 
 	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
 	Py_DECREF(Adjust_obj);
-
-	PyObject* Lifetime_obj = Lifetime_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Lifetime", Lifetime_obj);
-	Py_DECREF(Lifetime_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);

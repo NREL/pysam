@@ -1717,7 +1717,7 @@ static PyMethodDef ThirdpartyownershipModule_methods[] = {
 		{"new",             Thirdpartyownership_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Thirdpartyownership")},
 		{"default",             Thirdpartyownership_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Thirdpartyownership\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"FlatPlatePVThirdParty\"*\n\n		- *\"GenericBatteryThirdParty\"*\n\n		- *\"GenericSystemThirdParty\"*\n\n		- *\"PVBatteryThirdParty\"*\n\n		- *\"PVWattsBatteryThirdParty\"*\n\n		- *\"PVWattsThirdParty\"*\n\n		- *\"StandaloneBatteryThirdParty\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> Thirdpartyownership\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"CustomGenerationBatteryThirdParty\"*\n\n		- *\"CustomGenerationProfileThirdParty\"*\n\n		- *\"FlatPlatePVThirdParty\"*\n\n		- *\"PVBatteryThirdParty\"*\n\n		- *\"PVWattsBatteryThirdParty\"*\n\n		- *\"PVWattsThirdParty\"*\n\n		- *\"StandaloneBatteryThirdParty\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Thirdpartyownership_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Thirdpartyownership\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Thirdpartyownership_from_existing,        METH_VARARGS,

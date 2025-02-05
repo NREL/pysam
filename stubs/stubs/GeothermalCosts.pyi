@@ -35,6 +35,7 @@ class GeothermalCosts(object):
 
 
 		GF_flowrate = float
+		calc_drill_costs = float
 		condensate_pump_power = float
 		conversion_type = float
 		cw_pump_head = float
@@ -44,6 +45,14 @@ class GeothermalCosts(object):
 		dt_prod_well = float
 		eff_secondlaw = float
 		flash_count = float
+		geotherm_cost_inj_cost_curve = float
+		geotherm_cost_inj_cost_curve_welldiam = float
+		geotherm_cost_inj_cost_curve_welltype = float
+		geotherm_cost_inj_wells_drilled = float
+		geotherm_cost_prod_cost_curve = float
+		geotherm_cost_prod_cost_curve_welldiam = float
+		geotherm_cost_prod_cost_curve_welltype = float
+		geotherm_cost_prod_wells_drilled = float
 		gross_cost_output = float
 		gross_output = float
 		hp_flash_pressure = float
@@ -58,6 +67,7 @@ class GeothermalCosts(object):
 		qRejectByStage_2 = float
 		qRejectByStage_3 = float
 		qRejectTotal = float
+		resource_depth = float
 		spec_vol = float
 		spec_vol_lp = float
 		v_stage_1 = float
@@ -79,6 +89,8 @@ class GeothermalCosts(object):
 
 
 		baseline_cost = float
+		inj_total_cost = float
+		prod_total_cost = float
 
 
 

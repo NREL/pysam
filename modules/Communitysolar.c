@@ -1179,10 +1179,10 @@ static PyGetSetDef SystemCosts_getset[] = {
 	PyDoc_STR("*float*: Number of O and M types\n\n**Info:**\nbattery,fuelcell\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"annual_fuel_usage", (getter)SystemCosts_get_annual_fuel_usage,(setter)SystemCosts_set_annual_fuel_usage,
-	PyDoc_STR("*float*: Fuel usage (yr 1) [kWht]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Fuel usage (yr 1) [kWht]\n\n**Info:**\ncustom_generation,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"annual_fuel_usage_lifetime", (getter)SystemCosts_get_annual_fuel_usage_lifetime,(setter)SystemCosts_set_annual_fuel_usage_lifetime,
-	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical"),
+	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]\n\n**Info:**\ncustom_generation,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical"),
  	NULL},
 {"om_batt_capacity_cost", (getter)SystemCosts_get_om_batt_capacity_cost,(setter)SystemCosts_set_om_batt_capacity_cost,
 	PyDoc_STR("*sequence*: Battery capacity-based System Costs amount [$/kWcap]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
@@ -1212,10 +1212,10 @@ static PyGetSetDef SystemCosts_getset[] = {
 	PyDoc_STR("*float*: Fixed O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuel_cost", (getter)SystemCosts_get_om_fuel_cost,(setter)SystemCosts_set_om_fuel_cost,
-	PyDoc_STR("*sequence*: Fuel cost [$/MMBtu]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Fuel cost [$/MMBtu]\n\n**Info:**\ncustom_generation,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuel_cost_escal", (getter)SystemCosts_get_om_fuel_cost_escal,(setter)SystemCosts_set_om_fuel_cost_escal,
-	PyDoc_STR("*float*: Fuel cost escalation [%/year]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Fuel cost escalation [%/year]\n\n**Info:**\ncustom_generation,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuelcell_capacity_cost", (getter)SystemCosts_get_om_fuelcell_capacity_cost,(setter)SystemCosts_set_om_fuelcell_capacity_cost,
 	PyDoc_STR("*sequence*: Fuel cell capacity-based System Costs amount [$/kWcap]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
@@ -10075,6 +10075,18 @@ Outputs_get_npv_uti_pbi_income(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_pre_depr_alloc_basis(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_pre_depr_alloc_basis_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_pre_itc_qual_basis(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_pre_itc_qual_basis_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_present_value_fuel(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Communitysolar_Outputs_present_value_fuel_nget, self->data_ptr);
@@ -10826,7 +10838,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Debt up-front fee [$]"),
  	NULL},
 {"cost_financing", (getter)Outputs_get_cost_financing,(setter)0,
-	PyDoc_STR("*float*: Financing cost [$]"),
+	PyDoc_STR("*float*: Total financing cost [$]"),
  	NULL},
 {"cost_installed", (getter)Outputs_get_cost_installed,(setter)0,
 	PyDoc_STR("*float*: Net capital cost [$]"),
@@ -11721,6 +11733,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"npv_uti_pbi_income", (getter)Outputs_get_npv_uti_pbi_income,(setter)0,
 	PyDoc_STR("*float*: Present value of utility PBI income [$]"),
+ 	NULL},
+{"pre_depr_alloc_basis", (getter)Outputs_get_pre_depr_alloc_basis,(setter)0,
+	PyDoc_STR("*float*: Depreciable basis prior to allocation [$]"),
+ 	NULL},
+{"pre_itc_qual_basis", (getter)Outputs_get_pre_itc_qual_basis,(setter)0,
+	PyDoc_STR("*float*: ITC basis prior to qualification [$]"),
  	NULL},
 {"present_value_fuel", (getter)Outputs_get_present_value_fuel,(setter)0,
 	PyDoc_STR("*float*: Present value of fuel O&M [$]"),

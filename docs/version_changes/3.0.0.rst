@@ -1036,7 +1036,7 @@ TroughPhysical
 TroughPhysicalProcessHeat
 ************************************************
 
-:doc:`../modules/TroughPhysicalProcessHeat` Modified Input Variables:
+`Trough Physical Process Heat <https://nrel-pysam.readthedocs.io/en/v3.0.0/modules/TroughPhysicalProcessHeat.html>`_ Modified Input Variables:
 
     New variables:
 

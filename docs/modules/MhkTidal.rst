@@ -33,6 +33,13 @@ MHKTidal Group
 .. autoclass:: PySAM.MhkTidal.MhkTidal.MHKTidal
 	:members:
 
+AdjustmentFactors Group
+------------------------
+
+.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+	:members:
+	:noindex:
+
 Outputs Group
 --------------
 

@@ -24,7 +24,7 @@ The following modules are available for hybrid systems::
     HybridSystem.pv = PVHybrid (PySAM.Pvsamv1)
     HybridSystem.pvwatts = PVWattsHybrid (PySAM.Pvwattsv8)
     HybridSystem.wind = WindHybrid (PySAM.Windpower)
-    HybridSystem.gensys = GenericSystemHybrid (PySAM.GenericSystem)
+    HybridSystem.custom = CustomGenerationHybrid (PySAM.CustomGeneration)
     HybridSystem.battery = BatteryHybrid (PySAM.Battery)
     HybridSystem.fuelcell = FuelCellHybrid (PySAM.Fuelcell)
 
@@ -36,7 +36,7 @@ The following modules are available for hybrid systems::
 
     hybrids/BatteryHybrid.rst
     hybrids/FuelCellHybrid.rst
-    hybrids/GenericSystemHybrid.rst
+    hybrids/CustomGenerationHybrid.rst
     hybrids/PVHybrid.rst
     hybrids/PVWattsHybrid.rst
     hybrids/WindHybrid.rst
@@ -159,7 +159,7 @@ a JSON file using the **JSON for inputs** option. (Do *not* use the **PySAM JSON
 	
 	# store some outputs
 	# be careful to use the correct module names as defined by the HybridSystem() function: 
-	#     pv, pvwatts, wind, gensys, battery, fuelcell
+	#     pv, pvwatts, wind, custom, battery, fuelcell
 	#     _grid, singleowner, utilityrate5, host_developer
 	pvannualenergy = m.pvwatts.Outputs.annual_energy
 	windannualenergy = m.wind.Outputs.annual_energy
@@ -209,7 +209,7 @@ Names of configurations available for hybrid systems are listed in the documenta
 	
 	# store some outputs
 	# be careful to use the correct module names as defined by the HybridSystem() function: 
-	#     pv, pvwatts, wind, gensys, battery, fuelcell
+	#     pv, pvwatts, wind, custom, battery, fuelcell
 	#     _grid, singleowner, utilityrate5, host_developer
 	pvannualenergy = m.pv.Outputs.annual_energy
 	windannualenergy = m.wind.Outputs.annual_energy

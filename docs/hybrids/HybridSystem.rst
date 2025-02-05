@@ -24,10 +24,10 @@ HybridSystem
 
         None if :mod:`Windpower<PySAM.Windpower>` is in not in the technology stack
 
-    .. py:data:: gensys
-        :type: GenericSystemHybrid | None
+    .. py:data:: custom
+        :type: CustomGenerationHybrid | None
 
-        None if :mod:`GenericSystem<PySAM.GenericSystem>` is in not in the technology stack
+        None if :mod:`CustomGeneration<PySAM.CustomGeneration>` is in not in the technology stack
 
     .. py:data:: battery
         :type: BatteryHybrid | None
@@ -63,9 +63,9 @@ HybridSystem
 
         Create model with variables set to defaults of a configuration. Available configurations are:
 
-            "GenericPVWattsWindFuelCellBatteryHybridHostDeveloper"
+            "CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper"
 
-            "GenericPVWattsWindFuelCellBatteryHybridSingleOwner"
+            "CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner"
 
             "PVWattsWindBatteryHybridHostDeveloper"
 
@@ -95,7 +95,7 @@ HybridSystem
                 },
                 'pvwattsv8': {...}
 
-        Names of the technology models: "pvsamv1", "pvwattsv8", "windpower", "generic_system", "battery", "fuelcell"
+        Names of the technology models: "pvsamv1", "pvwattsv8", "windpower", "custom_generation", "battery", "fuelcell"
         Names of the financial models: "singleowner", "utilityrate5", "host_developer"
 
     .. py:function:: execute(verbosity_int=0) -> None

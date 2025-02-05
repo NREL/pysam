@@ -391,6 +391,30 @@ TES_set_T_src_out(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+TES_get_T_tank_cold_ini(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_TES_T_tank_cold_ini_nget, self->data_ptr);
+}
+
+static int
+TES_set_T_tank_cold_ini(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_T_tank_cold_ini_nset, self->data_ptr);
+}
+
+static PyObject *
+TES_get_T_tank_hot_ini(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_TES_T_tank_hot_ini_nget, self->data_ptr);
+}
+
+static int
+TES_set_T_tank_hot_ini(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_T_tank_hot_ini_nset, self->data_ptr);
+}
+
+static PyObject *
 TES_get_cold_tank_Thtr(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_CspSubcomponent_TES_cold_tank_Thtr_nget, self->data_ptr);
@@ -415,6 +439,18 @@ TES_set_cold_tank_max_heat(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+TES_get_d_tank_in(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_TES_d_tank_in_nget, self->data_ptr);
+}
+
+static int
+TES_set_d_tank_in(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_d_tank_in_nset, self->data_ptr);
+}
+
+static PyObject *
 TES_get_dt_hot(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_CspSubcomponent_TES_dt_hot_nget, self->data_ptr);
@@ -427,15 +463,15 @@ TES_set_dt_hot(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-TES_get_h_tank(VarGroupObject *self, void *closure)
+TES_get_h_tank_in(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_CspSubcomponent_TES_h_tank_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CspSubcomponent_TES_h_tank_in_nget, self->data_ptr);
 }
 
 static int
-TES_set_h_tank(VarGroupObject *self, PyObject *value, void *closure)
+TES_set_h_tank_in(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_h_tank_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_h_tank_in_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -499,6 +535,18 @@ TES_set_init_hot_htf_percent(VarGroupObject *self, PyObject *value, void *closur
 }
 
 static PyObject *
+TES_get_is_h_tank_fixed(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_TES_is_h_tank_fixed_nget, self->data_ptr);
+}
+
+static int
+TES_set_is_h_tank_fixed(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_is_h_tank_fixed_nset, self->data_ptr);
+}
+
+static PyObject *
 TES_get_mdot_sink(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_CspSubcomponent_TES_mdot_sink_aget, self->data_ptr);
@@ -559,6 +607,210 @@ TES_set_tank_pairs(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+TES_get_tes_cyl_piston_loss_poly(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_TES_tes_cyl_piston_loss_poly_aget, self->data_ptr);
+}
+
+static int
+TES_set_tes_cyl_piston_loss_poly(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_CspSubcomponent_TES_tes_cyl_piston_loss_poly_aset, self->data_ptr);
+}
+
+static PyObject *
+TES_get_tes_cyl_tank_cp(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_TES_tes_cyl_tank_cp_nget, self->data_ptr);
+}
+
+static int
+TES_set_tes_cyl_tank_cp(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_tes_cyl_tank_cp_nset, self->data_ptr);
+}
+
+static PyObject *
+TES_get_tes_cyl_tank_dens(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_TES_tes_cyl_tank_dens_nget, self->data_ptr);
+}
+
+static int
+TES_set_tes_cyl_tank_dens(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_tes_cyl_tank_dens_nset, self->data_ptr);
+}
+
+static PyObject *
+TES_get_tes_cyl_tank_insul_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_TES_tes_cyl_tank_insul_percent_nget, self->data_ptr);
+}
+
+static int
+TES_set_tes_cyl_tank_insul_percent(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_tes_cyl_tank_insul_percent_nset, self->data_ptr);
+}
+
+static PyObject *
+TES_get_tes_cyl_tank_thick(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_TES_tes_cyl_tank_thick_nget, self->data_ptr);
+}
+
+static int
+TES_set_tes_cyl_tank_thick(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_tes_cyl_tank_thick_nset, self->data_ptr);
+}
+
+static PyObject *
+TES_get_tes_n_tsteps(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_TES_tes_n_tsteps_nget, self->data_ptr);
+}
+
+static int
+TES_set_tes_n_tsteps(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_tes_n_tsteps_nset, self->data_ptr);
+}
+
+static PyObject *
+TES_get_tes_pb_T_charge_min(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_TES_tes_pb_T_charge_min_nget, self->data_ptr);
+}
+
+static int
+TES_set_tes_pb_T_charge_min(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_tes_pb_T_charge_min_nset, self->data_ptr);
+}
+
+static PyObject *
+TES_get_tes_pb_T_cold_delta(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_TES_tes_pb_T_cold_delta_nget, self->data_ptr);
+}
+
+static int
+TES_set_tes_pb_T_cold_delta(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_tes_pb_T_cold_delta_nset, self->data_ptr);
+}
+
+static PyObject *
+TES_get_tes_pb_T_grad_ini(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_TES_tes_pb_T_grad_ini_aget, self->data_ptr);
+}
+
+static int
+TES_set_tes_pb_T_grad_ini(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_CspSubcomponent_TES_tes_pb_T_grad_ini_aset, self->data_ptr);
+}
+
+static PyObject *
+TES_get_tes_pb_T_hot_delta(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_TES_tes_pb_T_hot_delta_nget, self->data_ptr);
+}
+
+static int
+TES_set_tes_pb_T_hot_delta(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_tes_pb_T_hot_delta_nset, self->data_ptr);
+}
+
+static PyObject *
+TES_get_tes_pb_cp_solid(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_TES_tes_pb_cp_solid_nget, self->data_ptr);
+}
+
+static int
+TES_set_tes_pb_cp_solid(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_tes_pb_cp_solid_nset, self->data_ptr);
+}
+
+static PyObject *
+TES_get_tes_pb_dens_solid(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_TES_tes_pb_dens_solid_nget, self->data_ptr);
+}
+
+static int
+TES_set_tes_pb_dens_solid(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_tes_pb_dens_solid_nset, self->data_ptr);
+}
+
+static PyObject *
+TES_get_tes_pb_f_oversize(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_TES_tes_pb_f_oversize_nget, self->data_ptr);
+}
+
+static int
+TES_set_tes_pb_f_oversize(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_tes_pb_f_oversize_nset, self->data_ptr);
+}
+
+static PyObject *
+TES_get_tes_pb_k_eff(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_TES_tes_pb_k_eff_nget, self->data_ptr);
+}
+
+static int
+TES_set_tes_pb_k_eff(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_tes_pb_k_eff_nset, self->data_ptr);
+}
+
+static PyObject *
+TES_get_tes_pb_n_xsteps(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_TES_tes_pb_n_xsteps_nget, self->data_ptr);
+}
+
+static int
+TES_set_tes_pb_n_xsteps(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_tes_pb_n_xsteps_nset, self->data_ptr);
+}
+
+static PyObject *
+TES_get_tes_pb_void_frac(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_TES_tes_pb_void_frac_nget, self->data_ptr);
+}
+
+static int
+TES_set_tes_pb_void_frac(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_tes_pb_void_frac_nset, self->data_ptr);
+}
+
+static PyObject *
+TES_get_tes_type(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_TES_tes_type_nget, self->data_ptr);
+}
+
+static int
+TES_set_tes_type(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_TES_tes_type_nset, self->data_ptr);
+}
+
+static PyObject *
 TES_get_tshours(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_CspSubcomponent_TES_tshours_nget, self->data_ptr);
@@ -589,32 +841,44 @@ static PyGetSetDef TES_getset[] = {
 {"T_src_out", (getter)TES_get_T_src_out,(setter)TES_set_T_src_out,
 	PyDoc_STR("*sequence*: Temperature from heat source [C]\n\n**Required:**\nTrue"),
  	NULL},
+{"T_tank_cold_ini", (getter)TES_get_T_tank_cold_ini,(setter)TES_set_T_tank_cold_ini,
+	PyDoc_STR("*float*: Temperature of fluid in cold tank at beginning of step [C]"),
+ 	NULL},
+{"T_tank_hot_ini", (getter)TES_get_T_tank_hot_ini,(setter)TES_set_T_tank_hot_ini,
+	PyDoc_STR("*float*: Temperature of fluid in hot tank at beginning of step [C]"),
+ 	NULL},
 {"cold_tank_Thtr", (getter)TES_get_cold_tank_Thtr,(setter)TES_set_cold_tank_Thtr,
-	PyDoc_STR("*float*: Minimum allowable cold tank HTF temp [C]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Minimum allowable cold tank HTF temp [C]\n\n**Required:**\nRequired if tes_type=1|tes_type=3"),
  	NULL},
 {"cold_tank_max_heat", (getter)TES_get_cold_tank_max_heat,(setter)TES_set_cold_tank_max_heat,
-	PyDoc_STR("*float*: Rated heater capacity for cold tank heating [MWe]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Rated heater capacity for cold tank heating [MWe]\n\n**Required:**\nRequired if tes_type=1|tes_type=3"),
+ 	NULL},
+{"d_tank_in", (getter)TES_get_d_tank_in,(setter)TES_set_d_tank_in,
+	PyDoc_STR("*float*: Tank diameter input [m]\n\n**Required:**\nRequired if is_h_tank_fixed=0|is_h_tank_fixed=2"),
  	NULL},
 {"dt_hot", (getter)TES_get_dt_hot,(setter)TES_set_dt_hot,
-	PyDoc_STR("*float*: Hot side HX approach temp [C]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Hot side HX approach temp [C]\n\n**Required:**\nRequired if tes_type=1"),
  	NULL},
-{"h_tank", (getter)TES_get_h_tank,(setter)TES_set_h_tank,
-	PyDoc_STR("*float*: Total height of tank (height of HTF when tank is full [m]\n\n**Required:**\nTrue"),
+{"h_tank_in", (getter)TES_get_h_tank_in,(setter)TES_set_h_tank_in,
+	PyDoc_STR("*float*: Total height of tank input (height of HTF when tank is full [m]\n\n**Required:**\nRequired if is_h_tank_fixed=1"),
  	NULL},
 {"h_tank_min", (getter)TES_get_h_tank_min,(setter)TES_set_h_tank_min,
-	PyDoc_STR("*float*: Minimum allowable HTF height in storage tank [m]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Minimum allowable HTF height in storage tank [m]\n\n**Required:**\nRequired if tes_type=1|tes_type=3"),
  	NULL},
 {"hot_tank_Thtr", (getter)TES_get_hot_tank_Thtr,(setter)TES_set_hot_tank_Thtr,
-	PyDoc_STR("*float*: Minimum allowable hot tank HTF temp [C]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Minimum allowable hot tank HTF temp [C]\n\n**Required:**\nRequired if tes_type=1|tes_type=3"),
  	NULL},
 {"hot_tank_bypassed", (getter)TES_get_hot_tank_bypassed,(setter)TES_set_hot_tank_bypassed,
 	PyDoc_STR("*sequence*: Is mass flow from source going straight to cold tank? [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"hot_tank_max_heat", (getter)TES_get_hot_tank_max_heat,(setter)TES_set_hot_tank_max_heat,
-	PyDoc_STR("*float*: Rated heater capacity for hot tank heating [MWe]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Rated heater capacity for hot tank heating [MWe]\n\n**Required:**\nRequired if tes_type=1|tes_type=3"),
  	NULL},
 {"init_hot_htf_percent", (getter)TES_get_init_hot_htf_percent,(setter)TES_set_init_hot_htf_percent,
 	PyDoc_STR("*float*: Initial fraction of avail. vol that is hot [%]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"is_h_tank_fixed", (getter)TES_get_is_h_tank_fixed,(setter)TES_set_is_h_tank_fixed,
+	PyDoc_STR("*float*: [1] Use fixed height (calculate diameter) [0] Use fixed diameter [2] Use fixed d and h (for packed bed) [-]\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"mdot_sink", (getter)TES_get_mdot_sink,(setter)TES_set_mdot_sink,
 	PyDoc_STR("*sequence*: Mass flow to heat sink or power block [kg/s]\n\n**Required:**\nTrue"),
@@ -623,19 +887,70 @@ static PyGetSetDef TES_getset[] = {
 	PyDoc_STR("*sequence*: Mass flow from heat source [kg/s]\n\n**Required:**\nTrue"),
  	NULL},
 {"store_fl_props", (getter)TES_get_store_fl_props,(setter)TES_set_store_fl_props,
-	PyDoc_STR("*sequence[sequence]*: User defined storage fluid property data [-]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*sequence[sequence]*: User defined storage fluid property data [-]\n\n**Required:**\nRequired if tes_type=1"),
  	NULL},
 {"store_fluid", (getter)TES_get_store_fluid,(setter)TES_set_store_fluid,
-	PyDoc_STR("*float*: Material number for storage fluid [-]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Material number for storage fluid [-]\n\n**Required:**\nRequired if tes_type=1"),
  	NULL},
 {"tank_pairs", (getter)TES_get_tank_pairs,(setter)TES_set_tank_pairs,
 	PyDoc_STR("*float*: Number of equivalent tank pairs [-]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
+ 	NULL},
+{"tes_cyl_piston_loss_poly", (getter)TES_get_tes_cyl_piston_loss_poly,(setter)TES_set_tes_cyl_piston_loss_poly,
+	PyDoc_STR("*sequence*: Polynomial coefficients describing piston heat loss function (f(kg/s)=%)\n\n**Required:**\nRequired if tes_type=3"),
+ 	NULL},
+{"tes_cyl_tank_cp", (getter)TES_get_tes_cyl_tank_cp,(setter)TES_set_tes_cyl_tank_cp,
+	PyDoc_STR("*float*: Tank wall cp (used for Piston Cylinder) [kJ/kg-K]\n\n**Required:**\nRequired if tes_type=3"),
+ 	NULL},
+{"tes_cyl_tank_dens", (getter)TES_get_tes_cyl_tank_dens,(setter)TES_set_tes_cyl_tank_dens,
+	PyDoc_STR("*float*: Tank wall thickness (used for Piston Cylinder) [kg/m3]\n\n**Required:**\nRequired if tes_type=3"),
+ 	NULL},
+{"tes_cyl_tank_insul_percent", (getter)TES_get_tes_cyl_tank_insul_percent,(setter)TES_set_tes_cyl_tank_insul_percent,
+	PyDoc_STR("*float*: Percent additional wall mass due to insulation (used for Piston Cylinder) [%]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"tes_cyl_tank_thick", (getter)TES_get_tes_cyl_tank_thick,(setter)TES_set_tes_cyl_tank_thick,
+	PyDoc_STR("*float*: Tank wall thickness (used for Piston Cylinder) [m]\n\n**Required:**\nRequired if tes_type=3"),
+ 	NULL},
+{"tes_n_tsteps", (getter)TES_get_tes_n_tsteps,(setter)TES_set_tes_n_tsteps,
+	PyDoc_STR("*float*: Number of subtimesteps (for NT and packed bed)\n\n**Required:**\ntes_type>1"),
+ 	NULL},
+{"tes_pb_T_charge_min", (getter)TES_get_tes_pb_T_charge_min,(setter)TES_set_tes_pb_T_charge_min,
+	PyDoc_STR("*float*: Min charge temp [C]\n\n**Required:**\nRequired if tes_type=2"),
+ 	NULL},
+{"tes_pb_T_cold_delta", (getter)TES_get_tes_pb_T_cold_delta,(setter)TES_set_tes_pb_T_cold_delta,
+	PyDoc_STR("*float*: Max allowable increase in cold discharge temp [C]\n\n**Required:**\nRequired if tes_type=2"),
+ 	NULL},
+{"tes_pb_T_grad_ini", (getter)TES_get_tes_pb_T_grad_ini,(setter)TES_set_tes_pb_T_grad_ini,
+	PyDoc_STR("*sequence*: TES Temperature gradient at beginning of timestep [C]\n\n**Required:**\nFalse. Automatically set to [-274] if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"tes_pb_T_hot_delta", (getter)TES_get_tes_pb_T_hot_delta,(setter)TES_set_tes_pb_T_hot_delta,
+	PyDoc_STR("*float*: Max allowable decrease in hot discharge temp [C]\n\n**Required:**\nRequired if tes_type=2"),
+ 	NULL},
+{"tes_pb_cp_solid", (getter)TES_get_tes_pb_cp_solid,(setter)TES_set_tes_pb_cp_solid,
+	PyDoc_STR("*float*: TES particle specific heat [kJ/kg K]\n\n**Required:**\nRequired if tes_type=2"),
+ 	NULL},
+{"tes_pb_dens_solid", (getter)TES_get_tes_pb_dens_solid,(setter)TES_set_tes_pb_dens_solid,
+	PyDoc_STR("*float*: TES packed bed media density [kg/m3]\n\n**Required:**\nRequired if tes_type=2"),
+ 	NULL},
+{"tes_pb_f_oversize", (getter)TES_get_tes_pb_f_oversize,(setter)TES_set_tes_pb_f_oversize,
+	PyDoc_STR("*float*: Packed bed oversize factor\n\n**Required:**\nRequired if tes_type=2"),
+ 	NULL},
+{"tes_pb_k_eff", (getter)TES_get_tes_pb_k_eff,(setter)TES_set_tes_pb_k_eff,
+	PyDoc_STR("*float*: TES packed bed effective conductivity [W/m K]\n\n**Required:**\nRequired if tes_type=2"),
+ 	NULL},
+{"tes_pb_n_xsteps", (getter)TES_get_tes_pb_n_xsteps,(setter)TES_set_tes_pb_n_xsteps,
+	PyDoc_STR("*float*: Number of spatial segments\n\n**Required:**\nRequired if tes_type=2"),
+ 	NULL},
+{"tes_pb_void_frac", (getter)TES_get_tes_pb_void_frac,(setter)TES_set_tes_pb_void_frac,
+	PyDoc_STR("*float*: TES packed bed void fraction\n\n**Required:**\nRequired if tes_type=2"),
+ 	NULL},
+{"tes_type", (getter)TES_get_tes_type,(setter)TES_set_tes_type,
+	PyDoc_STR("*float*: Standard two tank (1), Packed Bed (2), Piston Cylinder (3) [-]\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"tshours", (getter)TES_get_tshours,(setter)TES_set_tshours,
 	PyDoc_STR("*float*: Equivalent full-load thermal storage hours [hr]\n\n**Required:**\nTrue"),
  	NULL},
 {"u_tank", (getter)TES_get_u_tank,(setter)TES_set_u_tank,
-	PyDoc_STR("*float*: Loss coefficient from the tank [W/m2-K]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Loss coefficient from the tank [W/m2-K]\n\n**Required:**\nRequired if tes_type=1|tes_type=3"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -674,6 +989,173 @@ static PyTypeObject TES_Type = {
 		TES_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		TES_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * Powerblock Group
+ */ 
+
+static PyTypeObject Powerblock_Type;
+
+static PyObject *
+Powerblock_new(SAM_CspSubcomponent data_ptr)
+{
+	PyObject* new_obj = Powerblock_Type.tp_alloc(&Powerblock_Type,0);
+
+	VarGroupObject* Powerblock_obj = (VarGroupObject*)new_obj;
+
+	Powerblock_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* Powerblock methods */
+
+static PyObject *
+Powerblock_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "CspSubcomponent", "Powerblock")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Powerblock_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Powerblock_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "CspSubcomponent", "Powerblock")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Powerblock_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Powerblock_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Powerblock_methods[] = {
+		{"assign",            (PyCFunction)Powerblock_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Powerblock_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Powerblock_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Powerblock_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Powerblock_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Powerblock_get_P_ref(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_Powerblock_P_ref_nget, self->data_ptr);
+}
+
+static int
+Powerblock_set_P_ref(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_Powerblock_P_ref_nset, self->data_ptr);
+}
+
+static PyObject *
+Powerblock_get_eta_ref(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_Powerblock_eta_ref_nget, self->data_ptr);
+}
+
+static int
+Powerblock_set_eta_ref(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_Powerblock_eta_ref_nset, self->data_ptr);
+}
+
+static PyObject *
+Powerblock_get_pb_pump_coef(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_Powerblock_pb_pump_coef_nget, self->data_ptr);
+}
+
+static int
+Powerblock_set_pb_pump_coef(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_CspSubcomponent_Powerblock_pb_pump_coef_nset, self->data_ptr);
+}
+
+static PyGetSetDef Powerblock_getset[] = {
+{"P_ref", (getter)Powerblock_get_P_ref,(setter)Powerblock_set_P_ref,
+	PyDoc_STR("*float*: Rated plant capacity [MWe]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"eta_ref", (getter)Powerblock_get_eta_ref,(setter)Powerblock_set_eta_ref,
+	PyDoc_STR("*float*: Power cycle efficiency at design [none]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"pb_pump_coef", (getter)Powerblock_get_pb_pump_coef,(setter)Powerblock_set_pb_pump_coef,
+	PyDoc_STR("*float*: Pumping power to move 1kg of HTF through PB loop [kW/kg]\n\n**Required:**\nTrue"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Powerblock_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"CspSubcomponent.Powerblock",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Powerblock_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Powerblock_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -901,173 +1383,6 @@ static PyTypeObject SolarField_Type = {
 		SolarField_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		SolarField_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * Powerblock Group
- */ 
-
-static PyTypeObject Powerblock_Type;
-
-static PyObject *
-Powerblock_new(SAM_CspSubcomponent data_ptr)
-{
-	PyObject* new_obj = Powerblock_Type.tp_alloc(&Powerblock_Type,0);
-
-	VarGroupObject* Powerblock_obj = (VarGroupObject*)new_obj;
-
-	Powerblock_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* Powerblock methods */
-
-static PyObject *
-Powerblock_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "CspSubcomponent", "Powerblock")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-Powerblock_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &Powerblock_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "CspSubcomponent", "Powerblock")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-Powerblock_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &Powerblock_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef Powerblock_methods[] = {
-		{"assign",            (PyCFunction)Powerblock_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Powerblock_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)Powerblock_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Powerblock_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)Powerblock_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-Powerblock_get_P_ref(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_CspSubcomponent_Powerblock_P_ref_nget, self->data_ptr);
-}
-
-static int
-Powerblock_set_P_ref(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_CspSubcomponent_Powerblock_P_ref_nset, self->data_ptr);
-}
-
-static PyObject *
-Powerblock_get_eta_ref(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_CspSubcomponent_Powerblock_eta_ref_nget, self->data_ptr);
-}
-
-static int
-Powerblock_set_eta_ref(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_CspSubcomponent_Powerblock_eta_ref_nset, self->data_ptr);
-}
-
-static PyObject *
-Powerblock_get_pb_pump_coef(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_CspSubcomponent_Powerblock_pb_pump_coef_nget, self->data_ptr);
-}
-
-static int
-Powerblock_set_pb_pump_coef(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_CspSubcomponent_Powerblock_pb_pump_coef_nset, self->data_ptr);
-}
-
-static PyGetSetDef Powerblock_getset[] = {
-{"P_ref", (getter)Powerblock_get_P_ref,(setter)Powerblock_set_P_ref,
-	PyDoc_STR("*float*: Rated plant capacity [MWe]\n\n**Required:**\nTrue"),
- 	NULL},
-{"eta_ref", (getter)Powerblock_get_eta_ref,(setter)Powerblock_set_eta_ref,
-	PyDoc_STR("*float*: Power cycle efficiency at design [none]\n\n**Required:**\nTrue"),
- 	NULL},
-{"pb_pump_coef", (getter)Powerblock_get_pb_pump_coef,(setter)Powerblock_set_pb_pump_coef,
-	PyDoc_STR("*float*: Pumping power to move 1kg of HTF through PB loop [kW/kg]\n\n**Required:**\nTrue"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject Powerblock_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"CspSubcomponent.Powerblock",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		Powerblock_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		Powerblock_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -1319,7 +1634,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Minor loss coeffs for the coll, gen, and bypass loops [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"tanks_in_parallel", (getter)Controller_get_tanks_in_parallel,(setter)Controller_set_tanks_in_parallel,
-	PyDoc_STR("*float*: Tanks are in parallel, not in series, with solar field [-]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Tanks are in parallel, not in series, with solar field [-]\n\n**Required:**\nRequired if tes_type=1"),
  	NULL},
 {"tes_diams", (getter)Controller_get_tes_diams,(setter)Controller_set_tes_diams,
 	PyDoc_STR("*sequence[sequence]*: Custom TES diameters [m]\n\n**Required:**\nTrue"),
@@ -1455,6 +1770,12 @@ static PyMethodDef Outputs_methods[] = {
 };
 
 static PyObject *
+Outputs_get_T_grad_final(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_CspSubcomponent_Outputs_T_grad_final_mget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_T_sink_in(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_T_sink_in_aget, self->data_ptr);
@@ -1478,7 +1799,154 @@ Outputs_get_T_tank_hot(VarGroupObject *self, void *closure)
 	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_T_tank_hot_aget, self->data_ptr);
 }
 
+static PyObject *
+Outputs_get_hot_tank_mass_perc(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_hot_tank_mass_perc_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_hot_tank_vol_frac(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_hot_tank_vol_frac_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_piston_frac(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_piston_frac_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_piston_loc(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_piston_loc_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_ch_from_htf(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_q_ch_from_htf_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dc_to_htf(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_q_dc_to_htf_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_ch_from_htf(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_q_dot_ch_from_htf_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_dc_to_htf(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_q_dot_dc_to_htf_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_tes_E_cold(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_tes_E_cold_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_tes_E_hot(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_tes_E_hot_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_tes_V_cold(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_tes_V_cold_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_tes_V_hot(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_tes_V_hot_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_tes_diameter(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_Outputs_tes_diameter_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_tes_error(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_tes_error_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_tes_error_corrected(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_tes_error_corrected_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_tes_error_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_tes_error_percent_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_tes_exp_length(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_tes_exp_length_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_tes_exp_wall_mass(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_tes_exp_wall_mass_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_tes_height(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_Outputs_tes_height_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_tes_leak_error(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_tes_leak_error_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_tes_mass_cold(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_tes_mass_cold_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_tes_mass_hot(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_tes_mass_hot_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_tes_radius(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_CspSubcomponent_Outputs_tes_radius_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_tes_wall_error(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_CspSubcomponent_Outputs_tes_wall_error_aget, self->data_ptr);
+}
+
 static PyGetSetDef Outputs_getset[] = {
+{"T_grad_final", (getter)Outputs_get_T_grad_final,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: TES Temperature gradient at end of timestep [C]"),
+ 	NULL},
 {"T_sink_in", (getter)Outputs_get_T_sink_in,(setter)0,
 	PyDoc_STR("*sequence*: Temperature to heat sink or power block [C]"),
  	NULL},
@@ -1486,10 +1954,82 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Temperature to heat source [C]"),
  	NULL},
 {"T_tank_cold", (getter)Outputs_get_T_tank_cold,(setter)0,
-	PyDoc_STR("*sequence*: Temperature of cold tank (average) [C]"),
+	PyDoc_STR("*sequence*: Temperature of cold tank (end of timestep) [C]"),
  	NULL},
 {"T_tank_hot", (getter)Outputs_get_T_tank_hot,(setter)0,
-	PyDoc_STR("*sequence*: Temperature of hot tank (average) [C]"),
+	PyDoc_STR("*sequence*: Temperature of hot tank (end of timestep) [C]"),
+ 	NULL},
+{"hot_tank_mass_perc", (getter)Outputs_get_hot_tank_mass_perc,(setter)0,
+	PyDoc_STR("*sequence*: TES hot tank mass percent of total (end) [kg]"),
+ 	NULL},
+{"hot_tank_vol_frac", (getter)Outputs_get_hot_tank_vol_frac,(setter)0,
+	PyDoc_STR("*sequence*: Hot tank volume fraction of total"),
+ 	NULL},
+{"piston_frac", (getter)Outputs_get_piston_frac,(setter)0,
+	PyDoc_STR("*sequence*: Piston Fraction (distance from left cold side)"),
+ 	NULL},
+{"piston_loc", (getter)Outputs_get_piston_loc,(setter)0,
+	PyDoc_STR("*sequence*: Piston Location (distance from left cold side) [m]"),
+ 	NULL},
+{"q_ch_from_htf", (getter)Outputs_get_q_ch_from_htf,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy from the HTF to storage [MJt]"),
+ 	NULL},
+{"q_dc_to_htf", (getter)Outputs_get_q_dc_to_htf,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy to HTF from storage [MJt]"),
+ 	NULL},
+{"q_dot_ch_from_htf", (getter)Outputs_get_q_dot_ch_from_htf,(setter)0,
+	PyDoc_STR("*sequence*: Thermal power from the HTF to storage [MWt]"),
+ 	NULL},
+{"q_dot_dc_to_htf", (getter)Outputs_get_q_dot_dc_to_htf,(setter)0,
+	PyDoc_STR("*sequence*: Thermal power to HTF from storage [MWt]"),
+ 	NULL},
+{"tes_E_cold", (getter)Outputs_get_tes_E_cold,(setter)0,
+	PyDoc_STR("*sequence*: TES cold side internal energy [MJ]"),
+ 	NULL},
+{"tes_E_hot", (getter)Outputs_get_tes_E_hot,(setter)0,
+	PyDoc_STR("*sequence*: TES hot side internal energy [MJ]"),
+ 	NULL},
+{"tes_V_cold", (getter)Outputs_get_tes_V_cold,(setter)0,
+	PyDoc_STR("*sequence*: TES cold fluid volume [kg]"),
+ 	NULL},
+{"tes_V_hot", (getter)Outputs_get_tes_V_hot,(setter)0,
+	PyDoc_STR("*sequence*: TES hot fluid volume [kg]"),
+ 	NULL},
+{"tes_diameter", (getter)Outputs_get_tes_diameter,(setter)0,
+	PyDoc_STR("*float*: TES Diameter [m]"),
+ 	NULL},
+{"tes_error", (getter)Outputs_get_tes_error,(setter)0,
+	PyDoc_STR("*sequence*: TES energy balance error [MW]"),
+ 	NULL},
+{"tes_error_corrected", (getter)Outputs_get_tes_error_corrected,(setter)0,
+	PyDoc_STR("*sequence*: TES energy balance error, accounting for wall and temperature assumption error [MWt]"),
+ 	NULL},
+{"tes_error_percent", (getter)Outputs_get_tes_error_percent,(setter)0,
+	PyDoc_STR("*sequence*: TES energy balance error percent [%]"),
+ 	NULL},
+{"tes_exp_length", (getter)Outputs_get_tes_exp_length,(setter)0,
+	PyDoc_STR("*sequence*: TES expansion tank effective length [m]"),
+ 	NULL},
+{"tes_exp_wall_mass", (getter)Outputs_get_tes_exp_wall_mass,(setter)0,
+	PyDoc_STR("*sequence*: TES expansion tank effective wall mass [kg]"),
+ 	NULL},
+{"tes_height", (getter)Outputs_get_tes_height,(setter)0,
+	PyDoc_STR("*float*: TES Height [m]"),
+ 	NULL},
+{"tes_leak_error", (getter)Outputs_get_tes_leak_error,(setter)0,
+	PyDoc_STR("*sequence*: TES energy balance error due to leakage assumption [MWt]"),
+ 	NULL},
+{"tes_mass_cold", (getter)Outputs_get_tes_mass_cold,(setter)0,
+	PyDoc_STR("*sequence*: TES cold fluid mass [kg]"),
+ 	NULL},
+{"tes_mass_hot", (getter)Outputs_get_tes_mass_hot,(setter)0,
+	PyDoc_STR("*sequence*: TES hot fluid mass [kg]"),
+ 	NULL},
+{"tes_radius", (getter)Outputs_get_tes_radius,(setter)0,
+	PyDoc_STR("*float*: TES Radius [m]"),
+ 	NULL},
+{"tes_wall_error", (getter)Outputs_get_tes_wall_error,(setter)0,
+	PyDoc_STR("*sequence*: TES energy balance error due to wall temperature assumption [MWt]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1566,13 +2106,13 @@ newCspSubcomponentObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "TES", TES_obj);
 	Py_DECREF(TES_obj);
 
-	PyObject* SolarField_obj = SolarField_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "SolarField", SolarField_obj);
-	Py_DECREF(SolarField_obj);
-
 	PyObject* Powerblock_obj = Powerblock_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Powerblock", Powerblock_obj);
 	Py_DECREF(Powerblock_obj);
+
+	PyObject* SolarField_obj = SolarField_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "SolarField", SolarField_obj);
+	Py_DECREF(SolarField_obj);
 
 	PyObject* Controller_obj = Controller_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Controller", Controller_obj);
@@ -1890,19 +2430,19 @@ CspSubcomponentModule_exec(PyObject *m)
 				(PyObject*)&TES_Type);
 	Py_DECREF(&TES_Type);
 
-	/// Add the SolarField type object to CspSubcomponent_Type
-	if (PyType_Ready(&SolarField_Type) < 0) { goto fail; }
-	PyDict_SetItemString(CspSubcomponent_Type.tp_dict,
-				"SolarField",
-				(PyObject*)&SolarField_Type);
-	Py_DECREF(&SolarField_Type);
-
 	/// Add the Powerblock type object to CspSubcomponent_Type
 	if (PyType_Ready(&Powerblock_Type) < 0) { goto fail; }
 	PyDict_SetItemString(CspSubcomponent_Type.tp_dict,
 				"Powerblock",
 				(PyObject*)&Powerblock_Type);
 	Py_DECREF(&Powerblock_Type);
+
+	/// Add the SolarField type object to CspSubcomponent_Type
+	if (PyType_Ready(&SolarField_Type) < 0) { goto fail; }
+	PyDict_SetItemString(CspSubcomponent_Type.tp_dict,
+				"SolarField",
+				(PyObject*)&SolarField_Type);
+	Py_DECREF(&SolarField_Type);
 
 	/// Add the Controller type object to CspSubcomponent_Type
 	if (PyType_Ready(&Controller_Type) < 0) { goto fail; }

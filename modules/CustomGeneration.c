@@ -1,6 +1,6 @@
 #include <Python.h>
 
-#include <SAM_GenericSystem.h>
+#include <SAM_CustomGeneration.h>
 #include <SAM_api.h>
 
 #include "PySAM_utils.h"
@@ -13,7 +13,7 @@
 static PyTypeObject Plant_Type;
 
 static PyObject *
-Plant_new(SAM_GenericSystem data_ptr)
+Plant_new(SAM_CustomGeneration data_ptr)
 {
 	PyObject* new_obj = Plant_Type.tp_alloc(&Plant_Type,0);
 
@@ -34,7 +34,7 @@ Plant_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "GenericSystem", "Plant")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "CustomGeneration", "Plant")){
 		return NULL;
 	}
 
@@ -51,7 +51,7 @@ Plant_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &Plant_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "GenericSystem", "Plant")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "CustomGeneration", "Plant")){
 		return NULL;
 	}
 
@@ -80,85 +80,85 @@ static PyMethodDef Plant_methods[] = {
 static PyObject *
 Plant_get_conv_eff(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_Plant_conv_eff_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_Plant_conv_eff_nget, self->data_ptr);
 }
 
 static int
 Plant_set_conv_eff(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_GenericSystem_Plant_conv_eff_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_CustomGeneration_Plant_conv_eff_nset, self->data_ptr);
 }
 
 static PyObject *
 Plant_get_derate(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_Plant_derate_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_Plant_derate_nget, self->data_ptr);
 }
 
 static int
 Plant_set_derate(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_GenericSystem_Plant_derate_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_CustomGeneration_Plant_derate_nset, self->data_ptr);
 }
 
 static PyObject *
 Plant_get_energy_output_array(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_Plant_energy_output_array_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_CustomGeneration_Plant_energy_output_array_aget, self->data_ptr);
 }
 
 static int
 Plant_set_energy_output_array(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_GenericSystem_Plant_energy_output_array_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_CustomGeneration_Plant_energy_output_array_aset, self->data_ptr);
 }
 
 static PyObject *
 Plant_get_heat_rate(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_Plant_heat_rate_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_Plant_heat_rate_nget, self->data_ptr);
 }
 
 static int
 Plant_set_heat_rate(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_GenericSystem_Plant_heat_rate_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_CustomGeneration_Plant_heat_rate_nset, self->data_ptr);
 }
 
 static PyObject *
 Plant_get_spec_mode(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_Plant_spec_mode_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_Plant_spec_mode_nget, self->data_ptr);
 }
 
 static int
 Plant_set_spec_mode(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_GenericSystem_Plant_spec_mode_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_CustomGeneration_Plant_spec_mode_nset, self->data_ptr);
 }
 
 static PyObject *
 Plant_get_system_capacity(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_Plant_system_capacity_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_Plant_system_capacity_nget, self->data_ptr);
 }
 
 static int
 Plant_set_system_capacity(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_GenericSystem_Plant_system_capacity_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_CustomGeneration_Plant_system_capacity_nset, self->data_ptr);
 }
 
 static PyObject *
 Plant_get_user_capacity_factor(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_Plant_user_capacity_factor_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_Plant_user_capacity_factor_nget, self->data_ptr);
 }
 
 static int
 Plant_set_user_capacity_factor(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_GenericSystem_Plant_user_capacity_factor_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_CustomGeneration_Plant_user_capacity_factor_nset, self->data_ptr);
 }
 
 static PyGetSetDef Plant_getset[] = {
@@ -190,7 +190,7 @@ static PyTypeObject Plant_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"GenericSystem.Plant",             /*tp_name*/
+		"CustomGeneration.Plant",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -240,7 +240,7 @@ static PyTypeObject Plant_Type = {
 static PyTypeObject Lifetime_Type;
 
 static PyObject *
-Lifetime_new(SAM_GenericSystem data_ptr)
+Lifetime_new(SAM_CustomGeneration data_ptr)
 {
 	PyObject* new_obj = Lifetime_Type.tp_alloc(&Lifetime_Type,0);
 
@@ -261,7 +261,7 @@ Lifetime_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "GenericSystem", "Lifetime")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "CustomGeneration", "Lifetime")){
 		return NULL;
 	}
 
@@ -278,7 +278,7 @@ Lifetime_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &Lifetime_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "GenericSystem", "Lifetime")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "CustomGeneration", "Lifetime")){
 		return NULL;
 	}
 
@@ -307,37 +307,37 @@ static PyMethodDef Lifetime_methods[] = {
 static PyObject *
 Lifetime_get_analysis_period(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_Lifetime_analysis_period_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_Lifetime_analysis_period_nget, self->data_ptr);
 }
 
 static int
 Lifetime_set_analysis_period(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_GenericSystem_Lifetime_analysis_period_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_CustomGeneration_Lifetime_analysis_period_nset, self->data_ptr);
 }
 
 static PyObject *
 Lifetime_get_generic_degradation(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_Lifetime_generic_degradation_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_CustomGeneration_Lifetime_generic_degradation_aget, self->data_ptr);
 }
 
 static int
 Lifetime_set_generic_degradation(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_GenericSystem_Lifetime_generic_degradation_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_CustomGeneration_Lifetime_generic_degradation_aset, self->data_ptr);
 }
 
 static PyObject *
 Lifetime_get_system_use_lifetime_output(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_Lifetime_system_use_lifetime_output_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_Lifetime_system_use_lifetime_output_nget, self->data_ptr);
 }
 
 static int
 Lifetime_set_system_use_lifetime_output(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_GenericSystem_Lifetime_system_use_lifetime_output_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_CustomGeneration_Lifetime_system_use_lifetime_output_nset, self->data_ptr);
 }
 
 static PyGetSetDef Lifetime_getset[] = {
@@ -348,7 +348,7 @@ static PyGetSetDef Lifetime_getset[] = {
 	PyDoc_STR("*sequence*: Annual AC degradation [%/year]\n\n**Required:**\nRequired if system_use_lifetime_output=1"),
  	NULL},
 {"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
-	PyDoc_STR("*float*: Generic lifetime simulation [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Custom generation profile lifetime simulation [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -357,7 +357,7 @@ static PyTypeObject Lifetime_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"GenericSystem.Lifetime",             /*tp_name*/
+		"CustomGeneration.Lifetime",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -407,7 +407,7 @@ static PyTypeObject Lifetime_Type = {
 static PyTypeObject HybridCosts_Type;
 
 static PyObject *
-HybridCosts_new(SAM_GenericSystem data_ptr)
+HybridCosts_new(SAM_CustomGeneration data_ptr)
 {
 	PyObject* new_obj = HybridCosts_Type.tp_alloc(&HybridCosts_Type,0);
 
@@ -428,7 +428,7 @@ HybridCosts_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "GenericSystem", "HybridCosts")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "CustomGeneration", "HybridCosts")){
 		return NULL;
 	}
 
@@ -445,7 +445,7 @@ HybridCosts_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &HybridCosts_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "GenericSystem", "HybridCosts")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "CustomGeneration", "HybridCosts")){
 		return NULL;
 	}
 
@@ -474,174 +474,174 @@ static PyMethodDef HybridCosts_methods[] = {
 static PyObject *
 HybridCosts_get_annual_fuel_usage_lifetime(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_HybridCosts_annual_fuel_usage_lifetime_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_CustomGeneration_HybridCosts_annual_fuel_usage_lifetime_aget, self->data_ptr);
 }
 
 static int
 HybridCosts_set_annual_fuel_usage_lifetime(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_GenericSystem_HybridCosts_annual_fuel_usage_lifetime_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_CustomGeneration_HybridCosts_annual_fuel_usage_lifetime_aset, self->data_ptr);
 }
 
 static PyObject *
 HybridCosts_get_degradation(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_HybridCosts_degradation_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_CustomGeneration_HybridCosts_degradation_aget, self->data_ptr);
 }
 
 static int
 HybridCosts_set_degradation(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_GenericSystem_HybridCosts_degradation_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_CustomGeneration_HybridCosts_degradation_aset, self->data_ptr);
 }
 
 static PyObject *
 HybridCosts_get_land_area(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_HybridCosts_land_area_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_HybridCosts_land_area_nget, self->data_ptr);
 }
 
 static int
 HybridCosts_set_land_area(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_GenericSystem_HybridCosts_land_area_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_CustomGeneration_HybridCosts_land_area_nset, self->data_ptr);
 }
 
 static PyObject *
 HybridCosts_get_om_capacity(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_HybridCosts_om_capacity_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_CustomGeneration_HybridCosts_om_capacity_aget, self->data_ptr);
 }
 
 static int
 HybridCosts_set_om_capacity(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_GenericSystem_HybridCosts_om_capacity_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_CustomGeneration_HybridCosts_om_capacity_aset, self->data_ptr);
 }
 
 static PyObject *
 HybridCosts_get_om_capacity_escal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_HybridCosts_om_capacity_escal_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_HybridCosts_om_capacity_escal_nget, self->data_ptr);
 }
 
 static int
 HybridCosts_set_om_capacity_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_GenericSystem_HybridCosts_om_capacity_escal_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_CustomGeneration_HybridCosts_om_capacity_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 HybridCosts_get_om_fixed(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_HybridCosts_om_fixed_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_CustomGeneration_HybridCosts_om_fixed_aget, self->data_ptr);
 }
 
 static int
 HybridCosts_set_om_fixed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_GenericSystem_HybridCosts_om_fixed_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_CustomGeneration_HybridCosts_om_fixed_aset, self->data_ptr);
 }
 
 static PyObject *
 HybridCosts_get_om_fixed_escal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_HybridCosts_om_fixed_escal_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_HybridCosts_om_fixed_escal_nget, self->data_ptr);
 }
 
 static int
 HybridCosts_set_om_fixed_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_GenericSystem_HybridCosts_om_fixed_escal_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_CustomGeneration_HybridCosts_om_fixed_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 HybridCosts_get_om_fuel_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_HybridCosts_om_fuel_cost_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_CustomGeneration_HybridCosts_om_fuel_cost_aget, self->data_ptr);
 }
 
 static int
 HybridCosts_set_om_fuel_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_GenericSystem_HybridCosts_om_fuel_cost_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_CustomGeneration_HybridCosts_om_fuel_cost_aset, self->data_ptr);
 }
 
 static PyObject *
 HybridCosts_get_om_fuel_cost_escal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_HybridCosts_om_fuel_cost_escal_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_HybridCosts_om_fuel_cost_escal_nget, self->data_ptr);
 }
 
 static int
 HybridCosts_set_om_fuel_cost_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_GenericSystem_HybridCosts_om_fuel_cost_escal_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_CustomGeneration_HybridCosts_om_fuel_cost_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 HybridCosts_get_om_land_lease(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_HybridCosts_om_land_lease_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_CustomGeneration_HybridCosts_om_land_lease_aget, self->data_ptr);
 }
 
 static int
 HybridCosts_set_om_land_lease(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_GenericSystem_HybridCosts_om_land_lease_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_CustomGeneration_HybridCosts_om_land_lease_aset, self->data_ptr);
 }
 
 static PyObject *
 HybridCosts_get_om_land_lease_escal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_HybridCosts_om_land_lease_escal_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_HybridCosts_om_land_lease_escal_nget, self->data_ptr);
 }
 
 static int
 HybridCosts_set_om_land_lease_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_GenericSystem_HybridCosts_om_land_lease_escal_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_CustomGeneration_HybridCosts_om_land_lease_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 HybridCosts_get_om_production(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_HybridCosts_om_production_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_CustomGeneration_HybridCosts_om_production_aget, self->data_ptr);
 }
 
 static int
 HybridCosts_set_om_production(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_GenericSystem_HybridCosts_om_production_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_CustomGeneration_HybridCosts_om_production_aset, self->data_ptr);
 }
 
 static PyObject *
 HybridCosts_get_om_production_escal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_HybridCosts_om_production_escal_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_HybridCosts_om_production_escal_nget, self->data_ptr);
 }
 
 static int
 HybridCosts_set_om_production_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_GenericSystem_HybridCosts_om_production_escal_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_CustomGeneration_HybridCosts_om_production_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 HybridCosts_get_total_installed_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_HybridCosts_total_installed_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_HybridCosts_total_installed_cost_nget, self->data_ptr);
 }
 
 static int
 HybridCosts_set_total_installed_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_GenericSystem_HybridCosts_total_installed_cost_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_CustomGeneration_HybridCosts_total_installed_cost_nset, self->data_ptr);
 }
 
 static PyGetSetDef HybridCosts_getset[] = {
 {"annual_fuel_usage_lifetime", (getter)HybridCosts_get_annual_fuel_usage_lifetime,(setter)HybridCosts_set_annual_fuel_usage_lifetime,
-	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical"),
+	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]\n\n**Info:**\ncustom_generation,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical"),
  	NULL},
 {"degradation", (getter)HybridCosts_get_degradation,(setter)HybridCosts_set_degradation,
 	PyDoc_STR("*sequence*: Annual AC degradation [%]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
@@ -662,10 +662,10 @@ static PyGetSetDef HybridCosts_getset[] = {
 	PyDoc_STR("*float*: Fixed O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuel_cost", (getter)HybridCosts_get_om_fuel_cost,(setter)HybridCosts_set_om_fuel_cost,
-	PyDoc_STR("*sequence*: Fuel cost [$/MMBtu]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Fuel cost [$/MMBtu]\n\n**Info:**\ncustom_generation,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuel_cost_escal", (getter)HybridCosts_get_om_fuel_cost_escal,(setter)HybridCosts_set_om_fuel_cost_escal,
-	PyDoc_STR("*float*: Fuel cost escalation [%/year]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Fuel cost escalation [%/year]\n\n**Info:**\ncustom_generation,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_land_lease", (getter)HybridCosts_get_om_land_lease,(setter)HybridCosts_set_om_land_lease,
 	PyDoc_STR("*sequence*: Land lease cost [$/acre]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
@@ -689,7 +689,7 @@ static PyTypeObject HybridCosts_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"GenericSystem.HybridCosts",             /*tp_name*/
+		"CustomGeneration.HybridCosts",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -739,7 +739,7 @@ static PyTypeObject HybridCosts_Type = {
 static PyTypeObject Outputs_Type;
 
 static PyObject *
-Outputs_new(SAM_GenericSystem data_ptr)
+Outputs_new(SAM_CustomGeneration data_ptr)
 {
 	PyObject* new_obj = Outputs_Type.tp_alloc(&Outputs_Type,0);
 
@@ -760,7 +760,7 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "GenericSystem", "Outputs")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "CustomGeneration", "Outputs")){
 		return NULL;
 	}
 
@@ -777,7 +777,7 @@ Outputs_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &Outputs_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "GenericSystem", "Outputs")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "CustomGeneration", "Outputs")){
 		return NULL;
 	}
 
@@ -806,109 +806,109 @@ static PyMethodDef Outputs_methods[] = {
 static PyObject *
 Outputs_get_annual_energy(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_Outputs_annual_energy_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_Outputs_annual_energy_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_GenericSystem_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_CustomGeneration_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_fuel_usage(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_Outputs_annual_fuel_usage_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_Outputs_annual_fuel_usage_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_capacity_factor(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_Outputs_capacity_factor_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_Outputs_capacity_factor_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_battery_replacement_cost_schedule(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_Outputs_cf_battery_replacement_cost_schedule_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_CustomGeneration_Outputs_cf_battery_replacement_cost_schedule_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_energy_net(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_Outputs_cf_energy_net_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_CustomGeneration_Outputs_cf_energy_net_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_fuelcell_replacement_cost_schedule(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_Outputs_cf_fuelcell_replacement_cost_schedule_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_CustomGeneration_Outputs_cf_fuelcell_replacement_cost_schedule_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_land_lease_expense(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_Outputs_cf_land_lease_expense_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_CustomGeneration_Outputs_cf_land_lease_expense_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_om_capacity(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_Outputs_cf_om_capacity_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_CustomGeneration_Outputs_cf_om_capacity_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_om_fixed(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_Outputs_cf_om_fixed_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_CustomGeneration_Outputs_cf_om_fixed_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_om_fuel_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_Outputs_cf_om_fuel_cost_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_CustomGeneration_Outputs_cf_om_fuel_cost_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_om_land_lease(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_Outputs_cf_om_land_lease_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_CustomGeneration_Outputs_cf_om_land_lease_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_om_production(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_Outputs_cf_om_production_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_CustomGeneration_Outputs_cf_om_production_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_gen(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_Outputs_gen_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_CustomGeneration_Outputs_gen_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_kwh_per_kw(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_Outputs_kwh_per_kw_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_Outputs_kwh_per_kw_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_monthly_energy(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_Outputs_monthly_energy_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_CustomGeneration_Outputs_monthly_energy_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_heat_rate(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_Outputs_system_heat_rate_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_Outputs_system_heat_rate_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_water_usage(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_GenericSystem_Outputs_water_usage_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CustomGeneration_Outputs_water_usage_nget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
@@ -973,7 +973,7 @@ static PyTypeObject Outputs_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"GenericSystem.Outputs",             /*tp_name*/
+		"CustomGeneration.Outputs",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -1016,16 +1016,16 @@ static PyTypeObject Outputs_Type = {
 };
 
 /*
- * GenericSystem
+ * CustomGeneration
  */
 
-static PyTypeObject GenericSystem_Type;
+static PyTypeObject CustomGeneration_Type;
 
 static CmodObject *
-newGenericSystemObject(void* data_ptr)
+newCustomGenerationObject(void* data_ptr)
 {
 	CmodObject *self;
-	self = PyObject_New(CmodObject, &GenericSystem_Type);
+	self = PyObject_New(CmodObject, &CustomGeneration_Type);
 
 	PySAM_TECH_ATTR()
 
@@ -1063,10 +1063,10 @@ newGenericSystemObject(void* data_ptr)
 	return self;
 }
 
-/* GenericSystem methods */
+/* CustomGeneration methods */
 
 static void
-GenericSystem_dealloc(CmodObject *self)
+CustomGeneration_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
 
@@ -1080,7 +1080,7 @@ GenericSystem_dealloc(CmodObject *self)
 
 
 static PyObject *
-GenericSystem_get_data_ptr(CmodObject *self, PyObject *args)
+CustomGeneration_get_data_ptr(CmodObject *self, PyObject *args)
 {
 	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
 	return ptr;
@@ -1088,7 +1088,7 @@ GenericSystem_get_data_ptr(CmodObject *self, PyObject *args)
 
 
 static PyObject *
-GenericSystem_execute(CmodObject *self, PyObject *args)
+CustomGeneration_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
 
@@ -1096,7 +1096,7 @@ GenericSystem_execute(CmodObject *self, PyObject *args)
 		return NULL;
 
 	SAM_error error = new_error();
-	SAM_GenericSystem_execute(self->data_ptr, verbosity, &error);
+	SAM_CustomGeneration_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
 	Py_INCREF(Py_None);
 	return Py_None;
@@ -1104,14 +1104,14 @@ GenericSystem_execute(CmodObject *self, PyObject *args)
 
 
 static PyObject *
-GenericSystem_assign(CmodObject *self, PyObject *args)
+CustomGeneration_assign(CmodObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "GenericSystem"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "CustomGeneration"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -1119,14 +1119,14 @@ GenericSystem_assign(CmodObject *self, PyObject *args)
 }
 
 static PyObject *
-GenericSystem_replace(CmodObject *self, PyObject *args)
+CustomGeneration_replace(CmodObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "GenericSystem"))
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "CustomGeneration"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -1134,65 +1134,65 @@ GenericSystem_replace(CmodObject *self, PyObject *args)
 }
 
 static PyObject *
-GenericSystem_export(CmodObject *self, PyObject *args)
+CustomGeneration_export(CmodObject *self, PyObject *args)
 {
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
 static PyObject *
-GenericSystem_value(CmodObject *self, PyObject *args)
+CustomGeneration_value(CmodObject *self, PyObject *args)
 {
 	return Cmod_value(self, args);
 }
 
 static PyObject *
-GenericSystem_unassign(CmodObject *self, PyObject *args)
+CustomGeneration_unassign(CmodObject *self, PyObject *args)
 {
 	return Cmod_unassign(self, args);
 }
 
-static PyMethodDef GenericSystem_methods[] = {
-		{"execute",           (PyCFunction)GenericSystem_execute,  METH_VARARGS,
+static PyMethodDef CustomGeneration_methods[] = {
+		{"execute",           (PyCFunction)CustomGeneration_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
-		{"assign",            (PyCFunction)GenericSystem_assign,  METH_VARARGS,
+		{"assign",            (PyCFunction)CustomGeneration_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Plant': { var: val, ...}, ...}``")},
-		{"replace",            (PyCFunction)GenericSystem_replace,  METH_VARARGS,
+		{"replace",            (PyCFunction)CustomGeneration_replace,  METH_VARARGS,
 				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Plant': { var: val, ...}, ...}``")},
-		{"export",            (PyCFunction)GenericSystem_export,  METH_VARARGS,
+		{"export",            (PyCFunction)CustomGeneration_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
-		{"value",             (PyCFunction)GenericSystem_value, METH_VARARGS,
+		{"value",             (PyCFunction)CustomGeneration_value, METH_VARARGS,
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
-		{"unassign",          (PyCFunction)GenericSystem_unassign, METH_VARARGS,
+		{"unassign",          (PyCFunction)CustomGeneration_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
-		{"get_data_ptr",           (PyCFunction)GenericSystem_get_data_ptr,  METH_VARARGS,
+		{"get_data_ptr",           (PyCFunction)CustomGeneration_get_data_ptr,  METH_VARARGS,
 				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-GenericSystem_getattro(CmodObject *self, PyObject *name)
+CustomGeneration_getattro(CmodObject *self, PyObject *name)
 {
 	return PySAM_get_attr((PyObject*) self, (PyObject*) self->x_attr, name);
 }
 
 static int
-GenericSystem_setattr(CmodObject *self, const char *name, PyObject *v)
+CustomGeneration_setattr(CmodObject *self, const char *name, PyObject *v)
 {
 	return PySAM_set_attr((PyObject*)self, (PyObject*)self->x_attr, name, v);
 }
 
-static PyTypeObject GenericSystem_Type = {
+static PyTypeObject CustomGeneration_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"GenericSystem",            /*tp_name*/
+		"CustomGeneration",            /*tp_name*/
 		sizeof(CmodObject),/*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
-		(destructor)GenericSystem_dealloc,    /*tp_dealloc*/
+		(destructor)CustomGeneration_dealloc,    /*tp_dealloc*/
 		0,                          /*tp_print*/
 		(getattrfunc)0,             /*tp_getattr*/
-		(setattrfunc)GenericSystem_setattr,   /*tp_setattr*/
+		(setattrfunc)CustomGeneration_setattr,   /*tp_setattr*/
 		0,                          /*tp_reserved*/
 		0,                          /*tp_repr*/
 		0,                          /*tp_as_number*/
@@ -1201,7 +1201,7 @@ static PyTypeObject GenericSystem_Type = {
 		0,                          /*tp_hash*/
 		0,                          /*tp_call*/
 		0,                          /*tp_str*/
-		(getattrofunc)GenericSystem_getattro, /*tp_getattro*/
+		(getattrofunc)CustomGeneration_getattro, /*tp_getattro*/
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
@@ -1212,7 +1212,7 @@ static PyTypeObject GenericSystem_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		GenericSystem_methods,      /*tp_methods*/
+		CustomGeneration_methods,      /*tp_methods*/
 		0,                          /*tp_members*/
 		0,       /*tp_getset*/
 		0,                          /*tp_base*/
@@ -1230,13 +1230,13 @@ static PyTypeObject GenericSystem_Type = {
 /* --------------------------------------------------------------------- */
 
 
-/* Function of no arguments returning new GenericSystem object */
+/* Function of no arguments returning new CustomGeneration object */
 
 static PyObject *
-GenericSystem_new(PyObject *self, PyObject *args)
+CustomGeneration_new(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
-	rv = newGenericSystemObject(0);
+	rv = newCustomGenerationObject(0);
 	if (rv == NULL)
 		return NULL;
 
@@ -1245,7 +1245,7 @@ GenericSystem_new(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-GenericSystem_wrap(PyObject *self, PyObject *args)
+CustomGeneration_wrap(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	long long int ptr = 0;  // 64 bit arch
@@ -1253,7 +1253,7 @@ GenericSystem_wrap(PyObject *self, PyObject *args)
 		PyErr_BadArgument();
 		return NULL;
 	}
-	rv = newGenericSystemObject((void*)ptr);
+	rv = newCustomGenerationObject((void*)ptr);
 	if (rv == NULL)
 		return NULL;
 
@@ -1262,7 +1262,7 @@ GenericSystem_wrap(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-GenericSystem_default(PyObject *self, PyObject *args)
+CustomGeneration_default(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	char* def = 0;
@@ -1270,20 +1270,20 @@ GenericSystem_default(PyObject *self, PyObject *args)
 		PyErr_BadArgument();
 		return NULL;
 	}
-	rv = newGenericSystemObject(0);
+	rv = newCustomGenerationObject(0);
 	if (rv == NULL)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "GenericSystem", def) < 0) {
-		GenericSystem_dealloc(rv);
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "CustomGeneration", def) < 0) {
+		CustomGeneration_dealloc(rv);
 		return NULL;
 	}
 	return (PyObject *)rv;
 }
 
 static PyObject *
-GenericSystem_from_existing(PyObject *self, PyObject *args)
+CustomGeneration_from_existing(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	PyObject * module = 0;
@@ -1303,13 +1303,13 @@ GenericSystem_from_existing(PyObject *self, PyObject *args)
 	if (data_size < 0)
 		goto fail;
 
-	rv = newGenericSystemObject((void*)ptr);
+	rv = newCustomGenerationObject((void*)ptr);
 	if (rv == NULL)
 		goto fail;
 	rv->data_owner_ptr = module;
 	if (!def)
 		return (PyObject *)rv;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "GenericSystem", def);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "CustomGeneration", def);
 	return (PyObject *)rv;
 
 	fail:
@@ -1320,66 +1320,66 @@ GenericSystem_from_existing(PyObject *self, PyObject *args)
 
 /* List of functions defined in the module */
 
-static PyMethodDef GenericSystemModule_methods[] = {
-		{"new",             GenericSystem_new,         METH_VARARGS,
-				PyDoc_STR("new() -> GenericSystem")},
-		{"default",             GenericSystem_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> GenericSystem\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"GenericBatteryAllEquityPartnershipFlip\"*\n\n		- *\"GenericBatteryCommercial\"*\n\n		- *\"GenericBatteryHostDeveloper\"*\n\n		- *\"GenericBatteryLeveragedPartnershipFlip\"*\n\n		- *\"GenericBatteryMerchantPlant\"*\n\n		- *\"GenericBatteryResidential\"*\n\n		- *\"GenericBatterySaleLeaseback\"*\n\n		- *\"GenericBatterySingleOwner\"*\n\n		- *\"GenericBatteryThirdParty\"*\n\n		- *\"GenericPVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"GenericPVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"GenericSystemAllEquityPartnershipFlip\"*\n\n		- *\"GenericSystemCommercial\"*\n\n		- *\"GenericSystemHostDeveloper\"*\n\n		- *\"GenericSystemLCOECalculator\"*\n\n		- *\"GenericSystemLeveragedPartnershipFlip\"*\n\n		- *\"GenericSystemMerchantPlant\"*\n\n		- *\"GenericSystemNone\"*\n\n		- *\"GenericSystemResidential\"*\n\n		- *\"GenericSystemSaleLeaseback\"*\n\n		- *\"GenericSystemSingleOwner\"*\n\n		- *\"GenericSystemThirdParty\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
-		{"wrap",             GenericSystem_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> GenericSystem\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
-		{"from_existing",   GenericSystem_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> GenericSystem\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
+static PyMethodDef CustomGenerationModule_methods[] = {
+		{"new",             CustomGeneration_new,         METH_VARARGS,
+				PyDoc_STR("new() -> CustomGeneration")},
+		{"default",             CustomGeneration_default,         METH_VARARGS,
+				PyDoc_STR("default(config) -> CustomGeneration\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"CustomGenerationBatteryAllEquityPartnershipFlip\"*\n\n		- *\"CustomGenerationBatteryCommercial\"*\n\n		- *\"CustomGenerationBatteryHostDeveloper\"*\n\n		- *\"CustomGenerationBatteryLeveragedPartnershipFlip\"*\n\n		- *\"CustomGenerationBatteryMerchantPlant\"*\n\n		- *\"CustomGenerationBatteryResidential\"*\n\n		- *\"CustomGenerationBatterySaleLeaseback\"*\n\n		- *\"CustomGenerationBatterySingleOwner\"*\n\n		- *\"CustomGenerationBatteryThirdParty\"*\n\n		- *\"CustomGenerationProfileAllEquityPartnershipFlip\"*\n\n		- *\"CustomGenerationProfileCommercial\"*\n\n		- *\"CustomGenerationProfileHostDeveloper\"*\n\n		- *\"CustomGenerationProfileLCOECalculator\"*\n\n		- *\"CustomGenerationProfileLeveragedPartnershipFlip\"*\n\n		- *\"CustomGenerationProfileMerchantPlant\"*\n\n		- *\"CustomGenerationProfileNone\"*\n\n		- *\"CustomGenerationProfileResidential\"*\n\n		- *\"CustomGenerationProfileSaleLeaseback\"*\n\n		- *\"CustomGenerationProfileSingleOwner\"*\n\n		- *\"CustomGenerationProfileThirdParty\"*\n\n		- *\"CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+		{"wrap",             CustomGeneration_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> CustomGeneration\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
+		{"from_existing",   CustomGeneration_from_existing,        METH_VARARGS,
+				PyDoc_STR("from_existing(data, optional config) -> CustomGeneration\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input");
+			 "CustomGeneration");
 
 
 static int
-GenericSystemModule_exec(PyObject *m)
+CustomGenerationModule_exec(PyObject *m)
 {
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
 
-	GenericSystem_Type.tp_dict = PyDict_New();
-	if (!GenericSystem_Type.tp_dict) { goto fail; }
+	CustomGeneration_Type.tp_dict = PyDict_New();
+	if (!CustomGeneration_Type.tp_dict) { goto fail; }
 
-	/// Add the Plant type object to GenericSystem_Type
+	/// Add the Plant type object to CustomGeneration_Type
 	if (PyType_Ready(&Plant_Type) < 0) { goto fail; }
-	PyDict_SetItemString(GenericSystem_Type.tp_dict,
+	PyDict_SetItemString(CustomGeneration_Type.tp_dict,
 				"Plant",
 				(PyObject*)&Plant_Type);
 	Py_DECREF(&Plant_Type);
 
-	/// Add the Lifetime type object to GenericSystem_Type
+	/// Add the Lifetime type object to CustomGeneration_Type
 	if (PyType_Ready(&Lifetime_Type) < 0) { goto fail; }
-	PyDict_SetItemString(GenericSystem_Type.tp_dict,
+	PyDict_SetItemString(CustomGeneration_Type.tp_dict,
 				"Lifetime",
 				(PyObject*)&Lifetime_Type);
 	Py_DECREF(&Lifetime_Type);
 
-	/// Add the HybridCosts type object to GenericSystem_Type
+	/// Add the HybridCosts type object to CustomGeneration_Type
 	if (PyType_Ready(&HybridCosts_Type) < 0) { goto fail; }
-	PyDict_SetItemString(GenericSystem_Type.tp_dict,
+	PyDict_SetItemString(CustomGeneration_Type.tp_dict,
 				"HybridCosts",
 				(PyObject*)&HybridCosts_Type);
 	Py_DECREF(&HybridCosts_Type);
 
-	/// Add the Outputs type object to GenericSystem_Type
+	/// Add the Outputs type object to CustomGeneration_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }
-	PyDict_SetItemString(GenericSystem_Type.tp_dict,
+	PyDict_SetItemString(CustomGeneration_Type.tp_dict,
 				"Outputs",
 				(PyObject*)&Outputs_Type);
 	Py_DECREF(&Outputs_Type);
 
-	/// Add the GenericSystem type object to the module
-	if (PyType_Ready(&GenericSystem_Type) < 0) { goto fail; }
+	/// Add the CustomGeneration type object to the module
+	if (PyType_Ready(&CustomGeneration_Type) < 0) { goto fail; }
 	PyModule_AddObject(m,
-				"GenericSystem",
-				(PyObject*)&GenericSystem_Type);
+				"CustomGeneration",
+				(PyObject*)&CustomGeneration_Type);
 
 	return 0;
 	fail:
@@ -1387,18 +1387,18 @@ GenericSystemModule_exec(PyObject *m)
 	return -1;
 }
 
-static struct PyModuleDef_Slot GenericSystemModule_slots[] = {
-		{Py_mod_exec, GenericSystemModule_exec},
+static struct PyModuleDef_Slot CustomGenerationModule_slots[] = {
+		{Py_mod_exec, CustomGenerationModule_exec},
 		{0, NULL},
 };
 
-static struct PyModuleDef GenericSystemModule = {
+static struct PyModuleDef CustomGenerationModule = {
 		PyModuleDef_HEAD_INIT,
-		"GenericSystem",
+		"CustomGeneration",
 		module_doc,
 		0,
-		GenericSystemModule_methods,
-		GenericSystemModule_slots,
+		CustomGenerationModule_methods,
+		CustomGenerationModule_slots,
 		NULL,
 		NULL,
 		NULL
@@ -1407,7 +1407,7 @@ static struct PyModuleDef GenericSystemModule = {
 /* Export function for the module */
 
 PyMODINIT_FUNC
-PyInit_GenericSystem(void)
+PyInit_CustomGeneration(void)
 {
-	return PyModuleDef_Init(&GenericSystemModule);
+	return PyModuleDef_Init(&CustomGenerationModule);
 }

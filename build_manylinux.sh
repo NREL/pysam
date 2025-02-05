@@ -4,8 +4,6 @@ export SSCDIR=/io/ssc
 export SAMNTDIR=/io/sam
 export PYSAMDIR=/io/pysam
 
-/opt/python/cp39-cp39m/bin/pip install cmake
-
 mkdir -p /io/build_linux_ssc
 cd /io/build_linux_ssc
 rm -rf *
@@ -20,7 +18,7 @@ cmake ${SAMNTDIR}/api -DCMAKE_BUILD_TYPE=Release -DSAMAPI_EXPORT=1 -DSAM_SKIP_AU
 make -j 6 || exit
 
 cd $PYSAMDIR
-for PYTHONENV in cp38-cp38 cp39-cp39 cp310-cp310 cp311-cp311 cp312-cp312
+for PYTHONENV in cp38-cp38 cp39-cp39 cp310-cp310 cp311-cp311 cp312-cp312 cp313-cp313
 do
    yes | /opt/python/$PYTHONENV/bin/pip install -r tests/requirements.txt
    yes | /opt/python/$PYTHONENV/bin/pip uninstall NREL-PySAM
