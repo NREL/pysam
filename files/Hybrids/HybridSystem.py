@@ -6,7 +6,7 @@ from .PVWattsHybrid import PVWattsHybrid, pvwatts
 from .PVHybrid import PVHybrid, pv
 from .WindHybrid import WindHybrid, wind
 from .BatteryHybrid import BatteryHybrid, batt
-from .GenericSystemHybrid import GenericSystemHybrid, gensys
+from .CustomGenerationHybrid import CustomGenerationHybrid, custom
 from .FuelCellHybrid import FuelCellHybrid, fuelcell
 
 import PySAM.Grid as grid
@@ -20,7 +20,7 @@ class HybridSystem:
     """
     Class for hybrid systems that combines a performance model with a financial model and runs a PySAM.Hybrid simulation
 
-    Supported performance model modules: Pvsamv1, Pvwattsv8, Windpower, GenericSystem, Battery, Fuelcell
+    Supported performance model modules: Pvsamv1, Pvwattsv8, Windpower, CustomGeneration, Battery, Fuelcell
 
     Supported financial model modules: Singleowner, HostDeveloper
 
@@ -31,7 +31,7 @@ class HybridSystem:
     HybridSystem.pv = PVHybrid (PySAM.Pvsamv1)
     HybridSystem.pvwatts = PVWattsHybrid (PySAM.Pvwattsv8)
     HybridSystem.wind = WindHybrid (PySAM.Windpower)
-    HybridSystem.gensys = GenericSystemHybrid (PySAM.GenericSystem)
+    HybridSystem.custom = CustomGenerationHybrid (PySAM.CustomGeneration)
     HybridSystem.battery = BatteryHybrid (PySAM.Battery)
     HybridSystem.fuelcell = FuelCellHybrid (PySAM.Fuelcell)
     HybridSystem._grid = PySAM.Grid
@@ -69,9 +69,9 @@ class HybridSystem:
             elif pysam_module == wind:
                 self.wind: WindHybrid = WindHybrid()
                 self._generators['windpower'] = self.wind
-            elif pysam_module == gensys:
-                self.gensys: GenericSystemHybrid = GenericSystemHybrid()
-                self._generators['generic_system'] = self.gensys
+            elif pysam_module == custom:
+                self.custom: CustomGenerationHybrid = CustomGenerationHybrid()
+                self._generators['custom_generation'] = self.custom
             elif pysam_module == batt:
                 self.battery: BatteryHybrid = BatteryHybrid()
                 self._generators['battery'] = self.battery
@@ -113,8 +113,8 @@ class HybridSystem:
         """
         Create model with input variables set to default values. Available default configurations are:
 
-            "GenericPVWattsWindFuelCellBatteryHybridHostDeveloper"
-            "GenericPVWattsWindFuelCellBatteryHybridSingleOwner"
+            "CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper"
+            "CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner"
             "PVWattsWindBatteryHybridHostDeveloper"
             "PVWattsWindBatteryHybridSingleOwner"
             "PVWattsWindFuelCellBatteryHybridHostDeveloper"
@@ -141,7 +141,7 @@ class HybridSystem:
                 },
                 'pvwattsv8': {...}
 
-        Names of performance model modules: pvsamv1, pvwattsv8, windpower, generic_system, battery, fuelcell
+        Names of performance model modules: pvsamv1, pvwattsv8, windpower, custom_generation, battery, fuelcell
         Names of financial model modules: singleowner, utilityrate5, host_developer
         Names of intermediate modules: _grid, utilityrate5
 

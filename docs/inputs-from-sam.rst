@@ -13,7 +13,7 @@ Because of the large number of inputs required to run most PySAM models, it may 
 SAM Code Generator
 -------------------
 
-SAM's code generator exports data from a SAM case to JSON files or to a package of files for several programming and scripting languages. The **PySAM JSON** and **JSON for inputs options** described below work with PySAM. The **Python 2** and **Python 3** options described in :doc:`pyssc` work with Python when you want direct access to SSC without using the PySAM package.
+SAM's code generator exports data from a SAM case to JSON files or to a package of files for several programming and scripting languages. The **PySAM JSON** and **JSON for inputs options** described below work with PySAM. The **Python 2** and **Python 3** options described in :doc:`PySSC` work with Python when you want direct access to SSC without using the PySAM package.
 
 To open the code generator, in SAM, click **Generate code** on the case menu:
 
@@ -45,7 +45,7 @@ To see how the PySAM JSON option works, let's export SAM inputs for a PVWatts --
 
 .. note::
 
-    SAM's code generator also saves a copy of the SSC library files (``ssc.dll`` and ``sscapi.h`` in Windows) for the version of SAM that generated the code. You don't need to use these files, but they may be useful in the future if you update SAM and/or PySAM and need access to the original libraries you used to create your model. See :doc:`pyssc`.
+    SAM's code generator also saves a copy of the SSC library files (``ssc.dll`` and ``sscapi.h`` in Windows) for the version of SAM that generated the code. You don't need to use these files, but they may be useful in the future if you update SAM and/or PySAM and need access to the original libraries you used to create your model. See :doc:`PySSC`.
 
 Next, look up the correct order of execution for the compute modules in (:doc:`sam-configurations`).
 

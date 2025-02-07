@@ -1,6 +1,6 @@
 from .HybridBase import HybridGenerator
 
-class GenericSystemHybrid(HybridGenerator):
+class CustomGenerationHybrid(HybridGenerator):
     def new(self, str):
         pass
 

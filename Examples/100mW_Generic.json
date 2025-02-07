@@ -10,7 +10,6 @@
 	"analysis_period" : 25,
 	"generic_degradation" : [ 0 ],
 	"adjust:constant" : 0,
-	"compute_module_0" : "generic_system",
 	"en_batt" : 0,
 	"batt_replacement_option" : 0,
 	"batt_chem" : 1,

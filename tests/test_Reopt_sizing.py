@@ -38,7 +38,7 @@ def test_reopt_sizing_pvsam():
     import PySAM.Utilityrate5 as ur
     sys = pvsam.default("FlatPlatePVCommercial")
     fin = ur.from_existing(sys, "FlatPlatePVCommercial")
-    bt = stbt.from_existing(sys, "GenericBatteryCommercial")
+    bt = stbt.from_existing(sys, "CustomGenerationBatteryCommercial")
 
     sys.SolarResource.use_wf_albedo = 0
     sys.SolarResource.solar_resource_file = solar_resource
@@ -50,9 +50,9 @@ def test_reopt_sizing_pvsam():
     assert(post['reopt_post']['Site']['latitude'] == pytest.approx(33.6, 0.1))
 
 def test_repot_sizing_battery():
-    batt = stbt.default("GenericBatteryCommercial")
-    rate = ur.from_existing(batt, "GenericBatteryCommercial")
-    fin = loan.from_existing(batt, "GenericBatteryCommercial")
+    batt = stbt.default("CustomGenerationBatteryCommercial")
+    rate = ur.from_existing(batt, "CustomGenerationBatteryCommercial")
+    fin = loan.from_existing(batt, "CustomGenerationBatteryCommercial")
 
     post = batt.Reopt_size_standalone_battery_post()
 

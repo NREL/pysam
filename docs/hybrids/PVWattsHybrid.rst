@@ -13,8 +13,8 @@ PVWattsHybrid
 
         Load defaults for the configuration config. Available configurations:
 
-            "GenericPVWattsWindFuelCellBatteryHybridHostDeveloper"
-            "GenericPVWattsWindFuelCellBatteryHybridSingleOwner"
+            "CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper"
+            "CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner"
             "PVWattsWindBatteryHybridHostDeveloper"
             "PVWattsWindBatteryHybridSingleOwner"
             "PVWattsWindFuelCellBatteryHybridHostDeveloper"
