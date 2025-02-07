@@ -305,14 +305,19 @@ def set_cec_module_library_selection(model, module_name: str) -> dict:
     file = 'https://raw.githubusercontent.com/NREL/SAM/patch/deploy/libraries/CEC%20Modules.csv'
     db = pd.read_csv(file, index_col=0, header=2) # Reading this might take 1 min or so, the database is big.
 
+    print("This function does not set the bifaciality of a module based on the bifacial based on the lib_is_bifacial value. Please change cec_is_bifacial to 1 to make the module bifacial.")
+
     modfilter = db.index.str.startswith(module_name)
     CECMod = db[modfilter]
     CECParamList = CECMod.values.tolist()
-    print(len(CECMod), " modules selected. Name of 1st entry: ", CECMod.index[0])
+
+    if (len(CECMod) > 1):
+        print("More than 1 module found that matches the module name string. Please be more specific in the module name string.")
+        return
+
     column_names = list(CECMod.columns)
     for columnName, columnData in CECMod.items():
         if (columnName.startswith("cec_") and columnName != 'cec_material' and columnName != 'cec_gamma_pmp'):
-            print(columnName)
             model.value(columnName, columnData)
         else:
             continue
@@ -337,14 +342,19 @@ def set_cec_inverter_library_selection(model, inverter_name: str) -> dict:
     file = 'https://raw.githubusercontent.com/NREL/SAM/patch/deploy/libraries/CEC%20Inverters.csv'
     db = pd.read_csv(file, index_col=0, header=2) # Reading this might take 1 min or so, the database is big.
 
+    print("This function does not see the number of MPPT inputs for the inverter. Please see inv_num_mppt to set the number of mppt inputs for an inverter.")
+
     invfilter = db.index.str.startswith(inverter_name)
     CECInv = db[invfilter]
     CECParamList = CECInv.values.tolist()
     print(len(CECInv), " inverters selected. Name of 1st entry: ", CECInv.index[0])
+    if (len(CECMod) > 1):
+        print("More than 1 inverter found that matches the inverter name string. Please be more specific in the inverter name string.")
+        return
+
     column_names = list(CECInv.columns)
     unused_cols = ["inv_snl_ac_voltage", "inv_snl_idcmax"]
     for columnName, columnData in CECInv.items():
-        print(columnName)
         if (columnName.startswith("inv_snl") and columnName not in unused_cols):
             if(columnName.startswith("inv_snl_mppt_low")):
                 model.value("mppt_low_inverter", columnData)
