@@ -529,7 +529,7 @@ Fuelcell
 GenericSystem
 ************************************************
 
-:doc:`../modules/GenericSystem` Modified Input Variables:
+`Generic System <https://nrel-pysam.readthedocs.io/en/v5.0.0/modules/GenericSystem.html>`_ Modified Input Variables:
 
     New variables:
 
@@ -546,12 +546,12 @@ GenericSystem
          - adjust:periods
          - adjust:timeindex
 
-:doc:`../modules/GenericSystem` New Default files:
+`Generic System <https://nrel-pysam.readthedocs.io/en/v5.0.0/modules/GenericSystem.html>`_ New Default files:
 
      - GenericPVWattsWindFuelCellBatteryHybridHostDeveloper
      - GenericPVWattsWindFuelCellBatteryHybridSingleOwner
 
-:doc:`../modules/GenericSystem` Modified Default Values:
+`Generic System <https://nrel-pysam.readthedocs.io/en/v5.0.0/modules/GenericSystem.html>`_ Modified Default Values:
 
      - Equpartflip_GenericSystemAllEquityPartnershipFlip
 
@@ -1655,7 +1655,7 @@ TroughPhysical
 TroughPhysicalCspSolver
 ************************************************
 
-:doc:`../modules/TroughPhysicalCspSolver` Modified Input Variables:
+`Trough Physical Csp Solver <https://nrel-pysam.readthedocs.io/en/v5.0.0/modules/TroughPhysicalCspSolver.html>`_ Modified Input Variables:
 
     New variables:
 
@@ -1685,7 +1685,7 @@ TroughPhysicalIph
 TroughPhysicalProcessHeat
 ************************************************
 
-:doc:`../modules/TroughPhysicalProcessHeat` Modified Input Variables:
+`Trough Physical Csp Solver <https://nrel-pysam.readthedocs.io/en/v5.0.0/modules/TroughPhysicalCspSolver.html>`_ Modified Input Variables:
 
     New variables:
 
@@ -1712,7 +1712,7 @@ TroughPhysicalProcessHeat
          - dispatch_factor8
          - dispatch_factor9
 
-:doc:`../modules/TroughPhysicalProcessHeat` Removed Default files
+`Trough Physical Csp Solver <https://nrel-pysam.readthedocs.io/en/v5.0.0/modules/TroughPhysicalCspSolver.html>`_ Removed Default files
 
      - PhysicalTroughIPHLCOHCalculator
      - PhysicalTroughIPHNone

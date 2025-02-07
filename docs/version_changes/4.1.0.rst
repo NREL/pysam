@@ -55,7 +55,7 @@ DSLF
 DSPT
 ************************************************
 
-:doc:`../modules/DSPT` Removed Default files
+DSPT Removed Default files
 
      - All Equity Partnership Flip
      - Leveraged Partnership Flip
@@ -67,7 +67,7 @@ DSPT
 Dish Stirling
 ************************************************
 
-:doc:`../modules/Tcsdish` Removed Default files
+Dish Stirling Removed Default files
 
      - All Equity Partnership Flip
      - Commercial
@@ -132,7 +132,7 @@ Fuel Cell
 Generic Battery
 ************************************************
 
-:doc:`../modules/GenericBattery` Removed Default files
+`Generic Battery <https://nrel-pysam.readthedocs.io/en/v4.1.0/modules/GenericBattery.html>`_ Removed Default files
 
      - All Equity Partnership Flip
      - Commercial
@@ -148,7 +148,7 @@ Generic Battery
 Generic CSP System
 ************************************************
 
-:doc:`../modules/Generic CSP System` Removed Default files
+Generic CSP System Removed Default files
 
      - All Equity Partnership Flip
      - Commercial
@@ -163,7 +163,7 @@ Generic CSP System
 Generic System
 ************************************************
 
-:doc:`../modules/GenericSystem` Removed Default files
+`Generic System <https://nrel-pysam.readthedocs.io/en/v4.1.0/modules/GenericSystem.html>`_ Removed Default files
 
      - All Equity Partnership Flip
      - Commercial
@@ -228,7 +228,7 @@ MEwave
 MEwave Battery
 ************************************************
 
-:doc:`../modules/MhkWaveBattery` Removed Default files
+Mhk Wave Battery Removed Default files
 
      - Single Owner
 
@@ -282,7 +282,7 @@ PTES
 PV Battery
 ************************************************
 
-:doc:`../modules/PVBattery` Removed Default files
+PV Battery Removed Default files
 
      - All Equity Partnership Flip
      - Commercial
@@ -357,17 +357,9 @@ Physical Trough
 Physical Trough IPH
 ************************************************
 
-:doc:`../modules/TroughPhysicalProcessHeat` Removed Default files
+`Trough Physical Process Heat <https://nrel-pysam.readthedocs.io/en/v4.1.0/modules/TroughPhysicalProcessHeat.html>`_ Removed Default files
 
      - LCOH Calculator
-     - None
-
-
-Retired
-************************************************
-
-:doc:`../modules/Retired` Removed Default files
-
      - None
 
 

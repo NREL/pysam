@@ -27,8 +27,8 @@ def test1(n):
         ssc.data_free(data)
 
     def new_with_import():
-        import PySAM.GenericSystem as GenericSystem
-        gs = GenericSystem.new()
+        import PySAM.CustomGeneration as CustomGeneration
+        gs = CustomGeneration.new()
         a = gs.Plant
         a.spec_mode = 0
         a.derate = 4
@@ -71,7 +71,7 @@ def test1(n):
 def test2(n):
     from PySAM.PySSC import PySSC
     ssc = PySSC()
-    import PySAM.GenericSystem as GenericSystem
+    import PySAM.CustomGeneration as CustomGeneration
 
     def old_no_import():
         # ssc.module_exec_set_print(0)
@@ -88,7 +88,7 @@ def test2(n):
         ssc.data_free(data)
 
     def new_no_import():
-        gs = GenericSystem.new()
+        gs = CustomGeneration.new()
         a = gs.Plant
         a.spec_mode = 0
         a.derate = 4
@@ -128,7 +128,7 @@ def test2(n):
 #
 def test3(n):
     from PySAM.PySSC import PySSC
-    import PySAM.GenericSystem as GenericSystem
+    import PySAM.CustomGeneration as CustomGeneration
 
     ssc = PySSC()
 
@@ -147,7 +147,7 @@ def test3(n):
         ssc.data_free(data)
 
     def new_no_import_rand():
-        gs = GenericSystem.new()
+        gs = CustomGeneration.new()
         a = gs.Plant
         a.spec_mode = 0
         a.derate = random.randint(0, 10)
@@ -187,7 +187,7 @@ def test3(n):
 # Testing with dictionary loading
 #
 def test4(n):
-    import PySAM.GenericSystem as GenericSystem
+    import PySAM.CustomGeneration as CustomGeneration
     from PySAM.PySSC import PySSC
 
     dict_old = {
@@ -252,7 +252,7 @@ def test4(n):
 
     def new_dict():
 
-        gs = GenericSystem.new()
+        gs = CustomGeneration.new()
         gs.assign(dict_new)
 
     # time old version

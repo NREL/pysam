@@ -6,7 +6,7 @@ This example requires an NREL developer key, which can be obtained from https://
 Additional financial models, inputs, and outputs can be found at:
 * PV: https://nrel-pysam.readthedocs.io/en/master/modules/Utilityrate5.html
 
-Most recently tested against PySAM 5.1.0
+Most recently tested against PySAM 6.0.0
 Requires: nrel-pysam, requests
 
 @author: brtietz
