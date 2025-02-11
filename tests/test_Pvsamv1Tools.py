@@ -11,9 +11,9 @@ def test_default_system_sizing():
     n_strings, n_combiners, n_inverters, calculated_system_capacity = PySAM.Pvsamv1Tools.size_electrical_parameters(model, 130000, 1.2)
     assert(n_strings == 8748)
     assert(n_inverters == 43)
-    assert(calculated_system_capacity == pytest.approx(130004,1))
+    assert(calculated_system_capacity == pytest.approx(130004, abs = 1))
     assert(model.SystemDesign.subarray1_modules_per_string == 28)
-    assert(model.SystemDesign.system_capacity == pytest.approx(130004, 1))
+    assert(model.SystemDesign.system_capacity == pytest.approx(130004, abs = 1))
 
 def test_spe_system_sizing():
     model = pvsamv1.default("FlatPlatePVSingleOwner")
@@ -23,9 +23,9 @@ def test_spe_system_sizing():
     n_strings, n_combiners, n_inverters, calculated_system_capacity = PySAM.Pvsamv1Tools.size_electrical_parameters(model, 130000, 1.2)
     assert(n_strings == 8778)
     assert(n_inverters == 43)
-    assert(calculated_system_capacity == pytest.approx(129995))
+    assert(calculated_system_capacity == pytest.approx(129995, abs = 1))
     assert(model.SystemDesign.subarray1_modules_per_string == 28)
-    assert(model.SystemDesign.system_capacity == pytest.approx(129995, 1))
+    assert(model.SystemDesign.system_capacity == pytest.approx(129995, abs = 1))
 
 def test_6par_system_sizing():
     model = pvsamv1.default("FlatPlatePVSingleOwner")
@@ -33,9 +33,9 @@ def test_6par_system_sizing():
     n_strings, n_combiners, n_inverters, calculated_system_capacity = PySAM.Pvsamv1Tools.size_electrical_parameters(model, 130000, 1.2)
     assert(n_strings == 8748)
     assert(n_inverters == 43)
-    assert(calculated_system_capacity == pytest.approx(130004,1))
+    assert(calculated_system_capacity == pytest.approx(130004, abs = 1))
     assert(model.SystemDesign.subarray1_modules_per_string == 28)
-    assert(model.SystemDesign.system_capacity == pytest.approx(130004, 1))
+    assert(model.SystemDesign.system_capacity == pytest.approx(130004, abs = 1))
 
 def test_cec_module_library_selection():
     model = pvsamv1.default("FlatPlatePVSingleOwner")

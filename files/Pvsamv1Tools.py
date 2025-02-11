@@ -322,7 +322,7 @@ def set_cec_module_library_selection(model, module_name: str) -> dict:
     column_names = list(CECMod.columns)
     for columnName, columnData in CECMod.items():
         if (columnName.startswith("cec_") and columnName != 'cec_material' and columnName != 'cec_gamma_pmp'):
-            model.value(columnName, columnData)
+            model.value(columnName, columnData.iloc[0])
         else:
             continue
     
@@ -361,11 +361,11 @@ def set_cec_inverter_library_selection(model, inverter_name: str) -> dict:
     for columnName, columnData in CECInv.items():
         if (columnName.startswith("inv_snl") and columnName not in unused_cols):
             if(columnName.startswith("inv_snl_mppt_low")):
-                model.Inverter.mppt_low_inverter = columnData
+                model.Inverter.mppt_low_inverter = columnData.iloc[0]
             elif (columnName.startswith("inv_snl_mppt_hi")):
-                model.Inverter.mppt_hi_inverter = columnData
+                model.Inverter.mppt_hi_inverter = columnData.iloc[0]
             else:
-                model.value(columnName, columnData)
+                model.value(columnName, columnData.iloc[0])
         else:
             continue
     
