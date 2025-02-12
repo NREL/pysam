@@ -294,7 +294,7 @@ def get_inverter_power(pvsam_model: PVSamv1.Pvsamv1) -> float:
 
 def set_cec_module_library_selection(model, module_name: str) -> dict:
     """
-    Return the module values from the CEC Module Database library as a dictionary
+    Return the module values from the CEC Module Database library as a dictionary. Requires module_model = 1.
     
     :param model: Pvsamv1 model to write the module values to
     :param module_name: Name of module for indexing library, str
@@ -331,7 +331,7 @@ def set_cec_module_library_selection(model, module_name: str) -> dict:
 
 def set_cec_inverter_library_selection(model, inverter_name: str) -> dict:
     """
-    Return the inverter values from the CEC Inverter Database library as a dictionary
+    Return the inverter values from the CEC Inverter Database library as a dictionary. Requires inverter_model = 0.
     
     :param model: Pvsamv1 model to write the inverter values to
     :param inverter_name: Name of inverter for indexing library, str
