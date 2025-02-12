@@ -23,8 +23,6 @@ class GeothermalCosts(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	def getem_om_cost_calc(self, args):
-		pass
 	class GeoHourly(object):
 		def assign(self): 
 			pass
@@ -47,38 +45,23 @@ class GeothermalCosts(object):
 		dt_prod_well = float
 		eff_secondlaw = float
 		flash_count = float
-		geotherm_cost_conf_multiplier = float
-		geotherm_cost_conf_non_drill = float
-		geotherm_cost_conf_num_wells = float
-		geotherm_cost_expl_multiplier = float
-		geotherm_cost_expl_non_drill = float
-		geotherm_cost_expl_num_wells = float
 		geotherm_cost_inj_cost_curve = float
 		geotherm_cost_inj_cost_curve_welldiam = float
 		geotherm_cost_inj_cost_curve_welltype = float
+		geotherm_cost_inj_wells_drilled = float
 		geotherm_cost_prod_cost_curve = float
 		geotherm_cost_prod_cost_curve_welldiam = float
 		geotherm_cost_prod_cost_curve_welltype = float
-		geotherm_cost_prod_req = float
-		geotherm_cost_pump_depth = float
-		geotherm_cost_pump_fixed = float
-		geotherm_cost_pump_per_foot = float
-		geotherm_cost_stim_non_drill = float
+		geotherm_cost_prod_wells_drilled = float
 		gross_cost_output = float
 		gross_output = float
 		hp_flash_pressure = float
-		inj_num_pumps = float
-		inj_pump_hp = float
 		lp_flash_pressure = float
 		ncg_condensate_pump = float
-		num_wells_getem_inj_drilled = float
-		num_wells_getem_prod_drilled = float
-		num_wells_getem_prod_failed = float
 		ppi_base_year = float
 		pressure_ratio_1 = float
 		pressure_ratio_2 = float
 		pressure_ratio_3 = float
-		pump_size_hp = float
 		qCondenser = float
 		qRejectByStage_1 = float
 		qRejectByStage_2 = float
@@ -106,14 +89,8 @@ class GeothermalCosts(object):
 
 
 		baseline_cost = float
-		conf_total_cost = float
-		expl_total_cost = float
 		inj_total_cost = float
 		prod_total_cost = float
-		stim_total_cost = float
-		total_drilling_cost = float
-		total_gathering_cost = float
-		total_pump_cost = float
 
 
 
