@@ -4608,158 +4608,6 @@ static PyTypeObject Lifetime_Type = {
 
 
 /*
- * ThirdPartyOwnership Group
- */ 
-
-static PyTypeObject ThirdPartyOwnership_Type;
-
-static PyObject *
-ThirdPartyOwnership_new(SAM_Cashloan data_ptr)
-{
-	PyObject* new_obj = ThirdPartyOwnership_Type.tp_alloc(&ThirdPartyOwnership_Type,0);
-
-	VarGroupObject* ThirdPartyOwnership_obj = (VarGroupObject*)new_obj;
-
-	ThirdPartyOwnership_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* ThirdPartyOwnership methods */
-
-static PyObject *
-ThirdPartyOwnership_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Cashloan", "ThirdPartyOwnership")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-ThirdPartyOwnership_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &ThirdPartyOwnership_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Cashloan", "ThirdPartyOwnership")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-ThirdPartyOwnership_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &ThirdPartyOwnership_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef ThirdPartyOwnership_methods[] = {
-		{"assign",            (PyCFunction)ThirdPartyOwnership_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``ThirdPartyOwnership_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)ThirdPartyOwnership_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``ThirdPartyOwnership_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)ThirdPartyOwnership_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-ThirdPartyOwnership_get_elec_cost_with_system(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Cashloan_ThirdPartyOwnership_elec_cost_with_system_aget, self->data_ptr);
-}
-
-static int
-ThirdPartyOwnership_set_elec_cost_with_system(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Cashloan_ThirdPartyOwnership_elec_cost_with_system_aset, self->data_ptr);
-}
-
-static PyObject *
-ThirdPartyOwnership_get_elec_cost_without_system(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Cashloan_ThirdPartyOwnership_elec_cost_without_system_aget, self->data_ptr);
-}
-
-static int
-ThirdPartyOwnership_set_elec_cost_without_system(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Cashloan_ThirdPartyOwnership_elec_cost_without_system_aset, self->data_ptr);
-}
-
-static PyGetSetDef ThirdPartyOwnership_getset[] = {
-{"elec_cost_with_system", (getter)ThirdPartyOwnership_get_elec_cost_with_system,(setter)ThirdPartyOwnership_set_elec_cost_with_system,
-	PyDoc_STR("*sequence*: Energy value [$]\n\n**Required:**\nTrue"),
- 	NULL},
-{"elec_cost_without_system", (getter)ThirdPartyOwnership_get_elec_cost_without_system,(setter)ThirdPartyOwnership_set_elec_cost_without_system,
-	PyDoc_STR("*sequence*: Energy value [$]\n\n**Required:**\nTrue"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject ThirdPartyOwnership_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"Cashloan.ThirdPartyOwnership",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		ThirdPartyOwnership_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		ThirdPartyOwnership_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
  * LCOS Group
  */ 
 
@@ -6660,10 +6508,6 @@ newCashloanObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Lifetime", Lifetime_obj);
 	Py_DECREF(Lifetime_obj);
 
-	PyObject* ThirdPartyOwnership_obj = ThirdPartyOwnership_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "ThirdPartyOwnership", ThirdPartyOwnership_obj);
-	Py_DECREF(ThirdPartyOwnership_obj);
-
 	PyObject* LCOS_obj = LCOS_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "LCOS", LCOS_obj);
 	Py_DECREF(LCOS_obj);
@@ -7053,13 +6897,6 @@ CashloanModule_exec(PyObject *m)
 				"Lifetime",
 				(PyObject*)&Lifetime_Type);
 	Py_DECREF(&Lifetime_Type);
-
-	/// Add the ThirdPartyOwnership type object to Cashloan_Type
-	if (PyType_Ready(&ThirdPartyOwnership_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Cashloan_Type.tp_dict,
-				"ThirdPartyOwnership",
-				(PyObject*)&ThirdPartyOwnership_Type);
-	Py_DECREF(&ThirdPartyOwnership_Type);
 
 	/// Add the LCOS type object to Cashloan_Type
 	if (PyType_Ready(&LCOS_Type) < 0) { goto fail; }

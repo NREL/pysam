@@ -1744,30 +1744,6 @@ Outputs_get_charge_wo_sys_minimum_ym(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_elec_cost_with_system(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Utilityrate5_Outputs_elec_cost_with_system_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_elec_cost_with_system_year1(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Utilityrate5_Outputs_elec_cost_with_system_year1_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_elec_cost_without_system(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Utilityrate5_Outputs_elec_cost_without_system_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_elec_cost_without_system_year1(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Utilityrate5_Outputs_elec_cost_without_system_year1_nget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_energy_w_sys_ec_apr_tp(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Utilityrate5_Outputs_energy_w_sys_ec_apr_tp_mget, self->data_ptr);
@@ -2056,6 +2032,12 @@ Outputs_get_utility_bill_w_sys(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_utility_bill_w_sys_year1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Utilityrate5_Outputs_utility_bill_w_sys_year1_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_utility_bill_w_sys_ym(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Utilityrate5_Outputs_utility_bill_w_sys_ym_mget, self->data_ptr);
@@ -2065,6 +2047,12 @@ static PyObject *
 Outputs_get_utility_bill_wo_sys(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Utilityrate5_Outputs_utility_bill_wo_sys_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_utility_bill_wo_sys_year1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Utilityrate5_Outputs_utility_bill_wo_sys_year1_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2485,18 +2473,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"charge_wo_sys_minimum_ym", (getter)Outputs_get_charge_wo_sys_minimum_ym,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Minimum charge without system [$]"),
  	NULL},
-{"elec_cost_with_system", (getter)Outputs_get_elec_cost_with_system,(setter)0,
-	PyDoc_STR("*sequence*: Electricity bill with system [$/yr]"),
- 	NULL},
-{"elec_cost_with_system_year1", (getter)Outputs_get_elec_cost_with_system_year1,(setter)0,
-	PyDoc_STR("*float*: Electricity bill with system (year 1) [$/yr]"),
- 	NULL},
-{"elec_cost_without_system", (getter)Outputs_get_elec_cost_without_system,(setter)0,
-	PyDoc_STR("*sequence*: Electricity bill without system [$/yr]"),
- 	NULL},
-{"elec_cost_without_system_year1", (getter)Outputs_get_elec_cost_without_system_year1,(setter)0,
-	PyDoc_STR("*float*: Electricity bill without system (year 1) [$/yr]"),
- 	NULL},
 {"energy_w_sys_ec_apr_tp", (getter)Outputs_get_energy_w_sys_ec_apr_tp,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Electricity usage with system Apr [kWh]"),
  	NULL},
@@ -2641,11 +2617,17 @@ static PyGetSetDef Outputs_getset[] = {
 {"utility_bill_w_sys", (getter)Outputs_get_utility_bill_w_sys,(setter)0,
 	PyDoc_STR("*sequence*: Electricity bill with system [$]"),
  	NULL},
+{"utility_bill_w_sys_year1", (getter)Outputs_get_utility_bill_w_sys_year1,(setter)0,
+	PyDoc_STR("*float*: Electricity bill with system (year 1) [$/yr]"),
+ 	NULL},
 {"utility_bill_w_sys_ym", (getter)Outputs_get_utility_bill_w_sys_ym,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Electricity bill with system [$]"),
  	NULL},
 {"utility_bill_wo_sys", (getter)Outputs_get_utility_bill_wo_sys,(setter)0,
 	PyDoc_STR("*sequence*: Electricity bill without system [$]"),
+ 	NULL},
+{"utility_bill_wo_sys_year1", (getter)Outputs_get_utility_bill_wo_sys_year1,(setter)0,
+	PyDoc_STR("*float*: Electricity bill without system (year 1) [$/yr]"),
  	NULL},
 {"utility_bill_wo_sys_ym", (getter)Outputs_get_utility_bill_wo_sys_ym,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Electricity bill without system [$]"),

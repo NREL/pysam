@@ -924,7 +924,7 @@ static PyGetSetDef FinancialParameters_getset[] = {
 	PyDoc_STR("*sequence*: State income tax rate [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"system_capacity", (getter)FinancialParameters_get_system_capacity,(setter)FinancialParameters_set_system_capacity,
-	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``system_capacity``:\n\n\t - battery_total_cost_lcos\n\t - construction_financing_cost\n\t - land_area\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``system_capacity``:\n\n\t - battery_total_cost_lcos\n\t - construction_financing_cost\n\t - total_installed_cost\n"),
  	NULL},
 {"system_heat_rate", (getter)FinancialParameters_get_system_heat_rate,(setter)FinancialParameters_set_system_heat_rate,
 	PyDoc_STR("*float*: System heat rate [MMBTus/MWh]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
@@ -4469,30 +4469,6 @@ Host_set_annual_energy_value(VarGroupObject *self, PyObject *value, void *closur
 }
 
 static PyObject *
-Host_get_elec_cost_with_system(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Host_elec_cost_with_system_aget, self->data_ptr);
-}
-
-static int
-Host_set_elec_cost_with_system(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_HostDeveloper_Host_elec_cost_with_system_aset, self->data_ptr);
-}
-
-static PyObject *
-Host_get_elec_cost_without_system(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Host_elec_cost_without_system_aget, self->data_ptr);
-}
-
-static int
-Host_set_elec_cost_without_system(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_HostDeveloper_Host_elec_cost_without_system_aset, self->data_ptr);
-}
-
-static PyObject *
 Host_get_host_real_discount_rate(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_HostDeveloper_Host_host_real_discount_rate_nget, self->data_ptr);
@@ -4507,12 +4483,6 @@ Host_set_host_real_discount_rate(VarGroupObject *self, PyObject *value, void *cl
 static PyGetSetDef Host_getset[] = {
 {"annual_energy_value", (getter)Host_get_annual_energy_value,(setter)Host_set_annual_energy_value,
 	PyDoc_STR("*sequence*: Host energy value [$]\n\n**Required:**\nTrue"),
- 	NULL},
-{"elec_cost_with_system", (getter)Host_get_elec_cost_with_system,(setter)Host_set_elec_cost_with_system,
-	PyDoc_STR("*sequence*: Host energy bill with system [$]\n\n**Required:**\nTrue"),
- 	NULL},
-{"elec_cost_without_system", (getter)Host_get_elec_cost_without_system,(setter)Host_set_elec_cost_without_system,
-	PyDoc_STR("*sequence*: Host energy bill without system [$]\n\n**Required:**\nTrue"),
  	NULL},
 {"host_real_discount_rate", (getter)Host_get_host_real_discount_rate,(setter)Host_set_host_real_discount_rate,
 	PyDoc_STR("*float*: Host real discount rate [%]\n\n**Required:**\nTrue"),
@@ -5106,7 +5076,7 @@ static PyGetSetDef SystemOutput_getset[] = {
 	PyDoc_STR("*sequence*: Electricity from grid to system [kW]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"system_capacity", (getter)SystemOutput_get_system_capacity,(setter)SystemOutput_set_system_capacity,
-	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n**Constraints:**\nMIN=1e-3\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``system_capacity``:\n\n\t - battery_total_cost_lcos\n\t - construction_financing_cost\n\t - land_area\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n**Constraints:**\nMIN=1e-3\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``system_capacity``:\n\n\t - battery_total_cost_lcos\n\t - construction_financing_cost\n\t - total_installed_cost\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
