@@ -157,6 +157,20 @@ class LinearFresnelDsgIph(object):
 		heat_sink_dP_frac = float
 
 
+	class Revenue(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		ppa_price_input_heat_btu = tuple
+
+
 	class AdjustmentFactors(object):
 		def assign(self): 
 			pass
@@ -167,27 +181,27 @@ class LinearFresnelDsgIph(object):
 		def __init__(self, *args, **kwargs): # real signature unknown
 			pass
 	
-		constant = float
-		en_hourly = float
-		en_periods = float
-		en_timeindex = float
-		hourly = tuple
-		periods = tuple
-		imeindex = tuple
-		dc_constant = float
-		dc_en_hourly = float
-		dc_en_periods = float
-		dc_en_timeindex = float
-		dc_hourly = tuple
-		dc_periods = tuple
-		dc_imeindex = tuple
-		sf_constant = float
-		sf_en_hourly = float
-		sf_en_periods = float
-		sf_en_timeindex = float
-		sf_hourly = tuple
-		sf_periods = tuple
-		sf_timeindex = tuple
+		adjust_constant = float
+		adjust_en_hourly = float
+		adjust_en_periods = float
+		adjust_en_timeindex = float
+		adjust_hourly = tuple
+		adjust_periods = tuple
+		adjust_timeindex = tuple
+		dc_adjust_constant = float
+		dc_adjust_en_hourly = float
+		dc_adjust_en_periods = float
+		dc_adjust_en_timeindex = float
+		dc_adjust_hourly = tuple
+		dc_adjust_periods = tuple
+		dc_adjust_timeindex = tuple
+		sf_adjust_constant = float
+		sf_adjust_en_hourly = float
+		sf_adjust_en_periods = float
+		sf_adjust_en_timeindex = float
+		sf_adjust_hourly = tuple
+		sf_adjust_periods = tuple
+		sf_adjust_timeindex = tuple
 
 	class Outputs(object):
 		def assign(self): 
@@ -211,24 +225,30 @@ class LinearFresnelDsgIph(object):
 		annual_electricity_consumption = float
 		annual_energy = float
 		annual_energy_distribution_time = tuple
+		annual_energy_heat_btu = float
 		annual_field_energy = float
 		annual_thermal_consumption = float
 		annual_total_water_use = float
 		beam = tuple
 		capacity_factor = float
+		cp_system_nameplate = float
 		defocus = tuple
 		deltaP_field = tuple
 		e_dot_field_int_energy = tuple
 		eta_opt_ave = tuple
 		gen = tuple
+		gen_heat = tuple
+		gen_heat_btu = tuple
 		hour_day = tuple
 		kwh_per_kw = float
 		m_dot_field = tuple
 		m_dot_loop = tuple
 		month = tuple
+		nameplate = float
 		op_mode_1 = tuple
 		op_mode_2 = tuple
 		op_mode_3 = tuple
+		ppa_price_input = tuple
 		pres = tuple
 		q_dot_freeze_prot = tuple
 		q_dot_piping_loss = tuple
@@ -240,6 +260,7 @@ class LinearFresnelDsgIph(object):
 		q_inc_sf_tot = tuple
 		solazi = tuple
 		solzen = tuple
+		system_capacity = float
 		tdry = tuple
 		theta_longitudinal = tuple
 		theta_traverse = tuple

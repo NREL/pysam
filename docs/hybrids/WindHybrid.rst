@@ -13,9 +13,9 @@ WindHybrid
 
         Load defaults for the configuration config. Available configurations:
 
-            "GenericPVWattsWindFuelCellBatteryHybridHostDeveloper"
+            "CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper"
 
-            "GenericPVWattsWindFuelCellBatteryHybridSingleOwner"
+            "CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner"
 
             "PVWattsWindBatteryHybridHostDeveloper"
 

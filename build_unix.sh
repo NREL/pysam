@@ -23,7 +23,7 @@ source $(conda info --base)/etc/profile.d/conda.sh
 rm -rf build
 rm -rf dist/*
 
-for PYTHONENV in pysam_build_3.8 pysam_build_3.9 pysam_build_3.10 pysam_build_3.11 pysam_build_3.12
+for PYTHONENV in pysam_build_3.8 pysam_build_3.9 pysam_build_3.10 pysam_build_3.11 pysam_build_3.12 pysam_build_3.13
 do
    conda activate $PYTHONENV
    yes | pip install -r tests/requirements.txt
@@ -38,7 +38,7 @@ do
    python setup.py bdist_wheel
 done
 
-yes | $PYSAMDIR/build_conda.sh || exit
+# yes | $PYSAMDIR/build_conda.sh || exit
 
 #
 # Building for Manylinux1
@@ -48,7 +48,7 @@ cd ..
 if [ "$(python3 -c "import platform; print(platform.processor())")" = "arm" ]
 then
     docker pull quay.io/pypa/manylinux2014_aarch64
-    # docker run --rm -dit -v $(pwd):/io quay.io/pypa/manylinux2010_x86_64 /bin/bash
+#     # docker run --rm -dit -v $(pwd):/io quay.io/pypa/manylinux2014_aarch64 /bin/bash
     docker run --rm -v $(pwd):/io quay.io/pypa/manylinux2014_aarch64 /io/pysam/build_manylinux.sh || exit
 else
     docker pull quay.io/pypa/manylinux2014_x86_64
@@ -60,8 +60,8 @@ rename -s linux manylinux2014 $PYSAMDIR/dist/*-linux_*
 docker pull continuumio/anaconda3
 docker run --rm --env PYSAMDIR=/io/pysam -v $(pwd):/io continuumio/anaconda /io/pysam/build_conda.sh
 
-anaconda upload -u nrel $PYSAMDIR/dist/osx-64/*.tar.bz2
-anaconda upload -u nrel $PYSAMDIR/dist/linux-64/*.tar.bz2
+# anaconda upload -u nrel $PYSAMDIR/dist/osx-64/*.tar.bz2
+# anaconda upload -u nrel $PYSAMDIR/dist/linux-64/*.tar.bz2
 
 # only upload to PyPi after Github Actions test of new package passes
 # twine upload $PYSAMDIR/dist/*.whl

@@ -8,7 +8,7 @@ import PySAM.Battery as batt
 import PySAM.Windpower as wind
 import PySAM.Pvwattsv8 as pv
 import PySAM.Pvsamv1 as pvsam
-import PySAM.GenericSystem as gensys
+import PySAM.CustomGeneration as custom
 import PySAM.Fuelcell as fuelcell
 import PySAM.Singleowner as so
 import PySAM.HostDeveloper as hd
@@ -33,10 +33,10 @@ def test_PhotovoltaicWindBatteryHybridSingleOwner():
     battannualenergy = m.battery.value("annual_energy")
     npv = m.singleowner.Outputs.project_return_aftertax_npv
 
-    assert pvannualenergy == pytest.approx(227094871, 1e-2)
+    assert pvannualenergy == pytest.approx(235721657, 1e-2)
     assert windannualenergy == pytest.approx(366975555, 1e-2)
-    assert battannualenergy == pytest.approx(593931116, 1e-2)
-    assert npv == pytest.approx(-144238399, 1e-2)
+    assert battannualenergy == pytest.approx(598789802, 1e-2)
+    assert npv == pytest.approx(-154982178, 1e-2)
 
 
 def test_PVWattsv8WindBatterySingleOwner():
@@ -63,7 +63,7 @@ def test_PVWattsv8WindBatterySingleOwner():
     assert pvannualenergy == pytest.approx(211907455, 1e-2)
     assert windannualenergy == pytest.approx(366975552, 1e-2)
     assert battannualenergy == pytest.approx(570565000, 1e-2)
-    assert npv == pytest.approx(-242777472, 1e-2)
+    assert npv == pytest.approx(-227222606, 1e-2)
 
 
 def test_PVWattsv8WindBatteryHostDeveloper():
@@ -89,8 +89,8 @@ def test_PVWattsv8WindBatteryHostDeveloper():
 
     assert pvannualenergy == pytest.approx(938557, 1e-2)
     assert windannualenergy == pytest.approx(187767, 1e-2)
-    assert npv == pytest.approx(-174953, 1e-2)
-
+    assert battannualenergy == pytest.approx(1118877, 1e-2)
+    assert npv == pytest.approx(-168769, 1e-2)
 
 def test_GenericPVWattsWindFuelCellBatteryHybrid_SingleOwner():
     nfc1 = test_dir / "Generic PVWatts Wind FuelCell Battery Hybrid_Single Owner.json"
@@ -98,7 +98,7 @@ def test_GenericPVWattsWindFuelCellBatteryHybrid_SingleOwner():
     with open(nfc1, "r") as f:
         defs = json.load(f)['input']
 
-    m = HybridSystem([gensys, pv, wind, fuelcell, batt], 'singleowner')
+    m = HybridSystem([custom, pv, wind, fuelcell, batt], 'singleowner')
     m.new()
     m.pvwatts.SolarResource.solar_resource_file = str(solar_resource_path)
     m.wind.Resource.wind_resource_filename = str(wind_resource_path)
@@ -108,13 +108,13 @@ def test_GenericPVWattsWindFuelCellBatteryHybrid_SingleOwner():
 
     m.execute()
 
-    gensysannualenergy = m.gensys.Outputs.annual_energy
+    customannualenergy = m.custom.Outputs.annual_energy
     pvannualenergy = m.pvwatts.Outputs.annual_energy
     windannualenergy = m.wind.Outputs.annual_energy
     battannualenergy = m.battery.value("annual_energy")
     npv = m.singleowner.Outputs.project_return_aftertax_npv
 
-    assert gensysannualenergy == pytest.approx(756864000, 1e-2)
+    assert customannualenergy == pytest.approx(756864000, 1e-2)
     assert pvannualenergy == pytest.approx(211907456, 1e-2)
     assert windannualenergy == pytest.approx(366975552, 1e-2)
     assert battannualenergy == pytest.approx(1331720000, 1e-2)

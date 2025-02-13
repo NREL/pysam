@@ -328,7 +328,7 @@ static PyGetSetDef FinancialParameters_getset[] = {
 	PyDoc_STR("*sequence*: State income tax rate [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"system_capacity", (getter)FinancialParameters_get_system_capacity,(setter)FinancialParameters_set_system_capacity,
-	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``system_capacity``:\n\n\t - battery_total_cost_lcos\n\t - total_installed_cost\n"),
  	NULL},
 {"system_heat_rate", (getter)FinancialParameters_get_system_heat_rate,(setter)FinancialParameters_set_system_heat_rate,
 	PyDoc_STR("*float*: System heat rate [MMBTus/MWh]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
@@ -831,10 +831,10 @@ static PyGetSetDef SystemCosts_getset[] = {
 	PyDoc_STR("*float*: Number of O and M types\n\n**Info:**\nbattery,fuelcell\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"annual_fuel_usage", (getter)SystemCosts_get_annual_fuel_usage,(setter)SystemCosts_set_annual_fuel_usage,
-	PyDoc_STR("*float*: Fuel usage (yr 1) [kWht]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Fuel usage (yr 1) [kWht]\n\n**Info:**\ncustom_generation,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"annual_fuel_usage_lifetime", (getter)SystemCosts_get_annual_fuel_usage_lifetime,(setter)SystemCosts_set_annual_fuel_usage_lifetime,
-	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical"),
+	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]\n\n**Info:**\ncustom_generation,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical"),
  	NULL},
 {"om_batt_capacity_cost", (getter)SystemCosts_get_om_batt_capacity_cost,(setter)SystemCosts_set_om_batt_capacity_cost,
 	PyDoc_STR("*sequence*: Battery capacity-based System Costs amount [$/kWcap]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
@@ -864,10 +864,10 @@ static PyGetSetDef SystemCosts_getset[] = {
 	PyDoc_STR("*float*: Fixed O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuel_cost", (getter)SystemCosts_get_om_fuel_cost,(setter)SystemCosts_set_om_fuel_cost,
-	PyDoc_STR("*sequence*: Fuel cost [$/MMBtu]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Fuel cost [$/MMBtu]\n\n**Info:**\ncustom_generation,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuel_cost_escal", (getter)SystemCosts_get_om_fuel_cost_escal,(setter)SystemCosts_set_om_fuel_cost_escal,
-	PyDoc_STR("*float*: Fuel cost escalation [%/year]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Fuel cost escalation [%/year]\n\n**Info:**\ncustom_generation,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuelcell_capacity_cost", (getter)SystemCosts_get_om_fuelcell_capacity_cost,(setter)SystemCosts_set_om_fuelcell_capacity_cost,
 	PyDoc_STR("*sequence*: Fuel cell capacity-based System Costs amount [$/kWcap]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
@@ -918,7 +918,7 @@ static PyGetSetDef SystemCosts_getset[] = {
 	PyDoc_STR("*float*: Replacement cost escalation [%/year]\n\n**Info:**\nbattery,fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"total_installed_cost", (getter)SystemCosts_get_total_installed_cost,(setter)SystemCosts_set_total_installed_cost,
-	PyDoc_STR("*float*: Total installed cost [$]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Total installed cost [$]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nTrue\n\nThe value of ``total_installed_cost`` depends on the following variables:\n\n\t - battery_per_kWh\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3385,7 +3385,7 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*sequence*: Battery bank replacements per year [number/year]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"batt_computed_bank_capacity", (getter)BatterySystem_get_batt_computed_bank_capacity,(setter)BatterySystem_set_batt_computed_bank_capacity,
-	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults.\n\nThe value of the following variables depends on ``batt_computed_bank_capacity``:\n\n\t - battery_total_cost_lcos\n\t - om_batt_nameplate\n\t - total_installed_cost\n"),
  	NULL},
 {"batt_replacement_option", (getter)BatterySystem_get_batt_replacement_option,(setter)BatterySystem_set_batt_replacement_option,
 	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
@@ -3394,7 +3394,7 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*sequence*: Percentage of battery capacity to replace in each year [%]\n\n**Options:**\nlength <= analysis_period"),
  	NULL},
 {"battery_per_kWh", (getter)BatterySystem_get_battery_per_kWh,(setter)BatterySystem_set_battery_per_kWh,
-	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults.\n\nThe value of the following variables depends on ``battery_per_kWh``:\n\n\t - battery_total_cost_lcos\n\t - total_installed_cost\n"),
  	NULL},
 {"en_batt", (getter)BatterySystem_get_en_batt,(setter)BatterySystem_set_en_batt,
 	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
@@ -5039,7 +5039,7 @@ static PyGetSetDef LCOS_getset[] = {
 	PyDoc_STR("*float*: Net pre-tax cash battery salvage value [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"battery_total_cost_lcos", (getter)LCOS_get_battery_total_cost_lcos,(setter)LCOS_set_battery_total_cost_lcos,
-	PyDoc_STR("*float*: Battery total investment cost [$]"),
+	PyDoc_STR("*float*: Battery total investment cost [$]\n\nThe value of ``battery_total_cost_lcos`` depends on the following variables:\n\n\t - battery_per_kWh\n"),
  	NULL},
 {"charge_w_sys_ec_ym", (getter)LCOS_get_charge_w_sys_ec_ym,(setter)LCOS_set_charge_w_sys_ec_ym,
 	PyDoc_STR("*sequence[sequence]*: Energy charge with system [$]"),
@@ -5972,6 +5972,12 @@ Outputs_get_ibi_total_uti(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_irr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Cashloan_Outputs_irr_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_itc_total(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Cashloan_Outputs_itc_total_nget, self->data_ptr);
@@ -6053,6 +6059,12 @@ static PyObject *
 Outputs_get_loan_amount(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Cashloan_Outputs_loan_amount_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_nominal_discount_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Cashloan_Outputs_nominal_discount_rate_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -6449,6 +6461,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"ibi_total_uti", (getter)Outputs_get_ibi_total_uti,(setter)0,
 	PyDoc_STR("*float*: Utility IBI income [$]"),
  	NULL},
+{"irr", (getter)Outputs_get_irr,(setter)0,
+	PyDoc_STR("*float*: IRR Internal rate of return [$]"),
+ 	NULL},
 {"itc_total", (getter)Outputs_get_itc_total,(setter)0,
 	PyDoc_STR("*float*: Total ITC income [$]"),
  	NULL},
@@ -6490,6 +6505,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"loan_amount", (getter)Outputs_get_loan_amount,(setter)0,
 	PyDoc_STR("*float*: Debt [$]"),
+ 	NULL},
+{"nominal_discount_rate", (getter)Outputs_get_nominal_discount_rate,(setter)0,
+	PyDoc_STR("*float*: Nominal discount rate [%]"),
  	NULL},
 {"npv", (getter)Outputs_get_npv,(setter)0,
 	PyDoc_STR("*float*: NPV Net present value [$]"),
@@ -6922,7 +6940,7 @@ static PyMethodDef CashloanModule_methods[] = {
 		{"new",             Cashloan_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Cashloan")},
 		{"default",             Cashloan_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Cashloan\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"DSLFCommercial\"*\n\n		- *\"EmpiricalTroughCommercial\"*\n\n		- *\"FlatPlatePVCommercial\"*\n\n		- *\"FlatPlatePVResidential\"*\n\n		- *\"FuelCellCommercial\"*\n\n		- *\"GenericBatteryCommercial\"*\n\n		- *\"GenericBatteryResidential\"*\n\n		- *\"GenericCSPSystemCommercial\"*\n\n		- *\"GenericSystemCommercial\"*\n\n		- *\"GenericSystemResidential\"*\n\n		- *\"PVBatteryCommercial\"*\n\n		- *\"PVBatteryResidential\"*\n\n		- *\"PVWattsBatteryCommercial\"*\n\n		- *\"PVWattsBatteryResidential\"*\n\n		- *\"PVWattsCommercial\"*\n\n		- *\"PVWattsResidential\"*\n\n		- *\"SolarWaterHeatingCommercial\"*\n\n		- *\"SolarWaterHeatingResidential\"*\n\n		- *\"StandaloneBatteryCommercial\"*\n\n		- *\"StandaloneBatteryResidential\"*\n\n		- *\"WindPowerCommercial\"*\n\n		- *\"WindPowerResidential\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> Cashloan\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"CustomGenerationBatteryCommercial\"*\n\n		- *\"CustomGenerationBatteryResidential\"*\n\n		- *\"CustomGenerationProfileCommercial\"*\n\n		- *\"CustomGenerationProfileResidential\"*\n\n		- *\"DSLFCommercial\"*\n\n		- *\"EmpiricalTroughCommercial\"*\n\n		- *\"FlatPlatePVCommercial\"*\n\n		- *\"FlatPlatePVResidential\"*\n\n		- *\"FuelCellCommercial\"*\n\n		- *\"GenericCSPSystemCommercial\"*\n\n		- *\"PVBatteryCommercial\"*\n\n		- *\"PVBatteryResidential\"*\n\n		- *\"PVWattsBatteryCommercial\"*\n\n		- *\"PVWattsBatteryResidential\"*\n\n		- *\"PVWattsCommercial\"*\n\n		- *\"PVWattsResidential\"*\n\n		- *\"PhysicalTroughCommercial\"*\n\n		- *\"SolarWaterHeatingCommercial\"*\n\n		- *\"SolarWaterHeatingResidential\"*\n\n		- *\"StandaloneBatteryCommercial\"*\n\n		- *\"StandaloneBatteryResidential\"*\n\n		- *\"WindPowerCommercial\"*\n\n		- *\"WindPowerResidential\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Cashloan_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Cashloan\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Cashloan_from_existing,        METH_VARARGS,

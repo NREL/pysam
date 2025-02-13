@@ -70,7 +70,6 @@ class Pv6parmod(object):
 		alpha_isc = float
 		area = float
 		beta_voc = float
-		gamma_pmp = float
 		height = float
 		opvoltage = tuple
 		standoff = float

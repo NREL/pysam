@@ -506,18 +506,6 @@ CEC6ParameterPVModuleModel_set_beta_voc(VarGroupObject *self, PyObject *value, v
 }
 
 static PyObject *
-CEC6ParameterPVModuleModel_get_gamma_pmp(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pv6parmod_CEC6ParameterPVModuleModel_gamma_pmp_nget, self->data_ptr);
-}
-
-static int
-CEC6ParameterPVModuleModel_set_gamma_pmp(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Pv6parmod_CEC6ParameterPVModuleModel_gamma_pmp_nset, self->data_ptr);
-}
-
-static PyObject *
 CEC6ParameterPVModuleModel_get_height(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pv6parmod_CEC6ParameterPVModuleModel_height_nget, self->data_ptr);
@@ -604,9 +592,6 @@ static PyGetSetDef CEC6ParameterPVModuleModel_getset[] = {
  	NULL},
 {"beta_voc", (getter)CEC6ParameterPVModuleModel_get_beta_voc,(setter)CEC6ParameterPVModuleModel_set_beta_voc,
 	PyDoc_STR("*float*: Temp coeff of voltage at OC [V/'C]\n\n**Required:**\nTrue"),
- 	NULL},
-{"gamma_pmp", (getter)CEC6ParameterPVModuleModel_get_gamma_pmp,(setter)CEC6ParameterPVModuleModel_set_gamma_pmp,
-	PyDoc_STR("*float*: Temp coeff of power at MP [%/'C]\n\n**Required:**\nTrue"),
  	NULL},
 {"height", (getter)CEC6ParameterPVModuleModel_get_height,(setter)CEC6ParameterPVModuleModel_set_height,
 	PyDoc_STR("*float*: System installation height [0/1]\n\n**Options:**\n0=less than 22ft, 1=more than 22ft\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),

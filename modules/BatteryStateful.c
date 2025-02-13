@@ -841,6 +841,18 @@ ParamsPack_set_T_room_init(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+ParamsPack_get_availabilty_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_BatteryStateful_ParamsPack_availabilty_loss_aget, self->data_ptr);
+}
+
+static int
+ParamsPack_set_availabilty_loss(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_BatteryStateful_ParamsPack_availabilty_loss_aset, self->data_ptr);
+}
+
+static PyObject *
 ParamsPack_get_cap_vs_temp(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_BatteryStateful_ParamsPack_cap_vs_temp_mget, self->data_ptr);
@@ -1014,6 +1026,9 @@ static PyGetSetDef ParamsPack_getset[] = {
  	NULL},
 {"T_room_init", (getter)ParamsPack_get_T_room_init,(setter)ParamsPack_set_T_room_init,
 	PyDoc_STR("*float*: Temperature of storage room [C]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"availabilty_loss", (getter)ParamsPack_get_availabilty_loss,(setter)ParamsPack_set_availabilty_loss,
+	PyDoc_STR("*sequence*: Battery availability losses at each timestep [[%]]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cap_vs_temp", (getter)ParamsPack_get_cap_vs_temp,(setter)ParamsPack_set_cap_vs_temp,
 	PyDoc_STR("*sequence[sequence]*: Table with Temperature and Capacity % as columns [[[C,%]]]\n\n**Required:**\nRequired if life_model=0"),
@@ -1928,6 +1943,30 @@ StateCell_set_n_cycles(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+StateCell_get_percent_unavailable(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_percent_unavailable_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_percent_unavailable(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_percent_unavailable_nset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_percent_unavailable_prev(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_percent_unavailable_prev_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_percent_unavailable_prev(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_percent_unavailable_prev_nset, self->data_ptr);
+}
+
+static PyObject *
 StateCell_get_prev_charge(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_BatteryStateful_StateCell_prev_charge_nget, self->data_ptr);
@@ -2260,6 +2299,12 @@ static PyGetSetDef StateCell_getset[] = {
  	NULL},
 {"n_cycles", (getter)StateCell_get_n_cycles,(setter)StateCell_set_n_cycles,
 	PyDoc_STR("*float*: Number of cycles\n\n**INOUT:** This variable is both an input and an output to the compute module."),
+ 	NULL},
+{"percent_unavailable", (getter)StateCell_get_percent_unavailable,(setter)StateCell_set_percent_unavailable,
+	PyDoc_STR("*float*: Percent of system that is down [%]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
+ 	NULL},
+{"percent_unavailable_prev", (getter)StateCell_get_percent_unavailable_prev,(setter)StateCell_set_percent_unavailable_prev,
+	PyDoc_STR("*float*: Percent of system that was down last step [%]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"prev_charge", (getter)StateCell_get_prev_charge,(setter)StateCell_set_prev_charge,
 	PyDoc_STR("*float*: Charge mode of last time step [0/1/2]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
