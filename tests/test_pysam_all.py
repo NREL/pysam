@@ -189,16 +189,16 @@ def test_functionality():
         # Test shared module (AdjustmentFactors)
         d = a.AdjustmentFactors
 
-        d.constant = 1
-        assert(d.constant == 1)
+        d.adjust_constant = 1
+        assert(d.adjust_constant == 1)
         n_tests_passed += 1
 
-        d.hourly = (1, 2)
-        assert(d.hourly == (1, 2))
+        d.adjust_hourly = (1, 2)
+        assert(d.adjust_hourly == (1, 2))
         n_tests_passed += 1
 
-        d.periods = ((1, 2), (3, 4))
-        assert(d.periods == ((1, 2), (3, 4)))
+        d.adjust_periods = ((1, 2), (3, 4))
+        assert(d.adjust_periods == ((1, 2), (3, 4)))
         n_tests_passed += 1
 
         try:
@@ -207,26 +207,26 @@ def test_functionality():
             n_tests_passed += 1
 
         ValDict = d.export()
-        assert(ValDict['constant'] == 1 and ValDict['hourly'] == (1, 2) and ValDict['periods'] == ((1, 2), (3, 4)))
+        assert(ValDict['adjust_constant'] == 1 and ValDict['adjust_hourly'] == (1, 2) and ValDict['adjust_periods'] == ((1, 2), (3, 4)))
         n_tests_passed += 1
 
-        ValDict = {'constant': 10, "hourly": (10, 20), "periods": ((10, 20), (30, 40))}
+        ValDict = {'adjust_constant': 10, "adjust_hourly": (10, 20), "adjust_periods": ((10, 20), (30, 40))}
         d.assign(ValDict)
-        assert(ValDict['constant'] == 10 and ValDict['hourly'] == (10, 20) and ValDict['periods'] == ((10, 20), (30, 40)))
+        assert(ValDict['adjust_constant'] == 10 and ValDict['adjust_hourly'] == (10, 20) and ValDict['adjust_periods'] == ((10, 20), (30, 40)))
         n_tests_passed += 1
 
         # Test nested dictionary assignment and export
 
         TechDict = {'Plant': {'derate': 100,
                                    'energy_output_array': (100, 200)},
-                    'AdjustmentFactors': {'constant': 100, "hourly": (100, 200), "periods": ((100, 200), (300, 400))}}
+                    'AdjustmentFactors': {'adjust_constant': 100, "adjust_hourly": (100, 200), "adjust_periods": ((100, 200), (300, 400))}}
         a.assign(TechDict)
         ValDict = a.Plant.export()
         assert (ValDict['derate'] == 100 and ValDict['energy_output_array'] == (100, 200))
         n_tests_passed += 1
 
         ValDict = a.AdjustmentFactors.export()
-        assert (ValDict['constant'] == 100 and ValDict['hourly'] == (100, 200) and ValDict['periods'] == (
+        assert (ValDict['adjust_constant'] == 100 and ValDict['adjust_hourly'] == (100, 200) and ValDict['adjust_periods'] == (
         (100, 200), (300, 400)))
         n_tests_passed += 1
 
