@@ -18,16 +18,6 @@ jobs:
 
     name: ${{ matrix.os }} ${{ matrix.python-version }}
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup conda
-        uses: s-weigand/setup-conda@v1
-        with:
-          update-conda: true
-          python-version: ${{ matrix.python-version }}
-          conda-channels: anaconda, conda-forge
-      - run: conda --version
-      - run: which python
-
       - name: Checkout Repo
         uses: actions/checkout@v3
 
