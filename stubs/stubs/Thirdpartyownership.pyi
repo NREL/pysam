@@ -119,21 +119,6 @@ class Thirdpartyownership(object):
 		ppa_price = float
 
 
-	class ElectricityCost(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		elec_cost_with_system = tuple
-		elec_cost_without_system = tuple
-
-
 	class Outputs(object):
 		def assign(self): 
 			pass

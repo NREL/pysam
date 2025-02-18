@@ -57,12 +57,6 @@ CashFlow Group
 .. autoclass:: PySAM.Thirdpartyownership.Thirdpartyownership.CashFlow
 	:members:
 
-ElectricityCost Group
-----------------------
-
-.. autoclass:: PySAM.Thirdpartyownership.Thirdpartyownership.ElectricityCost
-	:members:
-
 Outputs Group
 --------------
 

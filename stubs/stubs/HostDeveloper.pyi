@@ -361,8 +361,6 @@ class HostDeveloper(object):
 
 
 		annual_energy_value = tuple
-		elec_cost_with_system = tuple
-		elec_cost_without_system = tuple
 		host_real_discount_rate = float
 
 

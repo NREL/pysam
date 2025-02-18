@@ -11132,30 +11132,6 @@ Outputs_get_charge_wo_sys_minimum_sep(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_elec_cost_with_system(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Utilityrate3_Outputs_elec_cost_with_system_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_elec_cost_with_system_year1(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Utilityrate3_Outputs_elec_cost_with_system_year1_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_elec_cost_without_system(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Utilityrate3_Outputs_elec_cost_without_system_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_elec_cost_without_system_year1(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Utilityrate3_Outputs_elec_cost_without_system_year1_nget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_energy_w_sys_ec_apr_p1(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Utilityrate3_Outputs_energy_w_sys_ec_apr_p1_aget, self->data_ptr);
@@ -12974,6 +12950,12 @@ Outputs_get_utility_bill_w_sys_sep(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_utility_bill_w_sys_year1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Utilityrate3_Outputs_utility_bill_w_sys_year1_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_utility_bill_wo_sys(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Utilityrate3_Outputs_utility_bill_wo_sys_aget, self->data_ptr);
@@ -13049,6 +13031,12 @@ static PyObject *
 Outputs_get_utility_bill_wo_sys_sep(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Utilityrate3_Outputs_utility_bill_wo_sys_sep_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_utility_bill_wo_sys_year1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Utilityrate3_Outputs_utility_bill_wo_sys_year1_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -14582,18 +14570,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"charge_wo_sys_minimum_sep", (getter)Outputs_get_charge_wo_sys_minimum_sep,(setter)0,
 	PyDoc_STR("*sequence*: Minimum charge without system in Sep [$]"),
  	NULL},
-{"elec_cost_with_system", (getter)Outputs_get_elec_cost_with_system,(setter)0,
-	PyDoc_STR("*sequence*: Electricity cost with system [$/yr]"),
- 	NULL},
-{"elec_cost_with_system_year1", (getter)Outputs_get_elec_cost_with_system_year1,(setter)0,
-	PyDoc_STR("*float*: Electricity cost with system [$/yr]"),
- 	NULL},
-{"elec_cost_without_system", (getter)Outputs_get_elec_cost_without_system,(setter)0,
-	PyDoc_STR("*sequence*: Electricity cost without system [$/yr]"),
- 	NULL},
-{"elec_cost_without_system_year1", (getter)Outputs_get_elec_cost_without_system_year1,(setter)0,
-	PyDoc_STR("*float*: Electricity cost without system [$/yr]"),
- 	NULL},
 {"energy_w_sys_ec_apr_p1", (getter)Outputs_get_energy_w_sys_ec_apr_p1,(setter)0,
 	PyDoc_STR("*sequence*: Energy with system (TOU) in Apr for period 1 and tiers 1 through 6 [kWh]"),
  	NULL},
@@ -15465,7 +15441,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Electricity savings [$/yr]"),
  	NULL},
 {"utility_bill_w_sys", (getter)Outputs_get_utility_bill_w_sys,(setter)0,
-	PyDoc_STR("*sequence*: Utility bill with system [$]"),
+	PyDoc_STR("*sequence*: Electricity cost with system [$/yr]"),
  	NULL},
 {"utility_bill_w_sys_apr", (getter)Outputs_get_utility_bill_w_sys_apr,(setter)0,
 	PyDoc_STR("*sequence*: Utility bill with system in Apr [$]"),
@@ -15503,8 +15479,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"utility_bill_w_sys_sep", (getter)Outputs_get_utility_bill_w_sys_sep,(setter)0,
 	PyDoc_STR("*sequence*: Utility bill with system in Sep [$]"),
  	NULL},
+{"utility_bill_w_sys_year1", (getter)Outputs_get_utility_bill_w_sys_year1,(setter)0,
+	PyDoc_STR("*float*: Electricity cost with system [$/yr]"),
+ 	NULL},
 {"utility_bill_wo_sys", (getter)Outputs_get_utility_bill_wo_sys,(setter)0,
-	PyDoc_STR("*sequence*: Utility bill without system [$]"),
+	PyDoc_STR("*sequence*: Electricity cost without system [$/yr]"),
  	NULL},
 {"utility_bill_wo_sys_apr", (getter)Outputs_get_utility_bill_wo_sys_apr,(setter)0,
 	PyDoc_STR("*sequence*: Utility bill without system in Apr [$]"),
@@ -15541,6 +15520,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"utility_bill_wo_sys_sep", (getter)Outputs_get_utility_bill_wo_sys_sep,(setter)0,
 	PyDoc_STR("*sequence*: Utility bill without system in Sep [$]"),
+ 	NULL},
+{"utility_bill_wo_sys_year1", (getter)Outputs_get_utility_bill_wo_sys_year1,(setter)0,
+	PyDoc_STR("*float*: Electricity cost without system [$/yr]"),
  	NULL},
 {"year1_electric_load", (getter)Outputs_get_year1_electric_load,(setter)0,
 	PyDoc_STR("*float*: Electricity load [kWh/yr]"),

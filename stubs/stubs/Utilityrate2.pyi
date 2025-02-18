@@ -620,8 +620,8 @@ class Utilityrate2(object):
 		charge_ec_nov = tuple
 		charge_ec_oct = tuple
 		charge_ec_sep = tuple
-		elec_cost_with_system = tuple
-		elec_cost_without_system = tuple
+		utility_bill_w_sys = tuple
+		utility_bill_wo_sys = tuple
 		year1_hourly_dc_tou_schedule = tuple
 		year1_hourly_dc_with_system = tuple
 		year1_hourly_dc_without_system = tuple

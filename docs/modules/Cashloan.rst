@@ -105,12 +105,6 @@ Lifetime Group
 .. autoclass:: PySAM.Cashloan.Cashloan.Lifetime
 	:members:
 
-ThirdPartyOwnership Group
---------------------------
-
-.. autoclass:: PySAM.Cashloan.Cashloan.ThirdPartyOwnership
-	:members:
-
 LCOS Group
 -----------
 

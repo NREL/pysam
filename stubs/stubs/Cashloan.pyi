@@ -393,21 +393,6 @@ class Cashloan(object):
 		system_use_lifetime_output = float
 
 
-	class ThirdPartyOwnership(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		elec_cost_with_system = tuple
-		elec_cost_without_system = tuple
-
-
 	class LCOS(object):
 		def assign(self): 
 			pass

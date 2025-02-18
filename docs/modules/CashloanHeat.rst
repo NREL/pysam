@@ -113,12 +113,6 @@ Lifetime Group
 .. autoclass:: PySAM.CashloanHeat.CashloanHeat.Lifetime
 	:members:
 
-ThirdPartyOwnership Group
---------------------------
-
-.. autoclass:: PySAM.CashloanHeat.CashloanHeat.ThirdPartyOwnership
-	:members:
-
 LCOS Group
 -----------
 

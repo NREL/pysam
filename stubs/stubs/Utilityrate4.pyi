@@ -154,10 +154,6 @@ class Utilityrate4(object):
 		charge_wo_sys_fixed_ym = tuple
 		charge_wo_sys_minimum = tuple
 		charge_wo_sys_minimum_ym = tuple
-		elec_cost_with_system = tuple
-		elec_cost_with_system_year1 = float
-		elec_cost_without_system = tuple
-		elec_cost_without_system_year1 = float
 		energy_w_sys_ec_apr_tp = tuple
 		energy_w_sys_ec_aug_tp = tuple
 		energy_w_sys_ec_dec_tp = tuple
@@ -197,8 +193,10 @@ class Utilityrate4(object):
 		surplus_w_sys_ec_oct_tp = tuple
 		surplus_w_sys_ec_sep_tp = tuple
 		utility_bill_w_sys = tuple
+		utility_bill_w_sys_year1 = float
 		utility_bill_w_sys_ym = tuple
 		utility_bill_wo_sys = tuple
+		utility_bill_wo_sys_year1 = float
 		utility_bill_wo_sys_ym = tuple
 		year1_electric_load = float
 		year1_hourly_dc_peak_per_period = tuple
