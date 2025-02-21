@@ -19,8 +19,6 @@ The variables listed below are interdependent with other variables. If you chang
 
  - construction_financing_cost
 
- - land_area
-
  - om_batt_nameplate
 
  - total_installed_cost

@@ -2591,18 +2591,6 @@ Outputs_get_charge_tr_sep(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_elec_cost_with_system(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Utilityrate_Outputs_elec_cost_with_system_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_elec_cost_without_system(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Utilityrate_Outputs_elec_cost_without_system_aget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_energy_net(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Utilityrate_Outputs_energy_net_aget, self->data_ptr);
@@ -2624,6 +2612,18 @@ static PyObject *
 Outputs_get_revenue_without_system(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Utilityrate_Outputs_revenue_without_system_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_utility_bill_w_sys(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Utilityrate_Outputs_utility_bill_w_sys_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_utility_bill_wo_sys(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Utilityrate_Outputs_utility_bill_wo_sys_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -2879,12 +2879,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"charge_tr_sep", (getter)Outputs_get_charge_tr_sep,(setter)0,
 	PyDoc_STR("*sequence*: Tiered rate charge in Sep [$]"),
  	NULL},
-{"elec_cost_with_system", (getter)Outputs_get_elec_cost_with_system,(setter)0,
-	PyDoc_STR("*sequence*: Electricity cost with system [$/yr]"),
- 	NULL},
-{"elec_cost_without_system", (getter)Outputs_get_elec_cost_without_system,(setter)0,
-	PyDoc_STR("*sequence*: Electricity cost without system [$/yr]"),
- 	NULL},
 {"energy_net", (getter)Outputs_get_energy_net,(setter)0,
 	PyDoc_STR("*sequence*: Energy by each year [kW]"),
  	NULL},
@@ -2896,6 +2890,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"revenue_without_system", (getter)Outputs_get_revenue_without_system,(setter)0,
 	PyDoc_STR("*sequence*: Total revenue without system [$]"),
+ 	NULL},
+{"utility_bill_w_sys", (getter)Outputs_get_utility_bill_w_sys,(setter)0,
+	PyDoc_STR("*sequence*: Electricity cost with system [$/yr]"),
+ 	NULL},
+{"utility_bill_wo_sys", (getter)Outputs_get_utility_bill_wo_sys,(setter)0,
+	PyDoc_STR("*sequence*: Electricity cost without system [$/yr]"),
  	NULL},
 {"year1_hourly_e_demand", (getter)Outputs_get_year1_hourly_e_demand,(setter)0,
 	PyDoc_STR("*sequence*: Electricity from grid [kWh]"),
