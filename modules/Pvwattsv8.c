@@ -71,11 +71,11 @@ SolarResource_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SolarResource_methods[] = {
 		{"assign",            (PyCFunction)SolarResource_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SolarResource_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SolarResource_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SolarResource_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SolarResource_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SolarResource_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SolarResource_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -89,6 +89,30 @@ static int
 SolarResource_set_albedo(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_array_setter(value, SAM_Pvwattsv8_SolarResource_albedo_aset, self->data_ptr);
+}
+
+static PyObject *
+SolarResource_get_albedo_default(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_SolarResource_albedo_default_nget, self->data_ptr);
+}
+
+static int
+SolarResource_set_albedo_default(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_SolarResource_albedo_default_nset, self->data_ptr);
+}
+
+static PyObject *
+SolarResource_get_albedo_default_snow(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_SolarResource_albedo_default_snow_nget, self->data_ptr);
+}
+
+static int
+SolarResource_set_albedo_default_snow(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_SolarResource_albedo_default_snow_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -129,16 +153,22 @@ SolarResource_set_use_wf_albedo(VarGroupObject *self, PyObject *value, void *clo
 
 static PyGetSetDef SolarResource_getset[] = {
 {"albedo", (getter)SolarResource_get_albedo,(setter)SolarResource_set_albedo,
-	PyDoc_STR("*sequence*: Albedo [frac]\n\n*Info*: if provided, will overwrite weather file albedo"),
+	PyDoc_STR("*sequence*: Albedo [0..1]\n\n**Info:**\nalbedo input array of 1 constant value or 12 monthly values"),
+ 	NULL},
+{"albedo_default", (getter)SolarResource_get_albedo_default,(setter)SolarResource_set_albedo_default,
+	PyDoc_STR("*float*: Albedo default [0..1]\n\n**Info:**\ndefault when albedo invalid\n\n**Required:**\nFalse. Automatically set to 0.2 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"albedo_default_snow", (getter)SolarResource_get_albedo_default_snow,(setter)SolarResource_set_albedo_default_snow,
+	PyDoc_STR("*float*: Albedo default for snow [0..1]\n\n**Info:**\ndefault when albedo invalid and snow model enabled\n\n**Required:**\nFalse. Automatically set to 0.6 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"solar_resource_data", (getter)SolarResource_get_solar_resource_data,(setter)SolarResource_set_solar_resource_data,
-	PyDoc_STR("*dict*: Weather data\n\n*Info*: dn,df,tdry,wspd,lat,lon,tz,elev"),
+	PyDoc_STR("*dict*: Weather data\n\n**Info:**\ndn,df,tdry,wspd,lat,lon,tz,elev"),
  	NULL},
 {"solar_resource_file", (getter)SolarResource_get_solar_resource_file,(setter)SolarResource_set_solar_resource_file,
 	PyDoc_STR("*str*: Weather file path"),
  	NULL},
 {"use_wf_albedo", (getter)SolarResource_get_use_wf_albedo,(setter)SolarResource_set_use_wf_albedo,
-	PyDoc_STR("*float*: Use albedo from weather file [0/1]\n\n*Info*: will use weather file albedo instead of albedo input\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Use albedo from weather file [0/1]\n\n**Options:**\n0=albedo input, 1=albedo from weather file (use albedo default if invalid)\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -253,11 +283,11 @@ Lifetime_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Lifetime_methods[] = {
 		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Lifetime_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Lifetime_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Lifetime_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Lifetime_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Lifetime_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -299,13 +329,13 @@ Lifetime_set_system_use_lifetime_output(VarGroupObject *self, PyObject *value, v
 
 static PyGetSetDef Lifetime_getset[] = {
 {"analysis_period", (getter)Lifetime_get_analysis_period,(setter)Lifetime_set_analysis_period,
-	PyDoc_STR("*float*: Analysis period [years]\n\n*Required*: True if system_use_lifetime_output=1"),
+	PyDoc_STR("*float*: Analysis period [years]\n\n**Required:**\nRequired if system_use_lifetime_output=1"),
  	NULL},
 {"dc_degradation", (getter)Lifetime_get_dc_degradation,(setter)Lifetime_set_dc_degradation,
-	PyDoc_STR("*sequence*: Annual DC degradation for lifetime simulations [%/year]\n\n*Required*: True if system_use_lifetime_output=1"),
+	PyDoc_STR("*sequence*: Annual DC degradation for lifetime simulations [%/year]\n\n**Required:**\nRequired if system_use_lifetime_output=1"),
  	NULL},
 {"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
-	PyDoc_STR("*float*: Run lifetime simulation [0/1]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Run lifetime simulation [0/1]\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -420,11 +450,11 @@ SystemDesign_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemDesign_methods[] = {
 		{"assign",            (PyCFunction)SystemDesign_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SystemDesign_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SystemDesign_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SystemDesign_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemDesign_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -585,54 +615,6 @@ SystemDesign_set_rotlim(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-SystemDesign_get_shading_azal(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Pvwattsv8_SystemDesign_shading_azal_mget, self->data_ptr);
-}
-
-static int
-SystemDesign_set_shading_azal(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Pvwattsv8_SystemDesign_shading_azal_mset, self->data_ptr);
-}
-
-static PyObject *
-SystemDesign_get_shading_diff(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvwattsv8_SystemDesign_shading_diff_nget, self->data_ptr);
-}
-
-static int
-SystemDesign_set_shading_diff(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Pvwattsv8_SystemDesign_shading_diff_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemDesign_get_shading_mxh(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Pvwattsv8_SystemDesign_shading_mxh_mget, self->data_ptr);
-}
-
-static int
-SystemDesign_set_shading_mxh(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Pvwattsv8_SystemDesign_shading_mxh_mset, self->data_ptr);
-}
-
-static PyObject *
-SystemDesign_get_shading_timestep(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Pvwattsv8_SystemDesign_shading_timestep_mget, self->data_ptr);
-}
-
-static int
-SystemDesign_set_shading_timestep(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Pvwattsv8_SystemDesign_shading_timestep_mset, self->data_ptr);
-}
-
-static PyObject *
 SystemDesign_get_soiling(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvwattsv8_SystemDesign_soiling_aget, self->data_ptr);
@@ -718,76 +700,64 @@ SystemDesign_set_xfmr_nll(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef SystemDesign_getset[] = {
 {"array_type", (getter)SystemDesign_get_array_type,(setter)SystemDesign_set_array_type,
-	PyDoc_STR("*float*: Array type [0/1/2/3/4]\n\n*Info*: Fixed Rack,Fixed Roof,1Axis,Backtracked,2Axis\n\n*Constraints*: MIN=0,MAX=4,INTEGER\n\n*Required*: True"),
+	PyDoc_STR("*float*: Array type [0/1/2/3/4]\n\n**Info:**\nfixed open rack,fixed roof mount,1-axis tracking,1-axis backtracking,2-axis tracking\n\n**Constraints:**\nMIN=0,MAX=4,INTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"azimuth", (getter)SystemDesign_get_azimuth,(setter)SystemDesign_set_azimuth,
-	PyDoc_STR("*float*: Azimuth angle [deg]\n\n*Options*: E=90,S=180,W=270\n\n*Constraints*: MIN=0,MAX=360\n\n*Required*: array_type<4"),
+	PyDoc_STR("*float*: Azimuth angle [degrees]\n\n**Options:**\nE=90,S=180,W=270\n\n**Constraints:**\nMIN=0,MAX=360\n\n**Required:**\narray_type<4"),
  	NULL},
 {"batt_simple_enable", (getter)SystemDesign_get_batt_simple_enable,(setter)SystemDesign_set_batt_simple_enable,
-	PyDoc_STR("*float*: Enable Battery [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable Battery [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"bifaciality", (getter)SystemDesign_get_bifaciality,(setter)SystemDesign_set_bifaciality,
-	PyDoc_STR("*float*: Module bifaciality factor [0 or ~0.65]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Module bifaciality factor [0 or ~0.65]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"dc_ac_ratio", (getter)SystemDesign_get_dc_ac_ratio,(setter)SystemDesign_set_dc_ac_ratio,
-	PyDoc_STR("*float*: DC to AC ratio [ratio]\n\n*Constraints*: POSITIVE\n\n*Required*: If not provided, assumed to be 1.1"),
+	PyDoc_STR("*float*: DC to AC ratio [ratio]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nFalse. Automatically set to 1.1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"en_snowloss", (getter)SystemDesign_get_en_snowloss,(setter)SystemDesign_set_en_snowloss,
-	PyDoc_STR("*float*: Enable snow loss model [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable snow loss model [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"enable_wind_stow", (getter)SystemDesign_get_enable_wind_stow,(setter)SystemDesign_set_enable_wind_stow,
-	PyDoc_STR("*float*: Enable tracker stow at high wind speeds [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable tracker stow at high wind speeds [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"gcr", (getter)SystemDesign_get_gcr,(setter)SystemDesign_set_gcr,
-	PyDoc_STR("*float*: Ground coverage ratio [0..1]\n\n*Constraints*: MIN=0.01,MAX=0.99\n\n*Required*: If not provided, assumed to be 0.4"),
+	PyDoc_STR("*float*: Ground coverage ratio [0..1]\n\n**Constraints:**\nMIN=0.01,MAX=0.99\n\n**Required:**\nFalse. Automatically set to 0.3 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"gust_factor", (getter)SystemDesign_get_gust_factor,(setter)SystemDesign_set_gust_factor,
-	PyDoc_STR("*float*: Wind gust estimation factor\n\n*Required*: False"),
+	PyDoc_STR("*float*: Wind gust estimation factor\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"inv_eff", (getter)SystemDesign_get_inv_eff,(setter)SystemDesign_set_inv_eff,
-	PyDoc_STR("*float*: Inverter efficiency at rated power [%]\n\n*Constraints*: MIN=90,MAX=99.5\n\n*Required*: If not provided, assumed to be 96"),
+	PyDoc_STR("*float*: Inverter efficiency at rated power [%]\n\n**Constraints:**\nMIN=90,MAX=99.5\n\n**Required:**\nFalse. Automatically set to 96 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"losses", (getter)SystemDesign_get_losses,(setter)SystemDesign_set_losses,
-	PyDoc_STR("*float*: Other DC losses [%]\n\n*Info*: Total system losses\n\n*Constraints*: MIN=-5,MAX=99\n\n*Required*: True"),
+	PyDoc_STR("*float*: DC system losses [%]\n\n**Info:**\ntotal system losses\n\n**Constraints:**\nMIN=-5,MAX=99\n\n**Required:**\nTrue"),
  	NULL},
 {"module_type", (getter)SystemDesign_get_module_type,(setter)SystemDesign_set_module_type,
-	PyDoc_STR("*float*: Module type [0/1/2]\n\n*Info*: Standard,Premium,Thin film\n\n*Constraints*: MIN=0,MAX=2,INTEGER\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Module type [0/1/2]\n\n**Info:**\nstandard,premium,thin film\n\n**Constraints:**\nMIN=0,MAX=2,INTEGER\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"rotlim", (getter)SystemDesign_get_rotlim,(setter)SystemDesign_set_rotlim,
-	PyDoc_STR("*float*: Tracker rotation angle limit [deg]\n\n*Required*: If not provided, assumed to be 45.0"),
- 	NULL},
-{"shading_azal", (getter)SystemDesign_get_shading_azal,(setter)SystemDesign_set_shading_azal,
-	PyDoc_STR("*sequence[sequence]*: Azimuth x altitude beam shading loss [%]\n\n*Required*: False"),
- 	NULL},
-{"shading_diff", (getter)SystemDesign_get_shading_diff,(setter)SystemDesign_set_shading_diff,
-	PyDoc_STR("*float*: Diffuse shading loss [%]\n\n*Required*: False"),
- 	NULL},
-{"shading_mxh", (getter)SystemDesign_get_shading_mxh,(setter)SystemDesign_set_shading_mxh,
-	PyDoc_STR("*sequence[sequence]*: Month x Hour beam shading loss [%]\n\n*Required*: False"),
- 	NULL},
-{"shading_timestep", (getter)SystemDesign_get_shading_timestep,(setter)SystemDesign_set_shading_timestep,
-	PyDoc_STR("*sequence[sequence]*: Time step beam shading loss [%]\n\n*Required*: False"),
+	PyDoc_STR("*float*: Tracker rotation angle limit [degrees]\n\n**Required:**\nFalse. Automatically set to 45.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"soiling", (getter)SystemDesign_get_soiling,(setter)SystemDesign_set_soiling,
-	PyDoc_STR("*sequence*: Soiling loss [%]\n\n*Required*: False"),
+	PyDoc_STR("*sequence*: Soiling loss [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"stow_wspd", (getter)SystemDesign_get_stow_wspd,(setter)SystemDesign_set_stow_wspd,
-	PyDoc_STR("*float*: Tracker stow wind speed threshold [m/s]\n\n*Required*: If not provided, assumed to be 10"),
+	PyDoc_STR("*float*: Tracker stow wind speed threshold [m/s]\n\n**Required:**\nFalse. Automatically set to 10 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"system_capacity", (getter)SystemDesign_get_system_capacity,(setter)SystemDesign_set_system_capacity,
-	PyDoc_STR("*float*: System size (DC nameplate) [kW]\n\n*Required*: True"),
+	PyDoc_STR("*float*: System size (DC nameplate) [kW]\n\n**Required:**\nTrue\n\nThe value of ``system_capacity`` depends on the following variables:\n\n\t - dc_ac_ratio\n"),
  	NULL},
 {"tilt", (getter)SystemDesign_get_tilt,(setter)SystemDesign_set_tilt,
-	PyDoc_STR("*float*: Tilt angle [deg]\n\n*Options*: H=0,V=90\n\n*Constraints*: MIN=0,MAX=90\n\n*Required*: array_type<4"),
+	PyDoc_STR("*float*: Tilt angle [degrees]\n\n**Options:**\nH=0,V=90\n\n**Constraints:**\nMIN=0,MAX=90\n\n**Required:**\narray_type<4"),
  	NULL},
 {"wind_stow_angle", (getter)SystemDesign_get_wind_stow_angle,(setter)SystemDesign_set_wind_stow_angle,
-	PyDoc_STR("*float*: Tracker angle for wind stow [deg]\n\n*Required*: If not provided, assumed to be 30.0"),
+	PyDoc_STR("*float*: Tracker angle for wind stow [degrees]\n\n**Required:**\nFalse. Automatically set to 30.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"xfmr_ll", (getter)SystemDesign_get_xfmr_ll,(setter)SystemDesign_set_xfmr_ll,
-	PyDoc_STR("*float*: GSU transformer load loss (resistive) [%(ac)]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: GSU transformer load loss (resistive) [%(ac)]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"xfmr_nll", (getter)SystemDesign_get_xfmr_nll,(setter)SystemDesign_set_xfmr_nll,
-	PyDoc_STR("*float*: GSU transformer no load loss (iron core) [%(ac)]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: GSU transformer no load loss (iron core) [%(ac)]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -826,6 +796,565 @@ static PyTypeObject SystemDesign_Type = {
 		SystemDesign_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		SystemDesign_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * Shading Group
+ */ 
+
+static PyTypeObject Shading_Type;
+
+static PyObject *
+Shading_new(SAM_Pvwattsv8 data_ptr)
+{
+	PyObject* new_obj = Shading_Type.tp_alloc(&Shading_Type,0);
+
+	VarGroupObject* Shading_obj = (VarGroupObject*)new_obj;
+
+	Shading_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* Shading methods */
+
+static PyObject *
+Shading_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Pvwattsv8", "Shading")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Shading_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Shading_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvwattsv8", "Shading")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Shading_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Shading_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Shading_methods[] = {
+		{"assign",            (PyCFunction)Shading_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Shading_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Shading_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Shading_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Shading_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Shading_get_shading_azal(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvwattsv8_Shading_shading_azal_mget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_azal(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvwattsv8_Shading_shading_azal_mset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_diff(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Shading_shading_diff_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_diff(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_Shading_shading_diff_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_en_azal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Shading_shading_en_azal_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_en_azal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_Shading_shading_en_azal_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_en_diff(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Shading_shading_en_diff_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_en_diff(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_Shading_shading_en_diff_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_en_mxh(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Shading_shading_en_mxh_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_en_mxh(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_Shading_shading_en_mxh_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_en_string_option(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Shading_shading_en_string_option_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_en_string_option(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_Shading_shading_en_string_option_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_en_timestep(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Shading_shading_en_timestep_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_en_timestep(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_Shading_shading_en_timestep_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_mxh(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvwattsv8_Shading_shading_mxh_mget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_mxh(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvwattsv8_Shading_shading_mxh_mset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_string_option(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Shading_shading_string_option_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_string_option(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_Shading_shading_string_option_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_timestep(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvwattsv8_Shading_shading_timestep_mget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_timestep(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvwattsv8_Shading_shading_timestep_mset, self->data_ptr);
+}
+
+static PyGetSetDef Shading_getset[] = {
+{"shading_azal", (getter)Shading_get_shading_azal,(setter)Shading_set_shading_azal,
+	PyDoc_STR("*sequence[sequence]*: Azimuth x altitude beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
+ 	NULL},
+{"shading_diff", (getter)Shading_get_shading_diff,(setter)Shading_set_shading_diff,
+	PyDoc_STR("*float*: Diffuse shading loss [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
+ 	NULL},
+{"shading_en_azal", (getter)Shading_get_shading_en_azal,(setter)Shading_set_shading_en_azal,
+	PyDoc_STR("*float*: Enable azimuth x altitude beam shading losses [0/1]\n\n**Options:**\n0=false,1=true\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"shading_en_diff", (getter)Shading_get_shading_en_diff,(setter)Shading_set_shading_en_diff,
+	PyDoc_STR("*float*: Enable diffuse shading loss [0/1]\n\n**Options:**\n0=false,1=true\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"shading_en_mxh", (getter)Shading_get_shading_en_mxh,(setter)Shading_set_shading_en_mxh,
+	PyDoc_STR("*float*: Enable month x Hour beam shading losses [0/1]\n\n**Options:**\n0=false,1=true\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"shading_en_string_option", (getter)Shading_get_shading_en_string_option,(setter)Shading_set_shading_en_string_option,
+	PyDoc_STR("*float*: Enable shading string option [0/1]\n\n**Options:**\n0=false,1=true\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"shading_en_timestep", (getter)Shading_get_shading_en_timestep,(setter)Shading_set_shading_en_timestep,
+	PyDoc_STR("*float*: Enable timestep beam shading losses [0/1]\n\n**Options:**\n0=false,1=true\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"shading_mxh", (getter)Shading_get_shading_mxh,(setter)Shading_set_shading_mxh,
+	PyDoc_STR("*sequence[sequence]*: Month x Hour beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
+ 	NULL},
+{"shading_string_option", (getter)Shading_get_shading_string_option,(setter)Shading_set_shading_string_option,
+	PyDoc_STR("*float*: Shading string option\n\n**Options:**\n0=shadingdb,1=average,2=maximum,3=minimum\n\n**Constraints:**\nINTEGER,MIN=-1,MAX=4\n\n**Required:**\nFalse. Automatically set to -1 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"shading_timestep", (getter)Shading_get_shading_timestep,(setter)Shading_set_shading_timestep,
+	PyDoc_STR("*sequence[sequence]*: Timestep beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Shading_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Pvwattsv8.Shading",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Shading_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Shading_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * HybridCosts Group
+ */ 
+
+static PyTypeObject HybridCosts_Type;
+
+static PyObject *
+HybridCosts_new(SAM_Pvwattsv8 data_ptr)
+{
+	PyObject* new_obj = HybridCosts_Type.tp_alloc(&HybridCosts_Type,0);
+
+	VarGroupObject* HybridCosts_obj = (VarGroupObject*)new_obj;
+
+	HybridCosts_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* HybridCosts methods */
+
+static PyObject *
+HybridCosts_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Pvwattsv8", "HybridCosts")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+HybridCosts_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &HybridCosts_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvwattsv8", "HybridCosts")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+HybridCosts_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &HybridCosts_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef HybridCosts_methods[] = {
+		{"assign",            (PyCFunction)HybridCosts_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``HybridCosts_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)HybridCosts_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``HybridCosts_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)HybridCosts_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+HybridCosts_get_degradation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_HybridCosts_degradation_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_degradation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvwattsv8_HybridCosts_degradation_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_land_area(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_HybridCosts_land_area_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_land_area(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_HybridCosts_land_area_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_HybridCosts_om_capacity_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_capacity(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvwattsv8_HybridCosts_om_capacity_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_capacity_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_HybridCosts_om_capacity_escal_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_capacity_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_HybridCosts_om_capacity_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_fixed(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_HybridCosts_om_fixed_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_fixed(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvwattsv8_HybridCosts_om_fixed_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_fixed_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_HybridCosts_om_fixed_escal_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_fixed_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_HybridCosts_om_fixed_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_land_lease(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_HybridCosts_om_land_lease_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_land_lease(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvwattsv8_HybridCosts_om_land_lease_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_land_lease_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_HybridCosts_om_land_lease_escal_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_land_lease_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_HybridCosts_om_land_lease_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_production(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_HybridCosts_om_production_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_production(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvwattsv8_HybridCosts_om_production_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_production_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_HybridCosts_om_production_escal_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_production_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_HybridCosts_om_production_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_total_installed_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_HybridCosts_total_installed_cost_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_total_installed_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_HybridCosts_total_installed_cost_nset, self->data_ptr);
+}
+
+static PyGetSetDef HybridCosts_getset[] = {
+{"degradation", (getter)HybridCosts_get_degradation,(setter)HybridCosts_set_degradation,
+	PyDoc_STR("*sequence*: Annual AC degradation [%]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"land_area", (getter)HybridCosts_get_land_area,(setter)HybridCosts_set_land_area,
+	PyDoc_STR("*float*: Total land area [acres]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_capacity", (getter)HybridCosts_get_om_capacity,(setter)HybridCosts_set_om_capacity,
+	PyDoc_STR("*sequence*: Capacity-based O&M amount [$/kWcap]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_capacity_escal", (getter)HybridCosts_get_om_capacity_escal,(setter)HybridCosts_set_om_capacity_escal,
+	PyDoc_STR("*float*: Capacity-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_fixed", (getter)HybridCosts_get_om_fixed,(setter)HybridCosts_set_om_fixed,
+	PyDoc_STR("*sequence*: Fixed O&M annual amount [$/year]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_fixed_escal", (getter)HybridCosts_get_om_fixed_escal,(setter)HybridCosts_set_om_fixed_escal,
+	PyDoc_STR("*float*: Fixed O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_land_lease", (getter)HybridCosts_get_om_land_lease,(setter)HybridCosts_set_om_land_lease,
+	PyDoc_STR("*sequence*: Land lease cost [$/acre]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_land_lease_escal", (getter)HybridCosts_get_om_land_lease_escal,(setter)HybridCosts_set_om_land_lease_escal,
+	PyDoc_STR("*float*: Land lease cost escalation [%/yr]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_production", (getter)HybridCosts_get_om_production,(setter)HybridCosts_set_om_production,
+	PyDoc_STR("*sequence*: Production-based O&M amount [$/MWh]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_production_escal", (getter)HybridCosts_get_om_production_escal,(setter)HybridCosts_set_om_production_escal,
+	PyDoc_STR("*float*: Production-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"total_installed_cost", (getter)HybridCosts_get_total_installed_cost,(setter)HybridCosts_set_total_installed_cost,
+	PyDoc_STR("*float*: Total installed cost [$]\n\n**Required:**\nTrue\n\nThe value of ``total_installed_cost`` depends on the following variables:\n\n\t - dc_ac_ratio\n\t - gcr\n\t - module_type\n"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject HybridCosts_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Pvwattsv8.HybridCosts",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		HybridCosts_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		HybridCosts_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -902,11 +1431,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -923,9 +1452,27 @@ Outputs_get_ac_annual(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_ac_annual_pre_adjust(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Outputs_ac_annual_pre_adjust_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_ac_monthly(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_ac_monthly_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_ac_pre_adjust(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_ac_pre_adjust_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_alb(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_alb_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -950,6 +1497,66 @@ static PyObject *
 Outputs_get_capacity_factor(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvwattsv8_Outputs_capacity_factor_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_capacity_factor_ac(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Outputs_capacity_factor_ac_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_battery_replacement_cost_schedule(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_cf_battery_replacement_cost_schedule_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_net(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_cf_energy_net_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_fuelcell_replacement_cost_schedule(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_cf_fuelcell_replacement_cost_schedule_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_land_lease_expense(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_cf_land_lease_expense_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_cf_om_capacity_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_fixed(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_cf_om_fixed_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_fuel_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_cf_om_fuel_cost_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_land_lease(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_cf_om_land_lease_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_production(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_cf_om_production_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1004,6 +1611,12 @@ static PyObject *
 Outputs_get_gh(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_gh_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_inv_eff_output(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_inv_eff_output_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1073,6 +1686,18 @@ Outputs_get_snow(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_snow_cover(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_snow_cover_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_soiling_f(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_soiling_f_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_solrad_annual(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvwattsv8_Outputs_solrad_annual_nget, self->data_ptr);
@@ -1112,6 +1737,12 @@ static PyObject *
 Outputs_get_sunup(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_sunup_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_system_capacity_ac(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Outputs_system_capacity_ac_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1157,20 +1788,59 @@ static PyGetSetDef Outputs_getset[] = {
 {"ac_annual", (getter)Outputs_get_ac_annual,(setter)0,
 	PyDoc_STR("*float*: Annual AC output [kWh]"),
  	NULL},
+{"ac_annual_pre_adjust", (getter)Outputs_get_ac_annual_pre_adjust,(setter)0,
+	PyDoc_STR("*float*: Annual AC output before system availability [kWh]"),
+ 	NULL},
 {"ac_monthly", (getter)Outputs_get_ac_monthly,(setter)0,
-	PyDoc_STR("*sequence*: AC output [kWh]"),
+	PyDoc_STR("*sequence*: Monthly AC energy [kWh]"),
+ 	NULL},
+{"ac_pre_adjust", (getter)Outputs_get_ac_pre_adjust,(setter)0,
+	PyDoc_STR("*sequence*: AC inverter output power before system availability [W]"),
+ 	NULL},
+{"alb", (getter)Outputs_get_alb,(setter)0,
+	PyDoc_STR("*sequence*: Albedo"),
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	PyDoc_STR("*float*: Annual energy [kWh]"),
+	PyDoc_STR("*float*: Annual AC energy in Year 1 [kWh]"),
  	NULL},
 {"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
  	NULL},
 {"aoi", (getter)Outputs_get_aoi,(setter)0,
-	PyDoc_STR("*sequence*: Angle of incidence [deg]"),
+	PyDoc_STR("*sequence*: Angle of incidence [degrees]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
-	PyDoc_STR("*float*: Capacity factor [%]"),
+	PyDoc_STR("*float*: Capacity factor based on nameplate DC capacity [%]"),
+ 	NULL},
+{"capacity_factor_ac", (getter)Outputs_get_capacity_factor_ac,(setter)0,
+	PyDoc_STR("*float*: Capacity factor based on total AC capacity [%]"),
+ 	NULL},
+{"cf_battery_replacement_cost_schedule", (getter)Outputs_get_cf_battery_replacement_cost_schedule,(setter)0,
+	PyDoc_STR("*sequence*: replacement O&M costs [$]"),
+ 	NULL},
+{"cf_energy_net", (getter)Outputs_get_cf_energy_net,(setter)0,
+	PyDoc_STR("*sequence*: annual energy [kWh]"),
+ 	NULL},
+{"cf_fuelcell_replacement_cost_schedule", (getter)Outputs_get_cf_fuelcell_replacement_cost_schedule,(setter)0,
+	PyDoc_STR("*sequence*: replacement O&M costs [$]"),
+ 	NULL},
+{"cf_land_lease_expense", (getter)Outputs_get_cf_land_lease_expense,(setter)0,
+	PyDoc_STR("*sequence*: Land lease expense [$]"),
+ 	NULL},
+{"cf_om_capacity", (getter)Outputs_get_cf_om_capacity,(setter)0,
+	PyDoc_STR("*sequence*: capacity O&M costs [$]"),
+ 	NULL},
+{"cf_om_fixed", (getter)Outputs_get_cf_om_fixed,(setter)0,
+	PyDoc_STR("*sequence*: fixed O&M costs [$]"),
+ 	NULL},
+{"cf_om_fuel_cost", (getter)Outputs_get_cf_om_fuel_cost,(setter)0,
+	PyDoc_STR("*sequence*: fossil fuel O&M costs [$]"),
+ 	NULL},
+{"cf_om_land_lease", (getter)Outputs_get_cf_om_land_lease,(setter)0,
+	PyDoc_STR("*sequence*: land lease O&M costs [$]"),
+ 	NULL},
+{"cf_om_production", (getter)Outputs_get_cf_om_production,(setter)0,
+	PyDoc_STR("*sequence*: production O&M costs [$]"),
  	NULL},
 {"city", (getter)Outputs_get_city,(setter)0,
 	PyDoc_STR("*str*: City"),
@@ -1179,7 +1849,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: DC inverter input power [W]"),
  	NULL},
 {"dc_monthly", (getter)Outputs_get_dc_monthly,(setter)0,
-	PyDoc_STR("*sequence*: DC output [kWh]"),
+	PyDoc_STR("*sequence*: Monthly DC energy [kWh]"),
  	NULL},
 {"dcsnowderate", (getter)Outputs_get_dcsnowderate,(setter)0,
 	PyDoc_STR("*sequence*: DC power loss due to snow [%]"),
@@ -1199,6 +1869,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"gh", (getter)Outputs_get_gh,(setter)0,
 	PyDoc_STR("*sequence*: Weather file global horizontal irradiance [W/m2]"),
  	NULL},
+{"inv_eff_output", (getter)Outputs_get_inv_eff_output,(setter)0,
+	PyDoc_STR("*sequence*: Inverter efficiency [%]"),
+ 	NULL},
 {"inverter_efficiency", (getter)Outputs_get_inverter_efficiency,(setter)0,
 	PyDoc_STR("*float*: Inverter efficiency at rated power [%]"),
  	NULL},
@@ -1206,16 +1879,16 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Energy yield [kWh/kW]"),
  	NULL},
 {"lat", (getter)Outputs_get_lat,(setter)0,
-	PyDoc_STR("*float*: Latitude [deg]"),
+	PyDoc_STR("*float*: Latitude [degrees]"),
  	NULL},
 {"location", (getter)Outputs_get_location,(setter)0,
 	PyDoc_STR("*str*: Location ID"),
  	NULL},
 {"lon", (getter)Outputs_get_lon,(setter)0,
-	PyDoc_STR("*float*: Longitude [deg]"),
+	PyDoc_STR("*float*: Longitude [degrees]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	PyDoc_STR("*sequence*: Monthly energy [kWh]"),
+	PyDoc_STR("*sequence*: Monthly AC energy in Year 1 [kWh]"),
  	NULL},
 {"percent_complete", (getter)Outputs_get_percent_complete,(setter)0,
 	PyDoc_STR("*float*: Estimated percent of total completed simulation [%]"),
@@ -1231,6 +1904,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"snow", (getter)Outputs_get_snow,(setter)0,
 	PyDoc_STR("*sequence*: Weather file snow depth [cm]"),
+ 	NULL},
+{"snow_cover", (getter)Outputs_get_snow_cover,(setter)0,
+	PyDoc_STR("*sequence*: Fraction of row covered by snow [0..1]"),
+ 	NULL},
+{"soiling_f", (getter)Outputs_get_soiling_f,(setter)0,
+	PyDoc_STR("*sequence*: Soiling factor"),
  	NULL},
 {"solrad_annual", (getter)Outputs_get_solrad_annual,(setter)0,
 	PyDoc_STR("*float*: Daily average solar irradiance [kWh/m2/day]"),
@@ -1253,6 +1932,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"sunup", (getter)Outputs_get_sunup,(setter)0,
 	PyDoc_STR("*sequence*: Sun up over horizon [0/1]"),
  	NULL},
+{"system_capacity_ac", (getter)Outputs_get_system_capacity_ac,(setter)0,
+	PyDoc_STR("*float*: System nameplate AC rating [kWac]"),
+ 	NULL},
 {"tamb", (getter)Outputs_get_tamb,(setter)0,
 	PyDoc_STR("*sequence*: Weather file ambient temperature [C]"),
  	NULL},
@@ -1266,7 +1948,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Time offset for interpreting time series outputs [hours]"),
  	NULL},
 {"tz", (getter)Outputs_get_tz,(setter)0,
-	PyDoc_STR("*float*: Time zone [hr]"),
+	PyDoc_STR("*float*: Time zone [UTC offset]"),
  	NULL},
 {"wspd", (getter)Outputs_get_wspd,(setter)0,
 	PyDoc_STR("*sequence*: Weather file wind speed [m/s]"),
@@ -1346,6 +2028,10 @@ newPvwattsv8Object(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "SystemDesign", SystemDesign_obj);
 	Py_DECREF(SystemDesign_obj);
 
+	PyObject* Shading_obj = Shading_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Shading", Shading_obj);
+	Py_DECREF(Shading_obj);
+
 	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
@@ -1360,6 +2046,10 @@ newPvwattsv8Object(void* data_ptr)
 
 	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
 	Py_DECREF(Adjust_obj);
+
+	PyObject* HybridCosts_obj = HybridCosts_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "HybridCosts", HybridCosts_obj);
+	Py_DECREF(HybridCosts_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -1381,6 +2071,14 @@ Pvwattsv8_dealloc(CmodObject *self)
 		PySAM_has_error(error);
 	}
 	PyObject_Del(self);
+}
+
+
+static PyObject *
+Pvwattsv8_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
 }
 
 
@@ -1461,6 +2159,8 @@ static PyMethodDef Pvwattsv8_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Pvwattsv8_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Pvwattsv8_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{"Reopt_size_battery_post", (PyCFunction)Reopt_size_battery_post, METH_VARARGS | METH_KEYWORDS,
 			Reopt_size_battery_post_doc},
 		{NULL,              NULL}           /* sentinel */
@@ -1621,12 +2321,11 @@ static PyMethodDef Pvwattsv8Module_methods[] = {
 		{"new",             Pvwattsv8_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Pvwattsv8")},
 		{"default",             Pvwattsv8_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Pvwattsv8\n\nUse default attributes\n"
-				"`config` options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsAllEquityPartnershipFlip\"\n- \"PVWattsCommercial\"\n- \"PVWattsCommunitySolar\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsLCOECalculator\"\n- \"PVWattsLeveragedPartnershipFlip\"\n- \"PVWattsMerchantPlant\"\n- \"PVWattsNone\"\n- \"PVWattsResidential\"\n- \"PVWattsSaleLeaseback\"\n- \"PVWattsSingleOwner\"\n- \"PVWattsThirdParty\"")},
+				PyDoc_STR("default(config) -> Pvwattsv8\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"FuelCellCommercial\"*\n\n		- *\"FuelCellSingleOwner\"*\n\n		- *\"PVWattsBatteryCommercial\"*\n\n		- *\"PVWattsBatteryHostDeveloper\"*\n\n		- *\"PVWattsBatteryResidential\"*\n\n		- *\"PVWattsBatteryThirdParty\"*\n\n		- *\"PVWattsWindBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsAllEquityPartnershipFlip\"*\n\n		- *\"PVWattsCommercial\"*\n\n		- *\"PVWattsCommunitySolar\"*\n\n		- *\"PVWattsHostDeveloper\"*\n\n		- *\"PVWattsLCOECalculator\"*\n\n		- *\"PVWattsLeveragedPartnershipFlip\"*\n\n		- *\"PVWattsMerchantPlant\"*\n\n		- *\"PVWattsNone\"*\n\n		- *\"PVWattsResidential\"*\n\n		- *\"PVWattsSaleLeaseback\"*\n\n		- *\"PVWattsSingleOwner\"*\n\n		- *\"PVWattsThirdParty\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Pvwattsv8_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Pvwattsv8\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Pvwattsv8\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Pvwattsv8_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Pvwattsv8\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Pvwattsv8\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1644,25 +2343,6 @@ Pvwattsv8Module_exec(PyObject *m)
 
 	Pvwattsv8_Type.tp_dict = PyDict_New();
 	if (!Pvwattsv8_Type.tp_dict) { goto fail; }
-
-	/// Add the AdjustmentFactors type object to Pvwattsv8_Type
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-	if (!AdjustmentFactorsModule){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
-	}
-
-	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
-	if (!AdjustmentFactors_Type){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
-	}
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Pvwattsv8_Type.tp_dict,
-						 "AdjustmentFactors",
-						 (PyObject*)AdjustmentFactors_Type);
-	Py_DECREF(&AdjustmentFactors_Type);
-	Py_XDECREF(AdjustmentFactors_Type);
 
 	/// Add the SolarResource type object to Pvwattsv8_Type
 	if (PyType_Ready(&SolarResource_Type) < 0) { goto fail; }
@@ -1684,6 +2364,20 @@ Pvwattsv8Module_exec(PyObject *m)
 				"SystemDesign",
 				(PyObject*)&SystemDesign_Type);
 	Py_DECREF(&SystemDesign_Type);
+
+	/// Add the Shading type object to Pvwattsv8_Type
+	if (PyType_Ready(&Shading_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Pvwattsv8_Type.tp_dict,
+				"Shading",
+				(PyObject*)&Shading_Type);
+	Py_DECREF(&Shading_Type);
+
+	/// Add the HybridCosts type object to Pvwattsv8_Type
+	if (PyType_Ready(&HybridCosts_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Pvwattsv8_Type.tp_dict,
+				"HybridCosts",
+				(PyObject*)&HybridCosts_Type);
+	Py_DECREF(&HybridCosts_Type);
 
 	/// Add the Outputs type object to Pvwattsv8_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

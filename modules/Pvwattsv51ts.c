@@ -69,11 +69,11 @@ PVWatts_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef PVWatts_methods[] = {
 		{"assign",            (PyCFunction)PVWatts_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``PVWatts_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``PVWatts_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)PVWatts_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``PVWatts_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``PVWatts_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)PVWatts_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -307,61 +307,61 @@ PVWatts_set_year(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef PVWatts_getset[] = {
 {"alb", (getter)PVWatts_get_alb,(setter)PVWatts_set_alb,
-	PyDoc_STR("*float*: Albedo [frac]\n\n*Required*: If not provided, assumed to be 0.2"),
+	PyDoc_STR("*float*: Albedo [frac]\n\n**Required:**\nFalse. Automatically set to 0.2 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"beam", (getter)PVWatts_get_beam,(setter)PVWatts_set_beam,
-	PyDoc_STR("*float*: Beam normal irradiance [W/m2]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Beam normal irradiance [W/m2]\n\n**Required:**\nTrue"),
  	NULL},
 {"day", (getter)PVWatts_get_day,(setter)PVWatts_set_day,
-	PyDoc_STR("*float*: Day [dy]\n\n*Info*: 1-days in month\n\n*Required*: True"),
+	PyDoc_STR("*float*: Day [dy]\n\n**Info:**\n1-days in month\n\n**Required:**\nTrue"),
  	NULL},
 {"diffuse", (getter)PVWatts_get_diffuse,(setter)PVWatts_set_diffuse,
-	PyDoc_STR("*float*: Diffuse irradiance [W/m2]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Diffuse irradiance [W/m2]\n\n**Required:**\nTrue"),
  	NULL},
 {"elevation", (getter)PVWatts_get_elevation,(setter)PVWatts_set_elevation,
-	PyDoc_STR("*float*: Elevation [m]\n\n*Required*: False"),
+	PyDoc_STR("*float*: Elevation [m]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"hour", (getter)PVWatts_get_hour,(setter)PVWatts_set_hour,
-	PyDoc_STR("*float*: Hour [hr]\n\n*Info*: 0-23\n\n*Required*: True"),
+	PyDoc_STR("*float*: Hour [hr]\n\n**Info:**\n0-23\n\n**Required:**\nTrue"),
  	NULL},
 {"lat", (getter)PVWatts_get_lat,(setter)PVWatts_set_lat,
-	PyDoc_STR("*float*: Latitude [deg]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Latitude [deg]\n\n**Required:**\nTrue"),
  	NULL},
 {"lon", (getter)PVWatts_get_lon,(setter)PVWatts_set_lon,
-	PyDoc_STR("*float*: Longitude [deg]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Longitude [deg]\n\n**Required:**\nTrue"),
  	NULL},
 {"minute", (getter)PVWatts_get_minute,(setter)PVWatts_set_minute,
-	PyDoc_STR("*float*: Minute [min]\n\n*Info*: 0-59\n\n*Required*: True"),
+	PyDoc_STR("*float*: Minute [min]\n\n**Info:**\n0-59\n\n**Required:**\nTrue"),
  	NULL},
 {"month", (getter)PVWatts_get_month,(setter)PVWatts_set_month,
-	PyDoc_STR("*float*: Month [mn]\n\n*Info*: 1-12\n\n*Required*: True"),
+	PyDoc_STR("*float*: Month [mn]\n\n**Info:**\n1-12\n\n**Required:**\nTrue"),
  	NULL},
 {"poa", (getter)PVWatts_get_poa,(setter)PVWatts_set_poa,
-	PyDoc_STR("*float*: Plane of array irradiance [W/m2]\n\n*Info*: Output from last time step may be used as input"),
+	PyDoc_STR("*float*: Plane of array irradiance [W/m2]\n\n**Info:**\nOutput from last time step may be used as input\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"pressure", (getter)PVWatts_get_pressure,(setter)PVWatts_set_pressure,
-	PyDoc_STR("*float*: Pressure [mbars]\n\n*Required*: False"),
+	PyDoc_STR("*float*: Pressure [mbars]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"shaded_percent", (getter)PVWatts_get_shaded_percent,(setter)PVWatts_set_shaded_percent,
-	PyDoc_STR("*float*: Percent of panels that are shaded [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Percent of panels that are shaded [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"tamb", (getter)PVWatts_get_tamb,(setter)PVWatts_set_tamb,
-	PyDoc_STR("*float*: Ambient temperature (dry bulb temperature) [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Ambient temperature (dry bulb temperature) [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"tcell", (getter)PVWatts_get_tcell,(setter)PVWatts_set_tcell,
-	PyDoc_STR("*float*: Module temperature [C]\n\n*Info*: Output from last time step may be used as input"),
+	PyDoc_STR("*float*: Module temperature [C]\n\n**Info:**\nOutput from last time step may be used as input\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"time_step", (getter)PVWatts_get_time_step,(setter)PVWatts_set_time_step,
-	PyDoc_STR("*float*: Time step of input data [hr]\n\n*Constraints*: POSITIVE\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Time step of input data [hr]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"tz", (getter)PVWatts_get_tz,(setter)PVWatts_set_tz,
-	PyDoc_STR("*float*: Time zone [hr]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Time zone [hr]\n\n**Required:**\nTrue"),
  	NULL},
 {"wspd", (getter)PVWatts_get_wspd,(setter)PVWatts_set_wspd,
-	PyDoc_STR("*float*: Wind speed [m/s]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Wind speed [m/s]\n\n**Required:**\nTrue"),
  	NULL},
 {"year", (getter)PVWatts_get_year,(setter)PVWatts_set_year,
-	PyDoc_STR("*float*: Year [yr]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Year [yr]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -476,11 +476,11 @@ SystemDesign_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemDesign_methods[] = {
 		{"assign",            (PyCFunction)SystemDesign_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SystemDesign_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SystemDesign_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SystemDesign_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemDesign_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -594,31 +594,31 @@ SystemDesign_set_tilt(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef SystemDesign_getset[] = {
 {"array_type", (getter)SystemDesign_get_array_type,(setter)SystemDesign_set_array_type,
-	PyDoc_STR("*float*: Array type [0/1/2/3/4]\n\n*Info*: Fixed OR,Fixed Roof,1Axis,Backtracked,2Axis\n\n*Constraints*: MIN=0,MAX=4,INTEGER\n\n*Required*: True"),
+	PyDoc_STR("*float*: Array type [0/1/2/3/4]\n\n**Info:**\nFixed OR,Fixed Roof,1Axis,Backtracked,2Axis\n\n**Constraints:**\nMIN=0,MAX=4,INTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"azimuth", (getter)SystemDesign_get_azimuth,(setter)SystemDesign_set_azimuth,
-	PyDoc_STR("*float*: Azimuth angle [deg]\n\n*Options*: E=90,S=180,W=270\n\n*Constraints*: MIN=0,MAX=360\n\n*Required*: array_type<4"),
+	PyDoc_STR("*float*: Azimuth angle [deg]\n\n**Options:**\nE=90,S=180,W=270\n\n**Constraints:**\nMIN=0,MAX=360\n\n**Required:**\narray_type<4"),
  	NULL},
 {"dc_ac_ratio", (getter)SystemDesign_get_dc_ac_ratio,(setter)SystemDesign_set_dc_ac_ratio,
-	PyDoc_STR("*float*: DC to AC ratio [ratio]\n\n*Constraints*: POSITIVE\n\n*Required*: If not provided, assumed to be 1.1"),
+	PyDoc_STR("*float*: DC to AC ratio [ratio]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nFalse. Automatically set to 1.1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"gcr", (getter)SystemDesign_get_gcr,(setter)SystemDesign_set_gcr,
-	PyDoc_STR("*float*: Ground coverage ratio [0..1]\n\n*Constraints*: MIN=0.01,MAX=0.99\n\n*Required*: If not provided, assumed to be 0.4"),
+	PyDoc_STR("*float*: Ground coverage ratio [0..1]\n\n**Constraints:**\nMIN=0.01,MAX=0.99\n\n**Required:**\nFalse. Automatically set to 0.4 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"inv_eff", (getter)SystemDesign_get_inv_eff,(setter)SystemDesign_set_inv_eff,
-	PyDoc_STR("*float*: Inverter efficiency at rated power [%]\n\n*Constraints*: MIN=90,MAX=99.5\n\n*Required*: If not provided, assumed to be 96"),
+	PyDoc_STR("*float*: Inverter efficiency at rated power [%]\n\n**Constraints:**\nMIN=90,MAX=99.5\n\n**Required:**\nFalse. Automatically set to 96 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"losses", (getter)SystemDesign_get_losses,(setter)SystemDesign_set_losses,
-	PyDoc_STR("*float*: System losses [%]\n\n*Info*: Total system losses\n\n*Constraints*: MIN=-5,MAX=99\n\n*Required*: True"),
+	PyDoc_STR("*float*: System losses [%]\n\n**Info:**\nTotal system losses\n\n**Constraints:**\nMIN=-5,MAX=99\n\n**Required:**\nTrue"),
  	NULL},
 {"module_type", (getter)SystemDesign_get_module_type,(setter)SystemDesign_set_module_type,
-	PyDoc_STR("*float*: Module type [0/1/2]\n\n*Info*: Standard,Premium,Thin film\n\n*Constraints*: MIN=0,MAX=2,INTEGER\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Module type [0/1/2]\n\n**Info:**\nStandard,Premium,Thin film\n\n**Constraints:**\nMIN=0,MAX=2,INTEGER\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"system_capacity", (getter)SystemDesign_get_system_capacity,(setter)SystemDesign_set_system_capacity,
-	PyDoc_STR("*float*: System size (DC nameplate) [kW]\n\n*Required*: True"),
+	PyDoc_STR("*float*: System size (DC nameplate) [kW]\n\n**Required:**\nTrue"),
  	NULL},
 {"tilt", (getter)SystemDesign_get_tilt,(setter)SystemDesign_set_tilt,
-	PyDoc_STR("*float*: Tilt angle [deg]\n\n*Options*: H=0,V=90\n\n*Constraints*: MIN=0,MAX=90\n\n*Required*: array_type<4"),
+	PyDoc_STR("*float*: Tilt angle [deg]\n\n**Options:**\nH=0,V=90\n\n**Constraints:**\nMIN=0,MAX=90\n\n**Required:**\narray_type<4"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -733,11 +733,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -855,6 +855,14 @@ Pvwattsv51ts_dealloc(CmodObject *self)
 
 
 static PyObject *
+Pvwattsv51ts_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Pvwattsv51ts_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -931,6 +939,8 @@ static PyMethodDef Pvwattsv51ts_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Pvwattsv51ts_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Pvwattsv51ts_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1089,12 +1099,11 @@ static PyMethodDef Pvwattsv51tsModule_methods[] = {
 		{"new",             Pvwattsv51ts_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Pvwattsv51ts")},
 		{"default",             Pvwattsv51ts_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Pvwattsv51ts\n\nUse default attributes\n"
-				"None")},
+				PyDoc_STR("default(config) -> Pvwattsv51ts\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Pvwattsv51ts_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Pvwattsv51ts\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Pvwattsv51ts\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Pvwattsv51ts_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Pvwattsv51ts\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Pvwattsv51ts\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

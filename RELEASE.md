@@ -1,5 +1,47 @@
 # Release Notes
 
+## Version 6.0.0, Dec 12, 2024 - SAM 2024.12.12, SSC Version 298
+* [SAM Release updates for Version 2024.12.12](https://nrel.github.io/SAM/doc/releasenotes.html)
+* GenericSystem renamed to CustomGeneration
+* Fix attribute error when using "value" on non-existing attribute (#178)
+* Added Python 3.13 support
+
+## Version 5.1.0, Mar 13, 2024 - SAM 2023.12.17, Revision 1, SSC Version 290
+* [SAM Release updates for Version 2023.12.17 Revision 1](https://nrel.github.io/SAM/doc/releasenotes.html)
+* Enable Hybrids in PySAM (#162)
+
+## Version 5.0.0, Dec 13, 2023 - SAM 2023.12.17, SSC Version 288
+* [SAM Release updates for Version 2023.12.17](https://nrel.github.io/SAM/doc/releasenotes.html)
+* Fix AdjustmentFactors (#158)
+* Fix Non-annual Pvwatts simulations (#159)
+
+## Version 4.2.0, June 30, 2023 - SAM 2022.11.21, Revision 3, SSC Version 280
+* [SAM Release updates for Version 2022.11.21 Revision 3](https://nrel.github.io/SAM/doc/releasenotes.html)
+* Fix support for arm64 and aarch64 (#143, #144)
+* Fix URDB v8 function (#145)
+* Windpower module example (#148)
+* Battery functions for reopt sizing (#149)
+
+## Version 4.1.0, Feb 24, 2023 - SAM 2022.11.21, Revision 2, SSC Version 279
+* [SAM Release updates for Version 2022.11.21 Revision 2](https://nrel.github.io/SAM/doc/releasenotes.html)
+* Updated Documentation for INOUT variables (#141)
+* Added tolerance for Battery sizing tool (#140)
+* Add Python 3.11 support
+
+## Version 4.0.0, Dec 10, 2022 - SAM 2022.11.21, Revision 1, SSC Version 278
+* [SAM Release updates for Version 2022.11.21 Revision 1](https://nrel.github.io/SAM/doc/releasenotes.html)
+* Added LoadTools, URDBv8 support and utility rate fixes (#126, 128)
+* License update (#127)
+* PySSC modifications for arrays (#125)
+
+## Version 3.0.2, Sep 27, 2022 - SAM 2021.12.02, Revision 2, SSC Version 274
+* [SAM Release updates for Version 2021.12.02 Revision 2](https://nrel.github.io/SAM/doc/releasenotes.html)
+* Added support for Apple Silicon (#108)
+
+## Version 3.0.1, Mar 4, 2022 - SAM 2021.12.02, Revision 1, SSC Version 268
+* [SAM Release updates for Version 2021.12.02 Revision 1](https://nrel.github.io/SAM/doc/releasenotes.html)
+* Moved all stub files from NREL-PySAM-stubs package into NREL-PySAM (#109)
+
 ## Version 3.0.0, Dec 23, 2021 ~ SAM 2021.12.02, SSC Version 267
 * __Warning: Significant changes to Battery and UtilityRate5 Modules, including redefinition of some variables.__
  Please see [SSC Release Notes](https://nrel.github.io/ssc/doc/releasenotes.html) for description of functionality and
@@ -10,7 +52,7 @@
 * Fix URDBv7_to_ElectricityRates error for certain demand structures (#99)
 * Add Python 3.10 Support (#104)
 * New Example for Selecting Modules and Inverter from the SAM Library (#103)
-* [SAM Release updates for Version 2020.12.02](https://nrel.github.io/SAM/doc/releasenotes.html)
+* [SAM Release updates for Version 2021.12.02](https://nrel.github.io/SAM/doc/releasenotes.html)
 
 ## Version 2.2.4, Aug 20, 2021 ~ SAM 2020.11.29, Revision 2, SSC Version 259
 * Fix bug in Battery LMO/LTO life model

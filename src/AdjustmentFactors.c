@@ -61,131 +61,300 @@ static PyMethodDef AdjustmentFactors_methods[] = {
 };
 
 static PyObject *
-AdjustmentFactors_get_constant(AdjustmentFactorsObject *self, void *closure)
+AdjustmentFactors_get_adjust_constant(AdjustmentFactorsObject *self, void *closure)
 {
     return PySAM_double_getter(SAM_AdjustmentFactors_adjust_constant_nget, self->data_ptr);
 }
 
 static int
-AdjustmentFactors_set_constant(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+AdjustmentFactors_set_adjust_constant(AdjustmentFactorsObject *self, PyObject *value, void *closure)
 {
     return PySAM_double_setter(value, SAM_AdjustmentFactors_adjust_constant_nset, self->data_ptr);
 }
 
 static PyObject *
-AdjustmentFactors_get_hourly(AdjustmentFactorsObject *self, void *closure)
+AdjustmentFactors_get_adjust_en_hourly(AdjustmentFactorsObject *self, void *closure)
+{
+    return PySAM_double_getter(SAM_AdjustmentFactors_adjust_en_hourly_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_en_hourly(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+{
+    return PySAM_double_setter(value, SAM_AdjustmentFactors_adjust_en_hourly_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_en_periods(AdjustmentFactorsObject *self, void *closure)
+{
+    return PySAM_double_getter(SAM_AdjustmentFactors_adjust_en_periods_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_en_periods(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+{
+    return PySAM_double_setter(value, SAM_AdjustmentFactors_adjust_en_periods_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_en_timeindex(AdjustmentFactorsObject *self, void *closure)
+{
+    return PySAM_double_getter(SAM_AdjustmentFactors_adjust_en_timeindex_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_en_timeindex(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+{
+    return PySAM_double_setter(value, SAM_AdjustmentFactors_adjust_en_timeindex_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_hourly(AdjustmentFactorsObject *self, void *closure)
 {
     return PySAM_array_getter(SAM_AdjustmentFactors_adjust_hourly_aget, self->data_ptr);
 }
 
 static int
-AdjustmentFactors_set_hourly(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+AdjustmentFactors_set_adjust_hourly(AdjustmentFactorsObject *self, PyObject *value, void *closure)
 {
     return PySAM_array_setter(value, SAM_AdjustmentFactors_adjust_hourly_aset, self->data_ptr);
 }
 
 static PyObject *
-AdjustmentFactors_get_periods(AdjustmentFactorsObject *self, void *closure)
+AdjustmentFactors_get_adjust_periods(AdjustmentFactorsObject *self, void *closure)
 {
     return PySAM_matrix_getter(SAM_AdjustmentFactors_adjust_periods_mget, self->data_ptr);
 }
 
 static int
-AdjustmentFactors_set_periods(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+AdjustmentFactors_set_adjust_periods(AdjustmentFactorsObject *self, PyObject *value, void *closure)
 {
     return PySAM_matrix_setter(value, SAM_AdjustmentFactors_adjust_periods_mset, self->data_ptr);
 }
 
 static PyObject *
-AdjustmentFactors_get_dc_constant(AdjustmentFactorsObject *self, void *closure)
+AdjustmentFactors_get_adjust_timeindex(AdjustmentFactorsObject *self, void *closure)
+{
+    return PySAM_array_getter(SAM_AdjustmentFactors_adjust_timeindex_aget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_timeindex(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+{
+    return PySAM_array_setter(value, SAM_AdjustmentFactors_adjust_timeindex_aset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_dc_adjust_constant(AdjustmentFactorsObject *self, void *closure)
 {
     return PySAM_double_getter(SAM_AdjustmentFactors_dc_adjust_constant_nget, self->data_ptr);
 }
 
 static int
-AdjustmentFactors_set_dc_constant(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+AdjustmentFactors_set_dc_adjust_constant(AdjustmentFactorsObject *self, PyObject *value, void *closure)
 {
     return PySAM_double_setter(value, SAM_AdjustmentFactors_dc_adjust_constant_nset, self->data_ptr);
 }
 
 static PyObject *
-AdjustmentFactors_get_dc_hourly(AdjustmentFactorsObject *self, void *closure)
+AdjustmentFactors_get_dc_adjust_en_hourly(AdjustmentFactorsObject *self, void *closure)
+{
+    return PySAM_double_getter(SAM_AdjustmentFactors_dc_adjust_en_hourly_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_dc_adjust_en_hourly(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+{
+    return PySAM_double_setter(value, SAM_AdjustmentFactors_dc_adjust_en_hourly_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_dc_adjust_en_periods(AdjustmentFactorsObject *self, void *closure)
+{
+    return PySAM_double_getter(SAM_AdjustmentFactors_dc_adjust_en_periods_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_dc_adjust_en_periods(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+{
+    return PySAM_double_setter(value, SAM_AdjustmentFactors_dc_adjust_en_periods_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_dc_adjust_en_timeindex(AdjustmentFactorsObject *self, void *closure)
+{
+    return PySAM_double_getter(SAM_AdjustmentFactors_dc_adjust_en_timeindex_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_dc_adjust_en_timeindex(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+{
+    return PySAM_double_setter(value, SAM_AdjustmentFactors_dc_adjust_en_timeindex_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_dc_adjust_hourly(AdjustmentFactorsObject *self, void *closure)
 {
     return PySAM_array_getter(SAM_AdjustmentFactors_dc_adjust_hourly_aget, self->data_ptr);
 }
 
 static int
-AdjustmentFactors_set_dc_hourly(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+AdjustmentFactors_set_dc_adjust_hourly(AdjustmentFactorsObject *self, PyObject *value, void *closure)
 {
     return PySAM_array_setter(value, SAM_AdjustmentFactors_dc_adjust_hourly_aset, self->data_ptr);
 }
 
 static PyObject *
-AdjustmentFactors_get_dc_periods(AdjustmentFactorsObject *self, void *closure)
+AdjustmentFactors_get_dc_adjust_periods(AdjustmentFactorsObject *self, void *closure)
 {
     return PySAM_matrix_getter(SAM_AdjustmentFactors_dc_adjust_periods_mget, self->data_ptr);
 }
 
 static int
-AdjustmentFactors_set_dc_periods(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+AdjustmentFactors_set_dc_adjust_periods(AdjustmentFactorsObject *self, PyObject *value, void *closure)
 {
     return PySAM_matrix_setter(value, SAM_AdjustmentFactors_dc_adjust_periods_mset, self->data_ptr);
 }
+
 static PyObject *
-AdjustmentFactors_get_sf_constant(AdjustmentFactorsObject *self, void *closure)
+AdjustmentFactors_get_dc_adjust_timeindex(AdjustmentFactorsObject *self, void *closure)
+{
+    return PySAM_array_getter(SAM_AdjustmentFactors_dc_adjust_timeindex_aget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_dc_adjust_timeindex(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+{
+    return PySAM_array_setter(value, SAM_AdjustmentFactors_dc_adjust_timeindex_aset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_sf_adjust_constant(AdjustmentFactorsObject *self, void *closure)
 {
     return PySAM_double_getter(SAM_AdjustmentFactors_sf_adjust_constant_nget, self->data_ptr);
 }
 
 static int
-AdjustmentFactors_set_sf_constant(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+AdjustmentFactors_set_sf_adjust_constant(AdjustmentFactorsObject *self, PyObject *value, void *closure)
 {
     return PySAM_double_setter(value, SAM_AdjustmentFactors_sf_adjust_constant_nset, self->data_ptr);
 }
 
 static PyObject *
-AdjustmentFactors_get_sf_hourly(AdjustmentFactorsObject *self, void *closure)
+AdjustmentFactors_get_sf_adjust_en_hourly(AdjustmentFactorsObject *self, void *closure)
+{
+    return PySAM_double_getter(SAM_AdjustmentFactors_sf_adjust_en_hourly_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_sf_adjust_en_hourly(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+{
+    return PySAM_double_setter(value, SAM_AdjustmentFactors_sf_adjust_en_hourly_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_sf_adjust_en_periods(AdjustmentFactorsObject *self, void *closure)
+{
+    return PySAM_double_getter(SAM_AdjustmentFactors_sf_adjust_en_periods_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_sf_adjust_en_periods(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+{
+    return PySAM_double_setter(value, SAM_AdjustmentFactors_sf_adjust_en_periods_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_sf_adjust_en_timeindex(AdjustmentFactorsObject *self, void *closure)
+{
+    return PySAM_double_getter(SAM_AdjustmentFactors_sf_adjust_en_timeindex_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_sf_adjust_en_timeindex(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+{
+    return PySAM_double_setter(value, SAM_AdjustmentFactors_sf_adjust_en_timeindex_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_sf_adjust_hourly(AdjustmentFactorsObject *self, void *closure)
 {
     return PySAM_array_getter(SAM_AdjustmentFactors_sf_adjust_hourly_aget, self->data_ptr);
 }
 
 static int
-AdjustmentFactors_set_sf_hourly(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+AdjustmentFactors_set_sf_adjust_hourly(AdjustmentFactorsObject *self, PyObject *value, void *closure)
 {
     return PySAM_array_setter(value, SAM_AdjustmentFactors_sf_adjust_hourly_aset, self->data_ptr);
 }
 
 static PyObject *
-AdjustmentFactors_get_sf_periods(AdjustmentFactorsObject *self, void *closure)
+AdjustmentFactors_get_sf_adjust_periods(AdjustmentFactorsObject *self, void *closure)
 {
     return PySAM_matrix_getter(SAM_AdjustmentFactors_sf_adjust_periods_mget, self->data_ptr);
 }
 
 static int
-AdjustmentFactors_set_sf_periods(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+AdjustmentFactors_set_sf_adjust_periods(AdjustmentFactorsObject *self, PyObject *value, void *closure)
 {
     return PySAM_matrix_setter(value, SAM_AdjustmentFactors_sf_adjust_periods_mset, self->data_ptr);
 }
 
+static PyObject *
+AdjustmentFactors_get_sf_adjust_timeindex(AdjustmentFactorsObject *self, void *closure)
+{
+    return PySAM_array_getter(SAM_AdjustmentFactors_sf_adjust_timeindex_aget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_sf_adjust_timeindex(AdjustmentFactorsObject *self, PyObject *value, void *closure)
+{
+    return PySAM_array_setter(value, SAM_AdjustmentFactors_sf_adjust_timeindex_aset, self->data_ptr);
+}
+
 static PyGetSetDef AdjustmentFactors_getset[] = {
-        {"constant", (getter)AdjustmentFactors_get_constant, (setter)AdjustmentFactors_set_constant,
-                "type: float", NULL},
-        {"hourly", (getter)AdjustmentFactors_get_hourly, (setter)AdjustmentFactors_set_hourly,
+        {"adjust_constant", (getter)AdjustmentFactors_get_adjust_constant, (setter)AdjustmentFactors_set_adjust_constant,
+                "AC Constant loss adjustment [%]", NULL},
+        {"adjust_en_hourly", (getter)AdjustmentFactors_get_adjust_en_hourly, (setter)AdjustmentFactors_set_adjust_en_hourly,
+                "Enable AC hourly-based adjustment factors [0/1]", NULL},
+        {"adjust_en_periods", (getter)AdjustmentFactors_get_adjust_en_periods, (setter)AdjustmentFactors_set_adjust_en_periods,
+                "Enable AC period-based adjustment factors [0/1]", NULL},
+        {"adjust_en_timeindex", (getter)AdjustmentFactors_get_adjust_en_timeindex, (setter)AdjustmentFactors_set_adjust_en_timeindex,
+                "Enable AC lfetime adjustment factors [0/1]", NULL},
+        {"adjust_hourly", (getter)AdjustmentFactors_get_adjust_hourly, (setter)AdjustmentFactors_set_adjust_hourly,
                 "AC Hourly Adjustment Factors [%]", NULL},
-        {"periods", (getter)AdjustmentFactors_get_periods, (setter)AdjustmentFactors_set_periods,
+        {"adjust_periods", (getter)AdjustmentFactors_get_adjust_periods, (setter)AdjustmentFactors_set_adjust_periods,
                 "AC Period-based Adjustment Factors [%]", NULL},
-        {"dc_constant", (getter)AdjustmentFactors_get_dc_constant, (setter)AdjustmentFactors_set_dc_constant,
+        {"adjust_timeindex", (getter)AdjustmentFactors_get_adjust_timeindex, (setter)AdjustmentFactors_set_adjust_timeindex,
+                "AC Lifetime Adjustment Factors [%]", NULL},
+        {"dc_adjust_constant", (getter)AdjustmentFactors_get_dc_adjust_constant, (setter)AdjustmentFactors_set_dc_adjust_constant,
                 "DC Constant loss adjustment [%]", NULL},
-        {"dc_hourly", (getter)AdjustmentFactors_get_dc_hourly, (setter)AdjustmentFactors_set_dc_hourly,
+        {"dc_adjust_en_hourly", (getter)AdjustmentFactors_get_dc_adjust_en_hourly, (setter)AdjustmentFactors_set_dc_adjust_en_hourly,
+                "Enable DC hourly-based adjustment factors [0/1]", NULL},
+        {"dc_adjust_en_periods", (getter)AdjustmentFactors_get_dc_adjust_en_periods, (setter)AdjustmentFactors_set_dc_adjust_en_periods,
+                "Enable DC period-based adjustment factors [0/1]", NULL},
+        {"dc_adjust_en_timeindex", (getter)AdjustmentFactors_get_dc_adjust_en_timeindex, (setter)AdjustmentFactors_set_dc_adjust_en_timeindex,
+                "Enable DC lfetime adjustment factors [0/1]", NULL},
+        {"dc_adjust_hourly", (getter)AdjustmentFactors_get_dc_adjust_hourly, (setter)AdjustmentFactors_set_dc_adjust_hourly,
                 "DC Hourly Adjustment Factors [%]", NULL},
-        {"dc_periods", (getter)AdjustmentFactors_get_dc_periods, (setter)AdjustmentFactors_set_dc_periods,
+        {"dc_adjust_periods", (getter)AdjustmentFactors_get_dc_adjust_periods, (setter)AdjustmentFactors_set_dc_adjust_periods,
                 "DC Period-based Adjustment Factors [%]", NULL},
-        {"sf_constant", (getter)AdjustmentFactors_get_sf_constant, (setter)AdjustmentFactors_set_sf_constant,
+        {"dc_adjust_timeindex", (getter)AdjustmentFactors_get_dc_adjust_timeindex, (setter)AdjustmentFactors_set_dc_adjust_timeindex,
+                "DC Lifetime Adjustment Factors [%]", NULL},
+        {"sf_adjust_constant", (getter)AdjustmentFactors_get_sf_adjust_constant, (setter)AdjustmentFactors_set_sf_adjust_constant,
                 "DC Constant loss adjustment [%]", NULL},
-        {"sf_hourly", (getter)AdjustmentFactors_get_sf_hourly, (setter)AdjustmentFactors_set_sf_hourly,
-                "DC Hourly Adjustment Factors [%]", NULL},
-        {"sf_periods", (getter)AdjustmentFactors_get_sf_periods, (setter)AdjustmentFactors_set_sf_periods,
-                "DC Period-based Adjustment Factors [%]", NULL},
+        {"sf_adjust_en_hourly", (getter)AdjustmentFactors_get_sf_adjust_en_hourly, (setter)AdjustmentFactors_set_sf_adjust_en_hourly,
+                "Enable SF hourly-based adjustment factors [0/1]", NULL},
+        {"sf_adjust_en_periods", (getter)AdjustmentFactors_get_sf_adjust_en_periods, (setter)AdjustmentFactors_set_sf_adjust_en_periods,
+                "Enable SF period-based adjustment factors [0/1]", NULL},
+        {"sf_adjust_en_timeindex", (getter)AdjustmentFactors_get_sf_adjust_en_timeindex, (setter)AdjustmentFactors_set_sf_adjust_en_timeindex,
+                "Enable SF lfetime adjustment factors [0/1]", NULL},
+        {"sf_adjust_hourly", (getter)AdjustmentFactors_get_sf_adjust_hourly, (setter)AdjustmentFactors_set_sf_adjust_hourly,
+                "SF Hourly Adjustment Factors [%]", NULL},
+        {"sf_adjust_periods", (getter)AdjustmentFactors_get_sf_adjust_periods, (setter)AdjustmentFactors_set_sf_adjust_periods,
+                "SF Period-based Adjustment Factors [%]", NULL},
+        {"sf_adjust_timeindex", (getter)AdjustmentFactors_get_sf_adjust_timeindex, (setter)AdjustmentFactors_set_sf_adjust_timeindex,
+                "SF Lifetime Adjustment Factors [%]", NULL},
         {NULL}  /* Sentinel */
 };
 

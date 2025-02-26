@@ -10,12 +10,12 @@ https://nrel-pysam.readthedocs.io
 
 
 ## Requirements
-1. Python 3.5+, 64 bit
+1. Python 3.8 - 3.13, 64 bit
 2. Operating system:
 	- MacOSX 10.7+
 	- Most Linux
 	- Windows 7, x64
-3. CMake 2.8
+3. CMake 3.20+
 
 
 ## Installing
@@ -24,15 +24,14 @@ https://nrel-pysam.readthedocs.io
 	pip install nrel-pysam
 	```
 
-2. Anaconda (<1.2.1 only):
+2. Anaconda (Versions > 1.2.1, < 6.0.0 only):
 	```
-	conda install -c nrel nrel-pysam nrel-pysam-stubs
+	conda install -c nrel nrel-pysam
 	```
 
 May not be compatible with different builds of the CPython reference interpreter, and not with alternative interpreters such as PyPy, IronPython or Jython
 
 ## Usage Examples
-- [Importing a SAM case](https://nrel-pysam.readthedocs.io/en/latest/Import.html)
 - [Examples](https://github.com/NREL/pysam/blob/master/Examples)
 
 

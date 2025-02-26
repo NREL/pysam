@@ -1,0 +1,1790 @@
+.. 5.0.0:
+
+Version 5.0.0
+===============================================
+
+This page compares the PySAM Modules' input variables and the defaults for these input variables 
+between the current release and the last release.
+
+This helps track which variables and defaults have changed between releases to make it easier to notify users during version upgrade.
+
+Below are lists for each PySAM Module:
+    1. New Default configurations
+    2. Removed Default configurations
+    3. Modified Variables: New variables, Removed variables and Type-changed variables
+    4. Modified Default Values
+
+Battery
+************************************************
+
+:doc:`../modules/Battery` New Default files:
+
+     - GenericPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - GenericPVWattsWindFuelCellBatteryHybridSingleOwner
+     - PVWattsWindBatteryHybridHostDeveloper
+     - PVWattsWindBatteryHybridSingleOwner
+     - PVWattsWindFuelCellBatteryHybridHostDeveloper
+     - PVWattsWindFuelCellBatteryHybridSingleOwner
+     - PhotovoltaicWindBatteryHybridHostDeveloper
+     - PhotovoltaicWindBatteryHybridSingleOwner
+
+:doc:`../modules/Battery` Modified Default Values:
+
+     - Cashloan_PVBatteryCommercial
+
+        ['total_installed_cost', 'loan_rate', 'system_capacity', 'om_capacity', 'om_batt_capacity_cost', 'battery_total_cost_lcos']
+
+     - Equpartflip_GenericBatteryAllEquityPartnershipFlip
+
+        ['total_installed_cost', 'battery_per_kWh', 'om_batt_capacity_cost', 'reserves_interest', 'construction_financing_cost', 'om_batt_replacement_cost', 'battery_total_cost_lcos']
+
+     - Battery_StandaloneBatteryResidential
+
+        ['om_batt_replacement_cost']
+
+     - Cashloan_StandaloneBatteryCommercial
+
+        ['total_installed_cost', 'loan_rate', 'battery_per_kWh', 'om_batt_replacement_cost', 'battery_total_cost_lcos']
+
+     - Pvsamv1_PVBatteryResidential
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'snl_ixo', 'snl_c2', 'snl_c7', 'inv_snl_c1', 'snl_ixxo', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco']
+
+     - HostDeveloper_GenericBatteryHostDeveloper
+
+        ['term_int_rate', 'cost_debt_closing', 'om_batt_capacity_cost', 'reserves_interest', 'construction_financing_cost']
+
+     - Battery_GenericBatteryAllEquityPartnershipFlip
+
+        ['om_batt_replacement_cost']
+
+     - Levpartflip_PVBatteryLeveragedPartnershipFlip
+
+        ['term_int_rate', 'total_installed_cost', 'battery_per_kWh', 'system_capacity', 'cost_debt_closing', 'om_batt_capacity_cost', 'reserves_interest', 'construction_financing_cost', 'ppa_price_input', 'om_batt_replacement_cost', 'battery_total_cost_lcos', 'land_area']
+
+     - Battery_GenericBatterySingleOwner
+
+        ['om_batt_replacement_cost']
+
+     - Saleleaseback_StandaloneBatterySaleLeaseback
+
+        ['total_installed_cost', 'battery_per_kWh', 'reserves_interest', 'construction_financing_cost', 'ppa_price_input', 'om_batt_replacement_cost', 'battery_total_cost_lcos']
+
+     - Merchantplant_GenericBatteryMerchantPlant
+
+        ['term_int_rate', 'total_installed_cost', 'battery_per_kWh', 'cost_debt_closing', 'om_batt_capacity_cost', 'reserves_interest', 'construction_financing_cost', 'om_batt_replacement_cost', 'battery_total_cost_lcos']
+
+     - Singleowner_PVBatterySingleOwner
+
+        ['term_int_rate', 'total_installed_cost', 'battery_per_kWh', 'system_capacity', 'cost_debt_closing', 'om_batt_capacity_cost', 'reserves_interest', 'construction_financing_cost', 'cp_system_nameplate', 'ppa_price_input', 'om_batt_replacement_cost', 'battery_total_cost_lcos', 'land_area']
+
+     - HostDeveloper_PVBatteryHostDeveloper
+
+        ['total_installed_cost', 'system_capacity', 'cost_debt_closing', 'om_capacity', 'om_batt_capacity_cost', 'construction_financing_cost', 'battery_total_cost_lcos']
+
+     - Equpartflip_PVBatteryAllEquityPartnershipFlip
+
+        ['total_installed_cost', 'battery_per_kWh', 'system_capacity', 'om_batt_capacity_cost', 'reserves_interest', 'construction_financing_cost', 'ppa_price_input', 'om_batt_replacement_cost', 'battery_total_cost_lcos', 'land_area']
+
+     - Battery_StandaloneBatteryMerchantPlant
+
+        ['batt_dispatch_auto_can_gridcharge', 'om_batt_replacement_cost']
+
+     - Pvsamv1_PVBatteryMerchantPlant
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'batt_dispatch_pvs_nameplate_ac', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'om_batt_replacement_cost', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Pvsamv1_PVBatteryCommercial
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Battery_GenericBatteryLeveragedPartnershipFlip
+
+        ['om_batt_replacement_cost']
+
+     - Pvsamv1_PVBatterySingleOwner
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'batt_dispatch_pvs_nameplate_ac', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'om_batt_replacement_cost', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'ppa_price_input', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Battery_StandaloneBatterySingleOwner
+
+        ['batt_dispatch_auto_can_gridcharge', 'ppa_price_input', 'om_batt_replacement_cost']
+
+     - Pvsamv1_PVBatteryThirdParty
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco']
+
+     - Battery_StandaloneBatteryHostDeveloper
+
+        ['om_batt_replacement_cost']
+
+     - Merchantplant_StandaloneBatteryMerchantPlant
+
+        ['term_int_rate', 'total_installed_cost', 'battery_per_kWh', 'cost_debt_closing', 'reserves_interest', 'construction_financing_cost', 'om_batt_replacement_cost', 'battery_total_cost_lcos']
+
+     - Pvsamv1_PVBatteryHostDeveloper
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Levpartflip_StandaloneBatteryLeveragedPartnershipFlip
+
+        ['term_int_rate', 'total_installed_cost', 'battery_per_kWh', 'cost_debt_closing', 'reserves_interest', 'construction_financing_cost', 'ppa_price_input', 'om_batt_replacement_cost', 'battery_total_cost_lcos']
+
+     - Singleowner_StandaloneBatterySingleOwner
+
+        ['term_int_rate', 'total_installed_cost', 'battery_per_kWh', 'cost_debt_closing', 'reserves_interest', 'construction_financing_cost', 'ppa_price_input', 'om_batt_replacement_cost', 'battery_total_cost_lcos']
+
+     - Battery_GenericBatterySaleLeaseback
+
+        ['om_batt_replacement_cost']
+
+     - Levpartflip_GenericBatteryLeveragedPartnershipFlip
+
+        ['term_int_rate', 'total_installed_cost', 'battery_per_kWh', 'cost_debt_closing', 'om_batt_capacity_cost', 'reserves_interest', 'construction_financing_cost', 'om_batt_replacement_cost', 'battery_total_cost_lcos']
+
+     - Equpartflip_StandaloneBatteryAllEquityPartnershipFlip
+
+        ['total_installed_cost', 'battery_per_kWh', 'reserves_interest', 'construction_financing_cost', 'ppa_price_input', 'om_batt_replacement_cost', 'battery_total_cost_lcos']
+
+     - Pvsamv1_PVBatteryAllEquityPartnershipFlip
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'batt_dispatch_pvs_nameplate_ac', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'om_batt_replacement_cost', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'ppa_price_input', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Cashloan_GenericBatteryCommercial
+
+        ['loan_rate', 'om_batt_capacity_cost']
+
+     - Battery_FuelCellCommercial
+
+        ['batt_life_model', 'dispatch_manual_percent_gridcharge']
+
+     - Cashloan_PVWattsBatteryResidential
+
+        ['loan_rate', 'om_capacity']
+
+     - Cashloan_PVBatteryResidential
+
+        ['loan_rate', 'om_capacity', 'om_batt_capacity_cost']
+
+     - Battery_StandaloneBatteryAllEquityPartnershipFlip
+
+        ['dispatch_manual_charge', 'batt_dispatch_auto_can_gridcharge', 'ppa_price_input', 'om_batt_replacement_cost']
+
+     - Cashloan_PVWattsBatteryCommercial
+
+        ['total_installed_cost', 'loan_rate', 'om_capacity', 'battery_total_cost_lcos']
+
+     - Battery_StandaloneBatteryLeveragedPartnershipFlip
+
+        ['dispatch_manual_charge', 'batt_dispatch_auto_can_gridcharge', 'ppa_price_input', 'om_batt_replacement_cost']
+
+     - Cashloan_StandaloneBatteryResidential
+
+        ['total_installed_cost', 'loan_rate', 'battery_per_kWh', 'om_batt_replacement_cost', 'battery_total_cost_lcos']
+
+     - Battery_StandaloneBatteryCommercial
+
+        ['om_batt_replacement_cost']
+
+     - HostDeveloper_PVWattsBatteryHostDeveloper
+
+        ['total_installed_cost', 'cost_debt_closing', 'om_capacity', 'construction_financing_cost', 'battery_total_cost_lcos']
+
+     - Saleleaseback_PVBatterySaleLeaseback
+
+        ['total_installed_cost', 'battery_per_kWh', 'system_capacity', 'om_batt_capacity_cost', 'reserves_interest', 'construction_financing_cost', 'ppa_price_input', 'om_batt_replacement_cost', 'battery_total_cost_lcos', 'land_area']
+
+     - HostDeveloper_StandaloneBatteryHostDeveloper
+
+        ['term_int_rate', 'total_installed_cost', 'battery_per_kWh', 'cost_debt_closing', 'reserves_interest', 'construction_financing_cost', 'om_batt_replacement_cost', 'battery_total_cost_lcos']
+
+     - MhkWave_MEwaveBatterySingleOwner
+
+        ['financial_cost_total', 'balance_of_system_cost_total']
+
+     - BatteryStateful_LeadAcid
+
+        ['resistance']
+
+     - Battery_GenericBatteryMerchantPlant
+
+        ['om_batt_replacement_cost']
+
+     - Merchantplant_PVBatteryMerchantPlant
+
+        ['term_int_rate', 'total_installed_cost', 'battery_per_kWh', 'system_capacity', 'cost_debt_closing', 'om_batt_capacity_cost', 'reserves_interest', 'construction_financing_cost', 'cp_system_nameplate', 'om_batt_replacement_cost', 'battery_total_cost_lcos', 'land_area']
+
+     - Cashloan_GenericBatteryResidential
+
+        ['loan_rate', 'om_batt_capacity_cost']
+
+     - Singleowner_MEwaveBatterySingleOwner
+
+        ['term_int_rate', 'total_installed_cost', 'cost_debt_closing', 'construction_financing_cost', 'battery_total_cost_lcos']
+
+     - Battery_StandaloneBatterySaleLeaseback
+
+        ['dispatch_manual_charge', 'batt_dispatch_auto_can_gridcharge', 'ppa_price_input', 'om_batt_replacement_cost']
+
+     - Pvsamv1_PVBatterySaleLeaseback
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'batt_dispatch_pvs_nameplate_ac', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'om_batt_replacement_cost', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'ppa_price_input', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Battery_FuelCellSingleOwner
+
+        ['batt_life_model', 'om_batt_replacement_cost', 'dispatch_manual_percent_gridcharge', 'batt_dispatch_update_frequency_hours', 'dispatch_manual_gridcharge']
+
+     - Singleowner_GenericBatterySingleOwner
+
+        ['term_int_rate', 'total_installed_cost', 'battery_per_kWh', 'cost_debt_closing', 'om_batt_capacity_cost', 'reserves_interest', 'construction_financing_cost', 'om_batt_replacement_cost', 'battery_total_cost_lcos']
+
+     - Pvsamv1_PVBatteryLeveragedPartnershipFlip
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'batt_dispatch_pvs_nameplate_ac', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'om_batt_replacement_cost', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'ppa_price_input', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Saleleaseback_GenericBatterySaleLeaseback
+
+        ['total_installed_cost', 'battery_per_kWh', 'om_batt_capacity_cost', 'reserves_interest', 'construction_financing_cost', 'om_batt_replacement_cost', 'battery_total_cost_lcos']
+
+
+
+Belpe
+************************************************
+
+:doc:`../modules/Belpe` Removed Default files
+
+     - GenericBatteryResidential
+     - GenericBatteryThirdParty
+     - StandaloneBatteryResidential
+     - StandaloneBatteryThirdParty
+
+
+Biomass
+************************************************
+
+:doc:`../modules/Biomass` Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+
+
+Cashloan
+************************************************
+
+:doc:`../modules/Cashloan` Removed Default files
+
+     - MSLFCommercial
+
+:doc:`../modules/Cashloan` Modified Default Values:
+
+     - Cashloan_DSLFCommercial
+
+        ['loan_rate']
+
+     - Cashloan_PVBatteryCommercial
+
+        ['total_installed_cost', 'loan_rate', 'system_capacity', 'om_capacity', 'om_batt_capacity_cost', 'battery_total_cost_lcos']
+
+     - Cashloan_GenericCSPSystemCommercial
+
+        ['loan_rate']
+
+     - Cashloan_FuelCellCommercial
+
+        ['total_installed_cost', 'loan_rate', 'battery_total_cost_lcos']
+
+     - Cashloan_StandaloneBatteryCommercial
+
+        ['total_installed_cost', 'loan_rate', 'battery_per_kWh', 'om_batt_replacement_cost', 'battery_total_cost_lcos']
+
+     - Cashloan_PVWattsResidential
+
+        ['total_installed_cost', 'loan_rate', 'om_capacity']
+
+     - Cashloan_WindPowerResidential
+
+        ['total_installed_cost', 'loan_rate', 'om_capacity']
+
+     - Cashloan_WindPowerCommercial
+
+        ['total_installed_cost', 'loan_rate', 'om_capacity']
+
+     - Cashloan_GenericSystemResidential
+
+        ['loan_rate']
+
+     - Cashloan_SolarWaterHeatingCommercial
+
+        ['loan_rate']
+
+     - Cashloan_FlatPlatePVCommercial
+
+        ['total_installed_cost', 'loan_rate', 'system_capacity', 'om_capacity']
+
+     - Cashloan_SolarWaterHeatingResidential
+
+        ['loan_rate']
+
+     - Cashloan_PVWattsCommercial
+
+        ['total_installed_cost', 'loan_rate', 'om_capacity']
+
+     - Cashloan_EmpiricalTroughCommercial
+
+        ['loan_rate']
+
+     - Cashloan_GenericBatteryCommercial
+
+        ['loan_rate', 'om_batt_capacity_cost']
+
+     - Cashloan_PVWattsBatteryResidential
+
+        ['loan_rate', 'om_capacity']
+
+     - Cashloan_PVBatteryResidential
+
+        ['loan_rate', 'om_capacity', 'om_batt_capacity_cost']
+
+     - Cashloan_PVWattsBatteryCommercial
+
+        ['total_installed_cost', 'loan_rate', 'om_capacity', 'battery_total_cost_lcos']
+
+     - Cashloan_StandaloneBatteryResidential
+
+        ['total_installed_cost', 'loan_rate', 'battery_per_kWh', 'om_batt_replacement_cost', 'battery_total_cost_lcos']
+
+     - Cashloan_GenericBatteryResidential
+
+        ['loan_rate', 'om_batt_capacity_cost']
+
+     - Cashloan_FlatPlatePVResidential
+
+        ['total_installed_cost', 'loan_rate', 'om_capacity']
+
+     - Cashloan_GenericSystemCommercial
+
+        ['loan_rate']
+
+
+
+Communitysolar
+************************************************
+
+:doc:`../modules/Communitysolar` Modified Input Variables:
+
+    Removed variables:
+
+         - roe_input
+
+
+Equpartflip
+************************************************
+
+:doc:`../modules/Equpartflip` Modified Input Variables:
+
+    New variables:
+
+         - dispatch_tod_factors
+         - fuelcell_replacement
+
+    Removed variables:
+
+         - dispatch_factor1
+         - dispatch_factor2
+         - dispatch_factor3
+         - dispatch_factor4
+         - dispatch_factor5
+         - dispatch_factor6
+         - dispatch_factor7
+         - dispatch_factor8
+         - dispatch_factor9
+
+
+EtesElectricResistance
+************************************************
+
+:doc:`../modules/EtesElectricResistance` Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+         - dispatch_tod_factors
+         - ud_is_sco2_regr
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+         - dispatch_factor1
+         - dispatch_factor2
+         - dispatch_factor3
+         - dispatch_factor4
+         - dispatch_factor5
+         - dispatch_factor6
+         - dispatch_factor7
+         - dispatch_factor8
+         - dispatch_factor9
+
+
+EtesPtes
+************************************************
+
+:doc:`../modules/EtesPtes` Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+         - dispatch_tod_factors
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+         - dispatch_factor1
+         - dispatch_factor2
+         - dispatch_factor3
+         - dispatch_factor4
+         - dispatch_factor5
+         - dispatch_factor6
+         - dispatch_factor7
+         - dispatch_factor8
+         - dispatch_factor9
+
+
+FresnelPhysical
+************************************************
+
+:doc:`../modules/FresnelPhysical` New Default files:
+
+     - MSLFAllEquityPartnershipFlip
+     - MSLFLeveragedPartnershipFlip
+     - MSLFMerchantPlant
+     - MSLFSaleLeaseback
+     - MSLFSingleOwner
+
+
+FresnelPhysicalIph
+************************************************
+
+:doc:`../modules/FresnelPhysicalIph` New Default files:
+
+     - MSLFIPHLCOHCalculator
+     - MSLFIPHNone
+
+
+Fuelcell
+************************************************
+
+:doc:`../modules/Fuelcell` Modified Input Variables:
+
+    New variables:
+
+         - dispatch_manual_fuelcell_sched
+         - dispatch_manual_fuelcell_sched_weekend
+
+    Removed variables:
+
+         - dispatch_manual_sched
+         - dispatch_manual_sched_weekend
+
+:doc:`../modules/Fuelcell` New Default files:
+
+     - GenericPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - GenericPVWattsWindFuelCellBatteryHybridSingleOwner
+     - PVWattsWindFuelCellBatteryHybridHostDeveloper
+     - PVWattsWindFuelCellBatteryHybridSingleOwner
+
+:doc:`../modules/Fuelcell` Modified Default Values:
+
+     - Fuelcell_FuelCellCommercial
+
+        ['dispatch_manual_percent_fc_discharge', 'dispatch_manual_units_fc_discharge']
+
+
+
+GenericSystem
+************************************************
+
+`Generic System <https://nrel-pysam.readthedocs.io/en/v5.0.0/modules/GenericSystem.html>`_ Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+
+`Generic System <https://nrel-pysam.readthedocs.io/en/v5.0.0/modules/GenericSystem.html>`_ New Default files:
+
+     - GenericPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - GenericPVWattsWindFuelCellBatteryHybridSingleOwner
+
+`Generic System <https://nrel-pysam.readthedocs.io/en/v5.0.0/modules/GenericSystem.html>`_ Modified Default Values:
+
+     - Equpartflip_GenericSystemAllEquityPartnershipFlip
+
+        ['reserves_interest', 'construction_financing_cost']
+
+     - Cashloan_GenericSystemResidential
+
+        ['loan_rate']
+
+     - Singleowner_GenericSystemSingleOwner
+
+        ['term_int_rate', 'cost_debt_closing', 'reserves_interest', 'construction_financing_cost']
+
+     - Levpartflip_GenericSystemLeveragedPartnershipFlip
+
+        ['term_int_rate', 'cost_debt_closing', 'reserves_interest', 'construction_financing_cost']
+
+     - Merchantplant_GenericSystemMerchantPlant
+
+        ['term_int_rate', 'cost_debt_closing', 'reserves_interest', 'construction_financing_cost']
+
+     - Lcoefcr_GenericSystemLCOECalculator
+
+        ['fixed_charge_rate']
+
+     - Saleleaseback_GenericSystemSaleLeaseback
+
+        ['reserves_interest', 'construction_financing_cost']
+
+     - HostDeveloper_GenericSystemHostDeveloper
+
+        ['term_int_rate', 'reserves_interest']
+
+     - Cashloan_GenericSystemCommercial
+
+        ['loan_rate']
+
+
+
+Geothermal
+************************************************
+
+:doc:`../modules/Geothermal` Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+         - drilling_success_rate
+         - exploration_wells_production
+         - failed_prod_flow_ratio
+         - geotherm.cost.inj_cost_curve_welldiam
+         - geotherm.cost.prod_cost_curve_welldiam
+         - injectivity_index
+         - stim_success_rate
+         - use_weather_file_conditions
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+         - casing_size
+         - inj_casing_size
+         - inj_well_diam
+         - well_diameter
+
+
+Grid
+************************************************
+
+:doc:`../modules/Grid` Modified Input Variables:
+
+    New variables:
+
+         - monthly_energy
+
+:doc:`../modules/Grid` New Default files:
+
+     - GenericPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - GenericPVWattsWindFuelCellBatteryHybridSingleOwner
+     - PVWattsWindBatteryHybridHostDeveloper
+     - PVWattsWindBatteryHybridSingleOwner
+     - PVWattsWindFuelCellBatteryHybridHostDeveloper
+     - PVWattsWindFuelCellBatteryHybridSingleOwner
+     - PhotovoltaicWindBatteryHybridHostDeveloper
+     - PhotovoltaicWindBatteryHybridSingleOwner
+
+:doc:`../modules/Grid` Removed Default files
+
+     - MSLFCommercial
+     - MSLFLCOECalculator
+     - MSLFNone
+
+
+Hcpv
+************************************************
+
+:doc:`../modules/Hcpv` Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+
+
+HostDeveloper
+************************************************
+
+:doc:`../modules/HostDeveloper` Modified Input Variables:
+
+    New variables:
+
+         - cf_hybrid_om_sum
+         - dispatch_tod_factors
+         - fuelcell_replacement
+         - is_hybrid
+         - monthly_energy
+
+    Removed variables:
+
+         - dispatch_factor1
+         - dispatch_factor2
+         - dispatch_factor3
+         - dispatch_factor4
+         - dispatch_factor5
+         - dispatch_factor6
+         - dispatch_factor7
+         - dispatch_factor8
+         - dispatch_factor9
+
+:doc:`../modules/HostDeveloper` New Default files:
+
+     - GenericPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - PVWattsWindBatteryHybridHostDeveloper
+     - PVWattsWindFuelCellBatteryHybridHostDeveloper
+     - PhotovoltaicWindBatteryHybridHostDeveloper
+
+:doc:`../modules/HostDeveloper` Modified Default Values:
+
+     - HostDeveloper_GenericBatteryHostDeveloper
+
+        ['term_int_rate', 'cost_debt_closing', 'om_batt_capacity_cost', 'reserves_interest', 'construction_financing_cost']
+
+     - HostDeveloper_PVBatteryHostDeveloper
+
+        ['total_installed_cost', 'system_capacity', 'cost_debt_closing', 'om_capacity', 'om_batt_capacity_cost', 'construction_financing_cost', 'battery_total_cost_lcos']
+
+     - Battery_StandaloneBatteryHostDeveloper
+
+        ['om_batt_replacement_cost']
+
+     - Pvsamv1_PVBatteryHostDeveloper
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - HostDeveloper_FlatPlatePVHostDeveloper
+
+        ['term_int_rate', 'total_installed_cost', 'system_capacity', 'cost_debt_closing', 'om_capacity', 'reserves_interest', 'construction_financing_cost']
+
+     - HostDeveloper_PVWattsHostDeveloper
+
+        ['term_int_rate', 'total_installed_cost', 'cost_debt_closing', 'om_capacity', 'reserves_interest', 'construction_financing_cost']
+
+     - Pvsamv1_FlatPlatePVHostDeveloper
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - HostDeveloper_GenericSystemHostDeveloper
+
+        ['term_int_rate', 'reserves_interest']
+
+     - HostDeveloper_PVWattsBatteryHostDeveloper
+
+        ['total_installed_cost', 'cost_debt_closing', 'om_capacity', 'construction_financing_cost', 'battery_total_cost_lcos']
+
+     - HostDeveloper_StandaloneBatteryHostDeveloper
+
+        ['term_int_rate', 'total_installed_cost', 'battery_per_kWh', 'cost_debt_closing', 'reserves_interest', 'construction_financing_cost', 'om_batt_replacement_cost', 'battery_total_cost_lcos']
+
+
+
+IphToLcoefcr
+************************************************
+
+:doc:`../modules/IphToLcoefcr` Removed Default files
+
+     - PhysicalTroughIPHLCOHCalculator
+
+
+Ippppa
+************************************************
+
+:doc:`../modules/Ippppa` Modified Input Variables:
+
+    Removed variables:
+
+         - fuelcell_annual_energy_discharged
+
+
+Lcoefcr
+************************************************
+
+:doc:`../modules/Lcoefcr` Removed Default files
+
+     - MSLFLCOECalculator
+     - PhysicalTroughIPHLCOHCalculator
+
+:doc:`../modules/Lcoefcr` Modified Default Values:
+
+     - Lcoefcr_WindPowerLCOECalculator
+
+        ['fixed_operating_cost', 'fixed_charge_rate', 'capital_cost']
+
+     - Lcoefcr_GeothermalPowerLCOECalculator
+
+        ['fixed_operating_cost', 'fixed_charge_rate', 'capital_cost']
+
+     - Lcoefcr_FlatPlatePVLCOECalculator
+
+        ['fixed_operating_cost', 'fixed_charge_rate', 'capital_cost']
+
+     - Lcoefcr_PVWattsLCOECalculator
+
+        ['fixed_operating_cost', 'fixed_charge_rate', 'capital_cost']
+
+     - Lcoefcr_MEwaveLCOECalculator
+
+        ['capital_cost']
+
+     - Lcoefcr_GenericSystemLCOECalculator
+
+        ['fixed_charge_rate']
+
+     - Lcoefcr_MEtidalLCOECalculator
+
+        ['capital_cost']
+
+     - Lcoefcr_BiopowerLCOECalculator
+
+        ['fixed_charge_rate']
+
+     - Lcoefcr_PhysicalTroughLCOECalculator
+
+        ['fixed_charge_rate', 'capital_cost']
+
+     - Lcoefcr_DSGLIPHLCOHCalculator
+
+        ['fixed_charge_rate']
+
+
+
+LcoefcrDesign
+************************************************
+
+:doc:`../modules/LcoefcrDesign` New Default files:
+
+     - MSLFIPHLCOHCalculator
+     - MSPTIPHLCOHCalculator
+     - PhysicalTroughIPHLCOHCalculator
+
+
+Levpartflip
+************************************************
+
+:doc:`../modules/Levpartflip` Modified Input Variables:
+
+    New variables:
+
+         - dispatch_tod_factors
+         - fuelcell_replacement
+
+    Removed variables:
+
+         - dispatch_factor1
+         - dispatch_factor2
+         - dispatch_factor3
+         - dispatch_factor4
+         - dispatch_factor5
+         - dispatch_factor6
+         - dispatch_factor7
+         - dispatch_factor8
+         - dispatch_factor9
+
+
+LinearFresnelDsgIph
+************************************************
+
+:doc:`../modules/LinearFresnelDsgIph` Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+
+
+MhkTidal
+************************************************
+
+:doc:`../modules/MhkTidal` Modified Input Variables:
+
+    New variables:
+
+         - tidal_resource_model_choice
+         - tidal_velocity
+
+
+MsptIph
+************************************************
+
+:doc:`../modules/MsptIph` New Default files:
+
+     - MSPTIPHLCOHCalculator
+     - MSPTIPHNone
+
+
+Pvsamv1
+************************************************
+
+:doc:`../modules/Pvsamv1` Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+         - dc_adjust_constant
+         - dc_adjust_en_periods
+         - dc_adjust_en_timeindex
+         - dc_adjust_periods
+         - dc_adjust_timeindex
+         - enable_subhourly_clipping
+         - subarray1_custom_cell_temp_array
+         - subarray1_custom_rot_angles_array
+         - subarray1_shading_azal
+         - subarray1_shading_diff
+         - subarray1_shading_en_azal
+         - subarray1_shading_en_diff
+         - subarray1_shading_en_mxh
+         - subarray1_shading_en_string_option
+         - subarray1_shading_en_timestep
+         - subarray1_shading_mxh
+         - subarray1_shading_string_option
+         - subarray1_shading_timestep
+         - subarray1_use_custom_cell_temp
+         - subarray1_use_custom_rot_angles
+         - subarray2_custom_cell_temp_array
+         - subarray2_custom_rot_angles_array
+         - subarray2_shading_azal
+         - subarray2_shading_diff
+         - subarray2_shading_en_azal
+         - subarray2_shading_en_diff
+         - subarray2_shading_en_mxh
+         - subarray2_shading_en_string_option
+         - subarray2_shading_en_timestep
+         - subarray2_shading_mxh
+         - subarray2_shading_string_option
+         - subarray2_shading_timestep
+         - subarray2_use_custom_cell_temp
+         - subarray2_use_custom_rot_angles
+         - subarray3_custom_cell_temp_array
+         - subarray3_custom_rot_angles_array
+         - subarray3_shading_azal
+         - subarray3_shading_diff
+         - subarray3_shading_en_azal
+         - subarray3_shading_en_diff
+         - subarray3_shading_en_mxh
+         - subarray3_shading_en_string_option
+         - subarray3_shading_en_timestep
+         - subarray3_shading_mxh
+         - subarray3_shading_string_option
+         - subarray3_shading_timestep
+         - subarray3_use_custom_cell_temp
+         - subarray3_use_custom_rot_angles
+         - subarray4_custom_cell_temp_array
+         - subarray4_custom_rot_angles_array
+         - subarray4_shading_azal
+         - subarray4_shading_diff
+         - subarray4_shading_en_azal
+         - subarray4_shading_en_diff
+         - subarray4_shading_en_mxh
+         - subarray4_shading_en_string_option
+         - subarray4_shading_en_timestep
+         - subarray4_shading_mxh
+         - subarray4_shading_string_option
+         - subarray4_shading_timestep
+         - subarray4_use_custom_cell_temp
+         - subarray4_use_custom_rot_angles
+         - subhourly_clipping_matrix
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+         - dc_adjust:constant
+         - dc_adjust:hourly
+         - dc_adjust:periods
+         - dc_adjust:timeindex
+         - measured_temp_array
+         - subarray1_shading:azal
+         - subarray1_shading:diff
+         - subarray1_shading:mxh
+         - subarray1_shading:string_option
+         - subarray1_shading:timestep
+         - subarray2_shading:azal
+         - subarray2_shading:diff
+         - subarray2_shading:mxh
+         - subarray2_shading:string_option
+         - subarray2_shading:timestep
+         - subarray3_shading:azal
+         - subarray3_shading:diff
+         - subarray3_shading:mxh
+         - subarray3_shading:string_option
+         - subarray3_shading:timestep
+         - subarray4_shading:azal
+         - subarray4_shading:diff
+         - subarray4_shading:mxh
+         - subarray4_shading:string_option
+         - subarray4_shading:timestep
+         - use_measured_temp
+
+:doc:`../modules/Pvsamv1` New Default files:
+
+     - PhotovoltaicWindBatteryHybridHostDeveloper
+     - PhotovoltaicWindBatteryHybridSingleOwner
+
+:doc:`../modules/Pvsamv1` Modified Default Values:
+
+     - Pvsamv1_PVBatteryResidential
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'snl_ixo', 'snl_c2', 'snl_c7', 'inv_snl_c1', 'snl_ixxo', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco']
+
+     - Pvsamv1_FlatPlatePVSingleOwner
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'subarray2_modules_per_string', 'subarray1_nstrings', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'inv_snl_c3', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'cec_module_width', 'inv_snl_vdcmax', 'system_capacity', 'inverter_count', 'inv_snl_c1', 'ppa_price_input', 'subarray4_nstrings', 'subarray4_modules_per_string', 'module_aspect_ratio', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Pvsamv1_FlatPlatePVSaleLeaseback
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'ppa_price_input', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Pvsamv1_PVBatteryMerchantPlant
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'batt_dispatch_pvs_nameplate_ac', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'om_batt_replacement_cost', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Pvsamv1_PVBatteryCommercial
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Pvsamv1_FlatPlatePVResidential
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'snl_ixo', 'snl_c2', 'snl_c7', 'inv_snl_c1', 'snl_ixxo', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco']
+
+     - Pvsamv1_PVBatterySingleOwner
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'batt_dispatch_pvs_nameplate_ac', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'om_batt_replacement_cost', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'ppa_price_input', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Pvsamv1_PVBatteryThirdParty
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco']
+
+     - Pvsamv1_PVBatteryHostDeveloper
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Pvsamv1_FlatPlatePVMerchantPlant
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Pvsamv1_PVBatteryAllEquityPartnershipFlip
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'batt_dispatch_pvs_nameplate_ac', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'om_batt_replacement_cost', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'ppa_price_input', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Pvsamv1_FlatPlatePVNone
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Pvsamv1_FlatPlatePVLeveragedPartnershipFlip
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'ppa_price_input', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Pvsamv1_FlatPlatePVLCOECalculator
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Pvsamv1_FlatPlatePVHostDeveloper
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Pvsamv1_FlatPlatePVAllEquityPartnershipFlip
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'ppa_price_input', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Pvsamv1_FlatPlatePVCommercial
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Pvsamv1_FlatPlatePVThirdParty
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inv_snl_c1', 'snl_ixxo', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Pvsamv1_PVBatterySaleLeaseback
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'batt_dispatch_pvs_nameplate_ac', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'om_batt_replacement_cost', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'ppa_price_input', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+     - Pvsamv1_PVBatteryLeveragedPartnershipFlip
+
+        ['subarray1_rack_shading', 'inv_snl_pnt', 'subarray3_nstrings', 'inv_tdc_plc', 'snl_c6', 'snl_b2', 'sixpar_aisc', 'snl_impo', 'inv_tdc_cec_cg', 'batt_dispatch_pvs_nameplate_ac', 'inv_tdc_cec_db', 'inv_snl_pso', 'snl_bvoco', 'subarray2_modules_per_string', 'snl_a0', 'snl_a3', 'snl_bvmpo', 'subarray1_nstrings', 'snl_a2', 'subarray3_modules_per_string', 'inv_tdc_ds', 'subarray2_nstrings', 'cec_module_length', 'snl_a1', 'inv_snl_c3', 'snl_isco', 'snl_vmpo', 'inv_snl_c2', 'inv_snl_vdco', 'inv_snl_eff_cec', 'inv_snl_paco', 'inv_snl_c0', 'snl_c0', 'snl_c1', 'cec_module_width', 'snl_voco', 'snl_n', 'inv_snl_vdcmax', 'snl_c3', 'snl_aisc', 'om_batt_replacement_cost', 'snl_ixo', 'snl_c2', 'system_capacity', 'snl_c7', 'inverter_count', 'inv_snl_c1', 'snl_ixxo', 'ppa_price_input', 'snl_a4', 'snl_c4', 'subarray4_nstrings', 'snl_area', 'subarray4_modules_per_string', 'snl_series_cells', 'module_aspect_ratio', 'snl_c5', 'sixpar_bvoc', 'inv_snl_pdco', 'subarray1_modules_per_string']
+
+
+
+Pvwattsv5
+************************************************
+
+:doc:`../modules/Pvwattsv5` Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+         - shading_azal
+         - shading_diff
+         - shading_en_azal
+         - shading_en_diff
+         - shading_en_mxh
+         - shading_en_string_option
+         - shading_en_timestep
+         - shading_mxh
+         - shading_string_option
+         - shading_timestep
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+         - shading:azal
+         - shading:diff
+         - shading:mxh
+         - shading:timestep
+
+
+Pvwattsv7
+************************************************
+
+:doc:`../modules/Pvwattsv7` Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+         - shading_azal
+         - shading_diff
+         - shading_en_azal
+         - shading_en_diff
+         - shading_en_mxh
+         - shading_en_string_option
+         - shading_en_timestep
+         - shading_mxh
+         - shading_string_option
+         - shading_timestep
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+         - shading:azal
+         - shading:diff
+         - shading:mxh
+         - shading:timestep
+
+
+Pvwattsv8
+************************************************
+
+:doc:`../modules/Pvwattsv8` Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+         - shading_azal
+         - shading_diff
+         - shading_en_azal
+         - shading_en_diff
+         - shading_en_mxh
+         - shading_en_string_option
+         - shading_en_timestep
+         - shading_mxh
+         - shading_string_option
+         - shading_timestep
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+         - shading:azal
+         - shading:diff
+         - shading:mxh
+         - shading:timestep
+
+:doc:`../modules/Pvwattsv8` New Default files:
+
+     - GenericPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - GenericPVWattsWindFuelCellBatteryHybridSingleOwner
+     - PVWattsWindBatteryHybridHostDeveloper
+     - PVWattsWindBatteryHybridSingleOwner
+     - PVWattsWindFuelCellBatteryHybridHostDeveloper
+     - PVWattsWindFuelCellBatteryHybridSingleOwner
+
+
+Saleleaseback
+************************************************
+
+:doc:`../modules/Saleleaseback` Modified Input Variables:
+
+    New variables:
+
+         - dispatch_tod_factors
+         - fuelcell_replacement
+
+    Removed variables:
+
+         - dispatch_factor1
+         - dispatch_factor2
+         - dispatch_factor3
+         - dispatch_factor4
+         - dispatch_factor5
+         - dispatch_factor6
+         - dispatch_factor7
+         - dispatch_factor8
+         - dispatch_factor9
+
+
+Singleowner
+************************************************
+
+:doc:`../modules/Singleowner` Modified Input Variables:
+
+    New variables:
+
+         - cf_hybrid_om_sum
+         - dispatch_tod_factors
+         - is_hybrid
+         - monthly_energy
+
+    Removed variables:
+
+         - dispatch_factor1
+         - dispatch_factor2
+         - dispatch_factor3
+         - dispatch_factor4
+         - dispatch_factor5
+         - dispatch_factor6
+         - dispatch_factor7
+         - dispatch_factor8
+         - dispatch_factor9
+
+:doc:`../modules/Singleowner` New Default files:
+
+     - GenericPVWattsWindFuelCellBatteryHybridSingleOwner
+     - PVWattsWindBatteryHybridSingleOwner
+     - PVWattsWindFuelCellBatteryHybridSingleOwner
+     - PhotovoltaicWindBatteryHybridSingleOwner
+
+:doc:`../modules/Singleowner` Modified Default Values:
+
+     - Singleowner_EmpiricalTroughSingleOwner
+
+        ['term_int_rate', 'cost_debt_closing', 'dscr', 'reserves_interest', 'construction_financing_cost', 'ppa_price_input']
+
+     - Singleowner_FlatPlatePVSingleOwner
+
+        ['term_int_rate', 'total_installed_cost', 'ptc_fed_escal', 'system_capacity', 'cost_debt_closing', 'reserves_interest', 'construction_financing_cost', 'ptc_fed_amount', 'itc_fed_percent', 'cp_system_nameplate', 'ppa_price_input', 'land_area']
+
+     - Singleowner_MSLFSingleOwner
+
+        ['term_int_rate', 'total_installed_cost', 'cost_debt_closing', 'dscr', 'reserves_interest', 'construction_financing_cost', 'ppa_price_input', 'land_area']
+
+     - Singleowner_PVWattsSingleOwner
+
+        ['term_int_rate', 'total_installed_cost', 'ptc_fed_escal', 'cost_debt_closing', 'reserves_interest', 'construction_financing_cost', 'ptc_fed_amount', 'itc_fed_percent', 'ppa_price_input']
+
+     - Singleowner_PVBatterySingleOwner
+
+        ['term_int_rate', 'total_installed_cost', 'battery_per_kWh', 'system_capacity', 'cost_debt_closing', 'om_batt_capacity_cost', 'reserves_interest', 'construction_financing_cost', 'cp_system_nameplate', 'ppa_price_input', 'om_batt_replacement_cost', 'battery_total_cost_lcos', 'land_area']
+
+     - Singleowner_GenericSystemSingleOwner
+
+        ['term_int_rate', 'cost_debt_closing', 'reserves_interest', 'construction_financing_cost']
+
+     - Singleowner_GeothermalPowerSingleOwner
+
+        ['term_int_rate', 'total_installed_cost', 'system_capacity', 'system_recapitalization_cost', 'cost_debt_closing', 'dscr', 'reserves_interest', 'construction_financing_cost', 'cp_system_nameplate']
+
+     - Singleowner_PTESSingleOwner
+
+        ['term_int_rate', 'system_capacity', 'cost_debt_closing', 'dscr', 'reserves_interest', 'construction_financing_cost', 'cp_system_nameplate']
+
+     - Singleowner_BiopowerSingleOwner
+
+        ['term_int_rate', 'cost_debt_closing', 'dscr', 'reserves_interest', 'construction_financing_cost']
+
+     - Singleowner_StandaloneBatterySingleOwner
+
+        ['term_int_rate', 'total_installed_cost', 'battery_per_kWh', 'cost_debt_closing', 'reserves_interest', 'construction_financing_cost', 'ppa_price_input', 'om_batt_replacement_cost', 'battery_total_cost_lcos']
+
+     - Singleowner_DSLFSingleOwner
+
+        ['term_int_rate', 'cost_debt_closing', 'dscr', 'reserves_interest', 'construction_financing_cost', 'ppa_price_input']
+
+     - Singleowner_MEwaveSingleOwner
+
+        ['term_int_rate', 'total_installed_cost', 'cost_debt_closing', 'construction_financing_cost']
+
+     - Singleowner_WindPowerSingleOwner
+
+        ['term_int_rate', 'total_installed_cost', 'cost_debt_closing', 'om_capacity', 'dscr', 'reserves_interest', 'construction_financing_cost', 'ptc_fed_amount']
+
+     - Singleowner_GenericCSPSystemSingleOwner
+
+        ['term_int_rate', 'cost_debt_closing', 'dscr', 'reserves_interest', 'construction_financing_cost', 'ppa_price_input']
+
+     - Singleowner_HighXConcentratingPVSingleOwner
+
+        ['term_int_rate', 'cost_debt_closing', 'reserves_interest', 'construction_financing_cost']
+
+     - Singleowner_PhysicalTroughSingleOwner
+
+        ['term_int_rate', 'total_installed_cost', 'cost_debt_closing', 'dscr', 'reserves_interest', 'construction_financing_cost', 'ppa_price_input', 'land_area']
+
+     - Singleowner_ETESSingleOwner
+
+        ['term_int_rate', 'cost_debt_closing', 'dscr', 'reserves_interest', 'construction_financing_cost']
+
+     - Singleowner_MSPTSingleOwner
+
+        ['term_int_rate', 'cost_debt_closing', 'dscr', 'reserves_interest', 'construction_financing_cost', 'ppa_price_input']
+
+     - Singleowner_MEwaveBatterySingleOwner
+
+        ['term_int_rate', 'total_installed_cost', 'cost_debt_closing', 'construction_financing_cost', 'battery_total_cost_lcos']
+
+     - Singleowner_GenericBatterySingleOwner
+
+        ['term_int_rate', 'total_installed_cost', 'battery_per_kWh', 'cost_debt_closing', 'om_batt_capacity_cost', 'reserves_interest', 'construction_financing_cost', 'om_batt_replacement_cost', 'battery_total_cost_lcos']
+
+     - Singleowner_FuelCellSingleOwner
+
+        ['term_int_rate', 'total_installed_cost', 'battery_per_kWh', 'cost_debt_closing', 'reserves_interest', 'construction_financing_cost', 'om_batt_replacement_cost', 'battery_total_cost_lcos']
+
+
+
+Swh
+************************************************
+
+:doc:`../modules/Swh` Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+         - shading_azal
+         - shading_diff
+         - shading_en_azal
+         - shading_en_diff
+         - shading_en_mxh
+         - shading_en_string_option
+         - shading_en_timestep
+         - shading_mxh
+         - shading_string_option
+         - shading_timestep
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+         - shading:azal
+         - shading:diff
+         - shading:mxh
+         - shading:timestep
+
+
+TcsMSLF
+************************************************
+
+:doc:`../modules/TcsMSLF` Removed Default files
+
+     - MSLFAllEquityPartnershipFlip
+     - MSLFCommercial
+     - MSLFLCOECalculator
+     - MSLFLeveragedPartnershipFlip
+     - MSLFMerchantPlant
+     - MSLFNone
+     - MSLFSaleLeaseback
+     - MSLFSingleOwner
+
+
+TcsgenericSolar
+************************************************
+
+:doc:`../modules/TcsgenericSolar` Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+         - sf_adjust_constant
+         - sf_adjust_en_periods
+         - sf_adjust_en_timeindex
+         - sf_adjust_periods
+         - sf_adjust_timeindex
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+         - sf_adjust:constant
+         - sf_adjust:hourly
+         - sf_adjust:periods
+         - sf_adjust:timeindex
+
+
+TcslinearFresnel
+************************************************
+
+:doc:`../modules/TcslinearFresnel` Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+
+
+TcsmoltenSalt
+************************************************
+
+:doc:`../modules/TcsmoltenSalt` Modified Input Variables:
+
+    New variables:
+
+         - W_dot_pb_pump_target
+         - W_dot_rec_target
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+         - dispatch_tod_factors
+         - is_calc_od_tube
+         - is_calc_pb_pump_coef
+         - is_calc_sm
+         - q_dot_rec_des_target
+         - sf_adjust_constant
+         - sf_adjust_en_periods
+         - sf_adjust_en_timeindex
+         - sf_adjust_periods
+         - sf_adjust_timeindex
+         - ud_is_sco2_regr
+         - use_net_cycle_output_as_capacity
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+         - dispatch_factor1
+         - dispatch_factor2
+         - dispatch_factor3
+         - dispatch_factor4
+         - dispatch_factor5
+         - dispatch_factor6
+         - dispatch_factor7
+         - dispatch_factor8
+         - dispatch_factor9
+         - sf_adjust:constant
+         - sf_adjust:hourly
+         - sf_adjust:periods
+         - sf_adjust:timeindex
+
+:doc:`../modules/TcsmoltenSalt` New Default files:
+
+     - MSPTNone
+
+:doc:`../modules/TcsmoltenSalt` Modified Default Values:
+
+     - TcsmoltenSalt_MSPTAllEquityPartnershipFlip
+
+        ['const_per_interest_rate1', 'ppa_price_input']
+
+     - TcsmoltenSalt_MSPTSaleLeaseback
+
+        ['const_per_interest_rate1', 'ppa_price_input']
+
+     - TcsmoltenSalt_MSPTLeveragedPartnershipFlip
+
+        ['const_per_interest_rate1', 'ppa_price_input']
+
+     - TcsmoltenSalt_MSPTMerchantPlant
+
+        ['const_per_interest_rate1']
+
+     - TcsmoltenSalt_MSPTSingleOwner
+
+        ['const_per_interest_rate1', 'ppa_price_input']
+
+
+
+Tcsmslf
+************************************************
+
+:doc:`../modules/TcsMSLF` Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+
+
+TcstroughEmpirical
+************************************************
+
+:doc:`../modules/TcstroughEmpirical` Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+
+
+TcstroughPhysical
+************************************************
+
+:doc:`../modules/TcstroughPhysical` Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+
+
+TidalFileReader
+************************************************
+
+:doc:`../modules/TidalFileReader` New Default files:
+
+     - MEtidalLCOECalculator
+     - MEtidalNone
+
+
+TroughPhysical
+************************************************
+
+:doc:`../modules/TroughPhysical` Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+         - csp.dtr.cost.bop_per_kwe
+         - csp.dtr.cost.contingency_percent
+         - csp.dtr.cost.epc.fixed
+         - csp.dtr.cost.epc.per_acre
+         - csp.dtr.cost.epc.per_watt
+         - csp.dtr.cost.epc.percent
+         - csp.dtr.cost.fossil_backup.cost_per_kwe
+         - csp.dtr.cost.htf_system.cost_per_m2
+         - csp.dtr.cost.plm.fixed
+         - csp.dtr.cost.plm.per_acre
+         - csp.dtr.cost.plm.per_watt
+         - csp.dtr.cost.plm.percent
+         - csp.dtr.cost.power_plant.cost_per_kwe
+         - csp.dtr.cost.sales_tax.percent
+         - csp.dtr.cost.site_improvements.cost_per_m2
+         - csp.dtr.cost.solar_field.cost_per_m2
+         - csp.dtr.cost.storage.cost_per_kwht
+         - dispatch_tod_factors
+         - lat
+         - sales_tax_rate
+         - sim_type
+
+    Removed variables:
+
+         - D_cpnt
+         - K_cpnt
+         - L_cpnt
+         - Type_cpnt
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+         - dispatch_factor1
+         - dispatch_factor2
+         - dispatch_factor3
+         - dispatch_factor4
+         - dispatch_factor5
+         - dispatch_factor6
+         - dispatch_factor7
+         - dispatch_factor8
+         - dispatch_factor9
+         - is_wlim_series
+         - nLoops
+         - wlim_series
+
+
+TroughPhysicalCspSolver
+************************************************
+
+`Trough Physical Csp Solver <https://nrel-pysam.readthedocs.io/en/v5.0.0/modules/TroughPhysicalCspSolver.html>`_ Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+
+
+TroughPhysicalIph
+************************************************
+
+:doc:`../modules/TroughPhysicalIph` New Default files:
+
+     - PhysicalTroughIPHLCOHCalculator
+     - PhysicalTroughIPHNone
+
+
+TroughPhysicalProcessHeat
+************************************************
+
+`Trough Physical Csp Solver <https://nrel-pysam.readthedocs.io/en/v5.0.0/modules/TroughPhysicalCspSolver.html>`_ Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+         - dispatch_tod_factors
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+         - dispatch_factor1
+         - dispatch_factor2
+         - dispatch_factor3
+         - dispatch_factor4
+         - dispatch_factor5
+         - dispatch_factor6
+         - dispatch_factor7
+         - dispatch_factor8
+         - dispatch_factor9
+
+`Trough Physical Csp Solver <https://nrel-pysam.readthedocs.io/en/v5.0.0/modules/TroughPhysicalCspSolver.html>`_ Removed Default files
+
+     - PhysicalTroughIPHLCOHCalculator
+     - PhysicalTroughIPHNone
+
+
+UiUdpcChecks
+************************************************
+
+:doc:`../modules/UiUdpcChecks` Modified Input Variables:
+
+    New variables:
+
+         - T_htf_cold_des
+         - W_dot_net_des
+         - cooler_tot_W_dot_fan
+         - is_calc_m_dot_vs_T_amb
+
+
+Utilityrate5
+************************************************
+
+:doc:`../modules/Utilityrate5` Modified Input Variables:
+
+    New variables:
+
+         - grid_outage
+
+:doc:`../modules/Utilityrate5` New Default files:
+
+     - GenericPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - GenericPVWattsWindFuelCellBatteryHybridSingleOwner
+     - PVWattsWindBatteryHybridHostDeveloper
+     - PVWattsWindBatteryHybridSingleOwner
+     - PVWattsWindFuelCellBatteryHybridHostDeveloper
+     - PVWattsWindFuelCellBatteryHybridSingleOwner
+     - PhotovoltaicWindBatteryHybridHostDeveloper
+     - PhotovoltaicWindBatteryHybridSingleOwner
+
+:doc:`../modules/Utilityrate5` Removed Default files
+
+     - MSLFCommercial
+
+
+Windpower
+************************************************
+
+:doc:`../modules/Windpower` Modified Input Variables:
+
+    New variables:
+
+         - adjust_constant
+         - adjust_en_periods
+         - adjust_en_timeindex
+         - adjust_periods
+         - adjust_timeindex
+
+    Removed variables:
+
+         - adjust:constant
+         - adjust:hourly
+         - adjust:periods
+         - adjust:timeindex
+
+:doc:`../modules/Windpower` New Default files:
+
+     - GenericPVWattsWindFuelCellBatteryHybridHostDeveloper
+     - GenericPVWattsWindFuelCellBatteryHybridSingleOwner
+     - PVWattsWindBatteryHybridHostDeveloper
+     - PVWattsWindBatteryHybridSingleOwner
+     - PVWattsWindFuelCellBatteryHybridHostDeveloper
+     - PVWattsWindFuelCellBatteryHybridSingleOwner
+     - PhotovoltaicWindBatteryHybridHostDeveloper
+     - PhotovoltaicWindBatteryHybridSingleOwner
+
+

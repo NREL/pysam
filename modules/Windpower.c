@@ -71,11 +71,11 @@ Resource_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Resource_methods[] = {
 		{"assign",            (PyCFunction)Resource_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Resource_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Resource_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Resource_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Resource_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Resource_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Resource_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -165,25 +165,25 @@ Resource_set_wind_resource_model_choice(VarGroupObject *self, PyObject *value, v
 
 static PyGetSetDef Resource_getset[] = {
 {"weibull_k_factor", (getter)Resource_get_weibull_k_factor,(setter)Resource_set_weibull_k_factor,
-	PyDoc_STR("*float*: Weibull K factor for wind resource\n\n*Required*: True if wind_resource_model_choice=1"),
+	PyDoc_STR("*float*: Weibull K factor for wind resource\n\n**Required:**\nRequired if wind_resource_model_choice=1"),
  	NULL},
 {"weibull_reference_height", (getter)Resource_get_weibull_reference_height,(setter)Resource_set_weibull_reference_height,
-	PyDoc_STR("*float*: Reference height for Weibull wind speed [m]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 50"),
+	PyDoc_STR("*float*: Reference height for Weibull wind speed [m]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 50 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"weibull_wind_speed", (getter)Resource_get_weibull_wind_speed,(setter)Resource_set_weibull_wind_speed,
-	PyDoc_STR("*float*: Average wind speed for Weibull model\n\n*Constraints*: MIN=0\n\n*Required*: True if wind_resource_model_choice=1"),
+	PyDoc_STR("*float*: Average wind speed for Weibull model\n\n**Constraints:**\nMIN=0\n\n**Required:**\nRequired if wind_resource_model_choice=1"),
  	NULL},
 {"wind_resource_data", (getter)Resource_get_wind_resource_data,(setter)Resource_set_wind_resource_data,
-	PyDoc_STR("*dict*: Wind resouce data in memory\n\n*Required*: False"),
+	PyDoc_STR("*dict*: Wind resouce data in memory\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"wind_resource_distribution", (getter)Resource_get_wind_resource_distribution,(setter)Resource_set_wind_resource_distribution,
-	PyDoc_STR("*sequence[sequence]*: Wind Speed x Dir Distribution as 2-D PDF [m/s,deg]\n\n*Required*: True if wind_resource_model_choice=2"),
+	PyDoc_STR("*sequence[sequence]*: Wind Speed x Dir Distribution as 2-D PDF [m/s,deg]\n\n**Required:**\nRequired if wind_resource_model_choice=2"),
  	NULL},
 {"wind_resource_filename", (getter)Resource_get_wind_resource_filename,(setter)Resource_set_wind_resource_filename,
-	PyDoc_STR("*str*: Local wind data file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: False"),
+	PyDoc_STR("*str*: Local wind data file path\n\n**Constraints:**\nLOCAL_FILE\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"wind_resource_model_choice", (getter)Resource_get_wind_resource_model_choice,(setter)Resource_set_wind_resource_model_choice,
-	PyDoc_STR("*float*: Hourly, Weibull or Distribution model [0/1/2]\n\n*Constraints*: INTEGER\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - wind_turbine_powercurve_powerout\n\t - wind_turbine_powercurve_windspeeds\n"),
+	PyDoc_STR("*float*: Hourly, Weibull or Distribution model [0/1/2]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``wind_resource_model_choice``:\n\n\t - wind_turbine_powercurve_powerout\n\t - wind_turbine_powercurve_windspeeds\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -298,11 +298,11 @@ Turbine_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Turbine_methods[] = {
 		{"assign",            (PyCFunction)Turbine_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Turbine_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Turbine_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Turbine_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Turbine_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Turbine_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Turbine_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{"calculate_powercurve", (PyCFunction)Turbine_calculate_powercurve, METH_VARARGS | METH_KEYWORDS,
 			Turbine_calculate_powercurve_doc},
 		{NULL,              NULL}           /* sentinel */
@@ -318,6 +318,18 @@ static int
 Turbine_set_wind_resource_shear(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Windpower_Turbine_wind_resource_shear_nset, self->data_ptr);
+}
+
+static PyObject *
+Turbine_get_wind_turbine_ct_curve(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_Turbine_wind_turbine_ct_curve_aget, self->data_ptr);
+}
+
+static int
+Turbine_set_wind_turbine_ct_curve(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Windpower_Turbine_wind_turbine_ct_curve_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -382,22 +394,25 @@ Turbine_set_wind_turbine_rotor_diameter(VarGroupObject *self, PyObject *value, v
 
 static PyGetSetDef Turbine_getset[] = {
 {"wind_resource_shear", (getter)Turbine_get_wind_resource_shear,(setter)Turbine_set_wind_resource_shear,
-	PyDoc_STR("*float*: Shear exponent\n\n*Constraints*: MIN=0\n\n*Required*: True"),
+	PyDoc_STR("*float*: Shear exponent\n\n**Constraints:**\nMIN=0\n\n**Required:**\nTrue"),
+ 	NULL},
+{"wind_turbine_ct_curve", (getter)Turbine_get_wind_turbine_ct_curve,(setter)Turbine_set_wind_turbine_ct_curve,
+	PyDoc_STR("*sequence*: User-defined Ct curve vs WS for wake models\n\n**Info:**\nuses same wind speeds as power curve\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Constraints:**\nLENGTH_EQUAL=wind_turbine_powercurve_windspeeds"),
  	NULL},
 {"wind_turbine_hub_ht", (getter)Turbine_get_wind_turbine_hub_ht,(setter)Turbine_set_wind_turbine_hub_ht,
-	PyDoc_STR("*float*: Hub height [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - wind_turbine_powercurve_powerout\n\t - wind_turbine_powercurve_windspeeds\n"),
+	PyDoc_STR("*float*: Hub height [m]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``wind_turbine_hub_ht``:\n\n\t - wind_turbine_powercurve_powerout\n\t - wind_turbine_powercurve_windspeeds\n"),
  	NULL},
 {"wind_turbine_max_cp", (getter)Turbine_get_wind_turbine_max_cp,(setter)Turbine_set_wind_turbine_max_cp,
-	PyDoc_STR("*float*: Max Coefficient of Power\n\n*Constraints*: MIN=0\n\n*Required*: True if wind_resource_model_choice=1\n\n*Changes to this variable may require updating the values of the following*: \n\t - wind_turbine_powercurve_powerout\n\t - wind_turbine_powercurve_windspeeds\n"),
+	PyDoc_STR("*float*: Max Coefficient of Power\n\n**Constraints:**\nMIN=0\n\n**Required:**\nRequired if wind_resource_model_choice=1\n\nThe value of the following variables depends on ``wind_turbine_max_cp``:\n\n\t - wind_turbine_powercurve_powerout\n\t - wind_turbine_powercurve_windspeeds\n"),
  	NULL},
 {"wind_turbine_powercurve_powerout", (getter)Turbine_get_wind_turbine_powercurve_powerout,(setter)Turbine_set_wind_turbine_powercurve_powerout,
-	PyDoc_STR("*sequence*: Power curve turbine output array [kW]\n\n*Constraints*: LENGTH_EQUAL=wind_turbine_powercurve_windspeeds\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - wind_resource_model_choice\n\t - wind_turbine_hub_ht\n\t - wind_turbine_max_cp\n"),
+	PyDoc_STR("*sequence*: Power curve turbine output array [kW]\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Constraints:**\nLENGTH_EQUAL=wind_turbine_powercurve_windspeeds\n\n**Required:**\nTrue\n\nThe value of ``wind_turbine_powercurve_powerout`` depends on the following variables:\n\n\t - wind_resource_model_choice\n\t - wind_turbine_hub_ht\n\t - wind_turbine_max_cp\n"),
  	NULL},
 {"wind_turbine_powercurve_windspeeds", (getter)Turbine_get_wind_turbine_powercurve_windspeeds,(setter)Turbine_set_wind_turbine_powercurve_windspeeds,
-	PyDoc_STR("*sequence*: Power curve wind speed array [m/s]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - wind_resource_model_choice\n\t - wind_turbine_hub_ht\n\t - wind_turbine_max_cp\n"),
+	PyDoc_STR("*sequence*: Power curve wind speed array [m/s]\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Required:**\nTrue\n\nThe value of ``wind_turbine_powercurve_windspeeds`` depends on the following variables:\n\n\t - wind_resource_model_choice\n\t - wind_turbine_hub_ht\n\t - wind_turbine_max_cp\n"),
  	NULL},
 {"wind_turbine_rotor_diameter", (getter)Turbine_get_wind_turbine_rotor_diameter,(setter)Turbine_set_wind_turbine_rotor_diameter,
-	PyDoc_STR("*float*: Rotor diameter [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n\t - wind_farm_xCoordinates\n\t - wind_farm_yCoordinates\n"),
+	PyDoc_STR("*float*: Rotor diameter [m]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``wind_turbine_rotor_diameter``:\n\n\t - wind_farm_xCoordinates\n\t - wind_farm_yCoordinates\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -512,11 +527,11 @@ Farm_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Farm_methods[] = {
 		{"assign",            (PyCFunction)Farm_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Farm_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Farm_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Farm_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Farm_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Farm_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Farm_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -533,6 +548,18 @@ Farm_set_max_turbine_override(VarGroupObject *self, PyObject *value, void *closu
 }
 
 static PyObject *
+Farm_get_park_wake_decay_constant(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Farm_park_wake_decay_constant_nget, self->data_ptr);
+}
+
+static int
+Farm_set_park_wake_decay_constant(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Farm_park_wake_decay_constant_nset, self->data_ptr);
+}
+
+static PyObject *
 Farm_get_system_capacity(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Windpower_Farm_system_capacity_nget, self->data_ptr);
@@ -542,6 +569,18 @@ static int
 Farm_set_system_capacity(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Windpower_Farm_system_capacity_nset, self->data_ptr);
+}
+
+static PyObject *
+Farm_get_wake_loss_multiplier(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Farm_wake_loss_multiplier_nget, self->data_ptr);
+}
+
+static int
+Farm_set_wake_loss_multiplier(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Farm_wake_loss_multiplier_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -594,22 +633,28 @@ Farm_set_wind_resource_turbulence_coeff(VarGroupObject *self, PyObject *value, v
 
 static PyGetSetDef Farm_getset[] = {
 {"max_turbine_override", (getter)Farm_get_max_turbine_override,(setter)Farm_set_max_turbine_override,
-	PyDoc_STR("*float*: Override the max number of turbines for wake modeling [numTurbines]\n\n*Info*: set new max num turbines"),
+	PyDoc_STR("*float*: Override the max number of turbines for wake modeling [numTurbines]\n\n**Info:**\nset new max num turbines"),
+ 	NULL},
+{"park_wake_decay_constant", (getter)Farm_get_park_wake_decay_constant,(setter)Farm_set_park_wake_decay_constant,
+	PyDoc_STR("*float*: Wake decay constant for Park model [0..1]"),
  	NULL},
 {"system_capacity", (getter)Farm_get_system_capacity,(setter)Farm_set_system_capacity,
-	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n*Constraints*: MIN=0\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - wind_turbine_rotor_diameter\n"),
+	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nTrue\n\nThe value of ``system_capacity`` depends on the following variables:\n\n\t - wind_turbine_rotor_diameter\n"),
+ 	NULL},
+{"wake_loss_multiplier", (getter)Farm_get_wake_loss_multiplier,(setter)Farm_set_wake_loss_multiplier,
+	PyDoc_STR("*float*: Multiplier for the calculated wake loss\n\n**Info:**\n>1 increases loss, <1 decreases loss\n\n**Constraints:**\nMIN=0"),
  	NULL},
 {"wind_farm_wake_model", (getter)Farm_get_wind_farm_wake_model,(setter)Farm_set_wind_farm_wake_model,
-	PyDoc_STR("*float*: Wake Model [Simple, Park, EV, Constant] [0/1/2/3]\n\n*Constraints*: INTEGER\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - wake_int_loss\n"),
+	PyDoc_STR("*float*: Wake Model [Simple, Park, EV, Constant] [0/1/2/3]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``wind_farm_wake_model``:\n\n\t - wake_int_loss\n"),
  	NULL},
 {"wind_farm_xCoordinates", (getter)Farm_get_wind_farm_xCoordinates,(setter)Farm_set_wind_farm_xCoordinates,
-	PyDoc_STR("*sequence*: Turbine X coordinates [m]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - wind_turbine_rotor_diameter\n"),
+	PyDoc_STR("*sequence*: Turbine X coordinates [m]\n\n**Required:**\nTrue\n\nThe value of ``wind_farm_xCoordinates`` depends on the following variables:\n\n\t - wind_turbine_rotor_diameter\n"),
  	NULL},
 {"wind_farm_yCoordinates", (getter)Farm_get_wind_farm_yCoordinates,(setter)Farm_set_wind_farm_yCoordinates,
-	PyDoc_STR("*sequence*: Turbine Y coordinates [m]\n\n*Constraints*: LENGTH_EQUAL=wind_farm_xCoordinates\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - wind_turbine_rotor_diameter\n"),
+	PyDoc_STR("*sequence*: Turbine Y coordinates [m]\n\n**Constraints:**\nLENGTH_EQUAL=wind_farm_xCoordinates\n\n**Required:**\nTrue\n\nThe value of ``wind_farm_yCoordinates`` depends on the following variables:\n\n\t - wind_turbine_rotor_diameter\n"),
  	NULL},
 {"wind_resource_turbulence_coeff", (getter)Farm_get_wind_resource_turbulence_coeff,(setter)Farm_set_wind_resource_turbulence_coeff,
-	PyDoc_STR("*float*: Turbulence coefficient [%]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
+	PyDoc_STR("*float*: Turbulence coefficient [%]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -724,11 +769,11 @@ Losses_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Losses_methods[] = {
 		{"assign",            (PyCFunction)Losses_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Losses_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Losses_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Losses_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Losses_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Losses_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Losses_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -889,6 +934,18 @@ Losses_set_icing_cutoff_temp(VarGroupObject *self, PyObject *value, void *closur
 }
 
 static PyObject *
+Losses_get_icing_persistence_timesteps(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_icing_persistence_timesteps_nget, self->data_ptr);
+}
+
+static int
+Losses_set_icing_persistence_timesteps(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_icing_persistence_timesteps_nset, self->data_ptr);
+}
+
+static PyObject *
 Losses_get_low_temp_cutoff(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Windpower_Losses_low_temp_cutoff_nget, self->data_ptr);
@@ -1034,79 +1091,82 @@ Losses_set_wake_int_loss(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Losses_getset[] = {
 {"avail_bop_loss", (getter)Losses_get_avail_bop_loss,(setter)Losses_set_avail_bop_loss,
-	PyDoc_STR("*float*: Balance-of-plant availability loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Balance-of-plant availability loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"avail_grid_loss", (getter)Losses_get_avail_grid_loss,(setter)Losses_set_avail_grid_loss,
-	PyDoc_STR("*float*: Grid availability loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Grid availability loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"avail_turb_loss", (getter)Losses_get_avail_turb_loss,(setter)Losses_set_avail_turb_loss,
-	PyDoc_STR("*float*: Turbine availabaility loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Turbine availabaility loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"elec_eff_loss", (getter)Losses_get_elec_eff_loss,(setter)Losses_set_elec_eff_loss,
-	PyDoc_STR("*float*: Electrical efficiency loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Electrical efficiency loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"elec_parasitic_loss", (getter)Losses_get_elec_parasitic_loss,(setter)Losses_set_elec_parasitic_loss,
-	PyDoc_STR("*float*: Electrical parasitic consumption loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Electrical parasitic consumption loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"en_icing_cutoff", (getter)Losses_get_en_icing_cutoff,(setter)Losses_set_en_icing_cutoff,
-	PyDoc_STR("*float*: Enable Icing Cutoff [0/1]\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable Icing Cutoff [0/1]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"en_low_temp_cutoff", (getter)Losses_get_en_low_temp_cutoff,(setter)Losses_set_en_low_temp_cutoff,
-	PyDoc_STR("*float*: Enable Low Temperature Cutoff [0/1]\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable Low Temperature Cutoff [0/1]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"env_degrad_loss", (getter)Losses_get_env_degrad_loss,(setter)Losses_set_env_degrad_loss,
-	PyDoc_STR("*float*: Environmental Degradation loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Environmental Degradation loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"env_env_loss", (getter)Losses_get_env_env_loss,(setter)Losses_set_env_env_loss,
-	PyDoc_STR("*float*: Environmental External Conditions loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Environmental External Conditions loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"env_exposure_loss", (getter)Losses_get_env_exposure_loss,(setter)Losses_set_env_exposure_loss,
-	PyDoc_STR("*float*: Environmental Exposure loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Environmental Exposure loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"env_icing_loss", (getter)Losses_get_env_icing_loss,(setter)Losses_set_env_icing_loss,
-	PyDoc_STR("*float*: Environmental Icing loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Environmental Icing loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"icing_cutoff_rh", (getter)Losses_get_icing_cutoff_rh,(setter)Losses_set_icing_cutoff_rh,
-	PyDoc_STR("*float*: Icing Cutoff Relative Humidity [%]\n\n*Info*: 'rh' required in wind_resource_data\n\n*Constraints*: MIN=0\n\n*Required*: True if en_icing_cutoff=1"),
+	PyDoc_STR("*float*: Icing Cutoff Relative Humidity [%]\n\n**Info:**\n'rh' required in wind_resource_data\n\n**Constraints:**\nMIN=0\n\n**Required:**\nRequired if en_icing_cutoff=1"),
  	NULL},
 {"icing_cutoff_temp", (getter)Losses_get_icing_cutoff_temp,(setter)Losses_set_icing_cutoff_temp,
-	PyDoc_STR("*float*: Icing Cutoff Temperature [C]\n\n*Required*: True if en_icing_cutoff=1"),
+	PyDoc_STR("*float*: Icing Cutoff Temperature [C]\n\n**Required:**\nRequired if en_icing_cutoff=1"),
+ 	NULL},
+{"icing_persistence_timesteps", (getter)Losses_get_icing_persistence_timesteps,(setter)Losses_set_icing_persistence_timesteps,
+	PyDoc_STR("*float*: Num timesteps icing lasts if conditions are met\n\n**Info:**\nincludes initial timestep\n\n**Constraints:**\nMIN=1,INTEGER\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"low_temp_cutoff", (getter)Losses_get_low_temp_cutoff,(setter)Losses_set_low_temp_cutoff,
-	PyDoc_STR("*float*: Low Temperature Cutoff [C]\n\n*Required*: True if en_low_temp_cutoff=1"),
+	PyDoc_STR("*float*: Low Temperature Cutoff [C]\n\n**Required:**\nRequired if en_low_temp_cutoff=1"),
  	NULL},
 {"ops_env_loss", (getter)Losses_get_ops_env_loss,(setter)Losses_set_ops_env_loss,
-	PyDoc_STR("*float*: Environmental/Permit Curtailment loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Environmental/Permit Curtailment loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ops_grid_loss", (getter)Losses_get_ops_grid_loss,(setter)Losses_set_ops_grid_loss,
-	PyDoc_STR("*float*: Grid curtailment loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Grid curtailment loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ops_load_loss", (getter)Losses_get_ops_load_loss,(setter)Losses_set_ops_load_loss,
-	PyDoc_STR("*float*: Load curtailment loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Load curtailment loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ops_strategies_loss", (getter)Losses_get_ops_strategies_loss,(setter)Losses_set_ops_strategies_loss,
-	PyDoc_STR("*float*: Operational strategies loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Operational strategies loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"turb_generic_loss", (getter)Losses_get_turb_generic_loss,(setter)Losses_set_turb_generic_loss,
-	PyDoc_STR("*float*: Turbine Generic Powercurve loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Turbine Generic Powercurve loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"turb_hysteresis_loss", (getter)Losses_get_turb_hysteresis_loss,(setter)Losses_set_turb_hysteresis_loss,
-	PyDoc_STR("*float*: Turbine High Wind Hysteresis loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Turbine High Wind Hysteresis loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"turb_perf_loss", (getter)Losses_get_turb_perf_loss,(setter)Losses_set_turb_perf_loss,
-	PyDoc_STR("*float*: Turbine Sub-optimal performance loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Turbine Sub-optimal performance loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"turb_specific_loss", (getter)Losses_get_turb_specific_loss,(setter)Losses_set_turb_specific_loss,
-	PyDoc_STR("*float*: Turbine Site-specific Powercurve loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Turbine Site-specific Powercurve loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"wake_ext_loss", (getter)Losses_get_wake_ext_loss,(setter)Losses_set_wake_ext_loss,
-	PyDoc_STR("*float*: External Wake loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: External Wake loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"wake_future_loss", (getter)Losses_get_wake_future_loss,(setter)Losses_set_wake_future_loss,
-	PyDoc_STR("*float*: Future Wake loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Future Wake loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"wake_int_loss", (getter)Losses_get_wake_int_loss,(setter)Losses_set_wake_int_loss,
-	PyDoc_STR("*float*: Constant Wake Model, internal wake loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: True if wind_farm_wake_model=3\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - wind_farm_wake_model\n"),
+	PyDoc_STR("*float*: Constant Wake Model, internal wake loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if wind_farm_wake_model=3\n\nThe value of ``wake_int_loss`` depends on the following variables:\n\n\t - wind_farm_wake_model\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1221,11 +1281,11 @@ Uncertainty_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Uncertainty_methods[] = {
 		{"assign",            (PyCFunction)Uncertainty_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Uncertainty_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Uncertainty_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Uncertainty_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Uncertainty_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Uncertainty_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Uncertainty_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1243,7 +1303,7 @@ Uncertainty_set_total_uncert(VarGroupObject *self, PyObject *value, void *closur
 
 static PyGetSetDef Uncertainty_getset[] = {
 {"total_uncert", (getter)Uncertainty_get_total_uncert,(setter)Uncertainty_set_total_uncert,
-	PyDoc_STR("*float*: Total uncertainty in energy production as percent of annual energy [%]\n\n*Constraints*: MIN=0,MAX=100"),
+	PyDoc_STR("*float*: Total uncertainty in energy production as percent of annual energy [%]\n\n**Constraints:**\nMIN=0,MAX=100"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1282,6 +1342,293 @@ static PyTypeObject Uncertainty_Type = {
 		Uncertainty_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		Uncertainty_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * HybridCosts Group
+ */ 
+
+static PyTypeObject HybridCosts_Type;
+
+static PyObject *
+HybridCosts_new(SAM_Windpower data_ptr)
+{
+	PyObject* new_obj = HybridCosts_Type.tp_alloc(&HybridCosts_Type,0);
+
+	VarGroupObject* HybridCosts_obj = (VarGroupObject*)new_obj;
+
+	HybridCosts_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* HybridCosts methods */
+
+static PyObject *
+HybridCosts_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Windpower", "HybridCosts")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+HybridCosts_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &HybridCosts_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Windpower", "HybridCosts")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+HybridCosts_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &HybridCosts_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef HybridCosts_methods[] = {
+		{"assign",            (PyCFunction)HybridCosts_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``HybridCosts_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)HybridCosts_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``HybridCosts_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)HybridCosts_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+HybridCosts_get_degradation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_HybridCosts_degradation_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_degradation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Windpower_HybridCosts_degradation_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_land_area(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_HybridCosts_land_area_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_land_area(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_HybridCosts_land_area_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_HybridCosts_om_capacity_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_capacity(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Windpower_HybridCosts_om_capacity_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_capacity_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_HybridCosts_om_capacity_escal_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_capacity_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_HybridCosts_om_capacity_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_fixed(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_HybridCosts_om_fixed_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_fixed(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Windpower_HybridCosts_om_fixed_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_fixed_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_HybridCosts_om_fixed_escal_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_fixed_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_HybridCosts_om_fixed_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_land_lease(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_HybridCosts_om_land_lease_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_land_lease(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Windpower_HybridCosts_om_land_lease_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_land_lease_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_HybridCosts_om_land_lease_escal_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_land_lease_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_HybridCosts_om_land_lease_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_production(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_HybridCosts_om_production_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_production(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Windpower_HybridCosts_om_production_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_om_production_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_HybridCosts_om_production_escal_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_om_production_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_HybridCosts_om_production_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_total_installed_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_HybridCosts_total_installed_cost_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_total_installed_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_HybridCosts_total_installed_cost_nset, self->data_ptr);
+}
+
+static PyGetSetDef HybridCosts_getset[] = {
+{"degradation", (getter)HybridCosts_get_degradation,(setter)HybridCosts_set_degradation,
+	PyDoc_STR("*sequence*: Annual AC degradation [%]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"land_area", (getter)HybridCosts_get_land_area,(setter)HybridCosts_set_land_area,
+	PyDoc_STR("*float*: Total land area [acres]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_capacity", (getter)HybridCosts_get_om_capacity,(setter)HybridCosts_set_om_capacity,
+	PyDoc_STR("*sequence*: Capacity-based O&M amount [$/kWcap]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_capacity_escal", (getter)HybridCosts_get_om_capacity_escal,(setter)HybridCosts_set_om_capacity_escal,
+	PyDoc_STR("*float*: Capacity-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_fixed", (getter)HybridCosts_get_om_fixed,(setter)HybridCosts_set_om_fixed,
+	PyDoc_STR("*sequence*: Fixed O&M annual amount [$/year]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_fixed_escal", (getter)HybridCosts_get_om_fixed_escal,(setter)HybridCosts_set_om_fixed_escal,
+	PyDoc_STR("*float*: Fixed O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_land_lease", (getter)HybridCosts_get_om_land_lease,(setter)HybridCosts_set_om_land_lease,
+	PyDoc_STR("*sequence*: Land lease cost [$/acre]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_land_lease_escal", (getter)HybridCosts_get_om_land_lease_escal,(setter)HybridCosts_set_om_land_lease_escal,
+	PyDoc_STR("*float*: Land lease cost escalation [%/yr]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_production", (getter)HybridCosts_get_om_production,(setter)HybridCosts_set_om_production,
+	PyDoc_STR("*sequence*: Production-based O&M amount [$/MWh]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"om_production_escal", (getter)HybridCosts_get_om_production_escal,(setter)HybridCosts_set_om_production_escal,
+	PyDoc_STR("*float*: Production-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"total_installed_cost", (getter)HybridCosts_get_total_installed_cost,(setter)HybridCosts_set_total_installed_cost,
+	PyDoc_STR("*float*: Total installed cost [$]\n\n**Required:**\nTrue\n\nThe value of ``total_installed_cost`` depends on the following variables:\n\n\t - wind_turbine_rotor_diameter\n"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject HybridCosts_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Windpower.HybridCosts",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		HybridCosts_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		HybridCosts_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -1358,11 +1705,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1403,6 +1750,24 @@ Outputs_get_annual_gross_energy(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_annual_wake_loss_internal_kWh(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Outputs_annual_wake_loss_internal_kWh_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_wake_loss_internal_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Outputs_annual_wake_loss_internal_percent_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_wake_loss_total_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Outputs_annual_wake_loss_total_percent_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_avail_losses(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Windpower_Outputs_avail_losses_nget, self->data_ptr);
@@ -1415,6 +1780,60 @@ Outputs_get_capacity_factor(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_cf_battery_replacement_cost_schedule(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_Outputs_cf_battery_replacement_cost_schedule_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_net(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_Outputs_cf_energy_net_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_fuelcell_replacement_cost_schedule(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_Outputs_cf_fuelcell_replacement_cost_schedule_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_land_lease_expense(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_Outputs_cf_land_lease_expense_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_Outputs_cf_om_capacity_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_fixed(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_Outputs_cf_om_fixed_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_fuel_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_Outputs_cf_om_fuel_cost_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_land_lease(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_Outputs_cf_om_land_lease_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_production(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_Outputs_cf_om_production_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_cutoff_losses(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Windpower_Outputs_cutoff_losses_nget, self->data_ptr);
@@ -1424,6 +1843,12 @@ static PyObject *
 Outputs_get_elec_losses(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Windpower_Outputs_elec_losses_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_elev(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Outputs_elev_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1442,6 +1867,18 @@ static PyObject *
 Outputs_get_kwh_per_kw(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Windpower_Outputs_kwh_per_kw_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_lat(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Outputs_lat_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_lon(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Outputs_lon_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1481,9 +1918,15 @@ Outputs_get_turbine_output_by_windspeed_bin(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_wake_losses(VarGroupObject *self, void *closure)
+Outputs_get_wake_loss_internal_kW(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Windpower_Outputs_wake_losses_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Windpower_Outputs_wake_loss_internal_kW_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_wake_loss_internal_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_Outputs_wake_loss_internal_percent_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1504,9 +1947,15 @@ Outputs_get_wind_speed_average(VarGroupObject *self, void *closure)
 	return PySAM_double_getter(SAM_Windpower_Outputs_wind_speed_average_nget, self->data_ptr);
 }
 
+static PyObject *
+Outputs_get_year(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Outputs_year_nget, self->data_ptr);
+}
+
 static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	PyDoc_STR("*float*: Annual Energy [kWh]"),
+	PyDoc_STR("*float*: Annual AC energy in Year 1 [kWh]"),
  	NULL},
 {"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
@@ -1521,7 +1970,16 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Annual energy with 95% probability of exceedance [kWh]"),
  	NULL},
 {"annual_gross_energy", (getter)Outputs_get_annual_gross_energy,(setter)0,
-	PyDoc_STR("*float*: Annual Gross Energy [kWh]"),
+	PyDoc_STR("*float*: Annual gross AC energy in Year 1 [kWh]"),
+ 	NULL},
+{"annual_wake_loss_internal_kWh", (getter)Outputs_get_annual_wake_loss_internal_kWh,(setter)0,
+	PyDoc_STR("*float*: Annual internal wake loss [kWh]"),
+ 	NULL},
+{"annual_wake_loss_internal_percent", (getter)Outputs_get_annual_wake_loss_internal_percent,(setter)0,
+	PyDoc_STR("*float*: Annual internal wake loss percentage [%]"),
+ 	NULL},
+{"annual_wake_loss_total_percent", (getter)Outputs_get_annual_wake_loss_total_percent,(setter)0,
+	PyDoc_STR("*float*: Annual total wake loss percentage [%]"),
  	NULL},
 {"avail_losses", (getter)Outputs_get_avail_losses,(setter)0,
 	PyDoc_STR("*float*: Availability losses [%]"),
@@ -1529,11 +1987,41 @@ static PyGetSetDef Outputs_getset[] = {
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
 	PyDoc_STR("*float*: Capacity factor [%]"),
  	NULL},
+{"cf_battery_replacement_cost_schedule", (getter)Outputs_get_cf_battery_replacement_cost_schedule,(setter)0,
+	PyDoc_STR("*sequence*: replacement O&M costs [$]"),
+ 	NULL},
+{"cf_energy_net", (getter)Outputs_get_cf_energy_net,(setter)0,
+	PyDoc_STR("*sequence*: annual energy [kWh]"),
+ 	NULL},
+{"cf_fuelcell_replacement_cost_schedule", (getter)Outputs_get_cf_fuelcell_replacement_cost_schedule,(setter)0,
+	PyDoc_STR("*sequence*: replacement O&M costs [$]"),
+ 	NULL},
+{"cf_land_lease_expense", (getter)Outputs_get_cf_land_lease_expense,(setter)0,
+	PyDoc_STR("*sequence*: Land lease expense [$]"),
+ 	NULL},
+{"cf_om_capacity", (getter)Outputs_get_cf_om_capacity,(setter)0,
+	PyDoc_STR("*sequence*: capacity O&M costs [$]"),
+ 	NULL},
+{"cf_om_fixed", (getter)Outputs_get_cf_om_fixed,(setter)0,
+	PyDoc_STR("*sequence*: fixed O&M costs [$]"),
+ 	NULL},
+{"cf_om_fuel_cost", (getter)Outputs_get_cf_om_fuel_cost,(setter)0,
+	PyDoc_STR("*sequence*: fossil fuel O&M costs [$]"),
+ 	NULL},
+{"cf_om_land_lease", (getter)Outputs_get_cf_om_land_lease,(setter)0,
+	PyDoc_STR("*sequence*: land lease O&M costs [$]"),
+ 	NULL},
+{"cf_om_production", (getter)Outputs_get_cf_om_production,(setter)0,
+	PyDoc_STR("*sequence*: production O&M costs [$]"),
+ 	NULL},
 {"cutoff_losses", (getter)Outputs_get_cutoff_losses,(setter)0,
 	PyDoc_STR("*float*: Low temp and Icing Cutoff losses [%]"),
  	NULL},
 {"elec_losses", (getter)Outputs_get_elec_losses,(setter)0,
 	PyDoc_STR("*float*: Electrical losses [%]"),
+ 	NULL},
+{"elev", (getter)Outputs_get_elev,(setter)0,
+	PyDoc_STR("*float*: Site elevation [m]"),
  	NULL},
 {"env_losses", (getter)Outputs_get_env_losses,(setter)0,
 	PyDoc_STR("*float*: Environmental losses [%]"),
@@ -1544,8 +2032,14 @@ static PyGetSetDef Outputs_getset[] = {
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
 	PyDoc_STR("*float*: First year kWh/kW [kWh/kW]"),
  	NULL},
+{"lat", (getter)Outputs_get_lat,(setter)0,
+	PyDoc_STR("*float*: Latitude [degrees]"),
+ 	NULL},
+{"lon", (getter)Outputs_get_lon,(setter)0,
+	PyDoc_STR("*float*: Longitude [degrees]"),
+ 	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	PyDoc_STR("*sequence*: Monthly Energy [kWh]"),
+	PyDoc_STR("*sequence*: Monthly AC energy in Year 1 [kWh]"),
  	NULL},
 {"ops_losses", (getter)Outputs_get_ops_losses,(setter)0,
 	PyDoc_STR("*float*: Operational losses [%]"),
@@ -1562,17 +2056,23 @@ static PyGetSetDef Outputs_getset[] = {
 {"turbine_output_by_windspeed_bin", (getter)Outputs_get_turbine_output_by_windspeed_bin,(setter)0,
 	PyDoc_STR("*sequence*: Turbine output by wind speed bin [kW]"),
  	NULL},
-{"wake_losses", (getter)Outputs_get_wake_losses,(setter)0,
-	PyDoc_STR("*float*: Wake losses [%]"),
+{"wake_loss_internal_kW", (getter)Outputs_get_wake_loss_internal_kW,(setter)0,
+	PyDoc_STR("*sequence*: Internal wake loss in kW [kW]"),
+ 	NULL},
+{"wake_loss_internal_percent", (getter)Outputs_get_wake_loss_internal_percent,(setter)0,
+	PyDoc_STR("*sequence*: Internal wake loss percent [%]"),
  	NULL},
 {"wind_direction", (getter)Outputs_get_wind_direction,(setter)0,
-	PyDoc_STR("*sequence*: Wind direction [deg]"),
+	PyDoc_STR("*sequence*: Wind direction [degrees]"),
  	NULL},
 {"wind_speed", (getter)Outputs_get_wind_speed,(setter)0,
 	PyDoc_STR("*sequence*: Wind speed [m/s]"),
  	NULL},
 {"wind_speed_average", (getter)Outputs_get_wind_speed_average,(setter)0,
 	PyDoc_STR("*float*: Average Wind speed [m/s]"),
+ 	NULL},
+{"year", (getter)Outputs_get_year,(setter)0,
+	PyDoc_STR("*float*: Year"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1653,10 +2153,6 @@ newWindpowerObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Losses", Losses_obj);
 	Py_DECREF(Losses_obj);
 
-	PyObject* Uncertainty_obj = Uncertainty_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Uncertainty", Uncertainty_obj);
-	Py_DECREF(Uncertainty_obj);
-
 	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
@@ -1671,6 +2167,14 @@ newWindpowerObject(void* data_ptr)
 
 	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
 	Py_DECREF(Adjust_obj);
+
+	PyObject* Uncertainty_obj = Uncertainty_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Uncertainty", Uncertainty_obj);
+	Py_DECREF(Uncertainty_obj);
+
+	PyObject* HybridCosts_obj = HybridCosts_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "HybridCosts", HybridCosts_obj);
+	Py_DECREF(HybridCosts_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -1692,6 +2196,14 @@ Windpower_dealloc(CmodObject *self)
 		PySAM_has_error(error);
 	}
 	PyObject_Del(self);
+}
+
+
+static PyObject *
+Windpower_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
 }
 
 
@@ -1772,6 +2284,8 @@ static PyMethodDef Windpower_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Windpower_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Windpower_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1930,12 +2444,11 @@ static PyMethodDef WindpowerModule_methods[] = {
 		{"new",             Windpower_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Windpower")},
 		{"default",             Windpower_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Windpower\n\nUse default attributes\n"
-				"`config` options:\n\n- \"WindPowerAllEquityPartnershipFlip\"\n- \"WindPowerCommercial\"\n- \"WindPowerLCOECalculator\"\n- \"WindPowerLeveragedPartnershipFlip\"\n- \"WindPowerMerchantPlant\"\n- \"WindPowerNone\"\n- \"WindPowerResidential\"\n- \"WindPowerSaleLeaseback\"\n- \"WindPowerSingleOwner\"")},
+				PyDoc_STR("default(config) -> Windpower\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsWindBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"PhotovoltaicWindBatteryHybridHostDeveloper\"*\n\n		- *\"PhotovoltaicWindBatteryHybridSingleOwner\"*\n\n		- *\"WindPowerAllEquityPartnershipFlip\"*\n\n		- *\"WindPowerCommercial\"*\n\n		- *\"WindPowerLCOECalculator\"*\n\n		- *\"WindPowerLeveragedPartnershipFlip\"*\n\n		- *\"WindPowerMerchantPlant\"*\n\n		- *\"WindPowerNone\"*\n\n		- *\"WindPowerResidential\"*\n\n		- *\"WindPowerSaleLeaseback\"*\n\n		- *\"WindPowerSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Windpower_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Windpower\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Windpower\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Windpower_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Windpower\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Windpower\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1953,25 +2466,6 @@ WindpowerModule_exec(PyObject *m)
 
 	Windpower_Type.tp_dict = PyDict_New();
 	if (!Windpower_Type.tp_dict) { goto fail; }
-
-	/// Add the AdjustmentFactors type object to Windpower_Type
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-	if (!AdjustmentFactorsModule){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
-	}
-
-	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
-	if (!AdjustmentFactors_Type){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
-	}
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Windpower_Type.tp_dict,
-						 "AdjustmentFactors",
-						 (PyObject*)AdjustmentFactors_Type);
-	Py_DECREF(&AdjustmentFactors_Type);
-	Py_XDECREF(AdjustmentFactors_Type);
 
 	/// Add the Resource type object to Windpower_Type
 	if (PyType_Ready(&Resource_Type) < 0) { goto fail; }
@@ -2007,6 +2501,13 @@ WindpowerModule_exec(PyObject *m)
 				"Uncertainty",
 				(PyObject*)&Uncertainty_Type);
 	Py_DECREF(&Uncertainty_Type);
+
+	/// Add the HybridCosts type object to Windpower_Type
+	if (PyType_Ready(&HybridCosts_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Windpower_Type.tp_dict,
+				"HybridCosts",
+				(PyObject*)&HybridCosts_Type);
+	Py_DECREF(&HybridCosts_Type);
 
 	/// Add the Outputs type object to Windpower_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

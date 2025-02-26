@@ -1,34 +1,3 @@
-class Common(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	HTF_code1 = float
-	HTF_code2 = float
-	fl_props1 = tuple
-	fl_props2 = tuple
-
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	are_equal = float
-
-
 class UserHtfComparison(object):
 	def assign(self, dict):
 		pass
@@ -45,14 +14,46 @@ class UserHtfComparison(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
 	def __init__(self, *args, **kwargs):
 		pass
 
-	Common = Common
-	Outputs = Outputs
+	class Common(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		HTF_code1 = float
+		HTF_code2 = float
+		fl_props1 = tuple
+		fl_props2 = tuple
+
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		are_equal = float
+
+
 
 
 def default(config) -> UserHtfComparison:

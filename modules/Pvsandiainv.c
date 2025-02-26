@@ -69,11 +69,11 @@ SandiaInverterModel_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SandiaInverterModel_methods[] = {
 		{"assign",            (PyCFunction)SandiaInverterModel_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SandiaInverterModel_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SandiaInverterModel_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SandiaInverterModel_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SandiaInverterModel_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SandiaInverterModel_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SandiaInverterModel_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -211,37 +211,37 @@ SandiaInverterModel_set_vdco(VarGroupObject *self, PyObject *value, void *closur
 
 static PyGetSetDef SandiaInverterModel_getset[] = {
 {"c0", (getter)SandiaInverterModel_get_c0,(setter)SandiaInverterModel_set_c0,
-	PyDoc_STR("*float*: C0: Defines parabolic curvature of relationship between ac power and dc power at reference conditions [1/W]\n\n*Required*: True"),
+	PyDoc_STR("*float*: C0: Defines parabolic curvature of relationship between ac power and dc power at reference conditions [1/W]\n\n**Required:**\nTrue"),
  	NULL},
 {"c1", (getter)SandiaInverterModel_get_c1,(setter)SandiaInverterModel_set_c1,
-	PyDoc_STR("*float*: C1: Parameter allowing Pdco to vary linearly with dc voltage input [1/V]\n\n*Required*: True"),
+	PyDoc_STR("*float*: C1: Parameter allowing Pdco to vary linearly with dc voltage input [1/V]\n\n**Required:**\nTrue"),
  	NULL},
 {"c2", (getter)SandiaInverterModel_get_c2,(setter)SandiaInverterModel_set_c2,
-	PyDoc_STR("*float*: C2: Parameter allowing Pso to vary linearly with dc voltage input  [1/V]\n\n*Required*: True"),
+	PyDoc_STR("*float*: C2: Parameter allowing Pso to vary linearly with dc voltage input  [1/V]\n\n**Required:**\nTrue"),
  	NULL},
 {"c3", (getter)SandiaInverterModel_get_c3,(setter)SandiaInverterModel_set_c3,
-	PyDoc_STR("*float*: C3: Parameter allowing C0 to vary linearly with dc voltage input [1/V]\n\n*Required*: True"),
+	PyDoc_STR("*float*: C3: Parameter allowing C0 to vary linearly with dc voltage input [1/V]\n\n**Required:**\nTrue"),
  	NULL},
 {"dc", (getter)SandiaInverterModel_get_dc,(setter)SandiaInverterModel_set_dc,
-	PyDoc_STR("*sequence*: DC power input to inverter [Watt]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: DC power input to inverter [Watt]\n\n**Required:**\nTrue"),
  	NULL},
 {"dc_voltage", (getter)SandiaInverterModel_get_dc_voltage,(setter)SandiaInverterModel_set_dc_voltage,
-	PyDoc_STR("*sequence*: DC voltage input to inverter [Volt]\n\n*Constraints*: LENGTH_EQUAL=dc\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: DC voltage input to inverter [Volt]\n\n**Constraints:**\nLENGTH_EQUAL=dc\n\n**Required:**\nTrue"),
  	NULL},
 {"paco", (getter)SandiaInverterModel_get_paco,(setter)SandiaInverterModel_set_paco,
-	PyDoc_STR("*float*: Max AC power rating [Wac]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Max AC power rating [Wac]\n\n**Required:**\nTrue"),
  	NULL},
 {"pdco", (getter)SandiaInverterModel_get_pdco,(setter)SandiaInverterModel_set_pdco,
-	PyDoc_STR("*float*: DC power level at which Paco is achieved [Wdc]\n\n*Required*: True"),
+	PyDoc_STR("*float*: DC power level at which Paco is achieved [Wdc]\n\n**Required:**\nTrue"),
  	NULL},
 {"pntare", (getter)SandiaInverterModel_get_pntare,(setter)SandiaInverterModel_set_pntare,
-	PyDoc_STR("*float*: Parasitic AC consumption [Wac]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Parasitic AC consumption [Wac]\n\n**Required:**\nTrue"),
  	NULL},
 {"pso", (getter)SandiaInverterModel_get_pso,(setter)SandiaInverterModel_set_pso,
-	PyDoc_STR("*float*: DC power level required to start inversion [Wdc]\n\n*Required*: True"),
+	PyDoc_STR("*float*: DC power level required to start inversion [Wdc]\n\n**Required:**\nTrue"),
  	NULL},
 {"vdco", (getter)SandiaInverterModel_get_vdco,(setter)SandiaInverterModel_set_vdco,
-	PyDoc_STR("*float*: DV voltage level at which Paco is achieved [Volt]\n\n*Required*: True"),
+	PyDoc_STR("*float*: DV voltage level at which Paco is achieved [Volt]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -356,11 +356,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -519,6 +519,14 @@ Pvsandiainv_dealloc(CmodObject *self)
 
 
 static PyObject *
+Pvsandiainv_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Pvsandiainv_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -595,6 +603,8 @@ static PyMethodDef Pvsandiainv_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Pvsandiainv_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Pvsandiainv_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -753,12 +763,11 @@ static PyMethodDef PvsandiainvModule_methods[] = {
 		{"new",             Pvsandiainv_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Pvsandiainv")},
 		{"default",             Pvsandiainv_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Pvsandiainv\n\nUse default attributes\n"
-				"None")},
+				PyDoc_STR("default(config) -> Pvsandiainv\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Pvsandiainv_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Pvsandiainv\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Pvsandiainv\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Pvsandiainv_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Pvsandiainv\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Pvsandiainv\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

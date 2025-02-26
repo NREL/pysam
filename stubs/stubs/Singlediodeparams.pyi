@@ -1,43 +1,3 @@
-class SingleDiodeModel(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	Adj_ref = float
-	I = float
-	Il_ref = float
-	Io_ref = float
-	Rs_ref = float
-	Rsh_ref = float
-	T = float
-	a_ref = float
-	alpha_isc = float
-
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	Il = float
-	Io = float
-	Rs = float
-	Rsh = float
-	a = float
-
-
 class Singlediodeparams(object):
 	def assign(self, dict):
 		pass
@@ -54,14 +14,55 @@ class Singlediodeparams(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
 	def __init__(self, *args, **kwargs):
 		pass
 
-	SingleDiodeModel = SingleDiodeModel
-	Outputs = Outputs
+	class SingleDiodeModel(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		Adj_ref = float
+		I = float
+		Il_ref = float
+		Io_ref = float
+		Rs_ref = float
+		Rsh_ref = float
+		T = float
+		a_ref = float
+		alpha_isc = float
+
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		Il = float
+		Io = float
+		Rs = float
+		Rsh = float
+		a = float
+
+
 
 
 def default(config) -> Singlediodeparams:

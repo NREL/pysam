@@ -1,38 +1,3 @@
-class TimeSequence(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	end_time = float
-	start_time = float
-	time_step = float
-
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	day = tuple
-	hour = tuple
-	minute = tuple
-	month = tuple
-	time = tuple
-	timehr = tuple
-
-
 class Timeseq(object):
 	def assign(self, dict):
 		pass
@@ -49,14 +14,50 @@ class Timeseq(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
 	def __init__(self, *args, **kwargs):
 		pass
 
-	TimeSequence = TimeSequence
-	Outputs = Outputs
+	class TimeSequence(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		end_time = float
+		start_time = float
+		time_step = float
+
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		day = tuple
+		hour = tuple
+		minute = tuple
+		month = tuple
+		time = tuple
+		timehr = tuple
+
+
 
 
 def default(config) -> Timeseq:

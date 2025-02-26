@@ -69,11 +69,11 @@ MHKTidal_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef MHKTidal_methods[] = {
 		{"assign",            (PyCFunction)MHKTidal_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``MHKTidal_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``MHKTidal_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)MHKTidal_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``MHKTidal_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``MHKTidal_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)MHKTidal_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -234,6 +234,30 @@ MHKTidal_set_tidal_resource(VarGroupObject *self, PyObject *value, void *closure
 }
 
 static PyObject *
+MHKTidal_get_tidal_resource_model_choice(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkTidal_MHKTidal_tidal_resource_model_choice_nget, self->data_ptr);
+}
+
+static int
+MHKTidal_set_tidal_resource_model_choice(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MhkTidal_MHKTidal_tidal_resource_model_choice_nset, self->data_ptr);
+}
+
+static PyObject *
+MHKTidal_get_tidal_velocity(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkTidal_MHKTidal_tidal_velocity_aget, self->data_ptr);
+}
+
+static int
+MHKTidal_set_tidal_velocity(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_MhkTidal_MHKTidal_tidal_velocity_aset, self->data_ptr);
+}
+
+static PyObject *
 MHKTidal_get_total_operating_cost(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkTidal_MHKTidal_total_operating_cost_nget, self->data_ptr);
@@ -247,46 +271,52 @@ MHKTidal_set_total_operating_cost(VarGroupObject *self, PyObject *value, void *c
 
 static PyGetSetDef MHKTidal_getset[] = {
 {"balance_of_system_cost_total", (getter)MHKTidal_get_balance_of_system_cost_total,(setter)MHKTidal_set_balance_of_system_cost_total,
-	PyDoc_STR("*float*: BOS costs [$]\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: BOS costs [$]\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"device_costs_total", (getter)MHKTidal_get_device_costs_total,(setter)MHKTidal_set_device_costs_total,
-	PyDoc_STR("*float*: Device costs [$]\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Device costs [$]\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"financial_cost_total", (getter)MHKTidal_get_financial_cost_total,(setter)MHKTidal_set_financial_cost_total,
-	PyDoc_STR("*float*: Financial costs [$]\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Financial costs [$]\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"fixed_charge_rate", (getter)MHKTidal_get_fixed_charge_rate,(setter)MHKTidal_set_fixed_charge_rate,
-	PyDoc_STR("*float*: FCR from LCOE Cost page\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: FCR from LCOE Cost page\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"loss_additional", (getter)MHKTidal_get_loss_additional,(setter)MHKTidal_set_loss_additional,
-	PyDoc_STR("*float*: Additional losses [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Additional losses [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"loss_array_spacing", (getter)MHKTidal_get_loss_array_spacing,(setter)MHKTidal_set_loss_array_spacing,
-	PyDoc_STR("*float*: Array spacing loss [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Array spacing loss [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"loss_downtime", (getter)MHKTidal_get_loss_downtime,(setter)MHKTidal_set_loss_downtime,
-	PyDoc_STR("*float*: Array/WEC downtime loss [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Array/WEC downtime loss [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"loss_resource_overprediction", (getter)MHKTidal_get_loss_resource_overprediction,(setter)MHKTidal_set_loss_resource_overprediction,
-	PyDoc_STR("*float*: Resource overprediction loss [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Resource overprediction loss [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"loss_transmission", (getter)MHKTidal_get_loss_transmission,(setter)MHKTidal_set_loss_transmission,
-	PyDoc_STR("*float*: Transmission losses [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Transmission losses [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"number_devices", (getter)MHKTidal_get_number_devices,(setter)MHKTidal_set_number_devices,
-	PyDoc_STR("*float*: Number of tidal devices in the system\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 1\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - tidal_power_curve\n"),
+	PyDoc_STR("*float*: Number of tidal devices in the system\n\n**Constraints:**\nINTEGER\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults.\n\nThe value of the following variables depends on ``number_devices``:\n\n\t - system_capacity\n\n\nThe value of ``number_devices`` depends on the following variables:\n\n\t - tidal_power_curve\n\t - tidal_resource\n"),
  	NULL},
 {"system_capacity", (getter)MHKTidal_get_system_capacity,(setter)MHKTidal_set_system_capacity,
-	PyDoc_STR("*float*: System Nameplate Capacity [kW]\n\n*Required*: If not provided, assumed to be 0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - number_devices\n\t - tidal_power_curve\n"),
+	PyDoc_STR("*float*: System Nameplate Capacity [kW]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of ``system_capacity`` depends on the following variables:\n\n\t - number_devices\n\t - tidal_power_curve\n\t - tidal_resource\n"),
  	NULL},
 {"tidal_power_curve", (getter)MHKTidal_get_tidal_power_curve,(setter)MHKTidal_set_tidal_power_curve,
-	PyDoc_STR("*sequence[sequence]*: Power curve of tidal energy device as function of stream speeds [kW]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - number_devices\n\t - system_capacity\n"),
+	PyDoc_STR("*sequence[sequence]*: Power curve of tidal energy device as function of stream speeds [kW]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``tidal_power_curve``:\n\n\t - number_devices\n\t - system_capacity\n\n\nThe value of ``tidal_power_curve`` depends on the following variables:\n\n\t - tidal_resource\n"),
  	NULL},
 {"tidal_resource", (getter)MHKTidal_get_tidal_resource,(setter)MHKTidal_set_tidal_resource,
-	PyDoc_STR("*sequence[sequence]*: Frequency distribution of resource as a function of stream speeds\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Frequency distribution of resource as a function of stream speeds\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``tidal_resource``:\n\n\t - number_devices\n\t - system_capacity\n\t - tidal_power_curve\n"),
+ 	NULL},
+{"tidal_resource_model_choice", (getter)MHKTidal_get_tidal_resource_model_choice,(setter)MHKTidal_set_tidal_resource_model_choice,
+	PyDoc_STR("*float*: Resource distribution or time series tidal resource data [0/1]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"tidal_velocity", (getter)MHKTidal_get_tidal_velocity,(setter)MHKTidal_set_tidal_velocity,
+	PyDoc_STR("*sequence*: Tidal velocity [m/s]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"total_operating_cost", (getter)MHKTidal_get_total_operating_cost,(setter)MHKTidal_set_total_operating_cost,
-	PyDoc_STR("*float*: O&M costs [$]\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: O&M costs [$]\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -401,11 +431,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -443,6 +473,12 @@ static PyObject *
 Outputs_get_device_rated_capacity(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkTidal_Outputs_device_rated_capacity_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkTidal_Outputs_gen_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -564,19 +600,22 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Cumulative annual energy production of array as function of speed [kWh]"),
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	PyDoc_STR("*float*: Annual energy production of array [kWh]"),
+	PyDoc_STR("*float*: Annual AC energy in Year 1 [kWh]"),
  	NULL},
 {"annual_energy_distribution", (getter)Outputs_get_annual_energy_distribution,(setter)0,
 	PyDoc_STR("*sequence*: Annual energy production of array as function of speed [kWh]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
-	PyDoc_STR("*float*: Capacity Factor of array [%]"),
+	PyDoc_STR("*float*: Capacity factor [%]"),
  	NULL},
 {"device_average_power", (getter)Outputs_get_device_average_power,(setter)0,
 	PyDoc_STR("*float*: Average power production of a single device [kW]"),
  	NULL},
 {"device_rated_capacity", (getter)Outputs_get_device_rated_capacity,(setter)0,
 	PyDoc_STR("*float*: Rated capacity of device [kW]"),
+ 	NULL},
+{"gen", (getter)Outputs_get_gen,(setter)0,
+	PyDoc_STR("*sequence*: System power generated [kW]"),
  	NULL},
 {"tidal_power_end_velocity", (getter)Outputs_get_tidal_power_end_velocity,(setter)0,
 	PyDoc_STR("*float*: Last tidal velocity where power curve is greater than 0  [m/s]"),
@@ -702,6 +741,21 @@ newMhkTidalObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "MHKTidal", MHKTidal_obj);
 	Py_DECREF(MHKTidal_obj);
 
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+
+	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
+	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
+	Py_XDECREF(data_cap);
+	Py_XDECREF(AdjustmentFactorsModule);
+
+	if (!Adjust_obj){
+		PyErr_SetString(PyExc_Exception, "Couldn't create AdjustmentFactorsObject\n");
+		return NULL;
+	}
+
+	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
+	Py_DECREF(Adjust_obj);
+
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
@@ -722,6 +776,14 @@ MhkTidal_dealloc(CmodObject *self)
 		PySAM_has_error(error);
 	}
 	PyObject_Del(self);
+}
+
+
+static PyObject *
+MhkTidal_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
 }
 
 
@@ -802,6 +864,8 @@ static PyMethodDef MhkTidal_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)MhkTidal_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)MhkTidal_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -960,12 +1024,11 @@ static PyMethodDef MhkTidalModule_methods[] = {
 		{"new",             MhkTidal_new,         METH_VARARGS,
 				PyDoc_STR("new() -> MhkTidal")},
 		{"default",             MhkTidal_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> MhkTidal\n\nUse default attributes\n"
-				"`config` options:\n\n- \"MEtidalLCOECalculator\"\n- \"MEtidalNone\"")},
+				PyDoc_STR("default(config) -> MhkTidal\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"MEtidalLCOECalculator\"*\n\n		- *\"MEtidalNone\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             MhkTidal_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> MhkTidal\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> MhkTidal\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   MhkTidal_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> MhkTidal\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> MhkTidal\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

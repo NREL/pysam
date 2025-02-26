@@ -1,35 +1,3 @@
-class SimpleLCOE(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	annual_energy = float
-	capital_cost = float
-	fixed_charge_rate = float
-	fixed_operating_cost = float
-	variable_operating_cost = float
-
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	lcoe_fcr = float
-
-
 class Lcoefcr(object):
 	def assign(self, dict):
 		pass
@@ -46,14 +14,47 @@ class Lcoefcr(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
 	def __init__(self, *args, **kwargs):
 		pass
 
-	SimpleLCOE = SimpleLCOE
-	Outputs = Outputs
+	class SimpleLCOE(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		annual_energy = float
+		capital_cost = float
+		fixed_charge_rate = float
+		fixed_operating_cost = float
+		variable_operating_cost = float
+
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		lcoe_fcr = float
+
+
 
 
 def default(config) -> Lcoefcr:

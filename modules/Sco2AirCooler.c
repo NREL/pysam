@@ -69,11 +69,11 @@ Common_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Common_methods[] = {
 		{"assign",            (PyCFunction)Common_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Common_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Common_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Common_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Common_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Common_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Common_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -199,22 +199,22 @@ Common_set_site_elevation(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Common_getset[] = {
 {"P_co2_hot_des", (getter)Common_get_P_co2_hot_des,(setter)Common_set_P_co2_hot_des,
-	PyDoc_STR("*float*: Pressure of CO2 at inlet to cooler [MPa]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Pressure of CO2 at inlet to cooler [MPa]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_amb_des", (getter)Common_get_T_amb_des,(setter)Common_set_T_amb_des,
-	PyDoc_STR("*float*: Ambient temperature at design [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Ambient temperature at design [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_co2_cold_des", (getter)Common_get_T_co2_cold_des,(setter)Common_set_T_co2_cold_des,
-	PyDoc_STR("*float*: Cold temperature of CO2 at cooler exit [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Cold temperature of CO2 at cooler exit [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_co2_hot_des", (getter)Common_get_T_co2_hot_des,(setter)Common_set_T_co2_hot_des,
-	PyDoc_STR("*float*: Hot temperature of CO2 at inlet to cooler [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Hot temperature of CO2 at inlet to cooler [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"W_dot_fan_des", (getter)Common_get_W_dot_fan_des,(setter)Common_set_W_dot_fan_des,
-	PyDoc_STR("*float*: Air fan power [MWe]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Air fan power [MWe]\n\n**Required:**\nTrue"),
  	NULL},
 {"deltaP_co2_des", (getter)Common_get_deltaP_co2_des,(setter)Common_set_deltaP_co2_des,
-	PyDoc_STR("*float*: Pressure drop of CO2 through cooler [MPa]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Pressure drop of CO2 through cooler [MPa]\n\n**Required:**\nTrue"),
  	NULL},
 {"od_calc_T_co2_cold", (getter)Common_get_od_calc_T_co2_cold,(setter)Common_set_od_calc_T_co2_cold,
 	PyDoc_STR("*sequence[sequence]*: Columns: T_co2_hot_C, P_co2_hot_MPa, W_dot_fan_ND, m_dot_CO2_ND, T_amb_C. Rows: cases"),
@@ -223,10 +223,10 @@ static PyGetSetDef Common_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Columns: T_co2_hot_C, P_co2_hot_MPa, T_co2_cold_C, m_dot_CO2_ND, T_amb_C. Rows: cases"),
  	NULL},
 {"q_dot_des", (getter)Common_get_q_dot_des,(setter)Common_set_q_dot_des,
-	PyDoc_STR("*float*: Heat rejected from CO2 stream [MWt]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Heat rejected from CO2 stream [MWt]\n\n**Required:**\nTrue"),
  	NULL},
 {"site_elevation", (getter)Common_get_site_elevation,(setter)Common_set_site_elevation,
-	PyDoc_STR("*float*: Site elevation [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Site elevation [m]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -341,11 +341,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -630,6 +630,14 @@ Sco2AirCooler_dealloc(CmodObject *self)
 
 
 static PyObject *
+Sco2AirCooler_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Sco2AirCooler_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -706,6 +714,8 @@ static PyMethodDef Sco2AirCooler_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Sco2AirCooler_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Sco2AirCooler_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -864,12 +874,11 @@ static PyMethodDef Sco2AirCoolerModule_methods[] = {
 		{"new",             Sco2AirCooler_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Sco2AirCooler")},
 		{"default",             Sco2AirCooler_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Sco2AirCooler\n\nUse default attributes\n"
-				"None")},
+				PyDoc_STR("default(config) -> Sco2AirCooler\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Sco2AirCooler_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Sco2AirCooler\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Sco2AirCooler\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Sco2AirCooler_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Sco2AirCooler\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Sco2AirCooler\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

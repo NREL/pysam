@@ -69,121 +69,13 @@ Revenue_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Revenue_methods[] = {
 		{"assign",            (PyCFunction)Revenue_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Revenue_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Revenue_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Revenue_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Revenue_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Revenue_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Revenue_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
-
-static PyObject *
-Revenue_get_dispatch_factor1(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Revenue_dispatch_factor1_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_factor1(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Revenue_dispatch_factor1_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_dispatch_factor2(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Revenue_dispatch_factor2_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_factor2(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Revenue_dispatch_factor2_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_dispatch_factor3(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Revenue_dispatch_factor3_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_factor3(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Revenue_dispatch_factor3_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_dispatch_factor4(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Revenue_dispatch_factor4_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_factor4(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Revenue_dispatch_factor4_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_dispatch_factor5(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Revenue_dispatch_factor5_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_factor5(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Revenue_dispatch_factor5_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_dispatch_factor6(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Revenue_dispatch_factor6_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_factor6(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Revenue_dispatch_factor6_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_dispatch_factor7(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Revenue_dispatch_factor7_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_factor7(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Revenue_dispatch_factor7_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_dispatch_factor8(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Revenue_dispatch_factor8_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_factor8(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Revenue_dispatch_factor8_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_dispatch_factor9(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Revenue_dispatch_factor9_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_factor9(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Revenue_dispatch_factor9_nset, self->data_ptr);
-}
 
 static PyObject *
 Revenue_get_dispatch_factors_ts(VarGroupObject *self, void *closure)
@@ -219,6 +111,18 @@ static int
 Revenue_set_dispatch_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
 {
 		return PySAM_matrix_setter(value, SAM_Singleowner_Revenue_dispatch_sched_weekend_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_dispatch_tod_factors(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Revenue_dispatch_tod_factors_aget, self->data_ptr);
+}
+
+static int
+Revenue_set_dispatch_tod_factors(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Singleowner_Revenue_dispatch_tod_factors_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -342,71 +246,47 @@ Revenue_set_ppa_soln_tolerance(VarGroupObject *self, PyObject *value, void *clos
 }
 
 static PyGetSetDef Revenue_getset[] = {
-{"dispatch_factor1", (getter)Revenue_get_dispatch_factor1,(setter)Revenue_set_dispatch_factor1,
-	PyDoc_STR("*float*: TOD factor for period 1\n\n*Required*: True if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor2", (getter)Revenue_get_dispatch_factor2,(setter)Revenue_set_dispatch_factor2,
-	PyDoc_STR("*float*: TOD factor for period 2\n\n*Required*: True if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor3", (getter)Revenue_get_dispatch_factor3,(setter)Revenue_set_dispatch_factor3,
-	PyDoc_STR("*float*: TOD factor for period 3\n\n*Required*: True if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor4", (getter)Revenue_get_dispatch_factor4,(setter)Revenue_set_dispatch_factor4,
-	PyDoc_STR("*float*: TOD factor for period 4\n\n*Required*: True if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor5", (getter)Revenue_get_dispatch_factor5,(setter)Revenue_set_dispatch_factor5,
-	PyDoc_STR("*float*: TOD factor for period 5\n\n*Required*: True if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor6", (getter)Revenue_get_dispatch_factor6,(setter)Revenue_set_dispatch_factor6,
-	PyDoc_STR("*float*: TOD factor for period 6\n\n*Required*: True if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor7", (getter)Revenue_get_dispatch_factor7,(setter)Revenue_set_dispatch_factor7,
-	PyDoc_STR("*float*: TOD factor for period 7\n\n*Required*: True if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor8", (getter)Revenue_get_dispatch_factor8,(setter)Revenue_set_dispatch_factor8,
-	PyDoc_STR("*float*: TOD factor for period 8\n\n*Required*: True if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor9", (getter)Revenue_get_dispatch_factor9,(setter)Revenue_set_dispatch_factor9,
-	PyDoc_STR("*float*: TOD factor for period 9\n\n*Required*: True if ppa_multiplier_model=0"),
- 	NULL},
 {"dispatch_factors_ts", (getter)Revenue_get_dispatch_factors_ts,(setter)Revenue_set_dispatch_factors_ts,
-	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n*Required*: True if ppa_multiplier_model=1"),
+	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n**Required:**\nRequired if ppa_multiplier_model=1"),
  	NULL},
 {"dispatch_sched_weekday", (getter)Revenue_get_dispatch_sched_weekday,(setter)Revenue_set_dispatch_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: Diurnal weekday TOD periods [1..9]\n\n*Info*: 12 x 24 matrix\n\n*Required*: True if ppa_multiplier_model=0"),
+	PyDoc_STR("*sequence[sequence]*: Diurnal weekday TOD periods [1..9]\n\n**Info:**\n12 x 24 matrix\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
  	NULL},
 {"dispatch_sched_weekend", (getter)Revenue_get_dispatch_sched_weekend,(setter)Revenue_set_dispatch_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: Diurnal weekend TOD periods [1..9]\n\n*Info*: 12 x 24 matrix\n\n*Required*: True if ppa_multiplier_model=0"),
+	PyDoc_STR("*sequence[sequence]*: Diurnal weekend TOD periods [1..9]\n\n**Info:**\n12 x 24 matrix\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
+{"dispatch_tod_factors", (getter)Revenue_get_dispatch_tod_factors,(setter)Revenue_set_dispatch_tod_factors,
+	PyDoc_STR("*sequence*: TOD factors for periods 1 through 9\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
  	NULL},
 {"flip_target_percent", (getter)Revenue_get_flip_target_percent,(setter)Revenue_set_flip_target_percent,
-	PyDoc_STR("*float*: After-tax IRR target [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 11"),
+	PyDoc_STR("*float*: After-tax IRR target [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 11 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"flip_target_year", (getter)Revenue_get_flip_target_year,(setter)Revenue_set_flip_target_year,
-	PyDoc_STR("*float*: IRR target year [Year]\n\n*Constraints*: MIN=1\n\n*Required*: If not provided, assumed to be 11"),
+	PyDoc_STR("*float*: IRR target year [Year]\n\n**Constraints:**\nMIN=1\n\n**Required:**\nFalse. Automatically set to 11 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ppa_escalation", (getter)Revenue_get_ppa_escalation,(setter)Revenue_set_ppa_escalation,
-	PyDoc_STR("*float*: PPA escalation rate [%/year]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: PPA escalation rate [%/year]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ppa_multiplier_model", (getter)Revenue_get_ppa_multiplier_model,(setter)Revenue_set_ppa_multiplier_model,
-	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n*Options*: 0=diurnal,1=timestep\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n**Options:**\n0=diurnal,1=timestep\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ppa_price_input", (getter)Revenue_get_ppa_price_input,(setter)Revenue_set_ppa_price_input,
-	PyDoc_STR("*sequence*: PPA price in first year [$/kWh]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: PPA price in first year input [$/kWh]\n\n**Required:**\nTrue"),
  	NULL},
 {"ppa_soln_max", (getter)Revenue_get_ppa_soln_max,(setter)Revenue_set_ppa_soln_max,
-	PyDoc_STR("*float*: PPA solution maximum ppa [cents/kWh]\n\n*Required*: If not provided, assumed to be 100"),
+	PyDoc_STR("*float*: PPA solution maximum ppa [cents/kWh]\n\n**Required:**\nFalse. Automatically set to 100 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ppa_soln_max_iterations", (getter)Revenue_get_ppa_soln_max_iterations,(setter)Revenue_set_ppa_soln_max_iterations,
-	PyDoc_STR("*float*: PPA solution maximum number of iterations\n\n*Constraints*: INTEGER,MIN=1\n\n*Required*: If not provided, assumed to be 100"),
+	PyDoc_STR("*float*: PPA solution maximum number of iterations\n\n**Constraints:**\nINTEGER,MIN=1\n\n**Required:**\nFalse. Automatically set to 100 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ppa_soln_min", (getter)Revenue_get_ppa_soln_min,(setter)Revenue_set_ppa_soln_min,
-	PyDoc_STR("*float*: PPA solution minimum ppa [cents/kWh]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: PPA solution minimum ppa [cents/kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ppa_soln_mode", (getter)Revenue_get_ppa_soln_mode,(setter)Revenue_set_ppa_soln_mode,
-	PyDoc_STR("*float*: PPA solution mode [0/1]\n\n*Options*: 0=solve ppa,1=specify ppa\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: PPA solution mode [0/1]\n\n**Options:**\n0=solve ppa,1=specify ppa\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ppa_soln_tolerance", (getter)Revenue_get_ppa_soln_tolerance,(setter)Revenue_set_ppa_soln_tolerance,
-	PyDoc_STR("*float*: PPA solution tolerance\n\n*Required*: If not provided, assumed to be 1e-5"),
+	PyDoc_STR("*float*: PPA solution tolerance\n\n**Required:**\nFalse. Automatically set to 1e-5 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -521,11 +401,11 @@ FinancialParameters_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef FinancialParameters_methods[] = {
 		{"assign",            (PyCFunction)FinancialParameters_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``FinancialParameters_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``FinancialParameters_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)FinancialParameters_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``FinancialParameters_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``FinancialParameters_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)FinancialParameters_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -975,115 +855,115 @@ FinancialParameters_set_term_tenor(VarGroupObject *self, PyObject *value, void *
 
 static PyGetSetDef FinancialParameters_getset[] = {
 {"analysis_period", (getter)FinancialParameters_get_analysis_period,(setter)FinancialParameters_set_analysis_period,
-	PyDoc_STR("*float*: Analyis period [years]\n\n*Constraints*: INTEGER,MIN=0,MAX=50\n\n*Required*: If not provided, assumed to be 30"),
+	PyDoc_STR("*float*: Analyis period [years]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=50\n\n**Required:**\nFalse. Automatically set to 30 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"construction_financing_cost", (getter)FinancialParameters_get_construction_financing_cost,(setter)FinancialParameters_set_construction_financing_cost,
-	PyDoc_STR("*float*: Construction financing total [$]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: Construction financing total [$]\n\n**Required:**\nTrue\n\nThe value of ``construction_financing_cost`` depends on the following variables:\n\n\t - battery_per_kWh\n\t - total_installed_cost\n"),
  	NULL},
 {"cost_debt_closing", (getter)FinancialParameters_get_cost_debt_closing,(setter)FinancialParameters_set_cost_debt_closing,
-	PyDoc_STR("*float*: Debt closing cost [$]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 250000"),
+	PyDoc_STR("*float*: Debt closing cost [$]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 250000 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cost_debt_fee", (getter)FinancialParameters_get_cost_debt_fee,(setter)FinancialParameters_set_cost_debt_fee,
-	PyDoc_STR("*float*: Debt closing fee (% of total debt amount) [%]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 1.5"),
+	PyDoc_STR("*float*: Debt closing fee (% of total debt amount) [%]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 1.5 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cost_other_financing", (getter)FinancialParameters_get_cost_other_financing,(setter)FinancialParameters_set_cost_other_financing,
-	PyDoc_STR("*float*: Other financing cost [$]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 150000"),
+	PyDoc_STR("*float*: Other financing cost [$]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 150000 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"debt_option", (getter)FinancialParameters_get_debt_option,(setter)FinancialParameters_set_debt_option,
-	PyDoc_STR("*float*: Debt option [0/1]\n\n*Options*: 0=debt percent,1=dscr\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Debt option [0/1]\n\n**Options:**\n0=debt percent,1=dscr\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"debt_percent", (getter)FinancialParameters_get_debt_percent,(setter)FinancialParameters_set_debt_percent,
-	PyDoc_STR("*float*: Debt percent [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 50"),
+	PyDoc_STR("*float*: Debt percent [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 50 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"dscr", (getter)FinancialParameters_get_dscr,(setter)FinancialParameters_set_dscr,
-	PyDoc_STR("*float*: Debt service coverage ratio\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 1.5"),
+	PyDoc_STR("*float*: Debt service coverage ratio\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 1.5 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"dscr_limit_debt_fraction", (getter)FinancialParameters_get_dscr_limit_debt_fraction,(setter)FinancialParameters_set_dscr_limit_debt_fraction,
-	PyDoc_STR("*float*: Limit debt fraction [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Limit debt fraction [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"dscr_maximum_debt_fraction", (getter)FinancialParameters_get_dscr_maximum_debt_fraction,(setter)FinancialParameters_set_dscr_maximum_debt_fraction,
-	PyDoc_STR("*float*: Maximum debt fraction [%]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 100"),
+	PyDoc_STR("*float*: Maximum debt fraction [%]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nFalse. Automatically set to 100 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"dscr_reserve_months", (getter)FinancialParameters_get_dscr_reserve_months,(setter)FinancialParameters_set_dscr_reserve_months,
-	PyDoc_STR("*float*: Debt service reserve account [months P&I]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 6"),
+	PyDoc_STR("*float*: Debt service reserve account [months P&I]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 6 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"equip1_reserve_cost", (getter)FinancialParameters_get_equip1_reserve_cost,(setter)FinancialParameters_set_equip1_reserve_cost,
-	PyDoc_STR("*float*: Major equipment reserve 1 cost [$/W]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 0.25"),
+	PyDoc_STR("*float*: Major equipment reserve 1 cost [$/W]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0.25 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"equip1_reserve_freq", (getter)FinancialParameters_get_equip1_reserve_freq,(setter)FinancialParameters_set_equip1_reserve_freq,
-	PyDoc_STR("*float*: Major equipment reserve 1 frequency [years]\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 12"),
+	PyDoc_STR("*float*: Major equipment reserve 1 frequency [years]\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 12 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"equip2_reserve_cost", (getter)FinancialParameters_get_equip2_reserve_cost,(setter)FinancialParameters_set_equip2_reserve_cost,
-	PyDoc_STR("*float*: Major equipment reserve 2 cost [$/W]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Major equipment reserve 2 cost [$/W]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"equip2_reserve_freq", (getter)FinancialParameters_get_equip2_reserve_freq,(setter)FinancialParameters_set_equip2_reserve_freq,
-	PyDoc_STR("*float*: Major equipment reserve 2 frequency [years]\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 15"),
+	PyDoc_STR("*float*: Major equipment reserve 2 frequency [years]\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 15 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"equip3_reserve_cost", (getter)FinancialParameters_get_equip3_reserve_cost,(setter)FinancialParameters_set_equip3_reserve_cost,
-	PyDoc_STR("*float*: Major equipment reserve 3 cost [$/W]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Major equipment reserve 3 cost [$/W]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"equip3_reserve_freq", (getter)FinancialParameters_get_equip3_reserve_freq,(setter)FinancialParameters_set_equip3_reserve_freq,
-	PyDoc_STR("*float*: Major equipment reserve 3 frequency [years]\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 20"),
+	PyDoc_STR("*float*: Major equipment reserve 3 frequency [years]\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 20 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"equip_reserve_depr_fed", (getter)FinancialParameters_get_equip_reserve_depr_fed,(setter)FinancialParameters_set_equip_reserve_depr_fed,
-	PyDoc_STR("*float*: Major equipment reserve federal depreciation\n\n*Options*: 0=5yr MACRS,1=15yr MACRS,2=5yr SL,3=15yr SL, 4=20yr SL,5=39yr SL,6=Custom\n\n*Constraints*: INTEGER,MIN=0,MAX=6\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Major equipment reserve federal depreciation\n\n**Options:**\n0=5yr MACRS,1=15yr MACRS,2=5yr SL,3=15yr SL, 4=20yr SL,5=39yr SL,6=Custom\n\n**Constraints:**\nINTEGER,MIN=0,MAX=6\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"equip_reserve_depr_sta", (getter)FinancialParameters_get_equip_reserve_depr_sta,(setter)FinancialParameters_set_equip_reserve_depr_sta,
-	PyDoc_STR("*float*: Major equipment reserve state depreciation\n\n*Options*: 0=5yr MACRS,1=15yr MACRS,2=5yr SL,3=15yr SL, 4=20yr SL,5=39yr SL,6=Custom\n\n*Constraints*: INTEGER,MIN=0,MAX=6\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Major equipment reserve state depreciation\n\n**Options:**\n0=5yr MACRS,1=15yr MACRS,2=5yr SL,3=15yr SL, 4=20yr SL,5=39yr SL,6=Custom\n\n**Constraints:**\nINTEGER,MIN=0,MAX=6\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"federal_tax_rate", (getter)FinancialParameters_get_federal_tax_rate,(setter)FinancialParameters_set_federal_tax_rate,
-	PyDoc_STR("*sequence*: Federal income tax rate [%]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Federal income tax rate [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"inflation_rate", (getter)FinancialParameters_get_inflation_rate,(setter)FinancialParameters_set_inflation_rate,
-	PyDoc_STR("*float*: Inflation rate [%]\n\n*Constraints*: MIN=-99\n\n*Required*: True"),
+	PyDoc_STR("*float*: Inflation rate [%]\n\n**Constraints:**\nMIN=-99\n\n**Required:**\nTrue"),
  	NULL},
 {"insurance_rate", (getter)FinancialParameters_get_insurance_rate,(setter)FinancialParameters_set_insurance_rate,
-	PyDoc_STR("*float*: Insurance rate [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Insurance rate [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"loan_moratorium", (getter)FinancialParameters_get_loan_moratorium,(setter)FinancialParameters_set_loan_moratorium,
-	PyDoc_STR("*float*: Loan moratorium period [years]\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Loan moratorium period [years]\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"months_receivables_reserve", (getter)FinancialParameters_get_months_receivables_reserve,(setter)FinancialParameters_set_months_receivables_reserve,
-	PyDoc_STR("*float*: Receivables reserve months of PPA revenue [months]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Receivables reserve months of PPA revenue [months]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"months_working_reserve", (getter)FinancialParameters_get_months_working_reserve,(setter)FinancialParameters_set_months_working_reserve,
-	PyDoc_STR("*float*: Working capital reserve months of operating costs [months]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 6"),
+	PyDoc_STR("*float*: Working capital reserve months of operating costs [months]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 6 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"payment_option", (getter)FinancialParameters_get_payment_option,(setter)FinancialParameters_set_payment_option,
-	PyDoc_STR("*float*: Debt repayment option [0/1]\n\n*Options*: 0=Equal payments (standard amortization),1=Fixed principal declining interest\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Debt repayment option [0/1]\n\n**Options:**\n0=Equal payments (standard amortization),1=Fixed principal declining interest\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"prop_tax_assessed_decline", (getter)FinancialParameters_get_prop_tax_assessed_decline,(setter)FinancialParameters_set_prop_tax_assessed_decline,
-	PyDoc_STR("*float*: Assessed value annual decline [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 5"),
+	PyDoc_STR("*float*: Assessed value annual decline [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 5 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"prop_tax_cost_assessed_percent", (getter)FinancialParameters_get_prop_tax_cost_assessed_percent,(setter)FinancialParameters_set_prop_tax_cost_assessed_percent,
-	PyDoc_STR("*float*: Percent of pre-financing costs assessed [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 95"),
+	PyDoc_STR("*float*: Percent of pre-financing costs assessed [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 95 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"property_tax_rate", (getter)FinancialParameters_get_property_tax_rate,(setter)FinancialParameters_set_property_tax_rate,
-	PyDoc_STR("*float*: Property tax rate [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Property tax rate [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"real_discount_rate", (getter)FinancialParameters_get_real_discount_rate,(setter)FinancialParameters_set_real_discount_rate,
-	PyDoc_STR("*float*: Real discount rate [%]\n\n*Constraints*: MIN=-99\n\n*Required*: True"),
+	PyDoc_STR("*float*: Real discount rate [%]\n\n**Constraints:**\nMIN=-99\n\n**Required:**\nTrue"),
  	NULL},
 {"reserves_interest", (getter)FinancialParameters_get_reserves_interest,(setter)FinancialParameters_set_reserves_interest,
-	PyDoc_STR("*float*: Interest on reserves [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 1.75"),
+	PyDoc_STR("*float*: Interest on reserves [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 1.75 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"salvage_percentage", (getter)FinancialParameters_get_salvage_percentage,(setter)FinancialParameters_set_salvage_percentage,
-	PyDoc_STR("*float*: Net pre-tax cash salvage value [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 10"),
+	PyDoc_STR("*float*: Net pre-tax cash salvage value [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 10 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"state_tax_rate", (getter)FinancialParameters_get_state_tax_rate,(setter)FinancialParameters_set_state_tax_rate,
-	PyDoc_STR("*sequence*: State income tax rate [%]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: State income tax rate [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"system_capacity", (getter)FinancialParameters_get_system_capacity,(setter)FinancialParameters_set_system_capacity,
-	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n*Constraints*: POSITIVE\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - cp_battery_nameplate\n\t - cp_system_nameplate\n"),
+	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``system_capacity``:\n\n\t - battery_total_cost_lcos\n\t - construction_financing_cost\n\t - cp_battery_nameplate\n\t - cp_system_nameplate\n\t - land_area\n\t - total_installed_cost\n"),
  	NULL},
 {"system_heat_rate", (getter)FinancialParameters_get_system_heat_rate,(setter)FinancialParameters_set_system_heat_rate,
-	PyDoc_STR("*float*: System heat rate [MMBTus/MWh]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: System heat rate [MMBTus/MWh]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"term_int_rate", (getter)FinancialParameters_get_term_int_rate,(setter)FinancialParameters_set_term_int_rate,
-	PyDoc_STR("*float*: Term financing interest rate [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 8.5"),
+	PyDoc_STR("*float*: Term financing interest rate [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 8.5 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"term_tenor", (getter)FinancialParameters_get_term_tenor,(setter)FinancialParameters_set_term_tenor,
-	PyDoc_STR("*float*: Term financing period [years]\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 10"),
+	PyDoc_STR("*float*: Term financing period [years]\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 10 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1198,11 +1078,11 @@ SystemCosts_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemCosts_methods[] = {
 		{"assign",            (PyCFunction)SystemCosts_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemCosts_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SystemCosts_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SystemCosts_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemCosts_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SystemCosts_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemCosts_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1240,18 +1120,6 @@ static int
 SystemCosts_set_annual_fuel_usage_lifetime(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_array_setter(value, SAM_Singleowner_SystemCosts_annual_fuel_usage_lifetime_aset, self->data_ptr);
-}
-
-static PyObject *
-SystemCosts_get_fuelcell_annual_energy_discharged(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_SystemCosts_fuelcell_annual_energy_discharged_aget, self->data_ptr);
-}
-
-static int
-SystemCosts_set_fuelcell_annual_energy_discharged(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Singleowner_SystemCosts_fuelcell_annual_energy_discharged_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1640,112 +1508,109 @@ SystemCosts_set_total_installed_cost(VarGroupObject *self, PyObject *value, void
 
 static PyGetSetDef SystemCosts_getset[] = {
 {"add_om_num_types", (getter)SystemCosts_get_add_om_num_types,(setter)SystemCosts_set_add_om_num_types,
-	PyDoc_STR("*float*: Number of O and M types\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Number of O and M types\n\n**Info:**\nbattery,fuelcell\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"annual_fuel_usage", (getter)SystemCosts_get_annual_fuel_usage,(setter)SystemCosts_set_annual_fuel_usage,
-	PyDoc_STR("*float*: Fuel usage (yr 1) [kWht]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Fuel usage (yr 1) [kWht]\n\n**Info:**\ncustom_generation,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"annual_fuel_usage_lifetime", (getter)SystemCosts_get_annual_fuel_usage_lifetime,(setter)SystemCosts_set_annual_fuel_usage_lifetime,
-	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]"),
- 	NULL},
-{"fuelcell_annual_energy_discharged", (getter)SystemCosts_get_fuelcell_annual_energy_discharged,(setter)SystemCosts_set_fuelcell_annual_energy_discharged,
-	PyDoc_STR("*sequence*: Annual energy from fuelcell [kWh]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]\n\n**Info:**\ncustom_generation,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical"),
  	NULL},
 {"om_batt_capacity_cost", (getter)SystemCosts_get_om_batt_capacity_cost,(setter)SystemCosts_set_om_batt_capacity_cost,
-	PyDoc_STR("*sequence*: Battery capacity-based System Costs amount [$/kWcap]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*sequence*: Battery capacity-based System Costs amount [$/kWcap]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_batt_fixed_cost", (getter)SystemCosts_get_om_batt_fixed_cost,(setter)SystemCosts_set_om_batt_fixed_cost,
-	PyDoc_STR("*sequence*: Battery fixed System Costs annual amount [$/year]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*sequence*: Battery fixed System Costs annual amount [$/year]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_batt_nameplate", (getter)SystemCosts_get_om_batt_nameplate,(setter)SystemCosts_set_om_batt_nameplate,
-	PyDoc_STR("*float*: Battery capacity for System Costs values [kW]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Battery capacity for System Costs values [kW]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_batt_replacement_cost", (getter)SystemCosts_get_om_batt_replacement_cost,(setter)SystemCosts_set_om_batt_replacement_cost,
-	PyDoc_STR("*sequence*: Replacement cost 1 [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*sequence*: Replacement cost 1 [$/kWh]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_batt_variable_cost", (getter)SystemCosts_get_om_batt_variable_cost,(setter)SystemCosts_set_om_batt_variable_cost,
-	PyDoc_STR("*sequence*: Battery production-based System Costs amount [$/MWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*sequence*: Battery production-based System Costs amount [$/MWh]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_capacity", (getter)SystemCosts_get_om_capacity,(setter)SystemCosts_set_om_capacity,
-	PyDoc_STR("*sequence*: Capacity-based O&M amount [$/kWcap]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*sequence*: Capacity-based O&M amount [$/kWcap]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_capacity_escal", (getter)SystemCosts_get_om_capacity_escal,(setter)SystemCosts_set_om_capacity_escal,
-	PyDoc_STR("*float*: Capacity-based O&M escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Capacity-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fixed", (getter)SystemCosts_get_om_fixed,(setter)SystemCosts_set_om_fixed,
-	PyDoc_STR("*sequence*: Fixed O&M annual amount [$/year]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*sequence*: Fixed O&M annual amount [$/year]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fixed_escal", (getter)SystemCosts_get_om_fixed_escal,(setter)SystemCosts_set_om_fixed_escal,
-	PyDoc_STR("*float*: Fixed O&M escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Fixed O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuel_cost", (getter)SystemCosts_get_om_fuel_cost,(setter)SystemCosts_set_om_fuel_cost,
-	PyDoc_STR("*sequence*: Fuel cost [$/MMBtu]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*sequence*: Fuel cost [$/MMBtu]\n\n**Info:**\ncustom_generation,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuel_cost_escal", (getter)SystemCosts_get_om_fuel_cost_escal,(setter)SystemCosts_set_om_fuel_cost_escal,
-	PyDoc_STR("*float*: Fuel cost escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Fuel cost escalation [%/year]\n\n**Info:**\ncustom_generation,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuelcell_capacity_cost", (getter)SystemCosts_get_om_fuelcell_capacity_cost,(setter)SystemCosts_set_om_fuelcell_capacity_cost,
-	PyDoc_STR("*sequence*: Fuel cell capacity-based System Costs amount [$/kWcap]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*sequence*: Fuel cell capacity-based System Costs amount [$/kWcap]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuelcell_fixed_cost", (getter)SystemCosts_get_om_fuelcell_fixed_cost,(setter)SystemCosts_set_om_fuelcell_fixed_cost,
-	PyDoc_STR("*sequence*: Fuel cell fixed System Costs annual amount [$/year]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*sequence*: Fuel cell fixed System Costs annual amount [$/year]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuelcell_nameplate", (getter)SystemCosts_get_om_fuelcell_nameplate,(setter)SystemCosts_set_om_fuelcell_nameplate,
-	PyDoc_STR("*float*: Fuel cell capacity for System Costs values [kW]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Fuel cell capacity for System Costs values [kW]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuelcell_replacement_cost", (getter)SystemCosts_get_om_fuelcell_replacement_cost,(setter)SystemCosts_set_om_fuelcell_replacement_cost,
-	PyDoc_STR("*sequence*: Replacement cost 2 [$/kW]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*sequence*: Replacement cost 2 [$/kW]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuelcell_variable_cost", (getter)SystemCosts_get_om_fuelcell_variable_cost,(setter)SystemCosts_set_om_fuelcell_variable_cost,
-	PyDoc_STR("*sequence*: Fuel cell production-based System Costs amount [$/MWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*sequence*: Fuel cell production-based System Costs amount [$/MWh]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_opt_fuel_1_cost", (getter)SystemCosts_get_om_opt_fuel_1_cost,(setter)SystemCosts_set_om_opt_fuel_1_cost,
-	PyDoc_STR("*sequence*: Biomass feedstock cost [$/unit]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*sequence*: Biomass feedstock cost [$/unit]\n\n**Info:**\nbiomass\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_opt_fuel_1_cost_escal", (getter)SystemCosts_get_om_opt_fuel_1_cost_escal,(setter)SystemCosts_set_om_opt_fuel_1_cost_escal,
-	PyDoc_STR("*float*: Biomass feedstock cost escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Biomass feedstock cost escalation [%/year]\n\n**Info:**\nbiomass\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_opt_fuel_1_usage", (getter)SystemCosts_get_om_opt_fuel_1_usage,(setter)SystemCosts_set_om_opt_fuel_1_usage,
-	PyDoc_STR("*float*: Biomass feedstock usage [unit]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Biomass feedstock usage [unit]\n\n**Info:**\nbiomass\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_opt_fuel_2_cost", (getter)SystemCosts_get_om_opt_fuel_2_cost,(setter)SystemCosts_set_om_opt_fuel_2_cost,
-	PyDoc_STR("*sequence*: Coal feedstock cost [$/unit]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*sequence*: Coal feedstock cost [$/unit]\n\n**Info:**\nbiomass\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_opt_fuel_2_cost_escal", (getter)SystemCosts_get_om_opt_fuel_2_cost_escal,(setter)SystemCosts_set_om_opt_fuel_2_cost_escal,
-	PyDoc_STR("*float*: Coal feedstock cost escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Coal feedstock cost escalation [%/year]\n\n**Info:**\nbiomass\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_opt_fuel_2_usage", (getter)SystemCosts_get_om_opt_fuel_2_usage,(setter)SystemCosts_set_om_opt_fuel_2_usage,
-	PyDoc_STR("*float*: Coal feedstock usage [unit]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Coal feedstock usage [unit]\n\n**Info:**\nbiomass\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_production", (getter)SystemCosts_get_om_production,(setter)SystemCosts_set_om_production,
-	PyDoc_STR("*sequence*: Production-based O&M amount [$/MWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*sequence*: Production-based O&M amount [$/MWh]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_production1_values", (getter)SystemCosts_get_om_production1_values,(setter)SystemCosts_set_om_production1_values,
-	PyDoc_STR("*sequence*: Battery production for System Costs values [kWh]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Battery production for System Costs values [kWh]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_production2_values", (getter)SystemCosts_get_om_production2_values,(setter)SystemCosts_set_om_production2_values,
-	PyDoc_STR("*sequence*: Fuel cell production for System Costs values [kWh]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Fuel cell production for System Costs values [kWh]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_production_escal", (getter)SystemCosts_get_om_production_escal,(setter)SystemCosts_set_om_production_escal,
-	PyDoc_STR("*float*: Production-based O&M escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Production-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_replacement_cost_escal", (getter)SystemCosts_get_om_replacement_cost_escal,(setter)SystemCosts_set_om_replacement_cost_escal,
-	PyDoc_STR("*float*: Replacement cost escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Replacement cost escalation [%/year]\n\n**Info:**\nbattery,fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"system_lifetime_recapitalize", (getter)SystemCosts_get_system_lifetime_recapitalize,(setter)SystemCosts_set_system_lifetime_recapitalize,
-	PyDoc_STR("*sequence*: Recapitalization boolean\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Recapitalization boolean\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"system_recapitalization_cost", (getter)SystemCosts_get_system_recapitalization_cost,(setter)SystemCosts_set_system_recapitalization_cost,
-	PyDoc_STR("*float*: Recapitalization cost [$]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Recapitalization cost [$]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"system_recapitalization_escalation", (getter)SystemCosts_get_system_recapitalization_escalation,(setter)SystemCosts_set_system_recapitalization_escalation,
-	PyDoc_STR("*float*: Recapitalization escalation (above inflation) [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Recapitalization escalation (above inflation) [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"system_use_recapitalization", (getter)SystemCosts_get_system_use_recapitalization,(setter)SystemCosts_set_system_use_recapitalization,
-	PyDoc_STR("*float*: Recapitalization expenses [0/1]\n\n*Options*: 0=None,1=Recapitalize\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Recapitalization expenses [0/1]\n\n**Options:**\n0=None,1=Recapitalize\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"total_installed_cost", (getter)SystemCosts_get_total_installed_cost,(setter)SystemCosts_set_total_installed_cost,
-	PyDoc_STR("*float*: Installed cost [$]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - construction_financing_cost\n"),
+	PyDoc_STR("*float*: Installed cost [$]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``total_installed_cost``:\n\n\t - battery_total_cost_lcos\n\t - construction_financing_cost\n\n\nThe value of ``total_installed_cost`` depends on the following variables:\n\n\t - battery_per_kWh\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1860,11 +1725,11 @@ LandLease_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef LandLease_methods[] = {
 		{"assign",            (PyCFunction)LandLease_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``LandLease_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``LandLease_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)LandLease_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``LandLease_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``LandLease_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)LandLease_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1906,13 +1771,13 @@ LandLease_set_om_land_lease_escal(VarGroupObject *self, PyObject *value, void *c
 
 static PyGetSetDef LandLease_getset[] = {
 {"land_area", (getter)LandLease_get_land_area,(setter)LandLease_set_land_area,
-	PyDoc_STR("*float*: Total land area [acres]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Total land area [acres]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_land_lease", (getter)LandLease_get_om_land_lease,(setter)LandLease_set_om_land_lease,
-	PyDoc_STR("*sequence*: Land lease cost [$/acre]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Land lease cost [$/acre]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_land_lease_escal", (getter)LandLease_get_om_land_lease_escal,(setter)LandLease_set_om_land_lease_escal,
-	PyDoc_STR("*float*: Land lease cost escalation [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Land lease cost escalation [%/yr]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2027,24 +1892,24 @@ TaxCreditIncentives_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef TaxCreditIncentives_methods[] = {
 		{"assign",            (PyCFunction)TaxCreditIncentives_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``TaxCreditIncentives_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``TaxCreditIncentives_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)TaxCreditIncentives_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``TaxCreditIncentives_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``TaxCreditIncentives_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)TaxCreditIncentives_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 TaxCreditIncentives_get_itc_fed_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Singleowner_TaxCreditIncentives_itc_fed_amount_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Singleowner_TaxCreditIncentives_itc_fed_amount_aget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Singleowner_TaxCreditIncentives_itc_fed_amount_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Singleowner_TaxCreditIncentives_itc_fed_amount_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -2074,13 +1939,13 @@ TaxCreditIncentives_set_itc_fed_amount_deprbas_sta(VarGroupObject *self, PyObjec
 static PyObject *
 TaxCreditIncentives_get_itc_fed_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Singleowner_TaxCreditIncentives_itc_fed_percent_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Singleowner_TaxCreditIncentives_itc_fed_percent_aget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Singleowner_TaxCreditIncentives_itc_fed_percent_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Singleowner_TaxCreditIncentives_itc_fed_percent_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -2110,25 +1975,25 @@ TaxCreditIncentives_set_itc_fed_percent_deprbas_sta(VarGroupObject *self, PyObje
 static PyObject *
 TaxCreditIncentives_get_itc_fed_percent_maxvalue(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Singleowner_TaxCreditIncentives_itc_fed_percent_maxvalue_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Singleowner_TaxCreditIncentives_itc_fed_percent_maxvalue_aget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_percent_maxvalue(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Singleowner_TaxCreditIncentives_itc_fed_percent_maxvalue_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Singleowner_TaxCreditIncentives_itc_fed_percent_maxvalue_aset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_sta_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Singleowner_TaxCreditIncentives_itc_sta_amount_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Singleowner_TaxCreditIncentives_itc_sta_amount_aget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Singleowner_TaxCreditIncentives_itc_sta_amount_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Singleowner_TaxCreditIncentives_itc_sta_amount_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -2158,13 +2023,13 @@ TaxCreditIncentives_set_itc_sta_amount_deprbas_sta(VarGroupObject *self, PyObjec
 static PyObject *
 TaxCreditIncentives_get_itc_sta_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Singleowner_TaxCreditIncentives_itc_sta_percent_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Singleowner_TaxCreditIncentives_itc_sta_percent_aget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Singleowner_TaxCreditIncentives_itc_sta_percent_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Singleowner_TaxCreditIncentives_itc_sta_percent_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -2194,13 +2059,13 @@ TaxCreditIncentives_set_itc_sta_percent_deprbas_sta(VarGroupObject *self, PyObje
 static PyObject *
 TaxCreditIncentives_get_itc_sta_percent_maxvalue(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Singleowner_TaxCreditIncentives_itc_sta_percent_maxvalue_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Singleowner_TaxCreditIncentives_itc_sta_percent_maxvalue_aget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_percent_maxvalue(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Singleowner_TaxCreditIncentives_itc_sta_percent_maxvalue_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Singleowner_TaxCreditIncentives_itc_sta_percent_maxvalue_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -2277,64 +2142,64 @@ TaxCreditIncentives_set_ptc_sta_term(VarGroupObject *self, PyObject *value, void
 
 static PyGetSetDef TaxCreditIncentives_getset[] = {
 {"itc_fed_amount", (getter)TaxCreditIncentives_get_itc_fed_amount,(setter)TaxCreditIncentives_set_itc_fed_amount,
-	PyDoc_STR("*float*: Federal amount-based ITC amount [$]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Federal amount-based ITC amount [$]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_fed_amount_deprbas_fed", (getter)TaxCreditIncentives_get_itc_fed_amount_deprbas_fed,(setter)TaxCreditIncentives_set_itc_fed_amount_deprbas_fed,
-	PyDoc_STR("*float*: Federal amount-based ITC reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Federal amount-based ITC reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_fed_amount_deprbas_sta", (getter)TaxCreditIncentives_get_itc_fed_amount_deprbas_sta,(setter)TaxCreditIncentives_set_itc_fed_amount_deprbas_sta,
-	PyDoc_STR("*float*: Federal amount-based ITC reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Federal amount-based ITC reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_fed_percent", (getter)TaxCreditIncentives_get_itc_fed_percent,(setter)TaxCreditIncentives_set_itc_fed_percent,
-	PyDoc_STR("*float*: Federal percentage-based ITC percent [%]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Federal percentage-based ITC percent [%]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_fed_percent_deprbas_fed", (getter)TaxCreditIncentives_get_itc_fed_percent_deprbas_fed,(setter)TaxCreditIncentives_set_itc_fed_percent_deprbas_fed,
-	PyDoc_STR("*float*: Federal percentage-based ITC reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Federal percentage-based ITC reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_fed_percent_deprbas_sta", (getter)TaxCreditIncentives_get_itc_fed_percent_deprbas_sta,(setter)TaxCreditIncentives_set_itc_fed_percent_deprbas_sta,
-	PyDoc_STR("*float*: Federal percentage-based ITC reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Federal percentage-based ITC reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_fed_percent_maxvalue", (getter)TaxCreditIncentives_get_itc_fed_percent_maxvalue,(setter)TaxCreditIncentives_set_itc_fed_percent_maxvalue,
-	PyDoc_STR("*float*: Federal percentage-based ITC maximum value [$]\n\n*Required*: If not provided, assumed to be 1e99"),
+	PyDoc_STR("*sequence*: Federal percentage-based ITC maximum value [$]\n\n**Required:**\nFalse. Automatically set to 1e99 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_sta_amount", (getter)TaxCreditIncentives_get_itc_sta_amount,(setter)TaxCreditIncentives_set_itc_sta_amount,
-	PyDoc_STR("*float*: State amount-based ITC amount [$]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: State amount-based ITC amount [$]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_sta_amount_deprbas_fed", (getter)TaxCreditIncentives_get_itc_sta_amount_deprbas_fed,(setter)TaxCreditIncentives_set_itc_sta_amount_deprbas_fed,
-	PyDoc_STR("*float*: State amount-based ITC reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State amount-based ITC reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_sta_amount_deprbas_sta", (getter)TaxCreditIncentives_get_itc_sta_amount_deprbas_sta,(setter)TaxCreditIncentives_set_itc_sta_amount_deprbas_sta,
-	PyDoc_STR("*float*: State amount-based ITC reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State amount-based ITC reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_sta_percent", (getter)TaxCreditIncentives_get_itc_sta_percent,(setter)TaxCreditIncentives_set_itc_sta_percent,
-	PyDoc_STR("*float*: State percentage-based ITC percent [%]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: State percentage-based ITC percent [%]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_sta_percent_deprbas_fed", (getter)TaxCreditIncentives_get_itc_sta_percent_deprbas_fed,(setter)TaxCreditIncentives_set_itc_sta_percent_deprbas_fed,
-	PyDoc_STR("*float*: State percentage-based ITC reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State percentage-based ITC reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_sta_percent_deprbas_sta", (getter)TaxCreditIncentives_get_itc_sta_percent_deprbas_sta,(setter)TaxCreditIncentives_set_itc_sta_percent_deprbas_sta,
-	PyDoc_STR("*float*: State percentage-based ITC reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State percentage-based ITC reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_sta_percent_maxvalue", (getter)TaxCreditIncentives_get_itc_sta_percent_maxvalue,(setter)TaxCreditIncentives_set_itc_sta_percent_maxvalue,
-	PyDoc_STR("*float*: State percentage-based ITC maximum Value [$]\n\n*Required*: If not provided, assumed to be 1e99"),
+	PyDoc_STR("*sequence*: State percentage-based ITC maximum Value [$]\n\n**Required:**\nFalse. Automatically set to 1e99 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ptc_fed_amount", (getter)TaxCreditIncentives_get_ptc_fed_amount,(setter)TaxCreditIncentives_set_ptc_fed_amount,
-	PyDoc_STR("*sequence*: Federal PTC amount [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Federal PTC amount [$/kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ptc_fed_escal", (getter)TaxCreditIncentives_get_ptc_fed_escal,(setter)TaxCreditIncentives_set_ptc_fed_escal,
-	PyDoc_STR("*float*: Federal PTC escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal PTC escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ptc_fed_term", (getter)TaxCreditIncentives_get_ptc_fed_term,(setter)TaxCreditIncentives_set_ptc_fed_term,
-	PyDoc_STR("*float*: Federal PTC term [years]\n\n*Required*: If not provided, assumed to be 10"),
+	PyDoc_STR("*float*: Federal PTC term [years]\n\n**Required:**\nFalse. Automatically set to 10 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ptc_sta_amount", (getter)TaxCreditIncentives_get_ptc_sta_amount,(setter)TaxCreditIncentives_set_ptc_sta_amount,
-	PyDoc_STR("*sequence*: State PTC amount [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: State PTC amount [$/kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ptc_sta_escal", (getter)TaxCreditIncentives_get_ptc_sta_escal,(setter)TaxCreditIncentives_set_ptc_sta_escal,
-	PyDoc_STR("*float*: State PTC escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State PTC escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ptc_sta_term", (getter)TaxCreditIncentives_get_ptc_sta_term,(setter)TaxCreditIncentives_set_ptc_sta_term,
-	PyDoc_STR("*float*: State PTC term [years]\n\n*Required*: If not provided, assumed to be 10"),
+	PyDoc_STR("*float*: State PTC term [years]\n\n**Required:**\nFalse. Automatically set to 10 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2449,11 +2314,11 @@ Depreciation_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Depreciation_methods[] = {
 		{"assign",            (PyCFunction)Depreciation_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Depreciation_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Depreciation_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Depreciation_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Depreciation_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Depreciation_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Depreciation_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2939,124 +2804,124 @@ Depreciation_set_depr_stabas_method(VarGroupObject *self, PyObject *value, void 
 
 static PyGetSetDef Depreciation_getset[] = {
 {"depr_alloc_custom_percent", (getter)Depreciation_get_depr_alloc_custom_percent,(setter)Depreciation_set_depr_alloc_custom_percent,
-	PyDoc_STR("*float*: Custom depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Custom depreciation federal and state allocation [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_alloc_macrs_15_percent", (getter)Depreciation_get_depr_alloc_macrs_15_percent,(setter)Depreciation_set_depr_alloc_macrs_15_percent,
-	PyDoc_STR("*float*: 15-yr MACRS depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 1.5"),
+	PyDoc_STR("*float*: 15-yr MACRS depreciation federal and state allocation [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 1.5 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_alloc_macrs_5_percent", (getter)Depreciation_get_depr_alloc_macrs_5_percent,(setter)Depreciation_set_depr_alloc_macrs_5_percent,
-	PyDoc_STR("*float*: 5-yr MACRS depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 89"),
+	PyDoc_STR("*float*: 5-yr MACRS depreciation federal and state allocation [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 89 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_alloc_sl_15_percent", (getter)Depreciation_get_depr_alloc_sl_15_percent,(setter)Depreciation_set_depr_alloc_sl_15_percent,
-	PyDoc_STR("*float*: 15-yr straight line depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 3"),
+	PyDoc_STR("*float*: 15-yr straight line depreciation federal and state allocation [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 3 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_alloc_sl_20_percent", (getter)Depreciation_get_depr_alloc_sl_20_percent,(setter)Depreciation_set_depr_alloc_sl_20_percent,
-	PyDoc_STR("*float*: 20-yr straight line depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 3"),
+	PyDoc_STR("*float*: 20-yr straight line depreciation federal and state allocation [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 3 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_alloc_sl_39_percent", (getter)Depreciation_get_depr_alloc_sl_39_percent,(setter)Depreciation_set_depr_alloc_sl_39_percent,
-	PyDoc_STR("*float*: 39-yr straight line depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0.5"),
+	PyDoc_STR("*float*: 39-yr straight line depreciation federal and state allocation [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0.5 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_alloc_sl_5_percent", (getter)Depreciation_get_depr_alloc_sl_5_percent,(setter)Depreciation_set_depr_alloc_sl_5_percent,
-	PyDoc_STR("*float*: 5-yr straight line depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: 5-yr straight line depreciation federal and state allocation [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_bonus_fed", (getter)Depreciation_get_depr_bonus_fed,(setter)Depreciation_set_depr_bonus_fed,
-	PyDoc_STR("*float*: Federal bonus depreciation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal bonus depreciation [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_bonus_fed_custom", (getter)Depreciation_get_depr_bonus_fed_custom,(setter)Depreciation_set_depr_bonus_fed_custom,
-	PyDoc_STR("*float*: Federal bonus depreciation custom [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal bonus depreciation custom [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_bonus_fed_macrs_15", (getter)Depreciation_get_depr_bonus_fed_macrs_15,(setter)Depreciation_set_depr_bonus_fed_macrs_15,
-	PyDoc_STR("*float*: Federal bonus depreciation 15-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal bonus depreciation 15-yr MACRS [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_bonus_fed_macrs_5", (getter)Depreciation_get_depr_bonus_fed_macrs_5,(setter)Depreciation_set_depr_bonus_fed_macrs_5,
-	PyDoc_STR("*float*: Federal bonus depreciation 5-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Federal bonus depreciation 5-yr MACRS [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_bonus_fed_sl_15", (getter)Depreciation_get_depr_bonus_fed_sl_15,(setter)Depreciation_set_depr_bonus_fed_sl_15,
-	PyDoc_STR("*float*: Federal bonus depreciation 15-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal bonus depreciation 15-yr straight line [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_bonus_fed_sl_20", (getter)Depreciation_get_depr_bonus_fed_sl_20,(setter)Depreciation_set_depr_bonus_fed_sl_20,
-	PyDoc_STR("*float*: Federal bonus depreciation 20-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal bonus depreciation 20-yr straight line [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_bonus_fed_sl_39", (getter)Depreciation_get_depr_bonus_fed_sl_39,(setter)Depreciation_set_depr_bonus_fed_sl_39,
-	PyDoc_STR("*float*: Federal bonus depreciation 39-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal bonus depreciation 39-yr straight line [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_bonus_fed_sl_5", (getter)Depreciation_get_depr_bonus_fed_sl_5,(setter)Depreciation_set_depr_bonus_fed_sl_5,
-	PyDoc_STR("*float*: Federal bonus depreciation 5-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal bonus depreciation 5-yr straight line [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_bonus_sta", (getter)Depreciation_get_depr_bonus_sta,(setter)Depreciation_set_depr_bonus_sta,
-	PyDoc_STR("*float*: State bonus depreciation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State bonus depreciation [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_bonus_sta_custom", (getter)Depreciation_get_depr_bonus_sta_custom,(setter)Depreciation_set_depr_bonus_sta_custom,
-	PyDoc_STR("*float*: State bonus depreciation custom [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State bonus depreciation custom [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_bonus_sta_macrs_15", (getter)Depreciation_get_depr_bonus_sta_macrs_15,(setter)Depreciation_set_depr_bonus_sta_macrs_15,
-	PyDoc_STR("*float*: State bonus depreciation 15-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State bonus depreciation 15-yr MACRS [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_bonus_sta_macrs_5", (getter)Depreciation_get_depr_bonus_sta_macrs_5,(setter)Depreciation_set_depr_bonus_sta_macrs_5,
-	PyDoc_STR("*float*: State bonus depreciation 5-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: State bonus depreciation 5-yr MACRS [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_bonus_sta_sl_15", (getter)Depreciation_get_depr_bonus_sta_sl_15,(setter)Depreciation_set_depr_bonus_sta_sl_15,
-	PyDoc_STR("*float*: State bonus depreciation 15-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State bonus depreciation 15-yr straight line [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_bonus_sta_sl_20", (getter)Depreciation_get_depr_bonus_sta_sl_20,(setter)Depreciation_set_depr_bonus_sta_sl_20,
-	PyDoc_STR("*float*: State bonus depreciation 20-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State bonus depreciation 20-yr straight line [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_bonus_sta_sl_39", (getter)Depreciation_get_depr_bonus_sta_sl_39,(setter)Depreciation_set_depr_bonus_sta_sl_39,
-	PyDoc_STR("*float*: State bonus depreciation 39-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State bonus depreciation 39-yr straight line [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_bonus_sta_sl_5", (getter)Depreciation_get_depr_bonus_sta_sl_5,(setter)Depreciation_set_depr_bonus_sta_sl_5,
-	PyDoc_STR("*float*: State bonus depreciation 5-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State bonus depreciation 5-yr straight line [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_custom_schedule", (getter)Depreciation_get_depr_custom_schedule,(setter)Depreciation_set_depr_custom_schedule,
-	PyDoc_STR("*sequence*: Custom depreciation schedule [%]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Custom depreciation schedule [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"depr_fedbas_method", (getter)Depreciation_get_depr_fedbas_method,(setter)Depreciation_set_depr_fedbas_method,
-	PyDoc_STR("*float*: Method of federal depreciation reduction\n\n*Options*: 0=5yr MACRS,1=Proportional\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Method of federal depreciation reduction\n\n**Options:**\n0=5yr MACRS,1=Proportional\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_itc_fed_custom", (getter)Depreciation_get_depr_itc_fed_custom,(setter)Depreciation_set_depr_itc_fed_custom,
-	PyDoc_STR("*float*: Federal ITC depreciation custom [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal ITC depreciation custom [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_itc_fed_macrs_15", (getter)Depreciation_get_depr_itc_fed_macrs_15,(setter)Depreciation_set_depr_itc_fed_macrs_15,
-	PyDoc_STR("*float*: Federal ITC depreciation 15-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal ITC depreciation 15-yr MACRS [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_itc_fed_macrs_5", (getter)Depreciation_get_depr_itc_fed_macrs_5,(setter)Depreciation_set_depr_itc_fed_macrs_5,
-	PyDoc_STR("*float*: Federal ITC depreciation 5-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Federal ITC depreciation 5-yr MACRS [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_itc_fed_sl_15", (getter)Depreciation_get_depr_itc_fed_sl_15,(setter)Depreciation_set_depr_itc_fed_sl_15,
-	PyDoc_STR("*float*: Federal ITC depreciation 15-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal ITC depreciation 15-yr straight line [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_itc_fed_sl_20", (getter)Depreciation_get_depr_itc_fed_sl_20,(setter)Depreciation_set_depr_itc_fed_sl_20,
-	PyDoc_STR("*float*: Federal ITC depreciation 20-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal ITC depreciation 20-yr straight line [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_itc_fed_sl_39", (getter)Depreciation_get_depr_itc_fed_sl_39,(setter)Depreciation_set_depr_itc_fed_sl_39,
-	PyDoc_STR("*float*: Federal ITC depreciation 39-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal ITC depreciation 39-yr straight line [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_itc_fed_sl_5", (getter)Depreciation_get_depr_itc_fed_sl_5,(setter)Depreciation_set_depr_itc_fed_sl_5,
-	PyDoc_STR("*float*: Federal ITC depreciation 5-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal ITC depreciation 5-yr straight line [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_itc_sta_custom", (getter)Depreciation_get_depr_itc_sta_custom,(setter)Depreciation_set_depr_itc_sta_custom,
-	PyDoc_STR("*float*: State ITC depreciation custom [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State ITC depreciation custom [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_itc_sta_macrs_15", (getter)Depreciation_get_depr_itc_sta_macrs_15,(setter)Depreciation_set_depr_itc_sta_macrs_15,
-	PyDoc_STR("*float*: State ITC depreciation 15-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State ITC depreciation 15-yr MACRS [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_itc_sta_macrs_5", (getter)Depreciation_get_depr_itc_sta_macrs_5,(setter)Depreciation_set_depr_itc_sta_macrs_5,
-	PyDoc_STR("*float*: State ITC depreciation 5-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: State ITC depreciation 5-yr MACRS [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_itc_sta_sl_15", (getter)Depreciation_get_depr_itc_sta_sl_15,(setter)Depreciation_set_depr_itc_sta_sl_15,
-	PyDoc_STR("*float*: State ITC depreciation 15-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State ITC depreciation 15-yr straight line [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_itc_sta_sl_20", (getter)Depreciation_get_depr_itc_sta_sl_20,(setter)Depreciation_set_depr_itc_sta_sl_20,
-	PyDoc_STR("*float*: State ITC depreciation 20-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State ITC depreciation 20-yr straight line [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_itc_sta_sl_39", (getter)Depreciation_get_depr_itc_sta_sl_39,(setter)Depreciation_set_depr_itc_sta_sl_39,
-	PyDoc_STR("*float*: State ITC depreciation 39-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State ITC depreciation 39-yr straight line [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_itc_sta_sl_5", (getter)Depreciation_get_depr_itc_sta_sl_5,(setter)Depreciation_set_depr_itc_sta_sl_5,
-	PyDoc_STR("*float*: State ITC depreciation 5-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State ITC depreciation 5-yr straight line [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"depr_stabas_method", (getter)Depreciation_get_depr_stabas_method,(setter)Depreciation_set_depr_stabas_method,
-	PyDoc_STR("*float*: Method of state depreciation reduction\n\n*Options*: 0=5yr MACRS,1=Proportional\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Method of state depreciation reduction\n\n**Options:**\n0=5yr MACRS,1=Proportional\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3171,11 +3036,11 @@ PaymentIncentives_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef PaymentIncentives_methods[] = {
 		{"assign",            (PyCFunction)PaymentIncentives_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``PaymentIncentives_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``PaymentIncentives_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)PaymentIncentives_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``PaymentIncentives_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``PaymentIncentives_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)PaymentIncentives_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -4285,280 +4150,280 @@ PaymentIncentives_set_pbi_uti_term(VarGroupObject *self, PyObject *value, void *
 
 static PyGetSetDef PaymentIncentives_getset[] = {
 {"cbi_fed_amount", (getter)PaymentIncentives_get_cbi_fed_amount,(setter)PaymentIncentives_set_cbi_fed_amount,
-	PyDoc_STR("*float*: Federal CBI amount [$/Watt]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Federal CBI amount [$/Watt]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_fed_deprbas_fed", (getter)PaymentIncentives_get_cbi_fed_deprbas_fed,(setter)PaymentIncentives_set_cbi_fed_deprbas_fed,
-	PyDoc_STR("*float*: Federal CBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal CBI reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_fed_deprbas_sta", (getter)PaymentIncentives_get_cbi_fed_deprbas_sta,(setter)PaymentIncentives_set_cbi_fed_deprbas_sta,
-	PyDoc_STR("*float*: Federal CBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal CBI reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_fed_maxvalue", (getter)PaymentIncentives_get_cbi_fed_maxvalue,(setter)PaymentIncentives_set_cbi_fed_maxvalue,
-	PyDoc_STR("*float*: Federal CBI maximum [$]\n\n*Required*: If not provided, assumed to be 1e99"),
+	PyDoc_STR("*float*: Federal CBI maximum [$]\n\n**Required:**\nFalse. Automatically set to 1e99 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_fed_tax_fed", (getter)PaymentIncentives_get_cbi_fed_tax_fed,(setter)PaymentIncentives_set_cbi_fed_tax_fed,
-	PyDoc_STR("*float*: Federal CBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Federal CBI federal taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_fed_tax_sta", (getter)PaymentIncentives_get_cbi_fed_tax_sta,(setter)PaymentIncentives_set_cbi_fed_tax_sta,
-	PyDoc_STR("*float*: Federal CBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Federal CBI state taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_oth_amount", (getter)PaymentIncentives_get_cbi_oth_amount,(setter)PaymentIncentives_set_cbi_oth_amount,
-	PyDoc_STR("*float*: Other CBI amount [$/Watt]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Other CBI amount [$/Watt]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_oth_deprbas_fed", (getter)PaymentIncentives_get_cbi_oth_deprbas_fed,(setter)PaymentIncentives_set_cbi_oth_deprbas_fed,
-	PyDoc_STR("*float*: Other CBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Other CBI reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_oth_deprbas_sta", (getter)PaymentIncentives_get_cbi_oth_deprbas_sta,(setter)PaymentIncentives_set_cbi_oth_deprbas_sta,
-	PyDoc_STR("*float*: Other CBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Other CBI reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_oth_maxvalue", (getter)PaymentIncentives_get_cbi_oth_maxvalue,(setter)PaymentIncentives_set_cbi_oth_maxvalue,
-	PyDoc_STR("*float*: Other CBI maximum [$]\n\n*Required*: If not provided, assumed to be 1e99"),
+	PyDoc_STR("*float*: Other CBI maximum [$]\n\n**Required:**\nFalse. Automatically set to 1e99 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_oth_tax_fed", (getter)PaymentIncentives_get_cbi_oth_tax_fed,(setter)PaymentIncentives_set_cbi_oth_tax_fed,
-	PyDoc_STR("*float*: Other CBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Other CBI federal taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_oth_tax_sta", (getter)PaymentIncentives_get_cbi_oth_tax_sta,(setter)PaymentIncentives_set_cbi_oth_tax_sta,
-	PyDoc_STR("*float*: Other CBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Other CBI state taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_sta_amount", (getter)PaymentIncentives_get_cbi_sta_amount,(setter)PaymentIncentives_set_cbi_sta_amount,
-	PyDoc_STR("*float*: State CBI amount [$/Watt]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: State CBI amount [$/Watt]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_sta_deprbas_fed", (getter)PaymentIncentives_get_cbi_sta_deprbas_fed,(setter)PaymentIncentives_set_cbi_sta_deprbas_fed,
-	PyDoc_STR("*float*: State CBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State CBI reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_sta_deprbas_sta", (getter)PaymentIncentives_get_cbi_sta_deprbas_sta,(setter)PaymentIncentives_set_cbi_sta_deprbas_sta,
-	PyDoc_STR("*float*: State CBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State CBI reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_sta_maxvalue", (getter)PaymentIncentives_get_cbi_sta_maxvalue,(setter)PaymentIncentives_set_cbi_sta_maxvalue,
-	PyDoc_STR("*float*: State CBI maximum [$]\n\n*Required*: If not provided, assumed to be 1e99"),
+	PyDoc_STR("*float*: State CBI maximum [$]\n\n**Required:**\nFalse. Automatically set to 1e99 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_sta_tax_fed", (getter)PaymentIncentives_get_cbi_sta_tax_fed,(setter)PaymentIncentives_set_cbi_sta_tax_fed,
-	PyDoc_STR("*float*: State CBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: State CBI federal taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_sta_tax_sta", (getter)PaymentIncentives_get_cbi_sta_tax_sta,(setter)PaymentIncentives_set_cbi_sta_tax_sta,
-	PyDoc_STR("*float*: State CBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: State CBI state taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_uti_amount", (getter)PaymentIncentives_get_cbi_uti_amount,(setter)PaymentIncentives_set_cbi_uti_amount,
-	PyDoc_STR("*float*: Utility CBI amount [$/Watt]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Utility CBI amount [$/Watt]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_uti_deprbas_fed", (getter)PaymentIncentives_get_cbi_uti_deprbas_fed,(setter)PaymentIncentives_set_cbi_uti_deprbas_fed,
-	PyDoc_STR("*float*: Utility CBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Utility CBI reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_uti_deprbas_sta", (getter)PaymentIncentives_get_cbi_uti_deprbas_sta,(setter)PaymentIncentives_set_cbi_uti_deprbas_sta,
-	PyDoc_STR("*float*: Utility CBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Utility CBI reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_uti_maxvalue", (getter)PaymentIncentives_get_cbi_uti_maxvalue,(setter)PaymentIncentives_set_cbi_uti_maxvalue,
-	PyDoc_STR("*float*: Utility CBI maximum [$]\n\n*Required*: If not provided, assumed to be 1e99"),
+	PyDoc_STR("*float*: Utility CBI maximum [$]\n\n**Required:**\nFalse. Automatically set to 1e99 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_uti_tax_fed", (getter)PaymentIncentives_get_cbi_uti_tax_fed,(setter)PaymentIncentives_set_cbi_uti_tax_fed,
-	PyDoc_STR("*float*: Utility CBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Utility CBI federal taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cbi_uti_tax_sta", (getter)PaymentIncentives_get_cbi_uti_tax_sta,(setter)PaymentIncentives_set_cbi_uti_tax_sta,
-	PyDoc_STR("*float*: Utility CBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Utility CBI state taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_fed_amount", (getter)PaymentIncentives_get_ibi_fed_amount,(setter)PaymentIncentives_set_ibi_fed_amount,
-	PyDoc_STR("*float*: Federal amount-based IBI amount [$]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal amount-based IBI amount [$]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_fed_amount_deprbas_fed", (getter)PaymentIncentives_get_ibi_fed_amount_deprbas_fed,(setter)PaymentIncentives_set_ibi_fed_amount_deprbas_fed,
-	PyDoc_STR("*float*: Federal amount-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal amount-based IBI reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_fed_amount_deprbas_sta", (getter)PaymentIncentives_get_ibi_fed_amount_deprbas_sta,(setter)PaymentIncentives_set_ibi_fed_amount_deprbas_sta,
-	PyDoc_STR("*float*: Federal amount-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal amount-based IBI reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_fed_amount_tax_fed", (getter)PaymentIncentives_get_ibi_fed_amount_tax_fed,(setter)PaymentIncentives_set_ibi_fed_amount_tax_fed,
-	PyDoc_STR("*float*: Federal amount-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Federal amount-based IBI federal taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_fed_amount_tax_sta", (getter)PaymentIncentives_get_ibi_fed_amount_tax_sta,(setter)PaymentIncentives_set_ibi_fed_amount_tax_sta,
-	PyDoc_STR("*float*: Federal amount-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Federal amount-based IBI state taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_fed_percent", (getter)PaymentIncentives_get_ibi_fed_percent,(setter)PaymentIncentives_set_ibi_fed_percent,
-	PyDoc_STR("*float*: Federal percentage-based IBI percent [%]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Federal percentage-based IBI percent [%]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_fed_percent_deprbas_fed", (getter)PaymentIncentives_get_ibi_fed_percent_deprbas_fed,(setter)PaymentIncentives_set_ibi_fed_percent_deprbas_fed,
-	PyDoc_STR("*float*: Federal percentage-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal percentage-based IBI reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_fed_percent_deprbas_sta", (getter)PaymentIncentives_get_ibi_fed_percent_deprbas_sta,(setter)PaymentIncentives_set_ibi_fed_percent_deprbas_sta,
-	PyDoc_STR("*float*: Federal percentage-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal percentage-based IBI reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_fed_percent_maxvalue", (getter)PaymentIncentives_get_ibi_fed_percent_maxvalue,(setter)PaymentIncentives_set_ibi_fed_percent_maxvalue,
-	PyDoc_STR("*float*: Federal percentage-based IBI maximum value [$]\n\n*Required*: If not provided, assumed to be 1e99"),
+	PyDoc_STR("*float*: Federal percentage-based IBI maximum value [$]\n\n**Required:**\nFalse. Automatically set to 1e99 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_fed_percent_tax_fed", (getter)PaymentIncentives_get_ibi_fed_percent_tax_fed,(setter)PaymentIncentives_set_ibi_fed_percent_tax_fed,
-	PyDoc_STR("*float*: Federal percentage-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Federal percentage-based IBI federal taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_fed_percent_tax_sta", (getter)PaymentIncentives_get_ibi_fed_percent_tax_sta,(setter)PaymentIncentives_set_ibi_fed_percent_tax_sta,
-	PyDoc_STR("*float*: Federal percentage-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Federal percentage-based IBI state taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_oth_amount", (getter)PaymentIncentives_get_ibi_oth_amount,(setter)PaymentIncentives_set_ibi_oth_amount,
-	PyDoc_STR("*float*: Other amount-based IBI amount [$]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Other amount-based IBI amount [$]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_oth_amount_deprbas_fed", (getter)PaymentIncentives_get_ibi_oth_amount_deprbas_fed,(setter)PaymentIncentives_set_ibi_oth_amount_deprbas_fed,
-	PyDoc_STR("*float*: Other amount-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Other amount-based IBI reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_oth_amount_deprbas_sta", (getter)PaymentIncentives_get_ibi_oth_amount_deprbas_sta,(setter)PaymentIncentives_set_ibi_oth_amount_deprbas_sta,
-	PyDoc_STR("*float*: Other amount-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Other amount-based IBI reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_oth_amount_tax_fed", (getter)PaymentIncentives_get_ibi_oth_amount_tax_fed,(setter)PaymentIncentives_set_ibi_oth_amount_tax_fed,
-	PyDoc_STR("*float*: Other amount-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Other amount-based IBI federal taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_oth_amount_tax_sta", (getter)PaymentIncentives_get_ibi_oth_amount_tax_sta,(setter)PaymentIncentives_set_ibi_oth_amount_tax_sta,
-	PyDoc_STR("*float*: Other amount-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Other amount-based IBI state taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_oth_percent", (getter)PaymentIncentives_get_ibi_oth_percent,(setter)PaymentIncentives_set_ibi_oth_percent,
-	PyDoc_STR("*float*: Other percentage-based IBI percent [%]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Other percentage-based IBI percent [%]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_oth_percent_deprbas_fed", (getter)PaymentIncentives_get_ibi_oth_percent_deprbas_fed,(setter)PaymentIncentives_set_ibi_oth_percent_deprbas_fed,
-	PyDoc_STR("*float*: Other percentage-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Other percentage-based IBI reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_oth_percent_deprbas_sta", (getter)PaymentIncentives_get_ibi_oth_percent_deprbas_sta,(setter)PaymentIncentives_set_ibi_oth_percent_deprbas_sta,
-	PyDoc_STR("*float*: Other percentage-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Other percentage-based IBI reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_oth_percent_maxvalue", (getter)PaymentIncentives_get_ibi_oth_percent_maxvalue,(setter)PaymentIncentives_set_ibi_oth_percent_maxvalue,
-	PyDoc_STR("*float*: Other percentage-based IBI maximum value [$]\n\n*Required*: If not provided, assumed to be 1e99"),
+	PyDoc_STR("*float*: Other percentage-based IBI maximum value [$]\n\n**Required:**\nFalse. Automatically set to 1e99 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_oth_percent_tax_fed", (getter)PaymentIncentives_get_ibi_oth_percent_tax_fed,(setter)PaymentIncentives_set_ibi_oth_percent_tax_fed,
-	PyDoc_STR("*float*: Other percentage-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Other percentage-based IBI federal taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_oth_percent_tax_sta", (getter)PaymentIncentives_get_ibi_oth_percent_tax_sta,(setter)PaymentIncentives_set_ibi_oth_percent_tax_sta,
-	PyDoc_STR("*float*: Other percentage-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Other percentage-based IBI state taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_sta_amount", (getter)PaymentIncentives_get_ibi_sta_amount,(setter)PaymentIncentives_set_ibi_sta_amount,
-	PyDoc_STR("*float*: State amount-based IBI amount [$]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State amount-based IBI amount [$]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_sta_amount_deprbas_fed", (getter)PaymentIncentives_get_ibi_sta_amount_deprbas_fed,(setter)PaymentIncentives_set_ibi_sta_amount_deprbas_fed,
-	PyDoc_STR("*float*: State amount-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State amount-based IBI reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_sta_amount_deprbas_sta", (getter)PaymentIncentives_get_ibi_sta_amount_deprbas_sta,(setter)PaymentIncentives_set_ibi_sta_amount_deprbas_sta,
-	PyDoc_STR("*float*: State amount-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State amount-based IBI reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_sta_amount_tax_fed", (getter)PaymentIncentives_get_ibi_sta_amount_tax_fed,(setter)PaymentIncentives_set_ibi_sta_amount_tax_fed,
-	PyDoc_STR("*float*: State amount-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: State amount-based IBI federal taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_sta_amount_tax_sta", (getter)PaymentIncentives_get_ibi_sta_amount_tax_sta,(setter)PaymentIncentives_set_ibi_sta_amount_tax_sta,
-	PyDoc_STR("*float*: State amount-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: State amount-based IBI state taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_sta_percent", (getter)PaymentIncentives_get_ibi_sta_percent,(setter)PaymentIncentives_set_ibi_sta_percent,
-	PyDoc_STR("*float*: State percentage-based IBI percent [%]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: State percentage-based IBI percent [%]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_sta_percent_deprbas_fed", (getter)PaymentIncentives_get_ibi_sta_percent_deprbas_fed,(setter)PaymentIncentives_set_ibi_sta_percent_deprbas_fed,
-	PyDoc_STR("*float*: State percentage-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State percentage-based IBI reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_sta_percent_deprbas_sta", (getter)PaymentIncentives_get_ibi_sta_percent_deprbas_sta,(setter)PaymentIncentives_set_ibi_sta_percent_deprbas_sta,
-	PyDoc_STR("*float*: State percentage-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State percentage-based IBI reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_sta_percent_maxvalue", (getter)PaymentIncentives_get_ibi_sta_percent_maxvalue,(setter)PaymentIncentives_set_ibi_sta_percent_maxvalue,
-	PyDoc_STR("*float*: State percentage-based IBI maximum value [$]\n\n*Required*: If not provided, assumed to be 1e99"),
+	PyDoc_STR("*float*: State percentage-based IBI maximum value [$]\n\n**Required:**\nFalse. Automatically set to 1e99 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_sta_percent_tax_fed", (getter)PaymentIncentives_get_ibi_sta_percent_tax_fed,(setter)PaymentIncentives_set_ibi_sta_percent_tax_fed,
-	PyDoc_STR("*float*: State percentage-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: State percentage-based IBI federal taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_sta_percent_tax_sta", (getter)PaymentIncentives_get_ibi_sta_percent_tax_sta,(setter)PaymentIncentives_set_ibi_sta_percent_tax_sta,
-	PyDoc_STR("*float*: State percentage-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: State percentage-based IBI state taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_uti_amount", (getter)PaymentIncentives_get_ibi_uti_amount,(setter)PaymentIncentives_set_ibi_uti_amount,
-	PyDoc_STR("*float*: Utility amount-based IBI amount [$]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Utility amount-based IBI amount [$]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_uti_amount_deprbas_fed", (getter)PaymentIncentives_get_ibi_uti_amount_deprbas_fed,(setter)PaymentIncentives_set_ibi_uti_amount_deprbas_fed,
-	PyDoc_STR("*float*: Utility amount-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Utility amount-based IBI reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_uti_amount_deprbas_sta", (getter)PaymentIncentives_get_ibi_uti_amount_deprbas_sta,(setter)PaymentIncentives_set_ibi_uti_amount_deprbas_sta,
-	PyDoc_STR("*float*: Utility amount-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Utility amount-based IBI reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_uti_amount_tax_fed", (getter)PaymentIncentives_get_ibi_uti_amount_tax_fed,(setter)PaymentIncentives_set_ibi_uti_amount_tax_fed,
-	PyDoc_STR("*float*: Utility amount-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Utility amount-based IBI federal taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_uti_amount_tax_sta", (getter)PaymentIncentives_get_ibi_uti_amount_tax_sta,(setter)PaymentIncentives_set_ibi_uti_amount_tax_sta,
-	PyDoc_STR("*float*: Utility amount-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Utility amount-based IBI state taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_uti_percent", (getter)PaymentIncentives_get_ibi_uti_percent,(setter)PaymentIncentives_set_ibi_uti_percent,
-	PyDoc_STR("*float*: Utility percentage-based IBI percent [%]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Utility percentage-based IBI percent [%]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_uti_percent_deprbas_fed", (getter)PaymentIncentives_get_ibi_uti_percent_deprbas_fed,(setter)PaymentIncentives_set_ibi_uti_percent_deprbas_fed,
-	PyDoc_STR("*float*: Utility percentage-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Utility percentage-based IBI reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_uti_percent_deprbas_sta", (getter)PaymentIncentives_get_ibi_uti_percent_deprbas_sta,(setter)PaymentIncentives_set_ibi_uti_percent_deprbas_sta,
-	PyDoc_STR("*float*: Utility percentage-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Utility percentage-based IBI reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_uti_percent_maxvalue", (getter)PaymentIncentives_get_ibi_uti_percent_maxvalue,(setter)PaymentIncentives_set_ibi_uti_percent_maxvalue,
-	PyDoc_STR("*float*: Utility percentage-based IBI maximum value [$]\n\n*Required*: If not provided, assumed to be 1e99"),
+	PyDoc_STR("*float*: Utility percentage-based IBI maximum value [$]\n\n**Required:**\nFalse. Automatically set to 1e99 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_uti_percent_tax_fed", (getter)PaymentIncentives_get_ibi_uti_percent_tax_fed,(setter)PaymentIncentives_set_ibi_uti_percent_tax_fed,
-	PyDoc_STR("*float*: Utility percentage-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Utility percentage-based IBI federal taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ibi_uti_percent_tax_sta", (getter)PaymentIncentives_get_ibi_uti_percent_tax_sta,(setter)PaymentIncentives_set_ibi_uti_percent_tax_sta,
-	PyDoc_STR("*float*: Utility percentage-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Utility percentage-based IBI state taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_fed_amount", (getter)PaymentIncentives_get_pbi_fed_amount,(setter)PaymentIncentives_set_pbi_fed_amount,
-	PyDoc_STR("*sequence*: Federal PBI amount [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Federal PBI amount [$/kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_fed_escal", (getter)PaymentIncentives_get_pbi_fed_escal,(setter)PaymentIncentives_set_pbi_fed_escal,
-	PyDoc_STR("*float*: Federal PBI escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal PBI escalation [%]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_fed_for_ds", (getter)PaymentIncentives_get_pbi_fed_for_ds,(setter)PaymentIncentives_set_pbi_fed_for_ds,
-	PyDoc_STR("*float*: Federal PBI available for debt service [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal PBI available for debt service [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_fed_tax_fed", (getter)PaymentIncentives_get_pbi_fed_tax_fed,(setter)PaymentIncentives_set_pbi_fed_tax_fed,
-	PyDoc_STR("*float*: Federal PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Federal PBI federal taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_fed_tax_sta", (getter)PaymentIncentives_get_pbi_fed_tax_sta,(setter)PaymentIncentives_set_pbi_fed_tax_sta,
-	PyDoc_STR("*float*: Federal PBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Federal PBI state taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_fed_term", (getter)PaymentIncentives_get_pbi_fed_term,(setter)PaymentIncentives_set_pbi_fed_term,
-	PyDoc_STR("*float*: Federal PBI term [years]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Federal PBI term [years]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_oth_amount", (getter)PaymentIncentives_get_pbi_oth_amount,(setter)PaymentIncentives_set_pbi_oth_amount,
-	PyDoc_STR("*sequence*: Other PBI amount [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Other PBI amount [$/kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_oth_escal", (getter)PaymentIncentives_get_pbi_oth_escal,(setter)PaymentIncentives_set_pbi_oth_escal,
-	PyDoc_STR("*float*: Other PBI escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Other PBI escalation [%]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_oth_for_ds", (getter)PaymentIncentives_get_pbi_oth_for_ds,(setter)PaymentIncentives_set_pbi_oth_for_ds,
-	PyDoc_STR("*float*: Other PBI available for debt service [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Other PBI available for debt service [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_oth_tax_fed", (getter)PaymentIncentives_get_pbi_oth_tax_fed,(setter)PaymentIncentives_set_pbi_oth_tax_fed,
-	PyDoc_STR("*float*: Other PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Other PBI federal taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_oth_tax_sta", (getter)PaymentIncentives_get_pbi_oth_tax_sta,(setter)PaymentIncentives_set_pbi_oth_tax_sta,
-	PyDoc_STR("*float*: Other PBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Other PBI state taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_oth_term", (getter)PaymentIncentives_get_pbi_oth_term,(setter)PaymentIncentives_set_pbi_oth_term,
-	PyDoc_STR("*float*: Other PBI term [years]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Other PBI term [years]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_sta_amount", (getter)PaymentIncentives_get_pbi_sta_amount,(setter)PaymentIncentives_set_pbi_sta_amount,
-	PyDoc_STR("*sequence*: State PBI amount [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: State PBI amount [$/kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_sta_escal", (getter)PaymentIncentives_get_pbi_sta_escal,(setter)PaymentIncentives_set_pbi_sta_escal,
-	PyDoc_STR("*float*: State PBI escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State PBI escalation [%]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_sta_for_ds", (getter)PaymentIncentives_get_pbi_sta_for_ds,(setter)PaymentIncentives_set_pbi_sta_for_ds,
-	PyDoc_STR("*float*: State PBI available for debt service [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State PBI available for debt service [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_sta_tax_fed", (getter)PaymentIncentives_get_pbi_sta_tax_fed,(setter)PaymentIncentives_set_pbi_sta_tax_fed,
-	PyDoc_STR("*float*: State PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: State PBI federal taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_sta_tax_sta", (getter)PaymentIncentives_get_pbi_sta_tax_sta,(setter)PaymentIncentives_set_pbi_sta_tax_sta,
-	PyDoc_STR("*float*: State PBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: State PBI state taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_sta_term", (getter)PaymentIncentives_get_pbi_sta_term,(setter)PaymentIncentives_set_pbi_sta_term,
-	PyDoc_STR("*float*: State PBI term [years]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: State PBI term [years]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_uti_amount", (getter)PaymentIncentives_get_pbi_uti_amount,(setter)PaymentIncentives_set_pbi_uti_amount,
-	PyDoc_STR("*sequence*: Utility PBI amount [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Utility PBI amount [$/kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_uti_escal", (getter)PaymentIncentives_get_pbi_uti_escal,(setter)PaymentIncentives_set_pbi_uti_escal,
-	PyDoc_STR("*float*: Utility PBI escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Utility PBI escalation [%]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_uti_for_ds", (getter)PaymentIncentives_get_pbi_uti_for_ds,(setter)PaymentIncentives_set_pbi_uti_for_ds,
-	PyDoc_STR("*float*: Utility PBI available for debt service [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Utility PBI available for debt service [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_uti_tax_fed", (getter)PaymentIncentives_get_pbi_uti_tax_fed,(setter)PaymentIncentives_set_pbi_uti_tax_fed,
-	PyDoc_STR("*float*: Utility PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Utility PBI federal taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_uti_tax_sta", (getter)PaymentIncentives_get_pbi_uti_tax_sta,(setter)PaymentIncentives_set_pbi_uti_tax_sta,
-	PyDoc_STR("*float*: Utility PBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Utility PBI state taxable [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pbi_uti_term", (getter)PaymentIncentives_get_pbi_uti_term,(setter)PaymentIncentives_set_pbi_uti_term,
-	PyDoc_STR("*float*: Utility PBI term [years]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Utility PBI term [years]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4673,11 +4538,11 @@ BatterySystem_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef BatterySystem_methods[] = {
 		{"assign",            (PyCFunction)BatterySystem_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``BatterySystem_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``BatterySystem_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)BatterySystem_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``BatterySystem_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``BatterySystem_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)BatterySystem_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -4777,30 +4642,45 @@ BatterySystem_set_en_standalone_batt(VarGroupObject *self, PyObject *value, void
 	return PySAM_double_setter(value, SAM_Singleowner_BatterySystem_en_standalone_batt_nset, self->data_ptr);
 }
 
+static PyObject *
+BatterySystem_get_en_wave_batt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_BatterySystem_en_wave_batt_nget, self->data_ptr);
+}
+
+static int
+BatterySystem_set_en_wave_batt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_BatterySystem_en_wave_batt_nset, self->data_ptr);
+}
+
 static PyGetSetDef BatterySystem_getset[] = {
 {"batt_bank_replacement", (getter)BatterySystem_get_batt_bank_replacement,(setter)BatterySystem_set_batt_bank_replacement,
-	PyDoc_STR("*sequence*: Battery bank replacements per year [number/year]"),
+	PyDoc_STR("*sequence*: Battery bank replacements per year [number/year]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"batt_computed_bank_capacity", (getter)BatterySystem_get_batt_computed_bank_capacity,(setter)BatterySystem_set_batt_computed_bank_capacity,
-	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n*Required*: If not provided, assumed to be 0.0\n\n*Changes to this variable may require updating the values of the following*: \n\t - cp_battery_nameplate\n"),
+	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults.\n\nThe value of the following variables depends on ``batt_computed_bank_capacity``:\n\n\t - battery_total_cost_lcos\n\t - construction_financing_cost\n\t - om_batt_nameplate\n\t - total_installed_cost\n"),
  	NULL},
 {"batt_meter_position", (getter)BatterySystem_get_batt_meter_position,(setter)BatterySystem_set_batt_meter_position,
 	PyDoc_STR("*float*: Position of battery relative to electric meter"),
  	NULL},
 {"batt_replacement_option", (getter)BatterySystem_get_batt_replacement_option,(setter)BatterySystem_set_batt_replacement_option,
-	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"batt_replacement_schedule_percent", (getter)BatterySystem_get_batt_replacement_schedule_percent,(setter)BatterySystem_set_batt_replacement_schedule_percent,
-	PyDoc_STR("*sequence*: Percentage of battery capacity to replace in each year [%]\n\n*Options*: length <= analysis_period"),
+	PyDoc_STR("*sequence*: Percentage of battery capacity to replace in each year [%]\n\n**Options:**\nlength <= analysis_period"),
  	NULL},
 {"battery_per_kWh", (getter)BatterySystem_get_battery_per_kWh,(setter)BatterySystem_set_battery_per_kWh,
-	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults.\n\nThe value of the following variables depends on ``battery_per_kWh``:\n\n\t - battery_total_cost_lcos\n\t - construction_financing_cost\n\t - total_installed_cost\n"),
  	NULL},
 {"en_batt", (getter)BatterySystem_get_en_batt,(setter)BatterySystem_set_en_batt,
-	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"en_standalone_batt", (getter)BatterySystem_get_en_standalone_batt,(setter)BatterySystem_set_en_standalone_batt,
-	PyDoc_STR("*float*: Enable standalone battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable standalone battery storage model [0/1]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"en_wave_batt", (getter)BatterySystem_get_en_wave_batt,(setter)BatterySystem_set_en_wave_batt,
+	PyDoc_STR("*float*: Enable standalone battery storage model [0/1]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4915,11 +4795,11 @@ ElectricityRates_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef ElectricityRates_methods[] = {
 		{"assign",            (PyCFunction)ElectricityRates_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ElectricityRates_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``ElectricityRates_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)ElectricityRates_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ElectricityRates_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``ElectricityRates_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)ElectricityRates_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -4935,9 +4815,444 @@ ElectricityRates_set_en_electricity_rates(VarGroupObject *self, PyObject *value,
 	return PySAM_double_setter(value, SAM_Singleowner_ElectricityRates_en_electricity_rates_nset, self->data_ptr);
 }
 
+static PyObject *
+ElectricityRates_get_rate_escalation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_ElectricityRates_rate_escalation_aget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_rate_escalation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Singleowner_ElectricityRates_rate_escalation_aset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_annual_min_charge(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_ElectricityRates_ur_annual_min_charge_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_annual_min_charge(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_ElectricityRates_ur_annual_min_charge_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_billing_demand_lookback_percentages(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Singleowner_ElectricityRates_ur_billing_demand_lookback_percentages_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_billing_demand_lookback_percentages(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Singleowner_ElectricityRates_ur_billing_demand_lookback_percentages_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_billing_demand_lookback_period(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_ElectricityRates_ur_billing_demand_lookback_period_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_billing_demand_lookback_period(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_ElectricityRates_ur_billing_demand_lookback_period_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_billing_demand_minimum(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_ElectricityRates_ur_billing_demand_minimum_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_billing_demand_minimum(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_ElectricityRates_ur_billing_demand_minimum_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_billing_demand_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Singleowner_ElectricityRates_ur_dc_billing_demand_periods_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_billing_demand_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Singleowner_ElectricityRates_ur_dc_billing_demand_periods_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_enable(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_ElectricityRates_ur_dc_enable_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_enable(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_ElectricityRates_ur_dc_enable_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_flat_mat(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Singleowner_ElectricityRates_ur_dc_flat_mat_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_flat_mat(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Singleowner_ElectricityRates_ur_dc_flat_mat_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_sched_weekday(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Singleowner_ElectricityRates_ur_dc_sched_weekday_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Singleowner_ElectricityRates_ur_dc_sched_weekday_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_sched_weekend(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Singleowner_ElectricityRates_ur_dc_sched_weekend_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Singleowner_ElectricityRates_ur_dc_sched_weekend_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_tou_mat(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Singleowner_ElectricityRates_ur_dc_tou_mat_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_tou_mat(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Singleowner_ElectricityRates_ur_dc_tou_mat_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ec_sched_weekday(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Singleowner_ElectricityRates_ur_ec_sched_weekday_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ec_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Singleowner_ElectricityRates_ur_ec_sched_weekday_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ec_sched_weekend(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Singleowner_ElectricityRates_ur_ec_sched_weekend_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ec_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Singleowner_ElectricityRates_ur_ec_sched_weekend_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ec_tou_mat(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Singleowner_ElectricityRates_ur_ec_tou_mat_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ec_tou_mat(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Singleowner_ElectricityRates_ur_ec_tou_mat_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_en_ts_buy_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_ElectricityRates_ur_en_ts_buy_rate_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_en_ts_buy_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_ElectricityRates_ur_en_ts_buy_rate_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_en_ts_sell_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_ElectricityRates_ur_en_ts_sell_rate_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_en_ts_sell_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_ElectricityRates_ur_en_ts_sell_rate_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_enable_billing_demand(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_ElectricityRates_ur_enable_billing_demand_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_enable_billing_demand(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_ElectricityRates_ur_enable_billing_demand_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_metering_option(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_ElectricityRates_ur_metering_option_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_metering_option(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_ElectricityRates_ur_metering_option_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_monthly_fixed_charge(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_ElectricityRates_ur_monthly_fixed_charge_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_monthly_fixed_charge(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_ElectricityRates_ur_monthly_fixed_charge_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_monthly_min_charge(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_ElectricityRates_ur_monthly_min_charge_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_monthly_min_charge(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_ElectricityRates_ur_monthly_min_charge_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_nb_apply_credit_current_month(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_ElectricityRates_ur_nb_apply_credit_current_month_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nb_apply_credit_current_month(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_ElectricityRates_ur_nb_apply_credit_current_month_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_nb_credit_expire(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_ElectricityRates_ur_nb_credit_expire_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nb_credit_expire(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_ElectricityRates_ur_nb_credit_expire_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_nm_credit_month(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_ElectricityRates_ur_nm_credit_month_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nm_credit_month(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_ElectricityRates_ur_nm_credit_month_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_nm_credit_rollover(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_ElectricityRates_ur_nm_credit_rollover_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nm_credit_rollover(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_ElectricityRates_ur_nm_credit_rollover_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_nm_yearend_sell_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_ElectricityRates_ur_nm_yearend_sell_rate_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nm_yearend_sell_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_ElectricityRates_ur_nm_yearend_sell_rate_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_sell_eq_buy(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_ElectricityRates_ur_sell_eq_buy_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_sell_eq_buy(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_ElectricityRates_ur_sell_eq_buy_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ts_buy_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_ElectricityRates_ur_ts_buy_rate_aget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ts_buy_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Singleowner_ElectricityRates_ur_ts_buy_rate_aset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ts_sell_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_ElectricityRates_ur_ts_sell_rate_aget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ts_sell_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Singleowner_ElectricityRates_ur_ts_sell_rate_aset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_yearzero_usage_peaks(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_ElectricityRates_ur_yearzero_usage_peaks_aget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_yearzero_usage_peaks(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Singleowner_ElectricityRates_ur_yearzero_usage_peaks_aset, self->data_ptr);
+}
+
 static PyGetSetDef ElectricityRates_getset[] = {
 {"en_electricity_rates", (getter)ElectricityRates_get_en_electricity_rates,(setter)ElectricityRates_set_en_electricity_rates,
-	PyDoc_STR("*float*: Enable electricity rates for grid purchase [0/1]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable electricity rates for grid purchase [0/1]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"rate_escalation", (getter)ElectricityRates_get_rate_escalation,(setter)ElectricityRates_set_rate_escalation,
+	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]"),
+ 	NULL},
+{"ur_annual_min_charge", (getter)ElectricityRates_get_ur_annual_min_charge,(setter)ElectricityRates_set_ur_annual_min_charge,
+	PyDoc_STR("*float*: Annual minimum charge [$]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_billing_demand_lookback_percentages", (getter)ElectricityRates_get_ur_billing_demand_lookback_percentages,(setter)ElectricityRates_set_ur_billing_demand_lookback_percentages,
+	PyDoc_STR("*sequence[sequence]*: Billing demand lookback percentages by month and consider actual peak demand [%]\n\n**Info:**\n12x2\n\n**Required:**\nRequired if ur_enable_billing_demand=1"),
+ 	NULL},
+{"ur_billing_demand_lookback_period", (getter)ElectricityRates_get_ur_billing_demand_lookback_period,(setter)ElectricityRates_set_ur_billing_demand_lookback_period,
+	PyDoc_STR("*float*: Billing demand lookback period [mn]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=12\n\n**Required:**\nRequired if ur_enable_billing_demand=1"),
+ 	NULL},
+{"ur_billing_demand_minimum", (getter)ElectricityRates_get_ur_billing_demand_minimum,(setter)ElectricityRates_set_ur_billing_demand_minimum,
+	PyDoc_STR("*float*: Minimum billing demand [kW]\n\n**Required:**\nRequired if ur_enable_billing_demand=1"),
+ 	NULL},
+{"ur_dc_billing_demand_periods", (getter)ElectricityRates_get_ur_dc_billing_demand_periods,(setter)ElectricityRates_set_ur_dc_billing_demand_periods,
+	PyDoc_STR("*sequence[sequence]*: Billing demand applicability to a given demand charge time of use period\n\n**Required:**\nRequired if ur_enable_billing_demand=1"),
+ 	NULL},
+{"ur_dc_enable", (getter)ElectricityRates_get_ur_dc_enable,(setter)ElectricityRates_set_ur_dc_enable,
+	PyDoc_STR("*float*: Enable demand charge [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_dc_flat_mat", (getter)ElectricityRates_get_ur_dc_flat_mat,(setter)ElectricityRates_set_ur_dc_flat_mat,
+	PyDoc_STR("*sequence[sequence]*: Demand rates (flat) table [col 0=month, col 1=tier no, col 2=tier peak (kW), col 3=charge ($/kW)]\n\n**Info:**\nnx4\n\n**Required:**\nRequired if ur_dc_enable=1"),
+ 	NULL},
+{"ur_dc_sched_weekday", (getter)ElectricityRates_get_ur_dc_sched_weekday,(setter)ElectricityRates_set_ur_dc_sched_weekday,
+	PyDoc_STR("*sequence[sequence]*: Demand charge weekday schedule [Periods defined in ur_dc_tou_mat]\n\n**Info:**\n12x24"),
+ 	NULL},
+{"ur_dc_sched_weekend", (getter)ElectricityRates_get_ur_dc_sched_weekend,(setter)ElectricityRates_set_ur_dc_sched_weekend,
+	PyDoc_STR("*sequence[sequence]*: Demand charge weekend schedule [Periods defined in ur_dc_tou_mat]\n\n**Info:**\n12x24"),
+ 	NULL},
+{"ur_dc_tou_mat", (getter)ElectricityRates_get_ur_dc_tou_mat,(setter)ElectricityRates_set_ur_dc_tou_mat,
+	PyDoc_STR("*sequence[sequence]*: Demand rates (TOU) table [col 0=period no, col 1=tier no, col 2=tier peak (kW), col 3=charge ($/kW)]\n\n**Info:**\nnx4\n\n**Required:**\nRequired if ur_dc_enable=1"),
+ 	NULL},
+{"ur_ec_sched_weekday", (getter)ElectricityRates_get_ur_ec_sched_weekday,(setter)ElectricityRates_set_ur_ec_sched_weekday,
+	PyDoc_STR("*sequence[sequence]*: Energy charge weekday schedule [Periods defined in ur_ec_tou_mat]\n\n**Info:**\n12x24"),
+ 	NULL},
+{"ur_ec_sched_weekend", (getter)ElectricityRates_get_ur_ec_sched_weekend,(setter)ElectricityRates_set_ur_ec_sched_weekend,
+	PyDoc_STR("*sequence[sequence]*: Energy charge weekend schedule [Periods defined in ur_ec_tou_mat]\n\n**Info:**\n12x24"),
+ 	NULL},
+{"ur_ec_tou_mat", (getter)ElectricityRates_get_ur_ec_tou_mat,(setter)ElectricityRates_set_ur_ec_tou_mat,
+	PyDoc_STR("*sequence[sequence]*: Energy rates table [col 0=period no, col 1=tier no, col 2=max usage, col 3=max usage units (0=kWh, 1=kWh/kW, 2=kWh daily, 3=kWh/kW daily), col 4=buy rate ($/kWh), col 5=sell rate ($/kWh)]\n\n**Info:**\nnx6"),
+ 	NULL},
+{"ur_en_ts_buy_rate", (getter)ElectricityRates_get_ur_en_ts_buy_rate,(setter)ElectricityRates_set_ur_en_ts_buy_rate,
+	PyDoc_STR("*float*: Enable time step buy rates [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_en_ts_sell_rate", (getter)ElectricityRates_get_ur_en_ts_sell_rate,(setter)ElectricityRates_set_ur_en_ts_sell_rate,
+	PyDoc_STR("*float*: Enable time step sell rates [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_enable_billing_demand", (getter)ElectricityRates_get_ur_enable_billing_demand,(setter)ElectricityRates_set_ur_enable_billing_demand,
+	PyDoc_STR("*float*: Enable billing demand ratchets [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_metering_option", (getter)ElectricityRates_get_ur_metering_option,(setter)ElectricityRates_set_ur_metering_option,
+	PyDoc_STR("*float*: Metering options [0=net energy metering,1=net energy metering with $ credits,2=net billing,3=net billing with carryover to next month,4=buy all - sell all]\n\n**Info:**\nNet metering monthly excess\n\n**Constraints:**\nINTEGER,MIN=0,MAX=4\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_monthly_fixed_charge", (getter)ElectricityRates_get_ur_monthly_fixed_charge,(setter)ElectricityRates_set_ur_monthly_fixed_charge,
+	PyDoc_STR("*float*: Monthly fixed charge [$]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_monthly_min_charge", (getter)ElectricityRates_get_ur_monthly_min_charge,(setter)ElectricityRates_set_ur_monthly_min_charge,
+	PyDoc_STR("*float*: Monthly minimum charge [$]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_nb_apply_credit_current_month", (getter)ElectricityRates_get_ur_nb_apply_credit_current_month,(setter)ElectricityRates_set_ur_nb_apply_credit_current_month,
+	PyDoc_STR("*float*: Apply earned credits to balance before rolling over excess         [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_nb_credit_expire", (getter)ElectricityRates_get_ur_nb_credit_expire,(setter)ElectricityRates_set_ur_nb_credit_expire,
+	PyDoc_STR("*float*: Credit is lost upon end of year         [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_nm_credit_month", (getter)ElectricityRates_get_ur_nm_credit_month,(setter)ElectricityRates_set_ur_nm_credit_month,
+	PyDoc_STR("*float*: Month of year end payout (true-up) [mn]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=11\n\n**Required:**\nFalse. Automatically set to 11 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_nm_credit_rollover", (getter)ElectricityRates_get_ur_nm_credit_rollover,(setter)ElectricityRates_set_ur_nm_credit_rollover,
+	PyDoc_STR("*float*: Apply net metering true-up credits to future bills [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_nm_yearend_sell_rate", (getter)ElectricityRates_get_ur_nm_yearend_sell_rate,(setter)ElectricityRates_set_ur_nm_yearend_sell_rate,
+	PyDoc_STR("*float*: Net metering true-up credit sell rate [$/kWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_sell_eq_buy", (getter)ElectricityRates_get_ur_sell_eq_buy,(setter)ElectricityRates_set_ur_sell_eq_buy,
+	PyDoc_STR("*float*: Set sell rate equal to buy rate [0/1]\n\n**Info:**\nOptional override\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_ts_buy_rate", (getter)ElectricityRates_get_ur_ts_buy_rate,(setter)ElectricityRates_set_ur_ts_buy_rate,
+	PyDoc_STR("*sequence*: Time step buy rates [$/kWh]"),
+ 	NULL},
+{"ur_ts_sell_rate", (getter)ElectricityRates_get_ur_ts_sell_rate,(setter)ElectricityRates_set_ur_ts_sell_rate,
+	PyDoc_STR("*sequence*: Time step sell rates [$/kWh]"),
+ 	NULL},
+{"ur_yearzero_usage_peaks", (getter)ElectricityRates_get_ur_yearzero_usage_peaks,(setter)ElectricityRates_set_ur_yearzero_usage_peaks,
+	PyDoc_STR("*sequence*: Peak usage by month for year zero [kW]\n\n**Info:**\n12\n\n**Required:**\nRequired if ur_enable_billing_demand=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -5052,11 +5367,11 @@ SystemOutput_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemOutput_methods[] = {
 		{"assign",            (PyCFunction)SystemOutput_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemOutput_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SystemOutput_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SystemOutput_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemOutput_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SystemOutput_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemOutput_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -5146,25 +5461,25 @@ SystemOutput_set_system_pre_curtailment_kwac(VarGroupObject *self, PyObject *val
 
 static PyGetSetDef SystemOutput_getset[] = {
 {"annual_energy_pre_curtailment_ac", (getter)SystemOutput_get_annual_energy_pre_curtailment_ac,(setter)SystemOutput_set_annual_energy_pre_curtailment_ac,
-	PyDoc_STR("*float*: Annual Energy AC pre-curtailment (year 1) [kWh]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Annual Energy AC pre-curtailment (year 1) [kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"degradation", (getter)SystemOutput_get_degradation,(setter)SystemOutput_set_degradation,
-	PyDoc_STR("*sequence*: Annual energy degradation\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Annual energy degradation\n\n**Required:**\nRequired if system_use_lifetime_output=0"),
  	NULL},
 {"gen", (getter)SystemOutput_get_gen,(setter)SystemOutput_set_gen,
-	PyDoc_STR("*sequence*: Net power to or from the grid [kW]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Net power to or from the grid [kW]\n\n**Required:**\nTrue"),
  	NULL},
 {"gen_purchases", (getter)SystemOutput_get_gen_purchases,(setter)SystemOutput_set_gen_purchases,
-	PyDoc_STR("*sequence*: Electricity from grid [kW]"),
+	PyDoc_STR("*sequence*: Electricity from grid to system [kW]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"gen_without_battery", (getter)SystemOutput_get_gen_without_battery,(setter)SystemOutput_set_gen_without_battery,
 	PyDoc_STR("*sequence*: Electricity to or from the renewable system, without the battery [kW]"),
  	NULL},
 {"system_capacity", (getter)SystemOutput_get_system_capacity,(setter)SystemOutput_set_system_capacity,
-	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n*Required*: If not provided, assumed to be 0\n\n*Changes to this variable may require updating the values of the following*: \n\t - cp_battery_nameplate\n\t - cp_system_nameplate\n"),
+	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of the following variables depends on ``system_capacity``:\n\n\t - battery_total_cost_lcos\n\t - construction_financing_cost\n\t - cp_battery_nameplate\n\t - cp_system_nameplate\n\t - land_area\n\t - total_installed_cost\n"),
  	NULL},
 {"system_pre_curtailment_kwac", (getter)SystemOutput_get_system_pre_curtailment_kwac,(setter)SystemOutput_set_system_pre_curtailment_kwac,
-	PyDoc_STR("*sequence*: System power before grid curtailment [kW]\n\n*Info*: System generation"),
+	PyDoc_STR("*sequence*: System power before grid curtailment [kW]\n\n**Info:**\nSystem generation"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -5279,11 +5594,11 @@ UtilityBill_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef UtilityBill_methods[] = {
 		{"assign",            (PyCFunction)UtilityBill_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``UtilityBill_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``UtilityBill_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)UtilityBill_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``UtilityBill_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``UtilityBill_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)UtilityBill_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -5416,13 +5731,25 @@ Lifetime_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Lifetime_methods[] = {
 		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Lifetime_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Lifetime_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Lifetime_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Lifetime_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Lifetime_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
+
+static PyObject *
+Lifetime_get_inflation_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_Lifetime_inflation_rate_nget, self->data_ptr);
+}
+
+static int
+Lifetime_set_inflation_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_Lifetime_inflation_rate_nset, self->data_ptr);
+}
 
 static PyObject *
 Lifetime_get_system_use_lifetime_output(VarGroupObject *self, void *closure)
@@ -5437,8 +5764,11 @@ Lifetime_set_system_use_lifetime_output(VarGroupObject *self, PyObject *value, v
 }
 
 static PyGetSetDef Lifetime_getset[] = {
+{"inflation_rate", (getter)Lifetime_get_inflation_rate,(setter)Lifetime_set_inflation_rate,
+	PyDoc_STR("*float*: Inflation rate [%]\n\n**Constraints:**\nMIN=-99"),
+ 	NULL},
 {"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
-	PyDoc_STR("*float*: Lifetime hourly system outputs [0/1]\n\n*Options*: 0=hourly first year,1=hourly lifetime\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: True"),
+	PyDoc_STR("*float*: Lifetime hourly system outputs [0/1]\n\n**Options:**\n0=hourly first year,1=hourly lifetime\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -5553,13 +5883,25 @@ FuelCell_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef FuelCell_methods[] = {
 		{"assign",            (PyCFunction)FuelCell_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``FuelCell_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``FuelCell_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)FuelCell_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``FuelCell_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``FuelCell_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)FuelCell_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
+
+static PyObject *
+FuelCell_get_annual_fuel_usage_lifetime(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_FuelCell_annual_fuel_usage_lifetime_aget, self->data_ptr);
+}
+
+static int
+FuelCell_set_annual_fuel_usage_lifetime(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Singleowner_FuelCell_annual_fuel_usage_lifetime_aset, self->data_ptr);
+}
 
 static PyObject *
 FuelCell_get_en_fuelcell(VarGroupObject *self, void *closure)
@@ -5571,6 +5913,18 @@ static int
 FuelCell_set_en_fuelcell(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Singleowner_FuelCell_en_fuelcell_nset, self->data_ptr);
+}
+
+static PyObject *
+FuelCell_get_fuelcell_annual_energy_discharged(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_FuelCell_fuelcell_annual_energy_discharged_aget, self->data_ptr);
+}
+
+static int
+FuelCell_set_fuelcell_annual_energy_discharged(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Singleowner_FuelCell_fuelcell_annual_energy_discharged_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -5634,20 +5988,26 @@ FuelCell_set_fuelcell_replacement_schedule(VarGroupObject *self, PyObject *value
 }
 
 static PyGetSetDef FuelCell_getset[] = {
+{"annual_fuel_usage_lifetime", (getter)FuelCell_get_annual_fuel_usage_lifetime,(setter)FuelCell_set_annual_fuel_usage_lifetime,
+	PyDoc_STR("*sequence*: Annual Fuel Usage (lifetime) [kWht]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
+ 	NULL},
 {"en_fuelcell", (getter)FuelCell_get_en_fuelcell,(setter)FuelCell_set_en_fuelcell,
-	PyDoc_STR("*float*: Enable fuel cell storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable fuel cell storage model [0/1]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"fuelcell_annual_energy_discharged", (getter)FuelCell_get_fuelcell_annual_energy_discharged,(setter)FuelCell_set_fuelcell_annual_energy_discharged,
+	PyDoc_STR("*sequence*: Fuel cell annual energy discharged [kWh]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"fuelcell_computed_bank_capacity", (getter)FuelCell_get_fuelcell_computed_bank_capacity,(setter)FuelCell_set_fuelcell_computed_bank_capacity,
-	PyDoc_STR("*float*: Fuel cell capacity [kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Fuel cell capacity [kWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"fuelcell_per_kWh", (getter)FuelCell_get_fuelcell_per_kWh,(setter)FuelCell_set_fuelcell_per_kWh,
-	PyDoc_STR("*float*: Fuel cell cost [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Fuel cell cost [$/kWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"fuelcell_replacement", (getter)FuelCell_get_fuelcell_replacement,(setter)FuelCell_set_fuelcell_replacement,
 	PyDoc_STR("*sequence*: Fuel cell replacements per year [number/year]"),
  	NULL},
 {"fuelcell_replacement_option", (getter)FuelCell_get_fuelcell_replacement_option,(setter)FuelCell_set_fuelcell_replacement_option,
-	PyDoc_STR("*float*: Enable fuel cell replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2"),
+	PyDoc_STR("*float*: Enable fuel cell replacement? [0=none,1=capacity based,2=user schedule]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2"),
  	NULL},
 {"fuelcell_replacement_schedule", (getter)FuelCell_get_fuelcell_replacement_schedule,(setter)FuelCell_set_fuelcell_replacement_schedule,
 	PyDoc_STR("*sequence*: Fuel cell replacements per year (user specified) [number/year]"),
@@ -5765,11 +6125,11 @@ CapacityPayments_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef CapacityPayments_methods[] = {
 		{"assign",            (PyCFunction)CapacityPayments_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``CapacityPayments_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``CapacityPayments_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)CapacityPayments_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``CapacityPayments_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``CapacityPayments_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)CapacityPayments_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -5847,22 +6207,22 @@ CapacityPayments_set_cp_system_nameplate(VarGroupObject *self, PyObject *value, 
 
 static PyGetSetDef CapacityPayments_getset[] = {
 {"cp_battery_nameplate", (getter)CapacityPayments_get_cp_battery_nameplate,(setter)CapacityPayments_set_cp_battery_nameplate,
-	PyDoc_STR("*float*: Battery nameplate [MW]\n\n*Constraints*: MIN=0\n\n*Required*: True if cp_capacity_payment_type=0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - cp_system_nameplate\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Battery nameplate [MW]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nRequired if cp_capacity_payment_type=0\n\nThe value of ``cp_battery_nameplate`` depends on the following variables:\n\n\t - cp_system_nameplate\n"),
  	NULL},
 {"cp_capacity_credit_percent", (getter)CapacityPayments_get_cp_capacity_credit_percent,(setter)CapacityPayments_set_cp_capacity_credit_percent,
-	PyDoc_STR("*sequence*: Capacity credit (eligible portion of nameplate) [%]\n\n*Required*: True if cp_capacity_payment_type=0"),
+	PyDoc_STR("*sequence*: Capacity credit (eligible portion of nameplate) [%]\n\n**Required:**\nRequired if cp_capacity_payment_type=0"),
  	NULL},
 {"cp_capacity_payment_amount", (getter)CapacityPayments_get_cp_capacity_payment_amount,(setter)CapacityPayments_set_cp_capacity_payment_amount,
-	PyDoc_STR("*sequence*: Capacity payment amount [$ or $/MW]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Capacity payment amount [$ or $/MW]\n\n**Required:**\nTrue"),
  	NULL},
 {"cp_capacity_payment_esc", (getter)CapacityPayments_get_cp_capacity_payment_esc,(setter)CapacityPayments_set_cp_capacity_payment_esc,
-	PyDoc_STR("*float*: Capacity payment escalation [%/year]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Capacity payment escalation [%/year]\n\n**Required:**\nTrue"),
  	NULL},
 {"cp_capacity_payment_type", (getter)CapacityPayments_get_cp_capacity_payment_type,(setter)CapacityPayments_set_cp_capacity_payment_type,
-	PyDoc_STR("*float*: Capacity payment type\n\n*Options*: 0=Energy basis,1=Fixed amount\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
+	PyDoc_STR("*float*: Capacity payment type\n\n**Options:**\n0=Energy basis,1=Fixed amount\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nTrue"),
  	NULL},
 {"cp_system_nameplate", (getter)CapacityPayments_get_cp_system_nameplate,(setter)CapacityPayments_set_cp_system_nameplate,
-	PyDoc_STR("*float*: System nameplate [MW]\n\n*Constraints*: MIN=0\n\n*Required*: True if cp_capacity_payment_type=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - cp_battery_nameplate\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - system_capacity\n"),
+	PyDoc_STR("*float*: System nameplate [MW]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nRequired if cp_capacity_payment_type=0\n\nThe value of the following variables depends on ``cp_system_nameplate``:\n\n\t - cp_battery_nameplate\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -5977,11 +6337,11 @@ GridLimits_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef GridLimits_methods[] = {
 		{"assign",            (PyCFunction)GridLimits_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``GridLimits_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``GridLimits_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)GridLimits_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``GridLimits_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``GridLimits_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)GridLimits_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -6011,10 +6371,10 @@ GridLimits_set_grid_curtailment_price_esc(VarGroupObject *self, PyObject *value,
 
 static PyGetSetDef GridLimits_getset[] = {
 {"grid_curtailment_price", (getter)GridLimits_get_grid_curtailment_price,(setter)GridLimits_set_grid_curtailment_price,
-	PyDoc_STR("*sequence*: Curtailment price [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Curtailment price [$/kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"grid_curtailment_price_esc", (getter)GridLimits_get_grid_curtailment_price_esc,(setter)GridLimits_set_grid_curtailment_price_esc,
-	PyDoc_STR("*float*: Curtailment price escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Curtailment price escalation [%]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -6129,11 +6489,11 @@ LCOS_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef LCOS_methods[] = {
 		{"assign",            (PyCFunction)LCOS_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``LCOS_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``LCOS_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)LCOS_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``LCOS_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``LCOS_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)LCOS_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -6331,22 +6691,22 @@ LCOS_set_year1_monthly_electricity_to_grid(VarGroupObject *self, PyObject *value
 
 static PyGetSetDef LCOS_getset[] = {
 {"batt_annual_charge_energy", (getter)LCOS_get_batt_annual_charge_energy,(setter)LCOS_set_batt_annual_charge_energy,
-	PyDoc_STR("*sequence*: Battery annual energy charged [kWh]"),
+	PyDoc_STR("*sequence*: Battery annual energy charged [kWh]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"batt_annual_charge_from_system", (getter)LCOS_get_batt_annual_charge_from_system,(setter)LCOS_set_batt_annual_charge_from_system,
-	PyDoc_STR("*sequence*: Battery annual energy charged from system [kWh]"),
+	PyDoc_STR("*sequence*: Battery annual energy charged from system [kWh]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"batt_annual_discharge_energy", (getter)LCOS_get_batt_annual_discharge_energy,(setter)LCOS_set_batt_annual_discharge_energy,
-	PyDoc_STR("*sequence*: Battery annual energy discharged [kWh]"),
+	PyDoc_STR("*sequence*: Battery annual energy discharged [kWh]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"batt_capacity_percent", (getter)LCOS_get_batt_capacity_percent,(setter)LCOS_set_batt_capacity_percent,
 	PyDoc_STR("*sequence*: Battery relative capacity to nameplate [%]"),
  	NULL},
 {"batt_salvage_percentage", (getter)LCOS_get_batt_salvage_percentage,(setter)LCOS_set_batt_salvage_percentage,
-	PyDoc_STR("*float*: Net pre-tax cash battery salvage value [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Net pre-tax cash battery salvage value [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"battery_total_cost_lcos", (getter)LCOS_get_battery_total_cost_lcos,(setter)LCOS_set_battery_total_cost_lcos,
-	PyDoc_STR("*float*: Battery total investment cost [$]"),
+	PyDoc_STR("*float*: Battery total investment cost [$]\n\nThe value of ``battery_total_cost_lcos`` depends on the following variables:\n\n\t - battery_per_kWh\n\t - total_installed_cost\n"),
  	NULL},
 {"charge_w_sys_ec_ym", (getter)LCOS_get_charge_w_sys_ec_ym,(setter)LCOS_set_charge_w_sys_ec_ym,
 	PyDoc_STR("*sequence[sequence]*: Energy charge with system [$]"),
@@ -6355,28 +6715,28 @@ static PyGetSetDef LCOS_getset[] = {
 	PyDoc_STR("*sequence*: Electricity to grid from battery [kW]"),
  	NULL},
 {"monthly_batt_to_grid", (getter)LCOS_get_monthly_batt_to_grid,(setter)LCOS_set_monthly_batt_to_grid,
-	PyDoc_STR("*sequence*: Energy to grid from battery [kWh]\n\n*Constraints*: LENGTH=12"),
+	PyDoc_STR("*sequence*: Energy to grid from battery [kWh]\n\n**Constraints:**\nLENGTH=12"),
  	NULL},
 {"monthly_grid_to_batt", (getter)LCOS_get_monthly_grid_to_batt,(setter)LCOS_set_monthly_grid_to_batt,
-	PyDoc_STR("*sequence*: Energy to battery from grid [kWh]\n\n*Constraints*: LENGTH=12"),
+	PyDoc_STR("*sequence*: Energy to battery from grid [kWh]\n\n**Constraints:**\nLENGTH=12"),
  	NULL},
 {"monthly_grid_to_load", (getter)LCOS_get_monthly_grid_to_load,(setter)LCOS_set_monthly_grid_to_load,
-	PyDoc_STR("*sequence*: Energy to load from grid [kWh]\n\n*Constraints*: LENGTH=12"),
+	PyDoc_STR("*sequence*: Energy to load from grid [kWh]\n\n**Constraints:**\nLENGTH=12"),
  	NULL},
 {"monthly_system_to_grid", (getter)LCOS_get_monthly_system_to_grid,(setter)LCOS_set_monthly_system_to_grid,
-	PyDoc_STR("*sequence*: Energy to grid from system [kWh]\n\n*Constraints*: LENGTH=12"),
+	PyDoc_STR("*sequence*: Energy to grid from system [kWh]\n\n**Constraints:**\nLENGTH=12"),
  	NULL},
 {"true_up_credits_ym", (getter)LCOS_get_true_up_credits_ym,(setter)LCOS_set_true_up_credits_ym,
 	PyDoc_STR("*sequence[sequence]*: Net annual true-up payments [$]"),
  	NULL},
 {"year1_monthly_ec_charge_gross_with_system", (getter)LCOS_get_year1_monthly_ec_charge_gross_with_system,(setter)LCOS_set_year1_monthly_ec_charge_gross_with_system,
-	PyDoc_STR("*sequence*: Energy charge with system before credits [$/mo]\n\n*Constraints*: LENGTH=12"),
+	PyDoc_STR("*sequence*: Energy charge with system before credits [$/mo]\n\n**Constraints:**\nLENGTH=12"),
  	NULL},
 {"year1_monthly_ec_charge_with_system", (getter)LCOS_get_year1_monthly_ec_charge_with_system,(setter)LCOS_set_year1_monthly_ec_charge_with_system,
 	PyDoc_STR("*sequence*: Energy charge with system [$]"),
  	NULL},
 {"year1_monthly_electricity_to_grid", (getter)LCOS_get_year1_monthly_electricity_to_grid,(setter)LCOS_set_year1_monthly_electricity_to_grid,
-	PyDoc_STR("*sequence*: Electricity to/from grid [kWh/mo]\n\n*Constraints*: LENGTH=12"),
+	PyDoc_STR("*sequence*: Electricity to/from grid [kWh/mo]\n\n**Constraints:**\nLENGTH=12"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -6491,11 +6851,11 @@ ChargesByMonth_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef ChargesByMonth_methods[] = {
 		{"assign",            (PyCFunction)ChargesByMonth_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ChargesByMonth_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``ChargesByMonth_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)ChargesByMonth_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ChargesByMonth_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``ChargesByMonth_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)ChargesByMonth_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -6581,6 +6941,447 @@ static PyTypeObject ChargesByMonth_Type = {
 
 
 /*
+ * HybridFin Group
+ */ 
+
+static PyTypeObject HybridFin_Type;
+
+static PyObject *
+HybridFin_new(SAM_Singleowner data_ptr)
+{
+	PyObject* new_obj = HybridFin_Type.tp_alloc(&HybridFin_Type,0);
+
+	VarGroupObject* HybridFin_obj = (VarGroupObject*)new_obj;
+
+	HybridFin_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* HybridFin methods */
+
+static PyObject *
+HybridFin_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Singleowner", "HybridFin")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+HybridFin_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &HybridFin_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Singleowner", "HybridFin")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+HybridFin_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &HybridFin_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef HybridFin_methods[] = {
+		{"assign",            (PyCFunction)HybridFin_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``HybridFin_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)HybridFin_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``HybridFin_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)HybridFin_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+HybridFin_get_cf_hybrid_om_sum(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_HybridFin_cf_hybrid_om_sum_aget, self->data_ptr);
+}
+
+static int
+HybridFin_set_cf_hybrid_om_sum(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Singleowner_HybridFin_cf_hybrid_om_sum_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridFin_get_is_hybrid(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_HybridFin_is_hybrid_nget, self->data_ptr);
+}
+
+static int
+HybridFin_set_is_hybrid(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_HybridFin_is_hybrid_nset, self->data_ptr);
+}
+
+static PyGetSetDef HybridFin_getset[] = {
+{"cf_hybrid_om_sum", (getter)HybridFin_get_cf_hybrid_om_sum,(setter)HybridFin_set_cf_hybrid_om_sum,
+	PyDoc_STR("*sequence*: Hybrid O&M costs [$]"),
+ 	NULL},
+{"is_hybrid", (getter)HybridFin_get_is_hybrid,(setter)HybridFin_set_is_hybrid,
+	PyDoc_STR("*float*: hybrid configuration [0/1]\n\n**Options:**\n0=singletech,1=hybrid\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject HybridFin_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Singleowner.HybridFin",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		HybridFin_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		HybridFin_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * Monthly Group
+ */ 
+
+static PyTypeObject Monthly_Type;
+
+static PyObject *
+Monthly_new(SAM_Singleowner data_ptr)
+{
+	PyObject* new_obj = Monthly_Type.tp_alloc(&Monthly_Type,0);
+
+	VarGroupObject* Monthly_obj = (VarGroupObject*)new_obj;
+
+	Monthly_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* Monthly methods */
+
+static PyObject *
+Monthly_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Singleowner", "Monthly")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Monthly_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Monthly_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Singleowner", "Monthly")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Monthly_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Monthly_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Monthly_methods[] = {
+		{"assign",            (PyCFunction)Monthly_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Monthly_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Monthly_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Monthly_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Monthly_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Monthly_get_monthly_energy(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Monthly_monthly_energy_aget, self->data_ptr);
+}
+
+static int
+Monthly_set_monthly_energy(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Singleowner_Monthly_monthly_energy_aset, self->data_ptr);
+}
+
+static PyGetSetDef Monthly_getset[] = {
+{"monthly_energy", (getter)Monthly_get_monthly_energy,(setter)Monthly_set_monthly_energy,
+	PyDoc_STR("*sequence*: Monthly AC energy in Year 1 [kWh]\n\n**Constraints:**\nLENGTH = 12"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Monthly_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Singleowner.Monthly",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Monthly_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Monthly_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * HybridCosts Group
+ */ 
+
+static PyTypeObject HybridCosts_Type;
+
+static PyObject *
+HybridCosts_new(SAM_Singleowner data_ptr)
+{
+	PyObject* new_obj = HybridCosts_Type.tp_alloc(&HybridCosts_Type,0);
+
+	VarGroupObject* HybridCosts_obj = (VarGroupObject*)new_obj;
+
+	HybridCosts_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* HybridCosts methods */
+
+static PyObject *
+HybridCosts_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Singleowner", "HybridCosts")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+HybridCosts_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &HybridCosts_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Singleowner", "HybridCosts")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+HybridCosts_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &HybridCosts_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef HybridCosts_methods[] = {
+		{"assign",            (PyCFunction)HybridCosts_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``HybridCosts_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)HybridCosts_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``HybridCosts_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)HybridCosts_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+HybridCosts_get_degradation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_HybridCosts_degradation_aget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_degradation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Singleowner_HybridCosts_degradation_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridCosts_get_total_installed_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_HybridCosts_total_installed_cost_nget, self->data_ptr);
+}
+
+static int
+HybridCosts_set_total_installed_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_HybridCosts_total_installed_cost_nset, self->data_ptr);
+}
+
+static PyGetSetDef HybridCosts_getset[] = {
+{"degradation", (getter)HybridCosts_get_degradation,(setter)HybridCosts_set_degradation,
+	PyDoc_STR("*sequence*: Annual AC degradation [%]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"total_installed_cost", (getter)HybridCosts_get_total_installed_cost,(setter)HybridCosts_set_total_installed_cost,
+	PyDoc_STR("*float*: Total installed cost [$]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``total_installed_cost``:\n\n\t - battery_total_cost_lcos\n\t - construction_financing_cost\n\n\nThe value of ``total_installed_cost`` depends on the following variables:\n\n\t - battery_per_kWh\n"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject HybridCosts_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Singleowner.HybridCosts",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		HybridCosts_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		HybridCosts_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * Outputs Group
  */ 
 
@@ -6643,11 +7444,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -6868,186 +7669,6 @@ Outputs_get_cf_energy_net(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_cf_energy_net_apr(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_apr_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_aug(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_aug_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dec(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_dec_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch1(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_dispatch1_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch2(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_dispatch2_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch3(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_dispatch3_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch4(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_dispatch4_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch5(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_dispatch5_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch6(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_dispatch6_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch7(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_dispatch7_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch8(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_dispatch8_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch9(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_dispatch9_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_feb(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_feb_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_jan(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_jan_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_jul(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_jul_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_jun(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_jun_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_mar(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_mar_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_may(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_may_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD1(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_monthly_firstyear_TOD1_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD2(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_monthly_firstyear_TOD2_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD3(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_monthly_firstyear_TOD3_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD4(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_monthly_firstyear_TOD4_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD5(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_monthly_firstyear_TOD5_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD6(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_monthly_firstyear_TOD6_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD7(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_monthly_firstyear_TOD7_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD8(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_monthly_firstyear_TOD8_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD9(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_monthly_firstyear_TOD9_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_nov(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_nov_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_oct(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_oct_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_sep(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_net_sep_aget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_cf_energy_purchases(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_purchases_aget, self->data_ptr);
@@ -7060,9 +7681,183 @@ Outputs_get_cf_energy_sales(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_cf_energy_sales_value(VarGroupObject *self, void *closure)
+Outputs_get_cf_energy_sales_apr(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_value_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_apr_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_aug(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_aug_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dec(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_dec_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch1(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_dispatch1_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch2(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_dispatch2_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch3(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_dispatch3_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch4(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_dispatch4_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch5(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_dispatch5_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch6(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_dispatch6_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch7(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_dispatch7_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch8(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_dispatch8_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch9(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_dispatch9_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_feb(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_feb_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_jan(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_jan_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_jul(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_jul_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_jun(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_jun_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_mar(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_mar_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_may(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_may_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD1(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_monthly_firstyear_TOD1_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD2(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_monthly_firstyear_TOD2_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD3(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_monthly_firstyear_TOD3_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD4(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_monthly_firstyear_TOD4_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD5(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_monthly_firstyear_TOD5_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD6(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_monthly_firstyear_TOD6_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD7(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_monthly_firstyear_TOD7_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD8(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_monthly_firstyear_TOD8_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD9(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_monthly_firstyear_TOD9_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_nov(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_nov_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_oct(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_oct_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_sep(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_sep_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -7228,6 +8023,48 @@ Outputs_get_cf_insurance_expense(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_cf_itc_fed(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_itc_fed_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_itc_fed_amount(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_itc_fed_amount_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_itc_fed_percent_amount(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_itc_fed_percent_amount_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_itc_sta(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_itc_sta_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_itc_sta_amount(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_itc_sta_amount_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_itc_sta_percent_amount(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_itc_sta_percent_amount_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_itc_total(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_itc_total_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_cf_land_lease_expense(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_land_lease_expense_aget, self->data_ptr);
@@ -7255,12 +8092,6 @@ static PyObject *
 Outputs_get_cf_om_batt_fixed_expense(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_om_batt_fixed_expense_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_om_batt_production_expense(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_om_batt_production_expense_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -7555,12 +8386,6 @@ static PyObject *
 Outputs_get_cf_ptc_sta(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_ptc_sta_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_ptc_total(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_ptc_total_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -9376,12 +10201,6 @@ Outputs_get_flip_target_year(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_gen_purchases(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_gen_purchases_aget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_ibi_fedtax_total(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Singleowner_Outputs_ibi_fedtax_total_nget, self->data_ptr);
@@ -9946,6 +10765,18 @@ Outputs_get_ppa_price(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_pre_depr_alloc_basis(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_Outputs_pre_depr_alloc_basis_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_pre_itc_qual_basis(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_Outputs_pre_itc_qual_basis_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_present_value_fuel(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Singleowner_Outputs_present_value_fuel_nget, self->data_ptr);
@@ -10133,115 +10964,112 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Effective income tax rate [frac]"),
  	NULL},
 {"cf_energy_curtailed", (getter)Outputs_get_cf_energy_curtailed,(setter)0,
-	PyDoc_STR("*sequence*: Curtailed energy [kWh]"),
+	PyDoc_STR("*sequence*: Electricity curtailed [kWh]"),
  	NULL},
 {"cf_energy_net", (getter)Outputs_get_cf_energy_net,(setter)0,
-	PyDoc_STR("*sequence*: Net energy to grid [kWh]"),
- 	NULL},
-{"cf_energy_net_apr", (getter)Outputs_get_cf_energy_net_apr,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in April [kWh]"),
- 	NULL},
-{"cf_energy_net_aug", (getter)Outputs_get_cf_energy_net_aug,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in August [kWh]"),
- 	NULL},
-{"cf_energy_net_dec", (getter)Outputs_get_cf_energy_net_dec,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in December [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch1", (getter)Outputs_get_cf_energy_net_dispatch1,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in TOD period 1 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch2", (getter)Outputs_get_cf_energy_net_dispatch2,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in TOD period 2 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch3", (getter)Outputs_get_cf_energy_net_dispatch3,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in TOD period 3 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch4", (getter)Outputs_get_cf_energy_net_dispatch4,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in TOD period 4 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch5", (getter)Outputs_get_cf_energy_net_dispatch5,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in TOD period 5 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch6", (getter)Outputs_get_cf_energy_net_dispatch6,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in TOD period 6 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch7", (getter)Outputs_get_cf_energy_net_dispatch7,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in TOD period 7 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch8", (getter)Outputs_get_cf_energy_net_dispatch8,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in TOD period 8 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch9", (getter)Outputs_get_cf_energy_net_dispatch9,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in TOD period 9 [kWh]"),
- 	NULL},
-{"cf_energy_net_feb", (getter)Outputs_get_cf_energy_net_feb,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in February [kWh]"),
- 	NULL},
-{"cf_energy_net_jan", (getter)Outputs_get_cf_energy_net_jan,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in January [kWh]"),
- 	NULL},
-{"cf_energy_net_jul", (getter)Outputs_get_cf_energy_net_jul,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in July [kWh]"),
- 	NULL},
-{"cf_energy_net_jun", (getter)Outputs_get_cf_energy_net_jun,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in June [kWh]"),
- 	NULL},
-{"cf_energy_net_mar", (getter)Outputs_get_cf_energy_net_mar,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in March [kWh]"),
- 	NULL},
-{"cf_energy_net_may", (getter)Outputs_get_cf_energy_net_may,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in May [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD1", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD1,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced in Year 1 by month for TOD period 1 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD2", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD2,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced in Year 1 by month for TOD period 2 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD3", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD3,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced in Year 1 by month for TOD period 3 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD4", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD4,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced in Year 1 by month for TOD period 4 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD5", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD5,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced in Year 1 by month for TOD period 5 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD6", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD6,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced in Year 1 by month for TOD period 6 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD7", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD7,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced in Year 1 by month for TOD period 7 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD8", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD8,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced in Year 1 by month for TOD period 8 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD9", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD9,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced in Year 1 by month for TOD period 9 [kWh]"),
- 	NULL},
-{"cf_energy_net_nov", (getter)Outputs_get_cf_energy_net_nov,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in November [kWh]"),
- 	NULL},
-{"cf_energy_net_oct", (getter)Outputs_get_cf_energy_net_oct,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in October [kWh]"),
- 	NULL},
-{"cf_energy_net_sep", (getter)Outputs_get_cf_energy_net_sep,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in September [kWh]"),
+	PyDoc_STR("*sequence*: Electricity to grid net [kWh]"),
  	NULL},
 {"cf_energy_purchases", (getter)Outputs_get_cf_energy_purchases,(setter)0,
-	PyDoc_STR("*sequence*: Energy from grid [kWh]"),
+	PyDoc_STR("*sequence*: Electricity from grid [kWh]"),
  	NULL},
 {"cf_energy_sales", (getter)Outputs_get_cf_energy_sales,(setter)0,
-	PyDoc_STR("*sequence*: Energy to grid [kWh]"),
+	PyDoc_STR("*sequence*: Electricity to grid [kWh]"),
  	NULL},
-{"cf_energy_sales_value", (getter)Outputs_get_cf_energy_sales_value,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue gross [$]"),
+{"cf_energy_sales_apr", (getter)Outputs_get_cf_energy_sales_apr,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in April [kWh]"),
+ 	NULL},
+{"cf_energy_sales_aug", (getter)Outputs_get_cf_energy_sales_aug,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in August [kWh]"),
+ 	NULL},
+{"cf_energy_sales_dec", (getter)Outputs_get_cf_energy_sales_dec,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in December [kWh]"),
+ 	NULL},
+{"cf_energy_sales_dispatch1", (getter)Outputs_get_cf_energy_sales_dispatch1,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in TOD period 1 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_dispatch2", (getter)Outputs_get_cf_energy_sales_dispatch2,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in TOD period 2 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_dispatch3", (getter)Outputs_get_cf_energy_sales_dispatch3,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in TOD period 3 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_dispatch4", (getter)Outputs_get_cf_energy_sales_dispatch4,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in TOD period 4 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_dispatch5", (getter)Outputs_get_cf_energy_sales_dispatch5,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in TOD period 5 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_dispatch6", (getter)Outputs_get_cf_energy_sales_dispatch6,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in TOD period 6 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_dispatch7", (getter)Outputs_get_cf_energy_sales_dispatch7,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in TOD period 7 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_dispatch8", (getter)Outputs_get_cf_energy_sales_dispatch8,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in TOD period 8 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_dispatch9", (getter)Outputs_get_cf_energy_sales_dispatch9,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in TOD period 9 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_feb", (getter)Outputs_get_cf_energy_sales_feb,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in February [kWh]"),
+ 	NULL},
+{"cf_energy_sales_jan", (getter)Outputs_get_cf_energy_sales_jan,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in January [kWh]"),
+ 	NULL},
+{"cf_energy_sales_jul", (getter)Outputs_get_cf_energy_sales_jul,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in July [kWh]"),
+ 	NULL},
+{"cf_energy_sales_jun", (getter)Outputs_get_cf_energy_sales_jun,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in June [kWh]"),
+ 	NULL},
+{"cf_energy_sales_mar", (getter)Outputs_get_cf_energy_sales_mar,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in March [kWh]"),
+ 	NULL},
+{"cf_energy_sales_may", (getter)Outputs_get_cf_energy_sales_may,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in May [kWh]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD1", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD1,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced in Year 1 by month for TOD period 1 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD2", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD2,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced in Year 1 by month for TOD period 2 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD3", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD3,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced in Year 1 by month for TOD period 3 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD4", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD4,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced in Year 1 by month for TOD period 4 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD5", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD5,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced in Year 1 by month for TOD period 5 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD6", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD6,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced in Year 1 by month for TOD period 6 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD7", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD7,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced in Year 1 by month for TOD period 7 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD8", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD8,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced in Year 1 by month for TOD period 8 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD9", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD9,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced in Year 1 by month for TOD period 9 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_nov", (getter)Outputs_get_cf_energy_sales_nov,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in November [kWh]"),
+ 	NULL},
+{"cf_energy_sales_oct", (getter)Outputs_get_cf_energy_sales_oct,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in October [kWh]"),
+ 	NULL},
+{"cf_energy_sales_sep", (getter)Outputs_get_cf_energy_sales_sep,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by year in September [kWh]"),
  	NULL},
 {"cf_energy_value", (getter)Outputs_get_cf_energy_value,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue net [$]"),
+	PyDoc_STR("*sequence*: PPA revenue [$]"),
  	NULL},
 {"cf_energy_without_battery", (getter)Outputs_get_cf_energy_without_battery,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced without the battery or curtailment [kWh]"),
+	PyDoc_STR("*sequence*: Electricity generated without storage [kWh]"),
  	NULL},
 {"cf_feddepr_custom", (getter)Outputs_get_cf_feddepr_custom,(setter)0,
 	PyDoc_STR("*sequence*: Federal depreciation from custom [$]"),
@@ -10318,6 +11146,27 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_insurance_expense", (getter)Outputs_get_cf_insurance_expense,(setter)0,
 	PyDoc_STR("*sequence*: Insurance expense [$]"),
  	NULL},
+{"cf_itc_fed", (getter)Outputs_get_cf_itc_fed,(setter)0,
+	PyDoc_STR("*sequence*: Federal ITC total income [$]"),
+ 	NULL},
+{"cf_itc_fed_amount", (getter)Outputs_get_cf_itc_fed_amount,(setter)0,
+	PyDoc_STR("*sequence*: Federal ITC amount income [$]"),
+ 	NULL},
+{"cf_itc_fed_percent_amount", (getter)Outputs_get_cf_itc_fed_percent_amount,(setter)0,
+	PyDoc_STR("*sequence*: Federal ITC percent income [$]"),
+ 	NULL},
+{"cf_itc_sta", (getter)Outputs_get_cf_itc_sta,(setter)0,
+	PyDoc_STR("*sequence*: State ITC total income [$]"),
+ 	NULL},
+{"cf_itc_sta_amount", (getter)Outputs_get_cf_itc_sta_amount,(setter)0,
+	PyDoc_STR("*sequence*: State ITC amount income [$]"),
+ 	NULL},
+{"cf_itc_sta_percent_amount", (getter)Outputs_get_cf_itc_sta_percent_amount,(setter)0,
+	PyDoc_STR("*sequence*: State ITC percent income [$]"),
+ 	NULL},
+{"cf_itc_total", (getter)Outputs_get_cf_itc_total,(setter)0,
+	PyDoc_STR("*sequence*: Total ITC income [$]"),
+ 	NULL},
 {"cf_land_lease_expense", (getter)Outputs_get_cf_land_lease_expense,(setter)0,
 	PyDoc_STR("*sequence*: Land lease expense [$]"),
  	NULL},
@@ -10333,41 +11182,38 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_om_batt_fixed_expense", (getter)Outputs_get_cf_om_batt_fixed_expense,(setter)0,
 	PyDoc_STR("*sequence*: Annual fixed cost for battery maintenance [$]"),
  	NULL},
-{"cf_om_batt_production_expense", (getter)Outputs_get_cf_om_batt_production_expense,(setter)0,
-	PyDoc_STR("*sequence*: Annual cost to for battery production based maintenance [$]"),
- 	NULL},
 {"cf_om_capacity1_expense", (getter)Outputs_get_cf_om_capacity1_expense,(setter)0,
-	PyDoc_STR("*sequence*: Battery capacity-based expense [$]"),
+	PyDoc_STR("*sequence*: O&M battery capacity-based expense [$]"),
  	NULL},
 {"cf_om_capacity2_expense", (getter)Outputs_get_cf_om_capacity2_expense,(setter)0,
-	PyDoc_STR("*sequence*: Fuel cell capacity-based expense [$]"),
+	PyDoc_STR("*sequence*: O&M fuel cell capacity-based expense [$]"),
  	NULL},
 {"cf_om_capacity_expense", (getter)Outputs_get_cf_om_capacity_expense,(setter)0,
 	PyDoc_STR("*sequence*: O&M capacity-based expense [$]"),
  	NULL},
 {"cf_om_fixed1_expense", (getter)Outputs_get_cf_om_fixed1_expense,(setter)0,
-	PyDoc_STR("*sequence*: Battery fixed expense [$]"),
+	PyDoc_STR("*sequence*: O&M battery fixed expense [$]"),
  	NULL},
 {"cf_om_fixed2_expense", (getter)Outputs_get_cf_om_fixed2_expense,(setter)0,
-	PyDoc_STR("*sequence*: Fuel cell fixed expense [$]"),
+	PyDoc_STR("*sequence*: O&M fuel cell fixed expense [$]"),
  	NULL},
 {"cf_om_fixed_expense", (getter)Outputs_get_cf_om_fixed_expense,(setter)0,
 	PyDoc_STR("*sequence*: O&M fixed expense [$]"),
  	NULL},
 {"cf_om_fuel_expense", (getter)Outputs_get_cf_om_fuel_expense,(setter)0,
-	PyDoc_STR("*sequence*: O&M fuel expense [$]"),
+	PyDoc_STR("*sequence*: Fuel expense [$]"),
  	NULL},
 {"cf_om_opt_fuel_1_expense", (getter)Outputs_get_cf_om_opt_fuel_1_expense,(setter)0,
-	PyDoc_STR("*sequence*: O&M biomass feedstock expense [$]"),
+	PyDoc_STR("*sequence*: Feedstock biomass expense [$]"),
  	NULL},
 {"cf_om_opt_fuel_2_expense", (getter)Outputs_get_cf_om_opt_fuel_2_expense,(setter)0,
-	PyDoc_STR("*sequence*: O&M coal feedstock expense [$]"),
+	PyDoc_STR("*sequence*: Feedstock coal expense [$]"),
  	NULL},
 {"cf_om_production1_expense", (getter)Outputs_get_cf_om_production1_expense,(setter)0,
-	PyDoc_STR("*sequence*: Battery production-based expense [$]"),
+	PyDoc_STR("*sequence*: O&M battery production-based expense [$]"),
  	NULL},
 {"cf_om_production2_expense", (getter)Outputs_get_cf_om_production2_expense,(setter)0,
-	PyDoc_STR("*sequence*: Fuel cell production-based expense [$]"),
+	PyDoc_STR("*sequence*: O&M fuel cell production-based expense [$]"),
  	NULL},
 {"cf_om_production_expense", (getter)Outputs_get_cf_om_production_expense,(setter)0,
 	PyDoc_STR("*sequence*: O&M production-based expense [$]"),
@@ -10482,9 +11328,6 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"cf_ptc_sta", (getter)Outputs_get_cf_ptc_sta,(setter)0,
 	PyDoc_STR("*sequence*: State PTC income [$]"),
- 	NULL},
-{"cf_ptc_total", (getter)Outputs_get_cf_ptc_total,(setter)0,
-	PyDoc_STR("*sequence*: Total PTC [$]"),
  	NULL},
 {"cf_pv_cash_for_ds", (getter)Outputs_get_cf_pv_cash_for_ds,(setter)0,
 	PyDoc_STR("*sequence*: Present value of CAFDS [$]"),
@@ -10667,7 +11510,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Total revenue [$]"),
  	NULL},
 {"cf_util_escal_rate", (getter)Outputs_get_cf_util_escal_rate,(setter)0,
-	PyDoc_STR("*sequence*: Annual battery salvage value costs [$]"),
+	PyDoc_STR("*sequence*: Utility escalation rate"),
  	NULL},
 {"cf_utility_bill", (getter)Outputs_get_cf_utility_bill,(setter)0,
 	PyDoc_STR("*sequence*: Electricity purchase [$]"),
@@ -10676,7 +11519,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Debt up-front fee [$]"),
  	NULL},
 {"cost_financing", (getter)Outputs_get_cost_financing,(setter)0,
-	PyDoc_STR("*float*: Financing cost [$]"),
+	PyDoc_STR("*float*: Total financing cost [$]"),
  	NULL},
 {"cost_installed", (getter)Outputs_get_cost_installed,(setter)0,
 	PyDoc_STR("*float*: Net capital cost [$]"),
@@ -11357,10 +12200,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: PPA revenue in Year 1 TOD period 1 [$]"),
  	NULL},
 {"firstyear_revenue_dispatch2", (getter)Outputs_get_firstyear_revenue_dispatch2,(setter)0,
-	PyDoc_STR("*float*: PPA revenue from in Year 1 TOD period 2 [$]"),
+	PyDoc_STR("*float*: PPA revenue in Year 1 TOD period 2 [$]"),
  	NULL},
 {"firstyear_revenue_dispatch3", (getter)Outputs_get_firstyear_revenue_dispatch3,(setter)0,
-	PyDoc_STR("*float*: PPA revenue from in Year 1 TOD period 3 [$]"),
+	PyDoc_STR("*float*: PPA revenue in Year 1 TOD period 3 [$]"),
  	NULL},
 {"firstyear_revenue_dispatch4", (getter)Outputs_get_firstyear_revenue_dispatch4,(setter)0,
 	PyDoc_STR("*float*: PPA revenue in Year 1 TOD period 4 [$]"),
@@ -11391,9 +12234,6 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"flip_target_year", (getter)Outputs_get_flip_target_year,(setter)0,
 	PyDoc_STR("*float*: Target year to meet IRR"),
- 	NULL},
-{"gen_purchases", (getter)Outputs_get_gen_purchases,(setter)0,
-	PyDoc_STR("*sequence*: Electricity from grid [kW]"),
  	NULL},
 {"ibi_fedtax_total", (getter)Outputs_get_ibi_fedtax_total,(setter)0,
 	PyDoc_STR("*float*: Federal taxable IBI income [$]"),
@@ -11585,34 +12425,34 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: State ITC income [$]"),
  	NULL},
 {"lcoe_nom", (getter)Outputs_get_lcoe_nom,(setter)0,
-	PyDoc_STR("*float*: Levelized cost (nominal) [cents/kWh]"),
+	PyDoc_STR("*float*: LCOE Levelized cost of energy nominal [cents/kWh]"),
  	NULL},
 {"lcoe_real", (getter)Outputs_get_lcoe_real,(setter)0,
-	PyDoc_STR("*float*: Levelized cost (real) [cents/kWh]"),
+	PyDoc_STR("*float*: LCOE Levelized cost of energy real [cents/kWh]"),
  	NULL},
 {"lcoptc_fed_nom", (getter)Outputs_get_lcoptc_fed_nom,(setter)0,
-	PyDoc_STR("*float*: Levelized federal PTC (nominal) [cents/kWh]"),
+	PyDoc_STR("*float*: Levelized federal PTC nominal [cents/kWh]"),
  	NULL},
 {"lcoptc_fed_real", (getter)Outputs_get_lcoptc_fed_real,(setter)0,
-	PyDoc_STR("*float*: Levelized federal PTC (real) [cents/kWh]"),
+	PyDoc_STR("*float*: Levelized federal PTC real [cents/kWh]"),
  	NULL},
 {"lcoptc_sta_nom", (getter)Outputs_get_lcoptc_sta_nom,(setter)0,
-	PyDoc_STR("*float*: Levelized state PTC (nominal) [cents/kWh]"),
+	PyDoc_STR("*float*: Levelized state PTC nominal [cents/kWh]"),
  	NULL},
 {"lcoptc_sta_real", (getter)Outputs_get_lcoptc_sta_real,(setter)0,
-	PyDoc_STR("*float*: Levelized state PTC (real) [cents/kWh]"),
+	PyDoc_STR("*float*: Levelized state PTC real [cents/kWh]"),
  	NULL},
 {"lcos_nom", (getter)Outputs_get_lcos_nom,(setter)0,
-	PyDoc_STR("*float*: Levelized cost of storage (nominal) [cents/kWh]"),
+	PyDoc_STR("*float*: LCOS Levelized cost of storage nominal [cents/kWh]"),
  	NULL},
 {"lcos_real", (getter)Outputs_get_lcos_real,(setter)0,
-	PyDoc_STR("*float*: Levelized cost of storage (real) [cents/kWh]"),
+	PyDoc_STR("*float*: LCOS Levelized cost of storage real [cents/kWh]"),
  	NULL},
 {"lppa_nom", (getter)Outputs_get_lppa_nom,(setter)0,
-	PyDoc_STR("*float*: Levelized PPA price (nominal) [cents/kWh]"),
+	PyDoc_STR("*float*: LPPA Levelized PPA price nominal [cents/kWh]"),
  	NULL},
 {"lppa_real", (getter)Outputs_get_lppa_real,(setter)0,
-	PyDoc_STR("*float*: Levelized PPA price (real) [cents/kWh]"),
+	PyDoc_STR("*float*: LPPA Levelized PPA price real [cents/kWh]"),
  	NULL},
 {"min_dscr", (getter)Outputs_get_min_dscr,(setter)0,
 	PyDoc_STR("*float*: Minimum DSCR"),
@@ -11639,10 +12479,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Present value of annual stored energy (real) [kWh]"),
  	NULL},
 {"npv_energy_nom", (getter)Outputs_get_npv_energy_nom,(setter)0,
-	PyDoc_STR("*float*: Present value of annual energy (nominal) [kWh]"),
+	PyDoc_STR("*float*: Present value of annual energy nominal [kWh]"),
  	NULL},
 {"npv_energy_real", (getter)Outputs_get_npv_energy_real,(setter)0,
-	PyDoc_STR("*float*: Present value of annual energy (real) [kWh]"),
+	PyDoc_STR("*float*: Present value of annual energy real [kWh]"),
  	NULL},
 {"npv_fed_pbi_income", (getter)Outputs_get_npv_fed_pbi_income,(setter)0,
 	PyDoc_STR("*float*: Present value of federal PBI income [$]"),
@@ -11666,7 +12506,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Present value of utility PBI income [$]"),
  	NULL},
 {"ppa", (getter)Outputs_get_ppa,(setter)0,
-	PyDoc_STR("*float*: PPA price (Year 1) [cents/kWh]"),
+	PyDoc_STR("*float*: PPA price in Year 1 [cents/kWh]"),
  	NULL},
 {"ppa_escalation", (getter)Outputs_get_ppa_escalation,(setter)0,
 	PyDoc_STR("*float*: PPA price escalation [%/year]"),
@@ -11676,6 +12516,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"ppa_price", (getter)Outputs_get_ppa_price,(setter)0,
 	PyDoc_STR("*float*: PPA price in first year [cents/kWh]"),
+ 	NULL},
+{"pre_depr_alloc_basis", (getter)Outputs_get_pre_depr_alloc_basis,(setter)0,
+	PyDoc_STR("*float*: Depreciable basis prior to allocation [$]"),
+ 	NULL},
+{"pre_itc_qual_basis", (getter)Outputs_get_pre_itc_qual_basis,(setter)0,
+	PyDoc_STR("*float*: ITC basis prior to qualification [$]"),
  	NULL},
 {"present_value_fuel", (getter)Outputs_get_present_value_fuel,(setter)0,
 	PyDoc_STR("*float*: Present value of fuel O&M [$]"),
@@ -11690,10 +12536,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Present value of non-fuel O&M [$]"),
  	NULL},
 {"project_return_aftertax_irr", (getter)Outputs_get_project_return_aftertax_irr,(setter)0,
-	PyDoc_STR("*float*: Internal rate of return (after-tax) [%]"),
+	PyDoc_STR("*float*: IRR Internal rate of return [%]"),
  	NULL},
 {"project_return_aftertax_npv", (getter)Outputs_get_project_return_aftertax_npv,(setter)0,
-	PyDoc_STR("*float*: Net present value (after-tax) [$]"),
+	PyDoc_STR("*float*: NPV Net present value [$]"),
  	NULL},
 {"prop_tax_assessed_value", (getter)Outputs_get_prop_tax_assessed_value,(setter)0,
 	PyDoc_STR("*float*: Assessed value of property for tax purposes [$]"),
@@ -11717,7 +12563,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Equity [$]"),
  	NULL},
 {"wacc", (getter)Outputs_get_wacc,(setter)0,
-	PyDoc_STR("*float*: Weighted average cost of capital (WACC) [$]"),
+	PyDoc_STR("*float*: WACC Weighted average cost of capital [$]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -11850,6 +12696,18 @@ newSingleownerObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "ChargesByMonth", ChargesByMonth_obj);
 	Py_DECREF(ChargesByMonth_obj);
 
+	PyObject* HybridFin_obj = HybridFin_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "HybridFin", HybridFin_obj);
+	Py_DECREF(HybridFin_obj);
+
+	PyObject* Monthly_obj = Monthly_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Monthly", Monthly_obj);
+	Py_DECREF(Monthly_obj);
+
+	PyObject* HybridCosts_obj = HybridCosts_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "HybridCosts", HybridCosts_obj);
+	Py_DECREF(HybridCosts_obj);
+
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
@@ -11870,6 +12728,14 @@ Singleowner_dealloc(CmodObject *self)
 		PySAM_has_error(error);
 	}
 	PyObject_Del(self);
+}
+
+
+static PyObject *
+Singleowner_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
 }
 
 
@@ -11950,6 +12816,8 @@ static PyMethodDef Singleowner_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Singleowner_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Singleowner_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -12108,12 +12976,11 @@ static PyMethodDef SingleownerModule_methods[] = {
 		{"new",             Singleowner_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Singleowner")},
 		{"default",             Singleowner_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Singleowner\n\nUse default attributes\n"
-				"`config` options:\n\n- \"BiopowerSingleOwner\"\n- \"DSLFSingleOwner\"\n- \"ETESSingleOwner\"\n- \"EmpiricalTroughSingleOwner\"\n- \"FlatPlatePVSingleOwner\"\n- \"FuelCellSingleOwner\"\n- \"GenericBatterySingleOwner\"\n- \"GenericCSPSystemSingleOwner\"\n- \"GenericSystemSingleOwner\"\n- \"GeothermalPowerSingleOwner\"\n- \"HighXConcentratingPVSingleOwner\"\n- \"MSLFSingleOwner\"\n- \"MSPTSingleOwner\"\n- \"PVBatterySingleOwner\"\n- \"PVWattsSingleOwner\"\n- \"PhysicalTroughSingleOwner\"\n- \"StandaloneBatterySingleOwner\"\n- \"WindPowerSingleOwner\"")},
+				PyDoc_STR("default(config) -> Singleowner\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"BiopowerSingleOwner\"*\n\n		- *\"CustomGenerationBatterySingleOwner\"*\n\n		- *\"CustomGenerationProfileSingleOwner\"*\n\n		- *\"CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"DSLFSingleOwner\"*\n\n		- *\"ETESSingleOwner\"*\n\n		- *\"EmpiricalTroughSingleOwner\"*\n\n		- *\"FlatPlatePVSingleOwner\"*\n\n		- *\"FuelCellSingleOwner\"*\n\n		- *\"GenericCSPSystemSingleOwner\"*\n\n		- *\"GeothermalPowerSingleOwner\"*\n\n		- *\"HighXConcentratingPVSingleOwner\"*\n\n		- *\"MEwaveBatterySingleOwner\"*\n\n		- *\"MEwaveSingleOwner\"*\n\n		- *\"MSLFSingleOwner\"*\n\n		- *\"MSPTSingleOwner\"*\n\n		- *\"PTESSingleOwner\"*\n\n		- *\"PVBatterySingleOwner\"*\n\n		- *\"PVWattsWindBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsSingleOwner\"*\n\n		- *\"PhotovoltaicWindBatteryHybridSingleOwner\"*\n\n		- *\"PhysicalTroughSingleOwner\"*\n\n		- *\"StandaloneBatterySingleOwner\"*\n\n		- *\"WindPowerSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Singleowner_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Singleowner\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Singleowner\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Singleowner_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Singleowner\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Singleowner\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -12250,6 +13117,27 @@ SingleownerModule_exec(PyObject *m)
 				"ChargesByMonth",
 				(PyObject*)&ChargesByMonth_Type);
 	Py_DECREF(&ChargesByMonth_Type);
+
+	/// Add the HybridFin type object to Singleowner_Type
+	if (PyType_Ready(&HybridFin_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Singleowner_Type.tp_dict,
+				"HybridFin",
+				(PyObject*)&HybridFin_Type);
+	Py_DECREF(&HybridFin_Type);
+
+	/// Add the Monthly type object to Singleowner_Type
+	if (PyType_Ready(&Monthly_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Singleowner_Type.tp_dict,
+				"Monthly",
+				(PyObject*)&Monthly_Type);
+	Py_DECREF(&Monthly_Type);
+
+	/// Add the HybridCosts type object to Singleowner_Type
+	if (PyType_Ready(&HybridCosts_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Singleowner_Type.tp_dict,
+				"HybridCosts",
+				(PyObject*)&HybridCosts_Type);
+	Py_DECREF(&HybridCosts_Type);
 
 	/// Add the Outputs type object to Singleowner_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

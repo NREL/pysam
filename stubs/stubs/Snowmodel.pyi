@@ -1,58 +1,3 @@
-class PVSnowModel(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	snowdepth = tuple
-	subarray1_nmody = float
-	subarray1_poa_shaded = tuple
-	subarray1_surf_tilt = tuple
-	subarray1_tilt = float
-	subarray1_track_mode = float
-	tdry = tuple
-	wspd = tuple
-
-
-class TimeSeries(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	hourly_gen = tuple
-	sunup = tuple
-
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	annual_energy = float
-	annual_energy_before_snow = float
-	hourly_energy_before_snow = tuple
-	hourly_gen = tuple
-	monthly_energy = tuple
-	monthly_energy_before_snow = tuple
-
-
 class Snowmodel(object):
 	def assign(self, dict):
 		pass
@@ -69,15 +14,71 @@ class Snowmodel(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
 	def __init__(self, *args, **kwargs):
 		pass
 
-	PVSnowModel = PVSnowModel
-	TimeSeries = TimeSeries
-	Outputs = Outputs
+	class PVSnowModel(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		snow_slide_coefficient = float
+		snowdepth = tuple
+		subarray1_nmody = float
+		subarray1_poa_shaded = tuple
+		subarray1_surf_tilt = tuple
+		subarray1_tilt = float
+		subarray1_track_mode = float
+		tdry = tuple
+		wspd = tuple
+
+
+	class TimeSeries(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		hourly_gen = tuple
+		sunup = tuple
+
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		annual_energy = float
+		annual_energy_before_snow = float
+		hourly_energy_before_snow = tuple
+		hourly_gen = tuple
+		monthly_energy = tuple
+		monthly_energy_before_snow = tuple
+
+
 
 
 def default(config) -> Snowmodel:

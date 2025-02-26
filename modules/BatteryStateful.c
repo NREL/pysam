@@ -69,11 +69,11 @@ Controls_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Controls_methods[] = {
 		{"assign",            (PyCFunction)Controls_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Controls_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Controls_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Controls_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Controls_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Controls_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Controls_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -127,16 +127,16 @@ Controls_set_input_power(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Controls_getset[] = {
 {"control_mode", (getter)Controls_get_control_mode,(setter)Controls_set_control_mode,
-	PyDoc_STR("*float*: Control using current (0) or power (1) [0/1]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Control using current (0) or power (1) [0/1]\n\n**Required:**\nTrue"),
  	NULL},
 {"dt_hr", (getter)Controls_get_dt_hr,(setter)Controls_set_dt_hr,
-	PyDoc_STR("*float*: Time step in hours [hr]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Time step in hours [hr]\n\n**Required:**\nTrue"),
  	NULL},
 {"input_current", (getter)Controls_get_input_current,(setter)Controls_set_input_current,
-	PyDoc_STR("*float*: Current at which to run battery [A]\n\n*Required*: True if control_mode=0"),
+	PyDoc_STR("*float*: Current at which to run battery [A]\n\n**Required:**\nRequired if control_mode=0"),
  	NULL},
 {"input_power", (getter)Controls_get_input_power,(setter)Controls_set_input_power,
-	PyDoc_STR("*float*: Power at which to run battery [kW]\n\n*Required*: True if control_mode=1"),
+	PyDoc_STR("*float*: Power at which to run battery [kW]\n\n**Required:**\nRequired if control_mode=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -251,11 +251,11 @@ ParamsCell_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef ParamsCell_methods[] = {
 		{"assign",            (PyCFunction)ParamsCell_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ParamsCell_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``ParamsCell_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)ParamsCell_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ParamsCell_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``ParamsCell_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)ParamsCell_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -609,91 +609,91 @@ ParamsCell_set_voltage_matrix(VarGroupObject *self, PyObject *value, void *closu
 
 static PyGetSetDef ParamsCell_getset[] = {
 {"C_rate", (getter)ParamsCell_get_C_rate,(setter)ParamsCell_set_C_rate,
-	PyDoc_STR("*float*: Rate at which voltage vs. capacity curve input\n\n*Required*: True if voltage_choice=0&chem~2"),
+	PyDoc_STR("*float*: Rate at which voltage vs. capacity curve input\n\n**Required:**\nRequired if voltage_choice=0&chem~2"),
  	NULL},
 {"Qexp", (getter)ParamsCell_get_Qexp,(setter)ParamsCell_set_Qexp,
-	PyDoc_STR("*float*: Cell capacity at end of exponential zone [Ah]\n\n*Required*: True if voltage_choice=0&chem~2"),
+	PyDoc_STR("*float*: Cell capacity at end of exponential zone [Ah]\n\n**Required:**\nRequired if voltage_choice=0&chem~2"),
  	NULL},
 {"Qfull", (getter)ParamsCell_get_Qfull,(setter)ParamsCell_set_Qfull,
-	PyDoc_STR("*float*: Fully charged cell capacity [Ah]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Fully charged cell capacity [Ah]\n\n**Required:**\nTrue"),
  	NULL},
 {"Qfull_flow", (getter)ParamsCell_get_Qfull_flow,(setter)ParamsCell_set_Qfull_flow,
-	PyDoc_STR("*float*: Fully charged flow battery capacity [Ah]\n\n*Required*: True if voltage_choice=0&chem=3"),
+	PyDoc_STR("*float*: Fully charged flow battery capacity [Ah]\n\n**Required:**\nRequired if voltage_choice=0&chem=3"),
  	NULL},
 {"Qnom", (getter)ParamsCell_get_Qnom,(setter)ParamsCell_set_Qnom,
-	PyDoc_STR("*float*: Cell capacity at end of nominal zone [Ah]\n\n*Required*: True if voltage_choice=0&chem~2"),
+	PyDoc_STR("*float*: Cell capacity at end of nominal zone [Ah]\n\n**Required:**\nRequired if voltage_choice=0&chem~2"),
  	NULL},
 {"Vcut", (getter)ParamsCell_get_Vcut,(setter)ParamsCell_set_Vcut,
-	PyDoc_STR("*float*: Cell cutoff voltage [V]\n\n*Required*: True if voltage_choice=0&chem~2"),
+	PyDoc_STR("*float*: Cell cutoff voltage [V]\n\n**Required:**\nRequired if voltage_choice=0&chem~2"),
  	NULL},
 {"Vexp", (getter)ParamsCell_get_Vexp,(setter)ParamsCell_set_Vexp,
-	PyDoc_STR("*float*: Cell voltage at end of exponential zone [V]\n\n*Required*: True if voltage_choice=0&chem~2"),
+	PyDoc_STR("*float*: Cell voltage at end of exponential zone [V]\n\n**Required:**\nRequired if voltage_choice=0&chem~2"),
  	NULL},
 {"Vfull", (getter)ParamsCell_get_Vfull,(setter)ParamsCell_set_Vfull,
-	PyDoc_STR("*float*: Fully charged cell voltage [V]\n\n*Required*: True if voltage_choice=0&chem~2"),
+	PyDoc_STR("*float*: Fully charged cell voltage [V]\n\n**Required:**\nRequired if voltage_choice=0&chem~2"),
  	NULL},
 {"Vnom", (getter)ParamsCell_get_Vnom,(setter)ParamsCell_set_Vnom,
-	PyDoc_STR("*float*: Cell voltage at end of nominal zone [V]\n\n*Required*: True if voltage_choice=0&chem~2"),
+	PyDoc_STR("*float*: Cell voltage at end of nominal zone [V]\n\n**Required:**\nRequired if voltage_choice=0&chem~2"),
  	NULL},
 {"Vnom_default", (getter)ParamsCell_get_Vnom_default,(setter)ParamsCell_set_Vnom_default,
-	PyDoc_STR("*float*: Default nominal cell voltage [V]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Default nominal cell voltage [V]\n\n**Required:**\nTrue"),
  	NULL},
 {"calendar_a", (getter)ParamsCell_get_calendar_a,(setter)ParamsCell_set_calendar_a,
-	PyDoc_STR("*float*: Calendar life model coefficient [1/sqrt(day)]\n\n*Required*: True if life_model=0&calendar_choice=1"),
+	PyDoc_STR("*float*: Calendar life model coefficient [1/sqrt(day)]\n\n**Required:**\nRequired if life_model=0&calendar_choice=1"),
  	NULL},
 {"calendar_b", (getter)ParamsCell_get_calendar_b,(setter)ParamsCell_set_calendar_b,
-	PyDoc_STR("*float*: Calendar life model coefficient [K]\n\n*Required*: True if life_model=0&calendar_choice=1"),
+	PyDoc_STR("*float*: Calendar life model coefficient [K]\n\n**Required:**\nRequired if life_model=0&calendar_choice=1"),
  	NULL},
 {"calendar_c", (getter)ParamsCell_get_calendar_c,(setter)ParamsCell_set_calendar_c,
-	PyDoc_STR("*float*: Calendar life model coefficient [K]\n\n*Required*: True if life_model=0&calendar_choice=1"),
+	PyDoc_STR("*float*: Calendar life model coefficient [K]\n\n**Required:**\nRequired if life_model=0&calendar_choice=1"),
  	NULL},
 {"calendar_choice", (getter)ParamsCell_get_calendar_choice,(setter)ParamsCell_set_calendar_choice,
-	PyDoc_STR("*float*: Calendar life degradation input option [0/1/2]\n\n*Options*: 0=None,1=LithiumIonModel,2=InputLossTable\n\n*Required*: True if life_model=0"),
+	PyDoc_STR("*float*: Calendar life degradation input option [0/1/2]\n\n**Options:**\n0=None,1=LithiumIonModel,2=InputLossTable\n\n**Required:**\nRequired if life_model=0"),
  	NULL},
 {"calendar_matrix", (getter)ParamsCell_get_calendar_matrix,(setter)ParamsCell_set_calendar_matrix,
-	PyDoc_STR("*sequence[sequence]*: Table with Day # and Capacity % columns [[[#, %]]]\n\n*Required*: True if life_model=0&calendar_choice=2"),
+	PyDoc_STR("*sequence[sequence]*: Table with Day # and Capacity % columns [[[#, %]]]\n\n**Required:**\nRequired if life_model=0&calendar_choice=2"),
  	NULL},
 {"calendar_q0", (getter)ParamsCell_get_calendar_q0,(setter)ParamsCell_set_calendar_q0,
-	PyDoc_STR("*float*: Calendar life model initial capacity cofficient\n\n*Required*: True if life_model=0&calendar_choice=1"),
+	PyDoc_STR("*float*: Calendar life model initial capacity cofficient\n\n**Required:**\nRequired if life_model=0&calendar_choice=1"),
  	NULL},
 {"chem", (getter)ParamsCell_get_chem,(setter)ParamsCell_set_chem,
-	PyDoc_STR("*float*: Lead Acid (0), Li Ion (1), Vanadium Redox (2), Iron Flow (3) [0/1/2/3]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Lead Acid (0), Li Ion (1), Vanadium Redox (2), Iron Flow (3) [0/1/2/3]\n\n**Required:**\nTrue"),
  	NULL},
 {"cycling_matrix", (getter)ParamsCell_get_cycling_matrix,(setter)ParamsCell_set_cycling_matrix,
-	PyDoc_STR("*sequence[sequence]*: Table with DOD %, Cycle #, and Capacity % columns [[[%, #, %]]]\n\n*Required*: True if life_model=0"),
+	PyDoc_STR("*sequence[sequence]*: Table with DOD %, Cycle #, and Capacity % columns [[[%, #, %]]]\n\n**Required:**\nRequired if life_model=0"),
  	NULL},
 {"initial_SOC", (getter)ParamsCell_get_initial_SOC,(setter)ParamsCell_set_initial_SOC,
-	PyDoc_STR("*float*: Initial state-of-charge [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Initial state-of-charge [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"leadacid_q10", (getter)ParamsCell_get_leadacid_q10,(setter)ParamsCell_set_leadacid_q10,
-	PyDoc_STR("*float*: Capacity at 10-hour discharge rate [Ah]\n\n*Required*: True if chem=0"),
+	PyDoc_STR("*float*: Capacity at 10-hour discharge rate [Ah]\n\n**Required:**\nRequired if chem=0"),
  	NULL},
 {"leadacid_q20", (getter)ParamsCell_get_leadacid_q20,(setter)ParamsCell_set_leadacid_q20,
-	PyDoc_STR("*float*: Capacity at 20-hour discharge rate [Ah]\n\n*Required*: True if chem=0"),
+	PyDoc_STR("*float*: Capacity at 20-hour discharge rate [Ah]\n\n**Required:**\nRequired if chem=0"),
  	NULL},
 {"leadacid_qn", (getter)ParamsCell_get_leadacid_qn,(setter)ParamsCell_set_leadacid_qn,
-	PyDoc_STR("*float*: Capacity at discharge rate for n-hour rate [Ah]\n\n*Required*: True if chem=0"),
+	PyDoc_STR("*float*: Capacity at discharge rate for n-hour rate [Ah]\n\n**Required:**\nRequired if chem=0"),
  	NULL},
 {"leadacid_tn", (getter)ParamsCell_get_leadacid_tn,(setter)ParamsCell_set_leadacid_tn,
-	PyDoc_STR("*float*: Hours to discharge for qn rate [h]\n\n*Required*: True if chem=0"),
+	PyDoc_STR("*float*: Hours to discharge for qn rate [h]\n\n**Required:**\nRequired if chem=0"),
  	NULL},
 {"life_model", (getter)ParamsCell_get_life_model,(setter)ParamsCell_set_life_model,
-	PyDoc_STR("*float*: Battery life model specifier [0/1/2]\n\n*Options*: 0=calendar/cycle,1=NMC,2=LMO/LTO\n\n*Required*: True"),
+	PyDoc_STR("*float*: Battery life model specifier [0/1/2]\n\n**Options:**\n0=calendar/cycle,1=NMC,2=LMO/LTO\n\n**Required:**\nTrue"),
  	NULL},
 {"maximum_SOC", (getter)ParamsCell_get_maximum_SOC,(setter)ParamsCell_set_maximum_SOC,
-	PyDoc_STR("*float*: Maximum allowed state-of-charge [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Maximum allowed state-of-charge [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"minimum_SOC", (getter)ParamsCell_get_minimum_SOC,(setter)ParamsCell_set_minimum_SOC,
-	PyDoc_STR("*float*: Minimum allowed state-of-charge [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Minimum allowed state-of-charge [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"resistance", (getter)ParamsCell_get_resistance,(setter)ParamsCell_set_resistance,
-	PyDoc_STR("*float*: Internal resistance [Ohm]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Internal resistance [Ohm]\n\n**Required:**\nTrue"),
  	NULL},
 {"voltage_choice", (getter)ParamsCell_get_voltage_choice,(setter)ParamsCell_set_voltage_choice,
-	PyDoc_STR("*float*: Battery voltage input option [0/1]\n\n*Options*: 0=Model,1=Table\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Battery voltage input option [0/1]\n\n**Options:**\n0=Model,1=Table\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"voltage_matrix", (getter)ParamsCell_get_voltage_matrix,(setter)ParamsCell_set_voltage_matrix,
-	PyDoc_STR("*sequence[sequence]*: Table with depth-of-discharge % and Voltage as columns [[[%, V]]]\n\n*Required*: True if voltage_choice=1"),
+	PyDoc_STR("*sequence[sequence]*: Table with depth-of-discharge % and Voltage as columns [[[%, V]]]\n\n**Required:**\nRequired if voltage_choice=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -808,11 +808,11 @@ ParamsPack_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef ParamsPack_methods[] = {
 		{"assign",            (PyCFunction)ParamsPack_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ParamsPack_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``ParamsPack_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)ParamsPack_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ParamsPack_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``ParamsPack_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)ParamsPack_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -838,6 +838,18 @@ static int
 ParamsPack_set_T_room_init(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_BatteryStateful_ParamsPack_T_room_init_nset, self->data_ptr);
+}
+
+static PyObject *
+ParamsPack_get_availabilty_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_BatteryStateful_ParamsPack_availabilty_loss_aget, self->data_ptr);
+}
+
+static int
+ParamsPack_set_availabilty_loss(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_BatteryStateful_ParamsPack_availabilty_loss_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1010,52 +1022,55 @@ ParamsPack_set_surface_area(VarGroupObject *self, PyObject *value, void *closure
 
 static PyGetSetDef ParamsPack_getset[] = {
 {"Cp", (getter)ParamsPack_get_Cp,(setter)ParamsPack_set_Cp,
-	PyDoc_STR("*float*: Battery specific heat capacity [J/KgK]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Battery specific heat capacity [J/KgK]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_room_init", (getter)ParamsPack_get_T_room_init,(setter)ParamsPack_set_T_room_init,
-	PyDoc_STR("*float*: Temperature of storage room [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Temperature of storage room [C]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"availabilty_loss", (getter)ParamsPack_get_availabilty_loss,(setter)ParamsPack_set_availabilty_loss,
+	PyDoc_STR("*sequence*: Battery availability losses at each timestep [[%]]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"cap_vs_temp", (getter)ParamsPack_get_cap_vs_temp,(setter)ParamsPack_set_cap_vs_temp,
-	PyDoc_STR("*sequence[sequence]*: Table with Temperature and Capacity % as columns [[[C,%]]]\n\n*Required*: True if life_model=0"),
+	PyDoc_STR("*sequence[sequence]*: Table with Temperature and Capacity % as columns [[[C,%]]]\n\n**Required:**\nRequired if life_model=0"),
  	NULL},
 {"h", (getter)ParamsPack_get_h,(setter)ParamsPack_set_h,
-	PyDoc_STR("*float*: Heat transfer between battery and environment [W/m2K]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Heat transfer between battery and environment [W/m2K]\n\n**Required:**\nTrue"),
  	NULL},
 {"loss_choice", (getter)ParamsPack_get_loss_choice,(setter)ParamsPack_set_loss_choice,
-	PyDoc_STR("*float*: Loss power input option [0/1]\n\n*Options*: 0=Monthly,1=TimeSeries\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Loss power input option [0/1]\n\n**Options:**\n0=Monthly,1=TimeSeries\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"mass", (getter)ParamsPack_get_mass,(setter)ParamsPack_set_mass,
-	PyDoc_STR("*float*: Battery mass [kg]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Battery mass [kg]\n\n**Required:**\nTrue"),
  	NULL},
 {"monthly_charge_loss", (getter)ParamsPack_get_monthly_charge_loss,(setter)ParamsPack_set_monthly_charge_loss,
-	PyDoc_STR("*sequence*: Battery system losses when charging [[kW]]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Battery system losses when charging [[kW]]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"monthly_discharge_loss", (getter)ParamsPack_get_monthly_discharge_loss,(setter)ParamsPack_set_monthly_discharge_loss,
-	PyDoc_STR("*sequence*: Battery system losses when discharging [[kW]]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Battery system losses when discharging [[kW]]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"monthly_idle_loss", (getter)ParamsPack_get_monthly_idle_loss,(setter)ParamsPack_set_monthly_idle_loss,
-	PyDoc_STR("*sequence*: Battery system losses when idle [[kW]]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Battery system losses when idle [[kW]]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"nominal_energy", (getter)ParamsPack_get_nominal_energy,(setter)ParamsPack_set_nominal_energy,
-	PyDoc_STR("*float*: Nominal installed energy [kWh]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Nominal installed energy [kWh]\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Required:**\nTrue"),
  	NULL},
 {"nominal_voltage", (getter)ParamsPack_get_nominal_voltage,(setter)ParamsPack_set_nominal_voltage,
-	PyDoc_STR("*float*: Nominal DC voltage [V]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Nominal DC voltage [V]\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Required:**\nTrue"),
  	NULL},
 {"replacement_capacity", (getter)ParamsPack_get_replacement_capacity,(setter)ParamsPack_set_replacement_capacity,
-	PyDoc_STR("*float*: Capacity degradation at which to replace battery [%]\n\n*Required*: True if replacement_option=1"),
+	PyDoc_STR("*float*: Capacity degradation at which to replace battery [%]\n\n**Required:**\nRequired if replacement_option=1"),
  	NULL},
 {"replacement_option", (getter)ParamsPack_get_replacement_option,(setter)ParamsPack_set_replacement_option,
-	PyDoc_STR("*float*: Replacements: none (0), by capacity (1), or schedule (2) [0=none,1=capacity limit,2=yearly schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Replacements: none (0), by capacity (1), or schedule (2) [0=none,1=capacity limit,2=yearly schedule]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"replacement_schedule_percent", (getter)ParamsPack_get_replacement_schedule_percent,(setter)ParamsPack_set_replacement_schedule_percent,
-	PyDoc_STR("*sequence*: Percentage of battery capacity to replace in each year [[%/year]]\n\n*Options*: length <= analysis_period\n\n*Required*: True if replacement_option=2"),
+	PyDoc_STR("*sequence*: Percentage of battery capacity to replace in each year [[%/year]]\n\n**Options:**\nlength <= analysis_period\n\n**Required:**\nRequired if replacement_option=2"),
  	NULL},
 {"schedule_loss", (getter)ParamsPack_get_schedule_loss,(setter)ParamsPack_set_schedule_loss,
-	PyDoc_STR("*sequence*: Battery system losses at each timestep [[kW]]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Battery system losses at each timestep [[kW]]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"surface_area", (getter)ParamsPack_get_surface_area,(setter)ParamsPack_set_surface_area,
-	PyDoc_STR("*float*: Battery surface area [m^2]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Battery surface area [m^2]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1170,11 +1185,11 @@ StatePack_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef StatePack_methods[] = {
 		{"assign",            (PyCFunction)StatePack_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``StatePack_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``StatePack_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)StatePack_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``StatePack_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``StatePack_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)StatePack_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1384,55 +1399,55 @@ StatePack_set_n_replacements(VarGroupObject *self, PyObject *value, void *closur
 
 static PyGetSetDef StatePack_getset[] = {
 {"I", (getter)StatePack_get_I,(setter)StatePack_set_I,
-	PyDoc_STR("*float*: Current [A]"),
+	PyDoc_STR("*float*: Current [A]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"I_chargeable", (getter)StatePack_get_I_chargeable,(setter)StatePack_set_I_chargeable,
-	PyDoc_STR("*float*: Estimated max chargeable current [A]"),
+	PyDoc_STR("*float*: Estimated max chargeable current [A]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"I_dischargeable", (getter)StatePack_get_I_dischargeable,(setter)StatePack_set_I_dischargeable,
-	PyDoc_STR("*float*: Estimated max dischargeable current [A]"),
+	PyDoc_STR("*float*: Estimated max dischargeable current [A]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"P", (getter)StatePack_get_P,(setter)StatePack_set_P,
-	PyDoc_STR("*float*: Power [kW]"),
+	PyDoc_STR("*float*: Power [kW]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"P_chargeable", (getter)StatePack_get_P_chargeable,(setter)StatePack_set_P_chargeable,
-	PyDoc_STR("*float*: Estimated max chargeable power  [kW]"),
+	PyDoc_STR("*float*: Estimated max chargeable power  [kW]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"P_dischargeable", (getter)StatePack_get_P_dischargeable,(setter)StatePack_set_P_dischargeable,
-	PyDoc_STR("*float*: Estimated max dischargeable power [kW]"),
+	PyDoc_STR("*float*: Estimated max dischargeable power [kW]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"Q", (getter)StatePack_get_Q,(setter)StatePack_set_Q,
-	PyDoc_STR("*float*: Capacity [Ah]"),
+	PyDoc_STR("*float*: Capacity [Ah]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"Q_max", (getter)StatePack_get_Q_max,(setter)StatePack_set_Q_max,
-	PyDoc_STR("*float*: Max Capacity [Ah]"),
+	PyDoc_STR("*float*: Max Capacity [Ah]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"SOC", (getter)StatePack_get_SOC,(setter)StatePack_set_SOC,
-	PyDoc_STR("*float*: State of Charge [%]"),
+	PyDoc_STR("*float*: State of Charge [%]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"T_batt", (getter)StatePack_get_T_batt,(setter)StatePack_set_T_batt,
-	PyDoc_STR("*float*: Battery temperature averaged over time step [C]"),
+	PyDoc_STR("*float*: Battery temperature averaged over time step [C]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"T_room", (getter)StatePack_get_T_room,(setter)StatePack_set_T_room,
-	PyDoc_STR("*float*: Room temperature [C]"),
+	PyDoc_STR("*float*: Room temperature [C]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"V", (getter)StatePack_get_V,(setter)StatePack_set_V,
-	PyDoc_STR("*float*: Voltage [V]"),
+	PyDoc_STR("*float*: Voltage [V]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"heat_dissipated", (getter)StatePack_get_heat_dissipated,(setter)StatePack_set_heat_dissipated,
-	PyDoc_STR("*float*: Heat dissipated due to flux [kW]"),
+	PyDoc_STR("*float*: Heat dissipated due to flux [kW]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"indices_replaced", (getter)StatePack_get_indices_replaced,(setter)StatePack_set_indices_replaced,
-	PyDoc_STR("*sequence*: Lifetime indices of replacement occurrences"),
+	PyDoc_STR("*sequence*: Lifetime indices of replacement occurrences\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"last_idx", (getter)StatePack_get_last_idx,(setter)StatePack_set_last_idx,
-	PyDoc_STR("*float*: Last index (lifetime)"),
+	PyDoc_STR("*float*: Last index (lifetime)\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"loss_kw", (getter)StatePack_get_loss_kw,(setter)StatePack_set_loss_kw,
-	PyDoc_STR("*float*: Ancillary power loss (kW DC for DC connected, AC for AC connected) [kW]"),
+	PyDoc_STR("*float*: Ancillary power loss (kW DC for DC connected, AC for AC connected) [kW]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"n_replacements", (getter)StatePack_get_n_replacements,(setter)StatePack_set_n_replacements,
-	PyDoc_STR("*float*: Number of replacements at current year"),
+	PyDoc_STR("*float*: Number of replacements at current year\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1547,11 +1562,11 @@ StateCell_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef StateCell_methods[] = {
 		{"assign",            (PyCFunction)StateCell_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``StateCell_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``StateCell_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)StateCell_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``StateCell_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``StateCell_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)StateCell_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1796,18 +1811,6 @@ StateCell_set_cycle_DOD_max(VarGroupObject *self, PyObject *value, void *closure
 }
 
 static PyObject *
-StateCell_get_cycle_DOD_range(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_BatteryStateful_StateCell_cycle_DOD_range_aget, self->data_ptr);
-}
-
-static int
-StateCell_set_cycle_DOD_range(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_BatteryStateful_StateCell_cycle_DOD_range_aset, self->data_ptr);
-}
-
-static PyObject *
 StateCell_get_cycle_counts(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_BatteryStateful_StateCell_cycle_counts_mget, self->data_ptr);
@@ -1937,6 +1940,30 @@ static int
 StateCell_set_n_cycles(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_n_cycles_nset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_percent_unavailable(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_percent_unavailable_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_percent_unavailable(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_percent_unavailable_nset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_percent_unavailable_prev(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_percent_unavailable_prev_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_percent_unavailable_prev(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_percent_unavailable_prev_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -2167,159 +2194,177 @@ StateCell_set_temp_avg(VarGroupObject *self, PyObject *value, void *closure)
 	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_temp_avg_nset, self->data_ptr);
 }
 
+static PyObject *
+StateCell_get_temp_dt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_temp_dt_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_temp_dt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_temp_dt_nset, self->data_ptr);
+}
+
 static PyGetSetDef StateCell_getset[] = {
 {"DOD_max", (getter)StateCell_get_DOD_max,(setter)StateCell_set_DOD_max,
-	PyDoc_STR("*float*: Max DOD of battery for current day [%]\n\n*Info*: Cycles for Life Model"),
+	PyDoc_STR("*float*: Max DOD of battery for current day [%]\n\n**Info:**\nCycles for Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"DOD_min", (getter)StateCell_get_DOD_min,(setter)StateCell_set_DOD_min,
-	PyDoc_STR("*float*: Min DOD of battery for current day [%]\n\n*Info*: Cycles for Life Model"),
+	PyDoc_STR("*float*: Min DOD of battery for current day [%]\n\n**Info:**\nCycles for Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"EFC", (getter)StateCell_get_EFC,(setter)StateCell_set_EFC,
-	PyDoc_STR("*float*: Total Equivalent Full Cycles [1]\n\n*Info*: LMO/LTO Life Model"),
+	PyDoc_STR("*float*: Total Equivalent Full Cycles [1]\n\n**Info:**\nLMO/LTO Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"EFC_dt", (getter)StateCell_get_EFC_dt,(setter)StateCell_set_EFC_dt,
-	PyDoc_STR("*float*: Equivalent Full Cycles cumulated for current day [1]\n\n*Info*: LMO/LTO Life Model"),
+	PyDoc_STR("*float*: Equivalent Full Cycles cumulated for current day [1]\n\n**Info:**\nLMO/LTO Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"I_loss", (getter)StateCell_get_I_loss,(setter)StateCell_set_I_loss,
-	PyDoc_STR("*float*: Lifetime and thermal losses [A]"),
+	PyDoc_STR("*float*: Lifetime and thermal losses [A]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"SOC_prev", (getter)StateCell_get_SOC_prev,(setter)StateCell_set_SOC_prev,
-	PyDoc_STR("*float*: State of Charge of last time step [%]"),
+	PyDoc_STR("*float*: State of Charge of last time step [%]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"T_batt_prev", (getter)StateCell_get_T_batt_prev,(setter)StateCell_set_T_batt_prev,
-	PyDoc_STR("*float*: Battery temperature at end of last time step [C]"),
+	PyDoc_STR("*float*: Battery temperature at end of last time step [C]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"average_range", (getter)StateCell_get_average_range,(setter)StateCell_set_average_range,
-	PyDoc_STR("*float*: Average cycle cycle_range [%]"),
+	PyDoc_STR("*float*: Average cycle cycle_range [%]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"b1_dt", (getter)StateCell_get_b1_dt,(setter)StateCell_set_b1_dt,
-	PyDoc_STR("*float*: b1 coefficient cumulated for current day [day^-0.5]\n\n*Info*: NMC Life Model"),
+	PyDoc_STR("*float*: b1 coefficient cumulated for current day [day^-0.5]\n\n**Info:**\nNMC Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"b2_dt", (getter)StateCell_get_b2_dt,(setter)StateCell_set_b2_dt,
-	PyDoc_STR("*float*: b2 coefficient cumulated for current day [1/cycle]\n\n*Info*: NMC Life Model"),
+	PyDoc_STR("*float*: b2 coefficient cumulated for current day [1/cycle]\n\n**Info:**\nNMC Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"b3_dt", (getter)StateCell_get_b3_dt,(setter)StateCell_set_b3_dt,
-	PyDoc_STR("*float*: b3 coefficient cumulated for current day [1]\n\n*Info*: NMC Life Model"),
+	PyDoc_STR("*float*: b3 coefficient cumulated for current day [1]\n\n**Info:**\nNMC Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"c0_dt", (getter)StateCell_get_c0_dt,(setter)StateCell_set_c0_dt,
-	PyDoc_STR("*float*: c0 coefficient cumulated for current day [Ah]\n\n*Info*: NMC Life Model"),
+	PyDoc_STR("*float*: c0 coefficient cumulated for current day [Ah]\n\n**Info:**\nNMC Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"c2_dt", (getter)StateCell_get_c2_dt,(setter)StateCell_set_c2_dt,
-	PyDoc_STR("*float*: c2 coefficient cumulated for current day [1/cycle]\n\n*Info*: NMC Life Model"),
+	PyDoc_STR("*float*: c2 coefficient cumulated for current day [1/cycle]\n\n**Info:**\nNMC Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"cell_current", (getter)StateCell_get_cell_current,(setter)StateCell_set_cell_current,
-	PyDoc_STR("*float*: Cell current [A]"),
+	PyDoc_STR("*float*: Cell current [A]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"cell_voltage", (getter)StateCell_get_cell_voltage,(setter)StateCell_set_cell_voltage,
-	PyDoc_STR("*float*: Cell voltage [V]"),
+	PyDoc_STR("*float*: Cell voltage [V]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"chargeChange", (getter)StateCell_get_chargeChange,(setter)StateCell_set_chargeChange,
-	PyDoc_STR("*float*: Whether Charge mode changed since last step [0/1]"),
+	PyDoc_STR("*float*: Whether Charge mode changed since last step [0/1]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"charge_mode", (getter)StateCell_get_charge_mode,(setter)StateCell_set_charge_mode,
-	PyDoc_STR("*float*: Charge (0), Idle (1), Discharge (2) [0/1/2]"),
+	PyDoc_STR("*float*: Charge (0), Idle (1), Discharge (2) [0/1/2]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"cum_dt", (getter)StateCell_get_cum_dt,(setter)StateCell_set_cum_dt,
-	PyDoc_STR("*float*: Elapsed time for current day [day]\n\n*Info*: Cycles for Life Model"),
+	PyDoc_STR("*float*: Elapsed time for current day [day]\n\n**Info:**\nCycles for Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"cycle_DOD", (getter)StateCell_get_cycle_DOD,(setter)StateCell_set_cycle_DOD,
-	PyDoc_STR("*float*: cycle_DOD of last cycle [%]"),
+	PyDoc_STR("*float*: cycle_DOD of last cycle [%]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"cycle_DOD_max", (getter)StateCell_get_cycle_DOD_max,(setter)StateCell_set_cycle_DOD_max,
-	PyDoc_STR("*sequence*: Max DODs of cycles concluded in current day [%]\n\n*Info*: Cycles for Life Model"),
- 	NULL},
-{"cycle_DOD_range", (getter)StateCell_get_cycle_DOD_range,(setter)StateCell_set_cycle_DOD_range,
-	PyDoc_STR("*sequence*: DOD cycle_range of each cycle [%]\n\n*Info*: NMC Life Model"),
+	PyDoc_STR("*sequence*: Max DODs of cycles concluded in current day [%]\n\n**Info:**\nCycles for Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"cycle_counts", (getter)StateCell_get_cycle_counts,(setter)StateCell_set_cycle_counts,
-	PyDoc_STR("*sequence[sequence]*: Counts of cycles by DOD categories in cycle matrix"),
+	PyDoc_STR("*sequence[sequence]*: Counts of cycles by DOD [[%, cycles]]\n\n**Options:**\nIf life_model=0, counts all cycles in simulation; else, cycles per day\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"cycle_range", (getter)StateCell_get_cycle_range,(setter)StateCell_set_cycle_range,
-	PyDoc_STR("*float*: Range of last cycle [%]"),
+	PyDoc_STR("*float*: Range of last cycle [%]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"day_age_of_battery", (getter)StateCell_get_day_age_of_battery,(setter)StateCell_set_day_age_of_battery,
-	PyDoc_STR("*float*: Day age of battery [day]"),
+	PyDoc_STR("*float*: Day age of battery [day]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"dq_relative_cal", (getter)StateCell_get_dq_relative_cal,(setter)StateCell_set_dq_relative_cal,
-	PyDoc_STR("*float*: Cumulative capacity change from calendar degradation [%]\n\n*Info*: LMO/LTO Life Model"),
+	PyDoc_STR("*float*: Cumulative capacity change from calendar degradation [%]\n\n**Info:**\nLMO/LTO Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"dq_relative_calendar_old", (getter)StateCell_get_dq_relative_calendar_old,(setter)StateCell_set_dq_relative_calendar_old,
-	PyDoc_STR("*float*: Change in capacity of last time step [%]"),
+	PyDoc_STR("*float*: Change in capacity of last time step [%]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"dq_relative_cyc", (getter)StateCell_get_dq_relative_cyc,(setter)StateCell_set_dq_relative_cyc,
-	PyDoc_STR("*float*: Cumulative capacity change from cycling degradation [%]\n\n*Info*: LMO/LTO Life Model"),
+	PyDoc_STR("*float*: Cumulative capacity change from cycling degradation [%]\n\n**Info:**\nLMO/LTO Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"dq_relative_li1", (getter)StateCell_get_dq_relative_li1,(setter)StateCell_set_dq_relative_li1,
-	PyDoc_STR("*float*: Cumulative capacity change from time-dependent Li loss [1]\n\n*Info*: NMC Life Model"),
+	PyDoc_STR("*float*: Cumulative capacity change from time-dependent Li loss [1]\n\n**Info:**\nNMC Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"dq_relative_li2", (getter)StateCell_get_dq_relative_li2,(setter)StateCell_set_dq_relative_li2,
-	PyDoc_STR("*float*: Cumulative capacity change from cycle-dependent Li loss [1]\n\n*Info*: NMC Life Model"),
+	PyDoc_STR("*float*: Cumulative capacity change from cycle-dependent Li loss [1]\n\n**Info:**\nNMC Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"dq_relative_li3", (getter)StateCell_get_dq_relative_li3,(setter)StateCell_set_dq_relative_li3,
-	PyDoc_STR("*float*: Cumulative capacity change from BOL Li loss [1]\n\n*Info*: NMC Life Model"),
+	PyDoc_STR("*float*: Cumulative capacity change from BOL Li loss [1]\n\n**Info:**\nNMC Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"dq_relative_neg", (getter)StateCell_get_dq_relative_neg,(setter)StateCell_set_dq_relative_neg,
-	PyDoc_STR("*float*: Cumulative capacity change from negative electrode [1]\n\n*Info*: NMC Life Model"),
+	PyDoc_STR("*float*: Cumulative capacity change from negative electrode [1]\n\n**Info:**\nNMC Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"n_cycles", (getter)StateCell_get_n_cycles,(setter)StateCell_set_n_cycles,
-	PyDoc_STR("*float*: Number of cycles"),
+	PyDoc_STR("*float*: Number of cycles\n\n**INOUT:** This variable is both an input and an output to the compute module."),
+ 	NULL},
+{"percent_unavailable", (getter)StateCell_get_percent_unavailable,(setter)StateCell_set_percent_unavailable,
+	PyDoc_STR("*float*: Percent of system that is down [%]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
+ 	NULL},
+{"percent_unavailable_prev", (getter)StateCell_get_percent_unavailable_prev,(setter)StateCell_set_percent_unavailable_prev,
+	PyDoc_STR("*float*: Percent of system that was down last step [%]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"prev_charge", (getter)StateCell_get_prev_charge,(setter)StateCell_set_prev_charge,
-	PyDoc_STR("*float*: Charge mode of last time step [0/1/2]"),
+	PyDoc_STR("*float*: Charge mode of last time step [0/1/2]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"q0", (getter)StateCell_get_q0,(setter)StateCell_set_q0,
-	PyDoc_STR("*float*: Cell capacity at timestep [Ah]"),
+	PyDoc_STR("*float*: Cell capacity at timestep [Ah]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"q1_0", (getter)StateCell_get_q1_0,(setter)StateCell_set_q1_0,
-	PyDoc_STR("*float*: Lead acid - Cell charge available [Ah]"),
+	PyDoc_STR("*float*: Lead acid - Cell charge available [Ah]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"q2", (getter)StateCell_get_q2,(setter)StateCell_set_q2,
-	PyDoc_STR("*float*: Lead acid - Cell capacity at 10-hr discharge rate [Ah]"),
+	PyDoc_STR("*float*: Lead acid - Cell capacity at 10-hr discharge rate [Ah]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"q2_0", (getter)StateCell_get_q2_0,(setter)StateCell_set_q2_0,
-	PyDoc_STR("*float*: Lead acid - Cell charge bound [Ah]"),
+	PyDoc_STR("*float*: Lead acid - Cell charge bound [Ah]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"q_relative", (getter)StateCell_get_q_relative,(setter)StateCell_set_q_relative,
-	PyDoc_STR("*float*: Overall relative capacity due to lifetime effects [%]"),
+	PyDoc_STR("*float*: Overall relative capacity due to lifetime effects [%]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"q_relative_calendar", (getter)StateCell_get_q_relative_calendar,(setter)StateCell_set_q_relative_calendar,
-	PyDoc_STR("*float*: Relative capacity due to calendar effects [%]"),
+	PyDoc_STR("*float*: Relative capacity due to calendar effects [%]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"q_relative_cycle", (getter)StateCell_get_q_relative_cycle,(setter)StateCell_set_q_relative_cycle,
-	PyDoc_STR("*float*: Relative capacity due to cycling effects [%]"),
+	PyDoc_STR("*float*: Relative capacity due to cycling effects [%]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"q_relative_li", (getter)StateCell_get_q_relative_li,(setter)StateCell_set_q_relative_li,
-	PyDoc_STR("*float*: Relative capacity due to loss of lithium inventory [%]\n\n*Info*: NMC Life Model"),
+	PyDoc_STR("*float*: Relative capacity due to loss of lithium inventory [%]\n\n**Info:**\nNMC Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"q_relative_neg", (getter)StateCell_get_q_relative_neg,(setter)StateCell_set_q_relative_neg,
-	PyDoc_STR("*float*: Relative capacity due to loss of anode material [%]\n\n*Info*: NMC Life Model"),
+	PyDoc_STR("*float*: Relative capacity due to loss of anode material [%]\n\n**Info:**\nNMC Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"q_relative_thermal", (getter)StateCell_get_q_relative_thermal,(setter)StateCell_set_q_relative_thermal,
-	PyDoc_STR("*float*: Relative capacity due to thermal effects [%]"),
+	PyDoc_STR("*float*: Relative capacity due to thermal effects [%]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"qmax_lifetime", (getter)StateCell_get_qmax_lifetime,(setter)StateCell_set_qmax_lifetime,
-	PyDoc_STR("*float*: Maximum possible cell capacity [Ah]"),
+	PyDoc_STR("*float*: Maximum possible cell capacity [Ah]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"qmax_thermal", (getter)StateCell_get_qmax_thermal,(setter)StateCell_set_qmax_thermal,
-	PyDoc_STR("*float*: Maximum cell capacity adjusted for temperature effects [Ah]"),
+	PyDoc_STR("*float*: Maximum cell capacity adjusted for temperature effects [Ah]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"qn", (getter)StateCell_get_qn,(setter)StateCell_set_qn,
-	PyDoc_STR("*float*: Lead acid - Cell capacity at n-hr discharge rate [Ah]"),
+	PyDoc_STR("*float*: Lead acid - Cell capacity at n-hr discharge rate [Ah]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"rainflow_Xlt", (getter)StateCell_get_rainflow_Xlt,(setter)StateCell_set_rainflow_Xlt,
-	PyDoc_STR("*float*: Rainflow cycle_range of second to last half cycle [%]"),
+	PyDoc_STR("*float*: Rainflow cycle_range of second to last half cycle [%]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"rainflow_Ylt", (getter)StateCell_get_rainflow_Ylt,(setter)StateCell_set_rainflow_Ylt,
-	PyDoc_STR("*float*: Rainflow cycle_range of last half cycle [%]"),
+	PyDoc_STR("*float*: Rainflow cycle_range of last half cycle [%]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"rainflow_jlt", (getter)StateCell_get_rainflow_jlt,(setter)StateCell_set_rainflow_jlt,
-	PyDoc_STR("*float*: Rainflow number of turning points"),
+	PyDoc_STR("*float*: Rainflow number of turning points\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"rainflow_peaks", (getter)StateCell_get_rainflow_peaks,(setter)StateCell_set_rainflow_peaks,
-	PyDoc_STR("*sequence*: Rainflow peaks of cycle_DOD [[%]]"),
+	PyDoc_STR("*sequence*: Rainflow peaks of cycle_DOD [[%]]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"temp_avg", (getter)StateCell_get_temp_avg,(setter)StateCell_set_temp_avg,
-	PyDoc_STR("*float*: Average temperature for current day [K]\n\n*Info*: LMO/LTO Life Model"),
+	PyDoc_STR("*float*: Average temperature for current day [K]\n\n**Info:**\nLMO/LTO Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
+ 	NULL},
+{"temp_dt", (getter)StateCell_get_temp_dt,(setter)StateCell_set_temp_dt,
+	PyDoc_STR("*float*: Temperature cumulated for current day [K]\n\n**Info:**\nNMC Life Model\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2429,6 +2474,14 @@ BatteryStateful_dealloc(CmodStatefulObject *self)
 
 
 static PyObject *
+BatteryStateful_get_data_ptr(CmodStatefulObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 BatteryStateful_setup(CmodStatefulObject *self, PyObject *args)
 {
 	SAM_error error = new_error();
@@ -2518,6 +2571,8 @@ static PyMethodDef BatteryStateful_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)BatteryStateful_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)BatteryStateful_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2680,12 +2735,11 @@ static PyMethodDef BatteryStatefulModule_methods[] = {
 		{"new",             BatteryStateful_new,         METH_VARARGS,
 				PyDoc_STR("new() -> BatteryStateful")},
 		{"default",             BatteryStateful_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> BatteryStateful\n\nUse default attributes\n"
-				"`config` options:\n\n- \"LFPGraphite\"\n- \"LMOLTO\"\n- \"LeadAcid\"\n- \"NMCGraphite\"")},
+				PyDoc_STR("default(config) -> BatteryStateful\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"LFPGraphite\"*\n\n		- *\"LMOLTO\"*\n\n		- *\"LeadAcid\"*\n\n		- *\"NMCGraphite\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             BatteryStateful_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> BatteryStateful\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> BatteryStateful\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   BatteryStateful_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> BatteryStateful\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> BatteryStateful\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

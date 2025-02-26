@@ -7,6 +7,7 @@ cmake-build-release/
 *.pyproj
 *.sln
 *.ipynb_checkpoints
+.vscode
 
 #os specific
 .idea/
@@ -30,3 +31,5 @@ files/defaults/
 *.pyc
 
 .mypy_cache
+
+*.zip

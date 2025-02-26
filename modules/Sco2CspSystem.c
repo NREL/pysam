@@ -69,11 +69,11 @@ SystemDesign_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemDesign_methods[] = {
 		{"assign",            (PyCFunction)SystemDesign_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SystemDesign_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SystemDesign_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SystemDesign_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemDesign_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -199,34 +199,34 @@ SystemDesign_set_site_elevation(VarGroupObject *self, PyObject *value, void *clo
 
 static PyGetSetDef SystemDesign_getset[] = {
 {"T_amb_des", (getter)SystemDesign_get_T_amb_des,(setter)SystemDesign_set_T_amb_des,
-	PyDoc_STR("*float*: Ambient temperature [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Ambient temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_htf_hot_des", (getter)SystemDesign_get_T_htf_hot_des,(setter)SystemDesign_set_T_htf_hot_des,
-	PyDoc_STR("*float*: HTF design hot temperature (PHX inlet) [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: HTF design hot temperature (PHX inlet) [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"W_dot_net_des", (getter)SystemDesign_get_W_dot_net_des,(setter)SystemDesign_set_W_dot_net_des,
-	PyDoc_STR("*float*: Design cycle power output (no cooling parasitics) [MWe]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Design cycle power output (no cooling parasitics) [MWe]\n\n**Required:**\nTrue"),
  	NULL},
 {"dT_PHX_hot_approach", (getter)SystemDesign_get_dT_PHX_hot_approach,(setter)SystemDesign_set_dT_PHX_hot_approach,
-	PyDoc_STR("*float*: Temp diff btw hot HTF and turbine inlet [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Temp diff btw hot HTF and turbine inlet [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"dT_mc_approach", (getter)SystemDesign_get_dT_mc_approach,(setter)SystemDesign_set_dT_mc_approach,
-	PyDoc_STR("*float*: Temp diff btw ambient air and main compressor inlet [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Temp diff btw ambient air and main compressor inlet [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"design_method", (getter)SystemDesign_get_design_method,(setter)SystemDesign_set_design_method,
-	PyDoc_STR("*float*: 1 = Specify efficiency, 2 = Specify total recup UA, 3 = Specify each recup design\n\n*Required*: True"),
+	PyDoc_STR("*float*: 1 = Specify efficiency, 2 = Specify total recup UA, 3 = Specify each recup design\n\n**Required:**\nTrue"),
  	NULL},
 {"eta_thermal_des", (getter)SystemDesign_get_eta_thermal_des,(setter)SystemDesign_set_eta_thermal_des,
-	PyDoc_STR("*float*: Power cycle thermal efficiency\n\n*Required*: True if design_method=1"),
+	PyDoc_STR("*float*: Power cycle thermal efficiency\n\n**Required:**\nRequired if design_method=1"),
  	NULL},
 {"htf", (getter)SystemDesign_get_htf,(setter)SystemDesign_set_htf,
-	PyDoc_STR("*float*: Integer code for HTF used in PHX\n\n*Required*: True"),
+	PyDoc_STR("*float*: Integer code for HTF used in PHX\n\n**Required:**\nTrue"),
  	NULL},
 {"htf_props", (getter)SystemDesign_get_htf_props,(setter)SystemDesign_set_htf_props,
-	PyDoc_STR("*sequence[sequence]*: User defined HTF property data\n\n*Info*: 7 columns (T,Cp,dens,visc,kvisc,cond,h), at least 3 rows\n\n*Required*: If not provided, assumed to be [[0]]"),
+	PyDoc_STR("*sequence[sequence]*: User defined HTF property data\n\n**Info:**\n7 columns (T,Cp,dens,visc,kvisc,cond,h), at least 3 rows\n\n**Required:**\nFalse. Automatically set to [[0]] if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"site_elevation", (getter)SystemDesign_get_site_elevation,(setter)SystemDesign_set_site_elevation,
-	PyDoc_STR("*float*: Site elevation [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Site elevation [m]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -341,11 +341,11 @@ HeatExchangerDesign_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef HeatExchangerDesign_methods[] = {
 		{"assign",            (PyCFunction)HeatExchangerDesign_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``HeatExchangerDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``HeatExchangerDesign_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)HeatExchangerDesign_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``HeatExchangerDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``HeatExchangerDesign_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)HeatExchangerDesign_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -687,88 +687,88 @@ HeatExchangerDesign_set_rel_tol(VarGroupObject *self, PyObject *value, void *clo
 
 static PyGetSetDef HeatExchangerDesign_getset[] = {
 {"HTR_HP_deltaP_des_in", (getter)HeatExchangerDesign_get_HTR_HP_deltaP_des_in,(setter)HeatExchangerDesign_set_HTR_HP_deltaP_des_in,
-	PyDoc_STR("*float*: HTR high pressure side pressure drop as fraction of inlet pressure [-]\n\n*Info*: High temperature recuperator"),
+	PyDoc_STR("*float*: HTR high pressure side pressure drop as fraction of inlet pressure [-]\n\n**Info:**\nHigh temperature recuperator"),
  	NULL},
 {"HTR_LP_deltaP_des_in", (getter)HeatExchangerDesign_get_HTR_LP_deltaP_des_in,(setter)HeatExchangerDesign_set_HTR_LP_deltaP_des_in,
-	PyDoc_STR("*float*: HTR low pressure side pressure drop as fraction of inlet pressure [-]\n\n*Info*: High temperature recuperator"),
+	PyDoc_STR("*float*: HTR low pressure side pressure drop as fraction of inlet pressure [-]\n\n**Info:**\nHigh temperature recuperator"),
  	NULL},
 {"HTR_UA_des_in", (getter)HeatExchangerDesign_get_HTR_UA_des_in,(setter)HeatExchangerDesign_set_HTR_UA_des_in,
-	PyDoc_STR("*float*: Design HTR conductance [kW/K]\n\n*Info*: High temperature recuperator\n\n*Required*: True if design_method=3"),
+	PyDoc_STR("*float*: Design HTR conductance [kW/K]\n\n**Info:**\nHigh temperature recuperator\n\n**Required:**\nRequired if design_method=3"),
  	NULL},
 {"HTR_design_code", (getter)HeatExchangerDesign_get_HTR_design_code,(setter)HeatExchangerDesign_set_HTR_design_code,
-	PyDoc_STR("*float*: 1 = UA, 2 = min dT, 3 = effectiveness [-]\n\n*Info*: High temperature recuperator\n\n*Required*: True if design_method=3"),
+	PyDoc_STR("*float*: 1 = UA, 2 = min dT, 3 = effectiveness [-]\n\n**Info:**\nHigh temperature recuperator\n\n**Required:**\nRequired if design_method=3"),
  	NULL},
 {"HTR_eff_des_in", (getter)HeatExchangerDesign_get_HTR_eff_des_in,(setter)HeatExchangerDesign_set_HTR_eff_des_in,
-	PyDoc_STR("*float*: Design effectiveness for HTR [-]\n\n*Info*: High temperature recuperator\n\n*Required*: True if design_method=3"),
+	PyDoc_STR("*float*: Design effectiveness for HTR [-]\n\n**Info:**\nHigh temperature recuperator\n\n**Required:**\nRequired if design_method=3"),
  	NULL},
 {"HTR_min_dT_des_in", (getter)HeatExchangerDesign_get_HTR_min_dT_des_in,(setter)HeatExchangerDesign_set_HTR_min_dT_des_in,
-	PyDoc_STR("*float*: Design minimum allowable temperature difference in HTR [C]\n\n*Info*: High temperature recuperator\n\n*Required*: True if design_method=3"),
+	PyDoc_STR("*float*: Design minimum allowable temperature difference in HTR [C]\n\n**Info:**\nHigh temperature recuperator\n\n**Required:**\nRequired if design_method=3"),
  	NULL},
 {"HTR_n_sub_hx", (getter)HeatExchangerDesign_get_HTR_n_sub_hx,(setter)HeatExchangerDesign_set_HTR_n_sub_hx,
-	PyDoc_STR("*float*: HTR number of model subsections [-]\n\n*Info*: High temperature recuperator\n\n*Required*: If not provided, assumed to be 10"),
+	PyDoc_STR("*float*: HTR number of model subsections [-]\n\n**Info:**\nHigh temperature recuperator\n\n**Required:**\nFalse. Automatically set to 10 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"HTR_od_model", (getter)HeatExchangerDesign_get_HTR_od_model,(setter)HeatExchangerDesign_set_HTR_od_model,
-	PyDoc_STR("*float*: 0: mass flow scale, 1: conductance ratio model [-]\n\n*Info*: High temperature recuperator\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: 0: mass flow scale, 1: conductance ratio model [-]\n\n**Info:**\nHigh temperature recuperator\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"HT_recup_eff_max", (getter)HeatExchangerDesign_get_HT_recup_eff_max,(setter)HeatExchangerDesign_set_HT_recup_eff_max,
-	PyDoc_STR("*float*: Maximum allowable effectiveness in HTR [-]\n\n*Info*: High temperature recuperator\n\n*Required*: If not provided, assumed to be 1.0"),
+	PyDoc_STR("*float*: Maximum allowable effectiveness in HTR [-]\n\n**Info:**\nHigh temperature recuperator\n\n**Required:**\nFalse. Automatically set to 1.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"LTR_HP_deltaP_des_in", (getter)HeatExchangerDesign_get_LTR_HP_deltaP_des_in,(setter)HeatExchangerDesign_set_LTR_HP_deltaP_des_in,
-	PyDoc_STR("*float*: LTR high pressure side pressure drop as fraction of inlet pressure [-]\n\n*Info*: Low temperature recuperator"),
+	PyDoc_STR("*float*: LTR high pressure side pressure drop as fraction of inlet pressure [-]\n\n**Info:**\nLow temperature recuperator"),
  	NULL},
 {"LTR_LP_deltaP_des_in", (getter)HeatExchangerDesign_get_LTR_LP_deltaP_des_in,(setter)HeatExchangerDesign_set_LTR_LP_deltaP_des_in,
-	PyDoc_STR("*float*: LTR low pressure side pressure drop as fraction of inlet pressure [-]\n\n*Info*: Low temperature recuperator"),
+	PyDoc_STR("*float*: LTR low pressure side pressure drop as fraction of inlet pressure [-]\n\n**Info:**\nLow temperature recuperator"),
  	NULL},
 {"LTR_UA_des_in", (getter)HeatExchangerDesign_get_LTR_UA_des_in,(setter)HeatExchangerDesign_set_LTR_UA_des_in,
-	PyDoc_STR("*float*: Design LTR conductance [kW/K]\n\n*Info*: Low temperature recuperator\n\n*Required*: True if design_method=3"),
+	PyDoc_STR("*float*: Design LTR conductance [kW/K]\n\n**Info:**\nLow temperature recuperator\n\n**Required:**\nRequired if design_method=3"),
  	NULL},
 {"LTR_design_code", (getter)HeatExchangerDesign_get_LTR_design_code,(setter)HeatExchangerDesign_set_LTR_design_code,
-	PyDoc_STR("*float*: 1 = UA, 2 = min dT, 3 = effectiveness [-]\n\n*Info*: Low temperature recuperator\n\n*Required*: True if design_method=3"),
+	PyDoc_STR("*float*: 1 = UA, 2 = min dT, 3 = effectiveness [-]\n\n**Info:**\nLow temperature recuperator\n\n**Required:**\nRequired if design_method=3"),
  	NULL},
 {"LTR_eff_des_in", (getter)HeatExchangerDesign_get_LTR_eff_des_in,(setter)HeatExchangerDesign_set_LTR_eff_des_in,
-	PyDoc_STR("*float*: Design effectiveness for LTR [-]\n\n*Info*: Low temperature recuperator\n\n*Required*: True if design_method=3"),
+	PyDoc_STR("*float*: Design effectiveness for LTR [-]\n\n**Info:**\nLow temperature recuperator\n\n**Required:**\nRequired if design_method=3"),
  	NULL},
 {"LTR_min_dT_des_in", (getter)HeatExchangerDesign_get_LTR_min_dT_des_in,(setter)HeatExchangerDesign_set_LTR_min_dT_des_in,
-	PyDoc_STR("*float*: Design minimum allowable temperature difference in LTR [C]\n\n*Info*: Low temperature recuperator\n\n*Required*: True if design_method=3"),
+	PyDoc_STR("*float*: Design minimum allowable temperature difference in LTR [C]\n\n**Info:**\nLow temperature recuperator\n\n**Required:**\nRequired if design_method=3"),
  	NULL},
 {"LTR_n_sub_hx", (getter)HeatExchangerDesign_get_LTR_n_sub_hx,(setter)HeatExchangerDesign_set_LTR_n_sub_hx,
-	PyDoc_STR("*float*: LTR number of model subsections [-]\n\n*Info*: Low temperature recuperator\n\n*Required*: If not provided, assumed to be 10"),
+	PyDoc_STR("*float*: LTR number of model subsections [-]\n\n**Info:**\nLow temperature recuperator\n\n**Required:**\nFalse. Automatically set to 10 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"LTR_od_model", (getter)HeatExchangerDesign_get_LTR_od_model,(setter)HeatExchangerDesign_set_LTR_od_model,
-	PyDoc_STR("*float*: 0: mass flow scale, 1: conductance ratio model [-]\n\n*Info*: Low temperature recuperator\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: 0: mass flow scale, 1: conductance ratio model [-]\n\n**Info:**\nLow temperature recuperator\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"LT_recup_eff_max", (getter)HeatExchangerDesign_get_LT_recup_eff_max,(setter)HeatExchangerDesign_set_LT_recup_eff_max,
-	PyDoc_STR("*float*: Maximum allowable effectiveness in LTR [-]\n\n*Info*: Low temperature recuperator\n\n*Required*: If not provided, assumed to be 1.0"),
+	PyDoc_STR("*float*: Maximum allowable effectiveness in LTR [-]\n\n**Info:**\nLow temperature recuperator\n\n**Required:**\nFalse. Automatically set to 1.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"UA_recup_tot_des", (getter)HeatExchangerDesign_get_UA_recup_tot_des,(setter)HeatExchangerDesign_set_UA_recup_tot_des,
-	PyDoc_STR("*float*: Total recuperator conductance [kW/K]\n\n*Info*: Combined recuperator design\n\n*Required*: True if design_method=2"),
+	PyDoc_STR("*float*: Total recuperator conductance [kW/K]\n\n**Info:**\nCombined recuperator design\n\n**Required:**\nRequired if design_method=2"),
  	NULL},
 {"cycle_config", (getter)HeatExchangerDesign_get_cycle_config,(setter)HeatExchangerDesign_set_cycle_config,
-	PyDoc_STR("*float*: 1 = recompression, 2 = partial cooling\n\n*Info*: High temperature recuperator\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: 1 = recompression, 2 = partial cooling\n\n**Info:**\nHigh temperature recuperator\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"des_objective", (getter)HeatExchangerDesign_get_des_objective,(setter)HeatExchangerDesign_set_des_objective,
-	PyDoc_STR("*float*: [2] = hit min phx deltat then max eta, [else] max eta\n\n*Info*: High temperature recuperator\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: [2] = hit min phx deltat then max eta, [else] max eta\n\n**Info:**\nHigh temperature recuperator\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"is_IP_fixed", (getter)HeatExchangerDesign_get_is_IP_fixed,(setter)HeatExchangerDesign_set_is_IP_fixed,
-	PyDoc_STR("*float*: partial cooling config: 0 = No, >0 = fixed HP-IP pressure ratio at input, <0 = fixed IP at abs(input)\n\n*Info*: High temperature recuperator\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: partial cooling config: 0 = No, >0 = fixed HP-IP pressure ratio at input, <0 = fixed IP at abs(input)\n\n**Info:**\nHigh temperature recuperator\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"is_PR_fixed", (getter)HeatExchangerDesign_get_is_PR_fixed,(setter)HeatExchangerDesign_set_is_PR_fixed,
-	PyDoc_STR("*float*: 0 = No, >0 = fixed pressure ratio at input <0 = fixed LP at abs(input) [High temperature recuperator]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: 0 = No, >0 = fixed pressure ratio at input <0 = fixed LP at abs(input) [High temperature recuperator]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"is_P_high_fixed", (getter)HeatExchangerDesign_get_is_P_high_fixed,(setter)HeatExchangerDesign_set_is_P_high_fixed,
-	PyDoc_STR("*float*: 1 = Yes (=P_high_limit), 0 = No, optimized (default)\n\n*Info*: High temperature recuperator\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: 1 = Yes (=P_high_limit), 0 = No, optimized (default)\n\n**Info:**\nHigh temperature recuperator\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"is_recomp_ok", (getter)HeatExchangerDesign_get_is_recomp_ok,(setter)HeatExchangerDesign_set_is_recomp_ok,
-	PyDoc_STR("*float*: 1 = Yes, 0 = simple cycle only, < 0 = fix f_recomp to abs(input)\n\n*Info*: High temperature recuperator\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: 1 = Yes, 0 = simple cycle only, < 0 = fix f_recomp to abs(input)\n\n**Info:**\nHigh temperature recuperator\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"min_phx_deltaT", (getter)HeatExchangerDesign_get_min_phx_deltaT,(setter)HeatExchangerDesign_set_min_phx_deltaT,
-	PyDoc_STR("*float*: Minimum design temperature difference across PHX [C]\n\n*Info*: High temperature recuperator\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Minimum design temperature difference across PHX [C]\n\n**Info:**\nHigh temperature recuperator\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"od_rel_tol", (getter)HeatExchangerDesign_get_od_rel_tol,(setter)HeatExchangerDesign_set_od_rel_tol,
-	PyDoc_STR("*float*: Baseline off-design relative convergence tolerance exponent (10^-od_rel_tol) [-]\n\n*Info*: High temperature recuperator\n\n*Required*: If not provided, assumed to be 3"),
+	PyDoc_STR("*float*: Baseline off-design relative convergence tolerance exponent (10^-od_rel_tol) [-]\n\n**Info:**\nHigh temperature recuperator\n\n**Required:**\nFalse. Automatically set to 3 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"rel_tol", (getter)HeatExchangerDesign_get_rel_tol,(setter)HeatExchangerDesign_set_rel_tol,
-	PyDoc_STR("*float*: Baseline solver and optimization relative tolerance exponent (10^-rel_tol) [-]\n\n*Info*: High temperature recuperator\n\n*Required*: If not provided, assumed to be 3"),
+	PyDoc_STR("*float*: Baseline solver and optimization relative tolerance exponent (10^-rel_tol) [-]\n\n**Info:**\nHigh temperature recuperator\n\n**Required:**\nFalse. Automatically set to 3 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -883,11 +883,11 @@ Common_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Common_methods[] = {
 		{"assign",            (PyCFunction)Common_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Common_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Common_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Common_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Common_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Common_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Common_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1100,28 +1100,28 @@ static PyGetSetDef Common_getset[] = {
 	PyDoc_STR("*float*: PHX co2 side pressure drop as fraction of inlet pressure [-]"),
  	NULL},
 {"P_high_limit", (getter)Common_get_P_high_limit,(setter)Common_set_P_high_limit,
-	PyDoc_STR("*float*: High pressure limit in cycle [MPa]\n\n*Required*: True"),
+	PyDoc_STR("*float*: High pressure limit in cycle [MPa]\n\n**Required:**\nTrue"),
  	NULL},
 {"deltaP_counterHX_frac", (getter)Common_get_deltaP_counterHX_frac,(setter)Common_set_deltaP_counterHX_frac,
-	PyDoc_STR("*float*: Fraction of CO2 inlet pressure that is design point counterflow HX (recups & PHX) pressure drop [-]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Fraction of CO2 inlet pressure that is design point counterflow HX (recups & PHX) pressure drop [-]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"eta_isen_mc", (getter)Common_get_eta_isen_mc,(setter)Common_set_eta_isen_mc,
-	PyDoc_STR("*float*: Design main compressor isentropic efficiency [-]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Design main compressor isentropic efficiency [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"eta_isen_pc", (getter)Common_get_eta_isen_pc,(setter)Common_set_eta_isen_pc,
-	PyDoc_STR("*float*: Design precompressor isentropic efficiency [-]\n\n*Required*: True if cycle_config=2"),
+	PyDoc_STR("*float*: Design precompressor isentropic efficiency [-]\n\n**Required:**\nRequired if cycle_config=2"),
  	NULL},
 {"eta_isen_rc", (getter)Common_get_eta_isen_rc,(setter)Common_set_eta_isen_rc,
-	PyDoc_STR("*float*: Design re-compressor isentropic efficiency [-]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Design re-compressor isentropic efficiency [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"eta_isen_t", (getter)Common_get_eta_isen_t,(setter)Common_set_eta_isen_t,
-	PyDoc_STR("*float*: Design turbine isentropic efficiency [-]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Design turbine isentropic efficiency [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"is_gen_od_polynomials", (getter)Common_get_is_gen_od_polynomials,(setter)Common_set_is_gen_od_polynomials,
-	PyDoc_STR("*float*: Generate off-design polynomials for Generic CSP models? 1 = Yes, 0 = No\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Generate off-design polynomials for Generic CSP models? 1 = Yes, 0 = No\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"mc_comp_type", (getter)Common_get_mc_comp_type,(setter)Common_set_mc_comp_type,
-	PyDoc_STR("*float*: Main compressor compressor type 1: SNL 2: CompA [-]\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Main compressor compressor type 1: SNL 2: CompA [-]\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"od_P_mc_in_sweep", (getter)Common_get_od_P_mc_in_sweep,(setter)Common_set_od_P_mc_in_sweep,
 	PyDoc_STR("*sequence*: Columns: 0) T_htf_C, 1) m_dot_htf_ND, 2) T_amb_C, 3) T_mc_in_C, 4) T_pc_in_C, 5) f_N_rc (=1 use design, <0, frac_des = abs(input), 6) f_N_mc (=1 use design, <0, frac_des = abs(input), 7) f_N_pc (=1 use design, =0 optimize, <0, frac_des = abs(input)), 8) PHX_f_dP (=1 use design, <0 = abs(input)"),
@@ -1130,19 +1130,19 @@ static PyGetSetDef Common_getset[] = {
 	PyDoc_STR("*sequence*: Columns: 0) T_htf_C, 1) m_dot_htf_ND, 2) T_amb_C,3) f_N_rc (=1 use design, <0, frac_des = abs(input),4) f_N_mc (=1 use design, <0, frac_des = abs(input),5) f_N_pc (=1 use design, <0, frac_des = abs(input),6) PHX_f_dP (=1 use design, <0 = abs(input)"),
  	NULL},
 {"od_T_t_in_mode", (getter)Common_get_od_T_t_in_mode,(setter)Common_set_od_T_t_in_mode,
-	PyDoc_STR("*float*: 0: model solves co2/HTF PHX od model to calculate turbine inlet temp, 1: model sets turbine inlet temp to HTF hot temp\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: 0: model solves co2/HTF PHX od model to calculate turbine inlet temp, 1: model sets turbine inlet temp to HTF hot temp\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"od_cases", (getter)Common_get_od_cases,(setter)Common_set_od_cases,
 	PyDoc_STR("*sequence[sequence]*: Columns: 0) T_htf_C, 1) m_dot_htf_ND, 2) T_amb_C, 3) f_N_rc (=1 use design, =0 optimize, <0, frac_des = abs(input)), 4) f_N_mc (=1 use design, =0 optimize, <0, frac_des = abs(input)), 5) f_N_pc (=1 use design, =0 optimize, <0, frac_des = abs(input)), 6) PHX_f_dP (=1 use design, <0 = abs(input), Rows: cases"),
  	NULL},
 {"od_generate_udpc", (getter)Common_get_od_generate_udpc,(setter)Common_set_od_generate_udpc,
-	PyDoc_STR("*sequence*: True/False, f_N_rc (=1 use design, =0 optimize, <0, frac_des = abs(input), f_N_mc (=1 use design, =0 optimize, <0, frac_des = abs(input), PHX_f_dP (=1 use design, <0 = abs(input)"),
+	PyDoc_STR("*sequence*: Columns 0) True/False,1) f_N_rc (=1 use design, =0 optimize, <0, frac_des = abs(input),2) f_N_mc (=1 use design, =0 optimize, <0, frac_des = abs(input),3) PHX_f_dP (=1 use design, <0 = abs(input)"),
  	NULL},
 {"od_max_htf_m_dot", (getter)Common_get_od_max_htf_m_dot,(setter)Common_set_od_max_htf_m_dot,
-	PyDoc_STR("*sequence[sequence]*: Columns: T_htf_C, T_amb_C, f_N_rc (=1 use design, <0, frac_des = abs(input), f_N_mc (=1 use design, <0, frac_des = abs(input), PHX_f_dP (=1 use design, <0 = abs(input), Rows: cases"),
+	PyDoc_STR("*sequence[sequence]*: Columns: 0) T_htf_C, 1) T_amb_C,2) f_N_rc (=1 use design, <0, frac_des = abs(input),3) f_N_mc (=1 use design, <0, frac_des = abs(input),4) PHX_f_dP (=1 use design, <0 = abs(input), Rows: cases"),
  	NULL},
 {"od_opt_objective", (getter)Common_get_od_opt_objective,(setter)Common_set_od_opt_objective,
-	PyDoc_STR("*float*: 0: find P_LP_in to achieve target power, optimize efficiency 1: find P_LP_in to achieve T_HTF_cold, optimize efficiency\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: 0: find P_LP_in to achieve target power, optimize efficiency 1: find P_LP_in to achieve T_HTF_cold, optimize efficiency\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"od_set_control", (getter)Common_get_od_set_control,(setter)Common_set_od_set_control,
 	PyDoc_STR("*sequence[sequence]*: Columns: 0) T_htf_C, 1) m_dot_htf_ND, 2) T_amb_C, 3) P_LP_in_MPa, 4) T_mc_in_C, 5) T_pc_in_C, 6) f_N_rc (=1 use design, <0, frac_des = abs(input), 7) f_N_mc (=1 use design, <0, frac_des = abs(input), 8) f_N_pc (=1 use design, =0 optimize, <0, frac_des = abs(input)), 9) PHX_f_dP (=1 use design, <0 = abs(input), Rows: cases"),
@@ -1260,11 +1260,11 @@ PHXDesign_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef PHXDesign_methods[] = {
 		{"assign",            (PyCFunction)PHXDesign_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``PHXDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``PHXDesign_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)PHXDesign_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``PHXDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``PHXDesign_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)PHXDesign_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1306,13 +1306,13 @@ PHXDesign_set_dT_PHX_cold_approach(VarGroupObject *self, PyObject *value, void *
 
 static PyGetSetDef PHXDesign_getset[] = {
 {"PHX_n_sub_hx", (getter)PHXDesign_get_PHX_n_sub_hx,(setter)PHXDesign_set_PHX_n_sub_hx,
-	PyDoc_STR("*float*: Number of subsections in PHX model [-]\n\n*Required*: If not provided, assumed to be 10"),
+	PyDoc_STR("*float*: Number of subsections in PHX model [-]\n\n**Required:**\nFalse. Automatically set to 10 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"PHX_od_model", (getter)PHXDesign_get_PHX_od_model,(setter)PHXDesign_set_PHX_od_model,
-	PyDoc_STR("*float*: 0: mass flow scale, 1: conductance ratio model [-]\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: 0: mass flow scale, 1: conductance ratio model [-]\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"dT_PHX_cold_approach", (getter)PHXDesign_get_dT_PHX_cold_approach,(setter)PHXDesign_set_dT_PHX_cold_approach,
-	PyDoc_STR("*float*: Temp diff btw cold HTF and cold CO2 [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Temp diff btw cold HTF and cold CO2 [C]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1427,11 +1427,11 @@ AirCoolerDesign_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef AirCoolerDesign_methods[] = {
 		{"assign",            (PyCFunction)AirCoolerDesign_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``AirCoolerDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``AirCoolerDesign_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)AirCoolerDesign_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``AirCoolerDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``AirCoolerDesign_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)AirCoolerDesign_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1497,19 +1497,19 @@ AirCoolerDesign_set_is_design_air_cooler(VarGroupObject *self, PyObject *value, 
 
 static PyGetSetDef AirCoolerDesign_getset[] = {
 {"N_nodes_air_cooler_pass", (getter)AirCoolerDesign_get_N_nodes_air_cooler_pass,(setter)AirCoolerDesign_set_N_nodes_air_cooler_pass,
-	PyDoc_STR("*float*: Number of nodes in single air cooler pass\n\n*Required*: If not provided, assumed to be 10"),
+	PyDoc_STR("*float*: Number of nodes in single air cooler pass\n\n**Required:**\nFalse. Automatically set to 10 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"deltaP_cooler_frac", (getter)AirCoolerDesign_get_deltaP_cooler_frac,(setter)AirCoolerDesign_set_deltaP_cooler_frac,
-	PyDoc_STR("*float*: Fraction of CO2 inlet pressure that is design point cooler CO2 pressure drop\n\n*Required*: True"),
+	PyDoc_STR("*float*: Fraction of CO2 inlet pressure that is design point cooler CO2 pressure drop\n\n**Required:**\nTrue"),
  	NULL},
 {"eta_air_cooler_fan", (getter)AirCoolerDesign_get_eta_air_cooler_fan,(setter)AirCoolerDesign_set_eta_air_cooler_fan,
-	PyDoc_STR("*float*: Air cooler fan isentropic efficiency\n\n*Required*: If not provided, assumed to be 0.5"),
+	PyDoc_STR("*float*: Air cooler fan isentropic efficiency\n\n**Required:**\nFalse. Automatically set to 0.5 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"fan_power_frac", (getter)AirCoolerDesign_get_fan_power_frac,(setter)AirCoolerDesign_set_fan_power_frac,
-	PyDoc_STR("*float*: Fraction of net cycle power consumed by air cooler fan\n\n*Required*: True"),
+	PyDoc_STR("*float*: Fraction of net cycle power consumed by air cooler fan\n\n**Required:**\nTrue"),
  	NULL},
 {"is_design_air_cooler", (getter)AirCoolerDesign_get_is_design_air_cooler,(setter)AirCoolerDesign_set_is_design_air_cooler,
-	PyDoc_STR("*float*: Defaults to True. False will skip air cooler calcs\n\n*Required*: If not provided, assumed to be 1.0"),
+	PyDoc_STR("*float*: Defaults to True. False will skip air cooler calcs\n\n**Required:**\nFalse. Automatically set to 1.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1624,11 +1624,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1693,9 +1693,15 @@ Outputs_get_HTR_UA_calculated(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_HTR_cost(VarGroupObject *self, void *closure)
+Outputs_get_HTR_cost_bare_erected(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_HTR_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_HTR_cost_bare_erected_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_HTR_cost_equipment(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_HTR_cost_equipment_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1759,9 +1765,15 @@ Outputs_get_LTR_UA_calculated(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_LTR_cost(VarGroupObject *self, void *closure)
+Outputs_get_LTR_cost_bare_erected(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_LTR_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_LTR_cost_bare_erected_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_LTR_cost_equipment(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_LTR_cost_equipment_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1801,9 +1813,21 @@ Outputs_get_PHX_co2_deltaP_des(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_PHX_cost(VarGroupObject *self, void *closure)
+Outputs_get_PHX_cost_bare_erected(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_PHX_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_PHX_cost_bare_erected_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_PHX_cost_equipment(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_PHX_cost_equipment_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_PHX_min_dT(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_PHX_min_dT_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2023,9 +2047,9 @@ Outputs_get_c_tot_W_dot_od(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_c_tot_cost(VarGroupObject *self, void *closure)
+Outputs_get_c_tot_cost_equip(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_c_tot_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_c_tot_cost_equip_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2047,9 +2071,15 @@ Outputs_get_cooler_tot_W_dot_fan_od(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_cooler_tot_cost(VarGroupObject *self, void *closure)
+Outputs_get_cooler_tot_cost_bare_erected(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_cooler_tot_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_cooler_tot_cost_bare_erected_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cooler_tot_cost_equipment(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_cooler_tot_cost_equipment_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2311,9 +2341,15 @@ Outputs_get_mc_cooler_co2_deltaP_od(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_mc_cooler_cost(VarGroupObject *self, void *closure)
+Outputs_get_mc_cooler_cost_bare_erected(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_mc_cooler_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_mc_cooler_cost_bare_erected_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mc_cooler_cost_equipment(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_mc_cooler_cost_equipment_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2353,9 +2389,15 @@ Outputs_get_mc_cooler_rho_in_od(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_mc_cost(VarGroupObject *self, void *closure)
+Outputs_get_mc_cost_bare_erected(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_mc_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_mc_cost_bare_erected_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mc_cost_equipment(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_mc_cost_equipment_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2563,9 +2605,15 @@ Outputs_get_pc_cooler_W_dot_fan_od(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_pc_cooler_cost(VarGroupObject *self, void *closure)
+Outputs_get_pc_cooler_cost_bare_erected(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_pc_cooler_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_pc_cooler_cost_bare_erected_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_pc_cooler_cost_equipment(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_pc_cooler_cost_equipment_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2581,9 +2629,15 @@ Outputs_get_pc_cooler_q_dot(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_pc_cost(VarGroupObject *self, void *closure)
+Outputs_get_pc_cost_bare_erected(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_pc_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_pc_cost_bare_erected_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_pc_cost_equipment(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_pc_cost_equipment_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2692,6 +2746,12 @@ static PyObject *
 Outputs_get_phx_eff_od(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_phx_eff_od_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_piping_inventory_etc_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_piping_inventory_etc_cost_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2809,9 +2869,15 @@ Outputs_get_rc_W_dot_od(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_rc_cost(VarGroupObject *self, void *closure)
+Outputs_get_rc_cost_bare_erected(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_rc_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_rc_cost_bare_erected_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_rc_cost_equipment(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_rc_cost_equipment_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2929,9 +2995,15 @@ Outputs_get_recup_total_UA_calculated(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_recup_total_cost(VarGroupObject *self, void *closure)
+Outputs_get_recup_total_cost_bare_erected(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_recup_total_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_recup_total_cost_bare_erected_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_recup_total_cost_equipment(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_recup_total_cost_equipment_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -3055,9 +3127,15 @@ Outputs_get_t_W_dot_od(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_t_cost(VarGroupObject *self, void *closure)
+Outputs_get_t_cost_bare_erected(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_t_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_t_cost_bare_erected_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_t_cost_equipment(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_t_cost_equipment_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -3181,8 +3259,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"HTR_UA_calculated", (getter)Outputs_get_HTR_UA_calculated,(setter)0,
 	PyDoc_STR("*float*: High temp recuperator UA calculated considering max eff and/or min temp diff parameter [MW/K]"),
  	NULL},
-{"HTR_cost", (getter)Outputs_get_HTR_cost,(setter)0,
-	PyDoc_STR("*float*: High temp recuperator cost [M$]"),
+{"HTR_cost_bare_erected", (getter)Outputs_get_HTR_cost_bare_erected,(setter)0,
+	PyDoc_STR("*float*: High temp recuperator cost equipment and install [M$]"),
+ 	NULL},
+{"HTR_cost_equipment", (getter)Outputs_get_HTR_cost_equipment,(setter)0,
+	PyDoc_STR("*float*: High temp recuperator cost equipment [M$]"),
  	NULL},
 {"HTR_min_dT", (getter)Outputs_get_HTR_min_dT,(setter)0,
 	PyDoc_STR("*float*: High temp recuperator min temperature difference [C]"),
@@ -3214,8 +3295,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"LTR_UA_calculated", (getter)Outputs_get_LTR_UA_calculated,(setter)0,
 	PyDoc_STR("*float*: Low temp recuperator UA calculated considering max eff and/or min temp diff parameter [MW/K]"),
  	NULL},
-{"LTR_cost", (getter)Outputs_get_LTR_cost,(setter)0,
-	PyDoc_STR("*float*: Low temp recuperator cost [M$]"),
+{"LTR_cost_bare_erected", (getter)Outputs_get_LTR_cost_bare_erected,(setter)0,
+	PyDoc_STR("*float*: Low temp recuperator cost equipment and install [M$]"),
+ 	NULL},
+{"LTR_cost_equipment", (getter)Outputs_get_LTR_cost_equipment,(setter)0,
+	PyDoc_STR("*float*: Low temp recuperator cost equipment [M$]"),
  	NULL},
 {"LTR_min_dT", (getter)Outputs_get_LTR_min_dT,(setter)0,
 	PyDoc_STR("*float*: Low temp recuperator min temperature difference [C]"),
@@ -3235,8 +3319,14 @@ static PyGetSetDef Outputs_getset[] = {
 {"PHX_co2_deltaP_des", (getter)Outputs_get_PHX_co2_deltaP_des,(setter)0,
 	PyDoc_STR("*float*: PHX co2 side design pressure drop [-]"),
  	NULL},
-{"PHX_cost", (getter)Outputs_get_PHX_cost,(setter)0,
-	PyDoc_STR("*float*: PHX cost [M$]"),
+{"PHX_cost_bare_erected", (getter)Outputs_get_PHX_cost_bare_erected,(setter)0,
+	PyDoc_STR("*float*: PHX cost equipment and install [M$]"),
+ 	NULL},
+{"PHX_cost_equipment", (getter)Outputs_get_PHX_cost_equipment,(setter)0,
+	PyDoc_STR("*float*: PHX cost equipment [M$]"),
+ 	NULL},
+{"PHX_min_dT", (getter)Outputs_get_PHX_min_dT,(setter)0,
+	PyDoc_STR("*float*: PHX min temperature difference [C]"),
  	NULL},
 {"P_co2_PHX_in", (getter)Outputs_get_P_co2_PHX_in,(setter)0,
 	PyDoc_STR("*float*: CO2 pressure at PHX inlet [MPa]"),
@@ -3346,7 +3436,7 @@ static PyGetSetDef Outputs_getset[] = {
 {"c_tot_W_dot_od", (getter)Outputs_get_c_tot_W_dot_od,(setter)0,
 	PyDoc_STR("*sequence*: Compressor total off-design power [MWe]"),
  	NULL},
-{"c_tot_cost", (getter)Outputs_get_c_tot_cost,(setter)0,
+{"c_tot_cost_equip", (getter)Outputs_get_c_tot_cost_equip,(setter)0,
 	PyDoc_STR("*float*: Compressor total cost [M$]"),
  	NULL},
 {"cooler_tot_UA", (getter)Outputs_get_cooler_tot_UA,(setter)0,
@@ -3358,17 +3448,20 @@ static PyGetSetDef Outputs_getset[] = {
 {"cooler_tot_W_dot_fan_od", (getter)Outputs_get_cooler_tot_W_dot_fan_od,(setter)0,
 	PyDoc_STR("*sequence*: Intermediate pressure cooler fan power [MWe]"),
  	NULL},
-{"cooler_tot_cost", (getter)Outputs_get_cooler_tot_cost,(setter)0,
-	PyDoc_STR("*float*: Total cooler cost [M$]"),
+{"cooler_tot_cost_bare_erected", (getter)Outputs_get_cooler_tot_cost_bare_erected,(setter)0,
+	PyDoc_STR("*float*: Total cooler cost equipment and install [M$]"),
+ 	NULL},
+{"cooler_tot_cost_equipment", (getter)Outputs_get_cooler_tot_cost_equipment,(setter)0,
+	PyDoc_STR("*float*: Total cooler cost equipment [M$]"),
  	NULL},
 {"cycle_cost", (getter)Outputs_get_cycle_cost,(setter)0,
-	PyDoc_STR("*float*: Cycle cost [M$]"),
+	PyDoc_STR("*float*: Cycle cost bare erected [M$]"),
  	NULL},
 {"cycle_spec_cost", (getter)Outputs_get_cycle_spec_cost,(setter)0,
-	PyDoc_STR("*float*: Cycle specific cost [$/kWe]"),
+	PyDoc_STR("*float*: Cycle specific cost bare erected [$/kWe]"),
  	NULL},
 {"cycle_spec_cost_thermal", (getter)Outputs_get_cycle_spec_cost_thermal,(setter)0,
-	PyDoc_STR("*float*: Cycle specific cost - thermal [$/kWt]"),
+	PyDoc_STR("*float*: Cycle specific (thermal) cost bare erected [$/kWt]"),
  	NULL},
 {"deltaT_HTF_PHX", (getter)Outputs_get_deltaT_HTF_PHX,(setter)0,
 	PyDoc_STR("*float*: HTF temp difference across PHX [C]"),
@@ -3490,8 +3583,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"mc_cooler_co2_deltaP_od", (getter)Outputs_get_mc_cooler_co2_deltaP_od,(setter)0,
 	PyDoc_STR("*sequence*: Off-design Off-design low pressure cooler co2 side pressure drop [-]"),
  	NULL},
-{"mc_cooler_cost", (getter)Outputs_get_mc_cooler_cost,(setter)0,
-	PyDoc_STR("*float*: Low pressure cooler cost [M$]"),
+{"mc_cooler_cost_bare_erected", (getter)Outputs_get_mc_cooler_cost_bare_erected,(setter)0,
+	PyDoc_STR("*float*: Low pressure cooler cost equipment and install [M$]"),
+ 	NULL},
+{"mc_cooler_cost_equipment", (getter)Outputs_get_mc_cooler_cost_equipment,(setter)0,
+	PyDoc_STR("*float*: Low pressure cooler cost equipment [M$]"),
  	NULL},
 {"mc_cooler_in_isen_deltah_to_P_mc_out", (getter)Outputs_get_mc_cooler_in_isen_deltah_to_P_mc_out,(setter)0,
 	PyDoc_STR("*float*: Low pressure cross flow cooler inlet isen enthalpy rise to mc outlet pressure [kJ/kg]"),
@@ -3511,8 +3607,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"mc_cooler_rho_in_od", (getter)Outputs_get_mc_cooler_rho_in_od,(setter)0,
 	PyDoc_STR("*sequence*: Off-design Low pressure cooler inlet density [kg/m3]"),
  	NULL},
-{"mc_cost", (getter)Outputs_get_mc_cost,(setter)0,
-	PyDoc_STR("*float*: Compressor cost [M$]"),
+{"mc_cost_bare_erected", (getter)Outputs_get_mc_cost_bare_erected,(setter)0,
+	PyDoc_STR("*float*: Compressor cost equipment plus install [M$]"),
+ 	NULL},
+{"mc_cost_equipment", (getter)Outputs_get_mc_cost_equipment,(setter)0,
+	PyDoc_STR("*float*: Compressor cost equipment [M$]"),
  	NULL},
 {"mc_eta_od", (getter)Outputs_get_mc_eta_od,(setter)0,
 	PyDoc_STR("*sequence*: Off-design main compressor overall isentropic efficiency"),
@@ -3616,8 +3715,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"pc_cooler_W_dot_fan_od", (getter)Outputs_get_pc_cooler_W_dot_fan_od,(setter)0,
 	PyDoc_STR("*sequence*: Off-design Intermediate pressure cooler fan power [MWe]"),
  	NULL},
-{"pc_cooler_cost", (getter)Outputs_get_pc_cooler_cost,(setter)0,
-	PyDoc_STR("*float*: Intermediate pressure cooler cost [M$]"),
+{"pc_cooler_cost_bare_erected", (getter)Outputs_get_pc_cooler_cost_bare_erected,(setter)0,
+	PyDoc_STR("*float*: Intermediate pressure cooler cost equipment and install [M$]"),
+ 	NULL},
+{"pc_cooler_cost_equipment", (getter)Outputs_get_pc_cooler_cost_equipment,(setter)0,
+	PyDoc_STR("*float*: Intermediate pressure cooler cost equipment [M$]"),
  	NULL},
 {"pc_cooler_m_dot_co2", (getter)Outputs_get_pc_cooler_m_dot_co2,(setter)0,
 	PyDoc_STR("*float*: Intermediate pressure cross flow cooler CO2 mass flow rate [kg/s]"),
@@ -3625,8 +3727,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"pc_cooler_q_dot", (getter)Outputs_get_pc_cooler_q_dot,(setter)0,
 	PyDoc_STR("*float*: Intermediate pressure cooler heat transfer [MWt]"),
  	NULL},
-{"pc_cost", (getter)Outputs_get_pc_cost,(setter)0,
-	PyDoc_STR("*float*: Precompressor cost [M$]"),
+{"pc_cost_bare_erected", (getter)Outputs_get_pc_cost_bare_erected,(setter)0,
+	PyDoc_STR("*float*: Precompressor cost equipment plus install [M$]"),
+ 	NULL},
+{"pc_cost_equipment", (getter)Outputs_get_pc_cost_equipment,(setter)0,
+	PyDoc_STR("*float*: Precompressor cost equipment [M$]"),
  	NULL},
 {"pc_eta_od", (getter)Outputs_get_pc_eta_od,(setter)0,
 	PyDoc_STR("*sequence*: Off-design precompressor overal isentropic efficiency"),
@@ -3681,6 +3786,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"phx_eff_od", (getter)Outputs_get_phx_eff_od,(setter)0,
 	PyDoc_STR("*sequence*: Off-design PHX effectiveness [-]"),
+ 	NULL},
+{"piping_inventory_etc_cost", (getter)Outputs_get_piping_inventory_etc_cost,(setter)0,
+	PyDoc_STR("*float*: Cost of remaining cycle equipment on BEC basis [M$]"),
  	NULL},
 {"q_dot_HTR", (getter)Outputs_get_q_dot_HTR,(setter)0,
 	PyDoc_STR("*float*: High temp recuperator heat transfer [MWt]"),
@@ -3739,8 +3847,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"rc_W_dot_od", (getter)Outputs_get_rc_W_dot_od,(setter)0,
 	PyDoc_STR("*sequence*: Off-design recompressor power [MWe]"),
  	NULL},
-{"rc_cost", (getter)Outputs_get_rc_cost,(setter)0,
-	PyDoc_STR("*float*: Recompressor cost [M$]"),
+{"rc_cost_bare_erected", (getter)Outputs_get_rc_cost_bare_erected,(setter)0,
+	PyDoc_STR("*float*: Recompressor cost equipment plus install [M$]"),
+ 	NULL},
+{"rc_cost_equipment", (getter)Outputs_get_rc_cost_equipment,(setter)0,
+	PyDoc_STR("*float*: Recompressor cost equipment [M$]"),
  	NULL},
 {"rc_eta_od", (getter)Outputs_get_rc_eta_od,(setter)0,
 	PyDoc_STR("*sequence*: Off-design recompressor overal isentropic efficiency"),
@@ -3799,8 +3910,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"recup_total_UA_calculated", (getter)Outputs_get_recup_total_UA_calculated,(setter)0,
 	PyDoc_STR("*float*: Total recuperator UA calculated considering max eff and/or min temp diff parameter [MW/K]"),
  	NULL},
-{"recup_total_cost", (getter)Outputs_get_recup_total_cost,(setter)0,
-	PyDoc_STR("*float*: Total recuperator cost [M$]"),
+{"recup_total_cost_bare_erected", (getter)Outputs_get_recup_total_cost_bare_erected,(setter)0,
+	PyDoc_STR("*float*: Total recuperator cost bare erected [M$]"),
+ 	NULL},
+{"recup_total_cost_equipment", (getter)Outputs_get_recup_total_cost_equipment,(setter)0,
+	PyDoc_STR("*float*: Total recuperator cost equipment [M$]"),
  	NULL},
 {"s_HTR_HP_data", (getter)Outputs_get_s_HTR_HP_data,(setter)0,
 	PyDoc_STR("*sequence*: Entropy points along HTR HP stream [kJ/kg-K]"),
@@ -3862,8 +3976,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"t_W_dot_od", (getter)Outputs_get_t_W_dot_od,(setter)0,
 	PyDoc_STR("*sequence*: Off-design turbine power [MWe]"),
  	NULL},
-{"t_cost", (getter)Outputs_get_t_cost,(setter)0,
-	PyDoc_STR("*float*: Tubine cost [M$]"),
+{"t_cost_bare_erected", (getter)Outputs_get_t_cost_bare_erected,(setter)0,
+	PyDoc_STR("*float*: Tubine cost - equipment plus install [M$]"),
+ 	NULL},
+{"t_cost_equipment", (getter)Outputs_get_t_cost_equipment,(setter)0,
+	PyDoc_STR("*float*: Tubine cost - equipment [M$]"),
  	NULL},
 {"t_delta_h_isen_des", (getter)Outputs_get_t_delta_h_isen_des,(setter)0,
 	PyDoc_STR("*float*: Turbine isentropic specific work [kJ/kg]"),
@@ -4017,6 +4134,14 @@ Sco2CspSystem_dealloc(CmodObject *self)
 
 
 static PyObject *
+Sco2CspSystem_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Sco2CspSystem_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -4093,6 +4218,8 @@ static PyMethodDef Sco2CspSystem_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Sco2CspSystem_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Sco2CspSystem_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -4251,12 +4378,11 @@ static PyMethodDef Sco2CspSystemModule_methods[] = {
 		{"new",             Sco2CspSystem_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Sco2CspSystem")},
 		{"default",             Sco2CspSystem_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Sco2CspSystem\n\nUse default attributes\n"
-				"None")},
+				PyDoc_STR("default(config) -> Sco2CspSystem\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Sco2CspSystem_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Sco2CspSystem\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Sco2CspSystem\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Sco2CspSystem_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Sco2CspSystem\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Sco2CspSystem\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

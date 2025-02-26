@@ -8,7 +8,7 @@ Additional financial models, inputs, and outputs can be found at:
 * PV: https://nrel-pysam.readthedocs.io/en/master/modules/Pvsamv1.html
 * Battery: https://nrel-pysam.readthedocs.io/en/master/modules/Battery.html
 
-Most recently tested against PySAM 2.2.3
+Most recently tested against PySAM 6.0.0
 
 @author: brtietz
 """
@@ -16,8 +16,12 @@ Most recently tested against PySAM 2.2.3
 import PySAM.Battery as battery_model
 import PySAM.Pvsamv1 as pvsam
 from PySAM.PySSC import *
+from pathlib import Path
 
-weather_file = sys.argv[1]  # .csv weather file with tmy format
+if len(sys.argv) > 1:
+    weather_file = sys.argv[1]  # .csv weather file with tmy format
+else:
+    weather_file = str(Path(__file__).parent.parent / "tests" / "blythe_ca_33.617773_-114.588261_nasa_60_tmy.csv")
 
 analysis_period = 1  # years
 days_in_year = 365
@@ -25,10 +29,11 @@ days_in_year = 365
 # Create the detailed residential pv model using PySAM's defaults
 system_model = pvsam.default("FlatPlatePVResidential")
 # Create the battery model based on the PV defaults
-battery = battery_model.from_existing(system_model, "GenericBatteryResidential")
+battery = battery_model.from_existing(system_model, "CustomGenerationBatteryResidential")
 
 # Default model does not include a weather file, so set that based on the command line path
 system_model.SolarResource.solar_resource_file = weather_file
+system_model.SolarResource.use_wf_albedo = 0
 
 # 24 hours of dispatch data, duplicated for each day. Would need to extend daily_dispatch for subhourly
 lifetime_dispatch = []

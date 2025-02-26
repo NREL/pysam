@@ -1,42 +1,3 @@
-class PVShadeLossDB(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	diffuse_irrad = tuple
-	global_poa_irrad = tuple
-	mods_per_string = tuple
-	pv_cell_temp = tuple
-	str_shade_fracs = tuple
-	str_vmp_stc = tuple
-	v_mppt_high = tuple
-	v_mppt_low = tuple
-
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	N = tuple
-	S = tuple
-	d = tuple
-	shade_loss = tuple
-	t = tuple
-
-
 class PvGetShadeLossMpp(object):
 	def assign(self, dict):
 		pass
@@ -53,14 +14,54 @@ class PvGetShadeLossMpp(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
 	def __init__(self, *args, **kwargs):
 		pass
 
-	PVShadeLossDB = PVShadeLossDB
-	Outputs = Outputs
+	class PVShadeLossDB(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		diffuse_irrad = tuple
+		global_poa_irrad = tuple
+		mods_per_string = tuple
+		pv_cell_temp = tuple
+		str_shade_fracs = tuple
+		str_vmp_stc = tuple
+		v_mppt_high = tuple
+		v_mppt_low = tuple
+
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		N = tuple
+		S = tuple
+		d = tuple
+		shade_loss = tuple
+		t = tuple
+
+
 
 
 def default(config) -> PvGetShadeLossMpp:

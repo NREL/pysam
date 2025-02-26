@@ -69,11 +69,11 @@ IEC61853_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef IEC61853_methods[] = {
 		{"assign",            (PyCFunction)IEC61853_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``IEC61853_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``IEC61853_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)IEC61853_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``IEC61853_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``IEC61853_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)IEC61853_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -103,10 +103,10 @@ IEC61853_set_param(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef IEC61853_getset[] = {
 {"input", (getter)IEC61853_get_input,(setter)IEC61853_set_input,
-	PyDoc_STR("*sequence[sequence]*: IEC-61853 matrix test data [various]\n\n*Info*: [IRR,TC,PMP,VMP,VOC,ISC]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: IEC-61853 matrix test data [various]\n\n**Info:**\n[IRR,TC,PMP,VMP,VOC,ISC]\n\n**Required:**\nTrue"),
  	NULL},
 {"param", (getter)IEC61853_get_param,(setter)IEC61853_set_param,
-	PyDoc_STR("*sequence[sequence]*: Parameter solution matrix\n\n*Info*: [IL,IO,RS,RSH,A]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Parameter solution matrix\n\n**Info:**\n[IL,IO,RS,RSH,A]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -221,11 +221,11 @@ SingleDiodeModel_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SingleDiodeModel_methods[] = {
 		{"assign",            (PyCFunction)SingleDiodeModel_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SingleDiodeModel_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SingleDiodeModel_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SingleDiodeModel_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SingleDiodeModel_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SingleDiodeModel_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SingleDiodeModel_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -255,10 +255,10 @@ SingleDiodeModel_set_T(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef SingleDiodeModel_getset[] = {
 {"I", (getter)SingleDiodeModel_get_I,(setter)SingleDiodeModel_set_I,
-	PyDoc_STR("*float*: Irradiance [W/m2]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Irradiance [W/m2]\n\n**Required:**\nTrue"),
  	NULL},
 {"T", (getter)SingleDiodeModel_get_T,(setter)SingleDiodeModel_set_T,
-	PyDoc_STR("*float*: Temperature [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -373,11 +373,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -522,6 +522,14 @@ Iec61853interp_dealloc(CmodObject *self)
 
 
 static PyObject *
+Iec61853interp_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Iec61853interp_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -598,6 +606,8 @@ static PyMethodDef Iec61853interp_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Iec61853interp_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Iec61853interp_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -756,12 +766,11 @@ static PyMethodDef Iec61853interpModule_methods[] = {
 		{"new",             Iec61853interp_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Iec61853interp")},
 		{"default",             Iec61853interp_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Iec61853interp\n\nUse default attributes\n"
-				"None")},
+				PyDoc_STR("default(config) -> Iec61853interp\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Iec61853interp_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Iec61853interp\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Iec61853interp\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Iec61853interp_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Iec61853interp\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Iec61853interp\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

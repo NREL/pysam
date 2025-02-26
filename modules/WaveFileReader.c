@@ -69,25 +69,13 @@ WeatherReader_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef WeatherReader_methods[] = {
 		{"assign",            (PyCFunction)WeatherReader_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``WeatherReader_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``WeatherReader_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)WeatherReader_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``WeatherReader_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``WeatherReader_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)WeatherReader_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
-
-static PyObject *
-WeatherReader_get_use_specific_wf_wave(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_WaveFileReader_WeatherReader_use_specific_wf_wave_nget, self->data_ptr);
-}
-
-static int
-WeatherReader_set_use_specific_wf_wave(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_WaveFileReader_WeatherReader_use_specific_wf_wave_nset, self->data_ptr);
-}
 
 static PyObject *
 WeatherReader_get_wave_resource_filename(VarGroupObject *self, void *closure)
@@ -126,17 +114,14 @@ WeatherReader_set_wave_resource_model_choice(VarGroupObject *self, PyObject *val
 }
 
 static PyGetSetDef WeatherReader_getset[] = {
-{"use_specific_wf_wave", (getter)WeatherReader_get_use_specific_wf_wave,(setter)WeatherReader_set_use_specific_wf_wave,
-	PyDoc_STR("*float*: user specified file [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
 {"wave_resource_filename", (getter)WeatherReader_get_wave_resource_filename,(setter)WeatherReader_set_wave_resource_filename,
-	PyDoc_STR("*str*: File path with Wave Height x Period Distribution as 2-D PDF\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True if wave_resource_model_choice=0"),
+	PyDoc_STR("*str*: File path with Wave Height x Period Distribution as 2-D PDF\n\n**Constraints:**\nLOCAL_FILE\n\n**Required:**\nRequired if wave_resource_model_choice=0"),
  	NULL},
 {"wave_resource_filename_ts", (getter)WeatherReader_get_wave_resource_filename_ts,(setter)WeatherReader_set_wave_resource_filename_ts,
-	PyDoc_STR("*str*: File path with 3-hour Wave Height and Period data as Time Series array\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True if wave_resource_model_choice=1"),
+	PyDoc_STR("*str*: File path with 3-hour Wave Height and Period data as Time Series array\n\n**Constraints:**\nLOCAL_FILE\n\n**Required:**\nRequired if wave_resource_model_choice=1"),
  	NULL},
 {"wave_resource_model_choice", (getter)WeatherReader_get_wave_resource_model_choice,(setter)WeatherReader_set_wave_resource_model_choice,
-	PyDoc_STR("*float*: Joint PDF or 3-hour wave resource data [0/1]\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Joint PDF or 3-hour wave resource data [0/1]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -251,11 +236,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -323,6 +308,12 @@ static PyObject *
 Outputs_get_location_id(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_WaveFileReader_Outputs_location_id_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_location_name(VarGroupObject *self, void *closure)
+{
+	return PySAM_string_getter(SAM_WaveFileReader_Outputs_location_name_sget, self->data_ptr);
 }
 
 static PyObject *
@@ -448,6 +439,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"location_id", (getter)Outputs_get_location_id,(setter)0,
 	PyDoc_STR("*float*: Location ID"),
+ 	NULL},
+{"location_name", (getter)Outputs_get_location_name,(setter)0,
+	PyDoc_STR("*str*: Location"),
  	NULL},
 {"lon", (getter)Outputs_get_lon,(setter)0,
 	PyDoc_STR("*float*: Longitude [deg]"),
@@ -585,6 +579,14 @@ WaveFileReader_dealloc(CmodObject *self)
 
 
 static PyObject *
+WaveFileReader_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 WaveFileReader_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -661,6 +663,8 @@ static PyMethodDef WaveFileReader_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)WaveFileReader_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)WaveFileReader_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -819,12 +823,11 @@ static PyMethodDef WaveFileReaderModule_methods[] = {
 		{"new",             WaveFileReader_new,         METH_VARARGS,
 				PyDoc_STR("new() -> WaveFileReader")},
 		{"default",             WaveFileReader_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> WaveFileReader\n\nUse default attributes\n"
-				"`config` options:\n\n- \"MEwaveLCOECalculator\"\n- \"MEwaveNone\"")},
+				PyDoc_STR("default(config) -> WaveFileReader\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"MEwaveBatterySingleOwner\"*\n\n		- *\"MEwaveLCOECalculator\"*\n\n		- *\"MEwaveNone\"*\n\n		- *\"MEwaveSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             WaveFileReader_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> WaveFileReader\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> WaveFileReader\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   WaveFileReader_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> WaveFileReader\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> WaveFileReader\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

@@ -69,11 +69,11 @@ SolarResource_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SolarResource_methods[] = {
 		{"assign",            (PyCFunction)SolarResource_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SolarResource_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SolarResource_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SolarResource_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SolarResource_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SolarResource_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SolarResource_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -103,10 +103,10 @@ SolarResource_set_solar_resource_file(VarGroupObject *self, PyObject *value, voi
 
 static PyGetSetDef SolarResource_getset[] = {
 {"solar_resource_data", (getter)SolarResource_get_solar_resource_data,(setter)SolarResource_set_solar_resource_data,
-	PyDoc_STR("*dict*: Weather data\n\n*Info*: dn,df,tdry,wspd,lat,lon,tz\n\n*Required*: False"),
+	PyDoc_STR("*dict*: Weather data\n\n**Info:**\ndn,df,tdry,wspd,lat,lon,tz\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"solar_resource_file", (getter)SolarResource_get_solar_resource_file,(setter)SolarResource_set_solar_resource_file,
-	PyDoc_STR("*str*: local weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: False"),
+	PyDoc_STR("*str*: local weather file path\n\n**Constraints:**\nLOCAL_FILE\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -221,11 +221,11 @@ SWH_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SWH_methods[] = {
 		{"assign",            (PyCFunction)SWH_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SWH_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SWH_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SWH_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SWH_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SWH_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SWH_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -554,54 +554,6 @@ SWH_set_scaled_draw(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-SWH_get_shading_azal(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Swh_SWH_shading_azal_mget, self->data_ptr);
-}
-
-static int
-SWH_set_shading_azal(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Swh_SWH_shading_azal_mset, self->data_ptr);
-}
-
-static PyObject *
-SWH_get_shading_diff(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Swh_SWH_shading_diff_nget, self->data_ptr);
-}
-
-static int
-SWH_set_shading_diff(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Swh_SWH_shading_diff_nset, self->data_ptr);
-}
-
-static PyObject *
-SWH_get_shading_mxh(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Swh_SWH_shading_mxh_mget, self->data_ptr);
-}
-
-static int
-SWH_set_shading_mxh(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Swh_SWH_shading_mxh_mset, self->data_ptr);
-}
-
-static PyObject *
-SWH_get_shading_timestep(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Swh_SWH_shading_timestep_mget, self->data_ptr);
-}
-
-static int
-SWH_set_shading_timestep(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Swh_SWH_shading_timestep_mset, self->data_ptr);
-}
-
-static PyObject *
 SWH_get_sky_model(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Swh_SWH_sky_model_nget, self->data_ptr);
@@ -699,121 +651,109 @@ SWH_set_use_custom_set(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef SWH_getset[] = {
 {"FRUL", (getter)SWH_get_FRUL,(setter)SWH_set_FRUL,
-	PyDoc_STR("*float*: FRUL\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n"),
+	PyDoc_STR("*float*: FRUL\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``FRUL``:\n\n\t - system_capacity\n"),
  	NULL},
 {"FRta", (getter)SWH_get_FRta,(setter)SWH_set_FRta,
-	PyDoc_STR("*float*: FRta\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n"),
+	PyDoc_STR("*float*: FRta\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``FRta``:\n\n\t - system_capacity\n"),
  	NULL},
 {"T_room", (getter)SWH_get_T_room,(setter)SWH_set_T_room,
-	PyDoc_STR("*float*: Temperature around solar tank [C]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Temperature around solar tank [C]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue"),
  	NULL},
 {"T_set", (getter)SWH_get_T_set,(setter)SWH_set_T_set,
-	PyDoc_STR("*float*: Set temperature [C]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Set temperature [C]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue"),
  	NULL},
 {"T_tank_max", (getter)SWH_get_T_tank_max,(setter)SWH_set_T_tank_max,
-	PyDoc_STR("*float*: Max temperature in solar tank [C]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Max temperature in solar tank [C]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue"),
  	NULL},
 {"U_tank", (getter)SWH_get_U_tank,(setter)SWH_set_U_tank,
-	PyDoc_STR("*float*: Solar tank heat loss coefficient [W/m2K]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Solar tank heat loss coefficient [W/m2K]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue"),
  	NULL},
 {"V_tank", (getter)SWH_get_V_tank,(setter)SWH_set_V_tank,
-	PyDoc_STR("*float*: Solar tank volume [m3]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Solar tank volume [m3]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue"),
  	NULL},
 {"albedo", (getter)SWH_get_albedo,(setter)SWH_set_albedo,
-	PyDoc_STR("*float*: Ground reflectance factor [0..1]\n\n*Constraints*: FACTOR\n\n*Required*: True"),
+	PyDoc_STR("*float*: Ground reflectance factor [0..1]\n\n**Constraints:**\nFACTOR\n\n**Required:**\nTrue"),
  	NULL},
 {"area_coll", (getter)SWH_get_area_coll,(setter)SWH_set_area_coll,
-	PyDoc_STR("*float*: Single collector area [m2]\n\n*Constraints*: POSITIVE\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Single collector area [m2]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``area_coll``:\n\n\t - system_capacity\n"),
  	NULL},
 {"azimuth", (getter)SWH_get_azimuth,(setter)SWH_set_azimuth,
-	PyDoc_STR("*float*: Collector azimuth [deg]\n\n*Options*: 90=E,180=S\n\n*Constraints*: MIN=0,MAX=360\n\n*Required*: True"),
+	PyDoc_STR("*float*: Collector azimuth [deg]\n\n**Options:**\n90=E,180=S\n\n**Constraints:**\nMIN=0,MAX=360\n\n**Required:**\nTrue"),
  	NULL},
 {"custom_mains", (getter)SWH_get_custom_mains,(setter)SWH_set_custom_mains,
-	PyDoc_STR("*sequence*: Custom mains [C]\n\n*Constraints*: LENGTH=8760\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Custom mains [C]\n\n**Constraints:**\nLENGTH=8760\n\n**Required:**\nTrue"),
  	NULL},
 {"custom_set", (getter)SWH_get_custom_set,(setter)SWH_set_custom_set,
-	PyDoc_STR("*sequence*: Custom set points [C]\n\n*Constraints*: LENGTH=8760\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Custom set points [C]\n\n**Constraints:**\nLENGTH=8760\n\n**Required:**\nTrue"),
  	NULL},
 {"fluid", (getter)SWH_get_fluid,(setter)SWH_set_fluid,
-	PyDoc_STR("*float*: Working fluid in system\n\n*Info*: Water,Glycol\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
+	PyDoc_STR("*float*: Working fluid in system\n\n**Info:**\nWater,Glycol\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nTrue"),
  	NULL},
 {"hx_eff", (getter)SWH_get_hx_eff,(setter)SWH_set_hx_eff,
-	PyDoc_STR("*float*: Heat exchanger effectiveness [0..1]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Heat exchanger effectiveness [0..1]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue"),
  	NULL},
 {"iam", (getter)SWH_get_iam,(setter)SWH_set_iam,
-	PyDoc_STR("*float*: Incidence angle modifier\n\n*Required*: True"),
+	PyDoc_STR("*float*: Incidence angle modifier\n\n**Required:**\nTrue"),
  	NULL},
 {"irrad_mode", (getter)SWH_get_irrad_mode,(setter)SWH_set_irrad_mode,
-	PyDoc_STR("*float*: Irradiance input mode [0/1/2]\n\n*Info*: Beam+Diff,Global+Beam,Global+Diff\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Irradiance input mode [0/1/2]\n\n**Info:**\nBeam+Diff,Global+Beam,Global+Diff\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"load", (getter)SWH_get_load,(setter)SWH_set_load,
 	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]"),
  	NULL},
 {"load_escalation", (getter)SWH_get_load_escalation,(setter)SWH_set_load_escalation,
-	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"mdot", (getter)SWH_get_mdot,(setter)SWH_set_mdot,
-	PyDoc_STR("*float*: Total system mass flow rate [kg/s]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Total system mass flow rate [kg/s]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue"),
  	NULL},
 {"ncoll", (getter)SWH_get_ncoll,(setter)SWH_set_ncoll,
-	PyDoc_STR("*float*: Number of collectors\n\n*Constraints*: POSITIVE,INTEGER\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Number of collectors\n\n**Constraints:**\nPOSITIVE,INTEGER\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``ncoll``:\n\n\t - system_capacity\n"),
  	NULL},
 {"pipe_diam", (getter)SWH_get_pipe_diam,(setter)SWH_set_pipe_diam,
-	PyDoc_STR("*float*: Pipe diameter [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Pipe diameter [m]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue"),
  	NULL},
 {"pipe_insul", (getter)SWH_get_pipe_insul,(setter)SWH_set_pipe_insul,
-	PyDoc_STR("*float*: Pipe insulation thickness [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Pipe insulation thickness [m]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue"),
  	NULL},
 {"pipe_k", (getter)SWH_get_pipe_k,(setter)SWH_set_pipe_k,
-	PyDoc_STR("*float*: Pipe insulation conductivity [W/m-C]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Pipe insulation conductivity [W/m-C]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue"),
  	NULL},
 {"pipe_length", (getter)SWH_get_pipe_length,(setter)SWH_set_pipe_length,
-	PyDoc_STR("*float*: Length of piping in system [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Length of piping in system [m]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue"),
  	NULL},
 {"pump_eff", (getter)SWH_get_pump_eff,(setter)SWH_set_pump_eff,
-	PyDoc_STR("*float*: Pumping efficiency [%]\n\n*Constraints*: PERCENT\n\n*Required*: True"),
+	PyDoc_STR("*float*: Pumping efficiency [%]\n\n**Constraints:**\nPERCENT\n\n**Required:**\nTrue"),
  	NULL},
 {"pump_power", (getter)SWH_get_pump_power,(setter)SWH_set_pump_power,
-	PyDoc_STR("*float*: Pump power [W]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Pump power [W]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue"),
  	NULL},
 {"scaled_draw", (getter)SWH_get_scaled_draw,(setter)SWH_set_scaled_draw,
-	PyDoc_STR("*sequence*: Hot water draw [kg/hr]\n\n*Constraints*: LENGTH=8760\n\n*Required*: True"),
- 	NULL},
-{"shading_azal", (getter)SWH_get_shading_azal,(setter)SWH_set_shading_azal,
-	PyDoc_STR("*sequence[sequence]*: Azimuth x altitude beam shading loss [%]\n\n*Required*: False"),
- 	NULL},
-{"shading_diff", (getter)SWH_get_shading_diff,(setter)SWH_set_shading_diff,
-	PyDoc_STR("*float*: Diffuse shading loss [%]\n\n*Required*: False"),
- 	NULL},
-{"shading_mxh", (getter)SWH_get_shading_mxh,(setter)SWH_set_shading_mxh,
-	PyDoc_STR("*sequence[sequence]*: Month x Hour beam shading loss [%]\n\n*Required*: False"),
- 	NULL},
-{"shading_timestep", (getter)SWH_get_shading_timestep,(setter)SWH_set_shading_timestep,
-	PyDoc_STR("*sequence[sequence]*: Time step beam shading loss [%]\n\n*Required*: False"),
+	PyDoc_STR("*sequence*: Hot water draw [kg/hr]\n\n**Constraints:**\nLENGTH=8760\n\n**Required:**\nTrue"),
  	NULL},
 {"sky_model", (getter)SWH_get_sky_model,(setter)SWH_set_sky_model,
-	PyDoc_STR("*float*: Tilted surface irradiance model [0/1/2]\n\n*Info*: Isotropic,HDKR,Perez\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Tilted surface irradiance model [0/1/2]\n\n**Info:**\nIsotropic,HDKR,Perez\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"system_capacity", (getter)SWH_get_system_capacity,(setter)SWH_set_system_capacity,
-	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - FRUL\n\t - FRta\n\t - area_coll\n\t - ncoll\n"),
+	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n**Required:**\nTrue\n\nThe value of ``system_capacity`` depends on the following variables:\n\n\t - FRUL\n\t - FRta\n\t - area_coll\n\t - ncoll\n"),
  	NULL},
 {"tank_h2d_ratio", (getter)SWH_get_tank_h2d_ratio,(setter)SWH_set_tank_h2d_ratio,
-	PyDoc_STR("*float*: Solar tank height to diameter ratio\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Solar tank height to diameter ratio\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue"),
  	NULL},
 {"test_flow", (getter)SWH_get_test_flow,(setter)SWH_set_test_flow,
-	PyDoc_STR("*float*: Flow rate used in collector test [kg/s]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Flow rate used in collector test [kg/s]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue"),
  	NULL},
 {"test_fluid", (getter)SWH_get_test_fluid,(setter)SWH_set_test_fluid,
-	PyDoc_STR("*float*: Fluid used in collector test\n\n*Info*: Water,Glycol\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
+	PyDoc_STR("*float*: Fluid used in collector test\n\n**Info:**\nWater,Glycol\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nTrue"),
  	NULL},
 {"tilt", (getter)SWH_get_tilt,(setter)SWH_set_tilt,
-	PyDoc_STR("*float*: Collector tilt [deg]\n\n*Constraints*: MIN=0,MAX=90\n\n*Required*: True"),
+	PyDoc_STR("*float*: Collector tilt [deg]\n\n**Constraints:**\nMIN=0,MAX=90\n\n**Required:**\nTrue"),
  	NULL},
 {"use_custom_mains", (getter)SWH_get_use_custom_mains,(setter)SWH_set_use_custom_mains,
-	PyDoc_STR("*float*: Use custom mains [%]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
+	PyDoc_STR("*float*: Use custom mains [%]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nTrue"),
  	NULL},
 {"use_custom_set", (getter)SWH_get_use_custom_set,(setter)SWH_set_use_custom_set,
-	PyDoc_STR("*float*: Use custom set points [%]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
+	PyDoc_STR("*float*: Use custom set points [%]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -852,6 +792,278 @@ static PyTypeObject SWH_Type = {
 		SWH_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		SWH_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * Shading Group
+ */ 
+
+static PyTypeObject Shading_Type;
+
+static PyObject *
+Shading_new(SAM_Swh data_ptr)
+{
+	PyObject* new_obj = Shading_Type.tp_alloc(&Shading_Type,0);
+
+	VarGroupObject* Shading_obj = (VarGroupObject*)new_obj;
+
+	Shading_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* Shading methods */
+
+static PyObject *
+Shading_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Swh", "Shading")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Shading_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Shading_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Swh", "Shading")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Shading_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Shading_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Shading_methods[] = {
+		{"assign",            (PyCFunction)Shading_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Shading_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Shading_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Shading_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Shading_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Shading_get_shading_azal(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Swh_Shading_shading_azal_mget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_azal(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Swh_Shading_shading_azal_mset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_diff(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Swh_Shading_shading_diff_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_diff(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Swh_Shading_shading_diff_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_en_azal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Swh_Shading_shading_en_azal_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_en_azal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Swh_Shading_shading_en_azal_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_en_diff(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Swh_Shading_shading_en_diff_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_en_diff(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Swh_Shading_shading_en_diff_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_en_mxh(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Swh_Shading_shading_en_mxh_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_en_mxh(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Swh_Shading_shading_en_mxh_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_en_string_option(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Swh_Shading_shading_en_string_option_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_en_string_option(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Swh_Shading_shading_en_string_option_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_en_timestep(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Swh_Shading_shading_en_timestep_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_en_timestep(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Swh_Shading_shading_en_timestep_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_mxh(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Swh_Shading_shading_mxh_mget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_mxh(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Swh_Shading_shading_mxh_mset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_string_option(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Swh_Shading_shading_string_option_nget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_string_option(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Swh_Shading_shading_string_option_nset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_shading_timestep(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Swh_Shading_shading_timestep_mget, self->data_ptr);
+}
+
+static int
+Shading_set_shading_timestep(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Swh_Shading_shading_timestep_mset, self->data_ptr);
+}
+
+static PyGetSetDef Shading_getset[] = {
+{"shading_azal", (getter)Shading_get_shading_azal,(setter)Shading_set_shading_azal,
+	PyDoc_STR("*sequence[sequence]*: Azimuth x altitude beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
+ 	NULL},
+{"shading_diff", (getter)Shading_get_shading_diff,(setter)Shading_set_shading_diff,
+	PyDoc_STR("*float*: Diffuse shading loss [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
+ 	NULL},
+{"shading_en_azal", (getter)Shading_get_shading_en_azal,(setter)Shading_set_shading_en_azal,
+	PyDoc_STR("*float*: Enable azimuth x altitude beam shading losses [0/1]\n\n**Options:**\n0=false,1=true\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"shading_en_diff", (getter)Shading_get_shading_en_diff,(setter)Shading_set_shading_en_diff,
+	PyDoc_STR("*float*: Enable diffuse shading loss [0/1]\n\n**Options:**\n0=false,1=true\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"shading_en_mxh", (getter)Shading_get_shading_en_mxh,(setter)Shading_set_shading_en_mxh,
+	PyDoc_STR("*float*: Enable month x Hour beam shading losses [0/1]\n\n**Options:**\n0=false,1=true\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"shading_en_string_option", (getter)Shading_get_shading_en_string_option,(setter)Shading_set_shading_en_string_option,
+	PyDoc_STR("*float*: Enable shading string option [0/1]\n\n**Options:**\n0=false,1=true\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"shading_en_timestep", (getter)Shading_get_shading_en_timestep,(setter)Shading_set_shading_en_timestep,
+	PyDoc_STR("*float*: Enable timestep beam shading losses [0/1]\n\n**Options:**\n0=false,1=true\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"shading_mxh", (getter)Shading_get_shading_mxh,(setter)Shading_set_shading_mxh,
+	PyDoc_STR("*sequence[sequence]*: Month x Hour beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
+ 	NULL},
+{"shading_string_option", (getter)Shading_get_shading_string_option,(setter)Shading_set_shading_string_option,
+	PyDoc_STR("*float*: Shading string option\n\n**Options:**\n0=shadingdb,1=average,2=maximum,3=minimum\n\n**Constraints:**\nINTEGER,MIN=-1,MAX=4\n\n**Required:**\nFalse. Automatically set to -1 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"shading_timestep", (getter)Shading_get_shading_timestep,(setter)Shading_set_shading_timestep,
+	PyDoc_STR("*sequence[sequence]*: Timestep beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Shading_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Swh.Shading",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Shading_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Shading_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -928,11 +1140,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1332,6 +1544,10 @@ newSwhObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "SWH", SWH_obj);
 	Py_DECREF(SWH_obj);
 
+	PyObject* Shading_obj = Shading_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Shading", Shading_obj);
+	Py_DECREF(Shading_obj);
+
 	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
@@ -1367,6 +1583,14 @@ Swh_dealloc(CmodObject *self)
 		PySAM_has_error(error);
 	}
 	PyObject_Del(self);
+}
+
+
+static PyObject *
+Swh_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
 }
 
 
@@ -1447,6 +1671,8 @@ static PyMethodDef Swh_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Swh_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Swh_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1605,12 +1831,11 @@ static PyMethodDef SwhModule_methods[] = {
 		{"new",             Swh_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Swh")},
 		{"default",             Swh_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Swh\n\nUse default attributes\n"
-				"`config` options:\n\n- \"SolarWaterHeatingCommercial\"\n- \"SolarWaterHeatingLCOECalculator\"\n- \"SolarWaterHeatingNone\"\n- \"SolarWaterHeatingResidential\"")},
+				PyDoc_STR("default(config) -> Swh\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"SolarWaterHeatingCommercial\"*\n\n		- *\"SolarWaterHeatingLCOECalculator\"*\n\n		- *\"SolarWaterHeatingNone\"*\n\n		- *\"SolarWaterHeatingResidential\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Swh_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Swh\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Swh\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Swh_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Swh\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Swh\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1629,25 +1854,6 @@ SwhModule_exec(PyObject *m)
 	Swh_Type.tp_dict = PyDict_New();
 	if (!Swh_Type.tp_dict) { goto fail; }
 
-	/// Add the AdjustmentFactors type object to Swh_Type
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-	if (!AdjustmentFactorsModule){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
-	}
-
-	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
-	if (!AdjustmentFactors_Type){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
-	}
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Swh_Type.tp_dict,
-						 "AdjustmentFactors",
-						 (PyObject*)AdjustmentFactors_Type);
-	Py_DECREF(&AdjustmentFactors_Type);
-	Py_XDECREF(AdjustmentFactors_Type);
-
 	/// Add the SolarResource type object to Swh_Type
 	if (PyType_Ready(&SolarResource_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Swh_Type.tp_dict,
@@ -1661,6 +1867,13 @@ SwhModule_exec(PyObject *m)
 				"SWH",
 				(PyObject*)&SWH_Type);
 	Py_DECREF(&SWH_Type);
+
+	/// Add the Shading type object to Swh_Type
+	if (PyType_Ready(&Shading_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Swh_Type.tp_dict,
+				"Shading",
+				(PyObject*)&Shading_Type);
+	Py_DECREF(&Shading_Type);
 
 	/// Add the Outputs type object to Swh_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

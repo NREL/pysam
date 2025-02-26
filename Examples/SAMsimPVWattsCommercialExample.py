@@ -13,13 +13,14 @@ The steps are:
     Run the simulations.
     Print the results.
 
-Most recently tested against PySAM 2.2.3
+Most recently tested against PySAM 6.0.0
 
 @author: frohro
 """
 
 import json
-import PySAM.Pvwattsv7 as PVWatts
+from pathlib import Path
+import PySAM.Pvwattsv8 as PVWatts
 import PySAM.Grid as Grid
 import PySAM.Utilityrate5 as UtilityRate
 import PySAM.Cashloan as Cashloan
@@ -42,7 +43,7 @@ with open(json_file_path) as f:
         dic = json.load(f)
 # The next seven lines are needed to load the PySAM data structures with the
 # inputs from the json file.
-pv_dat = pssc.dict_to_ssc_table(dic, "pvwattsv7")
+pv_dat = pssc.dict_to_ssc_table(dic, "pvwattsv8")
 grid_dat = pssc.dict_to_ssc_table(dic, "grid")
 ur_dat = pssc.dict_to_ssc_table(dic, "utilityrate5")
 cl_dat = pssc.dict_to_ssc_table(dic, "cashloan")
@@ -53,6 +54,9 @@ cl = Cashloan.from_existing(pv)
 grid.assign(Grid.wrap(grid_dat).export())
 ur.assign(UtilityRate.wrap(ur_dat).export())
 cl.assign(Cashloan.wrap(cl_dat).export())
+
+weather_file = str(Path(__file__).parent.parent / "tests" / "blythe_ca_33.617773_-114.588261_nasa_60_tmy.csv")
+pv.SolarResource.solar_resource_file = weather_file
 
 # The models are executed in order.  Note that the outputs from the first
 # simulation are automatically available for the next one, and so on.  :-)

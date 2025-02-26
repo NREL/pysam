@@ -1,6 +1,6 @@
 #include <Python.h>
 
-#include <SAM_6parsolve.h>
+#include <SAM_SixParsolve.h>
 #include <SAM_api.h>
 
 #include "PySAM_utils.h"
@@ -13,7 +13,7 @@
 static PyTypeObject SixParameterSolver_Type;
 
 static PyObject *
-SixParameterSolver_new(SAM_6parsolve data_ptr)
+SixParameterSolver_new(SAM_SixParsolve data_ptr)
 {
 	PyObject* new_obj = SixParameterSolver_Type.tp_alloc(&SixParameterSolver_Type,0);
 
@@ -34,7 +34,7 @@ SixParameterSolver_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "6parsolve", "SixParameterSolver")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "SixParsolve", "SixParameterSolver")){
 		return NULL;
 	}
 
@@ -51,7 +51,7 @@ SixParameterSolver_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &SixParameterSolver_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "6parsolve", "SixParameterSolver")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "SixParsolve", "SixParameterSolver")){
 		return NULL;
 	}
 
@@ -69,164 +69,164 @@ SixParameterSolver_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SixParameterSolver_methods[] = {
 		{"assign",            (PyCFunction)SixParameterSolver_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SixParameterSolver_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SixParameterSolver_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SixParameterSolver_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SixParameterSolver_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SixParameterSolver_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SixParameterSolver_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 SixParameterSolver_get_Imp(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_6parsolve_SixParameterSolver_Imp_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_SixParsolve_SixParameterSolver_Imp_nget, self->data_ptr);
 }
 
 static int
 SixParameterSolver_set_Imp(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_6parsolve_SixParameterSolver_Imp_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_SixParsolve_SixParameterSolver_Imp_nset, self->data_ptr);
 }
 
 static PyObject *
 SixParameterSolver_get_Isc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_6parsolve_SixParameterSolver_Isc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_SixParsolve_SixParameterSolver_Isc_nget, self->data_ptr);
 }
 
 static int
 SixParameterSolver_set_Isc(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_6parsolve_SixParameterSolver_Isc_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_SixParsolve_SixParameterSolver_Isc_nset, self->data_ptr);
 }
 
 static PyObject *
 SixParameterSolver_get_Nser(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_6parsolve_SixParameterSolver_Nser_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_SixParsolve_SixParameterSolver_Nser_nget, self->data_ptr);
 }
 
 static int
 SixParameterSolver_set_Nser(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_6parsolve_SixParameterSolver_Nser_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_SixParsolve_SixParameterSolver_Nser_nset, self->data_ptr);
 }
 
 static PyObject *
 SixParameterSolver_get_Tref(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_6parsolve_SixParameterSolver_Tref_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_SixParsolve_SixParameterSolver_Tref_nget, self->data_ptr);
 }
 
 static int
 SixParameterSolver_set_Tref(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_6parsolve_SixParameterSolver_Tref_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_SixParsolve_SixParameterSolver_Tref_nset, self->data_ptr);
 }
 
 static PyObject *
 SixParameterSolver_get_Vmp(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_6parsolve_SixParameterSolver_Vmp_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_SixParsolve_SixParameterSolver_Vmp_nget, self->data_ptr);
 }
 
 static int
 SixParameterSolver_set_Vmp(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_6parsolve_SixParameterSolver_Vmp_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_SixParsolve_SixParameterSolver_Vmp_nset, self->data_ptr);
 }
 
 static PyObject *
 SixParameterSolver_get_Voc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_6parsolve_SixParameterSolver_Voc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_SixParsolve_SixParameterSolver_Voc_nget, self->data_ptr);
 }
 
 static int
 SixParameterSolver_set_Voc(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_6parsolve_SixParameterSolver_Voc_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_SixParsolve_SixParameterSolver_Voc_nset, self->data_ptr);
 }
 
 static PyObject *
 SixParameterSolver_get_alpha_isc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_6parsolve_SixParameterSolver_alpha_isc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_SixParsolve_SixParameterSolver_alpha_isc_nget, self->data_ptr);
 }
 
 static int
 SixParameterSolver_set_alpha_isc(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_6parsolve_SixParameterSolver_alpha_isc_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_SixParsolve_SixParameterSolver_alpha_isc_nset, self->data_ptr);
 }
 
 static PyObject *
 SixParameterSolver_get_beta_voc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_6parsolve_SixParameterSolver_beta_voc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_SixParsolve_SixParameterSolver_beta_voc_nget, self->data_ptr);
 }
 
 static int
 SixParameterSolver_set_beta_voc(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_6parsolve_SixParameterSolver_beta_voc_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_SixParsolve_SixParameterSolver_beta_voc_nset, self->data_ptr);
 }
 
 static PyObject *
 SixParameterSolver_get_celltype(VarGroupObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_6parsolve_SixParameterSolver_celltype_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_SixParsolve_SixParameterSolver_celltype_sget, self->data_ptr);
 }
 
 static int
 SixParameterSolver_set_celltype(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_6parsolve_SixParameterSolver_celltype_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_SixParsolve_SixParameterSolver_celltype_sset, self->data_ptr);
 }
 
 static PyObject *
 SixParameterSolver_get_gamma_pmp(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_6parsolve_SixParameterSolver_gamma_pmp_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_SixParsolve_SixParameterSolver_gamma_pmp_nget, self->data_ptr);
 }
 
 static int
 SixParameterSolver_set_gamma_pmp(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_6parsolve_SixParameterSolver_gamma_pmp_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_SixParsolve_SixParameterSolver_gamma_pmp_nset, self->data_ptr);
 }
 
 static PyGetSetDef SixParameterSolver_getset[] = {
 {"Imp", (getter)SixParameterSolver_get_Imp,(setter)SixParameterSolver_set_Imp,
-	PyDoc_STR("*float*: Maximum power point current [A]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Maximum power point current [A]\n\n**Required:**\nTrue"),
  	NULL},
 {"Isc", (getter)SixParameterSolver_get_Isc,(setter)SixParameterSolver_set_Isc,
-	PyDoc_STR("*float*: Short circuit current [A]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Short circuit current [A]\n\n**Required:**\nTrue"),
  	NULL},
 {"Nser", (getter)SixParameterSolver_get_Nser,(setter)SixParameterSolver_set_Nser,
-	PyDoc_STR("*float*: Number of cells in series\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Number of cells in series\n\n**Constraints:**\nINTEGER,POSITIVE\n\n**Required:**\nTrue"),
  	NULL},
 {"Tref", (getter)SixParameterSolver_get_Tref,(setter)SixParameterSolver_set_Tref,
-	PyDoc_STR("*float*: Reference cell temperature ['C]\n\n*Required*: False"),
+	PyDoc_STR("*float*: Reference cell temperature ['C]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"Vmp", (getter)SixParameterSolver_get_Vmp,(setter)SixParameterSolver_set_Vmp,
-	PyDoc_STR("*float*: Maximum power point voltage [V]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Maximum power point voltage [V]\n\n**Required:**\nTrue"),
  	NULL},
 {"Voc", (getter)SixParameterSolver_get_Voc,(setter)SixParameterSolver_set_Voc,
-	PyDoc_STR("*float*: Open circuit voltage [V]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Open circuit voltage [V]\n\n**Required:**\nTrue"),
  	NULL},
 {"alpha_isc", (getter)SixParameterSolver_get_alpha_isc,(setter)SixParameterSolver_set_alpha_isc,
-	PyDoc_STR("*float*: Temp coeff of current at SC [A/'C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Temp coeff of current at SC [A/'C]\n\n**Required:**\nTrue"),
  	NULL},
 {"beta_voc", (getter)SixParameterSolver_get_beta_voc,(setter)SixParameterSolver_set_beta_voc,
-	PyDoc_STR("*float*: Temp coeff of voltage at OC [V/'C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Temp coeff of voltage at OC [V/'C]\n\n**Required:**\nTrue"),
  	NULL},
 {"celltype", (getter)SixParameterSolver_get_celltype,(setter)SixParameterSolver_set_celltype,
-	PyDoc_STR("*str*: Cell technology type [monoSi,multiSi/polySi,cis,cigs,cdte,amorphous]\n\n*Required*: True"),
+	PyDoc_STR("*str*: Cell technology type [monoSi,multiSi/polySi,cis,cigs,cdte,amorphous]\n\n**Required:**\nTrue"),
  	NULL},
 {"gamma_pmp", (getter)SixParameterSolver_get_gamma_pmp,(setter)SixParameterSolver_set_gamma_pmp,
-	PyDoc_STR("*float*: Temp coeff of power at MP [%/'C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Temp coeff of power at MP [%/'C]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -285,7 +285,7 @@ static PyTypeObject SixParameterSolver_Type = {
 static PyTypeObject Outputs_Type;
 
 static PyObject *
-Outputs_new(SAM_6parsolve data_ptr)
+Outputs_new(SAM_SixParsolve data_ptr)
 {
 	PyObject* new_obj = Outputs_Type.tp_alloc(&Outputs_Type,0);
 
@@ -306,7 +306,7 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "6parsolve", "Outputs")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "SixParsolve", "Outputs")){
 		return NULL;
 	}
 
@@ -323,7 +323,7 @@ Outputs_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &Outputs_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "6parsolve", "Outputs")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "SixParsolve", "Outputs")){
 		return NULL;
 	}
 
@@ -341,48 +341,48 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 Outputs_get_Adj(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_6parsolve_Outputs_Adj_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_SixParsolve_Outputs_Adj_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_Il(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_6parsolve_Outputs_Il_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_SixParsolve_Outputs_Il_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_Io(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_6parsolve_Outputs_Io_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_SixParsolve_Outputs_Io_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_Rs(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_6parsolve_Outputs_Rs_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_SixParsolve_Outputs_Rs_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_Rsh(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_6parsolve_Outputs_Rsh_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_SixParsolve_Outputs_Rsh_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_a(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_6parsolve_Outputs_a_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_SixParsolve_Outputs_a_nget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
@@ -495,6 +495,14 @@ SixParsolve_dealloc(CmodObject *self)
 
 
 static PyObject *
+SixParsolve_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 SixParsolve_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -503,7 +511,7 @@ SixParsolve_execute(CmodObject *self, PyObject *args)
 		return NULL;
 
 	SAM_error error = new_error();
-	SAM_6parsolve_execute(self->data_ptr, verbosity, &error);
+	SAM_SixParsolve_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
 	Py_INCREF(Py_None);
 	return Py_None;
@@ -518,7 +526,7 @@ SixParsolve_assign(CmodObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "6parsolve"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "SixParsolve"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -533,7 +541,7 @@ SixParsolve_replace(CmodObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "6parsolve"))
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "SixParsolve"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -571,6 +579,8 @@ static PyMethodDef SixParsolve_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)SixParsolve_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)SixParsolve_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -680,7 +690,7 @@ SixParsolve_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "6parsolve", def) < 0) {
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "SixParsolve", def) < 0) {
 		SixParsolve_dealloc(rv);
 		return NULL;
 	}
@@ -714,7 +724,7 @@ SixParsolve_from_existing(PyObject *self, PyObject *args)
 	rv->data_owner_ptr = module;
 	if (!def)
 		return (PyObject *)rv;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "6parsolve", def);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "SixParsolve", def);
 	return (PyObject *)rv;
 
 	fail:
@@ -729,17 +739,16 @@ static PyMethodDef SixParsolveModule_methods[] = {
 		{"new",             SixParsolve_new,         METH_VARARGS,
 				PyDoc_STR("new() -> SixParsolve")},
 		{"default",             SixParsolve_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> SixParsolve\n\nUse default attributes\n"
-				"None")},
+				PyDoc_STR("default(config) -> SixParsolve\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             SixParsolve_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> SixParsolve\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> SixParsolve\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   SixParsolve_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> SixParsolve\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> SixParsolve\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "SixParsolve");
+			 "Coefficient generator for six-parameter single diode module model");
 
 
 static int

@@ -767,11 +767,14 @@ static int PySAM_assign_from_dict(void *data_ptr, PyObject *dict, const char *te
 
     PyObject* ascii_mystring = NULL;
 
+    int existing_error_context = (PySAM_error_context != NULL);
+
     while (PyDict_Next(dict, &pos, &key, &value)){
         ascii_mystring = PyUnicode_AsASCIIString(key);
         char* name = PyBytes_AsString(ascii_mystring);
 
-        PySAM_error_context_set(name);
+        if (!existing_error_context)
+            PySAM_error_context_set(name);
 
         // numeric
         if (PyNumber_Check(value)){
@@ -862,7 +865,8 @@ static int PySAM_assign_from_dict(void *data_ptr, PyObject *dict, const char *te
         Py_DECREF(ascii_mystring);
     }
     Py_XDECREF(dict);
-    PySAM_error_context_clear();
+    if (!existing_error_context)
+        PySAM_error_context_clear();
     return 1;
     fail:
     Py_XDECREF(ascii_mystring);
@@ -904,7 +908,8 @@ static int PySAM_assign_from_nested_dict(PyObject* self, PyObject* x_attr, void 
         ascii_mystring = PyUnicode_AsASCIIString(key);
         char* name = PyBytes_AsString(ascii_mystring);
 
-        PySAM_error_context_set(name);
+        if (!PySAM_error_context)
+            PySAM_error_context_set(name);
 
         if (strcmp(name, "Outputs") == 0)
             continue;
@@ -929,7 +934,7 @@ static int PySAM_assign_from_nested_dict(PyObject* self, PyObject* x_attr, void 
     fail:
     Py_XDECREF(ascii_mystring);
     PySAM_error_context_clear();
-    return 0;
+    return -1;
 }
 
 //
@@ -1097,9 +1102,11 @@ static int PySAM_load_defaults(PyObject* self, PyObject* x_attr, void* data_ptr,
         return -1;
     }
 
+    PySAM_error_context_set("Loading defaults");
     if (PySAM_assign_from_nested_dict(self, x_attr, data_ptr, dict, cmod) < 0)
         return -1;
     Py_DECREF(dict);
+    PySAM_error_context_clear();
     return 0;
 }
 
@@ -1136,9 +1143,7 @@ static PyObject* PySAM_run_getset(PyObject *self, PyObject *arg, PyObject * x_at
             getset++;
         }
     }
-    char str[256];
-    PySAM_concat_msg(str, "'value' error, could not find attribute: ", name);
-    PyErr_SetString(PyExc_AttributeError, str);
+    PyErr_SetString(PyExc_AttributeError, "\"value\" error, could not find attribute by that name");
     return NULL;
 }
 
@@ -1158,7 +1163,7 @@ static PyObject * Cmod_value(CmodObject *self, PyObject *args)
     PyObject* value = NULL;
     if (!PyArg_ParseTuple(args, "s|O", &name, &value))
 		return NULL;
-
+        
     return PySAM_run_getset((PyObject *)self, value, self->x_attr, name, NULL);
 }
 

@@ -1,0 +1,408 @@
+.. 4.1.0:
+
+Version 4.1.0
+===============================================
+
+This page compares the PySAM Modules' input variables and the defaults for these input variables 
+between the current release and the last release.
+
+This helps track which variables and defaults have changed between releases to make it easier to notify users during version upgrade.
+
+Below are lists for each PySAM Module:
+    1. New Default configurations
+    2. Removed Default configurations
+    3. Modified Variables: New variables, Removed variables and Type-changed variables
+    4. Modified Default Values
+
+Biomass
+************************************************
+
+:doc:`../modules/Biomass` Removed Default files
+
+     - All Equity Partnership Flip
+     - LCOE Calculator
+     - Leveraged Partnership Flip
+     - Merchant Plant
+     - None
+     - Sale Leaseback
+     - Single Owner
+
+
+DSGL IPH
+************************************************
+
+:doc:`../modules/LinearFresnelDsgIph` Removed Default files
+
+     - LCOH Calculator
+     - None
+
+
+DSLF
+************************************************
+
+:doc:`../modules/TcslinearFresnel` Removed Default files
+
+     - All Equity Partnership Flip
+     - Commercial
+     - LCOE Calculator
+     - Leveraged Partnership Flip
+     - Merchant Plant
+     - None
+     - Sale Leaseback
+     - Single Owner
+
+
+DSPT
+************************************************
+
+DSPT Removed Default files
+
+     - All Equity Partnership Flip
+     - Leveraged Partnership Flip
+     - Merchant Plant
+     - Sale Leaseback
+     - Single Owner
+
+
+Dish Stirling
+************************************************
+
+Dish Stirling Removed Default files
+
+     - All Equity Partnership Flip
+     - Commercial
+     - LCOE Calculator
+     - Leveraged Partnership Flip
+     - Merchant Plant
+     - None
+     - Sale Leaseback
+     - Single Owner
+
+
+ETES
+************************************************
+
+:doc:`../modules/EtesElectricResistance` Removed Default files
+
+     - Single Owner
+
+
+Empirical Trough
+************************************************
+
+:doc:`../modules/TcstroughEmpirical` Removed Default files
+
+     - All Equity Partnership Flip
+     - Commercial
+     - LCOE Calculator
+     - Leveraged Partnership Flip
+     - Merchant Plant
+     - None
+     - Sale Leaseback
+     - Single Owner
+
+
+Flat Plate PV
+************************************************
+
+:doc:`../modules/Pvsamv1` Removed Default files
+
+     - All Equity Partnership Flip
+     - Commercial
+     - Host Developer
+     - LCOE Calculator
+     - Leveraged Partnership Flip
+     - Merchant Plant
+     - None
+     - Residential
+     - Sale Leaseback
+     - Single Owner
+     - Third Party
+
+
+Fuel Cell
+************************************************
+
+:doc:`../modules/Fuelcell` Removed Default files
+
+     - Commercial
+     - Single Owner
+
+
+Generic Battery
+************************************************
+
+`Generic Battery <https://nrel-pysam.readthedocs.io/en/v4.1.0/modules/GenericBattery.html>`_ Removed Default files
+
+     - All Equity Partnership Flip
+     - Commercial
+     - Host Developer
+     - Leveraged Partnership Flip
+     - Merchant Plant
+     - Residential
+     - Sale Leaseback
+     - Single Owner
+     - Third Party
+
+
+Generic CSP System
+************************************************
+
+Generic CSP System Removed Default files
+
+     - All Equity Partnership Flip
+     - Commercial
+     - LCOE Calculator
+     - Leveraged Partnership Flip
+     - Merchant Plant
+     - None
+     - Sale Leaseback
+     - Single Owner
+
+
+Generic System
+************************************************
+
+`Generic System <https://nrel-pysam.readthedocs.io/en/v4.1.0/modules/GenericSystem.html>`_ Removed Default files
+
+     - All Equity Partnership Flip
+     - Commercial
+     - Host Developer
+     - LCOE Calculator
+     - Leveraged Partnership Flip
+     - Merchant Plant
+     - None
+     - Residential
+     - Sale Leaseback
+     - Single Owner
+     - Third Party
+
+
+Geothermal Power
+************************************************
+
+:doc:`../modules/Geothermal` Removed Default files
+
+     - All Equity Partnership Flip
+     - LCOE Calculator
+     - Leveraged Partnership Flip
+     - Merchant Plant
+     - None
+     - Sale Leaseback
+     - Single Owner
+
+
+High-X Concentrating PV
+************************************************
+
+:doc:`../modules/Hcpv` Removed Default files
+
+     - All Equity Partnership Flip
+     - LCOE Calculator
+     - Leveraged Partnership Flip
+     - Merchant Plant
+     - None
+     - Sale Leaseback
+     - Single Owner
+
+
+MEtidal
+************************************************
+
+:doc:`../modules/MhkTidal` Removed Default files
+
+     - LCOE Calculator
+     - None
+
+
+MEwave
+************************************************
+
+:doc:`../modules/MhkWave` Removed Default files
+
+     - LCOE Calculator
+     - None
+     - Single Owner
+
+
+MEwave Battery
+************************************************
+
+Mhk Wave Battery Removed Default files
+
+     - Single Owner
+
+
+MSLF
+************************************************
+
+:doc:`../modules/FresnelPhysical` Removed Default files
+
+     - All Equity Partnership Flip
+     - Commercial
+     - LCOE Calculator
+     - Leveraged Partnership Flip
+     - Merchant Plant
+     - None
+     - Sale Leaseback
+     - Single Owner
+
+
+MSPT
+************************************************
+
+:doc:`../modules/TcsmoltenSalt` Removed Default files
+
+     - All Equity Partnership Flip
+     - Leveraged Partnership Flip
+     - Merchant Plant
+     - Sale Leaseback
+     - Single Owner
+
+
+PTES
+************************************************
+
+:doc:`../modules/EtesPtes` Removed Default files
+
+     - Single Owner
+
+:doc:`../modules/EtesPtes` Modified Default Values:
+
+     - Singleowner_PTESSingleOwner
+
+        ['system_capacity', 'cp_system_nameplate']
+
+     - EtesPtes_PTESSingleOwner
+
+        ['cold_htf_code']
+
+
+
+PV Battery
+************************************************
+
+PV Battery Removed Default files
+
+     - All Equity Partnership Flip
+     - Commercial
+     - Host Developer
+     - Leveraged Partnership Flip
+     - Merchant Plant
+     - Residential
+     - Sale Leaseback
+     - Single Owner
+     - Third Party
+
+
+PVWatts
+************************************************
+
+:doc:`../modules/Pvwattsv8` Removed Default files
+
+     - All Equity Partnership Flip
+     - Commercial
+     - Community Solar
+     - Host Developer
+     - LCOE Calculator
+     - Leveraged Partnership Flip
+     - Merchant Plant
+     - None
+     - Residential
+     - Sale Leaseback
+     - Single Owner
+     - Third Party
+
+:doc:`../modules/Pvwattsv8` Modified Default Values:
+
+     - Cashloan_PVWattsBatteryResidential
+
+        ['om_capacity']
+
+     - Cashloan_PVWattsBatteryCommercial
+
+        ['om_capacity']
+
+     - HostDeveloper_PVWattsBatteryHostDeveloper
+
+        ['om_capacity']
+
+
+
+PVWatts Battery
+************************************************
+
+:doc:`../modules/Battwatts` Removed Default files
+
+     - Commercial
+     - Host Developer
+     - Residential
+     - Third Party
+
+
+Physical Trough
+************************************************
+
+:doc:`../modules/TroughPhysical` Removed Default files
+
+     - All Equity Partnership Flip
+     - LCOE Calculator
+     - Leveraged Partnership Flip
+     - Merchant Plant
+     - None
+     - Sale Leaseback
+     - Single Owner
+
+
+Physical Trough IPH
+************************************************
+
+`Trough Physical Process Heat <https://nrel-pysam.readthedocs.io/en/v4.1.0/modules/TroughPhysicalProcessHeat.html>`_ Removed Default files
+
+     - LCOH Calculator
+     - None
+
+
+Solar Water Heating
+************************************************
+
+:doc:`../modules/Swh` Removed Default files
+
+     - Commercial
+     - LCOE Calculator
+     - None
+     - Residential
+
+
+Standalone Battery
+************************************************
+
+:doc:`../modules/Battery` Removed Default files
+
+     - All Equity Partnership Flip
+     - Commercial
+     - Host Developer
+     - Leveraged Partnership Flip
+     - Merchant Plant
+     - Residential
+     - Sale Leaseback
+     - Single Owner
+     - Third Party
+
+
+Wind Power
+************************************************
+
+:doc:`../modules/Windpower` Removed Default files
+
+     - All Equity Partnership Flip
+     - Commercial
+     - LCOE Calculator
+     - Leveraged Partnership Flip
+     - Merchant Plant
+     - None
+     - Residential
+     - Sale Leaseback
+     - Single Owner
+
+

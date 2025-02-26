@@ -1,45 +1,3 @@
-class SixParameterSolver(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	Imp = float
-	Isc = float
-	Nser = float
-	Tref = float
-	Vmp = float
-	Voc = float
-	alpha_isc = float
-	beta_voc = float
-	celltype = str
-	gamma_pmp = float
-
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	Adj = float
-	Il = float
-	Io = float
-	Rs = float
-	Rsh = float
-	a = float
-
-
 class SixParsolve(object):
 	def assign(self, dict):
 		pass
@@ -56,14 +14,57 @@ class SixParsolve(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
 	def __init__(self, *args, **kwargs):
 		pass
 
-	SixParameterSolver = SixParameterSolver
-	Outputs = Outputs
+	class SixParameterSolver(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		Imp = float
+		Isc = float
+		Nser = float
+		Tref = float
+		Vmp = float
+		Voc = float
+		alpha_isc = float
+		beta_voc = float
+		celltype = str
+		gamma_pmp = float
+
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		Adj = float
+		Il = float
+		Io = float
+		Rs = float
+		Rsh = float
+		a = float
+
+
 
 
 def default(config) -> SixParsolve:

@@ -1,7 +1,8 @@
 mypy
-numpy==1.21.0
+numpy
 pandas
 pytest
 python-dotenv
 pympler
 requests
+setuptools

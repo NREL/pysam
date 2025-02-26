@@ -69,11 +69,11 @@ SimpleLCOE_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SimpleLCOE_methods[] = {
 		{"assign",            (PyCFunction)SimpleLCOE_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SimpleLCOE_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SimpleLCOE_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SimpleLCOE_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SimpleLCOE_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SimpleLCOE_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SimpleLCOE_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -139,19 +139,19 @@ SimpleLCOE_set_variable_operating_cost(VarGroupObject *self, PyObject *value, vo
 
 static PyGetSetDef SimpleLCOE_getset[] = {
 {"annual_energy", (getter)SimpleLCOE_get_annual_energy,(setter)SimpleLCOE_set_annual_energy,
-	PyDoc_STR("*float*: Annual energy production [kWh]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Annual energy production [kWh]\n\n**Required:**\nTrue"),
  	NULL},
 {"capital_cost", (getter)SimpleLCOE_get_capital_cost,(setter)SimpleLCOE_set_capital_cost,
-	PyDoc_STR("*float*: Capital cost [$]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Capital cost [$]\n\n**Required:**\nTrue"),
  	NULL},
 {"fixed_charge_rate", (getter)SimpleLCOE_get_fixed_charge_rate,(setter)SimpleLCOE_set_fixed_charge_rate,
-	PyDoc_STR("*float*: Fixed charge rate\n\n*Required*: True"),
+	PyDoc_STR("*float*: Fixed charge rate\n\n**Required:**\nTrue"),
  	NULL},
 {"fixed_operating_cost", (getter)SimpleLCOE_get_fixed_operating_cost,(setter)SimpleLCOE_set_fixed_operating_cost,
-	PyDoc_STR("*float*: Annual fixed operating cost [$]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Annual fixed operating cost [$]\n\n**Required:**\nTrue"),
  	NULL},
 {"variable_operating_cost", (getter)SimpleLCOE_get_variable_operating_cost,(setter)SimpleLCOE_set_variable_operating_cost,
-	PyDoc_STR("*float*: Annual variable operating cost [$/kWh]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Annual variable operating cost [$/kWh]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -266,11 +266,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -282,7 +282,7 @@ Outputs_get_lcoe_fcr(VarGroupObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"lcoe_fcr", (getter)Outputs_get_lcoe_fcr,(setter)0,
-	PyDoc_STR("*float*: Levelized cost of energy [$/kWh]"),
+	PyDoc_STR("*float*: LCOE Levelized cost of energy [$/kWh]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -375,6 +375,14 @@ Lcoefcr_dealloc(CmodObject *self)
 
 
 static PyObject *
+Lcoefcr_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Lcoefcr_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -451,6 +459,8 @@ static PyMethodDef Lcoefcr_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Lcoefcr_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Lcoefcr_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -609,12 +619,11 @@ static PyMethodDef LcoefcrModule_methods[] = {
 		{"new",             Lcoefcr_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Lcoefcr")},
 		{"default",             Lcoefcr_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Lcoefcr\n\nUse default attributes\n"
-				"`config` options:\n\n- \"BiopowerLCOECalculator\"\n- \"DSGLIPHLCOHCalculator\"\n- \"DSLFLCOECalculator\"\n- \"EmpiricalTroughLCOECalculator\"\n- \"FlatPlatePVLCOECalculator\"\n- \"GenericCSPSystemLCOECalculator\"\n- \"GenericSystemLCOECalculator\"\n- \"GeothermalPowerLCOECalculator\"\n- \"HighXConcentratingPVLCOECalculator\"\n- \"MEtidalLCOECalculator\"\n- \"MEwaveLCOECalculator\"\n- \"MSLFLCOECalculator\"\n- \"PVWattsLCOECalculator\"\n- \"PhysicalTroughIPHLCOHCalculator\"\n- \"PhysicalTroughLCOECalculator\"\n- \"SolarWaterHeatingLCOECalculator\"\n- \"WindPowerLCOECalculator\"")},
+				PyDoc_STR("default(config) -> Lcoefcr\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"BiopowerLCOECalculator\"*\n\n		- *\"CustomGenerationProfileLCOECalculator\"*\n\n		- *\"DSGLIPHLCOHCalculator\"*\n\n		- *\"DSLFLCOECalculator\"*\n\n		- *\"EmpiricalTroughLCOECalculator\"*\n\n		- *\"FlatPlatePVLCOECalculator\"*\n\n		- *\"GenericCSPSystemLCOECalculator\"*\n\n		- *\"GeothermalPowerLCOECalculator\"*\n\n		- *\"HighXConcentratingPVLCOECalculator\"*\n\n		- *\"MEtidalLCOECalculator\"*\n\n		- *\"MEwaveLCOECalculator\"*\n\n		- *\"PVWattsLCOECalculator\"*\n\n		- *\"PhysicalTroughLCOECalculator\"*\n\n		- *\"SolarWaterHeatingLCOECalculator\"*\n\n		- *\"WindPowerLCOECalculator\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Lcoefcr_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Lcoefcr\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Lcoefcr\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Lcoefcr_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Lcoefcr\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Lcoefcr\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

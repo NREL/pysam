@@ -1,146 +1,3 @@
-class SolarResource(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	albedo = tuple
-	solar_resource_data = dict
-	solar_resource_file = str
-
-
-class Lifetime(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	analysis_period = float
-	dc_degradation = tuple
-	system_use_lifetime_output = float
-
-
-class SystemDesign(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	ac_plant_max_f = float
-	array_type = float
-	azimuth = float
-	batt_simple_enable = float
-	bifaciality = float
-	dc_ac_ratio = float
-	en_snowloss = float
-	enable_wind_stow = float
-	gcr = float
-	gust_factor = float
-	inv_eff = float
-	losses = float
-	module_type = float
-	rotlim = float
-	shading_azal = tuple
-	shading_diff = float
-	shading_mxh = tuple
-	shading_timestep = tuple
-	soiling = tuple
-	stow_wspd = float
-	system_capacity = float
-	tilt = float
-	wind_stow_angle = float
-	xfmr_ll = float
-	xfmr_nll = float
-
-
-class AdjustmentFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self): 
-		return {}
-
-	def __init__(self, *args, **kwargs): # real signature unknown
-		pass
-
-	constant = float
-	dc_constant = float
-	dc_hourly = tuple
-	dc_periods = tuple
-	hourly = tuple
-	periods = tuple
-	sf_constant = float
-	sf_hourly = tuple
-	sf_periods = tuple
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	ac = tuple
-	ac_annual = float
-	ac_monthly = tuple
-	annual_energy = float
-	annual_energy_distribution_time = tuple
-	aoi = tuple
-	capacity_factor = float
-	city = str
-	dc = tuple
-	dc_monthly = tuple
-	dcsnowderate = tuple
-	df = tuple
-	dn = tuple
-	elev = float
-	gen = tuple
-	gh = tuple
-	inverter_efficiency = float
-	kwh_per_kw = float
-	lat = float
-	location = str
-	lon = float
-	monthly_energy = tuple
-	percent_complete = float
-	poa = tuple
-	poa_monthly = tuple
-	shad_beam_factor = tuple
-	snow = tuple
-	solrad_annual = float
-	solrad_monthly = tuple
-	ss_beam_factor = tuple
-	ss_gnd_diffuse_factor = tuple
-	ss_sky_diffuse_factor = tuple
-	state = str
-	sunup = tuple
-	tamb = tuple
-	tcell = tuple
-	tpoa = tuple
-	ts_shift_hours = float
-	tz = float
-	wspd = tuple
-
-
 class Pvwattsv7(object):
 	def assign(self, dict):
 		pass
@@ -157,6 +14,9 @@ class Pvwattsv7(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
@@ -165,11 +25,181 @@ class Pvwattsv7(object):
 
 	def Reopt_size_battery_post(self, args):
 		pass
-	SolarResource = SolarResource
-	Lifetime = Lifetime
-	SystemDesign = SystemDesign
-	AdjustmentFactors = AdjustmentFactors
-	Outputs = Outputs
+	class SolarResource(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		albedo = tuple
+		solar_resource_data = dict
+		solar_resource_file = str
+
+
+	class Lifetime(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		analysis_period = float
+		dc_degradation = tuple
+		system_use_lifetime_output = float
+
+
+	class SystemDesign(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		ac_plant_max_f = float
+		array_type = float
+		azimuth = float
+		batt_simple_enable = float
+		bifaciality = float
+		dc_ac_ratio = float
+		en_snowloss = float
+		enable_wind_stow = float
+		gcr = float
+		gust_factor = float
+		inv_eff = float
+		losses = float
+		module_type = float
+		rotlim = float
+		soiling = tuple
+		stow_wspd = float
+		system_capacity = float
+		tilt = float
+		wind_stow_angle = float
+		xfmr_ll = float
+		xfmr_nll = float
+
+
+	class Shading(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		shading_azal = tuple
+		shading_diff = float
+		shading_en_azal = float
+		shading_en_diff = float
+		shading_en_mxh = float
+		shading_en_string_option = float
+		shading_en_timestep = float
+		shading_mxh = tuple
+		shading_string_option = float
+		shading_timestep = tuple
+
+
+	class AdjustmentFactors(object):
+		def assign(self): 
+			pass
+	
+		def export(self): 
+			return {}
+	
+		def __init__(self, *args, **kwargs): # real signature unknown
+			pass
+	
+		adjust_constant = float
+		adjust_en_hourly = float
+		adjust_en_periods = float
+		adjust_en_timeindex = float
+		adjust_hourly = tuple
+		adjust_periods = tuple
+		adjust_timeindex = tuple
+		dc_adjust_constant = float
+		dc_adjust_en_hourly = float
+		dc_adjust_en_periods = float
+		dc_adjust_en_timeindex = float
+		dc_adjust_hourly = tuple
+		dc_adjust_periods = tuple
+		dc_adjust_timeindex = tuple
+		sf_adjust_constant = float
+		sf_adjust_en_hourly = float
+		sf_adjust_en_periods = float
+		sf_adjust_en_timeindex = float
+		sf_adjust_hourly = tuple
+		sf_adjust_periods = tuple
+		sf_adjust_timeindex = tuple
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		ac = tuple
+		ac_annual = float
+		ac_monthly = tuple
+		annual_energy = float
+		annual_energy_distribution_time = tuple
+		aoi = tuple
+		capacity_factor = float
+		city = str
+		dc = tuple
+		dc_monthly = tuple
+		dcsnowderate = tuple
+		df = tuple
+		dn = tuple
+		elev = float
+		gen = tuple
+		gh = tuple
+		inverter_efficiency = float
+		kwh_per_kw = float
+		lat = float
+		location = str
+		lon = float
+		monthly_energy = tuple
+		percent_complete = float
+		poa = tuple
+		poa_monthly = tuple
+		shad_beam_factor = tuple
+		snow = tuple
+		snow_cover = tuple
+		solrad_annual = float
+		solrad_monthly = tuple
+		ss_beam_factor = tuple
+		ss_gnd_diffuse_factor = tuple
+		ss_sky_diffuse_factor = tuple
+		state = str
+		sunup = tuple
+		tamb = tuple
+		tcell = tuple
+		tpoa = tuple
+		ts_shift_hours = float
+		tz = float
+		wspd = tuple
+
+
 
 
 def default(config) -> Pvwattsv7:

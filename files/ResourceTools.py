@@ -9,6 +9,7 @@ import copy
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 import certifi
+import warnings
 
 import json
 
@@ -33,7 +34,7 @@ def SAM_CSV_to_solar_data(filename):
     with open(filename) as file_in:
         info = []
         for i in range(2):
-            info.append(file_in.readline())
+            info.append(file_in.readline().rstrip())
             info[i] = info[i].split(",")
         if "Time Zone" not in info[0]:
             raise ValueError("`Time Zone` field not found in solar resource file.")
@@ -41,6 +42,7 @@ def SAM_CSV_to_solar_data(filename):
         longitude = info[1][info[0].index("Longitude")]
         tz = info[1][info[0].index("Time Zone")]
         elev = info[1][info[0].index("Elevation")]
+        source = info[1][info[0].index("Source")]
         reader = csv.DictReader(file_in)
         for row in reader:
             for col, dat in row.items():
@@ -52,30 +54,43 @@ def SAM_CSV_to_solar_data(filename):
         weather['elev'] = float(elev)
         weather['lat'] = float(latitude)
         weather['lon'] = float(longitude)
-        weather['year'] = wfd.pop('Year')
-        weather['month'] = wfd.pop('Month')
-        weather['day'] = wfd.pop('Day')
-        weather['hour'] = wfd.pop('Hour')
-        weather['minute'] = wfd.pop('Minute')
-        weather['dn'] = wfd.pop('DNI')
-        weather['df'] = wfd.pop('DHI')
-        weather['gh'] = wfd.pop('GHI')
-        weather['wspd'] = wfd.pop('Wind Speed')
-        weather['tdry'] = wfd.pop('Temperature')
-        if 'Wind Direction' in wfd.keys():
-            weather['wdir'] = wfd.pop('Wind Direction')
-        if 'Pressure' in wfd.keys():
-            weather['pres'] = wfd.pop('Pressure')
-        if 'Dew Point' in wfd.keys():
-            weather['tdew'] = wfd.pop('Dew Point')
-        if 'Relative Humidity' in wfd.keys():
-            weather['rhum'] = wfd.pop('Relative Humidity')
-        if 'RH' in wfd.keys():
-            weather['rhum'] = wfd.pop('RH')
-        if 'Surface Albedo' in wfd.keys():
-            weather['alb'] = wfd.pop('Surface Albedo')
-        if 'Snow Depth' in wfd.keys():
-            weather['snow'] = wfd.pop('Snow Depth')
+
+        # Create dict with keys = keys passed to SAM and values = list of possible key versions found in resource files (NREL / NASA POWER)
+        acceptable_keys = {
+            'year' : ['year', 'Year', 'yr'],
+            'month' : ['month', 'Month', 'mo'],
+            'day' : ['day', 'Day'],
+            'hour' : ['hour', 'Hour', 'hr'],
+            'minute' : ['minute', 'Minute', 'min'],
+            'dn' : ['dn', 'DNI','dni', 'beam', 'direct normal', 'direct normal irradiance'],
+            'df' : ['df', 'DHI', 'dhi', 'diffuse', 'diffuse horizontal', 'diffuse horizontal irradiance'],
+            'gh' : ['gh', 'GHI','ghi', 'global', 'global horizontal', 'global horizontal irradiance'],
+            'wspd' : ['wspd', 'Wind Speed', 'wind speed'],
+            'tdry' : ['tdry', 'Temperature', 'dry bulb', 'dry bulb temp', 'temperature', 'ambient', 'ambient temp'],
+            'wdir' : ['wdir', 'Wind Direction', 'wind direction'],
+            'pres' : ['pres', 'Pressure', 'pressure'],
+            'tdew' : ['tdew', 'Dew Point', 'Tdew', 'dew point', 'dew point temperature'],
+            'rhum' : ['rhum', 'Relative Humidity', 'rh', 'RH', 'relative humidity', 'humidity'],
+            'alb' : ['alb', 'Surface Albedo', 'albedo', 'surface albedo'],
+            'snow' : ['snow', 'Snow Depth', 'snow depth', 'snow cover']
+        }
+        
+        # enumerates acceptable_keys, inserts key and values into weather dictionary if found in the resource file
+        for key, list_of_keys in acceptable_keys.items():
+            for good_key in list_of_keys:
+                if good_key in wfd.keys():
+                    weather[key] = wfd.pop(good_key)
+                    break
+
+        # handles averaged hourly data with no minute column provided by NASA POWER and removes 2/29 data for leap years
+        # this is a workaround so PySAM/SAM processes as instantaneous data (not setup to handle no minute column)
+        if source == 'NASA/POWER':
+            weather['minute'] = [30] * len(weather['hour'])
+            if len(weather['hour']) == 8784:
+                for key in weather.keys():
+                    if key not in ['tz','elev','lat','lon']:
+                        del weather[key][1416:1440]
+
 
         return weather
 
@@ -93,10 +108,11 @@ def SRW_to_wind_data(filename):
     if not os.path.isfile(filename):
         raise FileNotFoundError(filename + " does not exist.")
     data_dict = dict()
-    field_names = ('temperature', 'pressure', 'speed', 'direction')
+ 
+
     with open(filename) as file_in:
         file_in.readline()
-        file_in.readline()
+        source = str(file_in.readline().strip())
         fields = str(file_in.readline().strip()).split(',')
         fields = [i for i in fields if i] #remove empty strings
         file_in.readline()
@@ -105,6 +121,11 @@ def SRW_to_wind_data(filename):
         data_dict['heights'] = [float(i) for i in heights]
         data_dict['fields'] = []
 
+        # sets appropriate field names for NASA POWER vs Wind Toolkit data
+        if source == 'NASA/POWER':
+            field_names = ('temperature', 'pres', 'speed', 'direction')
+        else:
+            field_names = ('temperature', 'pressure', 'speed', 'direction')
         for field_name in fields:
             if field_name.lower() not in field_names:
                 raise ValueError(field_name.lower() + " required for wind data")
@@ -115,9 +136,8 @@ def SRW_to_wind_data(filename):
         for row in reader:
             row = [i for i in row if i] #remove empty strings
             data_dict['data'].append([float(i) for i in row])
-
+        
         return data_dict
-
 
 def URDBv7_to_ElectricityRates(urdb_response):
     """
@@ -132,6 +152,8 @@ def URDBv7_to_ElectricityRates(urdb_response):
         https://openei.org/services/doc/rest/util_rates/?version=7
     :return: dictionary for PySAM.UtilityRate5.UtilityRate5.ElectricityRates
     """
+    warnings.warn("ResourceTools.URDBv7_to_ElectricityRates is deprecated. Please use UtilityRateTools.URDBv8_to_ElectricityRates instead.", DeprecationWarning)
+
     urdb_data = dict()
     urdb_data['en_electricity_rates'] = 1
 
@@ -211,7 +233,7 @@ def URDBv7_to_ElectricityRates(urdb_response):
         fixed_charge = urdb_response['fixedchargefirstmeter']
         fixed_charge_units = urdb_response['fixedchargeunits']
         if fixed_charge_units == "$/day":
-            fixed_charge *= 365 / 30
+            fixed_charge *= 365 / 12
         elif fixed_charge_units == "$/year":
             fixed_charge /= 12
         urdb_data['ur_monthly_fixed_charge'] = fixed_charge
@@ -223,7 +245,7 @@ def URDBv7_to_ElectricityRates(urdb_response):
             urdb_data['ur_annual_min_charge'] = min_charge
         else:
             if min_charge_units == "$/day":
-                min_charge *= 365 / 30
+                min_charge *= 365 / 12
             urdb_data['ur_monthly_min_charge'] = min_charge
 
     try_get_schedule('energyweekdayschedule', 'ur_ec_sched_weekday')
@@ -240,18 +262,29 @@ def URDBv7_to_ElectricityRates(urdb_response):
         urdb_data['ur_dc_enable'] = 1
         flat_mat = []
         flat_demand = urdb_response['flatdemandmonths']
-        for month, tier in enumerate(flat_demand):
-            periods = [r for r in flat_demand_structure if r[0] == int(tier + 1)]
-            if len(periods) > 1:
-                raise ValueError("flat demand rate structure does not support multiple periods per month")
-            month_row = []
-            for p in periods:
+        for month, period in enumerate(flat_demand):
+            tiers = []
+            for r in flat_demand_structure:
+                if r[0] == int(period + 1):
+                    tiers.append(r)
+                    
+            if len(tiers) == 0:
+                raise ValueError("flatdemandstructure missing period number ", period)
+            for t in tiers:
+                month_row = []
                 month_row.append(month)
-                month_row += [p[i] for i in (1, 2, 3)]
-            flat_mat.append(month_row)
+                month_row += [t[i] for i in (1, 2, 3)]
+                flat_mat.append(month_row)
         urdb_data['ur_dc_flat_mat'] = flat_mat
+    # Fill out an empty flat rate structure if the rate has TOU demand but not flat demand    
     elif "demandratestructure" in urdb_response.keys():
         urdb_data['ur_dc_enable'] = 1
+        # Enumerate a dc_flat table with $0/kW in 12 months
+        flat_mat = []
+        for i in range(0, 12):
+            month_mat = [i, 1, 1e38, 0]
+            flat_mat.append(month_mat)
+        urdb_data['ur_dc_flat_mat'] = flat_mat
     else:
         urdb_data['ur_dc_enable'] = 0
 
@@ -262,7 +295,6 @@ def URDBv7_to_ElectricityRates(urdb_response):
 
     return urdb_data
 
-
 class FetchResourceFiles():
     """
     Download solar and wind resource files from NREL developer network
@@ -272,7 +304,7 @@ class FetchResourceFiles():
         'wind' for NREL WIND Toolkit at https://developer.nrel.gov/docs/wind/wind-toolkit/wtk-download/.
         'solar' for NREL NSRDB at https://developer.nrel.gov/docs/solar/nsrdb/nsrdb_data_query/
 
-    !param str nrel_api_key: *Required* NREL developer API key, available at https://developer.nrel.gov/signup/.
+    :param str nrel_api_key: *Required* NREL developer API key, available at https://developer.nrel.gov/signup/.
 
     :param str nrel_api_email: *Required* Email address associated with nrel_api_key.
 
@@ -523,7 +555,7 @@ class FetchResourceFiles():
 
         # --- Intialize File Path ---
         file_path = os.path.join(
-            self.SAM_resource_dir, "windtoolkit_{}_{}_{}min_{}m_{}.srw".format(lat, lon, self.resource_interval_min, self.resource_height, self.resource_year))
+            self.SAM_resource_dir, "windtoolkit_{}_{}_{}min_{}m_{}.csv".format(lat, lon, self.resource_interval_min, self.resource_height, self.resource_year))
 
         # --- See if file path already exists ---
         if os.path.exists(file_path):
@@ -543,10 +575,9 @@ class FetchResourceFiles():
             data_response = retry_session.get(data_url, verify=certifi.where())
 
             if data_response.ok:
-                # --- Convert response to string, read as pandas df, write to csv ---
-                raw_csv = io.StringIO(data_response.text)
-                df = self._csv_to_srw(raw_csv)
-                df.to_csv(file_path, index=False, header=False, na_rep='')
+                # --- Write response to file ---
+                with open(file_path, 'w') as f:
+                    f.write(data_response.text)
                 if self.verbose:
                     print('Success! File downloaded to {}.'.format(file_path))
                 return file_path

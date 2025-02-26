@@ -69,13 +69,25 @@ PVSnowModel_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef PVSnowModel_methods[] = {
 		{"assign",            (PyCFunction)PVSnowModel_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``PVSnowModel_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``PVSnowModel_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)PVSnowModel_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``PVSnowModel_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``PVSnowModel_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)PVSnowModel_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
+
+static PyObject *
+PVSnowModel_get_snow_slide_coefficient(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Snowmodel_PVSnowModel_snow_slide_coefficient_nget, self->data_ptr);
+}
+
+static int
+PVSnowModel_set_snow_slide_coefficient(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Snowmodel_PVSnowModel_snow_slide_coefficient_nset, self->data_ptr);
+}
 
 static PyObject *
 PVSnowModel_get_snowdepth(VarGroupObject *self, void *closure)
@@ -174,29 +186,32 @@ PVSnowModel_set_wspd(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyGetSetDef PVSnowModel_getset[] = {
+{"snow_slide_coefficient", (getter)PVSnowModel_get_snow_slide_coefficient,(setter)PVSnowModel_set_snow_slide_coefficient,
+	PyDoc_STR("*float*: Snow Slide Coefficient\n\n**Required:**\nFalse. Automatically set to 1.97 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
 {"snowdepth", (getter)PVSnowModel_get_snowdepth,(setter)PVSnowModel_set_snowdepth,
-	PyDoc_STR("*sequence*: Snow Depth [cm]\n\n*Constraints*: LENGTH=8760\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Snow Depth [cm]\n\n**Constraints:**\nLENGTH=8760\n\n**Required:**\nTrue"),
  	NULL},
 {"subarray1_nmody", (getter)PVSnowModel_get_subarray1_nmody,(setter)PVSnowModel_set_subarray1_nmody,
-	PyDoc_STR("*float*: Number of Modules in a Row\n\n*Required*: True"),
+	PyDoc_STR("*float*: Number of Modules in a Row\n\n**Required:**\nTrue"),
  	NULL},
 {"subarray1_poa_shaded", (getter)PVSnowModel_get_subarray1_poa_shaded,(setter)PVSnowModel_set_subarray1_poa_shaded,
-	PyDoc_STR("*sequence*: Plane of Array Incidence [W/m^2]\n\n*Constraints*: LENGTH=8760\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Plane of Array Incidence [W/m^2]\n\n**Constraints:**\nLENGTH=8760\n\n**Required:**\nTrue"),
  	NULL},
 {"subarray1_surf_tilt", (getter)PVSnowModel_get_subarray1_surf_tilt,(setter)PVSnowModel_set_subarray1_surf_tilt,
-	PyDoc_STR("*sequence*: Surface Tilt [Degrees]\n\n*Constraints*: LENGTH=8760\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Surface Tilt [Degrees]\n\n**Constraints:**\nLENGTH=8760\n\n**Required:**\nTrue"),
  	NULL},
 {"subarray1_tilt", (getter)PVSnowModel_get_subarray1_tilt,(setter)PVSnowModel_set_subarray1_tilt,
-	PyDoc_STR("*float*: Base tilt [Degrees]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Base tilt [Degrees]\n\n**Required:**\nTrue"),
  	NULL},
 {"subarray1_track_mode", (getter)PVSnowModel_get_subarray1_track_mode,(setter)PVSnowModel_set_subarray1_track_mode,
-	PyDoc_STR("*float*: Tracking Mode\n\n*Required*: True"),
+	PyDoc_STR("*float*: Tracking Mode\n\n**Required:**\nTrue"),
  	NULL},
 {"tdry", (getter)PVSnowModel_get_tdry,(setter)PVSnowModel_set_tdry,
-	PyDoc_STR("*sequence*: Ambient Temperature [Degrees Celsius]\n\n*Constraints*: LENGTH=8760\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Ambient Temperature [Degrees Celsius]\n\n**Constraints:**\nLENGTH=8760\n\n**Required:**\nTrue"),
  	NULL},
 {"wspd", (getter)PVSnowModel_get_wspd,(setter)PVSnowModel_set_wspd,
-	PyDoc_STR("*sequence*: Wind Speed [m/s]\n\n*Constraints*: LENGTH=8760\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Wind Speed [m/s]\n\n**Constraints:**\nLENGTH=8760\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -311,11 +326,11 @@ TimeSeries_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef TimeSeries_methods[] = {
 		{"assign",            (PyCFunction)TimeSeries_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``TimeSeries_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``TimeSeries_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)TimeSeries_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``TimeSeries_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``TimeSeries_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)TimeSeries_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -345,10 +360,10 @@ TimeSeries_set_sunup(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef TimeSeries_getset[] = {
 {"hourly_gen", (getter)TimeSeries_get_hourly_gen,(setter)TimeSeries_set_hourly_gen,
-	PyDoc_STR("*sequence*: Hourly Energy [kwh]\n\n*Constraints*: LENGTH=8760\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Hourly Energy [kwh]\n\n**Constraints:**\nLENGTH=8760\n\n**Required:**\nTrue"),
  	NULL},
 {"sunup", (getter)TimeSeries_get_sunup,(setter)TimeSeries_set_sunup,
-	PyDoc_STR("*sequence*: Sun up over horizon [0/1]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Sun up over horizon [0/1]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -463,11 +478,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -509,7 +524,7 @@ Outputs_get_monthly_energy_before_snow(VarGroupObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	PyDoc_STR("*float*: Annual Energy [kwh]"),
+	PyDoc_STR("*float*: Annual AC energy in Year 1 [kwh]"),
  	NULL},
 {"annual_energy_before_snow", (getter)Outputs_get_annual_energy_before_snow,(setter)0,
 	PyDoc_STR("*float*: Annual Energy Without Snow Losses [kwh]"),
@@ -521,7 +536,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Hourly Energy [kwh]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	PyDoc_STR("*sequence*: Monthly Energy [kwh]"),
+	PyDoc_STR("*sequence*: Monthly AC energy in Year 1 [kwh]"),
  	NULL},
 {"monthly_energy_before_snow", (getter)Outputs_get_monthly_energy_before_snow,(setter)0,
 	PyDoc_STR("*sequence*: Monthly Energy Without Snow Loss [kwh]"),
@@ -621,6 +636,14 @@ Snowmodel_dealloc(CmodObject *self)
 
 
 static PyObject *
+Snowmodel_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Snowmodel_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -697,6 +720,8 @@ static PyMethodDef Snowmodel_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Snowmodel_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Snowmodel_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -855,12 +880,11 @@ static PyMethodDef SnowmodelModule_methods[] = {
 		{"new",             Snowmodel_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Snowmodel")},
 		{"default",             Snowmodel_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Snowmodel\n\nUse default attributes\n"
-				"None")},
+				PyDoc_STR("default(config) -> Snowmodel\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Snowmodel_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Snowmodel\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Snowmodel\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Snowmodel_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Snowmodel\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Snowmodel\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

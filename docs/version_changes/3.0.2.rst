@@ -1,0 +1,81 @@
+.. 3.0.2:
+
+Version 3.0.2
+===============================================
+
+This page compares the PySAM Modules' input variables and the defaults for these input variables 
+between the current release and the last release.
+
+This helps track which variables and defaults have changed between releases to make it easier to notify users during version upgrade.
+
+Below are lists for each PySAM Module:
+    1. New Default configurations
+    2. Removed Default configurations
+    3. Modified Variables: New variables, Removed variables and Type-changed variables
+    4. Modified Default Values
+
+Battery
+************************************************
+
+:doc:`../modules/Battery` Modified Input Variables:
+
+    New variables:
+
+         - mp_ancserv1_revenue_single
+         - mp_ancserv2_revenue_single
+         - mp_ancserv3_revenue_single
+         - mp_ancserv4_revenue_single
+         - mp_enable_ancserv1_percent_gen
+         - mp_enable_ancserv2_percent_gen
+         - mp_enable_ancserv3_percent_gen
+         - mp_enable_ancserv4_percent_gen
+         - mp_enable_market_percent_gen
+         - mp_energy_market_revenue_single
+         - ppa_escalation
+
+
+LinearFresnelDsgIph
+************************************************
+
+:doc:`../modules/LinearFresnelDsgIph` Modified Input Variables:
+
+    New variables:
+
+         - deltaT_subcooled
+         - use_quality_or_subcooled
+
+    Removed variables:
+
+         - T_hot
+
+
+Merchantplant
+************************************************
+
+:doc:`../modules/Merchantplant` Modified Input Variables:
+
+    New variables:
+
+         - gen_without_battery
+
+
+Pvsamv1
+************************************************
+
+:doc:`../modules/Pvsamv1` Modified Input Variables:
+
+    New variables:
+
+         - mp_ancserv1_revenue_single
+         - mp_ancserv2_revenue_single
+         - mp_ancserv3_revenue_single
+         - mp_ancserv4_revenue_single
+         - mp_enable_ancserv1_percent_gen
+         - mp_enable_ancserv2_percent_gen
+         - mp_enable_ancserv3_percent_gen
+         - mp_enable_ancserv4_percent_gen
+         - mp_enable_market_percent_gen
+         - mp_energy_market_revenue_single
+         - ppa_escalation
+
+

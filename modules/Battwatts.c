@@ -69,11 +69,11 @@ Lifetime_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Lifetime_methods[] = {
 		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Lifetime_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Lifetime_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Lifetime_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Lifetime_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Lifetime_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -103,10 +103,10 @@ Lifetime_set_system_use_lifetime_output(VarGroupObject *self, PyObject *value, v
 
 static PyGetSetDef Lifetime_getset[] = {
 {"analysis_period", (getter)Lifetime_get_analysis_period,(setter)Lifetime_set_analysis_period,
-	PyDoc_STR("*float*: Lifetime analysis period [years]\n\n*Info*: The number of years in the simulation\n\n*Required*: True if system_use_lifetime_output=1"),
+	PyDoc_STR("*float*: Lifetime analysis period [years]\n\n**Info:**\nThe number of years in the simulation\n\n**Required:**\nRequired if system_use_lifetime_output=1"),
  	NULL},
 {"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
-	PyDoc_STR("*float*: Enable lifetime simulation [0/1]\n\n*Options*: 0=SingleYearRepeated,1=RunEveryYear\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable lifetime simulation [0/1]\n\n**Options:**\n0=SingleYearRepeated,1=RunEveryYear\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -221,11 +221,11 @@ Battery_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Battery_methods[] = {
 		{"assign",            (PyCFunction)Battery_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Battery_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Battery_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Battery_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Battery_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Battery_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Battery_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -378,25 +378,25 @@ static PyGetSetDef Battery_getset[] = {
 	PyDoc_STR("*sequence*: AC inverter power [W]"),
  	NULL},
 {"batt_custom_dispatch", (getter)Battery_get_batt_custom_dispatch,(setter)Battery_set_batt_custom_dispatch,
-	PyDoc_STR("*sequence*: Battery Dispatch [kW]\n\n*Required*: True if batt_simple_dispatch=2"),
+	PyDoc_STR("*sequence*: Battery Dispatch [kW]\n\n**Required:**\nRequired if batt_simple_dispatch=2"),
  	NULL},
 {"batt_simple_chemistry", (getter)Battery_get_batt_simple_chemistry,(setter)Battery_set_batt_simple_chemistry,
-	PyDoc_STR("*float*: Battery Chemistry [0=LeadAcid,1=Li-ion/2]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Battery Chemistry [0=LeadAcid,1=Li-ion/2]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"batt_simple_dispatch", (getter)Battery_get_batt_simple_dispatch,(setter)Battery_set_batt_simple_dispatch,
-	PyDoc_STR("*float*: Battery Dispatch [0=PeakShavingLookAhead,1=PeakShavingLookBehind,2=Custom]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Battery Dispatch [0=PeakShavingLookAhead,1=PeakShavingLookBehind,2=Custom]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"batt_simple_enable", (getter)Battery_get_batt_simple_enable,(setter)Battery_set_batt_simple_enable,
-	PyDoc_STR("*float*: Enable Battery [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable Battery [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"batt_simple_kw", (getter)Battery_get_batt_simple_kw,(setter)Battery_set_batt_simple_kw,
-	PyDoc_STR("*float*: Battery Power [kW]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Battery Power [kW]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"batt_simple_kwh", (getter)Battery_get_batt_simple_kwh,(setter)Battery_set_batt_simple_kwh,
-	PyDoc_STR("*float*: Battery Capacity [kWh]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Battery Capacity [kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"batt_simple_meter_position", (getter)Battery_get_batt_simple_meter_position,(setter)Battery_set_batt_simple_meter_position,
-	PyDoc_STR("*float*: Battery Meter Position [0=BehindTheMeter,1=FrontOfMeter]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Battery Meter Position [0=BehindTheMeter,1=FrontOfMeter]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"crit_load", (getter)Battery_get_crit_load,(setter)Battery_set_crit_load,
 	PyDoc_STR("*sequence*: Critical electricity load (year 1) [kW]"),
@@ -405,7 +405,7 @@ static PyGetSetDef Battery_getset[] = {
 	PyDoc_STR("*sequence*: DC array power [W]"),
  	NULL},
 {"inverter_efficiency", (getter)Battery_get_inverter_efficiency,(setter)Battery_set_inverter_efficiency,
-	PyDoc_STR("*float*: Inverter Efficiency [%]\n\n*Constraints*: MIN=0,MAX=100"),
+	PyDoc_STR("*float*: Inverter Efficiency [%]\n\n**Constraints:**\nMIN=0,MAX=100"),
  	NULL},
 {"load", (getter)Battery_get_load,(setter)Battery_set_load,
 	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]"),
@@ -523,11 +523,11 @@ Load_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Load_methods[] = {
 		{"assign",            (PyCFunction)Load_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Load_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Load_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Load_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Load_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Load_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Load_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -569,13 +569,13 @@ Load_set_run_resiliency_calcs(VarGroupObject *self, PyObject *value, void *closu
 
 static PyGetSetDef Load_getset[] = {
 {"grid_outage", (getter)Load_get_grid_outage,(setter)Load_set_grid_outage,
-	PyDoc_STR("*sequence*: Timesteps with grid outage [0/1]\n\n*Options*: 0=GridAvailable,1=GridUnavailable,Length=load"),
+	PyDoc_STR("*sequence*: Grid outage in this time step [0/1]\n\n**Options:**\n0=GridAvailable,1=GridUnavailable,Length=load"),
  	NULL},
 {"load_escalation", (getter)Load_get_load_escalation,(setter)Load_set_load_escalation,
-	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"run_resiliency_calcs", (getter)Load_get_run_resiliency_calcs,(setter)Load_set_run_resiliency_calcs,
-	PyDoc_STR("*float*: Enable resilence calculations for every timestep [0/1]\n\n*Options*: 0=DisableCalcs,1=EnableCalcs\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable resilence calculations for every timestep [0/1]\n\n**Options:**\n0=DisableCalcs,1=EnableCalcs\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -690,11 +690,11 @@ GridLimits_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef GridLimits_methods[] = {
 		{"assign",            (PyCFunction)GridLimits_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``GridLimits_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``GridLimits_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)GridLimits_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``GridLimits_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``GridLimits_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)GridLimits_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -736,10 +736,10 @@ GridLimits_set_grid_interconnection_limit_kwac(VarGroupObject *self, PyObject *v
 
 static PyGetSetDef GridLimits_getset[] = {
 {"enable_interconnection_limit", (getter)GridLimits_get_enable_interconnection_limit,(setter)GridLimits_set_enable_interconnection_limit,
-	PyDoc_STR("*float*: Enable grid interconnection limit [0/1]\n\n*Info*: Enable a grid interconnection limit"),
+	PyDoc_STR("*float*: Enable grid interconnection limit [0/1]\n\n**Info:**\nEnable a grid interconnection limit"),
  	NULL},
 {"grid_curtailment", (getter)GridLimits_get_grid_curtailment,(setter)GridLimits_set_grid_curtailment,
-	PyDoc_STR("*sequence*: Grid curtailment as energy delivery limit (first year) [MW]\n\n*Required*: False"),
+	PyDoc_STR("*sequence*: Grid curtailment as energy delivery limit (first year) [MW]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"grid_interconnection_limit_kwac", (getter)GridLimits_get_grid_interconnection_limit_kwac,(setter)GridLimits_set_grid_interconnection_limit_kwac,
 	PyDoc_STR("*float*: Grid interconnection limit [kWac]"),
@@ -857,11 +857,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -986,6 +986,12 @@ Outputs_get_batt_annual_energy_system_loss(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_batt_availability_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_availability_loss_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_batt_bank_installed_capacity(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Battwatts_Outputs_batt_bank_installed_capacity_nget, self->data_ptr);
@@ -1046,9 +1052,21 @@ Outputs_get_batt_dispatch_sched(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_batt_grid_charge_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_batt_grid_charge_percent_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_batt_power(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_power_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_power_dc(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_power_dc_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1214,6 +1232,12 @@ Outputs_get_batt_to_grid(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_batt_to_inverter_dc(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_to_inverter_dc_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_batt_to_load(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_to_load_aget, self->data_ptr);
@@ -1235,6 +1259,18 @@ static PyObject *
 Outputs_get_batt_voltage_cell(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_voltage_cell_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_year1_charge_from_grid(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_batt_year1_charge_from_grid_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_year1_charge_from_system(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_batt_year1_charge_from_system_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1388,6 +1424,18 @@ Outputs_get_monthly_system_to_load(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_num_ts_load_met_by_system_lifetime(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_num_ts_load_met_by_system_lifetime_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_num_ts_load_met_by_system_yr1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_num_ts_load_met_by_system_yr1_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_outage_durations(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_outage_durations_aget, self->data_ptr);
@@ -1403,6 +1451,18 @@ static PyObject *
 Outputs_get_pdf_of_surviving(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_pdf_of_surviving_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_percent_ts_load_met_by_system_lifetime(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_percent_ts_load_met_by_system_lifetime_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_percent_ts_load_met_by_system_yr1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_percent_ts_load_met_by_system_yr1_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1439,6 +1499,12 @@ static PyObject *
 Outputs_get_system_to_batt(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_system_to_batt_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_system_to_batt_dc(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_system_to_batt_dc_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1482,7 +1548,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Battery average roundtrip efficiency [%]"),
  	NULL},
 {"avg_critical_load", (getter)Outputs_get_avg_critical_load,(setter)0,
-	PyDoc_STR("*float*: Average critical load met for resilience [kWh]"),
+	PyDoc_STR("*float*: Hours of autonomy during grid outage critical load met [kWh]"),
  	NULL},
 {"batt_DOD", (getter)Outputs_get_batt_DOD,(setter)0,
 	PyDoc_STR("*sequence*: Battery cycle depth of discharge [%]"),
@@ -1514,6 +1580,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"batt_annual_energy_system_loss", (getter)Outputs_get_batt_annual_energy_system_loss,(setter)0,
 	PyDoc_STR("*sequence*: Battery annual system energy loss [kWh]"),
  	NULL},
+{"batt_availability_loss", (getter)Outputs_get_batt_availability_loss,(setter)0,
+	PyDoc_STR("*sequence*: Battery availability loss [%]"),
+ 	NULL},
 {"batt_bank_installed_capacity", (getter)Outputs_get_batt_bank_installed_capacity,(setter)0,
 	PyDoc_STR("*float*: Battery bank installed capacity [kWh]"),
  	NULL},
@@ -1544,8 +1613,14 @@ static PyGetSetDef Outputs_getset[] = {
 {"batt_dispatch_sched", (getter)Outputs_get_batt_dispatch_sched,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Battery dispatch schedule"),
  	NULL},
+{"batt_grid_charge_percent", (getter)Outputs_get_batt_grid_charge_percent,(setter)0,
+	PyDoc_STR("*float*: Battery charge energy charged from grid [%]"),
+ 	NULL},
 {"batt_power", (getter)Outputs_get_batt_power,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to/from battery [kW]"),
+	PyDoc_STR("*sequence*: Electricity to/from battery AC [kW]"),
+ 	NULL},
+{"batt_power_dc", (getter)Outputs_get_batt_power_dc,(setter)0,
+	PyDoc_STR("*sequence*: Electricity to/from battery DC [kW]"),
  	NULL},
 {"batt_power_target", (getter)Outputs_get_batt_power_target,(setter)0,
 	PyDoc_STR("*sequence*: Electricity battery power target for automated dispatch [kW]"),
@@ -1626,13 +1701,16 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Battery temperature [C]"),
  	NULL},
 {"batt_to_grid", (getter)Outputs_get_batt_to_grid,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to grid from battery [kW]"),
+	PyDoc_STR("*sequence*: Electricity to grid from battery AC [kW]"),
+ 	NULL},
+{"batt_to_inverter_dc", (getter)Outputs_get_batt_to_inverter_dc,(setter)0,
+	PyDoc_STR("*sequence*: Electricity to inverter from battery DC [kW]"),
  	NULL},
 {"batt_to_load", (getter)Outputs_get_batt_to_load,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to load from battery [kW]"),
+	PyDoc_STR("*sequence*: Electricity to load from battery AC [kW]"),
  	NULL},
 {"batt_to_system_load", (getter)Outputs_get_batt_to_system_load,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to system loads from battery [kW]"),
+	PyDoc_STR("*sequence*: Electricity to system loads from battery AC [kW]"),
  	NULL},
 {"batt_voltage", (getter)Outputs_get_batt_voltage,(setter)0,
 	PyDoc_STR("*sequence*: Battery voltage [V]"),
@@ -1640,8 +1718,14 @@ static PyGetSetDef Outputs_getset[] = {
 {"batt_voltage_cell", (getter)Outputs_get_batt_voltage_cell,(setter)0,
 	PyDoc_STR("*sequence*: Battery cell voltage [V]"),
  	NULL},
+{"batt_year1_charge_from_grid", (getter)Outputs_get_batt_year1_charge_from_grid,(setter)0,
+	PyDoc_STR("*float*: Battery annual energy charged from grid (year 1) [kWh]"),
+ 	NULL},
+{"batt_year1_charge_from_system", (getter)Outputs_get_batt_year1_charge_from_system,(setter)0,
+	PyDoc_STR("*float*: Battery annual energy charged from system (year 1) [kWh]"),
+ 	NULL},
 {"cdf_of_surviving", (getter)Outputs_get_cdf_of_surviving,(setter)0,
-	PyDoc_STR("*sequence*: Cumulative probabilities of autonomous hours for resilience"),
+	PyDoc_STR("*sequence*: Hours of autonomy during grid outage cumulative probabilities"),
  	NULL},
 {"crit_load", (getter)Outputs_get_crit_load,(setter)0,
 	PyDoc_STR("*sequence*: Critical load in this timestep [kW]"),
@@ -1650,7 +1734,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Critical load unmet in this timestep [kW]"),
  	NULL},
 {"fuelcell_to_batt", (getter)Outputs_get_fuelcell_to_batt,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to battery from fuel cell [kW]"),
+	PyDoc_STR("*sequence*: Electricity to battery from fuel cell AC [kW]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
 	PyDoc_STR("*sequence*: System power generated [kW]"),
@@ -1659,22 +1743,22 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Power produced without the battery or curtailment [kW]"),
  	NULL},
 {"grid_power", (getter)Outputs_get_grid_power,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to/from grid [kW]"),
+	PyDoc_STR("*sequence*: Electricity to/from grid AC [kW]"),
  	NULL},
 {"grid_power_target", (getter)Outputs_get_grid_power_target,(setter)0,
 	PyDoc_STR("*sequence*: Electricity grid power target for automated dispatch [kW]"),
  	NULL},
 {"grid_to_batt", (getter)Outputs_get_grid_to_batt,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to battery from grid [kW]"),
+	PyDoc_STR("*sequence*: Electricity to battery from grid AC [kW]"),
  	NULL},
 {"grid_to_load", (getter)Outputs_get_grid_to_load,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to load from grid [kW]"),
+	PyDoc_STR("*sequence*: Electricity to load from grid AC [kW]"),
  	NULL},
 {"interconnection_loss", (getter)Outputs_get_interconnection_loss,(setter)0,
-	PyDoc_STR("*sequence*: Electricity loss due to curtailment, interconnection, or outage [kW]"),
+	PyDoc_STR("*sequence*: Electricity loss due to curtailment interconnection outage [kW]"),
  	NULL},
 {"market_sell_rate_series_yr1", (getter)Outputs_get_market_sell_rate_series_yr1,(setter)0,
-	PyDoc_STR("*sequence*: Market sell rate (Year 1) [$/MWh]"),
+	PyDoc_STR("*sequence*: Power price for battery dispatch [$/MWh]"),
  	NULL},
 {"monthly_batt_to_grid", (getter)Outputs_get_monthly_batt_to_grid,(setter)0,
 	PyDoc_STR("*sequence*: Energy to grid from battery [kWh]"),
@@ -1715,38 +1799,53 @@ static PyGetSetDef Outputs_getset[] = {
 {"monthly_system_to_load", (getter)Outputs_get_monthly_system_to_load,(setter)0,
 	PyDoc_STR("*sequence*: Energy to load from system [kWh]"),
  	NULL},
+{"num_ts_load_met_by_system_lifetime", (getter)Outputs_get_num_ts_load_met_by_system_lifetime,(setter)0,
+	PyDoc_STR("*float*: Number of timesteps electric load met by system (lifetime)"),
+ 	NULL},
+{"num_ts_load_met_by_system_yr1", (getter)Outputs_get_num_ts_load_met_by_system_yr1,(setter)0,
+	PyDoc_STR("*float*: Number of timesteps electric load met by system (year 1)"),
+ 	NULL},
 {"outage_durations", (getter)Outputs_get_outage_durations,(setter)0,
-	PyDoc_STR("*sequence*: List of autonomous hours for resilience from min to max [hr]"),
+	PyDoc_STR("*sequence*: Hours of autonomy during grid outage hour list from min to max [hr]"),
  	NULL},
 {"outage_losses_unmet", (getter)Outputs_get_outage_losses_unmet,(setter)0,
 	PyDoc_STR("*sequence*: Battery and system losses unmet in this timestep [kW]"),
  	NULL},
 {"pdf_of_surviving", (getter)Outputs_get_pdf_of_surviving,(setter)0,
-	PyDoc_STR("*sequence*: Probabilities of autonomous hours for resilience "),
+	PyDoc_STR("*sequence*: Hours of autonomy during grid outage probabilities"),
+ 	NULL},
+{"percent_ts_load_met_by_system_lifetime", (getter)Outputs_get_percent_ts_load_met_by_system_lifetime,(setter)0,
+	PyDoc_STR("*float*: Percent of timesteps electric load met by system (lifetime)"),
+ 	NULL},
+{"percent_ts_load_met_by_system_yr1", (getter)Outputs_get_percent_ts_load_met_by_system_yr1,(setter)0,
+	PyDoc_STR("*float*: Percent of timesteps electric load met by system (year 1)"),
  	NULL},
 {"resilience_hrs", (getter)Outputs_get_resilience_hrs,(setter)0,
-	PyDoc_STR("*sequence*: Hours of autonomy during outage at each timestep for resilience [hr]"),
+	PyDoc_STR("*sequence*: Hours of autonomy during grid outage at each timestep [hr]"),
  	NULL},
 {"resilience_hrs_avg", (getter)Outputs_get_resilience_hrs_avg,(setter)0,
-	PyDoc_STR("*float*: Avg hours of autonomy for resilience [hr]"),
+	PyDoc_STR("*float*: Hours of autonomy during grid outage average [hr]"),
  	NULL},
 {"resilience_hrs_max", (getter)Outputs_get_resilience_hrs_max,(setter)0,
-	PyDoc_STR("*float*: Max hours of autonomy for resilience [hr]"),
+	PyDoc_STR("*float*: Hours of autonomy during grid outage maximum [hr]"),
  	NULL},
 {"resilience_hrs_min", (getter)Outputs_get_resilience_hrs_min,(setter)0,
-	PyDoc_STR("*float*: Min hours of autonomy for resilience  [hr]"),
+	PyDoc_STR("*float*: Hours of autonomy during grid outage minimum [hr]"),
  	NULL},
 {"survival_function", (getter)Outputs_get_survival_function,(setter)0,
-	PyDoc_STR("*sequence*: Survival function of autonomous hours for resilience"),
+	PyDoc_STR("*sequence*: Hours of autonomy during grid outage survival function"),
  	NULL},
 {"system_to_batt", (getter)Outputs_get_system_to_batt,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to battery from system [kW]"),
+	PyDoc_STR("*sequence*: Electricity to battery from system AC [kW]"),
+ 	NULL},
+{"system_to_batt_dc", (getter)Outputs_get_system_to_batt_dc,(setter)0,
+	PyDoc_STR("*sequence*: Electricity to battery from system DC [kW]"),
  	NULL},
 {"system_to_grid", (getter)Outputs_get_system_to_grid,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to grid from system [kW]"),
+	PyDoc_STR("*sequence*: Electricity to grid from system AC [kW]"),
  	NULL},
 {"system_to_load", (getter)Outputs_get_system_to_load,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to load from system [kW]"),
+	PyDoc_STR("*sequence*: Electricity to load from system AC [kW]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1823,6 +1922,21 @@ newBattwattsObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Load", Load_obj);
 	Py_DECREF(Load_obj);
 
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+
+	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
+	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
+	Py_XDECREF(data_cap);
+	Py_XDECREF(AdjustmentFactorsModule);
+
+	if (!Adjust_obj){
+		PyErr_SetString(PyExc_Exception, "Couldn't create AdjustmentFactorsObject\n");
+		return NULL;
+	}
+
+	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
+	Py_DECREF(Adjust_obj);
+
 	PyObject* GridLimits_obj = GridLimits_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "GridLimits", GridLimits_obj);
 	Py_DECREF(GridLimits_obj);
@@ -1847,6 +1961,14 @@ Battwatts_dealloc(CmodObject *self)
 		PySAM_has_error(error);
 	}
 	PyObject_Del(self);
+}
+
+
+static PyObject *
+Battwatts_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
 }
 
 
@@ -1927,6 +2049,8 @@ static PyMethodDef Battwatts_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Battwatts_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)Battwatts_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2085,12 +2209,11 @@ static PyMethodDef BattwattsModule_methods[] = {
 		{"new",             Battwatts_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Battwatts")},
 		{"default",             Battwatts_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Battwatts\n\nUse default attributes\n"
-				"`config` options:\n\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"")},
+				PyDoc_STR("default(config) -> Battwatts\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"PVWattsBatteryCommercial\"*\n\n		- *\"PVWattsBatteryHostDeveloper\"*\n\n		- *\"PVWattsBatteryResidential\"*\n\n		- *\"PVWattsBatteryThirdParty\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Battwatts_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Battwatts\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Battwatts\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Battwatts_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Battwatts\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Battwatts\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

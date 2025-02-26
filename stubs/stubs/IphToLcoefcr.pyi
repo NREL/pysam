@@ -1,45 +1,3 @@
-class IPHLCOH(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	annual_electricity_consumption = float
-	electricity_rate = float
-
-
-class SimpleLCOE(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	fixed_operating_cost = float
-
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-
-
 class IphToLcoefcr(object):
 	def assign(self, dict):
 		pass
@@ -56,15 +14,57 @@ class IphToLcoefcr(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
 	def __init__(self, *args, **kwargs):
 		pass
 
-	IPHLCOH = IPHLCOH
-	SimpleLCOE = SimpleLCOE
-	Outputs = Outputs
+	class IPHLCOH(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		annual_electricity_consumption = float
+		electricity_rate = float
+
+
+	class SimpleLCOE(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		fixed_operating_cost = float
+
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+
+
 
 
 def default(config) -> IphToLcoefcr:

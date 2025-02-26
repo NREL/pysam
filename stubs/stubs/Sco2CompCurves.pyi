@@ -1,41 +1,3 @@
-class Common(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	P_comp_in = float
-	T_comp_in = float
-	comp_type = float
-
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	eta = tuple
-	eta_ND = tuple
-	eta_norm_design = float
-	phi = tuple
-	phi_ND = tuple
-	phi_design = float
-	psi = tuple
-	psi_ND = tuple
-	psi_design = float
-
-
 class Sco2CompCurves(object):
 	def assign(self, dict):
 		pass
@@ -52,14 +14,53 @@ class Sco2CompCurves(object):
 	def export(self):
 		pass
 
+	def get_data_ptr(self):
+		pass
+
 	def __getattribute__(self, *args, **kwargs):
 		pass
 
 	def __init__(self, *args, **kwargs):
 		pass
 
-	Common = Common
-	Outputs = Outputs
+	class Common(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		P_comp_in = float
+		T_comp_in = float
+		comp_type = float
+
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		eta = tuple
+		eta_ND = tuple
+		eta_norm_design = float
+		phi = tuple
+		phi_ND = tuple
+		phi_design = float
+		psi = tuple
+		psi_ND = tuple
+		psi_design = float
+
+
 
 
 def default(config) -> Sco2CompCurves:

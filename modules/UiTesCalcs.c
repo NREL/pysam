@@ -69,11 +69,11 @@ Common_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Common_methods[] = {
 		{"assign",            (PyCFunction)Common_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Common_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Common_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Common_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Common_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Common_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Common_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -247,46 +247,46 @@ Common_set_u_tank(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Common_getset[] = {
 {"P_ref", (getter)Common_get_P_ref,(setter)Common_set_P_ref,
-	PyDoc_STR("*float*: Power cycle output at design [MWe]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Power cycle output at design [MWe]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_htf_cold_des", (getter)Common_get_T_htf_cold_des,(setter)Common_set_T_htf_cold_des,
-	PyDoc_STR("*float*: Cold design HTF temp into field [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Cold design HTF temp into field [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_htf_hot_des", (getter)Common_get_T_htf_hot_des,(setter)Common_set_T_htf_hot_des,
-	PyDoc_STR("*float*: Hot design HTF temp from field [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Hot design HTF temp from field [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"design_eff", (getter)Common_get_design_eff,(setter)Common_set_design_eff,
-	PyDoc_STR("*float*: Power cycle thermal efficiency\n\n*Required*: True"),
+	PyDoc_STR("*float*: Power cycle thermal efficiency\n\n**Required:**\nTrue"),
  	NULL},
 {"dt_hot", (getter)Common_get_dt_hot,(setter)Common_set_dt_hot,
-	PyDoc_STR("*float*: Heat exchanger approach temperature\n\n*Required*: True"),
+	PyDoc_STR("*float*: Heat exchanger approach temperature\n\n**Required:**\nTrue"),
  	NULL},
 {"field_fl_props", (getter)Common_get_field_fl_props,(setter)Common_set_field_fl_props,
-	PyDoc_STR("*sequence[sequence]*: User defined field fluid prop data\n\n*Info*: 7 columns (T,Cp,dens,visc,kvisc,cond,h), at least 3 rows\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: User defined field fluid prop data\n\n**Info:**\n7 columns (T,Cp,dens,visc,kvisc,cond,h), at least 3 rows\n\n**Required:**\nTrue"),
  	NULL},
 {"field_fluid", (getter)Common_get_field_fluid,(setter)Common_set_field_fluid,
-	PyDoc_STR("*float*: Field fluid code\n\n*Required*: True"),
+	PyDoc_STR("*float*: Field fluid code\n\n**Required:**\nTrue"),
  	NULL},
 {"h_tank", (getter)Common_get_h_tank,(setter)Common_set_h_tank,
-	PyDoc_STR("*float*: Total height of tank (HTF when tank is full [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Total height of tank (HTF when tank is full [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"h_tank_min", (getter)Common_get_h_tank_min,(setter)Common_set_h_tank_min,
-	PyDoc_STR("*float*: Min. allowable HTF height in storage tank [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Min. allowable HTF height in storage tank [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"store_fl_props", (getter)Common_get_store_fl_props,(setter)Common_set_store_fl_props,
-	PyDoc_STR("*sequence[sequence]*: User defined tes storage fluid prop data\n\n*Info*: 7 columns (T,Cp,dens,visc,kvisc,cond,h), at least 3 rows\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: User defined tes storage fluid prop data\n\n**Info:**\n7 columns (T,Cp,dens,visc,kvisc,cond,h), at least 3 rows\n\n**Required:**\nTrue"),
  	NULL},
 {"store_fluid", (getter)Common_get_store_fluid,(setter)Common_set_store_fluid,
-	PyDoc_STR("*float*: TES storage fluid code\n\n*Required*: True"),
+	PyDoc_STR("*float*: TES storage fluid code\n\n**Required:**\nTrue"),
  	NULL},
 {"tank_pairs", (getter)Common_get_tank_pairs,(setter)Common_set_tank_pairs,
-	PyDoc_STR("*float*: Number of equivalent tank pairs\n\n*Required*: True"),
+	PyDoc_STR("*float*: Number of equivalent tank pairs\n\n**Required:**\nTrue"),
  	NULL},
 {"tshours", (getter)Common_get_tshours,(setter)Common_set_tshours,
-	PyDoc_STR("*float*: Hours of TES relative to q_dot_pb_des [hr]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Hours of TES relative to q_dot_pb_des [hr]\n\n**Required:**\nTrue"),
  	NULL},
 {"u_tank", (getter)Common_get_u_tank,(setter)Common_set_u_tank,
-	PyDoc_STR("*float*: Loss coefficient from the tank [W/m2-K]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Loss coefficient from the tank [W/m2-K]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -401,11 +401,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -564,6 +564,14 @@ UiTesCalcs_dealloc(CmodObject *self)
 
 
 static PyObject *
+UiTesCalcs_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 UiTesCalcs_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -640,6 +648,8 @@ static PyMethodDef UiTesCalcs_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)UiTesCalcs_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"get_data_ptr",           (PyCFunction)UiTesCalcs_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("get_data_ptr() -> Pointer\n Get ssc_data_t pointer")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -798,12 +808,11 @@ static PyMethodDef UiTesCalcsModule_methods[] = {
 		{"new",             UiTesCalcs_new,         METH_VARARGS,
 				PyDoc_STR("new() -> UiTesCalcs")},
 		{"default",             UiTesCalcs_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> UiTesCalcs\n\nUse default attributes\n"
-				"None")},
+				PyDoc_STR("default(config) -> UiTesCalcs\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             UiTesCalcs_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> UiTesCalcs\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> UiTesCalcs\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   UiTesCalcs_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> UiTesCalcs\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> UiTesCalcs\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

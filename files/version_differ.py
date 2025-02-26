@@ -7,7 +7,7 @@ import tempfile
 import os
 import json
 import tarfile
-from files.version import __version__
+from version import __version__
 
 if old_version.__version__ == __version__:
     raise RuntimeError("Script needs to be run with old release installed and new release's ssc lib under files")
@@ -34,7 +34,7 @@ resp = requests.get("https://api.github.com/repos/NREL/pysam/releases").json()
 old_release = resp[previous_release]['name']
 sam_resp = requests.get("https://api.github.com/repos/NREL/sam/tags").json()
 for r in sam_resp:
-    if r['name'] == old_release.lower().replace(' ', '-'):
+    if old_release.lower().replace(' ', '-') in r['name']:
         old_release = r['tarball_url']
         break
 print(
@@ -55,7 +55,7 @@ with tarfile.open(sam_old_file, "r:gz") as tf:
     # To save the extracted file in directory of choice with same name as downloaded file.
     file_list_old = []
     for tarinfo in tf:
-        if "defaults" in tarinfo.name and os.path.splitext(tarinfo.name)[1] == '.json':
+        if "api_autogen" in tarinfo.name and "defaults" in tarinfo.name and os.path.splitext(tarinfo.name)[1] == '.json':
             file_list_old.append(tarinfo.name)
 
 sam_path = os.environ.get('SAMNTDIR')
@@ -106,7 +106,7 @@ def get_flat_dict(defaults_json):
         if type(v) is dict:
             output.update(get_flat_dict(v))
         else:
-            if isinstance(v, Iterable):
+            if isinstance(v, Iterable) and len(v):
                 if min(v) == 0 and max(v) == 0:
                     v = [0]
             output[k] = v
@@ -243,7 +243,7 @@ old_cmod_variables = get_var_dict()
 cmod_int = set(new_cmod_variables.keys()).intersection(set(old_cmod_variables.keys()))
 
 
-for name in cmod_int:
+for name in sorted(cmod_int):
     pysam_name = "".join([s.capitalize() for s in name.split('_')])
     mod_variables = dict()
 
@@ -292,16 +292,16 @@ doc_dict = OrderedDict(sorted(doc_dict.items()))
 
 pysam_dir = os.environ.get("PYSAMDIR")
 
-with open(os.path.join(pysam_dir, "docs", "VersionChanges.rst"), "w") as f:
-    f.write('.. Version Changes:\n\n')
-    f.write(f'Changes to Modules with Version {__version__}\n')
+with open(os.path.join(pysam_dir, "docs", "version_changes", __version__ + ".rst"), "w") as f:
+    f.write(f'.. {__version__}:\n\n')
+    f.write(f'Version {__version__}\n')
     f.write('===============================================\n\n')
     f.write(f'{doc_str}\n\n')
     for cmod, changes in doc_dict.items():
         f.write(cmod + "\n")
         f.write('************************************************\n\n')
         if 'mod_variables' in changes.keys():
-            f.write(f':doc:`modules/{cmod}` Modified Input Variables:\n\n')
+            f.write(f':doc:`../modules/{cmod}` Modified Input Variables:\n\n')
             if 'Added variables' in changes['mod_variables']:
                 f.write('    New variables:\n\n')
                 for v in changes['mod_variables']['Added variables']:
@@ -318,18 +318,21 @@ with open(os.path.join(pysam_dir, "docs", "VersionChanges.rst"), "w") as f:
                     f.write(f"         - {v}\n")
                 f.write('\n')
         if 'new_defaults' in changes.keys():
-            f.write(f':doc:`modules/{cmod}` New Default files:\n\n')
+            f.write(f':doc:`../modules/{cmod}` New Default files:\n\n')
             for v in changes['new_defaults']:
                 f.write(f"     - {v}\n")
             f.write("\n")
         if 'del_defaults' in changes.keys():
-            f.write(f':doc:`modules/{cmod}` Removed Default files\n\n')
+            f.write(f':doc:`../modules/{cmod}` Removed Default files\n\n')
             for v in changes['del_defaults']:
                 f.write(f"     - {v}\n")
             f.write("\n")
         if 'mod_defaults' in changes.keys():
-            f.write(f':doc:`modules/{cmod}` Modified Default Values:\n\n')
+            f.write(f':doc:`../modules/{cmod}` Modified Default Values:\n\n')
             for k, v in changes['mod_defaults'].items():
                 f.write(f"     - {k}\n\n        {list(v.keys())}\n\n")
             f.write("\n")
         f.write('\n')
+
+    if len(doc_dict) == 0:
+        f.write(f'No changes\n')
