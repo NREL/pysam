@@ -5,6 +5,8 @@ from pathlib import Path
 import glob
 import importlib
 import PySAM.CustomGeneration as CustomGeneration
+import PySAM.Pvsamv1 as pvsamv1
+import PySAM.Battery as battery
 from pympler.tracker import SummaryTracker
 from PySAM.PySSC import PySSC
 import PySAM.WaveFileReader as wavefile
@@ -447,3 +449,30 @@ def test_run_all():
         i = importlib.import_module(mod_name)
         m = assign_values(mod, i)
         print(f"{mod} passed")
+
+def test_ssc_exceptions():
+    tests_passed = 0
+    
+    pv = pvsamv1.default("FlatPlatePVSingleOwner")
+    # Try to run the PV model without a valid weather file path - expect exception
+    try:
+        pv.execute()
+    except:
+        tests_passed += 1
+
+    batt = battery.default("StandaloneBatteryCommercial")
+    # Options are 0-2 as of PySAM 6
+    batt.BatteryCell.batt_life_model = 99
+    try:
+        batt.execute()
+    except:
+        tests_passed += 1
+
+    batt = battery.new()
+    # Test prechecks by not setting up required variables
+    try:
+        batt.execute()
+    except:
+        tests_passed += 1
+
+    assert(tests_passed == 3)
