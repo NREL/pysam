@@ -1,41 +1,99 @@
 import pyomo.environ as pyo
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 import idaes.logger as idaeslog
 from pyomo.util.infeasible import log_infeasible_constraints, log_infeasible_bounds, log_close_to_bounds
 
 solve_log = idaeslog.getInitLogger("infeasibility", idaeslog.INFO, tag="properties")
 
+# 6par_solve.h L 423
+def current_at_voltage_cec(Vmodule, IL_ref, IO_ref, RS, A_ref, RSH_ref, I_mp_ref):
+    F = 0
+    Fprime = 0
+    Iold = 0.0
+    Inew = I_mp_ref
+
+    it = 0
+    maxit = 4000
+    while (abs(Inew - Iold) > 1.0e-4 and it < maxit ):
+        Iold = Inew
+
+        F = IL_ref - Iold - IO_ref * \
+            (np.exp((Vmodule + Iold * RS) / A_ref) - 1.0) - \
+            (Vmodule + Iold * RS) / RSH_ref
+
+        Fprime = -1.0 - IO_ref * (RS / A_ref) * \
+            np.exp((Vmodule + Iold * RS) / A_ref) - \
+            (RS / RSH_ref)
+
+        Inew = max(0.0, (Iold - (F / Fprime)))
+
+    return Inew
+
+def cec_model_params_at_condition(model, Irr, T_cell_K):
+    Tc_ref = pyo.value(model.Tref)
+    a = pyo.value(model.par.a)
+    Io = pyo.value(model.par.Io)
+    eg0 = pyo.value(model.Egref)
+    Adj = pyo.value(model.par.Adj)
+    alpha = pyo.value(model.aIsc)
+    Il = pyo.value(model.par.Il)
+    Io = pyo.value(model.par.Io)
+    Rs = pyo.value(model.par.Rs)
+    Rsh = pyo.value(model.par.Rsh)
+
+    q = 1.6e-19
+    KB = 1.38e-23
+
+    I_ref = 1000
+    muIsc = alpha * (1-Adj/100)
+    
+    A_oper = a * T_cell_K / Tc_ref
+    EG = eg0 * (1-0.0002677*(T_cell_K-Tc_ref))
+    # instead of 1/KB, is 11600 in L129
+    IO_oper = Io * np.power(T_cell_K/Tc_ref, 3) * np.exp( 11600 *(eg0/Tc_ref - EG/T_cell_K) )
+    
+    Rsh_oper = Rsh*(I_ref/Irr)
+    IL_oper = Irr/I_ref *( Il + muIsc*(T_cell_K-Tc_ref) )
+    if IL_oper < 0.0:
+        IL_oper = 0.0
+    
+    return IL_oper, IO_oper, Rs, A_oper, Rsh_oper
+
+def cec_model_ivcurve(model, Irr, T_cell_K, vmax, npts):
+    I_mp_ref = pyo.value(model.Imp)
+    IL_oper, IO_oper, Rs, A_oper, Rsh_oper = cec_model_params_at_condition(model, Irr, T_cell_K)
+
+    y_I = []
+
+    V = np.linspace(0, vmax, npts)
+    for i, v in enumerate(V):
+        I = current_at_voltage_cec( v, IL_oper, IO_oper, Rs, A_oper, Rsh_oper, I_mp_ref )	
+        y_I.append(I)
+    return V, y_I
+    
 def plot_iv_curve(model):
     curves = [ [ 1000, 25, 'black' ],
-			   [ 800,  25, 'blue' ],
-			   [ 600,  25, 'red' ],
-			   [ 400,  25, 'forest green' ],
-			   [ 200,  25, 'orange' ] ];
-		
-	np = 150
-	xx = alloc(np)
-	yy = alloc(np)
+               [ 800,  25, 'blue' ],
+               [ 600,  25, 'red' ],
+               [ 400,  25, 'green' ],
+               [ 200,  25, 'orange' ] ]
+        
+    alpha = pyo.value(model.aIsc)
+    beta = pyo.value(model.bVoc)
+    vmax = pyo.value(model.Voc)
+    imax = pyo.value(model.Isc)
+    I_mp_ref = pyo.value(model.Imp)
 
-	for( i=0;i<#curves;i++ )
-	{	
-		Irr = curves[i][0];
-		Tc = curves[i][1];
-		cec_model_ivcurve( Irr, Tc,	 
-			a, Il, Io, Rs, Rsh, Adj, alpha, I_mp_ref,
-			vmax, np,
-			xx, yy );
-			
-		plot(xx,yy,{'series'=sprintf('%g W/m^2', Irr),
-			size= (Irr==1000 ? 3:1 ), "color"=curves[i][2]});
+    npts = 150
+    for curve in curves:
+        Irr = curve[0]
+        Tc = curve[1]
 
-	}
-		
-	
-	//Make the plot
-	plotopt({"title"=sprintf('IV curves at %g ^\\deg  C',Tc),"popup"=true,"backcolor"=[255,255,255],"legend"=true, 'legendpos'='bottom'});
-	axis('x1', {'label'='Voltage (V)', 'min'=0, 'max'=ceil(vmax*1.01)});
-	axis('y1', {'label'='Current (A)', 'min'=0, 'max'= (imax*1.05)});
+        x_V, y_I = cec_model_ivcurve(model, Irr, Tc + 273.15, vmax, npts)
+        plt.plot(x_V, y_I, label=f"{Irr} W/m^2", color=curve[2])
+
 
 def create_model():
     model = pyo.ConcreteModel()
@@ -50,7 +108,7 @@ def create_model():
     m.bVoc = pyo.Param(domain=pyo.Reals, mutable=True)
     m.gPmp = pyo.Param(domain=pyo.Reals, mutable=True)
     m.Egref = pyo.Param(domain=pyo.NonNegativeReals, mutable=True, initialize=1.121)
-    m.Tref = pyo.Param(domain=pyo.NonNegativeReals, mutable=True)
+    m.Tref = pyo.Param(domain=pyo.NonNegativeReals, mutable=True, units=pyo.units.K)
 
     # Module6ParNonlinear
     m.par = pyo.Block()
@@ -128,116 +186,118 @@ def create_model():
     model.scaling_factor = pyo.Suffix(direction=pyo.Suffix.EXPORT)
     return model
 
-solver = pyo.SolverFactory('ipopt')
-solver.options["max_iter"] = 5000
+if __name__ == "__main__":
 
-filename = "/Users/dguittet/Projects/SAM/sam/samples/CEC Module and Inverter Libraries/CEC Modules/CEC Modules 2024-11-14/CEC Modules 2024-Nov-15_09-53.csv"
-cec_modules_df = pd.read_csv(filename, skiprows=[1, 2])
+    solver = pyo.SolverFactory('ipopt')
+    solver.options["max_iter"] = 5000
 
-param_comparison = {
-    "index": [],
-    "a_ssc": [],
-    "Il_ssc": [],
-    "Io_ssc": [],
-    "Rs_ssc": [],
-    "Rsh_ssc": [],
-    "Adj_ssc": [],
-    "a_py": [],
-    "Il_py": [],
-    "Io_py": [],
-    "Rs_py": [],
-    "Rsh_py": [],
-    "Adj_py": []
-}
+    filename = "/Users/dguittet/Projects/SAM/sam/samples/CEC Module and Inverter Libraries/CEC Modules/CEC Modules 2024-11-14/CEC Modules 2024-Nov-15_09-53.csv"
+    cec_modules_df = pd.read_csv(filename, skiprows=[1, 2])
 
-tee = False
-IL_SCALING = 1e9
-RSH_SCALING = 1e-3
-for n, r in cec_modules_df.iterrows():
-    model = create_model()
-    m = model.solver
-    tech = r['Technology']
+    param_comparison = {
+        "index": [],
+        "a_ssc": [],
+        "Il_ssc": [],
+        "Io_ssc": [],
+        "Rs_ssc": [],
+        "Rsh_ssc": [],
+        "Adj_ssc": [],
+        "a_py": [],
+        "Il_py": [],
+        "Io_py": [],
+        "Rs_py": [],
+        "Rsh_py": [],
+        "Adj_py": []
+    }
 
-    # if r['I_mp_ref'] < r['I_sc_ref']:
-        # raise ValueError
+    tee = False
+    IL_SCALING = 1e9
+    RSH_SCALING = 1e-3
+    for n, r in cec_modules_df.iterrows():
+        model = create_model()
+        m = model.solver
+        tech = r['Technology']
 
-    m.Vmp.set_value(r['V_mp_ref'])
-    m.Imp.set_value(r['I_mp_ref'])
-    m.Voc.set_value(r['V_oc_ref'])
-    m.Isc.set_value(r['I_sc_ref'])
-    m.aIsc.set_value(r['alpha_sc'])
-    m.bVoc.set_value(r['beta_oc'])
-    m.gPmp.set_value(r['gamma_r'])
-    m.Tref.set_value(25 + 273.15)
+        # if r['I_mp_ref'] < r['I_sc_ref']:
+            # raise ValueError
 
-    m.par.a.set_value(r['a_ref'])
-    m.par.Il.set_value(r['I_L_ref'])
-    m.par.Io.set_value(r['I_o_ref'])
-    m.par.Rs.set_value(r['R_s'])
-    m.par.Rsh.set_value(r['R_sh_ref'])
-    m.par.Adj.set_value(r['Adjust'])
+        m.Vmp.set_value(r['V_mp_ref'])
+        m.Imp.set_value(r['I_mp_ref'])
+        m.Voc.set_value(r['V_oc_ref'])
+        m.Isc.set_value(r['I_sc_ref'])
+        m.aIsc.set_value(r['alpha_sc'])
+        m.bVoc.set_value(r['beta_oc'])
+        m.gPmp.set_value(r['gamma_r'])
+        m.Tref.set_value(25 + 273.15)
 
-    model.scaling_factor[model.solver.par.Io] = IL_SCALING
-    model.scaling_factor[model.solver.par.Rsh] = RSH_SCALING
-    scaled_model = pyo.TransformationFactory('core.scale_model').create_using(model)
+        m.par.a.set_value(r['a_ref'])
+        m.par.Il.set_value(r['I_L_ref'])
+        m.par.Io.set_value(r['I_o_ref'])
+        m.par.Rs.set_value(r['R_s'])
+        m.par.Rsh.set_value(r['R_sh_ref'])
+        m.par.Adj.set_value(r['Adjust'])
 
-    scaled_model.solver.par.obj = pyo.Objective(rule=0)
+        model.scaling_factor[model.solver.par.Io] = IL_SCALING
+        model.scaling_factor[model.solver.par.Rsh] = RSH_SCALING
+        scaled_model = pyo.TransformationFactory('core.scale_model').create_using(model)
 
-    # log_infeasible_constraints(scaled_model.solver.par, logger=solve_log, tol=1e-5, log_expression=True, log_variables=True)
-    # log_infeasible_bounds(scaled_model.solver.par, logger=solve_log,  tol=1e-5)
+        scaled_model.solver.par.obj = pyo.Objective(rule=0)
 
-    scaled_model.solver.par.del_component('obj')
+        # log_infeasible_constraints(scaled_model.solver.par, logger=solve_log, tol=1e-5, log_expression=True, log_variables=True)
+        # log_infeasible_bounds(scaled_model.solver.par, logger=solve_log,  tol=1e-5)
 
-    solver.solve(scaled_model.solver.par, tee=tee)
+        scaled_model.solver.par.del_component('obj')
 
-    scaled_model.solver.gamma.obj = pyo.Objective(rule=model.solver.gamma.f_7)
+        solver.solve(scaled_model.solver.par, tee=tee)
 
-    solver.solve(scaled_model.solver.gamma, tee=tee)
-    # print(pyo.value(scaled_model.solver.gamma.gamma_avg), pyo.value(scaled_model.solver.gPmp))
-    # print(pyo.value(scaled_model.solver.gamma.obj))
+        scaled_model.solver.gamma.obj = pyo.Objective(rule=model.solver.gamma.f_7)
 
-    scaled_model.solver.gamma.del_component('obj')
-
-    solver.solve(scaled_model.sanity, tee=tee)
-    
-    try:
-        res = solver.solve(scaled_model, tee=tee)
-    except:
-        pass 
-
-    if res.solver.status != 'ok':
-        # log_infeasible_constraints(scaled_model, logger=solve_log, tol=1e-5, log_expression=True, log_variables=True)
-        # log_infeasible_bounds(scaled_model, logger=solve_log,  tol=1e-5)
-        print(n, pyo.value(scaled_model.solver.gamma.gamma_avg), pyo.value(scaled_model.solver.gPmp))
+        solver.solve(scaled_model.solver.gamma, tee=tee)
+        # print(pyo.value(scaled_model.solver.gamma.gamma_avg), pyo.value(scaled_model.solver.gPmp))
         # print(pyo.value(scaled_model.solver.gamma.obj))
-    else:
-        param_comparison['index'].append(n)
-        param_comparison['a_ssc'].append(r['a_ref'])
-        param_comparison['Il_ssc'].append(r['I_L_ref'])
-        param_comparison['Io_ssc'].append(r['I_o_ref'])
-        param_comparison['Rs_ssc'].append(r['R_s'])
-        param_comparison['Rsh_ssc'].append(r['R_sh_ref'])
-        param_comparison['Adj_ssc'].append(r['Adjust'])
-        a = pyo.value(scaled_model.solver.par.scaled_a)
-        Il = pyo.value(scaled_model.solver.par.scaled_Il)
-        Io = pyo.value(scaled_model.solver.par.scaled_Io / IL_SCALING)
-        Rs = pyo.value(scaled_model.solver.par.scaled_Rs)
-        Rsh = pyo.value(scaled_model.solver.par.scaled_Rsh / RSH_SCALING)
-        Adj = pyo.value(scaled_model.solver.par.scaled_Adj)
 
-        param_comparison['a_py'].append(a)
-        param_comparison['Il_py'].append(Il)
-        param_comparison['Io_py'].append(Io)
-        param_comparison['Rs_py'].append(Rs)
-        param_comparison['Rsh_py'].append(Rsh)
-        param_comparison['Adj_py'].append(Adj)
+        scaled_model.solver.gamma.del_component('obj')
 
-comparison_df = pd.DataFrame(param_comparison).set_index('index')
-comparison_df['d_a'] = ((comparison_df['a_py'] - comparison_df['a_ssc'])/comparison_df['a_ssc']).abs()
-comparison_df['d_Il'] = ((comparison_df['Il_py'] - comparison_df['Il_ssc'])/comparison_df['Il_ssc']).abs()
-comparison_df['d_Io'] = ((comparison_df['Io_py'] - comparison_df['Io_ssc'])/comparison_df['Io_ssc']).abs()
-comparison_df['d_Rs'] = ((comparison_df['Rs_py'] - comparison_df['Rs_ssc'])/comparison_df['Rs_ssc']).abs()
-comparison_df['d_Rsh'] = ((comparison_df['Rsh_py'] - comparison_df['Rsh_ssc'])/comparison_df['Rsh_ssc']).abs()
-comparison_df['d_Adj'] = ((comparison_df['Adj_py'] - comparison_df['Adj_ssc'])/comparison_df['Adj_ssc']).abs()
+        solver.solve(scaled_model.sanity, tee=tee)
+        
+        try:
+            res = solver.solve(scaled_model, tee=tee)
+        except:
+            pass 
 
-comparison_df.to_csv("param_comparison.csv")
+        if res.solver.status != 'ok':
+            # log_infeasible_constraints(scaled_model, logger=solve_log, tol=1e-5, log_expression=True, log_variables=True)
+            # log_infeasible_bounds(scaled_model, logger=solve_log,  tol=1e-5)
+            print(n, pyo.value(scaled_model.solver.gamma.gamma_avg), pyo.value(scaled_model.solver.gPmp))
+            # print(pyo.value(scaled_model.solver.gamma.obj))
+        else:
+            param_comparison['index'].append(n)
+            param_comparison['a_ssc'].append(r['a_ref'])
+            param_comparison['Il_ssc'].append(r['I_L_ref'])
+            param_comparison['Io_ssc'].append(r['I_o_ref'])
+            param_comparison['Rs_ssc'].append(r['R_s'])
+            param_comparison['Rsh_ssc'].append(r['R_sh_ref'])
+            param_comparison['Adj_ssc'].append(r['Adjust'])
+            a = pyo.value(scaled_model.solver.par.scaled_a)
+            Il = pyo.value(scaled_model.solver.par.scaled_Il)
+            Io = pyo.value(scaled_model.solver.par.scaled_Io / IL_SCALING)
+            Rs = pyo.value(scaled_model.solver.par.scaled_Rs)
+            Rsh = pyo.value(scaled_model.solver.par.scaled_Rsh / RSH_SCALING)
+            Adj = pyo.value(scaled_model.solver.par.scaled_Adj)
+
+            param_comparison['a_py'].append(a)
+            param_comparison['Il_py'].append(Il)
+            param_comparison['Io_py'].append(Io)
+            param_comparison['Rs_py'].append(Rs)
+            param_comparison['Rsh_py'].append(Rsh)
+            param_comparison['Adj_py'].append(Adj)
+
+    comparison_df = pd.DataFrame(param_comparison).set_index('index')
+    comparison_df['d_a'] = ((comparison_df['a_py'] - comparison_df['a_ssc'])/comparison_df['a_ssc']).abs()
+    comparison_df['d_Il'] = ((comparison_df['Il_py'] - comparison_df['Il_ssc'])/comparison_df['Il_ssc']).abs()
+    comparison_df['d_Io'] = ((comparison_df['Io_py'] - comparison_df['Io_ssc'])/comparison_df['Io_ssc']).abs()
+    comparison_df['d_Rs'] = ((comparison_df['Rs_py'] - comparison_df['Rs_ssc'])/comparison_df['Rs_ssc']).abs()
+    comparison_df['d_Rsh'] = ((comparison_df['Rsh_py'] - comparison_df['Rsh_ssc'])/comparison_df['Rsh_ssc']).abs()
+    comparison_df['d_Adj'] = ((comparison_df['Adj_py'] - comparison_df['Adj_ssc'])/comparison_df['Adj_ssc']).abs()
+
+    comparison_df.to_csv("param_comparison.csv")
