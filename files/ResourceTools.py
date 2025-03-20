@@ -521,7 +521,7 @@ class FetchResourceFiles():
                         if self.verbose:
                             print('Downloading file.')
                         csv = io.StringIO(data_response.text)
-                        df = pd.read_csv(csv)
+                        df = pd.read_csv(csv, dtype=str)
                         df.to_csv(file_path, index=False)
                         if self.verbose:
                             print('Success! File downloaded to {}.'.format(file_path))

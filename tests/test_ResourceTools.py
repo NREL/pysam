@@ -88,8 +88,10 @@ def test_wind_nasa():
 def test_resourcefilefetcher():
     load_dotenv()
     # please get your own API key from here https://developer.nrel.gov/signup/
-    NREL_API_KEY = os.environ.get('NREL_API_KEY')
-    NREL_API_EMAIL = os.environ.get('NREL_API_EMAIL')
+    #NREL_API_KEY = os.environ.get('NREL_API_KEY')
+    #NREL_API_EMAIL = os.environ.get('NREL_API_EMAIL')
+    NREL_API_KEY = 'DEMO_KEY'
+    NREL_API_EMAIL = 'test_email@email.org'
 
     lon_lats = [(-105.1800775, 39.7383155)]  # golden CO
 
