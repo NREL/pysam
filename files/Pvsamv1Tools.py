@@ -105,62 +105,69 @@ def size_electrical_parameters(
     module_power = 0
     module_vmp = 0
     module_voc = 0
-    match module_model:
-        case 0:
-            ref = int(model.SimpleEfficiencyModuleModel.spe_reference)
-            eff_list = [model.SimpleEfficiencyModuleModel.spe_eff0, model.SimpleEfficiencyModuleModel.spe_eff1, model.SimpleEfficiencyModuleModel.spe_eff2, model.SimpleEfficiencyModuleModel.spe_eff3, model.SimpleEfficiencyModuleModel.spe_eff4]
-            rad_list = [model.SimpleEfficiencyModuleModel.spe_rad0, model.SimpleEfficiencyModuleModel.spe_rad1, model.SimpleEfficiencyModuleModel.spe_rad2, model.SimpleEfficiencyModuleModel.spe_rad3, model.SimpleEfficiencyModuleModel.spe_rad4]
-            eff = eff_list[ref]
-            rad = rad_list[ref]
-            area = model.SimpleEfficiencyModuleModel.spe_area
-            module_power = eff / 100.0 * rad * area #Wdc
-            module_vmp = model.SimpleEfficiencyModuleModel.spe_vmp
-            module_voc = model.SimpleEfficiencyModuleModel.spe_voc
-        case 1:
-            module_power = model.CECPerformanceModelWithModuleDatabase.cec_v_mp_ref * model.CECPerformanceModelWithModuleDatabase.cec_i_mp_ref
-            module_vmp = model.CECPerformanceModelWithModuleDatabase.cec_v_mp_ref
-            module_voc = model.CECPerformanceModelWithModuleDatabase.cec_v_oc_ref
-        case 2:
-            module_vmp = model.CECPerformanceModelWithUserEnteredSpecifications.sixpar_vmp
-            module_voc = model.CECPerformanceModelWithUserEnteredSpecifications.sixpar_voc
-            module_power = module_vmp * model.CECPerformanceModelWithUserEnteredSpecifications.sixpar_imp
-        case 3:
-            print('This function does not currently work for the Sandia Array Performance Model')
-            '''
-            module_power = model.SandiaPVArrayPerformanceModelWithModuleDatabase.snl_ref_pmp
-            module_vmp = model.SandiaPVArrayPerformanceModelWithModuleDatabase.snl_ref_vmp
-            module_voc = model.SandiaPVArrayPerformanceModelWithModuleDatabase.snl_ref_voc
-            '''
-        case 4:
-            module_vmp = model.IEC61853SingleDiodeModel.sd11par_Vmp0
-            module_voc = model.IEC61853SingleDiodeModel.sd11par_Voc0
-            module_power = module_vmp * model.IEC61853SingleDiodeModel .sd11par_Imp0
-        case 5:
-            module_vmp = model.MermoudLejeuneSingleDiodeModel.mlm_V_mp_ref
-            module_voc = model.MermoudLejeuneSingleDiodeModel.mlm_V_oc_ref
-            module_power = module_vmp * model.MermoudLejeuneSingleDiodeModel.mlm_I_mp_ref
+    
+    if(module_model==0):
+        ref = int(model.SimpleEfficiencyModuleModel.spe_reference)
+        eff_list = [model.SimpleEfficiencyModuleModel.spe_eff0, model.SimpleEfficiencyModuleModel.spe_eff1, model.SimpleEfficiencyModuleModel.spe_eff2, model.SimpleEfficiencyModuleModel.spe_eff3, model.SimpleEfficiencyModuleModel.spe_eff4]
+        rad_list = [model.SimpleEfficiencyModuleModel.spe_rad0, model.SimpleEfficiencyModuleModel.spe_rad1, model.SimpleEfficiencyModuleModel.spe_rad2, model.SimpleEfficiencyModuleModel.spe_rad3, model.SimpleEfficiencyModuleModel.spe_rad4]
+        eff = eff_list[ref]
+        rad = rad_list[ref]
+        area = model.SimpleEfficiencyModuleModel.spe_area
+        module_power = eff / 100.0 * rad * area #Wdc
+        module_vmp = model.SimpleEfficiencyModuleModel.spe_vmp
+        module_voc = model.SimpleEfficiencyModuleModel.spe_voc
+    elif(module_model==1):
+        module_power = model.CECPerformanceModelWithModuleDatabase.cec_v_mp_ref * model.CECPerformanceModelWithModuleDatabase.cec_i_mp_ref
+        module_vmp = model.CECPerformanceModelWithModuleDatabase.cec_v_mp_ref
+        module_voc = model.CECPerformanceModelWithModuleDatabase.cec_v_oc_ref
+    elif(module_model==2):
+        module_vmp = model.CECPerformanceModelWithUserEnteredSpecifications.sixpar_vmp
+        module_voc = model.CECPerformanceModelWithUserEnteredSpecifications.sixpar_voc
+        module_power = module_vmp * model.CECPerformanceModelWithUserEnteredSpecifications.sixpar_imp
+    elif(module_model==3):
+        print('This function does not currently work for the Sandia Array Performance Model')
+        '''
+        module_power = model.SandiaPVArrayPerformanceModelWithModuleDatabase.snl_ref_pmp
+        module_vmp = model.SandiaPVArrayPerformanceModelWithModuleDatabase.snl_ref_vmp
+        module_voc = model.SandiaPVArrayPerformanceModelWithModuleDatabase.snl_ref_voc
+        '''
+        return
+    elif(module_model==4):
+        module_vmp = model.IEC61853SingleDiodeModel.sd11par_Vmp0
+        module_voc = model.IEC61853SingleDiodeModel.sd11par_Voc0
+        module_power = module_vmp * model.IEC61853SingleDiodeModel .sd11par_Imp0
+    elif(module_model==5):
+        module_vmp = model.MermoudLejeuneSingleDiodeModel.mlm_V_mp_ref
+        module_voc = model.MermoudLejeuneSingleDiodeModel.mlm_V_oc_ref
+        module_power = module_vmp * model.MermoudLejeuneSingleDiodeModel.mlm_I_mp_ref
+    else:
+        print('The module model is not recognized. Please use a valid module model.')
+        return
 
     inverter_model = model.Inverter.inverter_model
     inv_power = 0
     vdcmax_inv = 0
     v_mppt_max = 0
     v_mppt_min = 0
-    match inverter_model:
-        case 0:
-            inv_power = model.InverterCECDatabase.inv_snl_paco
-            vdcmax_inv = model.InverterCECDatabase.inv_snl_vdcmax
-        case 1:
-            inv_power = model.InverterDatasheet.inv_ds_paco
-            vdcmax_inv = model.InverterDatasheet.inv_ds_vdcmax
-        case 2:
-            inv_power = model.InverterPartLoadCurve.inv_pd_paco
-            vdcmax_inv = model.InverterPartLoadCurve.inv_pd_vdcmax
-        case 3:
-            inv_power = model.InverterCECCoefficientGenerator.inv_cec_cg_paco
-            vdcmax_inv = model.InverterCECCoefficientGenerator.inv_cec_cg_vdcmax
-        case 4:
-            inv_power = model.InverterMermoudLejeuneModel .ond_PMaxOUT
-            vdcmax_inv = model.InverterMermoudLejeuneModel .ond_VAbsMax
+    
+    if(inverter_model==0):
+        inv_power = model.InverterCECDatabase.inv_snl_paco
+        vdcmax_inv = model.InverterCECDatabase.inv_snl_vdcmax
+    elif (inverter_model==1):
+        inv_power = model.InverterDatasheet.inv_ds_paco
+        vdcmax_inv = model.InverterDatasheet.inv_ds_vdcmax
+    elif (inverter_model==1):
+        inv_power = model.InverterPartLoadCurve.inv_pd_paco
+        vdcmax_inv = model.InverterPartLoadCurve.inv_pd_vdcmax
+    elif (inverter_model==1):
+        inv_power = model.InverterCECCoefficientGenerator.inv_cec_cg_paco
+        vdcmax_inv = model.InverterCECCoefficientGenerator.inv_cec_cg_vdcmax
+    elif (inverter_model==1):
+        inv_power = model.InverterMermoudLejeuneModel .ond_PMaxOUT
+        vdcmax_inv = model.InverterMermoudLejeuneModel .ond_VAbsMax
+    else:
+        print('The inverter model is not recognized. Please use a valid inverter model.')
+        return
 
     if vdcmax_inverter is not None:
         vdcmax_inv = vdcmax_inverter
