@@ -18,27 +18,17 @@ jobs:
 
     name: ${{ matrix.os }} ${{ matrix.python-version }}
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup conda
-        uses: s-weigand/setup-conda@v1
-        with:
-          update-conda: true
-          python-version: ${{ matrix.python-version }}
-          conda-channels: anaconda, conda-forge
-      - run: conda --version
-      - run: which python
-
       - name: Checkout Repo
         uses: actions/checkout@v3
 
       - name: Get PySAM Version Unix
-        if: ${{ matrix.os != 'windows-latest' }}
+        if: ${{ matrix.os != 'windows-2019' }}
         run: |
           VER=$(python -c "from files.version import __version__; print(__version__)")
           echo "VERSION=$VER" >> $GITHUB_ENV
 
       - name: Get PySAM Version Windows
-        if: ${{ matrix.os == 'windows-latest'}}
+        if: ${{ matrix.os == 'windows-2019'}}
         run: |
           $VER=$(python -c "from files.version import __version__; print(__version__)")
           echo "VERSION=$VER" >> $env:GITHUB_ENV
