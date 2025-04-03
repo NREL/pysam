@@ -48,9 +48,8 @@ Shading Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.Pvwattsv7.Pvwattsv7.AdjustmentFactors
 	:members:
-	:noindex:
 
 Outputs Group
 --------------

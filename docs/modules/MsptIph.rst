@@ -114,9 +114,8 @@ Deprecated Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.MsptIph.MsptIph.AdjustmentFactors
 	:members:
-	:noindex:
 
 Outputs Group
 --------------

@@ -16,7 +16,7 @@ import PySAM
 import sphinx_rtd_theme
 
 sys.path.insert(0, "..")
-
+print(sys.executable)
 master_doc = 'index'
 
 # -- Project information -----------------------------------------------------
