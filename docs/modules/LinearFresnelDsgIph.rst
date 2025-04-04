@@ -76,9 +76,8 @@ Revenue Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.LinearFresnelDsgIph.LinearFresnelDsgIph.AdjustmentFactors
 	:members:
-	:noindex:
 
 Outputs Group
 --------------

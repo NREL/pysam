@@ -2,6 +2,9 @@ class SingleownerHeat(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class SingleownerHeat(object):
 		pass
 
 	class Revenue(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -34,9 +40,14 @@ class SingleownerHeat(object):
 			pass
 
 
+		dispatch_factors_ts = tuple
+		dispatch_sched_weekday = tuple
+		dispatch_sched_weekend = tuple
+		dispatch_tod_factors = tuple
 		flip_target_percent = float
 		flip_target_year = float
 		ppa_escalation = float
+		ppa_multiplier_model = float
 		ppa_price_input = tuple
 		ppa_soln_max = float
 		ppa_soln_max_iterations = float
@@ -46,7 +57,10 @@ class SingleownerHeat(object):
 
 
 	class FinancialParameters(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -96,7 +110,10 @@ class SingleownerHeat(object):
 
 
 	class SystemCosts(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -146,7 +163,10 @@ class SingleownerHeat(object):
 
 
 	class LandLease(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -162,7 +182,10 @@ class SingleownerHeat(object):
 
 
 	class TaxCreditIncentives(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -197,7 +220,10 @@ class SingleownerHeat(object):
 
 
 	class PaymentIncentives(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -310,7 +336,10 @@ class SingleownerHeat(object):
 
 
 	class Depreciation(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -363,7 +392,10 @@ class SingleownerHeat(object):
 
 
 	class BatterySystem(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -385,7 +417,10 @@ class SingleownerHeat(object):
 
 
 	class ElectricityRates(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -428,7 +463,10 @@ class SingleownerHeat(object):
 
 
 	class SystemOutput(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -447,7 +485,10 @@ class SingleownerHeat(object):
 
 
 	class HeatModelOutput(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -461,7 +502,10 @@ class SingleownerHeat(object):
 
 
 	class UtilityBill(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -476,7 +520,10 @@ class SingleownerHeat(object):
 
 
 	class Lifetime(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -491,7 +538,10 @@ class SingleownerHeat(object):
 
 
 	class FuelCell(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -512,7 +562,10 @@ class SingleownerHeat(object):
 
 
 	class LCOS(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -541,7 +594,10 @@ class SingleownerHeat(object):
 
 
 	class ChargesByMonth(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -556,7 +612,10 @@ class SingleownerHeat(object):
 
 
 	class HybridFin(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -571,7 +630,10 @@ class SingleownerHeat(object):
 
 
 	class Monthly(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -585,7 +647,10 @@ class SingleownerHeat(object):
 
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -631,6 +696,36 @@ class SingleownerHeat(object):
 		cf_energy_net_heat_btu = tuple
 		cf_energy_purchases = tuple
 		cf_energy_sales = tuple
+		cf_energy_sales_apr = tuple
+		cf_energy_sales_aug = tuple
+		cf_energy_sales_dec = tuple
+		cf_energy_sales_dispatch1 = tuple
+		cf_energy_sales_dispatch2 = tuple
+		cf_energy_sales_dispatch3 = tuple
+		cf_energy_sales_dispatch4 = tuple
+		cf_energy_sales_dispatch5 = tuple
+		cf_energy_sales_dispatch6 = tuple
+		cf_energy_sales_dispatch7 = tuple
+		cf_energy_sales_dispatch8 = tuple
+		cf_energy_sales_dispatch9 = tuple
+		cf_energy_sales_feb = tuple
+		cf_energy_sales_jan = tuple
+		cf_energy_sales_jul = tuple
+		cf_energy_sales_jun = tuple
+		cf_energy_sales_mar = tuple
+		cf_energy_sales_may = tuple
+		cf_energy_sales_monthly_firstyear_TOD1 = tuple
+		cf_energy_sales_monthly_firstyear_TOD2 = tuple
+		cf_energy_sales_monthly_firstyear_TOD3 = tuple
+		cf_energy_sales_monthly_firstyear_TOD4 = tuple
+		cf_energy_sales_monthly_firstyear_TOD5 = tuple
+		cf_energy_sales_monthly_firstyear_TOD6 = tuple
+		cf_energy_sales_monthly_firstyear_TOD7 = tuple
+		cf_energy_sales_monthly_firstyear_TOD8 = tuple
+		cf_energy_sales_monthly_firstyear_TOD9 = tuple
+		cf_energy_sales_nov = tuple
+		cf_energy_sales_oct = tuple
+		cf_energy_sales_sep = tuple
 		cf_energy_value = tuple
 		cf_energy_without_battery = tuple
 		cf_feddepr_custom = tuple
@@ -732,6 +827,36 @@ class SingleownerHeat(object):
 		cf_reserve_om = tuple
 		cf_reserve_receivables = tuple
 		cf_reserve_total = tuple
+		cf_revenue_apr = tuple
+		cf_revenue_aug = tuple
+		cf_revenue_dec = tuple
+		cf_revenue_dispatch1 = tuple
+		cf_revenue_dispatch2 = tuple
+		cf_revenue_dispatch3 = tuple
+		cf_revenue_dispatch4 = tuple
+		cf_revenue_dispatch5 = tuple
+		cf_revenue_dispatch6 = tuple
+		cf_revenue_dispatch7 = tuple
+		cf_revenue_dispatch8 = tuple
+		cf_revenue_dispatch9 = tuple
+		cf_revenue_feb = tuple
+		cf_revenue_jan = tuple
+		cf_revenue_jul = tuple
+		cf_revenue_jun = tuple
+		cf_revenue_mar = tuple
+		cf_revenue_may = tuple
+		cf_revenue_monthly_firstyear_TOD1 = tuple
+		cf_revenue_monthly_firstyear_TOD2 = tuple
+		cf_revenue_monthly_firstyear_TOD3 = tuple
+		cf_revenue_monthly_firstyear_TOD4 = tuple
+		cf_revenue_monthly_firstyear_TOD5 = tuple
+		cf_revenue_monthly_firstyear_TOD6 = tuple
+		cf_revenue_monthly_firstyear_TOD7 = tuple
+		cf_revenue_monthly_firstyear_TOD8 = tuple
+		cf_revenue_monthly_firstyear_TOD9 = tuple
+		cf_revenue_nov = tuple
+		cf_revenue_oct = tuple
+		cf_revenue_sep = tuple
 		cf_salvage_cost_lcos = tuple
 		cf_stadepr_custom = tuple
 		cf_stadepr_macrs_15 = tuple
@@ -962,6 +1087,33 @@ class SingleownerHeat(object):
 		depr_stabas_sl_5 = float
 		depr_stabas_total = float
 		effective_tax_rate = float
+		firstyear_energy_dispatch1 = float
+		firstyear_energy_dispatch2 = float
+		firstyear_energy_dispatch3 = float
+		firstyear_energy_dispatch4 = float
+		firstyear_energy_dispatch5 = float
+		firstyear_energy_dispatch6 = float
+		firstyear_energy_dispatch7 = float
+		firstyear_energy_dispatch8 = float
+		firstyear_energy_dispatch9 = float
+		firstyear_energy_price1 = float
+		firstyear_energy_price2 = float
+		firstyear_energy_price3 = float
+		firstyear_energy_price4 = float
+		firstyear_energy_price5 = float
+		firstyear_energy_price6 = float
+		firstyear_energy_price7 = float
+		firstyear_energy_price8 = float
+		firstyear_energy_price9 = float
+		firstyear_revenue_dispatch1 = float
+		firstyear_revenue_dispatch2 = float
+		firstyear_revenue_dispatch3 = float
+		firstyear_revenue_dispatch4 = float
+		firstyear_revenue_dispatch5 = float
+		firstyear_revenue_dispatch6 = float
+		firstyear_revenue_dispatch7 = float
+		firstyear_revenue_dispatch8 = float
+		firstyear_revenue_dispatch9 = float
 		flip_actual_irr = float
 		flip_actual_year = float
 		flip_target_irr = float
@@ -1056,6 +1208,7 @@ class SingleownerHeat(object):
 		npv_uti_pbi_income = float
 		ppa = float
 		ppa_escalation = float
+		ppa_multipliers = tuple
 		ppa_price = float
 		pre_depr_alloc_basis = float
 		pre_itc_qual_basis = float

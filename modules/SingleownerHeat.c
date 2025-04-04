@@ -78,6 +78,54 @@ static PyMethodDef Revenue_methods[] = {
 };
 
 static PyObject *
+Revenue_get_dispatch_factors_ts(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Revenue_dispatch_factors_ts_aget, self->data_ptr);
+}
+
+static int
+Revenue_set_dispatch_factors_ts(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_SingleownerHeat_Revenue_dispatch_factors_ts_aset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_dispatch_sched_weekday(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_SingleownerHeat_Revenue_dispatch_sched_weekday_mget, self->data_ptr);
+}
+
+static int
+Revenue_set_dispatch_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_SingleownerHeat_Revenue_dispatch_sched_weekday_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_dispatch_sched_weekend(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_SingleownerHeat_Revenue_dispatch_sched_weekend_mget, self->data_ptr);
+}
+
+static int
+Revenue_set_dispatch_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_SingleownerHeat_Revenue_dispatch_sched_weekend_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_dispatch_tod_factors(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Revenue_dispatch_tod_factors_aget, self->data_ptr);
+}
+
+static int
+Revenue_set_dispatch_tod_factors(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_SingleownerHeat_Revenue_dispatch_tod_factors_aset, self->data_ptr);
+}
+
+static PyObject *
 Revenue_get_flip_target_percent(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_SingleownerHeat_Revenue_flip_target_percent_nget, self->data_ptr);
@@ -111,6 +159,18 @@ static int
 Revenue_set_ppa_escalation(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_SingleownerHeat_Revenue_ppa_escalation_nset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_ppa_multiplier_model(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Revenue_ppa_multiplier_model_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_ppa_multiplier_model(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_SingleownerHeat_Revenue_ppa_multiplier_model_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -186,6 +246,18 @@ Revenue_set_ppa_soln_tolerance(VarGroupObject *self, PyObject *value, void *clos
 }
 
 static PyGetSetDef Revenue_getset[] = {
+{"dispatch_factors_ts", (getter)Revenue_get_dispatch_factors_ts,(setter)Revenue_set_dispatch_factors_ts,
+	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n**Required:**\nRequired if ppa_multiplier_model=1"),
+ 	NULL},
+{"dispatch_sched_weekday", (getter)Revenue_get_dispatch_sched_weekday,(setter)Revenue_set_dispatch_sched_weekday,
+	PyDoc_STR("*sequence[sequence]*: Diurnal weekday TOD periods [1..9]\n\n**Info:**\n12 x 24 matrix\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
+{"dispatch_sched_weekend", (getter)Revenue_get_dispatch_sched_weekend,(setter)Revenue_set_dispatch_sched_weekend,
+	PyDoc_STR("*sequence[sequence]*: Diurnal weekend TOD periods [1..9]\n\n**Info:**\n12 x 24 matrix\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
+{"dispatch_tod_factors", (getter)Revenue_get_dispatch_tod_factors,(setter)Revenue_set_dispatch_tod_factors,
+	PyDoc_STR("*sequence*: TOD factors for periods 1 through 9\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
 {"flip_target_percent", (getter)Revenue_get_flip_target_percent,(setter)Revenue_set_flip_target_percent,
 	PyDoc_STR("*float*: After-tax IRR target [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 11 if not assigned explicitly or loaded from defaults."),
  	NULL},
@@ -194,6 +266,9 @@ static PyGetSetDef Revenue_getset[] = {
  	NULL},
 {"ppa_escalation", (getter)Revenue_get_ppa_escalation,(setter)Revenue_set_ppa_escalation,
 	PyDoc_STR("*float*: PPA escalation rate [%/year]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ppa_multiplier_model", (getter)Revenue_get_ppa_multiplier_model,(setter)Revenue_set_ppa_multiplier_model,
+	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n**Options:**\n0=diurnal,1=timestep\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ppa_price_input", (getter)Revenue_get_ppa_price_input,(setter)Revenue_set_ppa_price_input,
 	PyDoc_STR("*sequence*: PPA price in first year input [$/kWht]\n\n**Required:**\nTrue"),
@@ -7395,6 +7470,186 @@ Outputs_get_cf_energy_sales(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_cf_energy_sales_apr(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_apr_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_aug(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_aug_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dec(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_dec_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch1(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_dispatch1_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch2(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_dispatch2_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch3(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_dispatch3_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch4(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_dispatch4_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch5(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_dispatch5_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch6(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_dispatch6_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch7(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_dispatch7_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch8(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_dispatch8_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch9(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_dispatch9_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_feb(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_feb_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_jan(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_jan_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_jul(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_jul_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_jun(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_jun_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_mar(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_mar_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_may(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_may_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD1(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_monthly_firstyear_TOD1_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD2(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_monthly_firstyear_TOD2_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD3(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_monthly_firstyear_TOD3_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD4(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_monthly_firstyear_TOD4_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD5(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_monthly_firstyear_TOD5_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD6(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_monthly_firstyear_TOD6_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD7(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_monthly_firstyear_TOD7_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD8(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_monthly_firstyear_TOD8_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD9(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_monthly_firstyear_TOD9_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_nov(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_nov_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_oct(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_oct_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_sep(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_sales_sep_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_cf_energy_value(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_energy_value_aget, self->data_ptr);
@@ -7998,6 +8253,186 @@ static PyObject *
 Outputs_get_cf_reserve_total(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_reserve_total_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_apr(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_apr_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_aug(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_aug_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_dec(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_dec_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_dispatch1(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_dispatch1_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_dispatch2(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_dispatch2_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_dispatch3(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_dispatch3_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_dispatch4(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_dispatch4_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_dispatch5(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_dispatch5_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_dispatch6(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_dispatch6_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_dispatch7(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_dispatch7_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_dispatch8(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_dispatch8_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_dispatch9(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_dispatch9_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_feb(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_feb_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_jan(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_jan_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_jul(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_jul_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_jun(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_jun_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_mar(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_mar_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_may(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_may_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_monthly_firstyear_TOD1(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_monthly_firstyear_TOD1_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_monthly_firstyear_TOD2(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_monthly_firstyear_TOD2_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_monthly_firstyear_TOD3(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_monthly_firstyear_TOD3_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_monthly_firstyear_TOD4(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_monthly_firstyear_TOD4_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_monthly_firstyear_TOD5(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_monthly_firstyear_TOD5_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_monthly_firstyear_TOD6(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_monthly_firstyear_TOD6_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_monthly_firstyear_TOD7(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_monthly_firstyear_TOD7_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_monthly_firstyear_TOD8(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_monthly_firstyear_TOD8_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_monthly_firstyear_TOD9(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_monthly_firstyear_TOD9_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_nov(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_nov_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_oct(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_oct_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_revenue_sep(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_cf_revenue_sep_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -9381,6 +9816,168 @@ Outputs_get_effective_tax_rate(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_firstyear_energy_dispatch1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_energy_dispatch1_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_energy_dispatch2(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_energy_dispatch2_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_energy_dispatch3(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_energy_dispatch3_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_energy_dispatch4(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_energy_dispatch4_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_energy_dispatch5(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_energy_dispatch5_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_energy_dispatch6(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_energy_dispatch6_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_energy_dispatch7(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_energy_dispatch7_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_energy_dispatch8(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_energy_dispatch8_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_energy_dispatch9(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_energy_dispatch9_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_energy_price1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_energy_price1_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_energy_price2(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_energy_price2_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_energy_price3(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_energy_price3_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_energy_price4(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_energy_price4_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_energy_price5(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_energy_price5_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_energy_price6(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_energy_price6_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_energy_price7(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_energy_price7_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_energy_price8(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_energy_price8_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_energy_price9(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_energy_price9_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_revenue_dispatch1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_revenue_dispatch1_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_revenue_dispatch2(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_revenue_dispatch2_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_revenue_dispatch3(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_revenue_dispatch3_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_revenue_dispatch4(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_revenue_dispatch4_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_revenue_dispatch5(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_revenue_dispatch5_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_revenue_dispatch6(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_revenue_dispatch6_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_revenue_dispatch7(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_revenue_dispatch7_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_revenue_dispatch8(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_revenue_dispatch8_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_firstyear_revenue_dispatch9(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_firstyear_revenue_dispatch9_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_flip_actual_irr(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_flip_actual_irr_nget, self->data_ptr);
@@ -9945,6 +10542,12 @@ Outputs_get_ppa_escalation(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_ppa_multipliers(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_SingleownerHeat_Outputs_ppa_multipliers_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_ppa_price(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_SingleownerHeat_Outputs_ppa_price_nget, self->data_ptr);
@@ -10154,6 +10757,96 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"cf_energy_sales", (getter)Outputs_get_cf_energy_sales,(setter)0,
 	PyDoc_STR("*sequence*: Thermal energy to grid [kWht]"),
+ 	NULL},
+{"cf_energy_sales_apr", (getter)Outputs_get_cf_energy_sales_apr,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in April [kWht]"),
+ 	NULL},
+{"cf_energy_sales_aug", (getter)Outputs_get_cf_energy_sales_aug,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in August [kWht]"),
+ 	NULL},
+{"cf_energy_sales_dec", (getter)Outputs_get_cf_energy_sales_dec,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in December [kWht]"),
+ 	NULL},
+{"cf_energy_sales_dispatch1", (getter)Outputs_get_cf_energy_sales_dispatch1,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in TOD period 1 [kWht]"),
+ 	NULL},
+{"cf_energy_sales_dispatch2", (getter)Outputs_get_cf_energy_sales_dispatch2,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in TOD period 2 [kWht]"),
+ 	NULL},
+{"cf_energy_sales_dispatch3", (getter)Outputs_get_cf_energy_sales_dispatch3,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in TOD period 3 [kWht]"),
+ 	NULL},
+{"cf_energy_sales_dispatch4", (getter)Outputs_get_cf_energy_sales_dispatch4,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in TOD period 4 [kWht]"),
+ 	NULL},
+{"cf_energy_sales_dispatch5", (getter)Outputs_get_cf_energy_sales_dispatch5,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in TOD period 5 [kWht]"),
+ 	NULL},
+{"cf_energy_sales_dispatch6", (getter)Outputs_get_cf_energy_sales_dispatch6,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in TOD period 6 [kWht]"),
+ 	NULL},
+{"cf_energy_sales_dispatch7", (getter)Outputs_get_cf_energy_sales_dispatch7,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in TOD period 7 [kWht]"),
+ 	NULL},
+{"cf_energy_sales_dispatch8", (getter)Outputs_get_cf_energy_sales_dispatch8,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in TOD period 8 [kWht]"),
+ 	NULL},
+{"cf_energy_sales_dispatch9", (getter)Outputs_get_cf_energy_sales_dispatch9,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in TOD period 9 [kWht]"),
+ 	NULL},
+{"cf_energy_sales_feb", (getter)Outputs_get_cf_energy_sales_feb,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in February [kWht]"),
+ 	NULL},
+{"cf_energy_sales_jan", (getter)Outputs_get_cf_energy_sales_jan,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in January [kWht]"),
+ 	NULL},
+{"cf_energy_sales_jul", (getter)Outputs_get_cf_energy_sales_jul,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in July [kWht]"),
+ 	NULL},
+{"cf_energy_sales_jun", (getter)Outputs_get_cf_energy_sales_jun,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in June [kWht]"),
+ 	NULL},
+{"cf_energy_sales_mar", (getter)Outputs_get_cf_energy_sales_mar,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in March [kWht]"),
+ 	NULL},
+{"cf_energy_sales_may", (getter)Outputs_get_cf_energy_sales_may,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in May [kWht]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD1", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD1,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced in Year 1 by month for TOD period 1 [kWht]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD2", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD2,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced in Year 1 by month for TOD period 2 [kWht]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD3", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD3,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced in Year 1 by month for TOD period 3 [kWht]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD4", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD4,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced in Year 1 by month for TOD period 4 [kWht]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD5", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD5,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced in Year 1 by month for TOD period 5 [kWht]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD6", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD6,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced in Year 1 by month for TOD period 6 [kWht]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD7", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD7,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced in Year 1 by month for TOD period 7 [kWht]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD8", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD8,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced in Year 1 by month for TOD period 8 [kWht]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD9", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD9,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced in Year 1 by month for TOD period 9 [kWht]"),
+ 	NULL},
+{"cf_energy_sales_nov", (getter)Outputs_get_cf_energy_sales_nov,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in November [kWht]"),
+ 	NULL},
+{"cf_energy_sales_oct", (getter)Outputs_get_cf_energy_sales_oct,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in October [kWht]"),
+ 	NULL},
+{"cf_energy_sales_sep", (getter)Outputs_get_cf_energy_sales_sep,(setter)0,
+	PyDoc_STR("*sequence*: Thermal energy produced by year in September [kWht]"),
  	NULL},
 {"cf_energy_value", (getter)Outputs_get_cf_energy_value,(setter)0,
 	PyDoc_STR("*sequence*: PPA revenue [$]"),
@@ -10457,6 +11150,96 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"cf_reserve_total", (getter)Outputs_get_cf_reserve_total,(setter)0,
 	PyDoc_STR("*sequence*: Reserves total reserves balance [$]"),
+ 	NULL},
+{"cf_revenue_apr", (getter)Outputs_get_cf_revenue_apr,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for April [$]"),
+ 	NULL},
+{"cf_revenue_aug", (getter)Outputs_get_cf_revenue_aug,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for August [$]"),
+ 	NULL},
+{"cf_revenue_dec", (getter)Outputs_get_cf_revenue_dec,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for December [$]"),
+ 	NULL},
+{"cf_revenue_dispatch1", (getter)Outputs_get_cf_revenue_dispatch1,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for TOD period 1 [$]"),
+ 	NULL},
+{"cf_revenue_dispatch2", (getter)Outputs_get_cf_revenue_dispatch2,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for TOD period 2 [$]"),
+ 	NULL},
+{"cf_revenue_dispatch3", (getter)Outputs_get_cf_revenue_dispatch3,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for TOD period 3 [$]"),
+ 	NULL},
+{"cf_revenue_dispatch4", (getter)Outputs_get_cf_revenue_dispatch4,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for TOD period 4 [$]"),
+ 	NULL},
+{"cf_revenue_dispatch5", (getter)Outputs_get_cf_revenue_dispatch5,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for TOD period 5 [$]"),
+ 	NULL},
+{"cf_revenue_dispatch6", (getter)Outputs_get_cf_revenue_dispatch6,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for TOD period 6 [$]"),
+ 	NULL},
+{"cf_revenue_dispatch7", (getter)Outputs_get_cf_revenue_dispatch7,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for TOD period 7 [$]"),
+ 	NULL},
+{"cf_revenue_dispatch8", (getter)Outputs_get_cf_revenue_dispatch8,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for TOD period 8 [$]"),
+ 	NULL},
+{"cf_revenue_dispatch9", (getter)Outputs_get_cf_revenue_dispatch9,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for TOD period 9 [$]"),
+ 	NULL},
+{"cf_revenue_feb", (getter)Outputs_get_cf_revenue_feb,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for February [$]"),
+ 	NULL},
+{"cf_revenue_jan", (getter)Outputs_get_cf_revenue_jan,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for January [$]"),
+ 	NULL},
+{"cf_revenue_jul", (getter)Outputs_get_cf_revenue_jul,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for July [$]"),
+ 	NULL},
+{"cf_revenue_jun", (getter)Outputs_get_cf_revenue_jun,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for June [$]"),
+ 	NULL},
+{"cf_revenue_mar", (getter)Outputs_get_cf_revenue_mar,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for March [$]"),
+ 	NULL},
+{"cf_revenue_may", (getter)Outputs_get_cf_revenue_may,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for May [$]"),
+ 	NULL},
+{"cf_revenue_monthly_firstyear_TOD1", (getter)Outputs_get_cf_revenue_monthly_firstyear_TOD1,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue in Year 1 by month for TOD period 1 [$]"),
+ 	NULL},
+{"cf_revenue_monthly_firstyear_TOD2", (getter)Outputs_get_cf_revenue_monthly_firstyear_TOD2,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue in Year 1 by month for TOD period 2 [$]"),
+ 	NULL},
+{"cf_revenue_monthly_firstyear_TOD3", (getter)Outputs_get_cf_revenue_monthly_firstyear_TOD3,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue in Year 1 by month for TOD period 3 [$]"),
+ 	NULL},
+{"cf_revenue_monthly_firstyear_TOD4", (getter)Outputs_get_cf_revenue_monthly_firstyear_TOD4,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue in Year 1 by month for TOD period 4 [$]"),
+ 	NULL},
+{"cf_revenue_monthly_firstyear_TOD5", (getter)Outputs_get_cf_revenue_monthly_firstyear_TOD5,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue in Year 1 by month for TOD period 5 [$]"),
+ 	NULL},
+{"cf_revenue_monthly_firstyear_TOD6", (getter)Outputs_get_cf_revenue_monthly_firstyear_TOD6,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue in Year 1 by month for TOD period 6 [$]"),
+ 	NULL},
+{"cf_revenue_monthly_firstyear_TOD7", (getter)Outputs_get_cf_revenue_monthly_firstyear_TOD7,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue in Year 1 by month for TOD period 7 [$]"),
+ 	NULL},
+{"cf_revenue_monthly_firstyear_TOD8", (getter)Outputs_get_cf_revenue_monthly_firstyear_TOD8,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue in Year 1 by month for TOD period 8 [$]"),
+ 	NULL},
+{"cf_revenue_monthly_firstyear_TOD9", (getter)Outputs_get_cf_revenue_monthly_firstyear_TOD9,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue in Year 1 by month for TOD period 9 [$]"),
+ 	NULL},
+{"cf_revenue_nov", (getter)Outputs_get_cf_revenue_nov,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for November [$]"),
+ 	NULL},
+{"cf_revenue_oct", (getter)Outputs_get_cf_revenue_oct,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for October [$]"),
+ 	NULL},
+{"cf_revenue_sep", (getter)Outputs_get_cf_revenue_sep,(setter)0,
+	PyDoc_STR("*sequence*: PPA revenue by year for September [$]"),
  	NULL},
 {"cf_salvage_cost_lcos", (getter)Outputs_get_cf_salvage_cost_lcos,(setter)0,
 	PyDoc_STR("*sequence*: Annual battery salvage value costs [$]"),
@@ -11148,6 +11931,87 @@ static PyGetSetDef Outputs_getset[] = {
 {"effective_tax_rate", (getter)Outputs_get_effective_tax_rate,(setter)0,
 	PyDoc_STR("*float*: Effective tax rate [%]"),
  	NULL},
+{"firstyear_energy_dispatch1", (getter)Outputs_get_firstyear_energy_dispatch1,(setter)0,
+	PyDoc_STR("*float*: Thermal energy produced in Year 1 TOD period 1 [kWht]"),
+ 	NULL},
+{"firstyear_energy_dispatch2", (getter)Outputs_get_firstyear_energy_dispatch2,(setter)0,
+	PyDoc_STR("*float*: Thermal energy produced in Year 1 TOD period 2 [kWht]"),
+ 	NULL},
+{"firstyear_energy_dispatch3", (getter)Outputs_get_firstyear_energy_dispatch3,(setter)0,
+	PyDoc_STR("*float*: Thermal energy produced in Year 1 TOD period 3 [kWht]"),
+ 	NULL},
+{"firstyear_energy_dispatch4", (getter)Outputs_get_firstyear_energy_dispatch4,(setter)0,
+	PyDoc_STR("*float*: Thermal energy produced in Year 1 TOD period 4 [kWht]"),
+ 	NULL},
+{"firstyear_energy_dispatch5", (getter)Outputs_get_firstyear_energy_dispatch5,(setter)0,
+	PyDoc_STR("*float*: Thermal energy produced in Year 1 TOD period 5 [kWht]"),
+ 	NULL},
+{"firstyear_energy_dispatch6", (getter)Outputs_get_firstyear_energy_dispatch6,(setter)0,
+	PyDoc_STR("*float*: Thermal energy produced in Year 1 TOD period 6 [kWht]"),
+ 	NULL},
+{"firstyear_energy_dispatch7", (getter)Outputs_get_firstyear_energy_dispatch7,(setter)0,
+	PyDoc_STR("*float*: Thermal energy produced in Year 1 TOD period 7 [kWht]"),
+ 	NULL},
+{"firstyear_energy_dispatch8", (getter)Outputs_get_firstyear_energy_dispatch8,(setter)0,
+	PyDoc_STR("*float*: Thermal energy produced in Year 1 TOD period 8 [kWht]"),
+ 	NULL},
+{"firstyear_energy_dispatch9", (getter)Outputs_get_firstyear_energy_dispatch9,(setter)0,
+	PyDoc_STR("*float*: Thermal energy produced in Year 1 TOD period 9 [kWht]"),
+ 	NULL},
+{"firstyear_energy_price1", (getter)Outputs_get_firstyear_energy_price1,(setter)0,
+	PyDoc_STR("*float*: Thermal power price in Year 1 TOD period 1 [cents/kWht]"),
+ 	NULL},
+{"firstyear_energy_price2", (getter)Outputs_get_firstyear_energy_price2,(setter)0,
+	PyDoc_STR("*float*: Thermal power price in Year 1 TOD period 2 [cents/kWht]"),
+ 	NULL},
+{"firstyear_energy_price3", (getter)Outputs_get_firstyear_energy_price3,(setter)0,
+	PyDoc_STR("*float*: Thermal power price in Year 1 TOD period 3 [cents/kWht]"),
+ 	NULL},
+{"firstyear_energy_price4", (getter)Outputs_get_firstyear_energy_price4,(setter)0,
+	PyDoc_STR("*float*: Thermal power price in Year 1 TOD period 4 [cents/kWht]"),
+ 	NULL},
+{"firstyear_energy_price5", (getter)Outputs_get_firstyear_energy_price5,(setter)0,
+	PyDoc_STR("*float*: Thermal power price in Year 1 TOD period 5 [cents/kWht]"),
+ 	NULL},
+{"firstyear_energy_price6", (getter)Outputs_get_firstyear_energy_price6,(setter)0,
+	PyDoc_STR("*float*: Thermal power price in Year 1 TOD period 6 [cents/kWht]"),
+ 	NULL},
+{"firstyear_energy_price7", (getter)Outputs_get_firstyear_energy_price7,(setter)0,
+	PyDoc_STR("*float*: Thermal power price in Year 1 TOD period 7 [cents/kWht]"),
+ 	NULL},
+{"firstyear_energy_price8", (getter)Outputs_get_firstyear_energy_price8,(setter)0,
+	PyDoc_STR("*float*: Thermal power price in Year 1 TOD period 8 [cents/kWht]"),
+ 	NULL},
+{"firstyear_energy_price9", (getter)Outputs_get_firstyear_energy_price9,(setter)0,
+	PyDoc_STR("*float*: Thermal power price in Year 1 TOD period 9 [cents/kWht]"),
+ 	NULL},
+{"firstyear_revenue_dispatch1", (getter)Outputs_get_firstyear_revenue_dispatch1,(setter)0,
+	PyDoc_STR("*float*: PPA revenue in Year 1 TOD period 1 [$]"),
+ 	NULL},
+{"firstyear_revenue_dispatch2", (getter)Outputs_get_firstyear_revenue_dispatch2,(setter)0,
+	PyDoc_STR("*float*: PPA revenue from in Year 1 TOD period 2 [$]"),
+ 	NULL},
+{"firstyear_revenue_dispatch3", (getter)Outputs_get_firstyear_revenue_dispatch3,(setter)0,
+	PyDoc_STR("*float*: PPA revenue from in Year 1 TOD period 3 [$]"),
+ 	NULL},
+{"firstyear_revenue_dispatch4", (getter)Outputs_get_firstyear_revenue_dispatch4,(setter)0,
+	PyDoc_STR("*float*: PPA revenue in Year 1 TOD period 4 [$]"),
+ 	NULL},
+{"firstyear_revenue_dispatch5", (getter)Outputs_get_firstyear_revenue_dispatch5,(setter)0,
+	PyDoc_STR("*float*: PPA revenue in Year 1 TOD period 5 [$]"),
+ 	NULL},
+{"firstyear_revenue_dispatch6", (getter)Outputs_get_firstyear_revenue_dispatch6,(setter)0,
+	PyDoc_STR("*float*: PPA revenue in Year 1 TOD period 6 [$]"),
+ 	NULL},
+{"firstyear_revenue_dispatch7", (getter)Outputs_get_firstyear_revenue_dispatch7,(setter)0,
+	PyDoc_STR("*float*: PPA revenue in Year 1 TOD period 7 [$]"),
+ 	NULL},
+{"firstyear_revenue_dispatch8", (getter)Outputs_get_firstyear_revenue_dispatch8,(setter)0,
+	PyDoc_STR("*float*: PPA revenue in Year 1 TOD period 8 [$]"),
+ 	NULL},
+{"firstyear_revenue_dispatch9", (getter)Outputs_get_firstyear_revenue_dispatch9,(setter)0,
+	PyDoc_STR("*float*: PPA revenue in Year 1 TOD period 9 [$]"),
+ 	NULL},
 {"flip_actual_irr", (getter)Outputs_get_flip_actual_irr,(setter)0,
 	PyDoc_STR("*float*: IRR in target year [%]"),
  	NULL},
@@ -11429,6 +12293,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"ppa_escalation", (getter)Outputs_get_ppa_escalation,(setter)0,
 	PyDoc_STR("*float*: PPA price escalation [%/year]"),
+ 	NULL},
+{"ppa_multipliers", (getter)Outputs_get_ppa_multipliers,(setter)0,
+	PyDoc_STR("*sequence*: TOD factors"),
  	NULL},
 {"ppa_price", (getter)Outputs_get_ppa_price,(setter)0,
 	PyDoc_STR("*float*: PPA price in first year [cents/kWh]"),

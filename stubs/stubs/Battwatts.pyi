@@ -2,6 +2,9 @@ class Battwatts(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class Battwatts(object):
 		pass
 
 	class Lifetime(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -39,7 +45,10 @@ class Battwatts(object):
 
 
 	class Battery(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -64,7 +73,10 @@ class Battwatts(object):
 
 
 	class Load(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -80,39 +92,31 @@ class Battwatts(object):
 
 
 	class AdjustmentFactors(object):
-		def assign(self): 
+		def assign(self, dict): 
 			pass
 	
-		def export(self): 
-			return {}
-	
-		def __init__(self, *args, **kwargs): # real signature unknown
+		def replace(self, dict): 
 			pass
 	
-		adjust_constant = float
-		adjust_en_hourly = float
-		adjust_en_periods = float
-		adjust_en_timeindex = float
-		adjust_hourly = tuple
-		adjust_periods = tuple
-		adjust_timeindex = tuple
-		dc_adjust_constant = float
-		dc_adjust_en_hourly = float
-		dc_adjust_en_periods = float
-		dc_adjust_en_timeindex = float
-		dc_adjust_hourly = tuple
-		dc_adjust_periods = tuple
-		dc_adjust_timeindex = tuple
-		sf_adjust_constant = float
-		sf_adjust_en_hourly = float
-		sf_adjust_en_periods = float
-		sf_adjust_en_timeindex = float
-		sf_adjust_hourly = tuple
-		sf_adjust_periods = tuple
-		sf_adjust_timeindex = tuple
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		batt_adjust_constant = float
+		batt_adjust_en_periods = float
+		batt_adjust_en_timeindex = float
+		batt_adjust_periods = tuple
+		batt_adjust_timeindex = tuple
+
 
 	class GridLimits(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -128,7 +132,10 @@ class Battwatts(object):
 
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -168,6 +175,7 @@ class Battwatts(object):
 		batt_conversion_loss = tuple
 		batt_cost_to_cycle = tuple
 		batt_cycles = tuple
+		batt_dispatch_period = tuple
 		batt_dispatch_sched = tuple
 		batt_grid_charge_percent = float
 		batt_power = tuple

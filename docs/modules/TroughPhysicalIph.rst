@@ -138,9 +138,8 @@ FinancialParameters Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.TroughPhysicalIph.TroughPhysicalIph.AdjustmentFactors
 	:members:
-	:noindex:
 
 ElectricityRates Group
 -----------------------

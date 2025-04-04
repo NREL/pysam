@@ -2,6 +2,9 @@ class Sco2CspUdPcTables(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class Sco2CspUdPcTables(object):
 		pass
 
 	class SystemDesign(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -47,7 +53,10 @@ class Sco2CspUdPcTables(object):
 
 
 	class HeatExchangerDesign(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -87,7 +96,10 @@ class Sco2CspUdPcTables(object):
 
 
 	class Common(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -119,7 +131,10 @@ class Sco2CspUdPcTables(object):
 
 
 	class PHXDesign(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -135,7 +150,10 @@ class Sco2CspUdPcTables(object):
 
 
 	class AirCoolerDesign(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -153,7 +171,10 @@ class Sco2CspUdPcTables(object):
 
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:

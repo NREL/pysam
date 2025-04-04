@@ -91,7 +91,7 @@ Common_set_input(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Common_getset[] = {
 {"input", (getter)Common_get_input,(setter)Common_set_input,
-	PyDoc_STR("*dict*: input_table for multiple technologies and one financial market\n\n**Required:**\nTrue"),
+	PyDoc_STR("*dict*: input_table for multiple technologies and one financial market\n\n**Info:**\npvsamv1,pvwattsv8,windpower,generic_system,battery,fuelcell,hybrid\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

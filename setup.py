@@ -120,8 +120,6 @@ for filename in os.listdir(defaults_df_dir):
 
 # copy over stub pyi files into "files" folder for export
 stub_files = []
-shutil.copyfile(os.path.join(this_directory, "stubs", 'AdjustmentFactors.pyi'),
-                os.path.join(this_directory, 'stubs', 'stubs', 'AdjustmentFactors.pyi'))
 for filename in os.listdir(os.path.join(this_directory, "stubs", "stubs")):
     if ".pyi" not in filename:
         continue
@@ -138,16 +136,7 @@ libfiles += hybrid_stubs
 
 
 # make list of all extension modules
-extension_modules = [Extension('PySAM.AdjustmentFactors',
-                     ['src/AdjustmentFactors.c'],
-                    define_macros=defines,
-                    include_dirs=[srcpath, includepath, this_directory + "/src"],
-                    library_dirs=[libpath],
-                    libraries=libs,
-                    extra_compile_args=extra_compile_args,
-                    extra_link_args=extra_link_args
-                    )]
-
+extension_modules = []
 for filename in os.listdir(this_directory + "/modules"):
     extension_modules.append(Extension('PySAM.' + os.path.splitext(filename)[0],
                              ['modules/' + filename],
@@ -185,7 +174,6 @@ setup(
     package_dir={'PySAM': 'files', 'PySAM.Hybrids': 'files/Hybrids'},
     package_data={
         '': libfiles},
-    setup_requires=read_lines(Path(__file__).parent / "requirements.txt"),
     tests_require=["pytest"],
     ext_modules=extension_modules
 )

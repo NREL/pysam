@@ -170,9 +170,8 @@ FinancialParameters Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.FresnelPhysical.FresnelPhysical.AdjustmentFactors
 	:members:
-	:noindex:
 
 Outputs Group
 --------------

@@ -113,9 +113,8 @@ FinancialParameters Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.TroughPhysical.TroughPhysical.AdjustmentFactors
 	:members:
-	:noindex:
 
 Outputs Group
 --------------

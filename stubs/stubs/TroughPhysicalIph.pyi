@@ -2,6 +2,9 @@ class TroughPhysicalIph(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class TroughPhysicalIph(object):
 		pass
 
 	class SystemControl(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -34,13 +40,17 @@ class TroughPhysicalIph(object):
 			pass
 
 
+		disp_inventory_incentive = float
 		is_dispatch = float
 		is_parallel_htr = float
 		sim_type = float
 
 
 	class Weather(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -55,7 +65,10 @@ class TroughPhysicalIph(object):
 
 
 	class SystemDesign(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -69,7 +82,10 @@ class TroughPhysicalIph(object):
 
 
 	class SolarField(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -187,7 +203,10 @@ class TroughPhysicalIph(object):
 
 
 	class HeatSink(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -197,19 +216,19 @@ class TroughPhysicalIph(object):
 			pass
 
 
-		hs_phys_N_sub = float
+		hs_htf_mdot_max_frac = float
 		hs_phys_P_steam_hot_des = float
 		hs_phys_Q_steam_hot_des = float
 		hs_phys_T_steam_cold_des = float
-		hs_phys_f_mdot_steam_max = float
-		hs_phys_f_mdot_steam_min = float
-		hs_phys_tol = float
 		hs_type = float
 		pb_pump_coef = float
 
 
 	class ParallelHeater(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -227,7 +246,10 @@ class TroughPhysicalIph(object):
 
 
 	class SystemCosts(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -242,7 +264,10 @@ class TroughPhysicalIph(object):
 
 
 	class TES(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -286,7 +311,10 @@ class TroughPhysicalIph(object):
 
 
 	class Controller(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -315,7 +343,10 @@ class TroughPhysicalIph(object):
 
 
 	class SysControl(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -334,7 +365,10 @@ class TroughPhysicalIph(object):
 
 
 	class Tou(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -364,7 +398,10 @@ class TroughPhysicalIph(object):
 
 
 	class FinancialModel(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -378,7 +415,10 @@ class TroughPhysicalIph(object):
 
 
 	class FinancialSolutionMode(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -392,7 +432,10 @@ class TroughPhysicalIph(object):
 
 
 	class Revenue(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -406,7 +449,10 @@ class TroughPhysicalIph(object):
 
 
 	class TimeOfDeliveryFactors(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -420,7 +466,10 @@ class TroughPhysicalIph(object):
 
 
 	class System(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -438,7 +487,10 @@ class TroughPhysicalIph(object):
 
 
 	class Powerblock(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -452,7 +504,10 @@ class TroughPhysicalIph(object):
 
 
 	class CapitalCosts(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -482,7 +537,10 @@ class TroughPhysicalIph(object):
 
 
 	class FinancialParameters(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -515,39 +573,31 @@ class TroughPhysicalIph(object):
 
 
 	class AdjustmentFactors(object):
-		def assign(self): 
+		def assign(self, dict): 
 			pass
 	
-		def export(self): 
-			return {}
-	
-		def __init__(self, *args, **kwargs): # real signature unknown
+		def replace(self, dict): 
 			pass
 	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
 		adjust_constant = float
-		adjust_en_hourly = float
 		adjust_en_periods = float
 		adjust_en_timeindex = float
-		adjust_hourly = tuple
 		adjust_periods = tuple
 		adjust_timeindex = tuple
-		dc_adjust_constant = float
-		dc_adjust_en_hourly = float
-		dc_adjust_en_periods = float
-		dc_adjust_en_timeindex = float
-		dc_adjust_hourly = tuple
-		dc_adjust_periods = tuple
-		dc_adjust_timeindex = tuple
-		sf_adjust_constant = float
-		sf_adjust_en_hourly = float
-		sf_adjust_en_periods = float
-		sf_adjust_en_timeindex = float
-		sf_adjust_hourly = tuple
-		sf_adjust_periods = tuple
-		sf_adjust_timeindex = tuple
+
 
 	class ElectricityRates(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -590,7 +640,10 @@ class TroughPhysicalIph(object):
 
 
 	class Lifetime(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -604,7 +657,10 @@ class TroughPhysicalIph(object):
 
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -642,8 +698,10 @@ class TroughPhysicalIph(object):
 		T_grad_9 = tuple
 		T_heat_sink_in = tuple
 		T_heat_sink_out = tuple
+		T_hs_ext_out_des = float
 		T_htf_heater_in = tuple
 		T_htf_heater_out = tuple
+		T_out_wf_heat_sink = tuple
 		T_rec_cold_in = tuple
 		T_rec_hot_out = tuple
 		T_tes_cold = tuple
@@ -754,6 +812,9 @@ class TroughPhysicalIph(object):
 		gen_heat_btu = tuple
 		heat_load_capacity_factor = float
 		hour_day = tuple
+		hx_UA_des = float
+		hx_min_dT_des = float
+		hx_min_dT_heat_sink = tuple
 		is_PAR_HTR_allowed = tuple
 		is_hx = float
 		is_pc_sb_allowed = tuple
@@ -768,6 +829,7 @@ class TroughPhysicalIph(object):
 		m_dot_field_delivered = tuple
 		m_dot_field_recirc = tuple
 		m_dot_field_to_cycle = tuple
+		m_dot_hs_ext_des = float
 		m_dot_htf_heat_sink = tuple
 		m_dot_htf_heater = tuple
 		m_dot_htfmax_actual = float
@@ -776,6 +838,7 @@ class TroughPhysicalIph(object):
 		m_dot_pc_to_tes_cold = tuple
 		m_dot_tes_cold_out = tuple
 		m_dot_tes_hot_out = tuple
+		m_dot_wf_heat_sink = tuple
 		mass_tes_cold = tuple
 		mass_tes_hot = tuple
 		max_field_flow_velocity = float
@@ -883,6 +946,7 @@ class TroughPhysicalIph(object):
 		time_hr = tuple
 		timestep_load_abs_calc = tuple
 		timestep_load_fractions_calc = tuple
+		timestep_sim_duration = tuple
 		total_aperture = float
 		total_direct_cost = float
 		total_indirect_cost = float
@@ -903,6 +967,7 @@ class TroughPhysicalIph(object):
 		vol_tes_hot = tuple
 		vol_tes_tot = tuple
 		wspd = tuple
+		x_out_wf_heat_sink = tuple
 
 
 

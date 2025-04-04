@@ -156,9 +156,8 @@ FinancialParameters Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.EtesElectricResistance.EtesElectricResistance.AdjustmentFactors
 	:members:
-	:noindex:
 
 Outputs Group
 --------------

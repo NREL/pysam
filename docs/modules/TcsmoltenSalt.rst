@@ -131,9 +131,8 @@ Deprecated Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.AdjustmentFactors
 	:members:
-	:noindex:
 
 Outputs Group
 --------------

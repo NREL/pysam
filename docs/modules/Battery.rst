@@ -170,9 +170,8 @@ Revenue Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.Battery.Battery.AdjustmentFactors
 	:members:
-	:noindex:
 
 ElectricityRates Group
 -----------------------

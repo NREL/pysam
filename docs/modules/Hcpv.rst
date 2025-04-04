@@ -86,9 +86,8 @@ HCPVArray Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.Hcpv.Hcpv.AdjustmentFactors
 	:members:
-	:noindex:
 
 Outputs Group
 --------------

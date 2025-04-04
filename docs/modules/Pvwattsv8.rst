@@ -52,9 +52,8 @@ Shading Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.Pvwattsv8.Pvwattsv8.AdjustmentFactors
 	:members:
-	:noindex:
 
 HybridCosts Group
 ------------------

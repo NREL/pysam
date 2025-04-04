@@ -50,9 +50,8 @@ Shading Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.Swh.Swh.AdjustmentFactors
 	:members:
-	:noindex:
 
 Outputs Group
 --------------

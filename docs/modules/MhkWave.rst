@@ -42,9 +42,8 @@ Lifetime Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.MhkWave.MhkWave.AdjustmentFactors
 	:members:
-	:noindex:
 
 Outputs Group
 --------------

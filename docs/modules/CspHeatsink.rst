@@ -1,12 +1,12 @@
-.. _UiTesCalcs:
+.. _CspHeatsink:
 
-UiTesCalcs
-===========
+CspHeatsink
+============
 
-.. automodule:: PySAM.UiTesCalcs
+.. automodule:: PySAM.CspHeatsink
 	:members:
 
-UiTesCalcs is a wrapper for the SSC compute module `cmod_ui_tes_calcs.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_ui_tes_calcs.cpp>`_
+CspHeatsink is a wrapper for the SSC compute module `cmod_csp_heatsink.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_csp_heatsink.cpp>`_
 
 Interdependent Variables
 --------------------------
@@ -18,18 +18,12 @@ The variables listed below are interdependent with other variables. If you chang
 Functions
 -----------
 
-.. autoclass:: PySAM.UiTesCalcs.UiTesCalcs
+.. autoclass:: PySAM.CspHeatsink.CspHeatsink
 	:members:
 
-Common Group
+System Group
 -------------
 
-.. autoclass:: PySAM.UiTesCalcs.UiTesCalcs.Common
-	:members:
-
-Outputs Group
---------------
-
-.. autoclass:: PySAM.UiTesCalcs.UiTesCalcs.Outputs
+.. autoclass:: PySAM.CspHeatsink.CspHeatsink.System
 	:members:
 
