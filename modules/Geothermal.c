@@ -1014,6 +1014,18 @@ GeoHourly_set_stim_success_rate(VarGroupObject *self, PyObject *value, void *clo
 }
 
 static PyObject *
+GeoHourly_get_stimulation_type(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_GeoHourly_stimulation_type_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_stimulation_type(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Geothermal_GeoHourly_stimulation_type_nset, self->data_ptr);
+}
+
+static PyObject *
 GeoHourly_get_subsurface_water_loss(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Geothermal_GeoHourly_subsurface_water_loss_nget, self->data_ptr);
@@ -1343,6 +1355,9 @@ static PyGetSetDef GeoHourly_getset[] = {
  	NULL},
 {"stim_success_rate", (getter)GeoHourly_get_stim_success_rate,(setter)GeoHourly_set_stim_success_rate,
 	PyDoc_STR("*float*: Stimulation success rate [%]\n\nThe value of the following variables depends on ``stim_success_rate``:\n\n\t - num_wells_getem\n"),
+ 	NULL},
+{"stimulation_type", (getter)GeoHourly_get_stimulation_type,(setter)GeoHourly_set_stimulation_type,
+	PyDoc_STR("*float*: Which wells are stimulated [0/1/2/3]\n\n**Options:**\n0=Injection,1=Production,2=Both,3=Neither\n\n**Required:**\nFalse. Automatically set to 3 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subsurface_water_loss", (getter)GeoHourly_get_subsurface_water_loss,(setter)GeoHourly_set_subsurface_water_loss,
 	PyDoc_STR("*float*: Subsurface water loss [%]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``subsurface_water_loss``:\n\n\t - num_wells_getem\n"),
@@ -1843,9 +1858,27 @@ Outputs_get_num_wells_getem_inj(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_num_wells_getem_inj_drilled(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_Outputs_num_wells_getem_inj_drilled_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_num_wells_getem_output(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Geothermal_Outputs_num_wells_getem_output_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_num_wells_getem_prod_drilled(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_Outputs_num_wells_getem_prod_drilled_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_num_wells_getem_prod_failed(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_Outputs_num_wells_getem_prod_failed_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2072,7 +2105,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Gross output from GETEM for cost"),
  	NULL},
 {"gross_output", (getter)Outputs_get_gross_output,(setter)0,
-	PyDoc_STR("*float*: Gross output from GETEM"),
+	PyDoc_STR("*float*: Gross output from GETEM [MW]"),
  	NULL},
 {"hp_flash_pressure", (getter)Outputs_get_hp_flash_pressure,(setter)0,
 	PyDoc_STR("*float*: HP Flash Pressure [psia]"),
@@ -2105,10 +2138,19 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Condensate Pump Work [kW]"),
  	NULL},
 {"num_wells_getem_inj", (getter)Outputs_get_num_wells_getem_inj,(setter)0,
-	PyDoc_STR("*float*: Number of wells calculated by GETEM"),
+	PyDoc_STR("*float*: Number of required injection wells calculated by GETEM"),
+ 	NULL},
+{"num_wells_getem_inj_drilled", (getter)Outputs_get_num_wells_getem_inj_drilled,(setter)0,
+	PyDoc_STR("*float*: Number of injection wells drilled"),
  	NULL},
 {"num_wells_getem_output", (getter)Outputs_get_num_wells_getem_output,(setter)0,
-	PyDoc_STR("*float*: Number of wells calculated by GETEM"),
+	PyDoc_STR("*float*: Number of production wells required"),
+ 	NULL},
+{"num_wells_getem_prod_drilled", (getter)Outputs_get_num_wells_getem_prod_drilled,(setter)0,
+	PyDoc_STR("*float*: Number of production wells drilled"),
+ 	NULL},
+{"num_wells_getem_prod_failed", (getter)Outputs_get_num_wells_getem_prod_failed,(setter)0,
+	PyDoc_STR("*float*: Number of production wells failed during drilling"),
  	NULL},
 {"plant_brine_eff", (getter)Outputs_get_plant_brine_eff,(setter)0,
 	PyDoc_STR("*float*: Plant Brine Efficiency"),

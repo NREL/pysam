@@ -26,6 +26,8 @@ class GeothermalCosts(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
+	def getem_om_cost_calc(self, args):
+		pass
 	class GeoHourly(object):
 		def assign(self, dict): 
 			pass
@@ -62,12 +64,18 @@ class GeothermalCosts(object):
 		gross_cost_output = float
 		gross_output = float
 		hp_flash_pressure = float
+		inj_num_pumps = float
+		inj_pump_hp = float
 		lp_flash_pressure = float
 		ncg_condensate_pump = float
+		num_wells_getem_inj_drilled = float
+		num_wells_getem_prod_drilled = float
+		num_wells_getem_prod_failed = float
 		ppi_base_year = float
 		pressure_ratio_1 = float
 		pressure_ratio_2 = float
 		pressure_ratio_3 = float
+		pump_size_hp = float
 		qCondenser = float
 		qRejectByStage_1 = float
 		qRejectByStage_2 = float
@@ -76,6 +84,7 @@ class GeothermalCosts(object):
 		resource_depth = float
 		spec_vol = float
 		spec_vol_lp = float
+		stimulation_type = float
 		v_stage_1 = float
 		v_stage_2 = float
 		v_stage_3 = float
