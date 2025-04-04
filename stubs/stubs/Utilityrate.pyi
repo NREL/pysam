@@ -228,12 +228,12 @@ class Utilityrate(object):
 		charge_tr_nov = tuple
 		charge_tr_oct = tuple
 		charge_tr_sep = tuple
-		elec_cost_with_system = tuple
-		elec_cost_without_system = tuple
 		energy_net = tuple
 		energy_value = tuple
 		revenue_with_system = tuple
 		revenue_without_system = tuple
+		utility_bill_w_sys = tuple
+		utility_bill_wo_sys = tuple
 		year1_hourly_e_demand = tuple
 		year1_hourly_e_grid = tuple
 		year1_hourly_income_with_system = tuple
