@@ -112,6 +112,7 @@ class Geothermal(object):
 		startup_frac = float
 		startup_time = float
 		stim_success_rate = float
+		stimulation_type = float
 		subsurface_water_loss = float
 		system_use_lifetime_output = float
 		temp_decline_max = float
@@ -191,7 +192,10 @@ class Geothermal(object):
 		monthly_resource_temperature = tuple
 		ncg_condensate_pump = float
 		num_wells_getem_inj = float
+		num_wells_getem_inj_drilled = float
 		num_wells_getem_output = float
+		num_wells_getem_prod_drilled = float
+		num_wells_getem_prod_failed = float
 		plant_brine_eff = float
 		pressure_ratio_1 = float
 		pressure_ratio_2 = float

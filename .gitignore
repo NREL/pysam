@@ -33,3 +33,7 @@ files/defaults/
 .mypy_cache
 
 *.zip
+
+*.dll
+
+*.lib
