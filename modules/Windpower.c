@@ -321,6 +321,18 @@ Turbine_set_wind_resource_shear(VarGroupObject *self, PyObject *value, void *clo
 }
 
 static PyObject *
+Turbine_get_wind_turbine_ct_curve(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_Turbine_wind_turbine_ct_curve_aget, self->data_ptr);
+}
+
+static int
+Turbine_set_wind_turbine_ct_curve(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Windpower_Turbine_wind_turbine_ct_curve_aset, self->data_ptr);
+}
+
+static PyObject *
 Turbine_get_wind_turbine_hub_ht(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Windpower_Turbine_wind_turbine_hub_ht_nget, self->data_ptr);
@@ -383,6 +395,9 @@ Turbine_set_wind_turbine_rotor_diameter(VarGroupObject *self, PyObject *value, v
 static PyGetSetDef Turbine_getset[] = {
 {"wind_resource_shear", (getter)Turbine_get_wind_resource_shear,(setter)Turbine_set_wind_resource_shear,
 	PyDoc_STR("*float*: Shear exponent\n\n**Constraints:**\nMIN=0\n\n**Required:**\nTrue"),
+ 	NULL},
+{"wind_turbine_ct_curve", (getter)Turbine_get_wind_turbine_ct_curve,(setter)Turbine_set_wind_turbine_ct_curve,
+	PyDoc_STR("*sequence*: User-defined Ct curve vs WS for wake models\n\n**Info:**\nuses same wind speeds as power curve\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Constraints:**\nLENGTH_EQUAL=wind_turbine_powercurve_windspeeds"),
  	NULL},
 {"wind_turbine_hub_ht", (getter)Turbine_get_wind_turbine_hub_ht,(setter)Turbine_set_wind_turbine_hub_ht,
 	PyDoc_STR("*float*: Hub height [m]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``wind_turbine_hub_ht``:\n\n\t - wind_turbine_powercurve_powerout\n\t - wind_turbine_powercurve_windspeeds\n"),
@@ -533,6 +548,18 @@ Farm_set_max_turbine_override(VarGroupObject *self, PyObject *value, void *closu
 }
 
 static PyObject *
+Farm_get_park_wake_decay_constant(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Farm_park_wake_decay_constant_nget, self->data_ptr);
+}
+
+static int
+Farm_set_park_wake_decay_constant(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Farm_park_wake_decay_constant_nset, self->data_ptr);
+}
+
+static PyObject *
 Farm_get_system_capacity(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Windpower_Farm_system_capacity_nget, self->data_ptr);
@@ -542,6 +569,18 @@ static int
 Farm_set_system_capacity(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Windpower_Farm_system_capacity_nset, self->data_ptr);
+}
+
+static PyObject *
+Farm_get_wake_loss_multiplier(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Farm_wake_loss_multiplier_nget, self->data_ptr);
+}
+
+static int
+Farm_set_wake_loss_multiplier(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Farm_wake_loss_multiplier_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -596,8 +635,14 @@ static PyGetSetDef Farm_getset[] = {
 {"max_turbine_override", (getter)Farm_get_max_turbine_override,(setter)Farm_set_max_turbine_override,
 	PyDoc_STR("*float*: Override the max number of turbines for wake modeling [numTurbines]\n\n**Info:**\nset new max num turbines"),
  	NULL},
+{"park_wake_decay_constant", (getter)Farm_get_park_wake_decay_constant,(setter)Farm_set_park_wake_decay_constant,
+	PyDoc_STR("*float*: Wake decay constant for Park model [0..1]"),
+ 	NULL},
 {"system_capacity", (getter)Farm_get_system_capacity,(setter)Farm_set_system_capacity,
 	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nTrue\n\nThe value of ``system_capacity`` depends on the following variables:\n\n\t - wind_turbine_rotor_diameter\n"),
+ 	NULL},
+{"wake_loss_multiplier", (getter)Farm_get_wake_loss_multiplier,(setter)Farm_set_wake_loss_multiplier,
+	PyDoc_STR("*float*: Multiplier for the calculated wake loss\n\n**Info:**\n>1 increases loss, <1 decreases loss\n\n**Constraints:**\nMIN=0"),
  	NULL},
 {"wind_farm_wake_model", (getter)Farm_get_wind_farm_wake_model,(setter)Farm_set_wind_farm_wake_model,
 	PyDoc_STR("*float*: Wake Model [Simple, Park, EV, Constant] [0/1/2/3]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``wind_farm_wake_model``:\n\n\t - wake_int_loss\n"),
@@ -889,6 +934,18 @@ Losses_set_icing_cutoff_temp(VarGroupObject *self, PyObject *value, void *closur
 }
 
 static PyObject *
+Losses_get_icing_persistence_timesteps(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_icing_persistence_timesteps_nget, self->data_ptr);
+}
+
+static int
+Losses_set_icing_persistence_timesteps(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_icing_persistence_timesteps_nset, self->data_ptr);
+}
+
+static PyObject *
 Losses_get_low_temp_cutoff(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Windpower_Losses_low_temp_cutoff_nget, self->data_ptr);
@@ -1072,6 +1129,9 @@ static PyGetSetDef Losses_getset[] = {
 {"icing_cutoff_temp", (getter)Losses_get_icing_cutoff_temp,(setter)Losses_set_icing_cutoff_temp,
 	PyDoc_STR("*float*: Icing Cutoff Temperature [C]\n\n**Required:**\nRequired if en_icing_cutoff=1"),
  	NULL},
+{"icing_persistence_timesteps", (getter)Losses_get_icing_persistence_timesteps,(setter)Losses_set_icing_persistence_timesteps,
+	PyDoc_STR("*float*: Num timesteps icing lasts if conditions are met\n\n**Info:**\nincludes initial timestep\n\n**Constraints:**\nMIN=1,INTEGER\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
 {"low_temp_cutoff", (getter)Losses_get_low_temp_cutoff,(setter)Losses_set_low_temp_cutoff,
 	PyDoc_STR("*float*: Low Temperature Cutoff [C]\n\n**Required:**\nRequired if en_low_temp_cutoff=1"),
  	NULL},
@@ -1145,6 +1205,203 @@ static PyTypeObject Losses_Type = {
 		Losses_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		Losses_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * AdjustmentFactors Group
+ */ 
+
+static PyTypeObject AdjustmentFactors_Type;
+
+static PyObject *
+AdjustmentFactors_new(SAM_Windpower data_ptr)
+{
+	PyObject* new_obj = AdjustmentFactors_Type.tp_alloc(&AdjustmentFactors_Type,0);
+
+	VarGroupObject* AdjustmentFactors_obj = (VarGroupObject*)new_obj;
+
+	AdjustmentFactors_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* AdjustmentFactors methods */
+
+static PyObject *
+AdjustmentFactors_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Windpower", "AdjustmentFactors")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+AdjustmentFactors_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &AdjustmentFactors_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Windpower", "AdjustmentFactors")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+AdjustmentFactors_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &AdjustmentFactors_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef AdjustmentFactors_methods[] = {
+		{"assign",            (PyCFunction)AdjustmentFactors_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``AdjustmentFactors_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)AdjustmentFactors_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``AdjustmentFactors_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)AdjustmentFactors_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+AdjustmentFactors_get_adjust_constant(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_AdjustmentFactors_adjust_constant_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_constant(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_AdjustmentFactors_adjust_constant_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_en_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_AdjustmentFactors_adjust_en_periods_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_en_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_AdjustmentFactors_adjust_en_periods_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_en_timeindex(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_AdjustmentFactors_adjust_en_timeindex_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_en_timeindex(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_AdjustmentFactors_adjust_en_timeindex_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Windpower_AdjustmentFactors_adjust_periods_mget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Windpower_AdjustmentFactors_adjust_periods_mset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_timeindex(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_AdjustmentFactors_adjust_timeindex_aget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_timeindex(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Windpower_AdjustmentFactors_adjust_timeindex_aset, self->data_ptr);
+}
+
+static PyGetSetDef AdjustmentFactors_getset[] = {
+{"adjust_constant", (getter)AdjustmentFactors_get_adjust_constant,(setter)AdjustmentFactors_set_adjust_constant,
+	PyDoc_STR("*float*: Constant loss adjustment [%]\n\n**Info:**\n'adjust' and 'constant' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nMAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"adjust_en_periods", (getter)AdjustmentFactors_get_adjust_en_periods,(setter)AdjustmentFactors_set_adjust_en_periods,
+	PyDoc_STR("*float*: Enable period-based adjustment factors [0/1]\n\n**Info:**\n'adjust' and 'en_periods' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"adjust_en_timeindex", (getter)AdjustmentFactors_get_adjust_en_timeindex,(setter)AdjustmentFactors_set_adjust_en_timeindex,
+	PyDoc_STR("*float*: Enable lifetime adjustment factors [0/1]\n\n**Info:**\n'adjust' and 'en_timeindex' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"adjust_periods", (getter)AdjustmentFactors_get_adjust_periods,(setter)AdjustmentFactors_set_adjust_periods,
+	PyDoc_STR("*sequence[sequence]*: Period-based adjustment factors [%]\n\n**Info:**\nSyntax: n x 3 matrix [ start, end, loss ]; Version upgrade: 'adjust' and 'periods' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nCOLS=3\n\n**Required:**\nRequired if adjust_en_periods=1"),
+ 	NULL},
+{"adjust_timeindex", (getter)AdjustmentFactors_get_adjust_timeindex,(setter)AdjustmentFactors_set_adjust_timeindex,
+	PyDoc_STR("*sequence*: Lifetime adjustment factors [%]\n\n**Info:**\n'adjust' and 'timeindex' separated by _ instead of : after SAM 2022.12.21\n\n**Required:**\nRequired if adjust_en_timeindex=1"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject AdjustmentFactors_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Windpower.AdjustmentFactors",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		AdjustmentFactors_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		AdjustmentFactors_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -1503,7 +1760,7 @@ static PyGetSetDef HybridCosts_getset[] = {
 	PyDoc_STR("*sequence*: Annual AC degradation [%]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"land_area", (getter)HybridCosts_get_land_area,(setter)HybridCosts_set_land_area,
-	PyDoc_STR("*float*: Total land area [acres]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of ``land_area`` depends on the following variables:\n\n\t - wind_turbine_rotor_diameter\n"),
+	PyDoc_STR("*float*: Total land area [acres]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_capacity", (getter)HybridCosts_get_om_capacity,(setter)HybridCosts_set_om_capacity,
 	PyDoc_STR("*sequence*: Capacity-based O&M amount [$/kWcap]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
@@ -1690,6 +1947,24 @@ Outputs_get_annual_gross_energy(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_annual_wake_loss_internal_kWh(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Outputs_annual_wake_loss_internal_kWh_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_wake_loss_internal_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Outputs_annual_wake_loss_internal_percent_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_wake_loss_total_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Outputs_annual_wake_loss_total_percent_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_avail_losses(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Windpower_Outputs_avail_losses_nget, self->data_ptr);
@@ -1840,9 +2115,15 @@ Outputs_get_turbine_output_by_windspeed_bin(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_wake_losses(VarGroupObject *self, void *closure)
+Outputs_get_wake_loss_internal_kW(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Windpower_Outputs_wake_losses_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Windpower_Outputs_wake_loss_internal_kW_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_wake_loss_internal_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_Outputs_wake_loss_internal_percent_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1871,7 +2152,7 @@ Outputs_get_year(VarGroupObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	PyDoc_STR("*float*: Annual Energy [kWh]"),
+	PyDoc_STR("*float*: Annual AC energy in Year 1 [kWh]"),
  	NULL},
 {"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
@@ -1886,7 +2167,16 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Annual energy with 95% probability of exceedance [kWh]"),
  	NULL},
 {"annual_gross_energy", (getter)Outputs_get_annual_gross_energy,(setter)0,
-	PyDoc_STR("*float*: Annual Gross Energy [kWh]"),
+	PyDoc_STR("*float*: Annual gross AC energy in Year 1 [kWh]"),
+ 	NULL},
+{"annual_wake_loss_internal_kWh", (getter)Outputs_get_annual_wake_loss_internal_kWh,(setter)0,
+	PyDoc_STR("*float*: Annual internal wake loss [kWh]"),
+ 	NULL},
+{"annual_wake_loss_internal_percent", (getter)Outputs_get_annual_wake_loss_internal_percent,(setter)0,
+	PyDoc_STR("*float*: Annual internal wake loss percentage [%]"),
+ 	NULL},
+{"annual_wake_loss_total_percent", (getter)Outputs_get_annual_wake_loss_total_percent,(setter)0,
+	PyDoc_STR("*float*: Annual total wake loss percentage [%]"),
  	NULL},
 {"avail_losses", (getter)Outputs_get_avail_losses,(setter)0,
 	PyDoc_STR("*float*: Availability losses [%]"),
@@ -1946,7 +2236,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Longitude [degrees]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	PyDoc_STR("*sequence*: Monthly Energy Gross [kWh]"),
+	PyDoc_STR("*sequence*: Monthly AC energy in Year 1 [kWh]"),
  	NULL},
 {"ops_losses", (getter)Outputs_get_ops_losses,(setter)0,
 	PyDoc_STR("*float*: Operational losses [%]"),
@@ -1963,8 +2253,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"turbine_output_by_windspeed_bin", (getter)Outputs_get_turbine_output_by_windspeed_bin,(setter)0,
 	PyDoc_STR("*sequence*: Turbine output by wind speed bin [kW]"),
  	NULL},
-{"wake_losses", (getter)Outputs_get_wake_losses,(setter)0,
-	PyDoc_STR("*float*: Wake losses [%]"),
+{"wake_loss_internal_kW", (getter)Outputs_get_wake_loss_internal_kW,(setter)0,
+	PyDoc_STR("*sequence*: Internal wake loss in kW [kW]"),
+ 	NULL},
+{"wake_loss_internal_percent", (getter)Outputs_get_wake_loss_internal_percent,(setter)0,
+	PyDoc_STR("*sequence*: Internal wake loss percent [%]"),
  	NULL},
 {"wind_direction", (getter)Outputs_get_wind_direction,(setter)0,
 	PyDoc_STR("*sequence*: Wind direction [degrees]"),
@@ -2057,20 +2350,9 @@ newWindpowerObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Losses", Losses_obj);
 	Py_DECREF(Losses_obj);
 
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-
-	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
-	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
-	Py_XDECREF(data_cap);
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (!Adjust_obj){
-		PyErr_SetString(PyExc_Exception, "Couldn't create AdjustmentFactorsObject\n");
-		return NULL;
-	}
-
-	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
-	Py_DECREF(Adjust_obj);
+	PyObject* AdjustmentFactors_obj = AdjustmentFactors_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "AdjustmentFactors", AdjustmentFactors_obj);
+	Py_DECREF(AdjustmentFactors_obj);
 
 	PyObject* Uncertainty_obj = Uncertainty_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Uncertainty", Uncertainty_obj);
@@ -2348,7 +2630,7 @@ static PyMethodDef WindpowerModule_methods[] = {
 		{"new",             Windpower_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Windpower")},
 		{"default",             Windpower_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Windpower\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"GenericPVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"GenericPVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsWindBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"PhotovoltaicWindBatteryHybridHostDeveloper\"*\n\n		- *\"PhotovoltaicWindBatteryHybridSingleOwner\"*\n\n		- *\"WindPowerAllEquityPartnershipFlip\"*\n\n		- *\"WindPowerCommercial\"*\n\n		- *\"WindPowerLCOECalculator\"*\n\n		- *\"WindPowerLeveragedPartnershipFlip\"*\n\n		- *\"WindPowerMerchantPlant\"*\n\n		- *\"WindPowerNone\"*\n\n		- *\"WindPowerResidential\"*\n\n		- *\"WindPowerSaleLeaseback\"*\n\n		- *\"WindPowerSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> Windpower\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsWindBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"PhotovoltaicWindBatteryHybridHostDeveloper\"*\n\n		- *\"PhotovoltaicWindBatteryHybridSingleOwner\"*\n\n		- *\"WindPowerAllEquityPartnershipFlip\"*\n\n		- *\"WindPowerCommercial\"*\n\n		- *\"WindPowerLCOECalculator\"*\n\n		- *\"WindPowerLeveragedPartnershipFlip\"*\n\n		- *\"WindPowerMerchantPlant\"*\n\n		- *\"WindPowerNone\"*\n\n		- *\"WindPowerResidential\"*\n\n		- *\"WindPowerSaleLeaseback\"*\n\n		- *\"WindPowerSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Windpower_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Windpower\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Windpower_from_existing,        METH_VARARGS,
@@ -2398,6 +2680,13 @@ WindpowerModule_exec(PyObject *m)
 				"Losses",
 				(PyObject*)&Losses_Type);
 	Py_DECREF(&Losses_Type);
+
+	/// Add the AdjustmentFactors type object to Windpower_Type
+	if (PyType_Ready(&AdjustmentFactors_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Windpower_Type.tp_dict,
+				"AdjustmentFactors",
+				(PyObject*)&AdjustmentFactors_Type);
+	Py_DECREF(&AdjustmentFactors_Type);
 
 	/// Add the Uncertainty type object to Windpower_Type
 	if (PyType_Ready(&Uncertainty_Type) < 0) { goto fail; }

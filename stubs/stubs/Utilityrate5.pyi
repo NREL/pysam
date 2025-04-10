@@ -2,6 +2,9 @@ class Utilityrate5(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class Utilityrate5(object):
 		pass
 
 	class Lifetime(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -40,7 +46,10 @@ class Utilityrate5(object):
 
 
 	class ElectricityRates(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -72,6 +81,8 @@ class Utilityrate5(object):
 		ur_metering_option = float
 		ur_monthly_fixed_charge = float
 		ur_monthly_min_charge = float
+		ur_nb_apply_credit_current_month = float
+		ur_nb_credit_expire = float
 		ur_nm_credit_month = float
 		ur_nm_credit_rollover = float
 		ur_nm_yearend_sell_rate = float
@@ -82,7 +93,10 @@ class Utilityrate5(object):
 
 
 	class SystemOutput(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -97,7 +111,10 @@ class Utilityrate5(object):
 
 
 	class Load(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -113,7 +130,10 @@ class Utilityrate5(object):
 
 
 	class HybridCosts(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -137,7 +157,10 @@ class Utilityrate5(object):
 
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -198,10 +221,6 @@ class Utilityrate5(object):
 		charge_wo_sys_fixed_ym = tuple
 		charge_wo_sys_minimum = tuple
 		charge_wo_sys_minimum_ym = tuple
-		elec_cost_with_system = tuple
-		elec_cost_with_system_year1 = float
-		elec_cost_without_system = tuple
-		elec_cost_without_system_year1 = float
 		energy_w_sys_ec_apr_tp = tuple
 		energy_w_sys_ec_aug_tp = tuple
 		energy_w_sys_ec_dec_tp = tuple
@@ -250,8 +269,10 @@ class Utilityrate5(object):
 		true_up_credits_ym = tuple
 		two_meter_sales_ym = tuple
 		utility_bill_w_sys = tuple
+		utility_bill_w_sys_year1 = float
 		utility_bill_w_sys_ym = tuple
 		utility_bill_wo_sys = tuple
+		utility_bill_wo_sys_year1 = float
 		utility_bill_wo_sys_ym = tuple
 		year1_billing_demand_w_sys = tuple
 		year1_billing_demand_wo_sys = tuple

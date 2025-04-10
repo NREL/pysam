@@ -51,10 +51,34 @@ HeatSink Group
 .. autoclass:: PySAM.TroughPhysicalIph.TroughPhysicalIph.HeatSink
 	:members:
 
+ParallelHeater Group
+---------------------
+
+.. autoclass:: PySAM.TroughPhysicalIph.TroughPhysicalIph.ParallelHeater
+	:members:
+
+SystemCosts Group
+------------------
+
+.. autoclass:: PySAM.TroughPhysicalIph.TroughPhysicalIph.SystemCosts
+	:members:
+
 TES Group
 ----------
 
 .. autoclass:: PySAM.TroughPhysicalIph.TroughPhysicalIph.TES
+	:members:
+
+Controller Group
+-----------------
+
+.. autoclass:: PySAM.TroughPhysicalIph.TroughPhysicalIph.Controller
+	:members:
+
+SysControl Group
+-----------------
+
+.. autoclass:: PySAM.TroughPhysicalIph.TroughPhysicalIph.SysControl
 	:members:
 
 Tou Group
@@ -75,22 +99,16 @@ FinancialSolutionMode Group
 .. autoclass:: PySAM.TroughPhysicalIph.TroughPhysicalIph.FinancialSolutionMode
 	:members:
 
-ElectricityRates Group
------------------------
+Revenue Group
+--------------
 
-.. autoclass:: PySAM.TroughPhysicalIph.TroughPhysicalIph.ElectricityRates
+.. autoclass:: PySAM.TroughPhysicalIph.TroughPhysicalIph.Revenue
 	:members:
 
 TimeOfDeliveryFactors Group
 ----------------------------
 
 .. autoclass:: PySAM.TroughPhysicalIph.TroughPhysicalIph.TimeOfDeliveryFactors
-	:members:
-
-Revenue Group
---------------
-
-.. autoclass:: PySAM.TroughPhysicalIph.TroughPhysicalIph.Revenue
 	:members:
 
 System Group
@@ -103,24 +121,6 @@ Powerblock Group
 -----------------
 
 .. autoclass:: PySAM.TroughPhysicalIph.TroughPhysicalIph.Powerblock
-	:members:
-
-Controller Group
------------------
-
-.. autoclass:: PySAM.TroughPhysicalIph.TroughPhysicalIph.Controller
-	:members:
-
-TowerAndReceiver Group
------------------------
-
-.. autoclass:: PySAM.TroughPhysicalIph.TroughPhysicalIph.TowerAndReceiver
-	:members:
-
-SolarResourceData Group
-------------------------
-
-.. autoclass:: PySAM.TroughPhysicalIph.TroughPhysicalIph.SolarResourceData
 	:members:
 
 CapitalCosts Group
@@ -138,9 +138,20 @@ FinancialParameters Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.TroughPhysicalIph.TroughPhysicalIph.AdjustmentFactors
 	:members:
-	:noindex:
+
+ElectricityRates Group
+-----------------------
+
+.. autoclass:: PySAM.TroughPhysicalIph.TroughPhysicalIph.ElectricityRates
+	:members:
+
+Lifetime Group
+---------------
+
+.. autoclass:: PySAM.TroughPhysicalIph.TroughPhysicalIph.Lifetime
+	:members:
 
 Outputs Group
 --------------

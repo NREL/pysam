@@ -796,7 +796,7 @@ static PyGetSetDef SolarPILOT_getset[] = {
 	PyDoc_STR("*float*: Contingency for cost overrun [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"cost_sf_fixed", (getter)SolarPILOT_get_cost_sf_fixed,(setter)SolarPILOT_set_cost_sf_fixed,
-	PyDoc_STR("*float*: Soalr field fixed cost [$]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Solar field fixed cost [$]\n\n**Required:**\nTrue"),
  	NULL},
 {"csp_pt_sf_fixed_land_area", (getter)SolarPILOT_get_csp_pt_sf_fixed_land_area,(setter)SolarPILOT_set_csp_pt_sf_fixed_land_area,
 	PyDoc_STR("*float*: Fixed land area [acre]\n\n**Required:**\nTrue"),

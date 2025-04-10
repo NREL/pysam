@@ -230,30 +230,6 @@ static PyMethodDef SystemControl_methods[] = {
 };
 
 static PyObject *
-SystemControl_get_ampl_data_dir(VarGroupObject *self, void *closure)
-{
-	return PySAM_string_getter(SAM_MsptIph_SystemControl_ampl_data_dir_sget, self->data_ptr);
-}
-
-static int
-SystemControl_set_ampl_data_dir(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_string_setter(value, SAM_MsptIph_SystemControl_ampl_data_dir_sset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_ampl_exec_call(VarGroupObject *self, void *closure)
-{
-	return PySAM_string_getter(SAM_MsptIph_SystemControl_ampl_exec_call_sget, self->data_ptr);
-}
-
-static int
-SystemControl_set_ampl_exec_call(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_string_setter(value, SAM_MsptIph_SystemControl_ampl_exec_call_sset, self->data_ptr);
-}
-
-static PyObject *
 SystemControl_get_aux_par(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MsptIph_SystemControl_aux_par_nget, self->data_ptr);
@@ -554,18 +530,6 @@ SystemControl_set_f_turb_tou_periods(VarGroupObject *self, PyObject *value, void
 }
 
 static PyObject *
-SystemControl_get_is_ampl_engine(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_MsptIph_SystemControl_is_ampl_engine_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_is_ampl_engine(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_MsptIph_SystemControl_is_ampl_engine_nset, self->data_ptr);
-}
-
-static PyObject *
 SystemControl_get_is_dispatch(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MsptIph_SystemControl_is_dispatch_nget, self->data_ptr);
@@ -611,18 +575,6 @@ static int
 SystemControl_set_is_tod_pc_target_also_pc_max(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_MsptIph_SystemControl_is_tod_pc_target_also_pc_max_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_is_write_ampl_dat(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_MsptIph_SystemControl_is_write_ampl_dat_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_is_write_ampl_dat(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_MsptIph_SystemControl_is_write_ampl_dat_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -758,12 +710,6 @@ SystemControl_set_weekend_schedule(VarGroupObject *self, PyObject *value, void *
 }
 
 static PyGetSetDef SystemControl_getset[] = {
-{"ampl_data_dir", (getter)SystemControl_get_ampl_data_dir,(setter)SystemControl_set_ampl_data_dir,
-	PyDoc_STR("*str*: AMPL data file directory\n\n**Required:**\nFalse. Automatically set to '' if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"ampl_exec_call", (getter)SystemControl_get_ampl_exec_call,(setter)SystemControl_set_ampl_exec_call,
-	PyDoc_STR("*str*: System command to run AMPL code\n\n**Required:**\nFalse. Automatically set to 'ampl sdk_solution.run' if not assigned explicitly or loaded from defaults."),
- 	NULL},
 {"aux_par", (getter)SystemControl_get_aux_par,(setter)SystemControl_set_aux_par,
 	PyDoc_STR("*float*: Aux heater, boiler parasitic [MWe/MWcap]\n\n**Required:**\nTrue"),
  	NULL},
@@ -839,9 +785,6 @@ static PyGetSetDef SystemControl_getset[] = {
 {"f_turb_tou_periods", (getter)SystemControl_get_f_turb_tou_periods,(setter)SystemControl_set_f_turb_tou_periods,
 	PyDoc_STR("*sequence*: Dispatch logic for turbine load fraction\n\n**Required:**\nTrue"),
  	NULL},
-{"is_ampl_engine", (getter)SystemControl_get_is_ampl_engine,(setter)SystemControl_set_is_ampl_engine,
-	PyDoc_STR("*float*: Run dispatch optimization with external AMPL engine\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
 {"is_dispatch", (getter)SystemControl_get_is_dispatch,(setter)SystemControl_set_is_dispatch,
 	PyDoc_STR("*float*: Allow dispatch optimization?\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
@@ -854,14 +797,11 @@ static PyGetSetDef SystemControl_getset[] = {
 {"is_tod_pc_target_also_pc_max", (getter)SystemControl_get_is_tod_pc_target_also_pc_max,(setter)SystemControl_set_is_tod_pc_target_also_pc_max,
 	PyDoc_STR("*float*: Is the TOD target cycle heat input also the max cycle heat input?\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
-{"is_write_ampl_dat", (getter)SystemControl_get_is_write_ampl_dat,(setter)SystemControl_set_is_write_ampl_dat,
-	PyDoc_STR("*float*: Write AMPL data files for dispatch run\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
 {"pb_fixed_par", (getter)SystemControl_get_pb_fixed_par,(setter)SystemControl_set_pb_fixed_par,
 	PyDoc_STR("*float*: Fixed parasitic load - runs at all times [MWe/MWcap]\n\n**Required:**\nTrue"),
  	NULL},
 {"q_rec_heattrace", (getter)SystemControl_get_q_rec_heattrace,(setter)SystemControl_set_q_rec_heattrace,
-	PyDoc_STR("*float*: Receiver heat trace energy consumption during startup [kWe-hr]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Receiver heat trace energy consumption during startup [kWhe]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"q_rec_standby", (getter)SystemControl_get_q_rec_standby,(setter)SystemControl_set_q_rec_standby,
 	PyDoc_STR("*float*: Receiver standby energy consumption [kWt]\n\n**Required:**\nFalse. Automatically set to 9e99 if not assigned explicitly or loaded from defaults."),
@@ -879,7 +819,7 @@ static PyGetSetDef SystemControl_getset[] = {
 	PyDoc_STR("*float*: Simulation stop time [s]\n\n**Required:**\nFalse. Automatically set to 31536000 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"timestep_load_fractions", (getter)SystemControl_get_timestep_load_fractions,(setter)SystemControl_set_timestep_load_fractions,
-	PyDoc_STR("*sequence*: Turbine load fraction for each timestep, alternative to block dispatch\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
+	PyDoc_STR("*sequence*: Turbine load fraction for each timestep, alternative to block dispatch\n\n**Required:**\nRequired if is_timestep_load_fractions=1"),
  	NULL},
 {"vacuum_arrays", (getter)SystemControl_get_vacuum_arrays,(setter)SystemControl_set_vacuum_arrays,
 	PyDoc_STR("*float*: Allocate arrays for only the required number of steps\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
@@ -2016,7 +1956,7 @@ static PyGetSetDef HeliostatField_getset[] = {
 	PyDoc_STR("*float*: Max number iteration steps\n\n**Required:**\nFalse. Automatically set to 200 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"p_start", (getter)HeliostatField_get_p_start,(setter)HeliostatField_set_p_start,
-	PyDoc_STR("*float*: Heliostat startup energy [kWe-hr]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Heliostat startup energy [kWhe]\n\n**Required:**\nTrue"),
  	NULL},
 {"p_track", (getter)HeliostatField_get_p_track,(setter)HeliostatField_set_p_track,
 	PyDoc_STR("*float*: Heliostat tracking energy [kWe]\n\n**Required:**\nTrue"),
@@ -2855,7 +2795,7 @@ static PyGetSetDef TowerAndReceiver_getset[] = {
 	PyDoc_STR("*float*: Piping length multiplier\n\n**Required:**\nTrue"),
  	NULL},
 {"piping_loss_coefficient", (getter)TowerAndReceiver_get_piping_loss_coefficient,(setter)TowerAndReceiver_set_piping_loss_coefficient,
-	PyDoc_STR("*float*: Thermal loss per meter of piping [Wt/m2-K]"),
+	PyDoc_STR("*float*: Thermal loss per meter of piping [Wt/m2-K]\n\n**Required:**\nTrue"),
  	NULL},
 {"preheat_flux", (getter)TowerAndReceiver_get_preheat_flux,(setter)TowerAndReceiver_set_preheat_flux,
 	PyDoc_STR("*float*: Tube absorbed solar flux during preheat [kW/m2]\n\n**Required:**\nFalse. Automatically set to 50.0 if not assigned explicitly or loaded from defaults."),
@@ -3824,7 +3764,7 @@ static PyGetSetDef ThermalStorage_getset[] = {
 	PyDoc_STR("*float*: Tanks are in parallel, not in series, with solar field [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"tes_init_hot_htf_percent", (getter)ThermalStorage_get_tes_init_hot_htf_percent,(setter)ThermalStorage_set_tes_init_hot_htf_percent,
-	PyDoc_STR("*float*: Initial fraction of available volume that is hot [%]"),
+	PyDoc_STR("*float*: Initial fraction of available volume that is hot [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"u_tank", (getter)ThermalStorage_get_u_tank,(setter)ThermalStorage_set_u_tank,
 	PyDoc_STR("*float*: Loss coefficient from the tank [W/m2-K]\n\n**Required:**\nTrue"),
@@ -3951,6 +3891,66 @@ static PyMethodDef HeatSink_methods[] = {
 };
 
 static PyObject *
+HeatSink_get_hs_htf_mdot_max_frac(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MsptIph_HeatSink_hs_htf_mdot_max_frac_nget, self->data_ptr);
+}
+
+static int
+HeatSink_set_hs_htf_mdot_max_frac(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MsptIph_HeatSink_hs_htf_mdot_max_frac_nset, self->data_ptr);
+}
+
+static PyObject *
+HeatSink_get_hs_phys_P_steam_hot_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MsptIph_HeatSink_hs_phys_P_steam_hot_des_nget, self->data_ptr);
+}
+
+static int
+HeatSink_set_hs_phys_P_steam_hot_des(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MsptIph_HeatSink_hs_phys_P_steam_hot_des_nset, self->data_ptr);
+}
+
+static PyObject *
+HeatSink_get_hs_phys_Q_steam_hot_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MsptIph_HeatSink_hs_phys_Q_steam_hot_des_nget, self->data_ptr);
+}
+
+static int
+HeatSink_set_hs_phys_Q_steam_hot_des(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MsptIph_HeatSink_hs_phys_Q_steam_hot_des_nset, self->data_ptr);
+}
+
+static PyObject *
+HeatSink_get_hs_phys_T_steam_cold_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MsptIph_HeatSink_hs_phys_T_steam_cold_des_nget, self->data_ptr);
+}
+
+static int
+HeatSink_set_hs_phys_T_steam_cold_des(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MsptIph_HeatSink_hs_phys_T_steam_cold_des_nset, self->data_ptr);
+}
+
+static PyObject *
+HeatSink_get_hs_type(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MsptIph_HeatSink_hs_type_nget, self->data_ptr);
+}
+
+static int
+HeatSink_set_hs_type(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MsptIph_HeatSink_hs_type_nset, self->data_ptr);
+}
+
+static PyObject *
 HeatSink_get_pb_pump_coef(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MsptIph_HeatSink_pb_pump_coef_nget, self->data_ptr);
@@ -3963,6 +3963,21 @@ HeatSink_set_pb_pump_coef(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyGetSetDef HeatSink_getset[] = {
+{"hs_htf_mdot_max_frac", (getter)HeatSink_get_hs_htf_mdot_max_frac,(setter)HeatSink_set_hs_htf_mdot_max_frac,
+	PyDoc_STR("*float*: Maximum HTF mass flow to heat sink relative to design point\n\n**Required:**\nTrue"),
+ 	NULL},
+{"hs_phys_P_steam_hot_des", (getter)HeatSink_get_hs_phys_P_steam_hot_des,(setter)HeatSink_set_hs_phys_P_steam_hot_des,
+	PyDoc_STR("*float*: Steam outlet (and inlet) pressure for physical heat sink [bar]\n\n**Required:**\nRequired if hs_type=1"),
+ 	NULL},
+{"hs_phys_Q_steam_hot_des", (getter)HeatSink_get_hs_phys_Q_steam_hot_des,(setter)HeatSink_set_hs_phys_Q_steam_hot_des,
+	PyDoc_STR("*float*: Steam outlet quality for physical heat sink\n\n**Required:**\nRequired if hs_type=1"),
+ 	NULL},
+{"hs_phys_T_steam_cold_des", (getter)HeatSink_get_hs_phys_T_steam_cold_des,(setter)HeatSink_set_hs_phys_T_steam_cold_des,
+	PyDoc_STR("*float*: Steam inlet temperature for physical heat sink [C]\n\n**Required:**\nRequired if hs_type=1"),
+ 	NULL},
+{"hs_type", (getter)HeatSink_get_hs_type,(setter)HeatSink_set_hs_type,
+	PyDoc_STR("*float*: 0: ideal model, 1: physical steam model\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
 {"pb_pump_coef", (getter)HeatSink_get_pb_pump_coef,(setter)HeatSink_set_pb_pump_coef,
 	PyDoc_STR("*float*: Pumping power to move 1kg of HTF through PB loop [kW/kg]\n\n**Required:**\nTrue"),
  	NULL},
@@ -4422,20 +4437,20 @@ static PyMethodDef Revenue_methods[] = {
 };
 
 static PyObject *
-Revenue_get_ppa_price_input(VarGroupObject *self, void *closure)
+Revenue_get_ppa_price_input_heat_btu(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_MsptIph_Revenue_ppa_price_input_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_MsptIph_Revenue_ppa_price_input_heat_btu_aget, self->data_ptr);
 }
 
 static int
-Revenue_set_ppa_price_input(VarGroupObject *self, PyObject *value, void *closure)
+Revenue_set_ppa_price_input_heat_btu(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_MsptIph_Revenue_ppa_price_input_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_MsptIph_Revenue_ppa_price_input_heat_btu_aset, self->data_ptr);
 }
 
 static PyGetSetDef Revenue_getset[] = {
-{"ppa_price_input", (getter)Revenue_get_ppa_price_input,(setter)Revenue_set_ppa_price_input,
-	PyDoc_STR("*sequence*: PPA prices - yearly [$/kWh]\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
+{"ppa_price_input_heat_btu", (getter)Revenue_get_ppa_price_input_heat_btu,(setter)Revenue_set_ppa_price_input_heat_btu,
+	PyDoc_STR("*sequence*: PPA prices - yearly [$/MMBtu]\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4812,64 +4827,64 @@ FinancialParameters_set_sales_tax_rate(VarGroupObject *self, PyObject *value, vo
 
 static PyGetSetDef FinancialParameters_getset[] = {
 {"const_per_interest_rate1", (getter)FinancialParameters_get_const_per_interest_rate1,(setter)FinancialParameters_set_const_per_interest_rate1,
-	PyDoc_STR("*float*: Interest rate, loan 1 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Interest rate, loan 1 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_interest_rate2", (getter)FinancialParameters_get_const_per_interest_rate2,(setter)FinancialParameters_set_const_per_interest_rate2,
-	PyDoc_STR("*float*: Interest rate, loan 2 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Interest rate, loan 2 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_interest_rate3", (getter)FinancialParameters_get_const_per_interest_rate3,(setter)FinancialParameters_set_const_per_interest_rate3,
-	PyDoc_STR("*float*: Interest rate, loan 3 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Interest rate, loan 3 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_interest_rate4", (getter)FinancialParameters_get_const_per_interest_rate4,(setter)FinancialParameters_set_const_per_interest_rate4,
-	PyDoc_STR("*float*: Interest rate, loan 4 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Interest rate, loan 4 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_interest_rate5", (getter)FinancialParameters_get_const_per_interest_rate5,(setter)FinancialParameters_set_const_per_interest_rate5,
-	PyDoc_STR("*float*: Interest rate, loan 5 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Interest rate, loan 5 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_months1", (getter)FinancialParameters_get_const_per_months1,(setter)FinancialParameters_set_const_per_months1,
-	PyDoc_STR("*float*: Months prior to operation, loan 1\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Months prior to operation, loan 1\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_months2", (getter)FinancialParameters_get_const_per_months2,(setter)FinancialParameters_set_const_per_months2,
-	PyDoc_STR("*float*: Months prior to operation, loan 2\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Months prior to operation, loan 2\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_months3", (getter)FinancialParameters_get_const_per_months3,(setter)FinancialParameters_set_const_per_months3,
-	PyDoc_STR("*float*: Months prior to operation, loan 3\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Months prior to operation, loan 3\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_months4", (getter)FinancialParameters_get_const_per_months4,(setter)FinancialParameters_set_const_per_months4,
-	PyDoc_STR("*float*: Months prior to operation, loan 4\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Months prior to operation, loan 4\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_months5", (getter)FinancialParameters_get_const_per_months5,(setter)FinancialParameters_set_const_per_months5,
-	PyDoc_STR("*float*: Months prior to operation, loan 5\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Months prior to operation, loan 5\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_percent1", (getter)FinancialParameters_get_const_per_percent1,(setter)FinancialParameters_set_const_per_percent1,
-	PyDoc_STR("*float*: Percent of total installed cost, loan 1 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Percent of total installed cost, loan 1 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_percent2", (getter)FinancialParameters_get_const_per_percent2,(setter)FinancialParameters_set_const_per_percent2,
-	PyDoc_STR("*float*: Percent of total installed cost, loan 2 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Percent of total installed cost, loan 2 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_percent3", (getter)FinancialParameters_get_const_per_percent3,(setter)FinancialParameters_set_const_per_percent3,
-	PyDoc_STR("*float*: Percent of total installed cost, loan 3 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Percent of total installed cost, loan 3 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_percent4", (getter)FinancialParameters_get_const_per_percent4,(setter)FinancialParameters_set_const_per_percent4,
-	PyDoc_STR("*float*: Percent of total installed cost, loan 4 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Percent of total installed cost, loan 4 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_percent5", (getter)FinancialParameters_get_const_per_percent5,(setter)FinancialParameters_set_const_per_percent5,
-	PyDoc_STR("*float*: Percent of total installed cost, loan 5 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Percent of total installed cost, loan 5 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_upfront_rate1", (getter)FinancialParameters_get_const_per_upfront_rate1,(setter)FinancialParameters_set_const_per_upfront_rate1,
-	PyDoc_STR("*float*: Upfront fee on principal, loan 1 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Upfront fee on principal, loan 1 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_upfront_rate2", (getter)FinancialParameters_get_const_per_upfront_rate2,(setter)FinancialParameters_set_const_per_upfront_rate2,
-	PyDoc_STR("*float*: Upfront fee on principal, loan 2 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Upfront fee on principal, loan 2 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_upfront_rate3", (getter)FinancialParameters_get_const_per_upfront_rate3,(setter)FinancialParameters_set_const_per_upfront_rate3,
-	PyDoc_STR("*float*: Upfront fee on principal, loan 3 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Upfront fee on principal, loan 3 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_upfront_rate4", (getter)FinancialParameters_get_const_per_upfront_rate4,(setter)FinancialParameters_set_const_per_upfront_rate4,
-	PyDoc_STR("*float*: Upfront fee on principal, loan 4 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Upfront fee on principal, loan 4 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_upfront_rate5", (getter)FinancialParameters_get_const_per_upfront_rate5,(setter)FinancialParameters_set_const_per_upfront_rate5,
-	PyDoc_STR("*float*: Upfront fee on principal, loan 5 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Upfront fee on principal, loan 5 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"sales_tax_rate", (getter)FinancialParameters_get_sales_tax_rate,(setter)FinancialParameters_set_sales_tax_rate,
 	PyDoc_STR("*float*: Sales tax rate [%]\n\n**Required:**\nTrue"),
@@ -5137,6 +5152,278 @@ static PyTypeObject Deprecated_Type = {
 
 
 /*
+ * AdjustmentFactors Group
+ */ 
+
+static PyTypeObject AdjustmentFactors_Type;
+
+static PyObject *
+AdjustmentFactors_new(SAM_MsptIph data_ptr)
+{
+	PyObject* new_obj = AdjustmentFactors_Type.tp_alloc(&AdjustmentFactors_Type,0);
+
+	VarGroupObject* AdjustmentFactors_obj = (VarGroupObject*)new_obj;
+
+	AdjustmentFactors_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* AdjustmentFactors methods */
+
+static PyObject *
+AdjustmentFactors_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "MsptIph", "AdjustmentFactors")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+AdjustmentFactors_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &AdjustmentFactors_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "MsptIph", "AdjustmentFactors")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+AdjustmentFactors_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &AdjustmentFactors_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef AdjustmentFactors_methods[] = {
+		{"assign",            (PyCFunction)AdjustmentFactors_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``AdjustmentFactors_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)AdjustmentFactors_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``AdjustmentFactors_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)AdjustmentFactors_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+AdjustmentFactors_get_adjust_constant(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MsptIph_AdjustmentFactors_adjust_constant_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_constant(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MsptIph_AdjustmentFactors_adjust_constant_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_en_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MsptIph_AdjustmentFactors_adjust_en_periods_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_en_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MsptIph_AdjustmentFactors_adjust_en_periods_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_en_timeindex(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MsptIph_AdjustmentFactors_adjust_en_timeindex_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_en_timeindex(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MsptIph_AdjustmentFactors_adjust_en_timeindex_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_MsptIph_AdjustmentFactors_adjust_periods_mget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_MsptIph_AdjustmentFactors_adjust_periods_mset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_timeindex(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MsptIph_AdjustmentFactors_adjust_timeindex_aget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_timeindex(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_MsptIph_AdjustmentFactors_adjust_timeindex_aset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_sf_adjust_constant(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MsptIph_AdjustmentFactors_sf_adjust_constant_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_sf_adjust_constant(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MsptIph_AdjustmentFactors_sf_adjust_constant_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_sf_adjust_en_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MsptIph_AdjustmentFactors_sf_adjust_en_periods_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_sf_adjust_en_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MsptIph_AdjustmentFactors_sf_adjust_en_periods_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_sf_adjust_en_timeindex(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MsptIph_AdjustmentFactors_sf_adjust_en_timeindex_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_sf_adjust_en_timeindex(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MsptIph_AdjustmentFactors_sf_adjust_en_timeindex_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_sf_adjust_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_MsptIph_AdjustmentFactors_sf_adjust_periods_mget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_sf_adjust_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_MsptIph_AdjustmentFactors_sf_adjust_periods_mset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_sf_adjust_timeindex(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MsptIph_AdjustmentFactors_sf_adjust_timeindex_aget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_sf_adjust_timeindex(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_MsptIph_AdjustmentFactors_sf_adjust_timeindex_aset, self->data_ptr);
+}
+
+static PyGetSetDef AdjustmentFactors_getset[] = {
+{"adjust_constant", (getter)AdjustmentFactors_get_adjust_constant,(setter)AdjustmentFactors_set_adjust_constant,
+	PyDoc_STR("*float*: Constant loss adjustment [%]\n\n**Info:**\n'adjust' and 'constant' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nMAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"adjust_en_periods", (getter)AdjustmentFactors_get_adjust_en_periods,(setter)AdjustmentFactors_set_adjust_en_periods,
+	PyDoc_STR("*float*: Enable period-based adjustment factors [0/1]\n\n**Info:**\n'adjust' and 'en_periods' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"adjust_en_timeindex", (getter)AdjustmentFactors_get_adjust_en_timeindex,(setter)AdjustmentFactors_set_adjust_en_timeindex,
+	PyDoc_STR("*float*: Enable lifetime adjustment factors [0/1]\n\n**Info:**\n'adjust' and 'en_timeindex' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"adjust_periods", (getter)AdjustmentFactors_get_adjust_periods,(setter)AdjustmentFactors_set_adjust_periods,
+	PyDoc_STR("*sequence[sequence]*: Period-based adjustment factors [%]\n\n**Info:**\nSyntax: n x 3 matrix [ start, end, loss ]; Version upgrade: 'adjust' and 'periods' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nCOLS=3\n\n**Required:**\nRequired if adjust_en_periods=1"),
+ 	NULL},
+{"adjust_timeindex", (getter)AdjustmentFactors_get_adjust_timeindex,(setter)AdjustmentFactors_set_adjust_timeindex,
+	PyDoc_STR("*sequence*: Lifetime adjustment factors [%]\n\n**Info:**\n'adjust' and 'timeindex' separated by _ instead of : after SAM 2022.12.21\n\n**Required:**\nRequired if adjust_en_timeindex=1"),
+ 	NULL},
+{"sf_adjust_constant", (getter)AdjustmentFactors_get_sf_adjust_constant,(setter)AdjustmentFactors_set_sf_adjust_constant,
+	PyDoc_STR("*float*: SF Constant loss adjustment [%]\n\n**Info:**\n'sf_adjust' and 'constant' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nMAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"sf_adjust_en_periods", (getter)AdjustmentFactors_get_sf_adjust_en_periods,(setter)AdjustmentFactors_set_sf_adjust_en_periods,
+	PyDoc_STR("*float*: Enable period-based adjustment factors [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"sf_adjust_en_timeindex", (getter)AdjustmentFactors_get_sf_adjust_en_timeindex,(setter)AdjustmentFactors_set_sf_adjust_en_timeindex,
+	PyDoc_STR("*float*: Enable lifetime adjustment factors [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"sf_adjust_periods", (getter)AdjustmentFactors_get_sf_adjust_periods,(setter)AdjustmentFactors_set_sf_adjust_periods,
+	PyDoc_STR("*sequence[sequence]*: SF Period-based Adjustment Factors [%]\n\n**Info:**\nn x 3 matrix [ start, end, loss ]\n\n**Constraints:**\nCOLS=3\n\n**Required:**\nRequired if sf_adjust_en_periods=1"),
+ 	NULL},
+{"sf_adjust_timeindex", (getter)AdjustmentFactors_get_sf_adjust_timeindex,(setter)AdjustmentFactors_set_sf_adjust_timeindex,
+	PyDoc_STR("*sequence*: SF Lifetime Adjustment Factors [%]\n\n**Required:**\nRequired if sf_adjust_en_timeindex=1"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject AdjustmentFactors_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"MsptIph.AdjustmentFactors",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		AdjustmentFactors_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		AdjustmentFactors_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * Outputs Group
  */ 
 
@@ -5304,6 +5591,12 @@ Outputs_get_T_heat_sink_out(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_T_hs_ext_out_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MsptIph_Outputs_T_hs_ext_out_des_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_T_htf_heater_in(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_MsptIph_Outputs_T_htf_heater_in_aget, self->data_ptr);
@@ -5313,6 +5606,12 @@ static PyObject *
 Outputs_get_T_htf_heater_out(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_MsptIph_Outputs_T_htf_heater_out_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_T_out_wf_heat_sink(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MsptIph_Outputs_T_out_wf_heat_sink_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -5475,6 +5774,12 @@ static PyObject *
 Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_MsptIph_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_energy_heat_btu(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MsptIph_Outputs_annual_energy_heat_btu_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -5976,6 +6281,18 @@ Outputs_get_gen(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_gen_heat(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MsptIph_Outputs_gen_heat_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_gen_heat_btu(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MsptIph_Outputs_gen_heat_btu_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_h_rec_input_to_cost_model(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MsptIph_Outputs_h_rec_input_to_cost_model_nget, self->data_ptr);
@@ -6003,6 +6320,24 @@ static PyObject *
 Outputs_get_heliostat_area(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MsptIph_Outputs_heliostat_area_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_hx_UA_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MsptIph_Outputs_hx_UA_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_hx_min_dT_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MsptIph_Outputs_hx_min_dT_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_hx_min_dT_heat_sink(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MsptIph_Outputs_hx_min_dT_heat_sink_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -6078,6 +6413,12 @@ Outputs_get_m_dot_field_to_cycle(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_m_dot_hs_ext_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MsptIph_Outputs_m_dot_hs_ext_des_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_m_dot_htf_heat_sink(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_MsptIph_Outputs_m_dot_htf_heat_sink_aget, self->data_ptr);
@@ -6123,6 +6464,12 @@ static PyObject *
 Outputs_get_m_dot_tes_hot_out(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_MsptIph_Outputs_m_dot_tes_hot_out_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_wf_heat_sink(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MsptIph_Outputs_m_dot_wf_heat_sink_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -6189,6 +6536,12 @@ static PyObject *
 Outputs_get_operating_modes_c(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_MsptIph_Outputs_operating_modes_c_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_ppa_price_input(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MsptIph_Outputs_ppa_price_input_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -6509,6 +6862,12 @@ Outputs_get_wspd(VarGroupObject *self, void *closure)
 	return PySAM_array_getter(SAM_MsptIph_Outputs_wspd_aget, self->data_ptr);
 }
 
+static PyObject *
+Outputs_get_x_out_wf_heat_sink(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MsptIph_Outputs_x_out_wf_heat_sink_aget, self->data_ptr);
+}
+
 static PyGetSetDef Outputs_getset[] = {
 {"A_rec", (getter)Outputs_get_A_rec,(setter)0,
 	PyDoc_STR("*float*: Receiver area - planar [m2]"),
@@ -6520,7 +6879,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: The overall outer diameter of the receiver - out [m]"),
  	NULL},
 {"E_heater_su_des", (getter)Outputs_get_E_heater_su_des,(setter)0,
-	PyDoc_STR("*float*: Heater startup energy [MWt-hr]"),
+	PyDoc_STR("*float*: Heater startup energy [MWht]"),
  	NULL},
 {"L_tower_piping_calc", (getter)Outputs_get_L_tower_piping_calc,(setter)0,
 	PyDoc_STR("*float*: Tower piping length [m]"),
@@ -6541,7 +6900,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Receiver and tower HTF pumping power [MWe]"),
  	NULL},
 {"Q_tes_des", (getter)Outputs_get_Q_tes_des,(setter)0,
-	PyDoc_STR("*float*: TES design capacity [MWt-hr]"),
+	PyDoc_STR("*float*: TES design capacity [MWht]"),
  	NULL},
 {"Q_thermal", (getter)Outputs_get_Q_thermal,(setter)0,
 	PyDoc_STR("*sequence*: Receiver thermal power to HTF less piping loss [MWt]"),
@@ -6558,11 +6917,17 @@ static PyGetSetDef Outputs_getset[] = {
 {"T_heat_sink_out", (getter)Outputs_get_T_heat_sink_out,(setter)0,
 	PyDoc_STR("*sequence*: Heat sink HTF outlet temp [C]"),
  	NULL},
+{"T_hs_ext_out_des", (getter)Outputs_get_T_hs_ext_out_des,(setter)0,
+	PyDoc_STR("*float*: Heat sink fluid outlet temperature [C]"),
+ 	NULL},
 {"T_htf_heater_in", (getter)Outputs_get_T_htf_heater_in,(setter)0,
 	PyDoc_STR("*sequence*: Parallel heater HTF inlet temperature [C]"),
  	NULL},
 {"T_htf_heater_out", (getter)Outputs_get_T_htf_heater_out,(setter)0,
 	PyDoc_STR("*sequence*: Parallel heater HTF outlet temperature [C]"),
+ 	NULL},
+{"T_out_wf_heat_sink", (getter)Outputs_get_T_out_wf_heat_sink,(setter)0,
+	PyDoc_STR("*sequence*: Heat sink steam outlet temp [C]"),
  	NULL},
 {"T_panel_out_max", (getter)Outputs_get_T_panel_out_max,(setter)0,
 	PyDoc_STR("*sequence*: Receiver panel maximum HTF outlet temperature during timestep [C]"),
@@ -6634,16 +6999,19 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Receiver estimated pump power due to tower height at design [MWe]"),
  	NULL},
 {"annual_E_tower_pump", (getter)Outputs_get_annual_E_tower_pump,(setter)0,
-	PyDoc_STR("*float*: Annual tower pumping power [MWe-hr]"),
+	PyDoc_STR("*float*: Annual tower pumping power [MWhe]"),
  	NULL},
 {"annual_electricity_consumption", (getter)Outputs_get_annual_electricity_consumption,(setter)0,
-	PyDoc_STR("*float*: Annual electricity consumption w/ avail derate [kWe-hr]"),
+	PyDoc_STR("*float*: Annual electricity consumption w/ avail derate [kWhe]"),
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	PyDoc_STR("*float*: Annual Thermal Energy to Heat Sink w/ avail derate [kWt-hr]"),
+	PyDoc_STR("*float*: Annual net thermal energy w/ avail. derate [kWht]"),
  	NULL},
 {"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
+ 	NULL},
+{"annual_energy_heat_btu", (getter)Outputs_get_annual_energy_heat_btu,(setter)0,
+	PyDoc_STR("*float*: Annual net thermal energy w/ avail. derate [MMBtu]"),
  	NULL},
 {"annual_eta_rec_th", (getter)Outputs_get_annual_eta_rec_th,(setter)0,
 	PyDoc_STR("*float*: Annual receiver thermal efficiency ignoring rec reflective loss"),
@@ -6652,22 +7020,22 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Annual receiver thermal efficiency including reflective loss"),
  	NULL},
 {"annual_q_defocus_est", (getter)Outputs_get_annual_q_defocus_est,(setter)0,
-	PyDoc_STR("*float*: Annual defocus loss estimate [MWt-hr]"),
+	PyDoc_STR("*float*: Annual defocus loss estimate [MWht]"),
  	NULL},
 {"annual_q_piping_loss", (getter)Outputs_get_annual_q_piping_loss,(setter)0,
-	PyDoc_STR("*float*: Annual tower piping losses [MWt-hr]"),
+	PyDoc_STR("*float*: Annual tower piping losses [MWht]"),
  	NULL},
 {"annual_q_rec_htf", (getter)Outputs_get_annual_q_rec_htf,(setter)0,
-	PyDoc_STR("*float*: Annual receiver power delivered to HTF [MWt-hr]"),
+	PyDoc_STR("*float*: Annual receiver power delivered to HTF [MWht]"),
  	NULL},
 {"annual_q_rec_inc", (getter)Outputs_get_annual_q_rec_inc,(setter)0,
-	PyDoc_STR("*float*: Annual receiver incident thermal power after reflective losses [MWt-hr]"),
+	PyDoc_STR("*float*: Annual receiver incident thermal power after reflective losses [MWht]"),
  	NULL},
 {"annual_q_rec_loss", (getter)Outputs_get_annual_q_rec_loss,(setter)0,
-	PyDoc_STR("*float*: Annual receiver convective and radiative losses [MWt-hr]"),
+	PyDoc_STR("*float*: Annual receiver convective and radiative losses [MWht]"),
  	NULL},
 {"annual_q_rec_startup", (getter)Outputs_get_annual_q_rec_startup,(setter)0,
-	PyDoc_STR("*float*: Annual receiver startup energy [MWt-hr]"),
+	PyDoc_STR("*float*: Annual receiver startup energy [MWht]"),
  	NULL},
 {"annual_total_water_use", (getter)Outputs_get_annual_total_water_use,(setter)0,
 	PyDoc_STR("*float*: Total annual water usage from mirror washing [m3]"),
@@ -6892,7 +7260,13 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Flux map intensities"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
-	PyDoc_STR("*sequence*: Total thermal power to heat sink with available derate [kWt]"),
+	PyDoc_STR("*sequence*: System net electrical power w/ avail. derate [kWe]"),
+ 	NULL},
+{"gen_heat", (getter)Outputs_get_gen_heat,(setter)0,
+	PyDoc_STR("*sequence*: System net thermal power w/ avail. derate [kWt]"),
+ 	NULL},
+{"gen_heat_btu", (getter)Outputs_get_gen_heat_btu,(setter)0,
+	PyDoc_STR("*sequence*: System net thermal power w/ avail. derate [MMBtu/hr]"),
  	NULL},
 {"h_rec_input_to_cost_model", (getter)Outputs_get_h_rec_input_to_cost_model,(setter)0,
 	PyDoc_STR("*float*: Receiver height for cost model selected from receiver type [m]"),
@@ -6908,6 +7282,15 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"heliostat_area", (getter)Outputs_get_heliostat_area,(setter)0,
 	PyDoc_STR("*float*: Active area of heliostat [m^2]"),
+ 	NULL},
+{"hx_UA_des", (getter)Outputs_get_hx_UA_des,(setter)0,
+	PyDoc_STR("*float*: Heat sink hx conductance [MW/K]"),
+ 	NULL},
+{"hx_min_dT_des", (getter)Outputs_get_hx_min_dT_des,(setter)0,
+	PyDoc_STR("*float*: Heat sink hx min temp difference [C]"),
+ 	NULL},
+{"hx_min_dT_heat_sink", (getter)Outputs_get_hx_min_dT_heat_sink,(setter)0,
+	PyDoc_STR("*sequence*: Heat sink HX min temp difference [C]"),
  	NULL},
 {"is_PAR_HTR_allowed", (getter)Outputs_get_is_PAR_HTR_allowed,(setter)0,
 	PyDoc_STR("*sequence*: Is parallel electric heater operation allowed"),
@@ -6945,6 +7328,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"m_dot_field_to_cycle", (getter)Outputs_get_m_dot_field_to_cycle,(setter)0,
 	PyDoc_STR("*sequence*: Mass flow: field to cycle [kg/s]"),
  	NULL},
+{"m_dot_hs_ext_des", (getter)Outputs_get_m_dot_hs_ext_des,(setter)0,
+	PyDoc_STR("*float*: Heat sink fluid mass flow rate [kg/s]"),
+ 	NULL},
 {"m_dot_htf_heat_sink", (getter)Outputs_get_m_dot_htf_heat_sink,(setter)0,
 	PyDoc_STR("*sequence*: Heat sink HTF mass flow [kg/s]"),
  	NULL},
@@ -6968,6 +7354,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"m_dot_tes_hot_out", (getter)Outputs_get_m_dot_tes_hot_out,(setter)0,
 	PyDoc_STR("*sequence*: Mass flow: TES hot out [kg/s]"),
+ 	NULL},
+{"m_dot_wf_heat_sink", (getter)Outputs_get_m_dot_wf_heat_sink,(setter)0,
+	PyDoc_STR("*sequence*: Heat sink steam mass flow rate [kg/s]"),
  	NULL},
 {"mass_tes_cold", (getter)Outputs_get_mass_tes_cold,(setter)0,
 	PyDoc_STR("*sequence*: TES cold tank mass (end) [kg]"),
@@ -7001,6 +7390,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"operating_modes_c", (getter)Outputs_get_operating_modes_c,(setter)0,
 	PyDoc_STR("*sequence*: Final 3 operating modes tried"),
+ 	NULL},
+{"ppa_price_input", (getter)Outputs_get_ppa_price_input,(setter)0,
+	PyDoc_STR("*sequence*: PPA prices - yearly [$/kWh]"),
  	NULL},
 {"pparasi", (getter)Outputs_get_pparasi,(setter)0,
 	PyDoc_STR("*sequence*: Field tracking power [MWe]"),
@@ -7161,6 +7553,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"wspd", (getter)Outputs_get_wspd,(setter)0,
 	PyDoc_STR("*sequence*: Resource wind velocity [m/s]"),
  	NULL},
+{"x_out_wf_heat_sink", (getter)Outputs_get_x_out_wf_heat_sink,(setter)0,
+	PyDoc_STR("*sequence*: Heat sink steam outlet quality [-]"),
+ 	NULL},
 	{NULL}  /* Sentinel */
 };
 
@@ -7284,20 +7679,9 @@ newMsptIphObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Deprecated", Deprecated_obj);
 	Py_DECREF(Deprecated_obj);
 
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-
-	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
-	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
-	Py_XDECREF(data_cap);
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (!Adjust_obj){
-		PyErr_SetString(PyExc_Exception, "Couldn't create AdjustmentFactorsObject\n");
-		return NULL;
-	}
-
-	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
-	Py_DECREF(Adjust_obj);
+	PyObject* AdjustmentFactors_obj = AdjustmentFactors_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "AdjustmentFactors", AdjustmentFactors_obj);
+	Py_DECREF(AdjustmentFactors_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -7567,7 +7951,7 @@ static PyMethodDef MsptIphModule_methods[] = {
 		{"new",             MsptIph_new,         METH_VARARGS,
 				PyDoc_STR("new() -> MsptIph")},
 		{"default",             MsptIph_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> MsptIph\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"MSPTIPHLCOHCalculator\"*\n\n		- *\"MSPTIPHNone\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> MsptIph\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"MSPTIPHLCOHCalculator\"*\n\n		- *\"MSPTIPHNone\"*\n\n		- *\"MSPTIPHSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             MsptIph_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> MsptIph\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   MsptIph_from_existing,        METH_VARARGS,
@@ -7694,6 +8078,13 @@ MsptIphModule_exec(PyObject *m)
 				"Deprecated",
 				(PyObject*)&Deprecated_Type);
 	Py_DECREF(&Deprecated_Type);
+
+	/// Add the AdjustmentFactors type object to MsptIph_Type
+	if (PyType_Ready(&AdjustmentFactors_Type) < 0) { goto fail; }
+	PyDict_SetItemString(MsptIph_Type.tp_dict,
+				"AdjustmentFactors",
+				(PyObject*)&AdjustmentFactors_Type);
+	Py_DECREF(&AdjustmentFactors_Type);
 
 	/// Add the Outputs type object to MsptIph_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

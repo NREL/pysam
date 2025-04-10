@@ -918,14 +918,7 @@ static int PySAM_assign_from_nested_dict(PyObject* self, PyObject* x_attr, void 
             PySAM_error_set_with_context("Mismatch between provided input and expected structure. PySAM modules are assigned using nested dictionaries. Restructure your input or double check which object to which you are assigning the input.");
             goto fail;
         }
-        if (strcmp(name, "AdjustmentFactors") == 0){
-            PyObject* adj_obj = PyDict_GetItemString(x_attr, "AdjustmentFactors");
-            if (!PyObject_CallMethod(adj_obj, "assign", "(O)", value)){
-                PySAM_error_set_with_context("Could not call 'assign' from imported AdjustmentFactors module.");
-                goto fail;
-            }
-        }
-        else if (!PySAM_assign_from_dict(data_ptr, value, tech, name))
+        if (!PySAM_assign_from_dict(data_ptr, value, tech, name))
             goto fail;
     }
     Py_XDECREF(ascii_mystring);
@@ -946,13 +939,7 @@ static int PySAM_replace_from_dict(PyTypeObject *tp, void *data_ptr, PyObject *d
     while(getset->name){
         SAM_error error = new_error();
         char ssc_name[1024];
-        if (strcmp(group, "AdjustmentFactors") == 0){
-            strcpy(ssc_name, "adjust:");
-            strcat(ssc_name, getset->name);
-        }
-        else {
-            strcpy(ssc_name, getset->name);
-        }
+        strcpy(ssc_name, getset->name);
         SAM_table_unassign_entry(data_ptr, ssc_name, &error);
         PySAM_has_error(error);
         getset++;
@@ -1143,9 +1130,7 @@ static PyObject* PySAM_run_getset(PyObject *self, PyObject *arg, PyObject * x_at
             getset++;
         }
     }
-    char str[256];
-    PySAM_concat_msg(str, "'value' error, could not find attribute: ", name);
-    PyErr_SetString(PyExc_AttributeError, str);
+    PyErr_SetString(PyExc_AttributeError, "\"value\" error, could not find attribute by that name");
     return NULL;
 }
 
@@ -1165,7 +1150,7 @@ static PyObject * Cmod_value(CmodObject *self, PyObject *args)
     PyObject* value = NULL;
     if (!PyArg_ParseTuple(args, "s|O", &name, &value))
 		return NULL;
-
+        
     return PySAM_run_getset((PyObject *)self, value, self->x_attr, name, NULL);
 }
 

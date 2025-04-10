@@ -2,6 +2,9 @@ class Utilityrateforecast(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class Utilityrateforecast(object):
 		pass
 
 	class ElectricityRates(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -60,6 +66,8 @@ class Utilityrateforecast(object):
 		ur_metering_option = float
 		ur_monthly_fixed_charge = float
 		ur_monthly_min_charge = float
+		ur_nb_apply_credit_current_month = float
+		ur_nb_credit_expire = float
 		ur_nm_credit_month = float
 		ur_nm_credit_rollover = float
 		ur_nm_yearend_sell_rate = float
@@ -70,7 +78,10 @@ class Utilityrateforecast(object):
 
 
 	class Lifetime(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -85,7 +96,10 @@ class Utilityrateforecast(object):
 
 
 	class Controls(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -100,7 +114,10 @@ class Utilityrateforecast(object):
 
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:

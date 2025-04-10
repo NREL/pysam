@@ -2,6 +2,9 @@ class Battwatts(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class Battwatts(object):
 		pass
 
 	class Lifetime(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -39,7 +45,10 @@ class Battwatts(object):
 
 
 	class Battery(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -64,7 +73,10 @@ class Battwatts(object):
 
 
 	class Load(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -79,8 +91,32 @@ class Battwatts(object):
 		run_resiliency_calcs = float
 
 
+	class AdjustmentFactors(object):
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		batt_adjust_constant = float
+		batt_adjust_en_periods = float
+		batt_adjust_en_timeindex = float
+		batt_adjust_periods = tuple
+		batt_adjust_timeindex = tuple
+
+
 	class GridLimits(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -96,7 +132,10 @@ class Battwatts(object):
 
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -126,6 +165,7 @@ class Battwatts(object):
 		batt_annual_discharge_energy = tuple
 		batt_annual_energy_loss = tuple
 		batt_annual_energy_system_loss = tuple
+		batt_availability_loss = tuple
 		batt_bank_installed_capacity = float
 		batt_bank_replacement = tuple
 		batt_capacity_percent = tuple
@@ -135,7 +175,9 @@ class Battwatts(object):
 		batt_conversion_loss = tuple
 		batt_cost_to_cycle = tuple
 		batt_cycles = tuple
+		batt_dispatch_period = tuple
 		batt_dispatch_sched = tuple
+		batt_grid_charge_percent = float
 		batt_power = tuple
 		batt_power_dc = tuple
 		batt_power_target = tuple
@@ -170,6 +212,8 @@ class Battwatts(object):
 		batt_to_system_load = tuple
 		batt_voltage = tuple
 		batt_voltage_cell = tuple
+		batt_year1_charge_from_grid = float
+		batt_year1_charge_from_system = float
 		cdf_of_surviving = tuple
 		crit_load = tuple
 		crit_load_unmet = tuple

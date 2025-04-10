@@ -390,6 +390,30 @@ ElectricityRates_set_ur_monthly_min_charge(VarGroupObject *self, PyObject *value
 }
 
 static PyObject *
+ElectricityRates_get_ur_nb_apply_credit_current_month(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Utilityrateforecast_ElectricityRates_ur_nb_apply_credit_current_month_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nb_apply_credit_current_month(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Utilityrateforecast_ElectricityRates_ur_nb_apply_credit_current_month_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_nb_credit_expire(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Utilityrateforecast_ElectricityRates_ur_nb_credit_expire_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nb_credit_expire(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Utilityrateforecast_ElectricityRates_ur_nb_credit_expire_nset, self->data_ptr);
+}
+
+static PyObject *
 ElectricityRates_get_ur_nm_credit_month(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Utilityrateforecast_ElectricityRates_ur_nm_credit_month_nget, self->data_ptr);
@@ -551,6 +575,12 @@ static PyGetSetDef ElectricityRates_getset[] = {
  	NULL},
 {"ur_monthly_min_charge", (getter)ElectricityRates_get_ur_monthly_min_charge,(setter)ElectricityRates_set_ur_monthly_min_charge,
 	PyDoc_STR("*float*: Monthly minimum charge [$]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_nb_apply_credit_current_month", (getter)ElectricityRates_get_ur_nb_apply_credit_current_month,(setter)ElectricityRates_set_ur_nb_apply_credit_current_month,
+	PyDoc_STR("*float*: Apply earned credits to balance before rolling over excess         [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_nb_credit_expire", (getter)ElectricityRates_get_ur_nb_credit_expire,(setter)ElectricityRates_set_ur_nb_credit_expire,
+	PyDoc_STR("*float*: Credit is lost upon end of year         [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_nm_credit_month", (getter)ElectricityRates_get_ur_nm_credit_month,(setter)ElectricityRates_set_ur_nm_credit_month,
 	PyDoc_STR("*float*: Month of year end payout (true-up) [mn]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=11\n\n**Required:**\nFalse. Automatically set to 11 if not assigned explicitly or loaded from defaults."),
@@ -723,7 +753,7 @@ static PyGetSetDef Lifetime_getset[] = {
 	PyDoc_STR("*float*: Number of years in escalation and forecast [years]\n\n**Constraints:**\nINTEGER,POSITIVE\n\n**Required:**\nTrue"),
  	NULL},
 {"inflation_rate", (getter)Lifetime_get_inflation_rate,(setter)Lifetime_set_inflation_rate,
-	PyDoc_STR("*float*: Inflation rate [%]\n\n**Constraints:**\nMIN=-99\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Inflation rate [%]\n\n**Constraints:**\nMIN=-99"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

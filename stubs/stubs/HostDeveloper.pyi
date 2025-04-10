@@ -2,6 +2,9 @@ class HostDeveloper(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class HostDeveloper(object):
 		pass
 
 	class Revenue(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -51,7 +57,10 @@ class HostDeveloper(object):
 
 
 	class FinancialParameters(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -99,7 +108,10 @@ class HostDeveloper(object):
 
 
 	class SystemCosts(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -143,7 +155,10 @@ class HostDeveloper(object):
 
 
 	class LandLease(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -159,7 +174,10 @@ class HostDeveloper(object):
 
 
 	class TaxCreditIncentives(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -192,7 +210,10 @@ class HostDeveloper(object):
 
 
 	class Depreciation(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -245,7 +266,10 @@ class HostDeveloper(object):
 
 
 	class PaymentIncentives(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -350,7 +374,10 @@ class HostDeveloper(object):
 
 
 	class Host(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -361,13 +388,14 @@ class HostDeveloper(object):
 
 
 		annual_energy_value = tuple
-		elec_cost_with_system = tuple
-		elec_cost_without_system = tuple
 		host_real_discount_rate = float
 
 
 	class TimeSeries(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -383,7 +411,10 @@ class HostDeveloper(object):
 
 
 	class ChargesByMonth(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -403,7 +434,10 @@ class HostDeveloper(object):
 
 
 	class SystemOutput(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -413,7 +447,6 @@ class HostDeveloper(object):
 			pass
 
 
-		annual_energy_value = tuple
 		annual_thermal_value = tuple
 		degradation = tuple
 		gen = tuple
@@ -422,7 +455,10 @@ class HostDeveloper(object):
 
 
 	class Moratorium(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -436,7 +472,10 @@ class HostDeveloper(object):
 
 
 	class Recapitalization(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -453,7 +492,10 @@ class HostDeveloper(object):
 
 
 	class TimeOfDelivery(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -467,7 +509,10 @@ class HostDeveloper(object):
 
 
 	class ConstructionFinancing(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -481,7 +526,10 @@ class HostDeveloper(object):
 
 
 	class BatterySystem(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -502,7 +550,10 @@ class HostDeveloper(object):
 
 
 	class LCOS(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -531,7 +582,10 @@ class HostDeveloper(object):
 
 
 	class ElectricityRates(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -545,7 +599,10 @@ class HostDeveloper(object):
 
 
 	class HybridFin(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -560,7 +617,10 @@ class HostDeveloper(object):
 
 
 	class Monthly(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -574,7 +634,10 @@ class HostDeveloper(object):
 
 
 	class FuelCell(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -590,7 +653,10 @@ class HostDeveloper(object):
 
 
 	class HybridCosts(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -605,7 +671,10 @@ class HostDeveloper(object):
 
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -1163,6 +1232,8 @@ class HostDeveloper(object):
 		ppa_escalation = float
 		ppa_multipliers = tuple
 		ppa_price = float
+		pre_depr_alloc_basis = float
+		pre_itc_qual_basis = float
 		present_value_fuel = float
 		present_value_insandproptax = float
 		present_value_oandm = float

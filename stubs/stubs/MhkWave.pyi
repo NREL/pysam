@@ -2,6 +2,9 @@ class MhkWave(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class MhkWave(object):
 		pass
 
 	class MHKWave(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -62,40 +68,11 @@ class MhkWave(object):
 		year = tuple
 
 
-	class AdjustmentFactors(object):
-		def assign(self): 
-			pass
-	
-		def export(self): 
-			return {}
-	
-		def __init__(self, *args, **kwargs): # real signature unknown
-			pass
-	
-		constant = float
-		en_hourly = float
-		en_periods = float
-		en_timeindex = float
-		hourly = tuple
-		periods = tuple
-		imeindex = tuple
-		dc_constant = float
-		dc_en_hourly = float
-		dc_en_periods = float
-		dc_en_timeindex = float
-		dc_hourly = tuple
-		dc_periods = tuple
-		dc_imeindex = tuple
-		sf_constant = float
-		sf_en_hourly = float
-		sf_en_periods = float
-		sf_en_timeindex = float
-		sf_hourly = tuple
-		sf_periods = tuple
-		sf_timeindex = tuple
-
 	class Lifetime(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -110,8 +87,32 @@ class MhkWave(object):
 		system_use_lifetime_output = float
 
 
+	class AdjustmentFactors(object):
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		adjust_constant = float
+		adjust_en_periods = float
+		adjust_en_timeindex = float
+		adjust_periods = tuple
+		adjust_timeindex = tuple
+
+
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:

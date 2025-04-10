@@ -414,12 +414,12 @@ Fuelcell
 GenericSystem
 ************************************************
 
-:doc:`../modules/GenericSystem` New Default files:
+`Generic System <https://nrel-pysam.readthedocs.io/en/v5.1.0/modules/GenericSystem.html>`_ New Default files:
 
      - GenericPVWattsWindFuelCellBatteryHybridHostDeveloper
      - GenericPVWattsWindFuelCellBatteryHybridSingleOwner
 
-:doc:`../modules/GenericSystem` Modified Default Values:
+`Generic System <https://nrel-pysam.readthedocs.io/en/v5.1.0/modules/GenericSystem.html>`_ Modified Default Values:
 
      - Equpartflip_GenericSystemAllEquityPartnershipFlip
 
@@ -1075,7 +1075,7 @@ TroughPhysicalIph
 TroughPhysicalProcessHeat
 ************************************************
 
-:doc:`../modules/TroughPhysicalProcessHeat` Removed Default files
+`Trough Physical Csp Solver <https://nrel-pysam.readthedocs.io/en/v5.1.0/modules/TroughPhysicalCspSolver.html>`_ Removed Default files
 
      - PhysicalTroughIPHNone
 

@@ -67,12 +67,17 @@ HeatSink Group
 .. autoclass:: PySAM.LinearFresnelDsgIph.LinearFresnelDsgIph.HeatSink
 	:members:
 
+Revenue Group
+--------------
+
+.. autoclass:: PySAM.LinearFresnelDsgIph.LinearFresnelDsgIph.Revenue
+	:members:
+
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.LinearFresnelDsgIph.LinearFresnelDsgIph.AdjustmentFactors
 	:members:
-	:noindex:
 
 Outputs Group
 --------------

@@ -924,7 +924,7 @@ static PyGetSetDef FinancialParameters_getset[] = {
 	PyDoc_STR("*sequence*: State income tax rate [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"system_capacity", (getter)FinancialParameters_get_system_capacity,(setter)FinancialParameters_set_system_capacity,
-	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``system_capacity``:\n\n\t - battery_total_cost_lcos\n\t - construction_financing_cost\n\t - land_area\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``system_capacity``:\n\n\t - battery_total_cost_lcos\n\t - construction_financing_cost\n\t - total_installed_cost\n"),
  	NULL},
 {"system_heat_rate", (getter)FinancialParameters_get_system_heat_rate,(setter)FinancialParameters_set_system_heat_rate,
 	PyDoc_STR("*float*: System heat rate [MMBTus/MWh]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
@@ -1433,10 +1433,10 @@ static PyGetSetDef SystemCosts_getset[] = {
 	PyDoc_STR("*float*: Number of O and M types\n\n**Info:**\nbattery,fuelcell\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"annual_fuel_usage", (getter)SystemCosts_get_annual_fuel_usage,(setter)SystemCosts_set_annual_fuel_usage,
-	PyDoc_STR("*float*: Fuel usage (yr 1) [kWht]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Fuel usage (yr 1) [kWht]\n\n**Info:**\ncustom_generation,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Constraints:**\nMIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"annual_fuel_usage_lifetime", (getter)SystemCosts_get_annual_fuel_usage_lifetime,(setter)SystemCosts_set_annual_fuel_usage_lifetime,
-	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical"),
+	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]\n\n**Info:**\ncustom_generation,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical"),
  	NULL},
 {"om_batt_capacity_cost", (getter)SystemCosts_get_om_batt_capacity_cost,(setter)SystemCosts_set_om_batt_capacity_cost,
 	PyDoc_STR("*sequence*: Battery capacity-based System Costs amount [$/kWcap]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
@@ -1466,10 +1466,10 @@ static PyGetSetDef SystemCosts_getset[] = {
 	PyDoc_STR("*float*: Fixed O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuel_cost", (getter)SystemCosts_get_om_fuel_cost,(setter)SystemCosts_set_om_fuel_cost,
-	PyDoc_STR("*sequence*: Fuel cost [$/MMBtu]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Fuel cost [$/MMBtu]\n\n**Info:**\ncustom_generation,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuel_cost_escal", (getter)SystemCosts_get_om_fuel_cost_escal,(setter)SystemCosts_set_om_fuel_cost_escal,
-	PyDoc_STR("*float*: Fuel cost escalation [%/year]\n\n**Info:**\ngeneric_system,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Fuel cost escalation [%/year]\n\n**Info:**\ncustom_generation,fuelcell,tcslinearfresnel,tcstroughempirical,tcsgenericsolar,fresnelphysical\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_fuelcell_capacity_cost", (getter)SystemCosts_get_om_fuelcell_capacity_cost,(setter)SystemCosts_set_om_fuelcell_capacity_cost,
 	PyDoc_STR("*sequence*: Fuel cell capacity-based System Costs amount [$/kWcap]\n\n**Info:**\nfuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
@@ -4469,30 +4469,6 @@ Host_set_annual_energy_value(VarGroupObject *self, PyObject *value, void *closur
 }
 
 static PyObject *
-Host_get_elec_cost_with_system(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Host_elec_cost_with_system_aget, self->data_ptr);
-}
-
-static int
-Host_set_elec_cost_with_system(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_HostDeveloper_Host_elec_cost_with_system_aset, self->data_ptr);
-}
-
-static PyObject *
-Host_get_elec_cost_without_system(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Host_elec_cost_without_system_aget, self->data_ptr);
-}
-
-static int
-Host_set_elec_cost_without_system(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_HostDeveloper_Host_elec_cost_without_system_aset, self->data_ptr);
-}
-
-static PyObject *
 Host_get_host_real_discount_rate(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_HostDeveloper_Host_host_real_discount_rate_nget, self->data_ptr);
@@ -4507,12 +4483,6 @@ Host_set_host_real_discount_rate(VarGroupObject *self, PyObject *value, void *cl
 static PyGetSetDef Host_getset[] = {
 {"annual_energy_value", (getter)Host_get_annual_energy_value,(setter)Host_set_annual_energy_value,
 	PyDoc_STR("*sequence*: Host energy value [$]\n\n**Required:**\nTrue"),
- 	NULL},
-{"elec_cost_with_system", (getter)Host_get_elec_cost_with_system,(setter)Host_set_elec_cost_with_system,
-	PyDoc_STR("*sequence*: Host energy bill with system [$]\n\n**Required:**\nTrue"),
- 	NULL},
-{"elec_cost_without_system", (getter)Host_get_elec_cost_without_system,(setter)Host_set_elec_cost_without_system,
-	PyDoc_STR("*sequence*: Host energy bill without system [$]\n\n**Required:**\nTrue"),
  	NULL},
 {"host_real_discount_rate", (getter)Host_get_host_real_discount_rate,(setter)Host_set_host_real_discount_rate,
 	PyDoc_STR("*float*: Host real discount rate [%]\n\n**Required:**\nTrue"),
@@ -5033,18 +5003,6 @@ static PyMethodDef SystemOutput_methods[] = {
 };
 
 static PyObject *
-SystemOutput_get_annual_energy_value(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_SystemOutput_annual_energy_value_aget, self->data_ptr);
-}
-
-static int
-SystemOutput_set_annual_energy_value(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_HostDeveloper_SystemOutput_annual_energy_value_aset, self->data_ptr);
-}
-
-static PyObject *
 SystemOutput_get_annual_thermal_value(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_HostDeveloper_SystemOutput_annual_thermal_value_aget, self->data_ptr);
@@ -5105,11 +5063,8 @@ SystemOutput_set_system_capacity(VarGroupObject *self, PyObject *value, void *cl
 }
 
 static PyGetSetDef SystemOutput_getset[] = {
-{"annual_energy_value", (getter)SystemOutput_get_annual_energy_value,(setter)SystemOutput_set_annual_energy_value,
-	PyDoc_STR("*sequence*: Energy value [$]\n\n**Required:**\nTrue"),
- 	NULL},
 {"annual_thermal_value", (getter)SystemOutput_get_annual_thermal_value,(setter)SystemOutput_set_annual_thermal_value,
-	PyDoc_STR("*sequence*: Energy value [$]"),
+	PyDoc_STR("*sequence*: Host thermal value [$]"),
  	NULL},
 {"degradation", (getter)SystemOutput_get_degradation,(setter)SystemOutput_set_degradation,
 	PyDoc_STR("*sequence*: Annual energy degradation\n\n**Required:**\nRequired if system_use_lifetime_output=0"),
@@ -5121,7 +5076,7 @@ static PyGetSetDef SystemOutput_getset[] = {
 	PyDoc_STR("*sequence*: Electricity from grid to system [kW]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"system_capacity", (getter)SystemOutput_get_system_capacity,(setter)SystemOutput_set_system_capacity,
-	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n**Constraints:**\nMIN=1e-3\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``system_capacity``:\n\n\t - battery_total_cost_lcos\n\t - construction_financing_cost\n\t - land_area\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n**Constraints:**\nMIN=1e-3\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``system_capacity``:\n\n\t - battery_total_cost_lcos\n\t - construction_financing_cost\n\t - total_installed_cost\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -6744,7 +6699,7 @@ Monthly_set_monthly_energy(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Monthly_getset[] = {
 {"monthly_energy", (getter)Monthly_get_monthly_energy,(setter)Monthly_set_monthly_energy,
-	PyDoc_STR("*sequence*: Monthly energy [kWh]\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Constraints:**\nLENGTH = 12"),
+	PyDoc_STR("*sequence*: Monthly AC energy in Year 1 [kWh]\n\n**Constraints:**\nLENGTH = 12"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -10475,6 +10430,18 @@ Outputs_get_ppa_price(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_pre_depr_alloc_basis(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_HostDeveloper_Outputs_pre_depr_alloc_basis_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_pre_itc_qual_basis(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_HostDeveloper_Outputs_pre_itc_qual_basis_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_present_value_fuel(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_HostDeveloper_Outputs_present_value_fuel_nget, self->data_ptr);
@@ -11217,7 +11184,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Debt up-front fee [$]"),
  	NULL},
 {"cost_financing", (getter)Outputs_get_cost_financing,(setter)0,
-	PyDoc_STR("*float*: Financing cost [$]"),
+	PyDoc_STR("*float*: Total financing cost [$]"),
  	NULL},
 {"cost_installed", (getter)Outputs_get_cost_installed,(setter)0,
 	PyDoc_STR("*float*: Net capital cost [$]"),
@@ -12203,6 +12170,12 @@ static PyGetSetDef Outputs_getset[] = {
 {"ppa_price", (getter)Outputs_get_ppa_price,(setter)0,
 	PyDoc_STR("*float*: PPA price in first year [cents/kWh]"),
  	NULL},
+{"pre_depr_alloc_basis", (getter)Outputs_get_pre_depr_alloc_basis,(setter)0,
+	PyDoc_STR("*float*: Depreciable basis prior to allocation [$]"),
+ 	NULL},
+{"pre_itc_qual_basis", (getter)Outputs_get_pre_itc_qual_basis,(setter)0,
+	PyDoc_STR("*float*: ITC basis prior to qualification [$]"),
+ 	NULL},
 {"present_value_fuel", (getter)Outputs_get_present_value_fuel,(setter)0,
 	PyDoc_STR("*float*: Present value of fuel O&M [$]"),
  	NULL},
@@ -12664,7 +12637,7 @@ static PyMethodDef HostDeveloperModule_methods[] = {
 		{"new",             HostDeveloper_new,         METH_VARARGS,
 				PyDoc_STR("new() -> HostDeveloper")},
 		{"default",             HostDeveloper_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> HostDeveloper\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"FlatPlatePVHostDeveloper\"*\n\n		- *\"GenericBatteryHostDeveloper\"*\n\n		- *\"GenericPVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"GenericSystemHostDeveloper\"*\n\n		- *\"PVBatteryHostDeveloper\"*\n\n		- *\"PVWattsBatteryHostDeveloper\"*\n\n		- *\"PVWattsWindBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsHostDeveloper\"*\n\n		- *\"PhotovoltaicWindBatteryHybridHostDeveloper\"*\n\n		- *\"StandaloneBatteryHostDeveloper\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> HostDeveloper\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"CustomGenerationBatteryHostDeveloper\"*\n\n		- *\"CustomGenerationProfileHostDeveloper\"*\n\n		- *\"CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"FlatPlatePVHostDeveloper\"*\n\n		- *\"PVBatteryHostDeveloper\"*\n\n		- *\"PVWattsBatteryHostDeveloper\"*\n\n		- *\"PVWattsWindBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsHostDeveloper\"*\n\n		- *\"PhotovoltaicWindBatteryHybridHostDeveloper\"*\n\n		- *\"StandaloneBatteryHostDeveloper\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             HostDeveloper_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> HostDeveloper\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   HostDeveloper_from_existing,        METH_VARARGS,

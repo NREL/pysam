@@ -8,7 +8,7 @@ Additional financial models, inputs, and outputs can be found at:
 * PV: https://nrel-pysam.readthedocs.io/en/master/modules/Pvsamv1.html
 * Battery: https://nrel-pysam.readthedocs.io/en/master/modules/Battery.html
 
-Most recently tested against PySAM 5.1.0
+Most recently tested against PySAM 6.0.0
 
 @author: brtietz
 """
@@ -29,7 +29,7 @@ days_in_year = 365
 # Create the detailed residential pv model using PySAM's defaults
 system_model = pvsam.default("FlatPlatePVResidential")
 # Create the battery model based on the PV defaults
-battery = battery_model.from_existing(system_model, "GenericBatteryResidential")
+battery = battery_model.from_existing(system_model, "CustomGenerationBatteryResidential")
 
 # Default model does not include a weather file, so set that based on the command line path
 system_model.SolarResource.solar_resource_file = weather_file

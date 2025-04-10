@@ -6,20 +6,20 @@ import PySAM.BatteryStateful as battstfl
 
 
 def test_leadacid():
-    model = batt.default("GenericBatteryCommercial")
+    model = batt.default("CustomGenerationBatteryCommercial")
     model.BatteryCell.batt_chem = 0
     assert(model.BatterySystem.batt_computed_bank_capacity != pytest.approx(100, .5))
     assert(model.BatterySystem.batt_power_charge_max_kwdc != pytest.approx(50, 0.5))
 
     BatteryTools.battery_model_sizing(model, desired_power=100, desired_capacity=400, desired_voltage=500)
-    assert(model.BatterySystem.batt_computed_strings == 261)
-    assert(model.BatterySystem.batt_computed_series == 139)
+    assert(model.BatterySystem.batt_computed_strings == 370)
+    assert(model.BatterySystem.batt_computed_series == 126)
     assert(model.BatterySystem.batt_computed_bank_capacity == pytest.approx(417, 1))
     assert(model.BatterySystem.batt_power_charge_max_kwdc == pytest.approx(96.29, 1))
 
 
 def test_liion_ac_connected_ac_sizing():
-    model = batt.default("GenericBatteryCommercial")
+    model = batt.default("CustomGenerationBatteryCommercial")
     model.BatteryCell.batt_chem = 1
     model.BatterySystem.batt_ac_or_dc = 1   # ac
     BatteryTools.battery_model_sizing(model, 100, 400, 500)
@@ -33,7 +33,7 @@ def test_liion_ac_connected_ac_sizing():
 
 
 def test_liion_ac_connected_dc_sizing():
-    model = batt.default("GenericBatteryCommercial")
+    model = batt.default("CustomGenerationBatteryCommercial")
     model.BatteryCell.batt_chem = 1
     model.BatterySystem.batt_ac_or_dc = 1   # ac
     BatteryTools.battery_model_sizing(model, 100, 400, 500, size_by_ac_not_dc=False)
@@ -47,7 +47,7 @@ def test_liion_ac_connected_dc_sizing():
 
 
 def test_liion_dc_connected_dc_sizing():
-    model = batt.default("GenericBatteryCommercial")
+    model = batt.default("CustomGenerationBatteryCommercial")
     model.BatteryCell.batt_chem = 1
     model.Inverter.inverter_model = 0
     model.Inverter.inv_snl_eff_cec = 50
@@ -72,7 +72,7 @@ def test_liion_dc_connected_dc_sizing():
 
 
 def test_liion_dc_connected_ac_sizing():
-    model = batt.default("GenericBatteryCommercial")
+    model = batt.default("CustomGenerationBatteryCommercial")
     model.BatteryCell.batt_chem = 1
     model.Inverter.inverter_model = 0
     model.Inverter.inv_snl_eff_cec = 100
@@ -100,7 +100,7 @@ def test_calculate_thermal_params():
 
 
 def test_battery_model_change_chemistry():
-    model = batt.default("GenericBatterySingleOwner")
+    model = batt.default("CustomGenerationBatterySingleOwner")
     original_capacity = model.value('batt_computed_bank_capacity')
     original_power = model.BatterySystem.batt_power_discharge_max_kwac
 
@@ -167,7 +167,7 @@ def test_batterystateful_model_lmolto():
 
 def test_liion_sizing_default_tolerence():
     with pytest.raises(ValueError):
-        model = batt.default("GenericBatteryResidential")
+        model = batt.default("CustomGenerationBatteryResidential")
         model.BatteryCell.batt_chem = 1
         model.Inverter.inverter_model = 0
         model.Inverter.inv_snl_eff_cec = 100
@@ -175,7 +175,7 @@ def test_liion_sizing_default_tolerence():
         BatteryTools.battery_model_sizing(model, 1, 4, 240, size_by_ac_not_dc=True)
 
 def test_liion_sizing_high_tolerence():
-    model = batt.default("GenericBatteryResidential")
+    model = batt.default("CustomGenerationBatteryResidential")
     model.BatteryCell.batt_chem = 1
     model.Inverter.inverter_model = 0
     model.Inverter.inv_snl_eff_cec = 100

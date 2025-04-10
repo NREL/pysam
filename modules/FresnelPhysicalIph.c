@@ -7,34 +7,34 @@
 
 
 /*
- * SystemControl Group
+ * SysControl Group
  */ 
 
-static PyTypeObject SystemControl_Type;
+static PyTypeObject SysControl_Type;
 
 static PyObject *
-SystemControl_new(SAM_FresnelPhysicalIph data_ptr)
+SysControl_new(SAM_FresnelPhysicalIph data_ptr)
 {
-	PyObject* new_obj = SystemControl_Type.tp_alloc(&SystemControl_Type,0);
+	PyObject* new_obj = SysControl_Type.tp_alloc(&SysControl_Type,0);
 
-	VarGroupObject* SystemControl_obj = (VarGroupObject*)new_obj;
+	VarGroupObject* SysControl_obj = (VarGroupObject*)new_obj;
 
-	SystemControl_obj->data_ptr = (SAM_table)data_ptr;
+	SysControl_obj->data_ptr = (SAM_table)data_ptr;
 
 	return new_obj;
 }
 
-/* SystemControl methods */
+/* SysControl methods */
 
 static PyObject *
-SystemControl_assign(VarGroupObject *self, PyObject *args)
+SysControl_assign(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "FresnelPhysicalIph", "SystemControl")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "FresnelPhysicalIph", "SysControl")){
 		return NULL;
 	}
 
@@ -43,15 +43,15 @@ SystemControl_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-SystemControl_replace(VarGroupObject *self, PyObject *args)
+SysControl_replace(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
-	PyTypeObject* tp = &SystemControl_Type;
+	PyTypeObject* tp = &SysControl_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "FresnelPhysicalIph", "SystemControl")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "FresnelPhysicalIph", "SysControl")){
 		return NULL;
 	}
 
@@ -60,62 +60,212 @@ SystemControl_replace(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-SystemControl_export(VarGroupObject *self, PyObject *args)
+SysControl_export(VarGroupObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &SystemControl_Type;
+	PyTypeObject* tp = &SysControl_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef SystemControl_methods[] = {
-		{"assign",            (PyCFunction)SystemControl_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SystemControl_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)SystemControl_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SystemControl_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)SystemControl_export,  METH_VARARGS,
+static PyMethodDef SysControl_methods[] = {
+		{"assign",            (PyCFunction)SysControl_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SysControl_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SysControl_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SysControl_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)SysControl_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-SystemControl_get_disp_inventory_incentive(VarGroupObject *self, void *closure)
+SysControl_get_aux_array(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SystemControl_disp_inventory_incentive_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_SysControl_aux_array_aget, self->data_ptr);
 }
 
 static int
-SystemControl_set_disp_inventory_incentive(VarGroupObject *self, PyObject *value, void *closure)
+SysControl_set_aux_array(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SystemControl_disp_inventory_incentive_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_SysControl_aux_array_aset, self->data_ptr);
 }
 
 static PyObject *
-SystemControl_get_sim_type(VarGroupObject *self, void *closure)
+SysControl_get_bop_array(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SystemControl_sim_type_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_SysControl_bop_array_aget, self->data_ptr);
 }
 
 static int
-SystemControl_set_sim_type(VarGroupObject *self, PyObject *value, void *closure)
+SysControl_set_bop_array(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SystemControl_sim_type_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_SysControl_bop_array_aset, self->data_ptr);
 }
 
-static PyGetSetDef SystemControl_getset[] = {
-{"disp_inventory_incentive", (getter)SystemControl_get_disp_inventory_incentive,(setter)SystemControl_set_disp_inventory_incentive,
+static PyObject *
+SysControl_get_disp_frequency(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_frequency_nget, self->data_ptr);
+}
+
+static int
+SysControl_set_disp_frequency(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_frequency_nset, self->data_ptr);
+}
+
+static PyObject *
+SysControl_get_disp_horizon(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_horizon_nget, self->data_ptr);
+}
+
+static int
+SysControl_set_disp_horizon(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_horizon_nset, self->data_ptr);
+}
+
+static PyObject *
+SysControl_get_disp_inventory_incentive(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_inventory_incentive_nget, self->data_ptr);
+}
+
+static int
+SysControl_set_disp_inventory_incentive(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_inventory_incentive_nset, self->data_ptr);
+}
+
+static PyObject *
+SysControl_get_disp_max_iter(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_max_iter_nget, self->data_ptr);
+}
+
+static int
+SysControl_set_disp_max_iter(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_max_iter_nset, self->data_ptr);
+}
+
+static PyObject *
+SysControl_get_disp_mip_gap(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_mip_gap_nget, self->data_ptr);
+}
+
+static int
+SysControl_set_disp_mip_gap(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_mip_gap_nset, self->data_ptr);
+}
+
+static PyObject *
+SysControl_get_disp_time_weighting(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_time_weighting_nget, self->data_ptr);
+}
+
+static int
+SysControl_set_disp_time_weighting(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_time_weighting_nset, self->data_ptr);
+}
+
+static PyObject *
+SysControl_get_disp_timeout(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_timeout_nget, self->data_ptr);
+}
+
+static int
+SysControl_set_disp_timeout(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_timeout_nset, self->data_ptr);
+}
+
+static PyObject *
+SysControl_get_is_dispatch(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_is_dispatch_nget, self->data_ptr);
+}
+
+static int
+SysControl_set_is_dispatch(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_is_dispatch_nset, self->data_ptr);
+}
+
+static PyObject *
+SysControl_get_pb_fixed_par(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_pb_fixed_par_nget, self->data_ptr);
+}
+
+static int
+SysControl_set_pb_fixed_par(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_pb_fixed_par_nset, self->data_ptr);
+}
+
+static PyObject *
+SysControl_get_sim_type(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_sim_type_nget, self->data_ptr);
+}
+
+static int
+SysControl_set_sim_type(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_sim_type_nset, self->data_ptr);
+}
+
+static PyGetSetDef SysControl_getset[] = {
+{"aux_array", (getter)SysControl_get_aux_array,(setter)SysControl_set_aux_array,
+	PyDoc_STR("*sequence*: Aux heater, boiler parasitic\n\n**Required:**\nTrue"),
+ 	NULL},
+{"bop_array", (getter)SysControl_get_bop_array,(setter)SysControl_set_bop_array,
+	PyDoc_STR("*sequence*: Balance of plant parasitic power fraction\n\n**Required:**\nTrue"),
+ 	NULL},
+{"disp_frequency", (getter)SysControl_get_disp_frequency,(setter)SysControl_set_disp_frequency,
+	PyDoc_STR("*float*: Frequency for dispatch optimization calculations [hour]\n\n**Required:**\nRequired if is_dispatch=1"),
+ 	NULL},
+{"disp_horizon", (getter)SysControl_get_disp_horizon,(setter)SysControl_set_disp_horizon,
+	PyDoc_STR("*float*: Time horizon for dispatch optimization [hour]\n\n**Required:**\nRequired if is_dispatch=1"),
+ 	NULL},
+{"disp_inventory_incentive", (getter)SysControl_get_disp_inventory_incentive,(setter)SysControl_set_disp_inventory_incentive,
 	PyDoc_STR("*float*: Dispatch storage terminal inventory incentive multiplier\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
-{"sim_type", (getter)SystemControl_get_sim_type,(setter)SystemControl_set_sim_type,
+{"disp_max_iter", (getter)SysControl_get_disp_max_iter,(setter)SysControl_set_disp_max_iter,
+	PyDoc_STR("*float*: Max. no. dispatch optimization iterations [-]\n\n**Required:**\nRequired if is_dispatch=1"),
+ 	NULL},
+{"disp_mip_gap", (getter)SysControl_get_disp_mip_gap,(setter)SysControl_set_disp_mip_gap,
+	PyDoc_STR("*float*: Dispatch optimization solution tolerance [-]\n\n**Required:**\nRequired if is_dispatch=1"),
+ 	NULL},
+{"disp_time_weighting", (getter)SysControl_get_disp_time_weighting,(setter)SysControl_set_disp_time_weighting,
+	PyDoc_STR("*float*: Dispatch optimization future time discounting factor [-]\n\n**Required:**\nFalse. Automatically set to 0.99 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"disp_timeout", (getter)SysControl_get_disp_timeout,(setter)SysControl_set_disp_timeout,
+	PyDoc_STR("*float*: Max. dispatch optimization solve duration [s]\n\n**Required:**\nRequired if is_dispatch=1"),
+ 	NULL},
+{"is_dispatch", (getter)SysControl_get_is_dispatch,(setter)SysControl_set_is_dispatch,
+	PyDoc_STR("*float*: Allow dispatch optimization? [-]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"pb_fixed_par", (getter)SysControl_get_pb_fixed_par,(setter)SysControl_set_pb_fixed_par,
+	PyDoc_STR("*float*: Fixed parasitic load - runs at all times\n\n**Required:**\nTrue"),
+ 	NULL},
+{"sim_type", (getter)SysControl_get_sim_type,(setter)SysControl_set_sim_type,
 	PyDoc_STR("*float*: 1 (default): timeseries, 2: design only\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject SystemControl_Type = {
+static PyTypeObject SysControl_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"FresnelPhysicalIph.SystemControl",             /*tp_name*/
+		"FresnelPhysicalIph.SysControl",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -142,9 +292,9 @@ static PyTypeObject SystemControl_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		SystemControl_methods,         /*tp_methods*/
+		SysControl_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		SystemControl_getset,          /*tp_getset*/
+		SysControl_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -476,13 +626,13 @@ static PyGetSetDef SystemDesign_getset[] = {
 	PyDoc_STR("*float*: Design heat input to power block [MWt]\n\n**Required:**\nTrue"),
  	NULL},
 {"solar_mult_in", (getter)SystemDesign_get_solar_mult_in,(setter)SystemDesign_set_solar_mult_in,
-	PyDoc_STR("*float*: Solar multiple Input"),
+	PyDoc_STR("*float*: Solar multiple Input\n\n**Required:**\nTrue"),
  	NULL},
 {"solar_mult_or_Ap", (getter)SystemDesign_get_solar_mult_or_Ap,(setter)SystemDesign_set_solar_mult_or_Ap,
-	PyDoc_STR("*float*: Design using specified solar mult or field aperture [m3]"),
+	PyDoc_STR("*float*: Design using specified solar mult or field aperture [m3]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"total_Ap_in", (getter)SystemDesign_get_total_Ap_in,(setter)SystemDesign_set_total_Ap_in,
-	PyDoc_STR("*float*: Field aperture Input [m3]"),
+	PyDoc_STR("*float*: Field aperture Input [m3]\n\n**Required:**\nTrue"),
  	NULL},
 {"tshours", (getter)SystemDesign_get_tshours,(setter)SystemDesign_set_tshours,
 	PyDoc_STR("*float*: Equivalent full-load thermal storage hours [hr]\n\n**Required:**\nTrue"),
@@ -765,6 +915,30 @@ SolarField_set_eta_pump(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+SolarField_get_f_htfmax(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_f_htfmax_nget, self->data_ptr);
+}
+
+static int
+SolarField_set_f_htfmax(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_f_htfmax_nset, self->data_ptr);
+}
+
+static PyObject *
+SolarField_get_f_htfmin(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_f_htfmin_nget, self->data_ptr);
+}
+
+static int
+SolarField_set_f_htfmin(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_f_htfmin_nset, self->data_ptr);
+}
+
+static PyObject *
 SolarField_get_field_fl_props(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_SolarField_field_fl_props_mget, self->data_ptr);
@@ -933,6 +1107,18 @@ SolarField_set_theta_stow(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+SolarField_get_use_abs_or_rel_mdot_limit(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_use_abs_or_rel_mdot_limit_nget, self->data_ptr);
+}
+
+static int
+SolarField_set_use_abs_or_rel_mdot_limit(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SolarField_use_abs_or_rel_mdot_limit_nset, self->data_ptr);
+}
+
+static PyObject *
 SolarField_get_washes_per_year(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_FresnelPhysicalIph_SolarField_washes_per_year_nget, self->data_ptr);
@@ -996,6 +1182,12 @@ static PyGetSetDef SolarField_getset[] = {
 {"eta_pump", (getter)SolarField_get_eta_pump,(setter)SolarField_set_eta_pump,
 	PyDoc_STR("*float*: HTF pump efficiency\n\n**Required:**\nTrue"),
  	NULL},
+{"f_htfmax", (getter)SolarField_get_f_htfmax,(setter)SolarField_set_f_htfmax,
+	PyDoc_STR("*float*: Maximum loop mass flow rate fraction of design\n\n**Required:**\nRequired if use_abs_or_rel_mdot_limit=1"),
+ 	NULL},
+{"f_htfmin", (getter)SolarField_get_f_htfmin,(setter)SolarField_set_f_htfmin,
+	PyDoc_STR("*float*: Minimum loop mass flow rate fraction of design\n\n**Required:**\nRequired if use_abs_or_rel_mdot_limit=1"),
+ 	NULL},
 {"field_fl_props", (getter)SolarField_get_field_fl_props,(setter)SolarField_set_field_fl_props,
 	PyDoc_STR("*sequence[sequence]*: Fluid property data\n\n**Required:**\nTrue"),
  	NULL},
@@ -1003,10 +1195,10 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*float*: Non-solar field land area multiplier [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"m_dot_htfmax", (getter)SolarField_get_m_dot_htfmax,(setter)SolarField_set_m_dot_htfmax,
-	PyDoc_STR("*float*: Maximum loop HTF flow rate [kg/s]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Maximum loop HTF flow rate [kg/s]\n\n**Required:**\nRequired if use_abs_or_rel_mdot_limit=0"),
  	NULL},
 {"m_dot_htfmin", (getter)SolarField_get_m_dot_htfmin,(setter)SolarField_set_m_dot_htfmin,
-	PyDoc_STR("*float*: Minimum loop HTF flow rate [kg/s]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Minimum loop HTF flow rate [kg/s]\n\n**Required:**\nRequired if use_abs_or_rel_mdot_limit=0"),
  	NULL},
 {"mc_bal_cold", (getter)SolarField_get_mc_bal_cold,(setter)SolarField_set_mc_bal_cold,
 	PyDoc_STR("*float*: The heat capacity of the balance of plant on the cold side [kWht/K-MWt]\n\n**Required:**\nTrue"),
@@ -1021,7 +1213,7 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*float*: Number of collector modules in a loop\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"p_start", (getter)SolarField_get_p_start,(setter)SolarField_set_p_start,
-	PyDoc_STR("*float*: Collector startup energy, per SCA [kWe-hr]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Collector startup energy, per SCA [kWhe]\n\n**Required:**\nTrue"),
  	NULL},
 {"rec_htf_vol", (getter)SolarField_get_rec_htf_vol,(setter)SolarField_set_rec_htf_vol,
 	PyDoc_STR("*float*: Volume of HTF in a single collector unit per unit aperture area [L/m2-ap]\n\n**Required:**\nTrue"),
@@ -1037,6 +1229,9 @@ static PyGetSetDef SolarField_getset[] = {
  	NULL},
 {"theta_stow", (getter)SolarField_get_theta_stow,(setter)SolarField_set_theta_stow,
 	PyDoc_STR("*float*: stow angle [deg]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"use_abs_or_rel_mdot_limit", (getter)SolarField_get_use_abs_or_rel_mdot_limit,(setter)SolarField_set_use_abs_or_rel_mdot_limit,
+	PyDoc_STR("*float*: Use mass flow abs (0) or relative (1) limits\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"washes_per_year", (getter)SolarField_get_washes_per_year,(setter)SolarField_set_washes_per_year,
 	PyDoc_STR("*float*: Mirror washing frequency [none]\n\n**Required:**\nTrue"),
@@ -1933,6 +2128,66 @@ static PyMethodDef HeatSink_methods[] = {
 };
 
 static PyObject *
+HeatSink_get_hs_htf_mdot_max_frac(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_HeatSink_hs_htf_mdot_max_frac_nget, self->data_ptr);
+}
+
+static int
+HeatSink_set_hs_htf_mdot_max_frac(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_HeatSink_hs_htf_mdot_max_frac_nset, self->data_ptr);
+}
+
+static PyObject *
+HeatSink_get_hs_phys_P_steam_hot_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_HeatSink_hs_phys_P_steam_hot_des_nget, self->data_ptr);
+}
+
+static int
+HeatSink_set_hs_phys_P_steam_hot_des(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_HeatSink_hs_phys_P_steam_hot_des_nset, self->data_ptr);
+}
+
+static PyObject *
+HeatSink_get_hs_phys_Q_steam_hot_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_HeatSink_hs_phys_Q_steam_hot_des_nget, self->data_ptr);
+}
+
+static int
+HeatSink_set_hs_phys_Q_steam_hot_des(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_HeatSink_hs_phys_Q_steam_hot_des_nset, self->data_ptr);
+}
+
+static PyObject *
+HeatSink_get_hs_phys_T_steam_cold_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_HeatSink_hs_phys_T_steam_cold_des_nget, self->data_ptr);
+}
+
+static int
+HeatSink_set_hs_phys_T_steam_cold_des(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_HeatSink_hs_phys_T_steam_cold_des_nset, self->data_ptr);
+}
+
+static PyObject *
+HeatSink_get_hs_type(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_HeatSink_hs_type_nget, self->data_ptr);
+}
+
+static int
+HeatSink_set_hs_type(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_HeatSink_hs_type_nset, self->data_ptr);
+}
+
+static PyObject *
 HeatSink_get_pb_pump_coef(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_FresnelPhysicalIph_HeatSink_pb_pump_coef_nget, self->data_ptr);
@@ -1945,6 +2200,21 @@ HeatSink_set_pb_pump_coef(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyGetSetDef HeatSink_getset[] = {
+{"hs_htf_mdot_max_frac", (getter)HeatSink_get_hs_htf_mdot_max_frac,(setter)HeatSink_set_hs_htf_mdot_max_frac,
+	PyDoc_STR("*float*: Maximum HTF mass flow to heat sink relative to design point\n\n**Required:**\nTrue"),
+ 	NULL},
+{"hs_phys_P_steam_hot_des", (getter)HeatSink_get_hs_phys_P_steam_hot_des,(setter)HeatSink_set_hs_phys_P_steam_hot_des,
+	PyDoc_STR("*float*: Steam outlet (and inlet) pressure for physical heat sink [bar]\n\n**Required:**\nRequired if hs_type=1"),
+ 	NULL},
+{"hs_phys_Q_steam_hot_des", (getter)HeatSink_get_hs_phys_Q_steam_hot_des,(setter)HeatSink_set_hs_phys_Q_steam_hot_des,
+	PyDoc_STR("*float*: Steam outlet quality for physical heat sink\n\n**Required:**\nRequired if hs_type=1"),
+ 	NULL},
+{"hs_phys_T_steam_cold_des", (getter)HeatSink_get_hs_phys_T_steam_cold_des,(setter)HeatSink_set_hs_phys_T_steam_cold_des,
+	PyDoc_STR("*float*: Steam inlet temperature for physical heat sink [C]\n\n**Required:**\nRequired if hs_type=1"),
+ 	NULL},
+{"hs_type", (getter)HeatSink_get_hs_type,(setter)HeatSink_set_hs_type,
+	PyDoc_STR("*float*: 0: ideal model, 1: physical steam model\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
 {"pb_pump_coef", (getter)HeatSink_get_pb_pump_coef,(setter)HeatSink_set_pb_pump_coef,
 	PyDoc_STR("*float*: Pumping power to move 1kg of HTF through PB loop [kW/kg]\n\n**Required:**\nTrue"),
  	NULL},
@@ -2432,30 +2702,6 @@ static PyMethodDef Tou_methods[] = {
 };
 
 static PyObject *
-Tou_get_ampl_data_dir(VarGroupObject *self, void *closure)
-{
-	return PySAM_string_getter(SAM_FresnelPhysicalIph_Tou_ampl_data_dir_sget, self->data_ptr);
-}
-
-static int
-Tou_set_ampl_data_dir(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_string_setter(value, SAM_FresnelPhysicalIph_Tou_ampl_data_dir_sset, self->data_ptr);
-}
-
-static PyObject *
-Tou_get_ampl_exec_call(VarGroupObject *self, void *closure)
-{
-	return PySAM_string_getter(SAM_FresnelPhysicalIph_Tou_ampl_exec_call_sget, self->data_ptr);
-}
-
-static int
-Tou_set_ampl_exec_call(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_string_setter(value, SAM_FresnelPhysicalIph_Tou_ampl_exec_call_sset, self->data_ptr);
-}
-
-static PyObject *
 Tou_get_disp_reporting(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_FresnelPhysicalIph_Tou_disp_reporting_nget, self->data_ptr);
@@ -2540,18 +2786,6 @@ Tou_set_f_turb_tou_periods(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-Tou_get_is_ampl_engine(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_Tou_is_ampl_engine_nget, self->data_ptr);
-}
-
-static int
-Tou_set_is_ampl_engine(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_Tou_is_ampl_engine_nset, self->data_ptr);
-}
-
-static PyObject *
 Tou_get_is_timestep_load_fractions(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_FresnelPhysicalIph_Tou_is_timestep_load_fractions_nget, self->data_ptr);
@@ -2576,18 +2810,6 @@ Tou_set_is_tod_pc_target_also_pc_max(VarGroupObject *self, PyObject *value, void
 }
 
 static PyObject *
-Tou_get_is_write_ampl_dat(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_Tou_is_write_ampl_dat_nget, self->data_ptr);
-}
-
-static int
-Tou_set_is_write_ampl_dat(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_Tou_is_write_ampl_dat_nset, self->data_ptr);
-}
-
-static PyObject *
 Tou_get_ppa_multiplier_model(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_FresnelPhysicalIph_Tou_ppa_multiplier_model_nget, self->data_ptr);
@@ -2600,27 +2822,27 @@ Tou_set_ppa_multiplier_model(VarGroupObject *self, PyObject *value, void *closur
 }
 
 static PyObject *
-Tou_get_q_rec_heattrace(VarGroupObject *self, void *closure)
+Tou_get_timestep_load_abs(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_Tou_q_rec_heattrace_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_Tou_timestep_load_abs_aget, self->data_ptr);
 }
 
 static int
-Tou_set_q_rec_heattrace(VarGroupObject *self, PyObject *value, void *closure)
+Tou_set_timestep_load_abs(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_Tou_q_rec_heattrace_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_Tou_timestep_load_abs_aset, self->data_ptr);
 }
 
 static PyObject *
-Tou_get_q_rec_standby(VarGroupObject *self, void *closure)
+Tou_get_timestep_load_abs_factor(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_Tou_q_rec_standby_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_Tou_timestep_load_abs_factor_nget, self->data_ptr);
 }
 
 static int
-Tou_set_q_rec_standby(VarGroupObject *self, PyObject *value, void *closure)
+Tou_set_timestep_load_abs_factor(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_Tou_q_rec_standby_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_Tou_timestep_load_abs_factor_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -2635,13 +2857,31 @@ Tou_set_timestep_load_fractions(VarGroupObject *self, PyObject *value, void *clo
 	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_Tou_timestep_load_fractions_aset, self->data_ptr);
 }
 
+static PyObject *
+Tou_get_weekday_schedule(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_Tou_weekday_schedule_mget, self->data_ptr);
+}
+
+static int
+Tou_set_weekday_schedule(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_FresnelPhysicalIph_Tou_weekday_schedule_mset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_weekend_schedule(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_Tou_weekend_schedule_mget, self->data_ptr);
+}
+
+static int
+Tou_set_weekend_schedule(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_FresnelPhysicalIph_Tou_weekend_schedule_mset, self->data_ptr);
+}
+
 static PyGetSetDef Tou_getset[] = {
-{"ampl_data_dir", (getter)Tou_get_ampl_data_dir,(setter)Tou_set_ampl_data_dir,
-	PyDoc_STR("*str*: AMPL data file directory [-]\n\n**Required:**\nFalse. Automatically set to '' if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"ampl_exec_call", (getter)Tou_get_ampl_exec_call,(setter)Tou_set_ampl_exec_call,
-	PyDoc_STR("*str*: System command to run AMPL code [-]\n\n**Required:**\nFalse. Automatically set to 'ampl sdk_solution.run' if not assigned explicitly or loaded from defaults."),
- 	NULL},
 {"disp_reporting", (getter)Tou_get_disp_reporting,(setter)Tou_set_disp_reporting,
 	PyDoc_STR("*float*: Dispatch optimization reporting level [-]\n\n**Required:**\nFalse. Automatically set to -1 if not assigned explicitly or loaded from defaults."),
  	NULL},
@@ -2658,34 +2898,34 @@ static PyGetSetDef Tou_getset[] = {
 	PyDoc_STR("*float*: Time steps per hour for dispatch optimization calculations [-]\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"dispatch_factors_ts", (getter)Tou_get_dispatch_factors_ts,(setter)Tou_set_dispatch_factors_ts,
-	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n**Required:**\nRequired if ppa_multiplier_model=1&csp_financial_model<5&is_dispatch=1&sim_type=1"),
+	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n**Required:**\nRequired if ppa_multiplier_model=1&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 {"f_turb_tou_periods", (getter)Tou_get_f_turb_tou_periods,(setter)Tou_set_f_turb_tou_periods,
-	PyDoc_STR("*sequence*: Dispatch logic for turbine load fraction [-]\n\n**Required:**\nTrue"),
- 	NULL},
-{"is_ampl_engine", (getter)Tou_get_is_ampl_engine,(setter)Tou_set_is_ampl_engine,
-	PyDoc_STR("*float*: Run dispatch optimization with external AMPL engine [-]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Dispatch logic for turbine load fraction [-]\n\n**Required:**\nRequired if is_timestep_load_fractions=0"),
  	NULL},
 {"is_timestep_load_fractions", (getter)Tou_get_is_timestep_load_fractions,(setter)Tou_set_is_timestep_load_fractions,
-	PyDoc_STR("*float*: Use turbine load fraction for each timestep instead of block dispatch?\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: 0: block dispatch, 1: hourly load fraction, 2: absolute load\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"is_tod_pc_target_also_pc_max", (getter)Tou_get_is_tod_pc_target_also_pc_max,(setter)Tou_set_is_tod_pc_target_also_pc_max,
 	PyDoc_STR("*float*: Is the TOD target cycle heat input also the max cycle heat input?\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
-{"is_write_ampl_dat", (getter)Tou_get_is_write_ampl_dat,(setter)Tou_set_is_write_ampl_dat,
-	PyDoc_STR("*float*: Write AMPL data files for dispatch run [-]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
 {"ppa_multiplier_model", (getter)Tou_get_ppa_multiplier_model,(setter)Tou_set_ppa_multiplier_model,
 	PyDoc_STR("*float*: PPA multiplier model 0: dispatch factors dispatch_factorX, 1: hourly multipliers dispatch_factors_ts [0/1]\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
-{"q_rec_heattrace", (getter)Tou_get_q_rec_heattrace,(setter)Tou_set_q_rec_heattrace,
-	PyDoc_STR("*float*: Receiver heat trace energy consumption during startup [kWe-hr]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+{"timestep_load_abs", (getter)Tou_get_timestep_load_abs,(setter)Tou_set_timestep_load_abs,
+	PyDoc_STR("*sequence*: Heat sink hourly load (not normalized) [kWt]\n\n**Required:**\nRequired if is_timestep_load_fractions=2"),
  	NULL},
-{"q_rec_standby", (getter)Tou_get_q_rec_standby,(setter)Tou_set_q_rec_standby,
-	PyDoc_STR("*float*: Receiver standby energy consumption [kWt]\n\n**Required:**\nFalse. Automatically set to 9e99 if not assigned explicitly or loaded from defaults."),
+{"timestep_load_abs_factor", (getter)Tou_get_timestep_load_abs_factor,(setter)Tou_set_timestep_load_abs_factor,
+	PyDoc_STR("*float*: Heat sink hourly load scale factor\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"timestep_load_fractions", (getter)Tou_get_timestep_load_fractions,(setter)Tou_set_timestep_load_fractions,
-	PyDoc_STR("*sequence*: Turbine load fraction for each timestep, alternative to block dispatch\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
+	PyDoc_STR("*sequence*: Turbine load fraction for each timestep, alternative to block dispatch\n\n**Required:**\nRequired if is_timestep_load_fractions=1"),
+ 	NULL},
+{"weekday_schedule", (getter)Tou_get_weekday_schedule,(setter)Tou_set_weekday_schedule,
+	PyDoc_STR("*sequence[sequence]*: 12x24 Time of Use Values for week days\n\n**Required:**\nRequired if is_timestep_load_fractions=0"),
+ 	NULL},
+{"weekend_schedule", (getter)Tou_get_weekend_schedule,(setter)Tou_set_weekend_schedule,
+	PyDoc_STR("*sequence[sequence]*: 12x24 Time of Use Values for week end days\n\n**Required:**\nRequired if is_timestep_load_fractions=0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2724,323 +2964,6 @@ static PyTypeObject Tou_Type = {
 		Tou_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		Tou_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * SysControl Group
- */ 
-
-static PyTypeObject SysControl_Type;
-
-static PyObject *
-SysControl_new(SAM_FresnelPhysicalIph data_ptr)
-{
-	PyObject* new_obj = SysControl_Type.tp_alloc(&SysControl_Type,0);
-
-	VarGroupObject* SysControl_obj = (VarGroupObject*)new_obj;
-
-	SysControl_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* SysControl methods */
-
-static PyObject *
-SysControl_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "FresnelPhysicalIph", "SysControl")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-SysControl_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &SysControl_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "FresnelPhysicalIph", "SysControl")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-SysControl_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &SysControl_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef SysControl_methods[] = {
-		{"assign",            (PyCFunction)SysControl_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SysControl_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)SysControl_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SysControl_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)SysControl_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-SysControl_get_aux_array(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_FresnelPhysicalIph_SysControl_aux_array_aget, self->data_ptr);
-}
-
-static int
-SysControl_set_aux_array(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_SysControl_aux_array_aset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_bop_array(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_FresnelPhysicalIph_SysControl_bop_array_aget, self->data_ptr);
-}
-
-static int
-SysControl_set_bop_array(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_SysControl_bop_array_aset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_disp_frequency(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_frequency_nget, self->data_ptr);
-}
-
-static int
-SysControl_set_disp_frequency(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_frequency_nset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_disp_horizon(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_horizon_nget, self->data_ptr);
-}
-
-static int
-SysControl_set_disp_horizon(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_horizon_nset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_disp_max_iter(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_max_iter_nget, self->data_ptr);
-}
-
-static int
-SysControl_set_disp_max_iter(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_max_iter_nset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_disp_mip_gap(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_mip_gap_nget, self->data_ptr);
-}
-
-static int
-SysControl_set_disp_mip_gap(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_mip_gap_nset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_disp_rsu_cost_rel(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_rsu_cost_rel_nget, self->data_ptr);
-}
-
-static int
-SysControl_set_disp_rsu_cost_rel(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_rsu_cost_rel_nset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_disp_time_weighting(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_time_weighting_nget, self->data_ptr);
-}
-
-static int
-SysControl_set_disp_time_weighting(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_time_weighting_nset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_disp_timeout(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_timeout_nget, self->data_ptr);
-}
-
-static int
-SysControl_set_disp_timeout(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_timeout_nset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_is_dispatch(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_is_dispatch_nget, self->data_ptr);
-}
-
-static int
-SysControl_set_is_dispatch(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_is_dispatch_nset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_pb_fixed_par(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_pb_fixed_par_nget, self->data_ptr);
-}
-
-static int
-SysControl_set_pb_fixed_par(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_pb_fixed_par_nset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_weekday_schedule(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_SysControl_weekday_schedule_mget, self->data_ptr);
-}
-
-static int
-SysControl_set_weekday_schedule(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_FresnelPhysicalIph_SysControl_weekday_schedule_mset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_weekend_schedule(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_SysControl_weekend_schedule_mget, self->data_ptr);
-}
-
-static int
-SysControl_set_weekend_schedule(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_FresnelPhysicalIph_SysControl_weekend_schedule_mset, self->data_ptr);
-}
-
-static PyGetSetDef SysControl_getset[] = {
-{"aux_array", (getter)SysControl_get_aux_array,(setter)SysControl_set_aux_array,
-	PyDoc_STR("*sequence*: Aux heater, boiler parasitic\n\n**Required:**\nTrue"),
- 	NULL},
-{"bop_array", (getter)SysControl_get_bop_array,(setter)SysControl_set_bop_array,
-	PyDoc_STR("*sequence*: Balance of plant parasitic power fraction\n\n**Required:**\nTrue"),
- 	NULL},
-{"disp_frequency", (getter)SysControl_get_disp_frequency,(setter)SysControl_set_disp_frequency,
-	PyDoc_STR("*float*: Frequency for dispatch optimization calculations [hour]\n\n**Required:**\nRequired if is_dispatch=1"),
- 	NULL},
-{"disp_horizon", (getter)SysControl_get_disp_horizon,(setter)SysControl_set_disp_horizon,
-	PyDoc_STR("*float*: Time horizon for dispatch optimization [hour]\n\n**Required:**\nRequired if is_dispatch=1"),
- 	NULL},
-{"disp_max_iter", (getter)SysControl_get_disp_max_iter,(setter)SysControl_set_disp_max_iter,
-	PyDoc_STR("*float*: Max. no. dispatch optimization iterations [-]\n\n**Required:**\nRequired if is_dispatch=1"),
- 	NULL},
-{"disp_mip_gap", (getter)SysControl_get_disp_mip_gap,(setter)SysControl_set_disp_mip_gap,
-	PyDoc_STR("*float*: Dispatch optimization solution tolerance [-]\n\n**Required:**\nRequired if is_dispatch=1"),
- 	NULL},
-{"disp_rsu_cost_rel", (getter)SysControl_get_disp_rsu_cost_rel,(setter)SysControl_set_disp_rsu_cost_rel,
-	PyDoc_STR("*float*: Receiver startup cost [$/MWt/start]\n\n**Required:**\nRequired if is_dispatch=1"),
- 	NULL},
-{"disp_time_weighting", (getter)SysControl_get_disp_time_weighting,(setter)SysControl_set_disp_time_weighting,
-	PyDoc_STR("*float*: Dispatch optimization future time discounting factor [-]\n\n**Required:**\nFalse. Automatically set to 0.99 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"disp_timeout", (getter)SysControl_get_disp_timeout,(setter)SysControl_set_disp_timeout,
-	PyDoc_STR("*float*: Max. dispatch optimization solve duration [s]\n\n**Required:**\nRequired if is_dispatch=1"),
- 	NULL},
-{"is_dispatch", (getter)SysControl_get_is_dispatch,(setter)SysControl_set_is_dispatch,
-	PyDoc_STR("*float*: Allow dispatch optimization? [-]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"pb_fixed_par", (getter)SysControl_get_pb_fixed_par,(setter)SysControl_set_pb_fixed_par,
-	PyDoc_STR("*float*: Fixed parasitic load - runs at all times\n\n**Required:**\nTrue"),
- 	NULL},
-{"weekday_schedule", (getter)SysControl_get_weekday_schedule,(setter)SysControl_set_weekday_schedule,
-	PyDoc_STR("*sequence[sequence]*: 12x24 Time of Use Values for week days\n\n**Required:**\nTrue"),
- 	NULL},
-{"weekend_schedule", (getter)SysControl_get_weekend_schedule,(setter)SysControl_set_weekend_schedule,
-	PyDoc_STR("*sequence[sequence]*: 12x24 Time of Use Values for week end days\n\n**Required:**\nTrue"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject SysControl_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"FresnelPhysicalIph.SysControl",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		SysControl_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		SysControl_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -3263,18 +3186,6 @@ static PyMethodDef FinancialSolutionMode_methods[] = {
 };
 
 static PyObject *
-FinancialSolutionMode_get_ppa_price_input(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_FresnelPhysicalIph_FinancialSolutionMode_ppa_price_input_aget, self->data_ptr);
-}
-
-static int
-FinancialSolutionMode_set_ppa_price_input(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_FinancialSolutionMode_ppa_price_input_aset, self->data_ptr);
-}
-
-static PyObject *
 FinancialSolutionMode_get_ppa_soln_mode(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_FresnelPhysicalIph_FinancialSolutionMode_ppa_soln_mode_nget, self->data_ptr);
@@ -3287,11 +3198,8 @@ FinancialSolutionMode_set_ppa_soln_mode(VarGroupObject *self, PyObject *value, v
 }
 
 static PyGetSetDef FinancialSolutionMode_getset[] = {
-{"ppa_price_input", (getter)FinancialSolutionMode_get_ppa_price_input,(setter)FinancialSolutionMode_set_ppa_price_input,
-	PyDoc_STR("*sequence*: PPA solution mode (0=Specify IRR target, 1=Specify PPA price)\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
 {"ppa_soln_mode", (getter)FinancialSolutionMode_get_ppa_soln_mode,(setter)FinancialSolutionMode_set_ppa_soln_mode,
-	PyDoc_STR("*float*: PPA solution mode (0=Specify IRR target, 1=Specify PPA price)\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
+	PyDoc_STR("*float*: PPA solution mode (0=Specify IRR target, 1=Specify PPA price)\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3452,13 +3360,13 @@ TimeOfDeliveryFactors_set_dispatch_tod_factors(VarGroupObject *self, PyObject *v
 
 static PyGetSetDef TimeOfDeliveryFactors_getset[] = {
 {"dispatch_sched_weekday", (getter)TimeOfDeliveryFactors_get_dispatch_sched_weekday,(setter)TimeOfDeliveryFactors_set_dispatch_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: PPA pricing weekday schedule, 12x24\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
+	PyDoc_STR("*sequence[sequence]*: PPA pricing weekday schedule, 12x24\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 {"dispatch_sched_weekend", (getter)TimeOfDeliveryFactors_get_dispatch_sched_weekend,(setter)TimeOfDeliveryFactors_set_dispatch_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: PPA pricing weekend schedule, 12x24\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
+	PyDoc_STR("*sequence[sequence]*: PPA pricing weekend schedule, 12x24\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 {"dispatch_tod_factors", (getter)TimeOfDeliveryFactors_get_dispatch_tod_factors,(setter)TimeOfDeliveryFactors_set_dispatch_tod_factors,
-	PyDoc_STR("*sequence*: TOD factors for periods 1 through 9\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
+	PyDoc_STR("*sequence*: TOD factors for periods 1 through 9\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3497,6 +3405,143 @@ static PyTypeObject TimeOfDeliveryFactors_Type = {
 		TimeOfDeliveryFactors_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		TimeOfDeliveryFactors_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * Revenue Group
+ */ 
+
+static PyTypeObject Revenue_Type;
+
+static PyObject *
+Revenue_new(SAM_FresnelPhysicalIph data_ptr)
+{
+	PyObject* new_obj = Revenue_Type.tp_alloc(&Revenue_Type,0);
+
+	VarGroupObject* Revenue_obj = (VarGroupObject*)new_obj;
+
+	Revenue_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* Revenue methods */
+
+static PyObject *
+Revenue_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "FresnelPhysicalIph", "Revenue")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Revenue_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Revenue_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "FresnelPhysicalIph", "Revenue")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Revenue_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Revenue_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Revenue_methods[] = {
+		{"assign",            (PyCFunction)Revenue_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Revenue_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Revenue_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Revenue_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Revenue_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Revenue_get_ppa_price_input_heat_btu(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_Revenue_ppa_price_input_heat_btu_aget, self->data_ptr);
+}
+
+static int
+Revenue_set_ppa_price_input_heat_btu(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_Revenue_ppa_price_input_heat_btu_aset, self->data_ptr);
+}
+
+static PyGetSetDef Revenue_getset[] = {
+{"ppa_price_input_heat_btu", (getter)Revenue_get_ppa_price_input_heat_btu,(setter)Revenue_set_ppa_price_input_heat_btu,
+	PyDoc_STR("*sequence*: PPA prices - yearly [$/MMBtu]\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Revenue_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"FresnelPhysicalIph.Revenue",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Revenue_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Revenue_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -4200,64 +4245,64 @@ FinancialParameters_set_const_per_upfront_rate5(VarGroupObject *self, PyObject *
 
 static PyGetSetDef FinancialParameters_getset[] = {
 {"const_per_interest_rate1", (getter)FinancialParameters_get_const_per_interest_rate1,(setter)FinancialParameters_set_const_per_interest_rate1,
-	PyDoc_STR("*float*: Interest rate, loan 1 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Interest rate, loan 1 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_interest_rate2", (getter)FinancialParameters_get_const_per_interest_rate2,(setter)FinancialParameters_set_const_per_interest_rate2,
-	PyDoc_STR("*float*: Interest rate, loan 2 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Interest rate, loan 2 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_interest_rate3", (getter)FinancialParameters_get_const_per_interest_rate3,(setter)FinancialParameters_set_const_per_interest_rate3,
-	PyDoc_STR("*float*: Interest rate, loan 3 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Interest rate, loan 3 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_interest_rate4", (getter)FinancialParameters_get_const_per_interest_rate4,(setter)FinancialParameters_set_const_per_interest_rate4,
-	PyDoc_STR("*float*: Interest rate, loan 4 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Interest rate, loan 4 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_interest_rate5", (getter)FinancialParameters_get_const_per_interest_rate5,(setter)FinancialParameters_set_const_per_interest_rate5,
-	PyDoc_STR("*float*: Interest rate, loan 5 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Interest rate, loan 5 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_months1", (getter)FinancialParameters_get_const_per_months1,(setter)FinancialParameters_set_const_per_months1,
-	PyDoc_STR("*float*: Months prior to operation, loan 1\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Months prior to operation, loan 1\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_months2", (getter)FinancialParameters_get_const_per_months2,(setter)FinancialParameters_set_const_per_months2,
-	PyDoc_STR("*float*: Months prior to operation, loan 2\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Months prior to operation, loan 2\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_months3", (getter)FinancialParameters_get_const_per_months3,(setter)FinancialParameters_set_const_per_months3,
-	PyDoc_STR("*float*: Months prior to operation, loan 3\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Months prior to operation, loan 3\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_months4", (getter)FinancialParameters_get_const_per_months4,(setter)FinancialParameters_set_const_per_months4,
-	PyDoc_STR("*float*: Months prior to operation, loan 4\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Months prior to operation, loan 4\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_months5", (getter)FinancialParameters_get_const_per_months5,(setter)FinancialParameters_set_const_per_months5,
-	PyDoc_STR("*float*: Months prior to operation, loan 5\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Months prior to operation, loan 5\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_percent1", (getter)FinancialParameters_get_const_per_percent1,(setter)FinancialParameters_set_const_per_percent1,
-	PyDoc_STR("*float*: Percent of total installed cost, loan 1 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Percent of total installed cost, loan 1 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_percent2", (getter)FinancialParameters_get_const_per_percent2,(setter)FinancialParameters_set_const_per_percent2,
-	PyDoc_STR("*float*: Percent of total installed cost, loan 2 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Percent of total installed cost, loan 2 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_percent3", (getter)FinancialParameters_get_const_per_percent3,(setter)FinancialParameters_set_const_per_percent3,
-	PyDoc_STR("*float*: Percent of total installed cost, loan 3 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Percent of total installed cost, loan 3 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_percent4", (getter)FinancialParameters_get_const_per_percent4,(setter)FinancialParameters_set_const_per_percent4,
-	PyDoc_STR("*float*: Percent of total installed cost, loan 4 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Percent of total installed cost, loan 4 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_percent5", (getter)FinancialParameters_get_const_per_percent5,(setter)FinancialParameters_set_const_per_percent5,
-	PyDoc_STR("*float*: Percent of total installed cost, loan 5 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Percent of total installed cost, loan 5 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_upfront_rate1", (getter)FinancialParameters_get_const_per_upfront_rate1,(setter)FinancialParameters_set_const_per_upfront_rate1,
-	PyDoc_STR("*float*: Upfront fee on principal, loan 1 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Upfront fee on principal, loan 1 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_upfront_rate2", (getter)FinancialParameters_get_const_per_upfront_rate2,(setter)FinancialParameters_set_const_per_upfront_rate2,
-	PyDoc_STR("*float*: Upfront fee on principal, loan 2 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Upfront fee on principal, loan 2 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_upfront_rate3", (getter)FinancialParameters_get_const_per_upfront_rate3,(setter)FinancialParameters_set_const_per_upfront_rate3,
-	PyDoc_STR("*float*: Upfront fee on principal, loan 3 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Upfront fee on principal, loan 3 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_upfront_rate4", (getter)FinancialParameters_get_const_per_upfront_rate4,(setter)FinancialParameters_set_const_per_upfront_rate4,
-	PyDoc_STR("*float*: Upfront fee on principal, loan 4 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Upfront fee on principal, loan 4 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 {"const_per_upfront_rate5", (getter)FinancialParameters_get_const_per_upfront_rate5,(setter)FinancialParameters_set_const_per_upfront_rate5,
-	PyDoc_STR("*float*: Upfront fee on principal, loan 5 [%]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Upfront fee on principal, loan 5 [%]\n\n**Required:**\nRequired if csp_financial_model=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4296,6 +4341,912 @@ static PyTypeObject FinancialParameters_Type = {
 		FinancialParameters_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		FinancialParameters_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * AdjustmentFactors Group
+ */ 
+
+static PyTypeObject AdjustmentFactors_Type;
+
+static PyObject *
+AdjustmentFactors_new(SAM_FresnelPhysicalIph data_ptr)
+{
+	PyObject* new_obj = AdjustmentFactors_Type.tp_alloc(&AdjustmentFactors_Type,0);
+
+	VarGroupObject* AdjustmentFactors_obj = (VarGroupObject*)new_obj;
+
+	AdjustmentFactors_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* AdjustmentFactors methods */
+
+static PyObject *
+AdjustmentFactors_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "FresnelPhysicalIph", "AdjustmentFactors")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+AdjustmentFactors_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &AdjustmentFactors_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "FresnelPhysicalIph", "AdjustmentFactors")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+AdjustmentFactors_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &AdjustmentFactors_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef AdjustmentFactors_methods[] = {
+		{"assign",            (PyCFunction)AdjustmentFactors_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``AdjustmentFactors_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)AdjustmentFactors_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``AdjustmentFactors_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)AdjustmentFactors_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+AdjustmentFactors_get_adjust_constant(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_AdjustmentFactors_adjust_constant_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_constant(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_AdjustmentFactors_adjust_constant_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_en_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_AdjustmentFactors_adjust_en_periods_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_en_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_AdjustmentFactors_adjust_en_periods_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_en_timeindex(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_AdjustmentFactors_adjust_en_timeindex_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_en_timeindex(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_AdjustmentFactors_adjust_en_timeindex_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_AdjustmentFactors_adjust_periods_mget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_FresnelPhysicalIph_AdjustmentFactors_adjust_periods_mset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_timeindex(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_AdjustmentFactors_adjust_timeindex_aget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_timeindex(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_AdjustmentFactors_adjust_timeindex_aset, self->data_ptr);
+}
+
+static PyGetSetDef AdjustmentFactors_getset[] = {
+{"adjust_constant", (getter)AdjustmentFactors_get_adjust_constant,(setter)AdjustmentFactors_set_adjust_constant,
+	PyDoc_STR("*float*: Constant loss adjustment [%]\n\n**Info:**\n'adjust' and 'constant' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nMAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"adjust_en_periods", (getter)AdjustmentFactors_get_adjust_en_periods,(setter)AdjustmentFactors_set_adjust_en_periods,
+	PyDoc_STR("*float*: Enable period-based adjustment factors [0/1]\n\n**Info:**\n'adjust' and 'en_periods' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"adjust_en_timeindex", (getter)AdjustmentFactors_get_adjust_en_timeindex,(setter)AdjustmentFactors_set_adjust_en_timeindex,
+	PyDoc_STR("*float*: Enable lifetime adjustment factors [0/1]\n\n**Info:**\n'adjust' and 'en_timeindex' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"adjust_periods", (getter)AdjustmentFactors_get_adjust_periods,(setter)AdjustmentFactors_set_adjust_periods,
+	PyDoc_STR("*sequence[sequence]*: Period-based adjustment factors [%]\n\n**Info:**\nSyntax: n x 3 matrix [ start, end, loss ]; Version upgrade: 'adjust' and 'periods' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nCOLS=3\n\n**Required:**\nRequired if adjust_en_periods=1"),
+ 	NULL},
+{"adjust_timeindex", (getter)AdjustmentFactors_get_adjust_timeindex,(setter)AdjustmentFactors_set_adjust_timeindex,
+	PyDoc_STR("*sequence*: Lifetime adjustment factors [%]\n\n**Info:**\n'adjust' and 'timeindex' separated by _ instead of : after SAM 2022.12.21\n\n**Required:**\nRequired if adjust_en_timeindex=1"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject AdjustmentFactors_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"FresnelPhysicalIph.AdjustmentFactors",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		AdjustmentFactors_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		AdjustmentFactors_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * ElectricityRates Group
+ */ 
+
+static PyTypeObject ElectricityRates_Type;
+
+static PyObject *
+ElectricityRates_new(SAM_FresnelPhysicalIph data_ptr)
+{
+	PyObject* new_obj = ElectricityRates_Type.tp_alloc(&ElectricityRates_Type,0);
+
+	VarGroupObject* ElectricityRates_obj = (VarGroupObject*)new_obj;
+
+	ElectricityRates_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* ElectricityRates methods */
+
+static PyObject *
+ElectricityRates_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "FresnelPhysicalIph", "ElectricityRates")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+ElectricityRates_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &ElectricityRates_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "FresnelPhysicalIph", "ElectricityRates")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+ElectricityRates_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &ElectricityRates_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef ElectricityRates_methods[] = {
+		{"assign",            (PyCFunction)ElectricityRates_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``ElectricityRates_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)ElectricityRates_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``ElectricityRates_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)ElectricityRates_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+ElectricityRates_get_en_electricity_rates(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_ElectricityRates_en_electricity_rates_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_en_electricity_rates(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_en_electricity_rates_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_rate_escalation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_ElectricityRates_rate_escalation_aget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_rate_escalation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_rate_escalation_aset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_annual_min_charge(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_annual_min_charge_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_annual_min_charge(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_annual_min_charge_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_billing_demand_lookback_percentages(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_billing_demand_lookback_percentages_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_billing_demand_lookback_percentages(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_billing_demand_lookback_percentages_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_billing_demand_lookback_period(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_billing_demand_lookback_period_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_billing_demand_lookback_period(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_billing_demand_lookback_period_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_billing_demand_minimum(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_billing_demand_minimum_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_billing_demand_minimum(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_billing_demand_minimum_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_billing_demand_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_dc_billing_demand_periods_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_billing_demand_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_dc_billing_demand_periods_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_enable(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_dc_enable_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_enable(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_dc_enable_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_flat_mat(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_dc_flat_mat_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_flat_mat(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_dc_flat_mat_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_sched_weekday(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_dc_sched_weekday_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_dc_sched_weekday_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_sched_weekend(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_dc_sched_weekend_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_dc_sched_weekend_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_tou_mat(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_dc_tou_mat_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_tou_mat(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_dc_tou_mat_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ec_sched_weekday(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_ec_sched_weekday_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ec_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_ec_sched_weekday_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ec_sched_weekend(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_ec_sched_weekend_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ec_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_ec_sched_weekend_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ec_tou_mat(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_ec_tou_mat_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ec_tou_mat(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_ec_tou_mat_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_en_ts_buy_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_en_ts_buy_rate_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_en_ts_buy_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_en_ts_buy_rate_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_en_ts_sell_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_en_ts_sell_rate_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_en_ts_sell_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_en_ts_sell_rate_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_enable_billing_demand(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_enable_billing_demand_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_enable_billing_demand(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_enable_billing_demand_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_metering_option(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_metering_option_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_metering_option(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_metering_option_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_monthly_fixed_charge(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_monthly_fixed_charge_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_monthly_fixed_charge(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_monthly_fixed_charge_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_monthly_min_charge(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_monthly_min_charge_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_monthly_min_charge(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_monthly_min_charge_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_nb_apply_credit_current_month(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_nb_apply_credit_current_month_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nb_apply_credit_current_month(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_nb_apply_credit_current_month_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_nb_credit_expire(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_nb_credit_expire_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nb_credit_expire(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_nb_credit_expire_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_nm_credit_month(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_nm_credit_month_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nm_credit_month(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_nm_credit_month_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_nm_credit_rollover(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_nm_credit_rollover_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nm_credit_rollover(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_nm_credit_rollover_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_nm_yearend_sell_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_nm_yearend_sell_rate_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nm_yearend_sell_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_nm_yearend_sell_rate_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_sell_eq_buy(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_sell_eq_buy_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_sell_eq_buy(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_sell_eq_buy_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ts_buy_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_ts_buy_rate_aget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ts_buy_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_ts_buy_rate_aset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ts_sell_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_ts_sell_rate_aget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ts_sell_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_ts_sell_rate_aset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_yearzero_usage_peaks(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_ElectricityRates_ur_yearzero_usage_peaks_aget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_yearzero_usage_peaks(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_ElectricityRates_ur_yearzero_usage_peaks_aset, self->data_ptr);
+}
+
+static PyGetSetDef ElectricityRates_getset[] = {
+{"en_electricity_rates", (getter)ElectricityRates_get_en_electricity_rates,(setter)ElectricityRates_set_en_electricity_rates,
+	PyDoc_STR("*float*: Optionally enable/disable electricity_rate [years]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1"),
+ 	NULL},
+{"rate_escalation", (getter)ElectricityRates_get_rate_escalation,(setter)ElectricityRates_set_rate_escalation,
+	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_annual_min_charge", (getter)ElectricityRates_get_ur_annual_min_charge,(setter)ElectricityRates_set_ur_annual_min_charge,
+	PyDoc_STR("*float*: Annual minimum charge [$]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_billing_demand_lookback_percentages", (getter)ElectricityRates_get_ur_billing_demand_lookback_percentages,(setter)ElectricityRates_set_ur_billing_demand_lookback_percentages,
+	PyDoc_STR("*sequence[sequence]*: Billing demand lookback percentages by month and consider actual peak demand [%]\n\n**Info:**\n12x2\n\n**Required:**\nRequired if ur_enable_billing_demand=1"),
+ 	NULL},
+{"ur_billing_demand_lookback_period", (getter)ElectricityRates_get_ur_billing_demand_lookback_period,(setter)ElectricityRates_set_ur_billing_demand_lookback_period,
+	PyDoc_STR("*float*: Billing demand lookback period [mn]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=12\n\n**Required:**\nRequired if ur_enable_billing_demand=1"),
+ 	NULL},
+{"ur_billing_demand_minimum", (getter)ElectricityRates_get_ur_billing_demand_minimum,(setter)ElectricityRates_set_ur_billing_demand_minimum,
+	PyDoc_STR("*float*: Minimum billing demand [kW]\n\n**Required:**\nRequired if ur_enable_billing_demand=1"),
+ 	NULL},
+{"ur_dc_billing_demand_periods", (getter)ElectricityRates_get_ur_dc_billing_demand_periods,(setter)ElectricityRates_set_ur_dc_billing_demand_periods,
+	PyDoc_STR("*sequence[sequence]*: Billing demand applicability to a given demand charge time of use period\n\n**Required:**\nRequired if ur_enable_billing_demand=1"),
+ 	NULL},
+{"ur_dc_enable", (getter)ElectricityRates_get_ur_dc_enable,(setter)ElectricityRates_set_ur_dc_enable,
+	PyDoc_STR("*float*: Enable demand charge [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_dc_flat_mat", (getter)ElectricityRates_get_ur_dc_flat_mat,(setter)ElectricityRates_set_ur_dc_flat_mat,
+	PyDoc_STR("*sequence[sequence]*: Demand rates (flat) table [col 0=month, col 1=tier no, col 2=tier peak (kW), col 3=charge ($/kW)]\n\n**Info:**\nnx4\n\n**Required:**\nRequired if ur_dc_enable=1"),
+ 	NULL},
+{"ur_dc_sched_weekday", (getter)ElectricityRates_get_ur_dc_sched_weekday,(setter)ElectricityRates_set_ur_dc_sched_weekday,
+	PyDoc_STR("*sequence[sequence]*: Demand charge weekday schedule [Periods defined in ur_dc_tou_mat]\n\n**Info:**\n12x24"),
+ 	NULL},
+{"ur_dc_sched_weekend", (getter)ElectricityRates_get_ur_dc_sched_weekend,(setter)ElectricityRates_set_ur_dc_sched_weekend,
+	PyDoc_STR("*sequence[sequence]*: Demand charge weekend schedule [Periods defined in ur_dc_tou_mat]\n\n**Info:**\n12x24"),
+ 	NULL},
+{"ur_dc_tou_mat", (getter)ElectricityRates_get_ur_dc_tou_mat,(setter)ElectricityRates_set_ur_dc_tou_mat,
+	PyDoc_STR("*sequence[sequence]*: Demand rates (TOU) table [col 0=period no, col 1=tier no, col 2=tier peak (kW), col 3=charge ($/kW)]\n\n**Info:**\nnx4\n\n**Required:**\nRequired if ur_dc_enable=1"),
+ 	NULL},
+{"ur_ec_sched_weekday", (getter)ElectricityRates_get_ur_ec_sched_weekday,(setter)ElectricityRates_set_ur_ec_sched_weekday,
+	PyDoc_STR("*sequence[sequence]*: Energy charge weekday schedule [Periods defined in ur_ec_tou_mat]\n\n**Info:**\n12x24"),
+ 	NULL},
+{"ur_ec_sched_weekend", (getter)ElectricityRates_get_ur_ec_sched_weekend,(setter)ElectricityRates_set_ur_ec_sched_weekend,
+	PyDoc_STR("*sequence[sequence]*: Energy charge weekend schedule [Periods defined in ur_ec_tou_mat]\n\n**Info:**\n12x24"),
+ 	NULL},
+{"ur_ec_tou_mat", (getter)ElectricityRates_get_ur_ec_tou_mat,(setter)ElectricityRates_set_ur_ec_tou_mat,
+	PyDoc_STR("*sequence[sequence]*: Energy rates table [col 0=period no, col 1=tier no, col 2=max usage, col 3=max usage units (0=kWh, 1=kWh/kW, 2=kWh daily, 3=kWh/kW daily), col 4=buy rate ($/kWh), col 5=sell rate ($/kWh)]\n\n**Info:**\nnx6"),
+ 	NULL},
+{"ur_en_ts_buy_rate", (getter)ElectricityRates_get_ur_en_ts_buy_rate,(setter)ElectricityRates_set_ur_en_ts_buy_rate,
+	PyDoc_STR("*float*: Enable time step buy rates [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_en_ts_sell_rate", (getter)ElectricityRates_get_ur_en_ts_sell_rate,(setter)ElectricityRates_set_ur_en_ts_sell_rate,
+	PyDoc_STR("*float*: Enable time step sell rates [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_enable_billing_demand", (getter)ElectricityRates_get_ur_enable_billing_demand,(setter)ElectricityRates_set_ur_enable_billing_demand,
+	PyDoc_STR("*float*: Enable billing demand ratchets [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_metering_option", (getter)ElectricityRates_get_ur_metering_option,(setter)ElectricityRates_set_ur_metering_option,
+	PyDoc_STR("*float*: Metering options [0=net energy metering,1=net energy metering with $ credits,2=net billing,3=net billing with carryover to next month,4=buy all - sell all]\n\n**Info:**\nNet metering monthly excess\n\n**Constraints:**\nINTEGER,MIN=0,MAX=4\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_monthly_fixed_charge", (getter)ElectricityRates_get_ur_monthly_fixed_charge,(setter)ElectricityRates_set_ur_monthly_fixed_charge,
+	PyDoc_STR("*float*: Monthly fixed charge [$]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_monthly_min_charge", (getter)ElectricityRates_get_ur_monthly_min_charge,(setter)ElectricityRates_set_ur_monthly_min_charge,
+	PyDoc_STR("*float*: Monthly minimum charge [$]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_nb_apply_credit_current_month", (getter)ElectricityRates_get_ur_nb_apply_credit_current_month,(setter)ElectricityRates_set_ur_nb_apply_credit_current_month,
+	PyDoc_STR("*float*: Apply earned credits to balance before rolling over excess         [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_nb_credit_expire", (getter)ElectricityRates_get_ur_nb_credit_expire,(setter)ElectricityRates_set_ur_nb_credit_expire,
+	PyDoc_STR("*float*: Credit is lost upon end of year         [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_nm_credit_month", (getter)ElectricityRates_get_ur_nm_credit_month,(setter)ElectricityRates_set_ur_nm_credit_month,
+	PyDoc_STR("*float*: Month of year end payout (true-up) [mn]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=11\n\n**Required:**\nFalse. Automatically set to 11 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_nm_credit_rollover", (getter)ElectricityRates_get_ur_nm_credit_rollover,(setter)ElectricityRates_set_ur_nm_credit_rollover,
+	PyDoc_STR("*float*: Apply net metering true-up credits to future bills [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_nm_yearend_sell_rate", (getter)ElectricityRates_get_ur_nm_yearend_sell_rate,(setter)ElectricityRates_set_ur_nm_yearend_sell_rate,
+	PyDoc_STR("*float*: Net metering true-up credit sell rate [$/kWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_sell_eq_buy", (getter)ElectricityRates_get_ur_sell_eq_buy,(setter)ElectricityRates_set_ur_sell_eq_buy,
+	PyDoc_STR("*float*: Set sell rate equal to buy rate [0/1]\n\n**Info:**\nOptional override\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_ts_buy_rate", (getter)ElectricityRates_get_ur_ts_buy_rate,(setter)ElectricityRates_set_ur_ts_buy_rate,
+	PyDoc_STR("*sequence*: Time step buy rates [$/kWh]"),
+ 	NULL},
+{"ur_ts_sell_rate", (getter)ElectricityRates_get_ur_ts_sell_rate,(setter)ElectricityRates_set_ur_ts_sell_rate,
+	PyDoc_STR("*sequence*: Time step sell rates [$/kWh]"),
+ 	NULL},
+{"ur_yearzero_usage_peaks", (getter)ElectricityRates_get_ur_yearzero_usage_peaks,(setter)ElectricityRates_set_ur_yearzero_usage_peaks,
+	PyDoc_STR("*sequence*: Peak usage by month for year zero [kW]\n\n**Info:**\n12\n\n**Required:**\nRequired if ur_enable_billing_demand=1"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject ElectricityRates_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"FresnelPhysicalIph.ElectricityRates",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		ElectricityRates_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		ElectricityRates_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * Lifetime Group
+ */ 
+
+static PyTypeObject Lifetime_Type;
+
+static PyObject *
+Lifetime_new(SAM_FresnelPhysicalIph data_ptr)
+{
+	PyObject* new_obj = Lifetime_Type.tp_alloc(&Lifetime_Type,0);
+
+	VarGroupObject* Lifetime_obj = (VarGroupObject*)new_obj;
+
+	Lifetime_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* Lifetime methods */
+
+static PyObject *
+Lifetime_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "FresnelPhysicalIph", "Lifetime")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Lifetime_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Lifetime_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "FresnelPhysicalIph", "Lifetime")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Lifetime_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Lifetime_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Lifetime_methods[] = {
+		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Lifetime_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Lifetime_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Lifetime_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Lifetime_get_inflation_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_Lifetime_inflation_rate_nget, self->data_ptr);
+}
+
+static int
+Lifetime_set_inflation_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_Lifetime_inflation_rate_nset, self->data_ptr);
+}
+
+static PyGetSetDef Lifetime_getset[] = {
+{"inflation_rate", (getter)Lifetime_get_inflation_rate,(setter)Lifetime_set_inflation_rate,
+	PyDoc_STR("*float*: Inflation rate [%]\n\n**Constraints:**\nMIN=-99"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Lifetime_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"FresnelPhysicalIph.Lifetime",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Lifetime_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Lifetime_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -4483,9 +5434,21 @@ Outputs_get_T_heat_sink_out(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_T_hs_ext_out_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_T_hs_ext_out_des_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_T_loop_out_des_SS(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_T_loop_out_des_SS_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_T_out_wf_heat_sink(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_Outputs_T_out_wf_heat_sink_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -4588,6 +5551,12 @@ static PyObject *
 Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_FresnelPhysicalIph_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_energy_heat_btu(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_annual_energy_heat_btu_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -4951,6 +5920,18 @@ Outputs_get_eta_optical_des_SS(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_f_htfmax_actual(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_f_htfmax_actual_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_f_htfmin_actual(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_f_htfmin_actual_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_field_area(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_field_area_nget, self->data_ptr);
@@ -4975,6 +5956,18 @@ Outputs_get_gen(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_gen_heat(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_Outputs_gen_heat_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_gen_heat_btu(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_Outputs_gen_heat_btu_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_heat_sink_cost(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_heat_sink_cost_nget, self->data_ptr);
@@ -4996,6 +5989,24 @@ static PyObject *
 Outputs_get_htf_system_cost(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_htf_system_cost_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_hx_UA_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_hx_UA_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_hx_min_dT_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_hx_min_dT_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_hx_min_dT_heat_sink(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_Outputs_hx_min_dT_heat_sink_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -5095,9 +6106,27 @@ Outputs_get_m_dot_field_to_cycle(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_m_dot_hs_ext_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_m_dot_hs_ext_des_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_m_dot_htf_heat_sink(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_FresnelPhysicalIph_Outputs_m_dot_htf_heat_sink_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_htfmax_actual(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_m_dot_htfmax_actual_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_htfmin_actual(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_m_dot_htfmin_actual_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -5131,6 +6160,12 @@ Outputs_get_m_dot_tes_hot_out(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_m_dot_wf_heat_sink(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_Outputs_m_dot_wf_heat_sink_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_mass_tes_cold(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_FresnelPhysicalIph_Outputs_mass_tes_cold_aget, self->data_ptr);
@@ -5161,6 +6196,12 @@ Outputs_get_monthly_energy(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_monthly_energy_heat_btu(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_Outputs_monthly_energy_heat_btu_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_nLoops(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_nLoops_nget, self->data_ptr);
@@ -5170,6 +6211,12 @@ static PyObject *
 Outputs_get_n_op_modes(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_FresnelPhysicalIph_Outputs_n_op_modes_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_nameplate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_nameplate_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -5266,6 +6313,12 @@ static PyObject *
 Outputs_get_plm_total_cost(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_plm_total_cost_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_ppa_price_input(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_Outputs_ppa_price_input_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -5551,9 +6604,27 @@ Outputs_get_therm_eff_loop_des_SS(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_thermal_load_heat_btu(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_Outputs_thermal_load_heat_btu_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_time_hr(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_FresnelPhysicalIph_Outputs_time_hr_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_timestep_load_abs_calc(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_Outputs_timestep_load_abs_calc_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_timestep_load_fractions_calc(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_Outputs_timestep_load_fractions_calc_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -5628,6 +6699,12 @@ Outputs_get_wspd(VarGroupObject *self, void *closure)
 	return PySAM_array_getter(SAM_FresnelPhysicalIph_Outputs_wspd_aget, self->data_ptr);
 }
 
+static PyObject *
+Outputs_get_x_out_wf_heat_sink(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_Outputs_x_out_wf_heat_sink_aget, self->data_ptr);
+}
+
 static PyGetSetDef Outputs_getset[] = {
 {"A_field", (getter)Outputs_get_A_field,(setter)0,
 	PyDoc_STR("*float*: Total field aperture [m2]"),
@@ -5660,7 +6737,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Steady State field heat loss from receiver [MWt]"),
  	NULL},
 {"Q_tes_des", (getter)Outputs_get_Q_tes_des,(setter)0,
-	PyDoc_STR("*float*: TES design capacity [MWt-hr]"),
+	PyDoc_STR("*float*: TES design capacity [MWht]"),
  	NULL},
 {"SCAs_def", (getter)Outputs_get_SCAs_def,(setter)0,
 	PyDoc_STR("*sequence*: Field fraction of focused SCAs"),
@@ -5680,8 +6757,14 @@ static PyGetSetDef Outputs_getset[] = {
 {"T_heat_sink_out", (getter)Outputs_get_T_heat_sink_out,(setter)0,
 	PyDoc_STR("*sequence*: Heat sink HTF outlet temp [C]"),
  	NULL},
+{"T_hs_ext_out_des", (getter)Outputs_get_T_hs_ext_out_des,(setter)0,
+	PyDoc_STR("*float*: Heat sink fluid outlet temperature [C]"),
+ 	NULL},
 {"T_loop_out_des_SS", (getter)Outputs_get_T_loop_out_des_SS,(setter)0,
 	PyDoc_STR("*float*: Steady State loop design outlet temperature [C]"),
+ 	NULL},
+{"T_out_wf_heat_sink", (getter)Outputs_get_T_out_wf_heat_sink,(setter)0,
+	PyDoc_STR("*sequence*: Heat sink steam outlet temp [C]"),
  	NULL},
 {"T_rec_cold_in", (getter)Outputs_get_T_rec_cold_in,(setter)0,
 	PyDoc_STR("*sequence*: Loop timestep-averaged inlet temperature [C]"),
@@ -5726,22 +6809,25 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Field collector tracking power [MWe]"),
  	NULL},
 {"annual_electricity_consumption", (getter)Outputs_get_annual_electricity_consumption,(setter)0,
-	PyDoc_STR("*float*: Annual electricity consumption w/ avail derate [kWe-hr]"),
+	PyDoc_STR("*float*: Annual electricity consumption w/ avail derate [kWhe]"),
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	PyDoc_STR("*float*: Annual Net Electrical Energy Production w/ avail derate [kWe-hr]"),
+	PyDoc_STR("*float*: Annual net thermal energy w/ avail. derate [kWhe]"),
  	NULL},
 {"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
  	NULL},
+{"annual_energy_heat_btu", (getter)Outputs_get_annual_energy_heat_btu,(setter)0,
+	PyDoc_STR("*float*: Annual net thermal energy w/ avail. derate [MMBtu]"),
+ 	NULL},
 {"annual_field_freeze_protection", (getter)Outputs_get_annual_field_freeze_protection,(setter)0,
-	PyDoc_STR("*float*: Annual thermal power for field freeze protection [kWt-hr]"),
+	PyDoc_STR("*float*: Annual thermal power for field freeze protection [kWht]"),
  	NULL},
 {"annual_tes_freeze_protection", (getter)Outputs_get_annual_tes_freeze_protection,(setter)0,
-	PyDoc_STR("*float*: Annual thermal power for TES freeze protection [kWt-hr]"),
+	PyDoc_STR("*float*: Annual thermal power for TES freeze protection [kWht]"),
  	NULL},
 {"annual_thermal_consumption", (getter)Outputs_get_annual_thermal_consumption,(setter)0,
-	PyDoc_STR("*float*: Annual thermal freeze protection required [kWt-hr]"),
+	PyDoc_STR("*float*: Annual thermal freeze protection required [kWht]"),
  	NULL},
 {"annual_total_water_use", (getter)Outputs_get_annual_total_water_use,(setter)0,
 	PyDoc_STR("*float*: Total Annual Water Usage [m^3]"),
@@ -5914,6 +7000,12 @@ static PyGetSetDef Outputs_getset[] = {
 {"eta_optical_des_SS", (getter)Outputs_get_eta_optical_des_SS,(setter)0,
 	PyDoc_STR("*float*: Steady State optical efficiency"),
  	NULL},
+{"f_htfmax_actual", (getter)Outputs_get_f_htfmax_actual,(setter)0,
+	PyDoc_STR("*float*: Actual maximum loop mass flow rate fraction of design"),
+ 	NULL},
+{"f_htfmin_actual", (getter)Outputs_get_f_htfmin_actual,(setter)0,
+	PyDoc_STR("*float*: Actual minimum loop mass flow rate fraction of design"),
+ 	NULL},
 {"field_area", (getter)Outputs_get_field_area,(setter)0,
 	PyDoc_STR("*float*: Solar field area [acres]"),
  	NULL},
@@ -5924,7 +7016,13 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Minimum field htf temp [C]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
-	PyDoc_STR("*sequence*: Total thermal power to heat sink with available derate [kWe]"),
+	PyDoc_STR("*sequence*: System net electrical power w/ avail. derate [kWe]"),
+ 	NULL},
+{"gen_heat", (getter)Outputs_get_gen_heat,(setter)0,
+	PyDoc_STR("*sequence*: System net thermal power w/ avail. derate [kWt]"),
+ 	NULL},
+{"gen_heat_btu", (getter)Outputs_get_gen_heat_btu,(setter)0,
+	PyDoc_STR("*sequence*: System net thermal power w/ avail. derate [MMBtu/hr]"),
  	NULL},
 {"heat_sink_cost", (getter)Outputs_get_heat_sink_cost,(setter)0,
 	PyDoc_STR("*float*: Heat sink cost [$]"),
@@ -5937,6 +7035,15 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"htf_system_cost", (getter)Outputs_get_htf_system_cost,(setter)0,
 	PyDoc_STR("*float*: HTF system cost [$]"),
+ 	NULL},
+{"hx_UA_des", (getter)Outputs_get_hx_UA_des,(setter)0,
+	PyDoc_STR("*float*: Heat sink hx conductance [MW/K]"),
+ 	NULL},
+{"hx_min_dT_des", (getter)Outputs_get_hx_min_dT_des,(setter)0,
+	PyDoc_STR("*float*: Heat sink hx min temp difference [C]"),
+ 	NULL},
+{"hx_min_dT_heat_sink", (getter)Outputs_get_hx_min_dT_heat_sink,(setter)0,
+	PyDoc_STR("*sequence*: Heat sink HX min temp difference [C]"),
  	NULL},
 {"installed_per_capacity", (getter)Outputs_get_installed_per_capacity,(setter)0,
 	PyDoc_STR("*float*: Estimated total installed cost per net capacity ($/kW) [$/kW]"),
@@ -5986,8 +7093,17 @@ static PyGetSetDef Outputs_getset[] = {
 {"m_dot_field_to_cycle", (getter)Outputs_get_m_dot_field_to_cycle,(setter)0,
 	PyDoc_STR("*sequence*: Mass flow: field to cycle [kg/s]"),
  	NULL},
+{"m_dot_hs_ext_des", (getter)Outputs_get_m_dot_hs_ext_des,(setter)0,
+	PyDoc_STR("*float*: Heat sink fluid mass flow rate [kg/s]"),
+ 	NULL},
 {"m_dot_htf_heat_sink", (getter)Outputs_get_m_dot_htf_heat_sink,(setter)0,
 	PyDoc_STR("*sequence*: Heat sink HTF mass flow [kg/s]"),
+ 	NULL},
+{"m_dot_htfmax_actual", (getter)Outputs_get_m_dot_htfmax_actual,(setter)0,
+	PyDoc_STR("*float*: Actual maximum loop HTF flow rate [kg/s]"),
+ 	NULL},
+{"m_dot_htfmin_actual", (getter)Outputs_get_m_dot_htfmin_actual,(setter)0,
+	PyDoc_STR("*float*: Actual minimum loop HTF flow rate [kg/s]"),
  	NULL},
 {"m_dot_loop", (getter)Outputs_get_m_dot_loop,(setter)0,
 	PyDoc_STR("*sequence*: Receiver mass flow rate [kg/s]"),
@@ -6004,6 +7120,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"m_dot_tes_hot_out", (getter)Outputs_get_m_dot_tes_hot_out,(setter)0,
 	PyDoc_STR("*sequence*: Mass flow: TES hot out [kg/s]"),
  	NULL},
+{"m_dot_wf_heat_sink", (getter)Outputs_get_m_dot_wf_heat_sink,(setter)0,
+	PyDoc_STR("*sequence*: Heat sink steam mass flow rate [kg/s]"),
+ 	NULL},
 {"mass_tes_cold", (getter)Outputs_get_mass_tes_cold,(setter)0,
 	PyDoc_STR("*sequence*: TES cold tank mass (end) [kg]"),
  	NULL},
@@ -6019,11 +7138,17 @@ static PyGetSetDef Outputs_getset[] = {
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
 	PyDoc_STR("*sequence*: Monthly Energy [kWh]"),
  	NULL},
+{"monthly_energy_heat_btu", (getter)Outputs_get_monthly_energy_heat_btu,(setter)0,
+	PyDoc_STR("*sequence*: Monthly Energy in MMBtu [MMBtu]"),
+ 	NULL},
 {"nLoops", (getter)Outputs_get_nLoops,(setter)0,
 	PyDoc_STR("*float*: Number of loops in the field"),
  	NULL},
 {"n_op_modes", (getter)Outputs_get_n_op_modes,(setter)0,
 	PyDoc_STR("*sequence*: Operating modes in reporting timestep"),
+ 	NULL},
+{"nameplate", (getter)Outputs_get_nameplate,(setter)0,
+	PyDoc_STR("*float*: Nameplate capacity [MWt]"),
  	NULL},
 {"op_mode_1", (getter)Outputs_get_op_mode_1,(setter)0,
 	PyDoc_STR("*sequence*: 1st operating mode"),
@@ -6072,6 +7197,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"plm_total_cost", (getter)Outputs_get_plm_total_cost,(setter)0,
 	PyDoc_STR("*float*: Total land cost [$]"),
+ 	NULL},
+{"ppa_price_input", (getter)Outputs_get_ppa_price_input,(setter)0,
+	PyDoc_STR("*sequence*: PPA prices - yearly [$/kWh]"),
  	NULL},
 {"pres", (getter)Outputs_get_pres,(setter)0,
 	PyDoc_STR("*sequence*: Resource Pressure [mbar]"),
@@ -6214,8 +7342,17 @@ static PyGetSetDef Outputs_getset[] = {
 {"therm_eff_loop_des_SS", (getter)Outputs_get_therm_eff_loop_des_SS,(setter)0,
 	PyDoc_STR("*float*: Steady State loop optical efficiency"),
  	NULL},
+{"thermal_load_heat_btu", (getter)Outputs_get_thermal_load_heat_btu,(setter)0,
+	PyDoc_STR("*sequence*: Thermal load (year 1) [MMBtu/hr]"),
+ 	NULL},
 {"time_hr", (getter)Outputs_get_time_hr,(setter)0,
 	PyDoc_STR("*sequence*: Time at end of timestep [hr]"),
+ 	NULL},
+{"timestep_load_abs_calc", (getter)Outputs_get_timestep_load_abs_calc,(setter)0,
+	PyDoc_STR("*sequence*: Calculated timestep load data [kWt]"),
+ 	NULL},
+{"timestep_load_fractions_calc", (getter)Outputs_get_timestep_load_fractions_calc,(setter)0,
+	PyDoc_STR("*sequence*: Calculated timestep load fractions"),
  	NULL},
 {"total_Ap", (getter)Outputs_get_total_Ap,(setter)0,
 	PyDoc_STR("*float*: Actual field aperture [m2]"),
@@ -6252,6 +7389,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"wspd", (getter)Outputs_get_wspd,(setter)0,
 	PyDoc_STR("*sequence*: Resource Wind Speed [m/s]"),
+ 	NULL},
+{"x_out_wf_heat_sink", (getter)Outputs_get_x_out_wf_heat_sink,(setter)0,
+	PyDoc_STR("*sequence*: Heat sink steam outlet quality [-]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -6316,9 +7456,9 @@ newFresnelPhysicalIphObject(void* data_ptr)
 
 	PySAM_TECH_ATTR()
 
-	PyObject* SystemControl_obj = SystemControl_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "SystemControl", SystemControl_obj);
-	Py_DECREF(SystemControl_obj);
+	PyObject* SysControl_obj = SysControl_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "SysControl", SysControl_obj);
+	Py_DECREF(SysControl_obj);
 
 	PyObject* Weather_obj = Weather_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
@@ -6348,10 +7488,6 @@ newFresnelPhysicalIphObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Tou", Tou_obj);
 	Py_DECREF(Tou_obj);
 
-	PyObject* SysControl_obj = SysControl_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "SysControl", SysControl_obj);
-	Py_DECREF(SysControl_obj);
-
 	PyObject* FinancialModel_obj = FinancialModel_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "FinancialModel", FinancialModel_obj);
 	Py_DECREF(FinancialModel_obj);
@@ -6364,6 +7500,10 @@ newFresnelPhysicalIphObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "TimeOfDeliveryFactors", TimeOfDeliveryFactors_obj);
 	Py_DECREF(TimeOfDeliveryFactors_obj);
 
+	PyObject* Revenue_obj = Revenue_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Revenue", Revenue_obj);
+	Py_DECREF(Revenue_obj);
+
 	PyObject* CapitalCosts_obj = CapitalCosts_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "CapitalCosts", CapitalCosts_obj);
 	Py_DECREF(CapitalCosts_obj);
@@ -6372,20 +7512,17 @@ newFresnelPhysicalIphObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "FinancialParameters", FinancialParameters_obj);
 	Py_DECREF(FinancialParameters_obj);
 
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+	PyObject* AdjustmentFactors_obj = AdjustmentFactors_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "AdjustmentFactors", AdjustmentFactors_obj);
+	Py_DECREF(AdjustmentFactors_obj);
 
-	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
-	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
-	Py_XDECREF(data_cap);
-	Py_XDECREF(AdjustmentFactorsModule);
+	PyObject* ElectricityRates_obj = ElectricityRates_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "ElectricityRates", ElectricityRates_obj);
+	Py_DECREF(ElectricityRates_obj);
 
-	if (!Adjust_obj){
-		PyErr_SetString(PyExc_Exception, "Couldn't create AdjustmentFactorsObject\n");
-		return NULL;
-	}
-
-	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
-	Py_DECREF(Adjust_obj);
+	PyObject* Lifetime_obj = Lifetime_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Lifetime", Lifetime_obj);
+	Py_DECREF(Lifetime_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -6486,9 +7623,9 @@ static PyMethodDef FresnelPhysicalIph_methods[] = {
 		{"execute",           (PyCFunction)FresnelPhysicalIph_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)FresnelPhysicalIph_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'System Control': { var: val, ...}, ...}``")},
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Sys_Control': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)FresnelPhysicalIph_replace,  METH_VARARGS,
-				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'System Control': { var: val, ...}, ...}``")},
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Sys_Control': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)FresnelPhysicalIph_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)FresnelPhysicalIph_value, METH_VARARGS,
@@ -6655,7 +7792,7 @@ static PyMethodDef FresnelPhysicalIphModule_methods[] = {
 		{"new",             FresnelPhysicalIph_new,         METH_VARARGS,
 				PyDoc_STR("new() -> FresnelPhysicalIph")},
 		{"default",             FresnelPhysicalIph_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> FresnelPhysicalIph\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"MSLFIPHLCOHCalculator\"*\n\n		- *\"MSLFIPHNone\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> FresnelPhysicalIph\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"MSLFIPHCommercial\"*\n\n		- *\"MSLFIPHLCOHCalculator\"*\n\n		- *\"MSLFIPHNone\"*\n\n		- *\"MSLFIPHSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             FresnelPhysicalIph_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> FresnelPhysicalIph\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   FresnelPhysicalIph_from_existing,        METH_VARARGS,
@@ -6678,12 +7815,12 @@ FresnelPhysicalIphModule_exec(PyObject *m)
 	FresnelPhysicalIph_Type.tp_dict = PyDict_New();
 	if (!FresnelPhysicalIph_Type.tp_dict) { goto fail; }
 
-	/// Add the SystemControl type object to FresnelPhysicalIph_Type
-	if (PyType_Ready(&SystemControl_Type) < 0) { goto fail; }
+	/// Add the SysControl type object to FresnelPhysicalIph_Type
+	if (PyType_Ready(&SysControl_Type) < 0) { goto fail; }
 	PyDict_SetItemString(FresnelPhysicalIph_Type.tp_dict,
-				"SystemControl",
-				(PyObject*)&SystemControl_Type);
-	Py_DECREF(&SystemControl_Type);
+				"SysControl",
+				(PyObject*)&SysControl_Type);
+	Py_DECREF(&SysControl_Type);
 
 	/// Add the Weather type object to FresnelPhysicalIph_Type
 	if (PyType_Ready(&Weather_Type) < 0) { goto fail; }
@@ -6734,13 +7871,6 @@ FresnelPhysicalIphModule_exec(PyObject *m)
 				(PyObject*)&Tou_Type);
 	Py_DECREF(&Tou_Type);
 
-	/// Add the SysControl type object to FresnelPhysicalIph_Type
-	if (PyType_Ready(&SysControl_Type) < 0) { goto fail; }
-	PyDict_SetItemString(FresnelPhysicalIph_Type.tp_dict,
-				"SysControl",
-				(PyObject*)&SysControl_Type);
-	Py_DECREF(&SysControl_Type);
-
 	/// Add the FinancialModel type object to FresnelPhysicalIph_Type
 	if (PyType_Ready(&FinancialModel_Type) < 0) { goto fail; }
 	PyDict_SetItemString(FresnelPhysicalIph_Type.tp_dict,
@@ -6762,6 +7892,13 @@ FresnelPhysicalIphModule_exec(PyObject *m)
 				(PyObject*)&TimeOfDeliveryFactors_Type);
 	Py_DECREF(&TimeOfDeliveryFactors_Type);
 
+	/// Add the Revenue type object to FresnelPhysicalIph_Type
+	if (PyType_Ready(&Revenue_Type) < 0) { goto fail; }
+	PyDict_SetItemString(FresnelPhysicalIph_Type.tp_dict,
+				"Revenue",
+				(PyObject*)&Revenue_Type);
+	Py_DECREF(&Revenue_Type);
+
 	/// Add the CapitalCosts type object to FresnelPhysicalIph_Type
 	if (PyType_Ready(&CapitalCosts_Type) < 0) { goto fail; }
 	PyDict_SetItemString(FresnelPhysicalIph_Type.tp_dict,
@@ -6775,6 +7912,27 @@ FresnelPhysicalIphModule_exec(PyObject *m)
 				"FinancialParameters",
 				(PyObject*)&FinancialParameters_Type);
 	Py_DECREF(&FinancialParameters_Type);
+
+	/// Add the AdjustmentFactors type object to FresnelPhysicalIph_Type
+	if (PyType_Ready(&AdjustmentFactors_Type) < 0) { goto fail; }
+	PyDict_SetItemString(FresnelPhysicalIph_Type.tp_dict,
+				"AdjustmentFactors",
+				(PyObject*)&AdjustmentFactors_Type);
+	Py_DECREF(&AdjustmentFactors_Type);
+
+	/// Add the ElectricityRates type object to FresnelPhysicalIph_Type
+	if (PyType_Ready(&ElectricityRates_Type) < 0) { goto fail; }
+	PyDict_SetItemString(FresnelPhysicalIph_Type.tp_dict,
+				"ElectricityRates",
+				(PyObject*)&ElectricityRates_Type);
+	Py_DECREF(&ElectricityRates_Type);
+
+	/// Add the Lifetime type object to FresnelPhysicalIph_Type
+	if (PyType_Ready(&Lifetime_Type) < 0) { goto fail; }
+	PyDict_SetItemString(FresnelPhysicalIph_Type.tp_dict,
+				"Lifetime",
+				(PyObject*)&Lifetime_Type);
+	Py_DECREF(&Lifetime_Type);
 
 	/// Add the Outputs type object to FresnelPhysicalIph_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

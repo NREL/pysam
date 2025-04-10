@@ -2,6 +2,9 @@ class Geothermal(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class Geothermal(object):
 		pass
 
 	class GeoHourly(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -44,6 +50,7 @@ class Geothermal(object):
 		T_approach = float
 		T_htf_cold_ref = float
 		T_htf_hot_ref = float
+		allow_reservoir_replacements = float
 		ambient_pressure = float
 		analysis_type = float
 		conversion_subtype = float
@@ -111,6 +118,7 @@ class Geothermal(object):
 		startup_frac = float
 		startup_time = float
 		stim_success_rate = float
+		stimulation_type = float
 		subsurface_water_loss = float
 		system_use_lifetime_output = float
 		temp_decline_max = float
@@ -122,39 +130,31 @@ class Geothermal(object):
 
 
 	class AdjustmentFactors(object):
-		def assign(self): 
+		def assign(self, dict): 
 			pass
 	
-		def export(self): 
-			return {}
-	
-		def __init__(self, *args, **kwargs): # real signature unknown
+		def replace(self, dict): 
 			pass
 	
-		constant = float
-		en_hourly = float
-		en_periods = float
-		en_timeindex = float
-		hourly = tuple
-		periods = tuple
-		imeindex = tuple
-		dc_constant = float
-		dc_en_hourly = float
-		dc_en_periods = float
-		dc_en_timeindex = float
-		dc_hourly = tuple
-		dc_periods = tuple
-		dc_imeindex = tuple
-		sf_constant = float
-		sf_en_hourly = float
-		sf_en_periods = float
-		sf_en_timeindex = float
-		sf_hourly = tuple
-		sf_periods = tuple
-		sf_timeindex = tuple
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		adjust_constant = float
+		adjust_en_periods = float
+		adjust_en_timeindex = float
+		adjust_periods = tuple
+		adjust_timeindex = tuple
+
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -190,7 +190,10 @@ class Geothermal(object):
 		monthly_resource_temperature = tuple
 		ncg_condensate_pump = float
 		num_wells_getem_inj = float
+		num_wells_getem_inj_drilled = float
 		num_wells_getem_output = float
+		num_wells_getem_prod_drilled = float
+		num_wells_getem_prod_failed = float
 		plant_brine_eff = float
 		pressure_ratio_1 = float
 		pressure_ratio_2 = float

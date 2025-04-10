@@ -307,13 +307,13 @@ static PyGetSetDef MHKTidal_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Power curve of tidal energy device as function of stream speeds [kW]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``tidal_power_curve``:\n\n\t - number_devices\n\t - system_capacity\n\n\nThe value of ``tidal_power_curve`` depends on the following variables:\n\n\t - tidal_resource\n"),
  	NULL},
 {"tidal_resource", (getter)MHKTidal_get_tidal_resource,(setter)MHKTidal_set_tidal_resource,
-	PyDoc_STR("*sequence[sequence]*: Frequency distribution of resource as a function of stream speeds\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``tidal_resource``:\n\n\t - number_devices\n\t - system_capacity\n\t - tidal_power_curve\n"),
+	PyDoc_STR("*sequence[sequence]*: Frequency distribution of resource as a function of stream speeds\n\n**Required:**\nRequired if tidal_resource_model_choice=0\n\nThe value of the following variables depends on ``tidal_resource``:\n\n\t - number_devices\n\t - system_capacity\n\t - tidal_power_curve\n"),
  	NULL},
 {"tidal_resource_model_choice", (getter)MHKTidal_get_tidal_resource_model_choice,(setter)MHKTidal_set_tidal_resource_model_choice,
 	PyDoc_STR("*float*: Resource distribution or time series tidal resource data [0/1]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"tidal_velocity", (getter)MHKTidal_get_tidal_velocity,(setter)MHKTidal_set_tidal_velocity,
-	PyDoc_STR("*sequence*: Tidal velocity [m/s]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
+	PyDoc_STR("*sequence*: Tidal velocity [m/s]\n\n**Required:**\nRequired if tidal_resource_model_choice=1"),
  	NULL},
 {"total_operating_cost", (getter)MHKTidal_get_total_operating_cost,(setter)MHKTidal_set_total_operating_cost,
 	PyDoc_STR("*float*: O&M costs [$]\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
@@ -355,6 +355,203 @@ static PyTypeObject MHKTidal_Type = {
 		MHKTidal_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		MHKTidal_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * AdjustmentFactors Group
+ */ 
+
+static PyTypeObject AdjustmentFactors_Type;
+
+static PyObject *
+AdjustmentFactors_new(SAM_MhkTidal data_ptr)
+{
+	PyObject* new_obj = AdjustmentFactors_Type.tp_alloc(&AdjustmentFactors_Type,0);
+
+	VarGroupObject* AdjustmentFactors_obj = (VarGroupObject*)new_obj;
+
+	AdjustmentFactors_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* AdjustmentFactors methods */
+
+static PyObject *
+AdjustmentFactors_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "MhkTidal", "AdjustmentFactors")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+AdjustmentFactors_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &AdjustmentFactors_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "MhkTidal", "AdjustmentFactors")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+AdjustmentFactors_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &AdjustmentFactors_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef AdjustmentFactors_methods[] = {
+		{"assign",            (PyCFunction)AdjustmentFactors_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``AdjustmentFactors_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)AdjustmentFactors_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``AdjustmentFactors_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)AdjustmentFactors_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+AdjustmentFactors_get_adjust_constant(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkTidal_AdjustmentFactors_adjust_constant_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_constant(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MhkTidal_AdjustmentFactors_adjust_constant_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_en_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkTidal_AdjustmentFactors_adjust_en_periods_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_en_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MhkTidal_AdjustmentFactors_adjust_en_periods_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_en_timeindex(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkTidal_AdjustmentFactors_adjust_en_timeindex_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_en_timeindex(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MhkTidal_AdjustmentFactors_adjust_en_timeindex_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_MhkTidal_AdjustmentFactors_adjust_periods_mget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_MhkTidal_AdjustmentFactors_adjust_periods_mset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_timeindex(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkTidal_AdjustmentFactors_adjust_timeindex_aget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_timeindex(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_MhkTidal_AdjustmentFactors_adjust_timeindex_aset, self->data_ptr);
+}
+
+static PyGetSetDef AdjustmentFactors_getset[] = {
+{"adjust_constant", (getter)AdjustmentFactors_get_adjust_constant,(setter)AdjustmentFactors_set_adjust_constant,
+	PyDoc_STR("*float*: Constant loss adjustment [%]\n\n**Info:**\n'adjust' and 'constant' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nMAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"adjust_en_periods", (getter)AdjustmentFactors_get_adjust_en_periods,(setter)AdjustmentFactors_set_adjust_en_periods,
+	PyDoc_STR("*float*: Enable period-based adjustment factors [0/1]\n\n**Info:**\n'adjust' and 'en_periods' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"adjust_en_timeindex", (getter)AdjustmentFactors_get_adjust_en_timeindex,(setter)AdjustmentFactors_set_adjust_en_timeindex,
+	PyDoc_STR("*float*: Enable lifetime adjustment factors [0/1]\n\n**Info:**\n'adjust' and 'en_timeindex' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"adjust_periods", (getter)AdjustmentFactors_get_adjust_periods,(setter)AdjustmentFactors_set_adjust_periods,
+	PyDoc_STR("*sequence[sequence]*: Period-based adjustment factors [%]\n\n**Info:**\nSyntax: n x 3 matrix [ start, end, loss ]; Version upgrade: 'adjust' and 'periods' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nCOLS=3\n\n**Required:**\nRequired if adjust_en_periods=1"),
+ 	NULL},
+{"adjust_timeindex", (getter)AdjustmentFactors_get_adjust_timeindex,(setter)AdjustmentFactors_set_adjust_timeindex,
+	PyDoc_STR("*sequence*: Lifetime adjustment factors [%]\n\n**Info:**\n'adjust' and 'timeindex' separated by _ instead of : after SAM 2022.12.21\n\n**Required:**\nRequired if adjust_en_timeindex=1"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject AdjustmentFactors_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"MhkTidal.AdjustmentFactors",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		AdjustmentFactors_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		AdjustmentFactors_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -600,7 +797,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Cumulative annual energy production of array as function of speed [kWh]"),
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	PyDoc_STR("*float*: Annual energy production of array [kWh]"),
+	PyDoc_STR("*float*: Annual AC energy in Year 1 [kWh]"),
  	NULL},
 {"annual_energy_distribution", (getter)Outputs_get_annual_energy_distribution,(setter)0,
 	PyDoc_STR("*sequence*: Annual energy production of array as function of speed [kWh]"),
@@ -740,6 +937,10 @@ newMhkTidalObject(void* data_ptr)
 	PyObject* MHKTidal_obj = MHKTidal_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "MHKTidal", MHKTidal_obj);
 	Py_DECREF(MHKTidal_obj);
+
+	PyObject* AdjustmentFactors_obj = AdjustmentFactors_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "AdjustmentFactors", AdjustmentFactors_obj);
+	Py_DECREF(AdjustmentFactors_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -1038,6 +1239,13 @@ MhkTidalModule_exec(PyObject *m)
 				"MHKTidal",
 				(PyObject*)&MHKTidal_Type);
 	Py_DECREF(&MHKTidal_Type);
+
+	/// Add the AdjustmentFactors type object to MhkTidal_Type
+	if (PyType_Ready(&AdjustmentFactors_Type) < 0) { goto fail; }
+	PyDict_SetItemString(MhkTidal_Type.tp_dict,
+				"AdjustmentFactors",
+				(PyObject*)&AdjustmentFactors_Type);
+	Py_DECREF(&AdjustmentFactors_Type);
 
 	/// Add the Outputs type object to MhkTidal_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

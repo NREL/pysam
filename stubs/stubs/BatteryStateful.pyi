@@ -2,6 +2,9 @@ class BatteryStateful(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class BatteryStateful(object):
 		pass
 
 	class Controls(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -41,7 +47,10 @@ class BatteryStateful(object):
 
 
 	class ParamsCell(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -83,7 +92,10 @@ class BatteryStateful(object):
 
 
 	class ParamsPack(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -95,6 +107,7 @@ class BatteryStateful(object):
 
 		Cp = float
 		T_room_init = float
+		availabilty_loss = tuple
 		cap_vs_temp = tuple
 		h = float
 		loss_choice = float
@@ -112,7 +125,10 @@ class BatteryStateful(object):
 
 
 	class StatePack(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -142,7 +158,10 @@ class BatteryStateful(object):
 
 
 	class StateCell(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -183,6 +202,8 @@ class BatteryStateful(object):
 		dq_relative_li3 = float
 		dq_relative_neg = float
 		n_cycles = float
+		percent_unavailable = float
+		percent_unavailable_prev = float
 		prev_charge = float
 		q0 = float
 		q1_0 = float
@@ -206,7 +227,10 @@ class BatteryStateful(object):
 
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:

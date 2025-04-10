@@ -2,6 +2,9 @@ class FresnelPhysical(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class FresnelPhysical(object):
 		pass
 
 	class SystemControl(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -39,7 +45,10 @@ class FresnelPhysical(object):
 
 
 	class Weather(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -53,7 +62,10 @@ class FresnelPhysical(object):
 
 
 	class SystemDesign(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -76,7 +88,10 @@ class FresnelPhysical(object):
 
 
 	class SolarField(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -99,6 +114,8 @@ class FresnelPhysical(object):
 		V_hdr_min = float
 		V_wind_des = float
 		eta_pump = float
+		f_htfmax = float
+		f_htfmin = float
 		field_fl_props = tuple
 		land_mult = float
 		m_dot_htfmax = float
@@ -109,16 +126,18 @@ class FresnelPhysical(object):
 		nMod = float
 		p_start = float
 		rec_htf_vol = float
-		rec_qf_delay = float
-		rec_su_delay = float
 		theta_dep = float
 		theta_stow = float
+		use_abs_or_rel_mdot_limit = float
 		washes_per_year = float
 		water_per_wash = float
 
 
 	class ColRec(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -174,7 +193,10 @@ class FresnelPhysical(object):
 
 
 	class Powerblock(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -206,7 +228,10 @@ class FresnelPhysical(object):
 
 
 	class UserDefinedPC(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -218,11 +243,15 @@ class FresnelPhysical(object):
 
 		ud_f_W_dot_cool_des = float
 		ud_ind_od = tuple
+		ud_is_sco2_regr = float
 		ud_m_dot_water_cool_des = float
 
 
 	class Storage(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -250,8 +279,42 @@ class FresnelPhysical(object):
 		u_tank = float
 
 
+	class Tou(object):
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		can_cycle_use_standby = float
+		disp_reporting = float
+		disp_spec_bb = float
+		disp_spec_presolve = float
+		disp_spec_scaling = float
+		disp_steps_per_hour = float
+		dispatch_factors_ts = tuple
+		dispatch_tod_factors = tuple
+		f_turb_tou_periods = tuple
+		is_timestep_load_fractions = float
+		is_tod_pc_target_also_pc_max = float
+		ppa_multiplier_model = float
+		q_rec_heattrace = float
+		q_rec_standby = float
+		timestep_load_fractions = tuple
+
+
 	class SysControl(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -272,46 +335,19 @@ class FresnelPhysical(object):
 		disp_rsu_cost_rel = float
 		disp_time_weighting = float
 		disp_timeout = float
-		dispatch_series = tuple
 		is_dispatch = float
-		is_dispatch_series = float
 		pb_fixed_par = float
+		rec_qf_delay = float
+		rec_su_delay = float
 		weekday_schedule = tuple
 		weekend_schedule = tuple
 
 
-	class Tou(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		ampl_data_dir = str
-		ampl_exec_call = str
-		can_cycle_use_standby = float
-		disp_reporting = float
-		disp_spec_bb = float
-		disp_spec_presolve = float
-		disp_spec_scaling = float
-		disp_steps_per_hour = float
-		dispatch_factors_ts = tuple
-		f_turb_tou_periods = tuple
-		is_ampl_engine = float
-		is_tod_pc_target_also_pc_max = float
-		is_write_ampl_dat = float
-		ppa_multiplier_model = float
-		q_rec_heattrace = float
-		q_rec_standby = float
-		timestep_load_fractions = tuple
-
-
 	class FinancialModel(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -325,7 +361,10 @@ class FresnelPhysical(object):
 
 
 	class ElectricityRates(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -339,7 +378,10 @@ class FresnelPhysical(object):
 
 
 	class TimeOfDeliveryFactors(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -351,11 +393,13 @@ class FresnelPhysical(object):
 
 		dispatch_sched_weekday = tuple
 		dispatch_sched_weekend = tuple
-		dispatch_tod_factors = tuple
 
 
 	class FinancialSolutionMode(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -370,7 +414,10 @@ class FresnelPhysical(object):
 
 
 	class Revenue(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -384,7 +431,10 @@ class FresnelPhysical(object):
 
 
 	class CapitalCosts(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -415,7 +465,10 @@ class FresnelPhysical(object):
 
 
 	class FinancialParameters(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -448,39 +501,31 @@ class FresnelPhysical(object):
 
 
 	class AdjustmentFactors(object):
-		def assign(self): 
+		def assign(self, dict): 
 			pass
 	
-		def export(self): 
-			return {}
-	
-		def __init__(self, *args, **kwargs): # real signature unknown
+		def replace(self, dict): 
 			pass
 	
-		constant = float
-		en_hourly = float
-		en_periods = float
-		en_timeindex = float
-		hourly = tuple
-		periods = tuple
-		imeindex = tuple
-		dc_constant = float
-		dc_en_hourly = float
-		dc_en_periods = float
-		dc_en_timeindex = float
-		dc_hourly = tuple
-		dc_periods = tuple
-		dc_imeindex = tuple
-		sf_constant = float
-		sf_en_hourly = float
-		sf_en_periods = float
-		sf_en_timeindex = float
-		sf_hourly = tuple
-		sf_periods = tuple
-		sf_timeindex = tuple
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		adjust_constant = float
+		adjust_en_periods = float
+		adjust_en_timeindex = float
+		adjust_periods = tuple
+		adjust_timeindex = tuple
+
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -587,6 +632,8 @@ class FresnelPhysical(object):
 		epc_total_cost = float
 		eta = tuple
 		eta_optical_des_SS = float
+		f_htfmax_actual = float
+		f_htfmin_actual = float
 		field_area = float
 		field_htf_max_temp = float
 		field_htf_min_temp = float
@@ -611,6 +658,8 @@ class FresnelPhysical(object):
 		m_dot_field_delivered = tuple
 		m_dot_field_recirc = tuple
 		m_dot_field_to_cycle = tuple
+		m_dot_htfmax_actual = float
+		m_dot_htfmin_actual = float
 		m_dot_loop = tuple
 		m_dot_loop_des_SS = float
 		m_dot_pc = tuple

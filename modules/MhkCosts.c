@@ -246,6 +246,18 @@ MHKCosts_set_inter_array_cable_length(VarGroupObject *self, PyObject *value, voi
 }
 
 static PyObject *
+MHKCosts_get_lib_tidal_device(VarGroupObject *self, void *closure)
+{
+	return PySAM_string_getter(SAM_MhkCosts_MHKCosts_lib_tidal_device_sget, self->data_ptr);
+}
+
+static int
+MHKCosts_set_lib_tidal_device(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_string_setter(value, SAM_MhkCosts_MHKCosts_lib_tidal_device_sset, self->data_ptr);
+}
+
+static PyObject *
 MHKCosts_get_lib_wave_device(VarGroupObject *self, void *closure)
 {
 	return PySAM_string_getter(SAM_MhkCosts_MHKCosts_lib_wave_device_sget, self->data_ptr);
@@ -515,6 +527,9 @@ static PyGetSetDef MHKCosts_getset[] = {
  	NULL},
 {"inter_array_cable_length", (getter)MHKCosts_get_inter_array_cable_length,(setter)MHKCosts_set_inter_array_cable_length,
 	PyDoc_STR("*float*: Inter-array cable length [m]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nTrue"),
+ 	NULL},
+{"lib_tidal_device", (getter)MHKCosts_get_lib_tidal_device,(setter)MHKCosts_set_lib_tidal_device,
+	PyDoc_STR("*str*: Tidal library name\n\n**Required:**\nRequired if marine_energy_tech=1"),
  	NULL},
 {"lib_wave_device", (getter)MHKCosts_get_lib_wave_device,(setter)MHKCosts_set_lib_wave_device,
 	PyDoc_STR("*str*: Wave library name\n\n**Required:**\nRequired if marine_energy_tech=0"),

@@ -44,6 +44,12 @@ TES Group
 .. autoclass:: PySAM.TroughPhysical.TroughPhysical.TES
 	:members:
 
+Controller Group
+-----------------
+
+.. autoclass:: PySAM.TroughPhysical.TroughPhysical.Controller
+	:members:
+
 Tou Group
 ----------
 
@@ -86,22 +92,10 @@ System Group
 .. autoclass:: PySAM.TroughPhysical.TroughPhysical.System
 	:members:
 
-Controller Group
------------------
-
-.. autoclass:: PySAM.TroughPhysical.TroughPhysical.Controller
-	:members:
-
 TowerAndReceiver Group
 -----------------------
 
 .. autoclass:: PySAM.TroughPhysical.TroughPhysical.TowerAndReceiver
-	:members:
-
-SolarResourceData Group
-------------------------
-
-.. autoclass:: PySAM.TroughPhysical.TroughPhysical.SolarResourceData
 	:members:
 
 CapitalCosts Group
@@ -110,12 +104,17 @@ CapitalCosts Group
 .. autoclass:: PySAM.TroughPhysical.TroughPhysical.CapitalCosts
 	:members:
 
+FinancialParameters Group
+--------------------------
+
+.. autoclass:: PySAM.TroughPhysical.TroughPhysical.FinancialParameters
+	:members:
+
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.TroughPhysical.TroughPhysical.AdjustmentFactors
 	:members:
-	:noindex:
 
 Outputs Group
 --------------

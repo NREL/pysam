@@ -2,6 +2,9 @@ class FresnelPhysicalIph(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -23,8 +26,11 @@ class FresnelPhysicalIph(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	class SystemControl(object):
-		def assign(self): 
+	class SysControl(object):
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -34,12 +40,25 @@ class FresnelPhysicalIph(object):
 			pass
 
 
+		aux_array = tuple
+		bop_array = tuple
+		disp_frequency = float
+		disp_horizon = float
 		disp_inventory_incentive = float
+		disp_max_iter = float
+		disp_mip_gap = float
+		disp_time_weighting = float
+		disp_timeout = float
+		is_dispatch = float
+		pb_fixed_par = float
 		sim_type = float
 
 
 	class Weather(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -53,7 +72,10 @@ class FresnelPhysicalIph(object):
 
 
 	class SystemDesign(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -74,7 +96,10 @@ class FresnelPhysicalIph(object):
 
 
 	class SolarField(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -97,6 +122,8 @@ class FresnelPhysicalIph(object):
 		V_hdr_min = float
 		V_wind_des = float
 		eta_pump = float
+		f_htfmax = float
+		f_htfmin = float
 		field_fl_props = tuple
 		land_mult = float
 		m_dot_htfmax = float
@@ -111,12 +138,16 @@ class FresnelPhysicalIph(object):
 		rec_su_delay = float
 		theta_dep = float
 		theta_stow = float
+		use_abs_or_rel_mdot_limit = float
 		washes_per_year = float
 		water_per_wash = float
 
 
 	class ColRec(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -172,7 +203,10 @@ class FresnelPhysicalIph(object):
 
 
 	class HeatSink(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -182,11 +216,19 @@ class FresnelPhysicalIph(object):
 			pass
 
 
+		hs_htf_mdot_max_frac = float
+		hs_phys_P_steam_hot_des = float
+		hs_phys_Q_steam_hot_des = float
+		hs_phys_T_steam_cold_des = float
+		hs_type = float
 		pb_pump_coef = float
 
 
 	class Storage(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -215,7 +257,10 @@ class FresnelPhysicalIph(object):
 
 
 	class Tou(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -225,8 +270,6 @@ class FresnelPhysicalIph(object):
 			pass
 
 
-		ampl_data_dir = str
-		ampl_exec_call = str
 		disp_reporting = float
 		disp_spec_bb = float
 		disp_spec_presolve = float
@@ -234,44 +277,21 @@ class FresnelPhysicalIph(object):
 		disp_steps_per_hour = float
 		dispatch_factors_ts = tuple
 		f_turb_tou_periods = tuple
-		is_ampl_engine = float
 		is_timestep_load_fractions = float
 		is_tod_pc_target_also_pc_max = float
-		is_write_ampl_dat = float
 		ppa_multiplier_model = float
-		q_rec_heattrace = float
-		q_rec_standby = float
+		timestep_load_abs = tuple
+		timestep_load_abs_factor = float
 		timestep_load_fractions = tuple
-
-
-	class SysControl(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		aux_array = tuple
-		bop_array = tuple
-		disp_frequency = float
-		disp_horizon = float
-		disp_max_iter = float
-		disp_mip_gap = float
-		disp_rsu_cost_rel = float
-		disp_time_weighting = float
-		disp_timeout = float
-		is_dispatch = float
-		pb_fixed_par = float
 		weekday_schedule = tuple
 		weekend_schedule = tuple
 
 
 	class FinancialModel(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -285,7 +305,10 @@ class FresnelPhysicalIph(object):
 
 
 	class FinancialSolutionMode(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -295,12 +318,14 @@ class FresnelPhysicalIph(object):
 			pass
 
 
-		ppa_price_input = tuple
 		ppa_soln_mode = float
 
 
 	class TimeOfDeliveryFactors(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -315,8 +340,28 @@ class FresnelPhysicalIph(object):
 		dispatch_tod_factors = tuple
 
 
+	class Revenue(object):
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		ppa_price_input_heat_btu = tuple
+
+
 	class CapitalCosts(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -346,7 +391,10 @@ class FresnelPhysicalIph(object):
 
 
 	class FinancialParameters(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -379,39 +427,94 @@ class FresnelPhysicalIph(object):
 
 
 	class AdjustmentFactors(object):
-		def assign(self): 
+		def assign(self, dict): 
 			pass
 	
-		def export(self): 
-			return {}
-	
-		def __init__(self, *args, **kwargs): # real signature unknown
+		def replace(self, dict): 
 			pass
 	
-		constant = float
-		en_hourly = float
-		en_periods = float
-		en_timeindex = float
-		hourly = tuple
-		periods = tuple
-		imeindex = tuple
-		dc_constant = float
-		dc_en_hourly = float
-		dc_en_periods = float
-		dc_en_timeindex = float
-		dc_hourly = tuple
-		dc_periods = tuple
-		dc_imeindex = tuple
-		sf_constant = float
-		sf_en_hourly = float
-		sf_en_periods = float
-		sf_en_timeindex = float
-		sf_hourly = tuple
-		sf_periods = tuple
-		sf_timeindex = tuple
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		adjust_constant = float
+		adjust_en_periods = float
+		adjust_en_timeindex = float
+		adjust_periods = tuple
+		adjust_timeindex = tuple
+
+
+	class ElectricityRates(object):
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		en_electricity_rates = float
+		rate_escalation = tuple
+		ur_annual_min_charge = float
+		ur_billing_demand_lookback_percentages = tuple
+		ur_billing_demand_lookback_period = float
+		ur_billing_demand_minimum = float
+		ur_dc_billing_demand_periods = tuple
+		ur_dc_enable = float
+		ur_dc_flat_mat = tuple
+		ur_dc_sched_weekday = tuple
+		ur_dc_sched_weekend = tuple
+		ur_dc_tou_mat = tuple
+		ur_ec_sched_weekday = tuple
+		ur_ec_sched_weekend = tuple
+		ur_ec_tou_mat = tuple
+		ur_en_ts_buy_rate = float
+		ur_en_ts_sell_rate = float
+		ur_enable_billing_demand = float
+		ur_metering_option = float
+		ur_monthly_fixed_charge = float
+		ur_monthly_min_charge = float
+		ur_nb_apply_credit_current_month = float
+		ur_nb_credit_expire = float
+		ur_nm_credit_month = float
+		ur_nm_credit_rollover = float
+		ur_nm_yearend_sell_rate = float
+		ur_sell_eq_buy = float
+		ur_ts_buy_rate = tuple
+		ur_ts_sell_rate = tuple
+		ur_yearzero_usage_peaks = tuple
+
+
+	class Lifetime(object):
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		inflation_rate = float
+
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -438,7 +541,9 @@ class FresnelPhysicalIph(object):
 		T_field_out_des_SS = float
 		T_heat_sink_in = tuple
 		T_heat_sink_out = tuple
+		T_hs_ext_out_des = float
 		T_loop_out_des_SS = float
+		T_out_wf_heat_sink = tuple
 		T_rec_cold_in = tuple
 		T_rec_hot_out = tuple
 		T_tes_cold = tuple
@@ -456,6 +561,7 @@ class FresnelPhysicalIph(object):
 		annual_electricity_consumption = float
 		annual_energy = float
 		annual_energy_distribution_time = tuple
+		annual_energy_heat_btu = float
 		annual_field_freeze_protection = float
 		annual_tes_freeze_protection = float
 		annual_thermal_consumption = float
@@ -516,14 +622,21 @@ class FresnelPhysicalIph(object):
 		eff_loop_des_SS = float
 		epc_total_cost = float
 		eta_optical_des_SS = float
+		f_htfmax_actual = float
+		f_htfmin_actual = float
 		field_area = float
 		field_htf_max_temp = float
 		field_htf_min_temp = float
 		gen = tuple
+		gen_heat = tuple
+		gen_heat_btu = tuple
 		heat_sink_cost = float
 		hl_des = float
 		hour_day = tuple
 		htf_system_cost = float
+		hx_UA_des = float
+		hx_min_dT_des = float
+		hx_min_dT_heat_sink = tuple
 		installed_per_capacity = float
 		is_pc_sb_allowed = tuple
 		is_pc_su_allowed = tuple
@@ -540,19 +653,25 @@ class FresnelPhysicalIph(object):
 		m_dot_field_delivered = tuple
 		m_dot_field_recirc = tuple
 		m_dot_field_to_cycle = tuple
+		m_dot_hs_ext_des = float
 		m_dot_htf_heat_sink = tuple
+		m_dot_htfmax_actual = float
+		m_dot_htfmin_actual = float
 		m_dot_loop = tuple
 		m_dot_loop_des_SS = float
 		m_dot_pc_to_tes_cold = tuple
 		m_dot_tes_cold_out = tuple
 		m_dot_tes_hot_out = tuple
+		m_dot_wf_heat_sink = tuple
 		mass_tes_cold = tuple
 		mass_tes_hot = tuple
 		mdot_field_des = float
 		month = tuple
 		monthly_energy = tuple
+		monthly_energy_heat_btu = tuple
 		nLoops = float
 		n_op_modes = tuple
+		nameplate = float
 		op_mode_1 = tuple
 		op_mode_2 = tuple
 		op_mode_3 = tuple
@@ -569,6 +688,7 @@ class FresnelPhysicalIph(object):
 		pipe_tes_vel_dsn = tuple
 		pipe_tes_wallthk = tuple
 		plm_total_cost = float
+		ppa_price_input = tuple
 		pres = tuple
 		pricing_mult = tuple
 		q_balance = tuple
@@ -616,7 +736,10 @@ class FresnelPhysicalIph(object):
 		tes_htf_pump_power = tuple
 		therm_eff_des_SS = float
 		therm_eff_loop_des_SS = float
+		thermal_load_heat_btu = tuple
 		time_hr = tuple
+		timestep_load_abs_calc = tuple
+		timestep_load_fractions_calc = tuple
 		total_Ap = float
 		total_direct_cost = float
 		total_indirect_cost = float
@@ -629,6 +752,7 @@ class FresnelPhysicalIph(object):
 		vol_min = float
 		vol_tank = float
 		wspd = tuple
+		x_out_wf_heat_sink = tuple
 
 
 

@@ -16,14 +16,14 @@
 :doc:`../modules/Cashloan` (HD)
       Residential/Commerical Finance model.
 
+:doc:`../modules/CashloanHeat` (HD)
+      Residential/Commerical Finance model for heat.
+
 :doc:`../modules/CbConstructionFinancing` (HD)
       Construction financing cost calculations
 
 :doc:`../modules/CbEmpiricalHceHeatLoss` (HD)
       Empirical HCE Heat Loss
-
-:doc:`../modules/CbMsptSystemCosts` (HD)
-      CSP molten salt power tower system costs
 
 :doc:`../modules/Communitysolar`
       Comunity Solar Financial Model
@@ -31,8 +31,14 @@
 :doc:`../modules/CspDsgLfUi` (HD)
       Calculates values for all calculated values on UI TES page(s)
 
+:doc:`../modules/CspHeatsink` (HD)
+      CSP heat sink
+
 :doc:`../modules/CspSubcomponent`
       CSP subcomponents
+
+:doc:`../modules/CustomGeneration` (HD)
+      Custom Generation Profile (formerly Generic System)
 
 :doc:`../modules/Equpartflip`
       All Equity Partnership Flip Financial Model
@@ -52,14 +58,11 @@
 :doc:`../modules/Fuelcell`
       Fuel cell model
 
-:doc:`../modules/GenericSystem`
-      Generic System
-
 :doc:`../modules/Geothermal`
       Geothermal monthly and hourly models using general power block code from TRNSYS Type 224 code by M.Wagner, and some GETEM model code.
 
 :doc:`../modules/GeothermalCosts` (HD)
-      Geothermal monthly and hourly models using general power block code from TRNSYS Type 224 code by M.Wagner, and some GETEM model code.
+      Geothermal cost equations.
 
 :doc:`../modules/Grid` (HD)
       Grid model
@@ -87,9 +90,6 @@
 
 :doc:`../modules/IphToLcoefcr`
       Convert annual energy to kWt-hr and adjust fixed cost to include electric parasitic costs.
-
-:doc:`../modules/Ippppa` (HD)
-      Utility IPP/Commerical PPA Finance model.
 
 :doc:`../modules/Irradproc` (HD)
       Irradiance Processor
@@ -178,6 +178,9 @@
 :doc:`../modules/Singleowner`
       Single Owner Financial Model
 
+:doc:`../modules/SingleownerHeat` (HD)
+      Single Owner Financial Model for Heat
+
 :doc:`../modules/SixParsolve`
       Solver for CEC/6 parameter PV module coefficients
 
@@ -189,9 +192,6 @@
 
 :doc:`../modules/Swh`
       Solar water heating model using multi-mode tank node model.
-
-:doc:`../modules/TcsMSLF` (HD)
-      CSP model using the molten salt linear fresnel TCS types.
 
 :doc:`../modules/TcsgenericSolar`
       Generic CSP model using the generic solar TCS types.
@@ -205,13 +205,13 @@
 :doc:`../modules/TcstroughEmpirical`
       CSP model using the emperical trough TCS types.
 
-:doc:`../modules/TcstroughPhysical` (HD)
-      CSP model using the emperical trough TCS types.
-
 :doc:`../modules/TestUdPowerCycle` (HD)
       Test user-defined power cylce model
 
 :doc:`../modules/Thermalrate` (HD)
+      Thermal flat rate structure net revenue calculator
+
+:doc:`../modules/ThermalrateIph` (HD)
       Thermal flat rate structure net revenue calculator
 
 :doc:`../modules/Thirdpartyownership`
@@ -226,35 +226,14 @@
 :doc:`../modules/TroughPhysical`
       Physical trough applications
 
-:doc:`../modules/TroughPhysicalCspSolver` (HD)
-      Physical trough using CSP Solver
-
 :doc:`../modules/TroughPhysicalIph` (HD)
       Physical trough iph applications
-
-:doc:`../modules/TroughPhysicalProcessHeat`
-      Physical trough process heat applications
-
-:doc:`../modules/UiTesCalcs` (HD)
-      Calculates values for all calculated values on UI TES page(s)
 
 :doc:`../modules/UiUdpcChecks` (HD)
       Calculates the levels and number of paramteric runs for 3 udpc ind variables
 
 :doc:`../modules/UserHtfComparison` (HD)
       Evaluates equivalence of two user-defined HTF tables
-
-:doc:`../modules/Utilityrate` (HD)
-      Electricity bill calculator (deprecated)
-
-:doc:`../modules/Utilityrate2` (HD)
-      Electricity bill calculator based on OpenEI Version 2 (deprecated)
-
-:doc:`../modules/Utilityrate3` (HD)
-      Electricity bill calculator based on OpenEI Version 3 (deprecated)
-
-:doc:`../modules/Utilityrate4` (HD)
-      Electricity bill calculator based on OpenEI Version 4 (deprecated)
 
 :doc:`../modules/Utilityrate5`
       Electricity bill calculator based on OpenEI Version 8
@@ -299,19 +278,20 @@
     ../modules/Belpe.rst
     ../modules/Biomass.rst
     ../modules/Cashloan.rst
+    ../modules/CashloanHeat.rst
     ../modules/CbConstructionFinancing.rst
     ../modules/CbEmpiricalHceHeatLoss.rst
-    ../modules/CbMsptSystemCosts.rst
     ../modules/Communitysolar.rst
     ../modules/CspDsgLfUi.rst
+    ../modules/CspHeatsink.rst
     ../modules/CspSubcomponent.rst
+    ../modules/CustomGeneration.rst
     ../modules/Equpartflip.rst
     ../modules/EtesElectricResistance.rst
     ../modules/EtesPtes.rst
     ../modules/FresnelPhysical.rst
     ../modules/FresnelPhysicalIph.rst
     ../modules/Fuelcell.rst
-    ../modules/GenericSystem.rst
     ../modules/Geothermal.rst
     ../modules/GeothermalCosts.rst
     ../modules/Grid.rst
@@ -323,7 +303,6 @@
     ../modules/Iec61853par.rst
     ../modules/InvCecCg.rst
     ../modules/IphToLcoefcr.rst
-    ../modules/Ippppa.rst
     ../modules/Irradproc.rst
     ../modules/Layoutarea.rst
     ../modules/Lcoefcr.rst
@@ -353,32 +332,25 @@
     ../modules/Singlediode.rst
     ../modules/Singlediodeparams.rst
     ../modules/Singleowner.rst
+    ../modules/SingleownerHeat.rst
     ../modules/SixParsolve.rst
     ../modules/Snowmodel.rst
     ../modules/Solarpilot.rst
     ../modules/Swh.rst
-    ../modules/TcsMSLF.rst
     ../modules/TcsgenericSolar.rst
     ../modules/TcslinearFresnel.rst
     ../modules/TcsmoltenSalt.rst
     ../modules/TcstroughEmpirical.rst
-    ../modules/TcstroughPhysical.rst
     ../modules/TestUdPowerCycle.rst
     ../modules/Thermalrate.rst
+    ../modules/ThermalrateIph.rst
     ../modules/Thirdpartyownership.rst
     ../modules/TidalFileReader.rst
     ../modules/Timeseq.rst
     ../modules/TroughPhysical.rst
-    ../modules/TroughPhysicalCspSolver.rst
     ../modules/TroughPhysicalIph.rst
-    ../modules/TroughPhysicalProcessHeat.rst
-    ../modules/UiTesCalcs.rst
     ../modules/UiUdpcChecks.rst
     ../modules/UserHtfComparison.rst
-    ../modules/Utilityrate.rst
-    ../modules/Utilityrate2.rst
-    ../modules/Utilityrate3.rst
-    ../modules/Utilityrate4.rst
     ../modules/Utilityrate5.rst
     ../modules/Utilityrateforecast.rst
     ../modules/WaveFileReader.rst

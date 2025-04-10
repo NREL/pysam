@@ -2,6 +2,9 @@ class MhkTidal(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class MhkTidal(object):
 		pass
 
 	class MHKTidal(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -52,8 +58,32 @@ class MhkTidal(object):
 		total_operating_cost = float
 
 
+	class AdjustmentFactors(object):
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		adjust_constant = float
+		adjust_en_periods = float
+		adjust_en_timeindex = float
+		adjust_periods = tuple
+		adjust_timeindex = tuple
+
+
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:

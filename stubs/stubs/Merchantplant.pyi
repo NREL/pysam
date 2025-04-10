@@ -2,6 +2,9 @@ class Merchantplant(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class Merchantplant(object):
 		pass
 
 	class FinancialParameters(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -75,7 +81,10 @@ class Merchantplant(object):
 
 
 	class SystemCosts(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -123,7 +132,10 @@ class Merchantplant(object):
 
 
 	class LandLease(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -139,7 +151,10 @@ class Merchantplant(object):
 
 
 	class TaxCreditIncentives(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -172,7 +187,10 @@ class Merchantplant(object):
 
 
 	class Depreciation(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -225,7 +243,10 @@ class Merchantplant(object):
 
 
 	class PaymentIncentives(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -330,7 +351,10 @@ class Merchantplant(object):
 
 
 	class Revenue(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -370,7 +394,10 @@ class Merchantplant(object):
 
 
 	class BatterySystem(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -393,7 +420,10 @@ class Merchantplant(object):
 
 
 	class ElectricityRates(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -408,7 +438,10 @@ class Merchantplant(object):
 
 
 	class SystemOutput(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -428,7 +461,10 @@ class Merchantplant(object):
 
 
 	class UtilityBill(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -442,7 +478,10 @@ class Merchantplant(object):
 
 
 	class Lifetime(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -456,7 +495,10 @@ class Merchantplant(object):
 
 
 	class FuelCell(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -477,7 +519,10 @@ class Merchantplant(object):
 
 
 	class CapacityPayments(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -496,7 +541,10 @@ class Merchantplant(object):
 
 
 	class LCOS(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -525,7 +573,10 @@ class Merchantplant(object):
 
 
 	class ChargesByMonth(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -540,7 +591,10 @@ class Merchantplant(object):
 
 
 	class GridLimits(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -555,7 +609,10 @@ class Merchantplant(object):
 
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -1052,6 +1109,8 @@ class Merchantplant(object):
 		npv_sta_pbi_income = float
 		npv_thermal_value = float
 		npv_uti_pbi_income = float
+		pre_depr_alloc_basis = float
+		pre_itc_qual_basis = float
 		present_value_fuel = float
 		present_value_insandproptax = float
 		present_value_oandm = float

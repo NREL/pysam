@@ -2,6 +2,9 @@ class MsptIph(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class MsptIph(object):
 		pass
 
 	class SolarResource(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -39,7 +45,10 @@ class MsptIph(object):
 
 
 	class SystemControl(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -49,8 +58,6 @@ class MsptIph(object):
 			pass
 
 
-		ampl_data_dir = str
-		ampl_exec_call = str
 		aux_par = float
 		aux_par_0 = float
 		aux_par_1 = float
@@ -76,12 +83,10 @@ class MsptIph(object):
 		disp_time_weighting = float
 		disp_timeout = float
 		f_turb_tou_periods = tuple
-		is_ampl_engine = float
 		is_dispatch = float
 		is_parallel_htr = float
 		is_timestep_load_fractions = float
 		is_tod_pc_target_also_pc_max = float
-		is_write_ampl_dat = float
 		pb_fixed_par = float
 		q_rec_heattrace = float
 		q_rec_standby = float
@@ -96,7 +101,10 @@ class MsptIph(object):
 
 
 	class FinancialModel(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -110,7 +118,10 @@ class MsptIph(object):
 
 
 	class SystemDesign(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -130,7 +141,10 @@ class MsptIph(object):
 
 
 	class HeliostatField(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -187,7 +201,10 @@ class MsptIph(object):
 
 
 	class TowerAndReceiver(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -250,7 +267,10 @@ class MsptIph(object):
 
 
 	class ParallelHeater(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -268,7 +288,10 @@ class MsptIph(object):
 
 
 	class SystemCosts(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -303,7 +326,10 @@ class MsptIph(object):
 
 
 	class ThermalStorage(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -326,7 +352,10 @@ class MsptIph(object):
 
 
 	class HeatSink(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -336,11 +365,19 @@ class MsptIph(object):
 			pass
 
 
+		hs_htf_mdot_max_frac = float
+		hs_phys_P_steam_hot_des = float
+		hs_phys_Q_steam_hot_des = float
+		hs_phys_T_steam_cold_des = float
+		hs_type = float
 		pb_pump_coef = float
 
 
 	class TimeOfDeliveryFactors(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -358,7 +395,10 @@ class MsptIph(object):
 
 
 	class FinancialSolutionMode(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -372,7 +412,10 @@ class MsptIph(object):
 
 
 	class Revenue(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -382,11 +425,14 @@ class MsptIph(object):
 			pass
 
 
-		ppa_price_input = tuple
+		ppa_price_input_heat_btu = tuple
 
 
 	class FinancialParameters(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -420,7 +466,10 @@ class MsptIph(object):
 
 
 	class Deprecated(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -439,39 +488,36 @@ class MsptIph(object):
 
 
 	class AdjustmentFactors(object):
-		def assign(self): 
+		def assign(self, dict): 
 			pass
 	
-		def export(self): 
-			return {}
-	
-		def __init__(self, *args, **kwargs): # real signature unknown
+		def replace(self, dict): 
 			pass
 	
-		constant = float
-		en_hourly = float
-		en_periods = float
-		en_timeindex = float
-		hourly = tuple
-		periods = tuple
-		imeindex = tuple
-		dc_constant = float
-		dc_en_hourly = float
-		dc_en_periods = float
-		dc_en_timeindex = float
-		dc_hourly = tuple
-		dc_periods = tuple
-		dc_imeindex = tuple
-		sf_constant = float
-		sf_en_hourly = float
-		sf_en_periods = float
-		sf_en_timeindex = float
-		sf_hourly = tuple
-		sf_periods = tuple
-		sf_timeindex = tuple
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		adjust_constant = float
+		adjust_en_periods = float
+		adjust_en_timeindex = float
+		adjust_periods = tuple
+		adjust_timeindex = tuple
+		sf_adjust_constant = float
+		sf_adjust_en_periods = float
+		sf_adjust_en_timeindex = float
+		sf_adjust_periods = tuple
+		sf_adjust_timeindex = tuple
+
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -497,8 +543,10 @@ class MsptIph(object):
 		Q_thermal_ss_csky = tuple
 		T_heat_sink_in = tuple
 		T_heat_sink_out = tuple
+		T_hs_ext_out_des = float
 		T_htf_heater_in = tuple
 		T_htf_heater_out = tuple
+		T_out_wf_heat_sink = tuple
 		T_panel_out_max = tuple
 		T_rec_in = tuple
 		T_rec_out = tuple
@@ -526,6 +574,7 @@ class MsptIph(object):
 		annual_electricity_consumption = float
 		annual_energy = float
 		annual_energy_distribution_time = tuple
+		annual_energy_heat_btu = float
 		annual_eta_rec_th = float
 		annual_eta_rec_th_incl_refl = float
 		annual_q_defocus_est = float
@@ -609,11 +658,16 @@ class MsptIph(object):
 		flux_maps_for_import = tuple
 		flux_maps_out = tuple
 		gen = tuple
+		gen_heat = tuple
+		gen_heat_btu = tuple
 		h_rec_input_to_cost_model = float
 		h_tower_calc = float
 		heater_cost = float
 		helio_positions_calc = tuple
 		heliostat_area = float
+		hx_UA_des = float
+		hx_min_dT_des = float
+		hx_min_dT_heat_sink = tuple
 		is_PAR_HTR_allowed = tuple
 		is_pc_sb_allowed = tuple
 		is_pc_su_allowed = tuple
@@ -626,6 +680,7 @@ class MsptIph(object):
 		m_dot_cr_to_tes_hot = tuple
 		m_dot_cycle_to_field = tuple
 		m_dot_field_to_cycle = tuple
+		m_dot_hs_ext_des = float
 		m_dot_htf_heat_sink = tuple
 		m_dot_htf_heater = tuple
 		m_dot_htf_rec_des = float
@@ -634,6 +689,7 @@ class MsptIph(object):
 		m_dot_rec = tuple
 		m_dot_tes_cold_out = tuple
 		m_dot_tes_hot_out = tuple
+		m_dot_wf_heat_sink = tuple
 		mass_tes_cold = tuple
 		mass_tes_hot = tuple
 		n_op_modes = tuple
@@ -645,6 +701,7 @@ class MsptIph(object):
 		operating_modes_a = tuple
 		operating_modes_b = tuple
 		operating_modes_c = tuple
+		ppa_price_input = tuple
 		pparasi = tuple
 		pricing_mult = tuple
 		q_balance = tuple
@@ -698,6 +755,7 @@ class MsptIph(object):
 		ui_direct_subtotal = float
 		vel_rec_htf_des = float
 		wspd = tuple
+		x_out_wf_heat_sink = tuple
 
 
 

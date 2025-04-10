@@ -1,7 +1,6 @@
 import json, marshal, os, shutil
 from setuptools import setup, Extension
 import sys
-from distutils.core import Command
 from files.version import __version__
 from pathlib import Path
 
@@ -121,8 +120,6 @@ for filename in os.listdir(defaults_df_dir):
 
 # copy over stub pyi files into "files" folder for export
 stub_files = []
-shutil.copyfile(os.path.join(this_directory, "stubs", 'AdjustmentFactors.pyi'),
-                os.path.join(this_directory, 'stubs', 'stubs', 'AdjustmentFactors.pyi'))
 for filename in os.listdir(os.path.join(this_directory, "stubs", "stubs")):
     if ".pyi" not in filename:
         continue
@@ -139,16 +136,7 @@ libfiles += hybrid_stubs
 
 
 # make list of all extension modules
-extension_modules = [Extension('PySAM.AdjustmentFactors',
-                     ['src/AdjustmentFactors.c'],
-                    define_macros=defines,
-                    include_dirs=[srcpath, includepath, this_directory + "/src"],
-                    library_dirs=[libpath],
-                    libraries=libs,
-                    extra_compile_args=extra_compile_args,
-                    extra_link_args=extra_link_args
-                    )]
-
+extension_modules = []
 for filename in os.listdir(this_directory + "/modules"):
     extension_modules.append(Extension('PySAM.' + os.path.splitext(filename)[0],
                              ['modules/' + filename],
@@ -160,23 +148,6 @@ for filename in os.listdir(this_directory + "/modules"):
                             extra_link_args=extra_link_args
                             ))
 
-
-# function to rename macosx distribution for Python 3.7 to be minimum version of 10.12 instead of 10.14
-class PostProcess(Command):
-    description = "rename macosx distribution for Python 3.7 to be minimum version of 10.12 instead of 10.14"
-    user_options = []
-
-    def initialize_options(self):
-        self.cwd = None
-
-    def finalize_options(self):
-        self.cwd = os.getcwd()
-
-    def run(self):
-        assert os.getcwd() == self.cwd, 'Must be in package root: %s' % self.cwd
-        name = "NREL_PySAM-" + latest_version + "-" + "cp37-cp37m-macosx_10_14_x86_64.whl"
-        newname = "NREL_PySAM-" + latest_version + "-" + "cp37-cp37m-macosx_10_12_x86_64.whl"
-        os.system('mv ./dist/' + name + ' ./dist/' + newname)
 
 ###################################################################################################
 #
@@ -203,12 +174,7 @@ setup(
     package_dir={'PySAM': 'files', 'PySAM.Hybrids': 'files/Hybrids'},
     package_data={
         '': libfiles},
-    setup_requires=["pytest-runner"],
     tests_require=["pytest"],
-    install_requires=read_lines(Path(__file__).parent / "requirements.txt"),
-    cmdclass={
-        'post': PostProcess
-    },
     ext_modules=extension_modules
 )
 

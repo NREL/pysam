@@ -2,6 +2,9 @@ class Saleleaseback(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class Saleleaseback(object):
 		pass
 
 	class Revenue(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -49,7 +55,10 @@ class Saleleaseback(object):
 
 
 	class FinancialParameters(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -82,7 +91,10 @@ class Saleleaseback(object):
 
 
 	class SystemCosts(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -125,7 +137,10 @@ class Saleleaseback(object):
 
 
 	class LandLease(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -141,7 +156,10 @@ class Saleleaseback(object):
 
 
 	class TaxCreditIncentives(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -174,7 +192,10 @@ class Saleleaseback(object):
 
 
 	class Depreciation(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -225,7 +246,10 @@ class Saleleaseback(object):
 
 
 	class PaymentIncentives(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -326,7 +350,10 @@ class Saleleaseback(object):
 
 
 	class SystemOutput(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -343,7 +370,10 @@ class Saleleaseback(object):
 
 
 	class ElectricityRates(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -358,7 +388,10 @@ class Saleleaseback(object):
 
 
 	class SaleLeaseback(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -389,7 +422,10 @@ class Saleleaseback(object):
 
 
 	class UtilityBill(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -403,7 +439,10 @@ class Saleleaseback(object):
 
 
 	class OtherCapitalCosts(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -418,7 +457,10 @@ class Saleleaseback(object):
 
 
 	class LCOS(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -447,7 +489,10 @@ class Saleleaseback(object):
 
 
 	class ChargesByMonth(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -462,7 +507,10 @@ class Saleleaseback(object):
 
 
 	class BatterySystem(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -483,7 +531,10 @@ class Saleleaseback(object):
 
 
 	class FuelCell(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -499,7 +550,10 @@ class Saleleaseback(object):
 
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -1065,6 +1119,8 @@ class Saleleaseback(object):
 		ppa_escalation = float
 		ppa_multipliers = tuple
 		ppa_price = float
+		pre_depr_alloc_basis = float
+		pre_itc_qual_basis = float
 		present_value_fuel = float
 		present_value_insandproptax = float
 		present_value_oandm = float

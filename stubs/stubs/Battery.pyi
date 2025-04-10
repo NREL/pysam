@@ -2,6 +2,9 @@ class Battery(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -26,7 +29,10 @@ class Battery(object):
 	def Reopt_size_standalone_battery_post(self, args):
 		pass
 	class Simulation(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -37,10 +43,14 @@ class Battery(object):
 
 
 		percent_complete = float
+		timestep_minutes = float
 
 
 	class Lifetime(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -56,7 +66,10 @@ class Battery(object):
 
 
 	class BatterySystem(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -99,7 +112,10 @@ class Battery(object):
 
 
 	class SystemOutput(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -116,7 +132,10 @@ class Battery(object):
 
 
 	class Load(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -135,7 +154,10 @@ class Battery(object):
 
 
 	class BatteryCell(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -183,7 +205,10 @@ class Battery(object):
 
 
 	class Inverter(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -206,7 +231,10 @@ class Battery(object):
 
 
 	class Losses(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -220,7 +248,10 @@ class Battery(object):
 
 
 	class BatteryDispatch(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -236,6 +267,7 @@ class Battery(object):
 		batt_dispatch_auto_btm_can_discharge_to_grid = float
 		batt_dispatch_auto_can_charge = float
 		batt_dispatch_auto_can_clipcharge = float
+		batt_dispatch_auto_can_curtailcharge = float
 		batt_dispatch_auto_can_fuelcellcharge = float
 		batt_dispatch_auto_can_gridcharge = float
 		batt_dispatch_charge_only_system_exceeds_load = float
@@ -280,7 +312,10 @@ class Battery(object):
 
 
 	class SystemCosts(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -297,7 +332,10 @@ class Battery(object):
 
 
 	class FuelCell(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -311,7 +349,10 @@ class Battery(object):
 
 
 	class PriceSignal(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -342,7 +383,10 @@ class Battery(object):
 
 
 	class Revenue(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -352,9 +396,13 @@ class Battery(object):
 			pass
 
 
+		mp_ancserv1_percent_gen = float
 		mp_ancserv1_revenue_single = tuple
+		mp_ancserv2_percent_gen = float
 		mp_ancserv2_revenue_single = tuple
+		mp_ancserv3_percent_gen = float
 		mp_ancserv3_revenue_single = tuple
+		mp_ancserv4_percent_gen = float
 		mp_ancserv4_revenue_single = tuple
 		mp_enable_ancserv1_percent_gen = float
 		mp_enable_ancserv2_percent_gen = float
@@ -362,10 +410,35 @@ class Battery(object):
 		mp_enable_ancserv4_percent_gen = float
 		mp_enable_market_percent_gen = float
 		mp_energy_market_revenue_single = tuple
+		mp_market_percent_gen = float
+
+
+	class AdjustmentFactors(object):
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		batt_adjust_constant = float
+		batt_adjust_en_periods = float
+		batt_adjust_en_timeindex = float
+		batt_adjust_periods = tuple
+		batt_adjust_timeindex = tuple
 
 
 	class ElectricityRates(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -396,6 +469,8 @@ class Battery(object):
 		ur_metering_option = float
 		ur_monthly_fixed_charge = float
 		ur_monthly_min_charge = float
+		ur_nb_apply_credit_current_month = float
+		ur_nb_credit_expire = float
 		ur_nm_credit_month = float
 		ur_nm_credit_rollover = float
 		ur_nm_yearend_sell_rate = float
@@ -406,7 +481,10 @@ class Battery(object):
 
 
 	class GridLimits(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -422,7 +500,10 @@ class Battery(object):
 
 
 	class HybridCosts(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -447,7 +528,10 @@ class Battery(object):
 
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -476,6 +560,7 @@ class Battery(object):
 		batt_annual_discharge_energy = tuple
 		batt_annual_energy_loss = tuple
 		batt_annual_energy_system_loss = tuple
+		batt_availability_loss = tuple
 		batt_bank_installed_capacity = float
 		batt_bank_replacement = tuple
 		batt_capacity_percent = tuple
@@ -485,7 +570,9 @@ class Battery(object):
 		batt_conversion_loss = tuple
 		batt_cost_to_cycle = tuple
 		batt_cycles = tuple
+		batt_dispatch_period = tuple
 		batt_dispatch_sched = tuple
+		batt_grid_charge_percent = float
 		batt_power = tuple
 		batt_power_dc = tuple
 		batt_power_target = tuple
@@ -520,6 +607,8 @@ class Battery(object):
 		batt_to_system_load = tuple
 		batt_voltage = tuple
 		batt_voltage_cell = tuple
+		batt_year1_charge_from_grid = float
+		batt_year1_charge_from_system = float
 		capacity_factor_sales = float
 		cdf_of_surviving = tuple
 		cf_battery_replacement_cost_schedule = tuple

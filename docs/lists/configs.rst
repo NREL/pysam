@@ -61,6 +61,204 @@ Biomass Combustion -- Single Owner
 
       :doc:`../modules/Biomass`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
 
+Custom Generation PVWatts Wind Fuel Cell Battery Hybrid -- Single Owner
+---------------------------------------------------------------------------------
+
+      Hybrid power system with PVWatts and wind power generation and battery storage). Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
+
+      Configuration name for defaults: *"CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Pvwattsv8`, :doc:`../modules/Windpower`, :doc:`../modules/Fuelcell`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
+
+Custom Generation PVWatts Wind Fuel Cell Battery Hybrid -- Third Party - Host / Developer
+---------------------------------------------------------------------------------
+
+      Hybrid power system with PVWatts and wind power generation and battery storage). Third party ownershop from host and developer perspective for PPA.
+
+      Configuration name for defaults: *"CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Pvwattsv8`, :doc:`../modules/Windpower`, :doc:`../modules/Fuelcell`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Thermalrate`, :doc:`../modules/HostDeveloper`
+
+Custom Generation Profile (Generic System) -- Commercial Owner
+---------------------------------------------------------------------------------
+
+      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Renewable energy system displaces commercial building electric load.
+
+      Configuration name for defaults: *"CustomGenerationProfileCommercial"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Cashloan`
+
+Custom Generation Profile (Generic System) -- LCOE Calculator (FCR Method)
+---------------------------------------------------------------------------------
+
+      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Calculate LCOE using fixed charge rate method.
+
+      Configuration name for defaults: *"CustomGenerationProfileLCOECalculator"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Grid`, :doc:`../modules/Lcoefcr`
+
+Custom Generation Profile (Generic System) -- Merchant Plant
+---------------------------------------------------------------------------------
+
+      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Merchant plant with constant DSCR and ancillary services revenue, reserve accounts and depreciation allocations.
+
+      Configuration name for defaults: *"CustomGenerationProfileMerchantPlant"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Merchantplant`
+
+Custom Generation Profile (Generic System) -- No Financial Model
+---------------------------------------------------------------------------------
+
+      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Run the performance model with no financial model.
+
+      Configuration name for defaults: *"CustomGenerationProfileNone"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Grid`
+
+Custom Generation Profile (Generic System) -- Partnership Flip with Debt
+---------------------------------------------------------------------------------
+
+      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Developer/investor partnership flip PPA structure with debt.
+
+      Configuration name for defaults: *"CustomGenerationProfileLeveragedPartnershipFlip"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Levpartflip`
+
+Custom Generation Profile (Generic System) -- Partnership Flip without Debt
+---------------------------------------------------------------------------------
+
+      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Developer/investor partnership flip PPA structure without debt.
+
+      Configuration name for defaults: *"CustomGenerationProfileAllEquityPartnershipFlip"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Equpartflip`
+
+Custom Generation Profile (Generic System) -- Residential Owner
+---------------------------------------------------------------------------------
+
+      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Renewable energy system displaces residential home electric load.
+
+      Configuration name for defaults: *"CustomGenerationProfileResidential"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Cashloan`
+
+Custom Generation Profile (Generic System) -- Sale Leaseback
+---------------------------------------------------------------------------------
+
+      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Sale leaseback partnership PPA structure.
+
+      Configuration name for defaults: *"CustomGenerationProfileSaleLeaseback"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Saleleaseback`
+
+Custom Generation Profile (Generic System) -- Single Owner
+---------------------------------------------------------------------------------
+
+      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
+
+      Configuration name for defaults: *"CustomGenerationProfileSingleOwner"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
+
+Custom Generation Profile (Generic System) -- Third Party - Host / Developer
+---------------------------------------------------------------------------------
+
+      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Third party ownershop from host and developer perspective for PPA.
+
+      Configuration name for defaults: *"CustomGenerationProfileHostDeveloper"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/HostDeveloper`
+
+Custom Generation Profile (Generic System) -- Third Party Owner - Host
+---------------------------------------------------------------------------------
+
+      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Third party ownership from host perspective for PPA or lease agreement.
+
+      Configuration name for defaults: *"CustomGenerationProfileThirdParty"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Thirdpartyownership`
+
+Custom Generation Profile-Battery (Generic Battery) -- Commercial Owner
+---------------------------------------------------------------------------------
+
+      Generic system model with battery storage. Renewable energy system displaces commercial building electric load.
+
+      Configuration name for defaults: *"CustomGenerationBatteryCommercial"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Cashloan`
+
+Custom Generation Profile-Battery (Generic Battery) -- Merchant Plant
+---------------------------------------------------------------------------------
+
+      Generic system model with battery storage. Merchant plant with constant DSCR and ancillary services revenue, reserve accounts and depreciation allocations.
+
+      Configuration name for defaults: *"CustomGenerationBatteryMerchantPlant"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Merchantplant`
+
+Custom Generation Profile-Battery (Generic Battery) -- Partnership Flip with Debt
+---------------------------------------------------------------------------------
+
+      Generic system model with battery storage. Developer/investor partnership flip PPA structure with debt.
+
+      Configuration name for defaults: *"CustomGenerationBatteryLeveragedPartnershipFlip"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Levpartflip`
+
+Custom Generation Profile-Battery (Generic Battery) -- Partnership Flip without Debt
+---------------------------------------------------------------------------------
+
+      Generic system model with battery storage. Developer/investor partnership flip PPA structure without debt.
+
+      Configuration name for defaults: *"CustomGenerationBatteryAllEquityPartnershipFlip"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Equpartflip`
+
+Custom Generation Profile-Battery (Generic Battery) -- Residential Owner
+---------------------------------------------------------------------------------
+
+      Generic system model with battery storage. Renewable energy system displaces residential home electric load.
+
+      Configuration name for defaults: *"CustomGenerationBatteryResidential"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Cashloan`
+
+Custom Generation Profile-Battery (Generic Battery) -- Sale Leaseback
+---------------------------------------------------------------------------------
+
+      Generic system model with battery storage. Sale leaseback partnership PPA structure.
+
+      Configuration name for defaults: *"CustomGenerationBatterySaleLeaseback"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Saleleaseback`
+
+Custom Generation Profile-Battery (Generic Battery) -- Single Owner
+---------------------------------------------------------------------------------
+
+      Generic system model with battery storage. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
+
+      Configuration name for defaults: *"CustomGenerationBatterySingleOwner"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
+
+Custom Generation Profile-Battery (Generic Battery) -- Third Party - Host / Developer
+---------------------------------------------------------------------------------
+
+      Generic system model with battery storage. Third party ownershop from host and developer perspective for PPA.
+
+      Configuration name for defaults: *"CustomGenerationBatteryHostDeveloper"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/HostDeveloper`
+
+Custom Generation Profile-Battery (Generic Battery) -- Third Party Owner - Host
+---------------------------------------------------------------------------------
+
+      Generic system model with battery storage. Third party ownership from host perspective for PPA or lease agreement.
+
+      Configuration name for defaults: *"CustomGenerationBatteryThirdParty"*
+
+      :doc:`../modules/CustomGeneration`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Thirdpartyownership`
+
 Detailed PV Model -- Commercial Owner
 ---------------------------------------------------------------------------------
 
@@ -268,24 +466,6 @@ Fuel Cell - PV - Battery -- Single Owner
 
       :doc:`../modules/Pvwattsv8`, :doc:`../modules/Fuelcell`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Thermalrate`, :doc:`../modules/Singleowner`
 
-Generic PVWatts Wind FuelCell Battery Hybrid -- Single Owner
----------------------------------------------------------------------------------
-
-      Hybrid power system with PVWatts and wind power generation and battery storage). Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
-
-      Configuration name for defaults: *"GenericPVWattsWindFuelCellBatteryHybridSingleOwner"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Pvwattsv8`, :doc:`../modules/Windpower`, :doc:`../modules/Fuelcell`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
-
-Generic PVWatts Wind FuelCell Battery Hybrid -- Third Party - Host / Developer
----------------------------------------------------------------------------------
-
-      Hybrid power system with PVWatts and wind power generation and battery storage). Third party ownershop from host and developer perspective for PPA.
-
-      Configuration name for defaults: *"GenericPVWattsWindFuelCellBatteryHybridHostDeveloper"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Pvwattsv8`, :doc:`../modules/Windpower`, :doc:`../modules/Fuelcell`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/HostDeveloper`
-
 Generic Solar Model -- Commercial Owner
 ---------------------------------------------------------------------------------
 
@@ -357,186 +537,6 @@ Generic Solar Model -- Single Owner
       Configuration name for defaults: *"GenericCSPSystemSingleOwner"*
 
       :doc:`../modules/TcsgenericSolar`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
-
-Generic System -- Commercial Owner
----------------------------------------------------------------------------------
-
-      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Renewable energy system displaces commercial building electric load.
-
-      Configuration name for defaults: *"GenericSystemCommercial"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Cashloan`
-
-Generic System -- LCOE Calculator (FCR Method)
----------------------------------------------------------------------------------
-
-      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Calculate LCOE using fixed charge rate method.
-
-      Configuration name for defaults: *"GenericSystemLCOECalculator"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Grid`, :doc:`../modules/Lcoefcr`
-
-Generic System -- Merchant Plant
----------------------------------------------------------------------------------
-
-      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Merchant plant with constant DSCR and ancillary services revenue, reserve accounts and depreciation allocations.
-
-      Configuration name for defaults: *"GenericSystemMerchantPlant"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Merchantplant`
-
-Generic System -- No Financial Model
----------------------------------------------------------------------------------
-
-      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Run the performance model with no financial model.
-
-      Configuration name for defaults: *"GenericSystemNone"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Grid`
-
-Generic System -- Partnership Flip with Debt
----------------------------------------------------------------------------------
-
-      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Developer/investor partnership flip PPA structure with debt.
-
-      Configuration name for defaults: *"GenericSystemLeveragedPartnershipFlip"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Levpartflip`
-
-Generic System -- Partnership Flip without Debt
----------------------------------------------------------------------------------
-
-      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Developer/investor partnership flip PPA structure without debt.
-
-      Configuration name for defaults: *"GenericSystemAllEquityPartnershipFlip"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Equpartflip`
-
-Generic System -- Residential Owner
----------------------------------------------------------------------------------
-
-      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Renewable energy system displaces residential home electric load.
-
-      Configuration name for defaults: *"GenericSystemResidential"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Cashloan`
-
-Generic System -- Sale Leaseback
----------------------------------------------------------------------------------
-
-      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Sale leaseback partnership PPA structure.
-
-      Configuration name for defaults: *"GenericSystemSaleLeaseback"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Saleleaseback`
-
-Generic System -- Single Owner
----------------------------------------------------------------------------------
-
-      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
-
-      Configuration name for defaults: *"GenericSystemSingleOwner"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
-
-Generic System -- Third Party - Host / Developer
----------------------------------------------------------------------------------
-
-      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Third party ownershop from host and developer perspective for PPA.
-
-      Configuration name for defaults: *"GenericSystemHostDeveloper"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/HostDeveloper`
-
-Generic System -- Third Party Owner - Host
----------------------------------------------------------------------------------
-
-      Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input. Third party ownership from host perspective for PPA or lease agreement.
-
-      Configuration name for defaults: *"GenericSystemThirdParty"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Thirdpartyownership`
-
-Generic System-Battery -- Commercial Owner
----------------------------------------------------------------------------------
-
-      Generic system model with battery storage. Renewable energy system displaces commercial building electric load.
-
-      Configuration name for defaults: *"GenericBatteryCommercial"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Cashloan`
-
-Generic System-Battery -- Merchant Plant
----------------------------------------------------------------------------------
-
-      Generic system model with battery storage. Merchant plant with constant DSCR and ancillary services revenue, reserve accounts and depreciation allocations.
-
-      Configuration name for defaults: *"GenericBatteryMerchantPlant"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Merchantplant`
-
-Generic System-Battery -- Partnership Flip with Debt
----------------------------------------------------------------------------------
-
-      Generic system model with battery storage. Developer/investor partnership flip PPA structure with debt.
-
-      Configuration name for defaults: *"GenericBatteryLeveragedPartnershipFlip"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Levpartflip`
-
-Generic System-Battery -- Partnership Flip without Debt
----------------------------------------------------------------------------------
-
-      Generic system model with battery storage. Developer/investor partnership flip PPA structure without debt.
-
-      Configuration name for defaults: *"GenericBatteryAllEquityPartnershipFlip"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Equpartflip`
-
-Generic System-Battery -- Residential Owner
----------------------------------------------------------------------------------
-
-      Generic system model with battery storage. Renewable energy system displaces residential home electric load.
-
-      Configuration name for defaults: *"GenericBatteryResidential"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Cashloan`
-
-Generic System-Battery -- Sale Leaseback
----------------------------------------------------------------------------------
-
-      Generic system model with battery storage. Sale leaseback partnership PPA structure.
-
-      Configuration name for defaults: *"GenericBatterySaleLeaseback"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Saleleaseback`
-
-Generic System-Battery -- Single Owner
----------------------------------------------------------------------------------
-
-      Generic system model with battery storage. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
-
-      Configuration name for defaults: *"GenericBatterySingleOwner"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
-
-Generic System-Battery -- Third Party - Host / Developer
----------------------------------------------------------------------------------
-
-      Generic system model with battery storage. Third party ownershop from host and developer perspective for PPA.
-
-      Configuration name for defaults: *"GenericBatteryHostDeveloper"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/HostDeveloper`
-
-Generic System-Battery -- Third Party Owner - Host
----------------------------------------------------------------------------------
-
-      Generic system model with battery storage. Third party ownership from host perspective for PPA or lease agreement.
-
-      Configuration name for defaults: *"GenericBatteryThirdParty"*
-
-      :doc:`../modules/GenericSystem`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Thirdpartyownership`
 
 Geothermal -- LCOE Calculator (FCR Method)
 ---------------------------------------------------------------------------------
@@ -682,6 +682,15 @@ Linear Direct Steam -- No Financial Model
 
       :doc:`../modules/LinearFresnelDsgIph`
 
+Linear Direct Steam -- Single Owner
+---------------------------------------------------------------------------------
+
+      Industrial process heat linear Fresnel collector system. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
+
+      Configuration name for defaults: *"DSGLIPHSingleOwner"*
+
+      :doc:`../modules/LinearFresnelDsgIph`, :doc:`../modules/Utilityrate5`, :doc:`../modules/SingleownerHeat`
+
 Linear Fresnel Direct Steam -- Commercial Owner
 ---------------------------------------------------------------------------------
 
@@ -808,6 +817,15 @@ Linear Molten Salt --
 
       :doc:`../modules/FresnelPhysicalIph`, :doc:`../modules/LcoefcrDesign`
 
+Linear Molten Salt -- Commercial Owner
+---------------------------------------------------------------------------------
+
+      Industrial process heat linear collector system with molten salt heat transfer fluid. Renewable energy system displaces commercial building electric load.
+
+      Configuration name for defaults: *"MSLFIPHCommercial"*
+
+      :doc:`../modules/FresnelPhysicalIph`, :doc:`../modules/Utilityrate5`, :doc:`../modules/ThermalrateIph`, :doc:`../modules/CashloanHeat`
+
 Linear Molten Salt -- No Financial Model
 ---------------------------------------------------------------------------------
 
@@ -816,6 +834,15 @@ Linear Molten Salt -- No Financial Model
       Configuration name for defaults: *"MSLFIPHNone"*
 
       :doc:`../modules/FresnelPhysicalIph`
+
+Linear Molten Salt -- Single Owner
+---------------------------------------------------------------------------------
+
+      Industrial process heat linear collector system with molten salt heat transfer fluid. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
+
+      Configuration name for defaults: *"MSLFIPHSingleOwner"*
+
+      :doc:`../modules/FresnelPhysicalIph`, :doc:`../modules/Utilityrate5`, :doc:`../modules/SingleownerHeat`
 
 PVWatts -- Commercial Owner
 ---------------------------------------------------------------------------------
@@ -959,7 +986,7 @@ PVWatts Wind Fuel Cell Battery Hybrid -- Third Party - Host / Developer
 
       Configuration name for defaults: *"PVWattsWindFuelCellBatteryHybridHostDeveloper"*
 
-      :doc:`../modules/Pvwattsv8`, :doc:`../modules/Windpower`, :doc:`../modules/Fuelcell`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/HostDeveloper`
+      :doc:`../modules/Pvwattsv8`, :doc:`../modules/Windpower`, :doc:`../modules/Fuelcell`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Thermalrate`, :doc:`../modules/HostDeveloper`
 
 PVWatts-Battery -- Commercial Owner
 ---------------------------------------------------------------------------------
@@ -1006,6 +1033,15 @@ Parabolic Trough --
 
       :doc:`../modules/TroughPhysicalIph`, :doc:`../modules/LcoefcrDesign`
 
+Parabolic Trough -- Commercial Owner
+---------------------------------------------------------------------------------
+
+      Industrial process heat parabolic trough system using heat transfer and thermodynamic component models. Renewable energy system displaces commercial building electric load.
+
+      Configuration name for defaults: *"PhysicalTroughIPHCommercial"*
+
+      :doc:`../modules/TroughPhysicalIph`, :doc:`../modules/Utilityrate5`, :doc:`../modules/ThermalrateIph`, :doc:`../modules/CashloanHeat`
+
 Parabolic Trough -- No Financial Model
 ---------------------------------------------------------------------------------
 
@@ -1014,6 +1050,15 @@ Parabolic Trough -- No Financial Model
       Configuration name for defaults: *"PhysicalTroughIPHNone"*
 
       :doc:`../modules/TroughPhysicalIph`
+
+Parabolic Trough -- Single Owner
+---------------------------------------------------------------------------------
+
+      Industrial process heat parabolic trough system using heat transfer and thermodynamic component models. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
+
+      Configuration name for defaults: *"PhysicalTroughIPHSingleOwner"*
+
+      :doc:`../modules/TroughPhysicalIph`, :doc:`../modules/Utilityrate5`, :doc:`../modules/SingleownerHeat`
 
 Parabolic Trough Empirical Model -- Commercial Owner
 ---------------------------------------------------------------------------------
@@ -1086,6 +1131,15 @@ Parabolic Trough Empirical Model -- Single Owner
       Configuration name for defaults: *"EmpiricalTroughSingleOwner"*
 
       :doc:`../modules/TcstroughEmpirical`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
+
+Parabolic Trough Physical Model -- Commercial Owner
+---------------------------------------------------------------------------------
+
+      CSP parabolic trough system using heat transfer and thermodynamic component models. Renewable energy system displaces commercial building electric load.
+
+      Configuration name for defaults: *"PhysicalTroughCommercial"*
+
+      :doc:`../modules/TroughPhysical`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Cashloan`
 
 Parabolic Trough Physical Model -- LCOE Calculator (FCR Method)
 ---------------------------------------------------------------------------------
@@ -1383,6 +1437,15 @@ Tower Molten Salt -- No Financial Model
       Configuration name for defaults: *"MSPTIPHNone"*
 
       :doc:`../modules/MsptIph`
+
+Tower Molten Salt -- Single Owner
+---------------------------------------------------------------------------------
+
+      Industrial process heat power tower system with molten salt heat transfer fluid. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
+
+      Configuration name for defaults: *"MSPTIPHSingleOwner"*
+
+      :doc:`../modules/MsptIph`, :doc:`../modules/Utilityrate5`, :doc:`../modules/SingleownerHeat`
 
 Wave -- LCOE Calculator (FCR Method)
 ---------------------------------------------------------------------------------

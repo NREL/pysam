@@ -4458,18 +4458,6 @@ CECPerformanceModelWithModuleDatabase_set_cec_bifaciality(VarGroupObject *self, 
 }
 
 static PyObject *
-CECPerformanceModelWithModuleDatabase_get_cec_gamma_r(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithModuleDatabase_cec_gamma_r_nget, self->data_ptr);
-}
-
-static int
-CECPerformanceModelWithModuleDatabase_set_cec_gamma_r(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithModuleDatabase_cec_gamma_r_nset, self->data_ptr);
-}
-
-static PyObject *
 CECPerformanceModelWithModuleDatabase_get_cec_gap_spacing(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithModuleDatabase_cec_gap_spacing_nget, self->data_ptr);
@@ -4790,9 +4778,6 @@ static PyGetSetDef CECPerformanceModelWithModuleDatabase_getset[] = {
  	NULL},
 {"cec_bifaciality", (getter)CECPerformanceModelWithModuleDatabase_get_cec_bifaciality,(setter)CECPerformanceModelWithModuleDatabase_set_cec_bifaciality,
 	PyDoc_STR("*float*: Bifaciality factor [%]\n\n**Required:**\nRequired if module_model=1"),
- 	NULL},
-{"cec_gamma_r", (getter)CECPerformanceModelWithModuleDatabase_get_cec_gamma_r,(setter)CECPerformanceModelWithModuleDatabase_set_cec_gamma_r,
-	PyDoc_STR("*float*: Maximum power point temperature coefficient [%/C]\n\n**Required:**\nRequired if module_model=1"),
  	NULL},
 {"cec_gap_spacing", (getter)CECPerformanceModelWithModuleDatabase_get_cec_gap_spacing,(setter)CECPerformanceModelWithModuleDatabase_set_cec_gap_spacing,
 	PyDoc_STR("*float*: Gap spacing [m]\n\n**Required:**\nRequired if module_model=1&cec_temp_corr_mode=1"),
@@ -10493,6 +10478,353 @@ static PyTypeObject PVLosses_Type = {
 
 
 /*
+ * AdjustmentFactors Group
+ */ 
+
+static PyTypeObject AdjustmentFactors_Type;
+
+static PyObject *
+AdjustmentFactors_new(SAM_Pvsamv1 data_ptr)
+{
+	PyObject* new_obj = AdjustmentFactors_Type.tp_alloc(&AdjustmentFactors_Type,0);
+
+	VarGroupObject* AdjustmentFactors_obj = (VarGroupObject*)new_obj;
+
+	AdjustmentFactors_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* AdjustmentFactors methods */
+
+static PyObject *
+AdjustmentFactors_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Pvsamv1", "AdjustmentFactors")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+AdjustmentFactors_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &AdjustmentFactors_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "AdjustmentFactors")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+AdjustmentFactors_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &AdjustmentFactors_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef AdjustmentFactors_methods[] = {
+		{"assign",            (PyCFunction)AdjustmentFactors_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``AdjustmentFactors_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)AdjustmentFactors_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``AdjustmentFactors_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)AdjustmentFactors_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+AdjustmentFactors_get_adjust_constant(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_AdjustmentFactors_adjust_constant_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_constant(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_AdjustmentFactors_adjust_constant_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_en_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_AdjustmentFactors_adjust_en_periods_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_en_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_AdjustmentFactors_adjust_en_periods_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_en_timeindex(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_AdjustmentFactors_adjust_en_timeindex_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_en_timeindex(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_AdjustmentFactors_adjust_en_timeindex_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_AdjustmentFactors_adjust_periods_mget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_AdjustmentFactors_adjust_periods_mset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_adjust_timeindex(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_AdjustmentFactors_adjust_timeindex_aget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_adjust_timeindex(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvsamv1_AdjustmentFactors_adjust_timeindex_aset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_batt_adjust_constant(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_AdjustmentFactors_batt_adjust_constant_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_batt_adjust_constant(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_AdjustmentFactors_batt_adjust_constant_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_batt_adjust_en_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_AdjustmentFactors_batt_adjust_en_periods_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_batt_adjust_en_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_AdjustmentFactors_batt_adjust_en_periods_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_batt_adjust_en_timeindex(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_AdjustmentFactors_batt_adjust_en_timeindex_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_batt_adjust_en_timeindex(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_AdjustmentFactors_batt_adjust_en_timeindex_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_batt_adjust_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_AdjustmentFactors_batt_adjust_periods_mget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_batt_adjust_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_AdjustmentFactors_batt_adjust_periods_mset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_batt_adjust_timeindex(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_AdjustmentFactors_batt_adjust_timeindex_aget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_batt_adjust_timeindex(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvsamv1_AdjustmentFactors_batt_adjust_timeindex_aset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_dc_adjust_constant(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_AdjustmentFactors_dc_adjust_constant_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_dc_adjust_constant(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_AdjustmentFactors_dc_adjust_constant_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_dc_adjust_en_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_AdjustmentFactors_dc_adjust_en_periods_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_dc_adjust_en_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_AdjustmentFactors_dc_adjust_en_periods_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_dc_adjust_en_timeindex(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_AdjustmentFactors_dc_adjust_en_timeindex_nget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_dc_adjust_en_timeindex(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_AdjustmentFactors_dc_adjust_en_timeindex_nset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_dc_adjust_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_AdjustmentFactors_dc_adjust_periods_mget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_dc_adjust_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_AdjustmentFactors_dc_adjust_periods_mset, self->data_ptr);
+}
+
+static PyObject *
+AdjustmentFactors_get_dc_adjust_timeindex(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_AdjustmentFactors_dc_adjust_timeindex_aget, self->data_ptr);
+}
+
+static int
+AdjustmentFactors_set_dc_adjust_timeindex(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvsamv1_AdjustmentFactors_dc_adjust_timeindex_aset, self->data_ptr);
+}
+
+static PyGetSetDef AdjustmentFactors_getset[] = {
+{"adjust_constant", (getter)AdjustmentFactors_get_adjust_constant,(setter)AdjustmentFactors_set_adjust_constant,
+	PyDoc_STR("*float*: Constant loss adjustment [%]\n\n**Info:**\n'adjust' and 'constant' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nMAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"adjust_en_periods", (getter)AdjustmentFactors_get_adjust_en_periods,(setter)AdjustmentFactors_set_adjust_en_periods,
+	PyDoc_STR("*float*: Enable period-based adjustment factors [0/1]\n\n**Info:**\n'adjust' and 'en_periods' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"adjust_en_timeindex", (getter)AdjustmentFactors_get_adjust_en_timeindex,(setter)AdjustmentFactors_set_adjust_en_timeindex,
+	PyDoc_STR("*float*: Enable lifetime adjustment factors [0/1]\n\n**Info:**\n'adjust' and 'en_timeindex' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"adjust_periods", (getter)AdjustmentFactors_get_adjust_periods,(setter)AdjustmentFactors_set_adjust_periods,
+	PyDoc_STR("*sequence[sequence]*: Period-based adjustment factors [%]\n\n**Info:**\nSyntax: n x 3 matrix [ start, end, loss ]; Version upgrade: 'adjust' and 'periods' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nCOLS=3\n\n**Required:**\nRequired if adjust_en_periods=1"),
+ 	NULL},
+{"adjust_timeindex", (getter)AdjustmentFactors_get_adjust_timeindex,(setter)AdjustmentFactors_set_adjust_timeindex,
+	PyDoc_STR("*sequence*: Lifetime adjustment factors [%]\n\n**Info:**\n'adjust' and 'timeindex' separated by _ instead of : after SAM 2022.12.21\n\n**Required:**\nRequired if adjust_en_timeindex=1"),
+ 	NULL},
+{"batt_adjust_constant", (getter)AdjustmentFactors_get_batt_adjust_constant,(setter)AdjustmentFactors_set_batt_adjust_constant,
+	PyDoc_STR("*float*: Battery Constant loss adjustment [%]\n\n**Constraints:**\nMAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"batt_adjust_en_periods", (getter)AdjustmentFactors_get_batt_adjust_en_periods,(setter)AdjustmentFactors_set_batt_adjust_en_periods,
+	PyDoc_STR("*float*: Enable battery period-based adjustment factors [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"batt_adjust_en_timeindex", (getter)AdjustmentFactors_get_batt_adjust_en_timeindex,(setter)AdjustmentFactors_set_batt_adjust_en_timeindex,
+	PyDoc_STR("*float*: Enable battery lifetime adjustment factors [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"batt_adjust_periods", (getter)AdjustmentFactors_get_batt_adjust_periods,(setter)AdjustmentFactors_set_batt_adjust_periods,
+	PyDoc_STR("*sequence[sequence]*: Battery Period-based Adjustment Factors [%]\n\n**Info:**\nn x 3 matrix [ start, end, loss ]\n\n**Constraints:**\nCOLS=3\n\n**Required:**\nRequired if batt_adjust_en_periods=1"),
+ 	NULL},
+{"batt_adjust_timeindex", (getter)AdjustmentFactors_get_batt_adjust_timeindex,(setter)AdjustmentFactors_set_batt_adjust_timeindex,
+	PyDoc_STR("*sequence*: Battery Lifetime Adjustment Factors [%]\n\n**Required:**\nRequired if batt_adjust_en_timeindex=1"),
+ 	NULL},
+{"dc_adjust_constant", (getter)AdjustmentFactors_get_dc_adjust_constant,(setter)AdjustmentFactors_set_dc_adjust_constant,
+	PyDoc_STR("*float*: DC Constant loss adjustment [%]\n\n**Info:**\n'dc_adjust' and 'constant' separated by _ instead of : after SAM 2022.12.21\n\n**Constraints:**\nMAX=100\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"dc_adjust_en_periods", (getter)AdjustmentFactors_get_dc_adjust_en_periods,(setter)AdjustmentFactors_set_dc_adjust_en_periods,
+	PyDoc_STR("*float*: Enable period-based adjustment factors [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"dc_adjust_en_timeindex", (getter)AdjustmentFactors_get_dc_adjust_en_timeindex,(setter)AdjustmentFactors_set_dc_adjust_en_timeindex,
+	PyDoc_STR("*float*: Enable lifetime adjustment factors [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"dc_adjust_periods", (getter)AdjustmentFactors_get_dc_adjust_periods,(setter)AdjustmentFactors_set_dc_adjust_periods,
+	PyDoc_STR("*sequence[sequence]*: DC Period-based Adjustment Factors [%]\n\n**Info:**\nn x 3 matrix [ start, end, loss ]\n\n**Constraints:**\nCOLS=3\n\n**Required:**\nRequired if dc_adjust_en_periods=1"),
+ 	NULL},
+{"dc_adjust_timeindex", (getter)AdjustmentFactors_get_dc_adjust_timeindex,(setter)AdjustmentFactors_set_dc_adjust_timeindex,
+	PyDoc_STR("*sequence*: DC Lifetime Adjustment Factors [%]\n\n**Required:**\nRequired if dc_adjust_en_timeindex=1"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject AdjustmentFactors_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Pvsamv1.AdjustmentFactors",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		AdjustmentFactors_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		AdjustmentFactors_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * BatteryCell Group
  */ 
 
@@ -11283,6 +11615,18 @@ BatteryDispatch_set_batt_dispatch_auto_can_clipcharge(VarGroupObject *self, PyOb
 }
 
 static PyObject *
+BatteryDispatch_get_batt_dispatch_auto_can_curtailcharge(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_auto_can_curtailcharge_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_dispatch_auto_can_curtailcharge(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_dispatch_auto_can_curtailcharge_nset, self->data_ptr);
+}
+
+static PyObject *
 BatteryDispatch_get_batt_dispatch_auto_can_fuelcellcharge(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_auto_can_fuelcellcharge_nget, self->data_ptr);
@@ -11792,6 +12136,9 @@ static PyGetSetDef BatteryDispatch_getset[] = {
  	NULL},
 {"batt_dispatch_auto_can_clipcharge", (getter)BatteryDispatch_get_batt_dispatch_auto_can_clipcharge,(setter)BatteryDispatch_set_batt_dispatch_auto_can_clipcharge,
 	PyDoc_STR("*float*: Battery can charge from clipped power? [0/1]"),
+ 	NULL},
+{"batt_dispatch_auto_can_curtailcharge", (getter)BatteryDispatch_get_batt_dispatch_auto_can_curtailcharge,(setter)BatteryDispatch_set_batt_dispatch_auto_can_curtailcharge,
+	PyDoc_STR("*float*: Battery can charge from grid-limited system power? [0/1]"),
  	NULL},
 {"batt_dispatch_auto_can_fuelcellcharge", (getter)BatteryDispatch_get_batt_dispatch_auto_can_fuelcellcharge,(setter)BatteryDispatch_set_batt_dispatch_auto_can_fuelcellcharge,
 	PyDoc_STR("*float*: Charging from fuel cell allowed for automated dispatch? [0/1]"),
@@ -12749,6 +13096,18 @@ static PyMethodDef Revenue_methods[] = {
 };
 
 static PyObject *
+Revenue_get_mp_ancserv1_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Revenue_mp_ancserv1_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_ancserv1_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Revenue_mp_ancserv1_percent_gen_nset, self->data_ptr);
+}
+
+static PyObject *
 Revenue_get_mp_ancserv1_revenue_single(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Pvsamv1_Revenue_mp_ancserv1_revenue_single_mget, self->data_ptr);
@@ -12758,6 +13117,18 @@ static int
 Revenue_set_mp_ancserv1_revenue_single(VarGroupObject *self, PyObject *value, void *closure)
 {
 		return PySAM_matrix_setter(value, SAM_Pvsamv1_Revenue_mp_ancserv1_revenue_single_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_ancserv2_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Revenue_mp_ancserv2_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_ancserv2_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Revenue_mp_ancserv2_percent_gen_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -12773,6 +13144,18 @@ Revenue_set_mp_ancserv2_revenue_single(VarGroupObject *self, PyObject *value, vo
 }
 
 static PyObject *
+Revenue_get_mp_ancserv3_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Revenue_mp_ancserv3_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_ancserv3_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Revenue_mp_ancserv3_percent_gen_nset, self->data_ptr);
+}
+
+static PyObject *
 Revenue_get_mp_ancserv3_revenue_single(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Pvsamv1_Revenue_mp_ancserv3_revenue_single_mget, self->data_ptr);
@@ -12782,6 +13165,18 @@ static int
 Revenue_set_mp_ancserv3_revenue_single(VarGroupObject *self, PyObject *value, void *closure)
 {
 		return PySAM_matrix_setter(value, SAM_Pvsamv1_Revenue_mp_ancserv3_revenue_single_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_ancserv4_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Revenue_mp_ancserv4_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_ancserv4_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Revenue_mp_ancserv4_percent_gen_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -12868,15 +13263,39 @@ Revenue_set_mp_energy_market_revenue_single(VarGroupObject *self, PyObject *valu
 		return PySAM_matrix_setter(value, SAM_Pvsamv1_Revenue_mp_energy_market_revenue_single_mset, self->data_ptr);
 }
 
+static PyObject *
+Revenue_get_mp_market_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Revenue_mp_market_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_market_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Revenue_mp_market_percent_gen_nset, self->data_ptr);
+}
+
 static PyGetSetDef Revenue_getset[] = {
+{"mp_ancserv1_percent_gen", (getter)Revenue_get_mp_ancserv1_percent_gen,(setter)Revenue_set_mp_ancserv1_percent_gen,
+	PyDoc_STR("*float*: Percent of demand to copy to cleared capacity array [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_ancserv1_percent_gen=1"),
+ 	NULL},
 {"mp_ancserv1_revenue_single", (getter)Revenue_get_mp_ancserv1_revenue_single,(setter)Revenue_set_mp_ancserv1_revenue_single,
 	PyDoc_STR("*sequence[sequence]*: Ancillary services 1 revenue input\n\n**Info:**\nLifetime x 1[Price($/MWh)]\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_ancserv1_percent_gen=1"),
+ 	NULL},
+{"mp_ancserv2_percent_gen", (getter)Revenue_get_mp_ancserv2_percent_gen,(setter)Revenue_set_mp_ancserv2_percent_gen,
+	PyDoc_STR("*float*: Percent of demand to copy to cleared capacity array [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_ancserv2_percent_gen=1"),
  	NULL},
 {"mp_ancserv2_revenue_single", (getter)Revenue_get_mp_ancserv2_revenue_single,(setter)Revenue_set_mp_ancserv2_revenue_single,
 	PyDoc_STR("*sequence[sequence]*: Ancillary services 2 revenue input\n\n**Info:**\nLifetime x 1[Price($/MWh)]\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_ancserv2_percent_gen=1"),
  	NULL},
+{"mp_ancserv3_percent_gen", (getter)Revenue_get_mp_ancserv3_percent_gen,(setter)Revenue_set_mp_ancserv3_percent_gen,
+	PyDoc_STR("*float*: Percent of demand to copy to cleared capacity array [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_ancserv3_percent_gen=1"),
+ 	NULL},
 {"mp_ancserv3_revenue_single", (getter)Revenue_get_mp_ancserv3_revenue_single,(setter)Revenue_set_mp_ancserv3_revenue_single,
 	PyDoc_STR("*sequence[sequence]*: Ancillary services 3 revenue input\n\n**Info:**\nLifetime x 1[Price($/MWh)]\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_ancserv3_percent_gen=1"),
+ 	NULL},
+{"mp_ancserv4_percent_gen", (getter)Revenue_get_mp_ancserv4_percent_gen,(setter)Revenue_set_mp_ancserv4_percent_gen,
+	PyDoc_STR("*float*: Percent of demand to copy to cleared capacity array [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_ancserv4_percent_gen=1"),
  	NULL},
 {"mp_ancserv4_revenue_single", (getter)Revenue_get_mp_ancserv4_revenue_single,(setter)Revenue_set_mp_ancserv4_revenue_single,
 	PyDoc_STR("*sequence[sequence]*: Ancillary services 4 revenue input\n\n**Info:**\nLifetime x 1[Price($/MWh)]\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_ancserv4_percent_gen=1"),
@@ -12898,6 +13317,9 @@ static PyGetSetDef Revenue_getset[] = {
  	NULL},
 {"mp_energy_market_revenue_single", (getter)Revenue_get_mp_energy_market_revenue_single,(setter)Revenue_set_mp_energy_market_revenue_single,
 	PyDoc_STR("*sequence[sequence]*: Energy market revenue input\n\n**Info:**\nLifetime x 1 [Price($/MWh)]\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_market_percent_gen=1"),
+ 	NULL},
+{"mp_market_percent_gen", (getter)Revenue_get_mp_market_percent_gen,(setter)Revenue_set_mp_market_percent_gen,
+	PyDoc_STR("*float*: Percent of demand to copy to cleared capacity array [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_market_percent_gen=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -13273,6 +13695,30 @@ ElectricityRates_set_ur_monthly_min_charge(VarGroupObject *self, PyObject *value
 }
 
 static PyObject *
+ElectricityRates_get_ur_nb_apply_credit_current_month(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_nb_apply_credit_current_month_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nb_apply_credit_current_month(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_nb_apply_credit_current_month_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_nb_credit_expire(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_nb_credit_expire_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nb_credit_expire(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_nb_credit_expire_nset, self->data_ptr);
+}
+
+static PyObject *
 ElectricityRates_get_ur_nm_credit_month(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_nm_credit_month_nget, self->data_ptr);
@@ -13419,6 +13865,12 @@ static PyGetSetDef ElectricityRates_getset[] = {
  	NULL},
 {"ur_monthly_min_charge", (getter)ElectricityRates_get_ur_monthly_min_charge,(setter)ElectricityRates_set_ur_monthly_min_charge,
 	PyDoc_STR("*float*: Monthly minimum charge [$]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_nb_apply_credit_current_month", (getter)ElectricityRates_get_ur_nb_apply_credit_current_month,(setter)ElectricityRates_set_ur_nb_apply_credit_current_month,
+	PyDoc_STR("*float*: Apply earned credits to balance before rolling over excess         [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_nb_credit_expire", (getter)ElectricityRates_get_ur_nb_credit_expire,(setter)ElectricityRates_set_ur_nb_credit_expire,
+	PyDoc_STR("*float*: Credit is lost upon end of year         [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_nm_credit_month", (getter)ElectricityRates_get_ur_nm_credit_month,(setter)ElectricityRates_set_ur_nm_credit_month,
 	PyDoc_STR("*float*: Month of year end payout (true-up) [mn]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=11\n\n**Required:**\nFalse. Automatically set to 11 if not assigned explicitly or loaded from defaults."),
@@ -13854,7 +14306,7 @@ static PyGetSetDef HybridCosts_getset[] = {
 	PyDoc_STR("*sequence*: Annual AC degradation [%]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"land_area", (getter)HybridCosts_get_land_area,(setter)HybridCosts_set_land_area,
-	PyDoc_STR("*float*: Total land area [acres]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of ``land_area`` depends on the following variables:\n\n\t - 6par_area\n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n\t - batt_power_discharge_max_kwdc\n\t - cec_area\n\t - cec_i_mp_ref\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_c0\n\t - inv_cec_cg_c1\n\t - inv_cec_cg_c2\n\t - inv_cec_cg_c3\n\t - inv_cec_cg_eff_cec\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_pdco\n\t - inv_cec_cg_psco\n\t - inv_cec_cg_vdco\n\t - inv_ds_eff\n\t - inv_ds_paco\n\t - inv_pd_eff\n\t - inv_pd_paco\n\t - inv_snl_c0\n\t - inv_snl_c1\n\t - inv_snl_c2\n\t - inv_snl_c3\n\t - inv_snl_eff_cec\n\t - inv_snl_paco\n\t - inv_snl_pdco\n\t - inv_snl_pso\n\t - inv_snl_vdco\n\t - inverter_count\n\t - inverter_model\n\t - module_model\n\t - mppt_hi_inverter\n\t - mppt_low_inverter\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - sd11par_area\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n\t - subarray1_gcr\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray2_gcr\n\t - subarray2_modules_per_string\n\t - subarray2_nstrings\n\t - subarray3_enable\n\t - subarray3_gcr\n\t - subarray3_modules_per_string\n\t - subarray3_nstrings\n\t - subarray4_enable\n\t - subarray4_gcr\n\t - subarray4_modules_per_string\n\t - subarray4_nstrings\n"),
+	PyDoc_STR("*float*: Total land area [acres]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_capacity", (getter)HybridCosts_get_om_capacity,(setter)HybridCosts_set_om_capacity,
 	PyDoc_STR("*sequence*: Capacity-based O&M amount [$/kWcap]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
@@ -14794,6 +15246,12 @@ Outputs_get_batt_annual_energy_system_loss(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_batt_availability_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_availability_loss_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_batt_bank_installed_capacity(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_Outputs_batt_bank_installed_capacity_nget, self->data_ptr);
@@ -14848,9 +15306,21 @@ Outputs_get_batt_cycles(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_batt_dispatch_period(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_dispatch_period_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_batt_dispatch_sched(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Pvsamv1_Outputs_batt_dispatch_sched_mget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_grid_charge_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_batt_grid_charge_percent_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -15055,6 +15525,18 @@ static PyObject *
 Outputs_get_batt_voltage_cell(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_voltage_cell_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_year1_charge_from_grid(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_batt_year1_charge_from_grid_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_year1_charge_from_system(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_batt_year1_charge_from_system_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -16636,6 +17118,12 @@ Outputs_get_survival_function(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_system_capacity_ac(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_system_capacity_ac_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_system_to_batt(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_system_to_batt_aget, self->data_ptr);
@@ -16733,7 +17221,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: AC lifetime daily loss [kW]"),
  	NULL},
 {"ac_perf_adj_loss", (getter)Outputs_get_ac_perf_adj_loss,(setter)0,
-	PyDoc_STR("*sequence*: AC performance adjustment loss [kW]"),
+	PyDoc_STR("*sequence*: AC availability loss [kW]"),
  	NULL},
 {"ac_transmission_loss", (getter)Outputs_get_ac_transmission_loss,(setter)0,
 	PyDoc_STR("*sequence*: Transmission loss [kW]"),
@@ -16775,7 +17263,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Annual AC loss OND model [kWh/yr]"),
  	NULL},
 {"annual_ac_perf_adj_loss_percent", (getter)Outputs_get_annual_ac_perf_adj_loss_percent,(setter)0,
-	PyDoc_STR("*float*: AC performance adjustment loss [%]"),
+	PyDoc_STR("*float*: AC availability loss [%]"),
  	NULL},
 {"annual_ac_wiring_loss", (getter)Outputs_get_annual_ac_wiring_loss,(setter)0,
 	PyDoc_STR("*float*: AC wiring loss [kWh]"),
@@ -16853,7 +17341,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: DC power optimizer loss [%]"),
  	NULL},
 {"annual_dc_perf_adj_loss_percent", (getter)Outputs_get_annual_dc_perf_adj_loss_percent,(setter)0,
-	PyDoc_STR("*float*: DC performance adjustment loss [%]"),
+	PyDoc_STR("*float*: DC availability loss [%]"),
  	NULL},
 {"annual_dc_snow_loss_percent", (getter)Outputs_get_annual_dc_snow_loss_percent,(setter)0,
 	PyDoc_STR("*float*: DC snow loss [%]"),
@@ -16877,7 +17365,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Subinterval distribution clipping correction loss percent [%]"),
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	PyDoc_STR("*float*: Annual AC energy [kWh]"),
+	PyDoc_STR("*float*: Annual AC energy in Year 1 [kWh]"),
  	NULL},
 {"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
@@ -17122,6 +17610,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"batt_annual_energy_system_loss", (getter)Outputs_get_batt_annual_energy_system_loss,(setter)0,
 	PyDoc_STR("*sequence*: Battery annual system energy loss [kWh]"),
  	NULL},
+{"batt_availability_loss", (getter)Outputs_get_batt_availability_loss,(setter)0,
+	PyDoc_STR("*sequence*: Battery availability loss [%]"),
+ 	NULL},
 {"batt_bank_installed_capacity", (getter)Outputs_get_batt_bank_installed_capacity,(setter)0,
 	PyDoc_STR("*float*: Battery bank installed capacity [kWh]"),
  	NULL},
@@ -17149,8 +17640,14 @@ static PyGetSetDef Outputs_getset[] = {
 {"batt_cycles", (getter)Outputs_get_batt_cycles,(setter)0,
 	PyDoc_STR("*sequence*: Battery number of cycles"),
  	NULL},
+{"batt_dispatch_period", (getter)Outputs_get_batt_dispatch_period,(setter)0,
+	PyDoc_STR("*sequence*: Battery manual dispatch period in this timestep"),
+ 	NULL},
 {"batt_dispatch_sched", (getter)Outputs_get_batt_dispatch_sched,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Battery dispatch schedule"),
+ 	NULL},
+{"batt_grid_charge_percent", (getter)Outputs_get_batt_grid_charge_percent,(setter)0,
+	PyDoc_STR("*float*: Battery charge energy charged from grid [%]"),
  	NULL},
 {"batt_power", (getter)Outputs_get_batt_power,(setter)0,
 	PyDoc_STR("*sequence*: Electricity to/from battery AC [kW]"),
@@ -17253,6 +17750,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"batt_voltage_cell", (getter)Outputs_get_batt_voltage_cell,(setter)0,
 	PyDoc_STR("*sequence*: Battery cell voltage [V]"),
+ 	NULL},
+{"batt_year1_charge_from_grid", (getter)Outputs_get_batt_year1_charge_from_grid,(setter)0,
+	PyDoc_STR("*float*: Battery annual energy charged from grid (year 1) [kWh]"),
+ 	NULL},
+{"batt_year1_charge_from_system", (getter)Outputs_get_batt_year1_charge_from_system,(setter)0,
+	PyDoc_STR("*float*: Battery annual energy charged from system (year 1) [kWh]"),
  	NULL},
 {"bifacial_electrical_mismatch", (getter)Outputs_get_bifacial_electrical_mismatch,(setter)0,
 	PyDoc_STR("*sequence*: Array bifacial electrical mismatch loss [kW]"),
@@ -17429,10 +17932,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Critical load unmet percentage [%]"),
  	NULL},
 {"monthly_dc", (getter)Outputs_get_monthly_dc,(setter)0,
-	PyDoc_STR("*sequence*: DC energy [kWh/mo]"),
+	PyDoc_STR("*sequence*: Monthly DC energy in Year 1 [kWh/mo]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	PyDoc_STR("*sequence*: AC energy gross [kWh/mo]"),
+	PyDoc_STR("*sequence*: Monthly AC energy in Year 1 [kWh/mo]"),
  	NULL},
 {"monthly_grid_to_batt", (getter)Outputs_get_monthly_grid_to_batt,(setter)0,
 	PyDoc_STR("*sequence*: Energy to battery from grid [kWh]"),
@@ -17510,10 +18013,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Array POA front-side beam radiation nominal [kW]"),
  	NULL},
 {"poa_eff", (getter)Outputs_get_poa_eff,(setter)0,
-	PyDoc_STR("*sequence*: Array POA radiation total after reflection (IAM) [kW]"),
+	PyDoc_STR("*sequence*: Array POA radiation total after shading soiling reflection (IAM) [kW]"),
  	NULL},
 {"poa_front", (getter)Outputs_get_poa_front,(setter)0,
-	PyDoc_STR("*sequence*: Array POA front-side total radiation after reflection (IAM) [kW]"),
+	PyDoc_STR("*sequence*: Array POA front-side total radiation after shading soiling reflection (IAM) [kW]"),
  	NULL},
 {"poa_nom", (getter)Outputs_get_poa_nom,(setter)0,
 	PyDoc_STR("*sequence*: Array POA front-side total radiation nominal [kW]"),
@@ -17540,10 +18043,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Array POA rear-side radiation blocked by rear soiling [kW]"),
  	NULL},
 {"poa_shaded", (getter)Outputs_get_poa_shaded,(setter)0,
-	PyDoc_STR("*sequence*: Array POA front-side total radiation after shading only [kW]"),
+	PyDoc_STR("*sequence*: Array POA front-side total radiation after shading [kW]"),
  	NULL},
 {"poa_shaded_soiled", (getter)Outputs_get_poa_shaded_soiled,(setter)0,
-	PyDoc_STR("*sequence*: Array POA front-side total radiation after shading and soiling [kW]"),
+	PyDoc_STR("*sequence*: Array POA front-side total radiation after shading soiling [kW]"),
  	NULL},
 {"resilience_hrs", (getter)Outputs_get_resilience_hrs,(setter)0,
 	PyDoc_STR("*sequence*: Hours of autonomy during grid outage at each timestep [hr]"),
@@ -17648,7 +18151,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Subarray 1 diffuse POA clearsky irradiance [W/m2]"),
  	NULL},
 {"subarray1_poa_eff", (getter)Outputs_get_subarray1_poa_eff,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 1 POA total irradiance after reflection (IAM) [W/m2]"),
+	PyDoc_STR("*sequence*: Subarray 1 POA total irradiance after shading soiling reflection (IAM) [W/m2]"),
  	NULL},
 {"subarray1_poa_eff_beam", (getter)Outputs_get_subarray1_poa_eff_beam,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 1 POA front beam irradiance after shading and soiling [W/m2]"),
@@ -17657,7 +18160,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Subarray 1 POA front diffuse irradiance after shading and soiling [W/m2]"),
  	NULL},
 {"subarray1_poa_front", (getter)Outputs_get_subarray1_poa_front,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 1 POA front total irradiance after reflection (IAM) [W/m2]"),
+	PyDoc_STR("*sequence*: Subarray 1 POA front total irradiance after shading soiling reflection (IAM) [W/m2]"),
  	NULL},
 {"subarray1_poa_ground_front_cs", (getter)Outputs_get_subarray1_poa_ground_front_cs,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 1 ground reflected POA clearsky irradiance [W/m2]"),
@@ -17675,13 +18178,13 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Subarray 1 POA spatial rear total irradiance after reflection (IAM) [W/m2]"),
  	NULL},
 {"subarray1_poa_shaded", (getter)Outputs_get_subarray1_poa_shaded,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 1 POA front total irradiance after shading only [W/m2]"),
+	PyDoc_STR("*sequence*: Subarray 1 POA front total irradiance after shading [W/m2]"),
  	NULL},
 {"subarray1_poa_shaded_soiled", (getter)Outputs_get_subarray1_poa_shaded_soiled,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 1 POA front total irradiance after shading and soiling [W/m2]"),
+	PyDoc_STR("*sequence*: Subarray 1 POA front total irradiance after shading soiling [W/m2]"),
  	NULL},
 {"subarray1_snow_coverage", (getter)Outputs_get_subarray1_snow_coverage,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 1 Snow cover [0..1]"),
+	PyDoc_STR("*sequence*: Subarray 1 Fraction of row covered by snow [0..1]"),
  	NULL},
 {"subarray1_snow_loss", (getter)Outputs_get_subarray1_snow_loss,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 1 Snow cover DC power loss [kW]"),
@@ -17756,7 +18259,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Subarray 2 diffuse POA clearsky irradiance [W/m2]"),
  	NULL},
 {"subarray2_poa_eff", (getter)Outputs_get_subarray2_poa_eff,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 2 POA total irradiance after module reflection (IAM) [W/m2]"),
+	PyDoc_STR("*sequence*: Subarray 2 POA total irradiance after shading soiling reflection (IAM) [W/m2]"),
  	NULL},
 {"subarray2_poa_eff_beam", (getter)Outputs_get_subarray2_poa_eff_beam,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 2 POA front beam irradiance after shading and soiling [W/m2]"),
@@ -17765,7 +18268,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Subarray 2 POA front diffuse irradiance after shading and soiling [W/m2]"),
  	NULL},
 {"subarray2_poa_front", (getter)Outputs_get_subarray2_poa_front,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 2 POA front total irradiance after reflection (IAM) [W/m2]"),
+	PyDoc_STR("*sequence*: Subarray 2 POA front total irradiance after shading soiling reflection (IAM) [W/m2]"),
  	NULL},
 {"subarray2_poa_ground_front_cs", (getter)Outputs_get_subarray2_poa_ground_front_cs,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 2 ground reflected POA clearsky irradiance [W/m2]"),
@@ -17783,13 +18286,13 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Subarray 2 POA spatial rear total irradiance after reflection (IAM) [W/m2]"),
  	NULL},
 {"subarray2_poa_shaded", (getter)Outputs_get_subarray2_poa_shaded,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 2 POA front total irradiance after shading only [W/m2]"),
+	PyDoc_STR("*sequence*: Subarray 2 POA front total irradiance after shading [W/m2]"),
  	NULL},
 {"subarray2_poa_shaded_soiled", (getter)Outputs_get_subarray2_poa_shaded_soiled,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 2 POA front total irradiance after shading and soiling [W/m2]"),
+	PyDoc_STR("*sequence*: Subarray 2 POA front total irradiance after shading soiling [W/m2]"),
  	NULL},
 {"subarray2_snow_coverage", (getter)Outputs_get_subarray2_snow_coverage,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 2 Snow cover [0..1]"),
+	PyDoc_STR("*sequence*: Subarray 2 Fraction of row covered by snow [0..1]"),
  	NULL},
 {"subarray2_snow_loss", (getter)Outputs_get_subarray2_snow_loss,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 2 Snow cover DC power loss [kW]"),
@@ -17864,7 +18367,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Subarray 3 diffuse POA clearsky irradiance [W/m2]"),
  	NULL},
 {"subarray3_poa_eff", (getter)Outputs_get_subarray3_poa_eff,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 3 POA total irradiance after reflection (IAM) [W/m2]"),
+	PyDoc_STR("*sequence*: Subarray 3 POA total irradiance after shading soiling reflection (IAM) [W/m2]"),
  	NULL},
 {"subarray3_poa_eff_beam", (getter)Outputs_get_subarray3_poa_eff_beam,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 3 POA front beam irradiance after shading and soiling [W/m2]"),
@@ -17873,7 +18376,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Subarray 3 POA front diffuse irradiance after shading and soiling [W/m2]"),
  	NULL},
 {"subarray3_poa_front", (getter)Outputs_get_subarray3_poa_front,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 3 POA front total irradiance after reflection (IAM) [W/m2]"),
+	PyDoc_STR("*sequence*: Subarray 3 POA front total irradiance after shading soiling reflection (IAM) [W/m2]"),
  	NULL},
 {"subarray3_poa_ground_front_cs", (getter)Outputs_get_subarray3_poa_ground_front_cs,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 3 ground reflected POA clearsky irradiance [W/m2]"),
@@ -17891,13 +18394,13 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Subarray 3 POA spatial rear total irradiance after reflection (IAM) [W/m2]"),
  	NULL},
 {"subarray3_poa_shaded", (getter)Outputs_get_subarray3_poa_shaded,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 3 POA front total irradiance after shading only [W/m2]"),
+	PyDoc_STR("*sequence*: Subarray 3 POA front total irradiance after shading [W/m2]"),
  	NULL},
 {"subarray3_poa_shaded_soiled", (getter)Outputs_get_subarray3_poa_shaded_soiled,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 3 POA front total irradiance after shading and soiling [W/m2]"),
+	PyDoc_STR("*sequence*: Subarray 3 POA front total irradiance after shading soiling [W/m2]"),
  	NULL},
 {"subarray3_snow_coverage", (getter)Outputs_get_subarray3_snow_coverage,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 3 Snow cover [0..1]"),
+	PyDoc_STR("*sequence*: Subarray 3 Fraction of row covered by snow [0..1]"),
  	NULL},
 {"subarray3_snow_loss", (getter)Outputs_get_subarray3_snow_loss,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 3 Snow cover DC power loss [kW]"),
@@ -17972,7 +18475,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Subarray 4 diffuse POA clearsky irradiance [W/m2]"),
  	NULL},
 {"subarray4_poa_eff", (getter)Outputs_get_subarray4_poa_eff,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 4 POA total irradiance after reflection (IAM) [W/m2]"),
+	PyDoc_STR("*sequence*: Subarray 4 POA total irradiance after shading soiling reflection (IAM) [W/m2]"),
  	NULL},
 {"subarray4_poa_eff_beam", (getter)Outputs_get_subarray4_poa_eff_beam,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 4 POA front beam irradiance after shading and soiling [W/m2]"),
@@ -17981,7 +18484,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Subarray 4 POA front diffuse irradiance after shading and soiling [W/m2]"),
  	NULL},
 {"subarray4_poa_front", (getter)Outputs_get_subarray4_poa_front,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 4 POA front total irradiance after reflection (IAM) [W/m2]"),
+	PyDoc_STR("*sequence*: Subarray 4 POA front total irradiance after shading soiling reflection (IAM) [W/m2]"),
  	NULL},
 {"subarray4_poa_ground_front_cs", (getter)Outputs_get_subarray4_poa_ground_front_cs,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 4 ground reflected POA clearsky irradiance [W/m2]"),
@@ -17999,13 +18502,13 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Subarray 4 POA spatial rear total irradiance after reflection (IAM) [W/m2]"),
  	NULL},
 {"subarray4_poa_shaded", (getter)Outputs_get_subarray4_poa_shaded,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 4 POA front total irradiance after shading only [W/m2]"),
+	PyDoc_STR("*sequence*: Subarray 4 POA front total irradiance after shading [W/m2]"),
  	NULL},
 {"subarray4_poa_shaded_soiled", (getter)Outputs_get_subarray4_poa_shaded_soiled,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 4 POA front total irradiance after shading and soiling [W/m2]"),
+	PyDoc_STR("*sequence*: Subarray 4 POA front total irradiance after shading soiling [W/m2]"),
  	NULL},
 {"subarray4_snow_coverage", (getter)Outputs_get_subarray4_snow_coverage,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 4 Snow cover [0..1]"),
+	PyDoc_STR("*sequence*: Subarray 4 Fraction of row covered by snow [0..1]"),
  	NULL},
 {"subarray4_snow_loss", (getter)Outputs_get_subarray4_snow_loss,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 4 Snow cover DC power loss [kW]"),
@@ -18042,6 +18545,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"survival_function", (getter)Outputs_get_survival_function,(setter)0,
 	PyDoc_STR("*sequence*: Hours of autonomy during grid outage survival function"),
+ 	NULL},
+{"system_capacity_ac", (getter)Outputs_get_system_capacity_ac,(setter)0,
+	PyDoc_STR("*float*: System nameplate AC rating [kWac]"),
  	NULL},
 {"system_to_batt", (getter)Outputs_get_system_to_batt,(setter)0,
 	PyDoc_STR("*sequence*: Electricity to battery from system AC [kW]"),
@@ -18239,20 +18745,9 @@ newPvsamv1Object(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "PVLosses", PVLosses_obj);
 	Py_DECREF(PVLosses_obj);
 
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-
-	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
-	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
-	Py_XDECREF(data_cap);
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (!Adjust_obj){
-		PyErr_SetString(PyExc_Exception, "Couldn't create AdjustmentFactorsObject\n");
-		return NULL;
-	}
-
-	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
-	Py_DECREF(Adjust_obj);
+	PyObject* AdjustmentFactors_obj = AdjustmentFactors_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "AdjustmentFactors", AdjustmentFactors_obj);
+	Py_DECREF(AdjustmentFactors_obj);
 
 	PyObject* BatteryCell_obj = BatteryCell_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "BatteryCell", BatteryCell_obj);
@@ -18736,6 +19231,13 @@ Pvsamv1Module_exec(PyObject *m)
 				"PVLosses",
 				(PyObject*)&PVLosses_Type);
 	Py_DECREF(&PVLosses_Type);
+
+	/// Add the AdjustmentFactors type object to Pvsamv1_Type
+	if (PyType_Ready(&AdjustmentFactors_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Pvsamv1_Type.tp_dict,
+				"AdjustmentFactors",
+				(PyObject*)&AdjustmentFactors_Type);
+	Py_DECREF(&AdjustmentFactors_Type);
 
 	/// Add the BatteryCell type object to Pvsamv1_Type
 	if (PyType_Ready(&BatteryCell_Type) < 0) { goto fail; }

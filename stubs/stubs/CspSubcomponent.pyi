@@ -2,6 +2,9 @@ class CspSubcomponent(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class CspSubcomponent(object):
 		pass
 
 	class System(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -39,7 +45,10 @@ class CspSubcomponent(object):
 
 
 	class Weather(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -53,7 +62,10 @@ class CspSubcomponent(object):
 
 
 	class TES(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -65,26 +77,69 @@ class CspSubcomponent(object):
 
 		T_sink_out = tuple
 		T_src_out = tuple
+		T_tank_cold_ini = float
+		T_tank_hot_ini = float
 		cold_tank_Thtr = float
 		cold_tank_max_heat = float
+		d_tank_in = float
 		dt_hot = float
-		h_tank = float
+		h_tank_in = float
 		h_tank_min = float
 		hot_tank_Thtr = float
 		hot_tank_bypassed = tuple
 		hot_tank_max_heat = float
 		init_hot_htf_percent = float
+		is_h_tank_fixed = float
 		mdot_sink = tuple
 		mdot_src = tuple
 		store_fl_props = tuple
 		store_fluid = float
 		tank_pairs = float
+		tes_cyl_piston_loss_poly = tuple
+		tes_cyl_tank_cp = float
+		tes_cyl_tank_dens = float
+		tes_cyl_tank_insul_percent = float
+		tes_cyl_tank_thick = float
+		tes_n_tsteps = float
+		tes_pb_T_charge_min = float
+		tes_pb_T_cold_delta = float
+		tes_pb_T_grad_ini = tuple
+		tes_pb_T_hot_delta = float
+		tes_pb_cp_solid = float
+		tes_pb_dens_solid = float
+		tes_pb_f_oversize = float
+		tes_pb_k_eff = float
+		tes_pb_n_xsteps = float
+		tes_pb_void_frac = float
+		tes_type = float
 		tshours = float
 		u_tank = float
 
 
+	class Powerblock(object):
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		P_ref = float
+		eta_ref = float
+		pb_pump_coef = float
+
+
 	class SolarField(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -103,24 +158,11 @@ class CspSubcomponent(object):
 		field_fl_props = tuple
 
 
-	class Powerblock(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		P_ref = float
-		eta_ref = float
-		pb_pump_coef = float
-
-
 	class Controller(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -145,7 +187,10 @@ class CspSubcomponent(object):
 
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -155,10 +200,35 @@ class CspSubcomponent(object):
 			pass
 
 
+		T_grad_final = tuple
 		T_sink_in = tuple
 		T_src_in = tuple
 		T_tank_cold = tuple
 		T_tank_hot = tuple
+		hot_tank_mass_perc = tuple
+		hot_tank_vol_frac = tuple
+		piston_frac = tuple
+		piston_loc = tuple
+		q_ch_from_htf = tuple
+		q_dc_to_htf = tuple
+		q_dot_ch_from_htf = tuple
+		q_dot_dc_to_htf = tuple
+		tes_E_cold = tuple
+		tes_E_hot = tuple
+		tes_V_cold = tuple
+		tes_V_hot = tuple
+		tes_diameter = float
+		tes_error = tuple
+		tes_error_corrected = tuple
+		tes_error_percent = tuple
+		tes_exp_length = tuple
+		tes_exp_wall_mass = tuple
+		tes_height = float
+		tes_leak_error = tuple
+		tes_mass_cold = tuple
+		tes_mass_hot = tuple
+		tes_radius = float
+		tes_wall_error = tuple
 
 
 

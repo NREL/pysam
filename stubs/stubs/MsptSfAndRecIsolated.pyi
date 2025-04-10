@@ -2,6 +2,9 @@ class MsptSfAndRecIsolated(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class MsptSfAndRecIsolated(object):
 		pass
 
 	class Simulation(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -38,7 +44,10 @@ class MsptSfAndRecIsolated(object):
 
 
 	class TowerAndReceiver(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -82,7 +91,10 @@ class MsptSfAndRecIsolated(object):
 
 
 	class ReceiverControl(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -98,7 +110,10 @@ class MsptSfAndRecIsolated(object):
 
 
 	class Timeseries(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -112,7 +127,10 @@ class MsptSfAndRecIsolated(object):
 
 
 	class Weather(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -130,7 +148,10 @@ class MsptSfAndRecIsolated(object):
 
 
 	class Flux(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -144,7 +165,10 @@ class MsptSfAndRecIsolated(object):
 
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:

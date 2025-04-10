@@ -23,10 +23,10 @@ Functions
 .. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph
 	:members:
 
-SystemControl Group
---------------------
+SysControl Group
+-----------------
 
-.. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.SystemControl
+.. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.SysControl
 	:members:
 
 Weather Group
@@ -71,12 +71,6 @@ Tou Group
 .. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.Tou
 	:members:
 
-SysControl Group
------------------
-
-.. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.SysControl
-	:members:
-
 FinancialModel Group
 ---------------------
 
@@ -95,6 +89,12 @@ TimeOfDeliveryFactors Group
 .. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.TimeOfDeliveryFactors
 	:members:
 
+Revenue Group
+--------------
+
+.. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.Revenue
+	:members:
+
 CapitalCosts Group
 -------------------
 
@@ -110,9 +110,20 @@ FinancialParameters Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.AdjustmentFactors
 	:members:
-	:noindex:
+
+ElectricityRates Group
+-----------------------
+
+.. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.ElectricityRates
+	:members:
+
+Lifetime Group
+---------------
+
+.. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.Lifetime
+	:members:
 
 Outputs Group
 --------------
