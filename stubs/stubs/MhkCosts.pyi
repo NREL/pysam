@@ -2,6 +2,9 @@ class MhkCosts(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class MhkCosts(object):
 		pass
 
 	class MHKCosts(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -48,6 +54,7 @@ class MhkCosts(object):
 		export_cable_system_cost_input = float
 		export_cable_system_cost_method = float
 		inter_array_cable_length = float
+		lib_tidal_device = str
 		lib_wave_device = str
 		library_or_input_wec = float
 		marine_energy_tech = float
@@ -70,7 +77,10 @@ class MhkCosts(object):
 
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:

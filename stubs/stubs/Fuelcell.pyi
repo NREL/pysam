@@ -2,6 +2,9 @@ class Fuelcell(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class Fuelcell(object):
 		pass
 
 	class Lifetime(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -39,7 +45,10 @@ class Fuelcell(object):
 
 
 	class Common(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -55,7 +64,10 @@ class Fuelcell(object):
 
 
 	class Load(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -69,7 +81,10 @@ class Fuelcell(object):
 
 
 	class FuelCell(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -115,7 +130,10 @@ class Fuelcell(object):
 
 
 	class HybridCosts(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -146,7 +164,10 @@ class Fuelcell(object):
 
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:

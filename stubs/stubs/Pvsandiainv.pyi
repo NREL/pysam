@@ -2,6 +2,9 @@ class Pvsandiainv(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -24,7 +27,10 @@ class Pvsandiainv(object):
 		pass
 
 	class SandiaInverterModel(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -48,7 +54,10 @@ class Pvsandiainv(object):
 
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:

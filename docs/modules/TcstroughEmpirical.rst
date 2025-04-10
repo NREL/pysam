@@ -158,9 +158,8 @@ Parasitic Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors
 	:members:
-	:noindex:
 
 Outputs Group
 --------------

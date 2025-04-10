@@ -1,4 +1,4 @@
-class Sco2CompCurves(object):
+class CspHeatsink(object):
 	def assign(self, dict):
 		pass
 
@@ -26,7 +26,7 @@ class Sco2CompCurves(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	class Common(object):
+	class System(object):
 		def assign(self, dict): 
 			pass
 	
@@ -40,9 +40,7 @@ class Sco2CompCurves(object):
 			pass
 
 
-		P_comp_in = float
-		T_comp_in = float
-		comp_type = float
+		t_step = float
 
 
 	class Outputs(object):
@@ -59,29 +57,20 @@ class Sco2CompCurves(object):
 			pass
 
 
-		eta = tuple
-		eta_ND = tuple
-		eta_norm_design = float
-		phi = tuple
-		phi_ND = tuple
-		phi_design = float
-		psi = tuple
-		psi_ND = tuple
-		psi_design = float
 
 
 
 
-def default(config) -> Sco2CompCurves:
+def default(config) -> CspHeatsink:
 	pass
 
-def new() -> Sco2CompCurves:
+def new() -> CspHeatsink:
 	pass
 
-def wrap(ssc_data_t) -> Sco2CompCurves:
+def wrap(ssc_data_t) -> CspHeatsink:
 	pass
 
-def from_existing(model, config="") -> Sco2CompCurves:
+def from_existing(model, config="") -> CspHeatsink:
 	pass
 
 __loader__ = None 

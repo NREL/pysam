@@ -40,9 +40,8 @@ Lifetime Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.CustomGeneration.CustomGeneration.AdjustmentFactors
 	:members:
-	:noindex:
 
 HybridCosts Group
 ------------------

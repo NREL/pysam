@@ -130,9 +130,8 @@ GeoHourly Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.Geothermal.Geothermal.AdjustmentFactors
 	:members:
-	:noindex:
 
 Outputs Group
 --------------
