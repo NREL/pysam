@@ -16,6 +16,9 @@
 :doc:`../modules/Cashloan` (HD)
       Residential/Commerical Finance model.
 
+:doc:`../modules/CashloanHeat` (HD)
+      Residential/Commerical Finance model for heat.
+
 :doc:`../modules/CbConstructionFinancing` (HD)
       Construction financing cost calculations
 
@@ -33,6 +36,9 @@
 
 :doc:`../modules/CspSubcomponent`
       CSP subcomponents
+
+:doc:`../modules/CustomGeneration` (HD)
+      Custom Generation Profile (formerly Generic System)
 
 :doc:`../modules/Equpartflip`
       All Equity Partnership Flip Financial Model
@@ -52,14 +58,11 @@
 :doc:`../modules/Fuelcell`
       Fuel cell model
 
-:doc:`../modules/GenericSystem`
-      Generic System
-
 :doc:`../modules/Geothermal`
       Geothermal monthly and hourly models using general power block code from TRNSYS Type 224 code by M.Wagner, and some GETEM model code.
 
 :doc:`../modules/GeothermalCosts` (HD)
-      Geothermal monthly and hourly models using general power block code from TRNSYS Type 224 code by M.Wagner, and some GETEM model code.
+      Geothermal cost equations.
 
 :doc:`../modules/Grid` (HD)
       Grid model
@@ -178,6 +181,9 @@
 :doc:`../modules/Singleowner`
       Single Owner Financial Model
 
+:doc:`../modules/SingleownerHeat` (HD)
+      Single Owner Financial Model for Heat
+
 :doc:`../modules/SixParsolve`
       Solver for CEC/6 parameter PV module coefficients
 
@@ -214,6 +220,9 @@
 :doc:`../modules/Thermalrate` (HD)
       Thermal flat rate structure net revenue calculator
 
+:doc:`../modules/ThermalrateIph` (HD)
+      Thermal flat rate structure net revenue calculator
+
 :doc:`../modules/Thirdpartyownership`
       Residential/Commercial 3rd Party Ownership Finance model.
 
@@ -226,14 +235,8 @@
 :doc:`../modules/TroughPhysical`
       Physical trough applications
 
-:doc:`../modules/TroughPhysicalCspSolver` (HD)
-      Physical trough using CSP Solver
-
 :doc:`../modules/TroughPhysicalIph` (HD)
       Physical trough iph applications
-
-:doc:`../modules/TroughPhysicalProcessHeat`
-      Physical trough process heat applications
 
 :doc:`../modules/UiTesCalcs` (HD)
       Calculates values for all calculated values on UI TES page(s)
@@ -299,19 +302,20 @@
     ../modules/Belpe.rst
     ../modules/Biomass.rst
     ../modules/Cashloan.rst
+    ../modules/CashloanHeat.rst
     ../modules/CbConstructionFinancing.rst
     ../modules/CbEmpiricalHceHeatLoss.rst
     ../modules/CbMsptSystemCosts.rst
     ../modules/Communitysolar.rst
     ../modules/CspDsgLfUi.rst
     ../modules/CspSubcomponent.rst
+    ../modules/CustomGeneration.rst
     ../modules/Equpartflip.rst
     ../modules/EtesElectricResistance.rst
     ../modules/EtesPtes.rst
     ../modules/FresnelPhysical.rst
     ../modules/FresnelPhysicalIph.rst
     ../modules/Fuelcell.rst
-    ../modules/GenericSystem.rst
     ../modules/Geothermal.rst
     ../modules/GeothermalCosts.rst
     ../modules/Grid.rst
@@ -353,6 +357,7 @@
     ../modules/Singlediode.rst
     ../modules/Singlediodeparams.rst
     ../modules/Singleowner.rst
+    ../modules/SingleownerHeat.rst
     ../modules/SixParsolve.rst
     ../modules/Snowmodel.rst
     ../modules/Solarpilot.rst
@@ -365,13 +370,12 @@
     ../modules/TcstroughPhysical.rst
     ../modules/TestUdPowerCycle.rst
     ../modules/Thermalrate.rst
+    ../modules/ThermalrateIph.rst
     ../modules/Thirdpartyownership.rst
     ../modules/TidalFileReader.rst
     ../modules/Timeseq.rst
     ../modules/TroughPhysical.rst
-    ../modules/TroughPhysicalCspSolver.rst
     ../modules/TroughPhysicalIph.rst
-    ../modules/TroughPhysicalProcessHeat.rst
     ../modules/UiTesCalcs.rst
     ../modules/UiUdpcChecks.rst
     ../modules/UserHtfComparison.rst

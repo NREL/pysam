@@ -409,6 +409,8 @@ class Singleowner(object):
 		ur_metering_option = float
 		ur_monthly_fixed_charge = float
 		ur_monthly_min_charge = float
+		ur_nb_apply_credit_current_month = float
+		ur_nb_credit_expire = float
 		ur_nm_credit_month = float
 		ur_nm_credit_rollover = float
 		ur_nm_yearend_sell_rate = float
@@ -463,6 +465,7 @@ class Singleowner(object):
 			pass
 
 
+		inflation_rate = float
 		system_use_lifetime_output = float
 
 
@@ -1172,6 +1175,8 @@ class Singleowner(object):
 		ppa_escalation = float
 		ppa_multipliers = tuple
 		ppa_price = float
+		pre_depr_alloc_basis = float
+		pre_itc_qual_basis = float
 		present_value_fuel = float
 		present_value_insandproptax = float
 		present_value_oandm = float

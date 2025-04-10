@@ -4,7 +4,7 @@ Any list of floats with length analysis_period * steps_in_year can be used for d
 
 Additional financial models, inputs, and outputs can be found at https://nrel-pysam.readthedocs.io/en/master/modules/Battery.html
 
-Most recently tested against PySAM 5.1.0
+Most recently tested against PySAM 6.0.0
 
 @author: brtietz
 """
@@ -16,7 +16,7 @@ steps_in_year = 8760  # currently hours in year, multiply this for subhourly tes
 days_in_year = 365
 
 # Create the model using PySAM's defaults
-battery = battery_model.default("GenericBatterySingleOwner")
+battery = battery_model.default("CustomGenerationBatterySingleOwner")
 
 # Set up inputs needed by the model.
 battery.BatteryCell.batt_room_temperature_celsius = [20] * (steps_in_year * analysis_period)  # degrees C, room temperature. Would normally come from weather file

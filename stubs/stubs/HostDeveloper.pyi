@@ -361,8 +361,6 @@ class HostDeveloper(object):
 
 
 		annual_energy_value = tuple
-		elec_cost_with_system = tuple
-		elec_cost_without_system = tuple
 		host_real_discount_rate = float
 
 
@@ -413,7 +411,6 @@ class HostDeveloper(object):
 			pass
 
 
-		annual_energy_value = tuple
 		annual_thermal_value = tuple
 		degradation = tuple
 		gen = tuple
@@ -1163,6 +1160,8 @@ class HostDeveloper(object):
 		ppa_escalation = float
 		ppa_multipliers = tuple
 		ppa_price = float
+		pre_depr_alloc_basis = float
+		pre_itc_qual_basis = float
 		present_value_fuel = float
 		present_value_insandproptax = float
 		present_value_oandm = float

@@ -1052,6 +1052,8 @@ class Merchantplant(object):
 		npv_sta_pbi_income = float
 		npv_thermal_value = float
 		npv_uti_pbi_income = float
+		pre_depr_alloc_basis = float
+		pre_itc_qual_basis = float
 		present_value_fuel = float
 		present_value_insandproptax = float
 		present_value_oandm = float

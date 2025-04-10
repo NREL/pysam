@@ -730,7 +730,7 @@ static PyGetSetDef SystemDesign_getset[] = {
 	PyDoc_STR("*float*: Inverter efficiency at rated power [%]\n\n**Constraints:**\nMIN=90,MAX=99.5\n\n**Required:**\nFalse. Automatically set to 96 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"losses", (getter)SystemDesign_get_losses,(setter)SystemDesign_set_losses,
-	PyDoc_STR("*float*: Other DC losses [%]\n\n**Info:**\ntotal system losses\n\n**Constraints:**\nMIN=-5,MAX=99\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: DC system losses [%]\n\n**Info:**\ntotal system losses\n\n**Constraints:**\nMIN=-5,MAX=99\n\n**Required:**\nTrue"),
  	NULL},
 {"module_type", (getter)SystemDesign_get_module_type,(setter)SystemDesign_set_module_type,
 	PyDoc_STR("*float*: Module type [0/1/2]\n\n**Info:**\nstandard,premium,thin film\n\n**Constraints:**\nMIN=0,MAX=2,INTEGER\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
@@ -1289,7 +1289,7 @@ static PyGetSetDef HybridCosts_getset[] = {
 	PyDoc_STR("*sequence*: Annual AC degradation [%]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"land_area", (getter)HybridCosts_get_land_area,(setter)HybridCosts_set_land_area,
-	PyDoc_STR("*float*: Total land area [acres]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of ``land_area`` depends on the following variables:\n\n\t - dc_ac_ratio\n\t - gcr\n\t - module_type\n"),
+	PyDoc_STR("*float*: Total land area [acres]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_capacity", (getter)HybridCosts_get_om_capacity,(setter)HybridCosts_set_om_capacity,
 	PyDoc_STR("*sequence*: Capacity-based O&M amount [$/kWcap]\n\n**Info:**\n!battery,!fuelcell\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
@@ -1686,6 +1686,12 @@ Outputs_get_snow(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_snow_cover(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_snow_cover_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_soiling_f(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_soiling_f_aget, self->data_ptr);
@@ -1731,6 +1737,12 @@ static PyObject *
 Outputs_get_sunup(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_sunup_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_system_capacity_ac(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Outputs_system_capacity_ac_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1780,7 +1792,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Annual AC output before system availability [kWh]"),
  	NULL},
 {"ac_monthly", (getter)Outputs_get_ac_monthly,(setter)0,
-	PyDoc_STR("*sequence*: AC output [kWh]"),
+	PyDoc_STR("*sequence*: Monthly AC energy [kWh]"),
  	NULL},
 {"ac_pre_adjust", (getter)Outputs_get_ac_pre_adjust,(setter)0,
 	PyDoc_STR("*sequence*: AC inverter output power before system availability [W]"),
@@ -1789,7 +1801,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Albedo"),
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	PyDoc_STR("*float*: Annual energy [kWh]"),
+	PyDoc_STR("*float*: Annual AC energy in Year 1 [kWh]"),
  	NULL},
 {"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
@@ -1837,7 +1849,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: DC inverter input power [W]"),
  	NULL},
 {"dc_monthly", (getter)Outputs_get_dc_monthly,(setter)0,
-	PyDoc_STR("*sequence*: DC output [kWh]"),
+	PyDoc_STR("*sequence*: Monthly DC energy [kWh]"),
  	NULL},
 {"dcsnowderate", (getter)Outputs_get_dcsnowderate,(setter)0,
 	PyDoc_STR("*sequence*: DC power loss due to snow [%]"),
@@ -1876,7 +1888,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Longitude [degrees]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	PyDoc_STR("*sequence*: Monthly energy [kWh]"),
+	PyDoc_STR("*sequence*: Monthly AC energy in Year 1 [kWh]"),
  	NULL},
 {"percent_complete", (getter)Outputs_get_percent_complete,(setter)0,
 	PyDoc_STR("*float*: Estimated percent of total completed simulation [%]"),
@@ -1892,6 +1904,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"snow", (getter)Outputs_get_snow,(setter)0,
 	PyDoc_STR("*sequence*: Weather file snow depth [cm]"),
+ 	NULL},
+{"snow_cover", (getter)Outputs_get_snow_cover,(setter)0,
+	PyDoc_STR("*sequence*: Fraction of row covered by snow [0..1]"),
  	NULL},
 {"soiling_f", (getter)Outputs_get_soiling_f,(setter)0,
 	PyDoc_STR("*sequence*: Soiling factor"),
@@ -1916,6 +1931,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"sunup", (getter)Outputs_get_sunup,(setter)0,
 	PyDoc_STR("*sequence*: Sun up over horizon [0/1]"),
+ 	NULL},
+{"system_capacity_ac", (getter)Outputs_get_system_capacity_ac,(setter)0,
+	PyDoc_STR("*float*: System nameplate AC rating [kWac]"),
  	NULL},
 {"tamb", (getter)Outputs_get_tamb,(setter)0,
 	PyDoc_STR("*sequence*: Weather file ambient temperature [C]"),
@@ -2303,7 +2321,7 @@ static PyMethodDef Pvwattsv8Module_methods[] = {
 		{"new",             Pvwattsv8_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Pvwattsv8")},
 		{"default",             Pvwattsv8_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Pvwattsv8\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"FuelCellCommercial\"*\n\n		- *\"FuelCellSingleOwner\"*\n\n		- *\"GenericPVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"GenericPVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsBatteryCommercial\"*\n\n		- *\"PVWattsBatteryHostDeveloper\"*\n\n		- *\"PVWattsBatteryResidential\"*\n\n		- *\"PVWattsBatteryThirdParty\"*\n\n		- *\"PVWattsWindBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsAllEquityPartnershipFlip\"*\n\n		- *\"PVWattsCommercial\"*\n\n		- *\"PVWattsCommunitySolar\"*\n\n		- *\"PVWattsHostDeveloper\"*\n\n		- *\"PVWattsLCOECalculator\"*\n\n		- *\"PVWattsLeveragedPartnershipFlip\"*\n\n		- *\"PVWattsMerchantPlant\"*\n\n		- *\"PVWattsNone\"*\n\n		- *\"PVWattsResidential\"*\n\n		- *\"PVWattsSaleLeaseback\"*\n\n		- *\"PVWattsSingleOwner\"*\n\n		- *\"PVWattsThirdParty\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> Pvwattsv8\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"FuelCellCommercial\"*\n\n		- *\"FuelCellSingleOwner\"*\n\n		- *\"PVWattsBatteryCommercial\"*\n\n		- *\"PVWattsBatteryHostDeveloper\"*\n\n		- *\"PVWattsBatteryResidential\"*\n\n		- *\"PVWattsBatteryThirdParty\"*\n\n		- *\"PVWattsWindBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsAllEquityPartnershipFlip\"*\n\n		- *\"PVWattsCommercial\"*\n\n		- *\"PVWattsCommunitySolar\"*\n\n		- *\"PVWattsHostDeveloper\"*\n\n		- *\"PVWattsLCOECalculator\"*\n\n		- *\"PVWattsLeveragedPartnershipFlip\"*\n\n		- *\"PVWattsMerchantPlant\"*\n\n		- *\"PVWattsNone\"*\n\n		- *\"PVWattsResidential\"*\n\n		- *\"PVWattsSaleLeaseback\"*\n\n		- *\"PVWattsSingleOwner\"*\n\n		- *\"PVWattsThirdParty\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Pvwattsv8_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Pvwattsv8\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Pvwattsv8_from_existing,        METH_VARARGS,

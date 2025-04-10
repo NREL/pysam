@@ -2151,7 +2151,7 @@ Outputs_get_system_total_moisture(VarGroupObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	PyDoc_STR("*float*: Annual Energy [kWh]"),
+	PyDoc_STR("*float*: Annual AC energy in Year 1 [kWh]"),
  	NULL},
 {"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
@@ -2190,7 +2190,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Total Boiler Efficiency - HHV (%) [%]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	PyDoc_STR("*sequence*: Monthly Energy Gross [kWh]"),
+	PyDoc_STR("*sequence*: Monthly AC energy in Year 1) [kWh]"),
  	NULL},
 {"monthly_forest_emc", (getter)Outputs_get_monthly_forest_emc,(setter)0,
 	PyDoc_STR("*sequence*: Monthly forest EMC (dry)"),

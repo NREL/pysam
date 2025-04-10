@@ -1,6 +1,6 @@
 {
 	"input" : {
-	"compute_modules" : ["generic_system","pvwattsv8","windpower","fuelcell","battery","grid","utilityrate5","singleowner"],
+	"compute_modules" : ["custom_generation","pvwattsv8","windpower","fuelcell","battery","grid","utilityrate5","singleowner"],
 	"windpower" : {
     "om_fixed_escal" : 0,
     "turb_specific_loss" : 0.81000000000000005,
@@ -53,7 +53,7 @@
 	"om_production" : [ 0 ],
  "number table entries" : 50
  },
-	"generic_system" : {
+	"custom_generation" : {
     "adjust_en_timeindex" : 0,
 	"om_capacity" : [ 40 ],
 	"om_fuel_cost" : [ 10 ],

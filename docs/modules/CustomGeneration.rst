@@ -1,12 +1,12 @@
-.. _GenericSystem:
+.. _CustomGeneration:
 
-GenericSystem
-==============
+CustomGeneration
+=================
 
-.. automodule:: PySAM.GenericSystem
+.. automodule:: PySAM.CustomGeneration
 	:members:
 
-GenericSystem is a wrapper for the SSC compute module `cmod_generic_system.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_generic_system.cpp>`_
+CustomGeneration is a wrapper for the SSC compute module `cmod_custom_generation.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_custom_generation.cpp>`_
 
 Interdependent Variables
 --------------------------
@@ -22,19 +22,19 @@ The variables listed below are interdependent with other variables. If you chang
 Functions
 -----------
 
-.. autoclass:: PySAM.GenericSystem.GenericSystem
+.. autoclass:: PySAM.CustomGeneration.CustomGeneration
 	:members:
 
 Plant Group
 ------------
 
-.. autoclass:: PySAM.GenericSystem.GenericSystem.Plant
+.. autoclass:: PySAM.CustomGeneration.CustomGeneration.Plant
 	:members:
 
 Lifetime Group
 ---------------
 
-.. autoclass:: PySAM.GenericSystem.GenericSystem.Lifetime
+.. autoclass:: PySAM.CustomGeneration.CustomGeneration.Lifetime
 	:members:
 
 AdjustmentFactors Group
@@ -47,12 +47,12 @@ AdjustmentFactors Group
 HybridCosts Group
 ------------------
 
-.. autoclass:: PySAM.GenericSystem.GenericSystem.HybridCosts
+.. autoclass:: PySAM.CustomGeneration.CustomGeneration.HybridCosts
 	:members:
 
 Outputs Group
 --------------
 
-.. autoclass:: PySAM.GenericSystem.GenericSystem.Outputs
+.. autoclass:: PySAM.CustomGeneration.CustomGeneration.Outputs
 	:members:
 

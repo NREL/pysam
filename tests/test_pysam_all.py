@@ -4,7 +4,9 @@ import pytest
 from pathlib import Path
 import glob
 import importlib
-import PySAM.GenericSystem as GenericSystem
+import PySAM.CustomGeneration as CustomGeneration
+import PySAM.Pvsamv1 as pvsamv1
+import PySAM.Battery as battery
 from pympler.tracker import SummaryTracker
 from PySAM.PySSC import PySSC
 import PySAM.WaveFileReader as wavefile
@@ -14,7 +16,7 @@ ssc = PySSC()
 check_error_cases = True
 
 def test_adjustment_factors():
-    m = GenericSystem.new()
+    m = CustomGeneration.new()
     adj = m.AdjustmentFactors
     adj.adjust_constant = 0
     adj.adjust_en_hourly = 0
@@ -40,7 +42,7 @@ def test_adjustment_factors():
     adj.export()
 
 @pytest.mark.parametrize("execution_number", range(10))
-def test_pyssc(execution_number):
+def test_pyssc(execution_number: int):
     var = ssc.var_create()
     ssc.var_set_value(var, 0)
     assert int(ssc.var_get_number(var)) == 0
@@ -109,7 +111,7 @@ def test_functionality():
 
         round += 1
 
-        a = GenericSystem.new()
+        a = CustomGeneration.new()
         b = a.Plant
 
         # Test setting values with correct types
@@ -128,13 +130,13 @@ def test_functionality():
         # Test type checks with errors
 
         try:
-            c = GenericSystem.new()
+            c = CustomGeneration.new()
             c.Plant.energy_output_array = 1
         except:
             n_tests_passed += 1
 
         try:
-            c = GenericSystem.new()
+            c = CustomGeneration.new()
             c.Plant.energy_output_array = (1, "2")
         except:
             n_tests_passed += 1
@@ -159,21 +161,21 @@ def test_functionality():
                           'energy_output_array': (10, 20)}
 
         try:
-            c = GenericSystem.new()
+            c = CustomGeneration.new()
             PlantDict['energy_output_array'] = ()
             c.Plant.assign(PlantDict)
         except:
             n_tests_passed += 1
 
         try:
-            c = GenericSystem.new()
+            c = CustomGeneration.new()
             PlantDict['energy_output_array'] = ((12, 20), (1, 1))
             c.Plant.assign(PlantDict)
         except:
             n_tests_passed += 1
 
         try:
-            c = GenericSystem.new()
+            c = CustomGeneration.new()
             PlantDict['derate'] = "derate"
             PlantDict['energy_output_array'] = (1, 2)
             c.Plant.assign(PlantDict)
@@ -189,16 +191,16 @@ def test_functionality():
         # Test shared module (AdjustmentFactors)
         d = a.AdjustmentFactors
 
-        d.constant = 1
-        assert(d.constant == 1)
+        d.adjust_constant = 1
+        assert(d.adjust_constant == 1)
         n_tests_passed += 1
 
-        d.hourly = (1, 2)
-        assert(d.hourly == (1, 2))
+        d.adjust_hourly = (1, 2)
+        assert(d.adjust_hourly == (1, 2))
         n_tests_passed += 1
 
-        d.periods = ((1, 2), (3, 4))
-        assert(d.periods == ((1, 2), (3, 4)))
+        d.adjust_periods = ((1, 2), (3, 4))
+        assert(d.adjust_periods == ((1, 2), (3, 4)))
         n_tests_passed += 1
 
         try:
@@ -207,26 +209,26 @@ def test_functionality():
             n_tests_passed += 1
 
         ValDict = d.export()
-        assert(ValDict['constant'] == 1 and ValDict['hourly'] == (1, 2) and ValDict['periods'] == ((1, 2), (3, 4)))
+        assert(ValDict['adjust_constant'] == 1 and ValDict['adjust_hourly'] == (1, 2) and ValDict['adjust_periods'] == ((1, 2), (3, 4)))
         n_tests_passed += 1
 
-        ValDict = {'constant': 10, "hourly": (10, 20), "periods": ((10, 20), (30, 40))}
+        ValDict = {'adjust_constant': 10, "adjust_hourly": (10, 20), "adjust_periods": ((10, 20), (30, 40))}
         d.assign(ValDict)
-        assert(ValDict['constant'] == 10 and ValDict['hourly'] == (10, 20) and ValDict['periods'] == ((10, 20), (30, 40)))
+        assert(ValDict['adjust_constant'] == 10 and ValDict['adjust_hourly'] == (10, 20) and ValDict['adjust_periods'] == ((10, 20), (30, 40)))
         n_tests_passed += 1
 
         # Test nested dictionary assignment and export
 
         TechDict = {'Plant': {'derate': 100,
                                    'energy_output_array': (100, 200)},
-                    'AdjustmentFactors': {'constant': 100, "hourly": (100, 200), "periods": ((100, 200), (300, 400))}}
+                    'AdjustmentFactors': {'adjust_constant': 100, "adjust_hourly": (100, 200), "adjust_periods": ((100, 200), (300, 400))}}
         a.assign(TechDict)
         ValDict = a.Plant.export()
         assert (ValDict['derate'] == 100 and ValDict['energy_output_array'] == (100, 200))
         n_tests_passed += 1
 
         ValDict = a.AdjustmentFactors.export()
-        assert (ValDict['constant'] == 100 and ValDict['hourly'] == (100, 200) and ValDict['periods'] == (
+        assert (ValDict['adjust_constant'] == 100 and ValDict['adjust_hourly'] == (100, 200) and ValDict['adjust_periods'] == (
         (100, 200), (300, 400)))
         n_tests_passed += 1
 
@@ -235,7 +237,7 @@ def test_functionality():
         data = ssc.data_create()
         ssc.data_set_number(data, b'derate', 1000)
         ssc.data_set_array(data, b'energy_output_array', [1000, 2000])
-        a = GenericSystem.wrap(data)
+        a = CustomGeneration.wrap(data)
         assert(a.Plant.derate == 1000)
         assert(a.Plant.energy_output_array == (1000, 2000))
 
@@ -294,7 +296,7 @@ def test_functionality():
         n_tests_passed += 1
 
         # Test loading from serialized dict
-        a = GenericSystem.default("GenericSystemNone")
+        a = CustomGeneration.default("CustomGenerationProfileNone")
 
         # Test `value` function
         a.value("derate", 1)
@@ -315,7 +317,7 @@ def test_functionality():
             n_tests_passed += 1
             assert True
 
-        a = GenericSystem.default("GenericSystemNone")
+        a = CustomGeneration.default("CustomGenerationProfileNone")
         a.Lifetime.system_use_lifetime_output = 1
         a.replace({"Plant": {"derate": 1}})
         assert(a.Plant.derate == 1)
@@ -387,7 +389,7 @@ def assign_values(mod, i):
             m.Weather.file_name = sf
         elif mod == "Windpower":
             m.Resource.wind_resource_filename = wf
-        elif mod == "GenericSystem":
+        elif mod == "CustomGeneration":
             m.Lifetime.generic_degradation = [0, ]
         elif mod == "Grid":
             m.SystemOutput.gen = [1 for i in range(8760)]
@@ -439,8 +441,7 @@ def test_run_all():
         "FresnelPhysical", "FresnelPhysicalIph",
         "LinearFresnelDsgIph", "MhkTidal", "MhkWave",
         "MsptIph",
-        "Pvsamv1", "Pvwattsv8", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "GenericSystem", "Grid",
-        "TroughPhysicalProcessHeat", 
+        "Pvsamv1", "Pvwattsv8", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "CustomGeneration", "Grid",
         "TcsMSLF", "TcsgenericSolar", "TcslinearFresnel", "TcstroughEmpirical",
         "TroughPhysical", "TroughPhysicalIph", "Windpower")
     for mod in techs:
@@ -448,3 +449,30 @@ def test_run_all():
         i = importlib.import_module(mod_name)
         m = assign_values(mod, i)
         print(f"{mod} passed")
+
+def test_ssc_exceptions():
+    tests_passed = 0
+    
+    pv = pvsamv1.default("FlatPlatePVSingleOwner")
+    # Try to run the PV model without a valid weather file path - expect exception
+    try:
+        pv.execute()
+    except:
+        tests_passed += 1
+
+    batt = battery.default("StandaloneBatteryCommercial")
+    # Options are 0-2 as of PySAM 6
+    batt.BatteryCell.batt_life_model = 99
+    try:
+        batt.execute()
+    except:
+        tests_passed += 1
+
+    batt = battery.new()
+    # Test prechecks by not setting up required variables
+    try:
+        batt.execute()
+    except:
+        tests_passed += 1
+
+    assert(tests_passed == 3)

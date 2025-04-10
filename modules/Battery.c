@@ -91,9 +91,24 @@ Simulation_set_percent_complete(VarGroupObject *self, PyObject *value, void *clo
 	return PySAM_double_setter(value, SAM_Battery_Simulation_percent_complete_nset, self->data_ptr);
 }
 
+static PyObject *
+Simulation_get_timestep_minutes(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_Simulation_timestep_minutes_nget, self->data_ptr);
+}
+
+static int
+Simulation_set_timestep_minutes(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_Simulation_timestep_minutes_nset, self->data_ptr);
+}
+
 static PyGetSetDef Simulation_getset[] = {
 {"percent_complete", (getter)Simulation_get_percent_complete,(setter)Simulation_set_percent_complete,
 	PyDoc_STR("*float*: Estimated simulation status [%]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
+ 	NULL},
+{"timestep_minutes", (getter)Simulation_get_timestep_minutes,(setter)Simulation_set_timestep_minutes,
+	PyDoc_STR("*float*: Simulation timestep [minutes]\n\n**Info:**\nThe number of minutes in each timestep\n\n**Required:**\nRequired if en_standalone_batt=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1005,7 +1020,7 @@ SystemOutput_set_gen(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef SystemOutput_getset[] = {
 {"annual_energy", (getter)SystemOutput_get_annual_energy,(setter)SystemOutput_set_annual_energy,
-	PyDoc_STR("*float*: Annual Energy [kWh]\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Annual AC energy in Year 1 [kWh]\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"capacity_factor", (getter)SystemOutput_get_capacity_factor,(setter)SystemOutput_set_capacity_factor,
 	PyDoc_STR("*float*: Capacity factor [%]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
@@ -2478,6 +2493,18 @@ BatteryDispatch_set_batt_dispatch_auto_can_clipcharge(VarGroupObject *self, PyOb
 }
 
 static PyObject *
+BatteryDispatch_get_batt_dispatch_auto_can_curtailcharge(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_BatteryDispatch_batt_dispatch_auto_can_curtailcharge_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_dispatch_auto_can_curtailcharge(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_BatteryDispatch_batt_dispatch_auto_can_curtailcharge_nset, self->data_ptr);
+}
+
+static PyObject *
 BatteryDispatch_get_batt_dispatch_auto_can_fuelcellcharge(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Battery_BatteryDispatch_batt_dispatch_auto_can_fuelcellcharge_nget, self->data_ptr);
@@ -2987,6 +3014,9 @@ static PyGetSetDef BatteryDispatch_getset[] = {
  	NULL},
 {"batt_dispatch_auto_can_clipcharge", (getter)BatteryDispatch_get_batt_dispatch_auto_can_clipcharge,(setter)BatteryDispatch_set_batt_dispatch_auto_can_clipcharge,
 	PyDoc_STR("*float*: Battery can charge from clipped power? [0/1]"),
+ 	NULL},
+{"batt_dispatch_auto_can_curtailcharge", (getter)BatteryDispatch_get_batt_dispatch_auto_can_curtailcharge,(setter)BatteryDispatch_set_batt_dispatch_auto_can_curtailcharge,
+	PyDoc_STR("*float*: Battery can charge from grid-limited system power? [0/1]"),
  	NULL},
 {"batt_dispatch_auto_can_fuelcellcharge", (getter)BatteryDispatch_get_batt_dispatch_auto_can_fuelcellcharge,(setter)BatteryDispatch_set_batt_dispatch_auto_can_fuelcellcharge,
 	PyDoc_STR("*float*: Charging from fuel cell allowed for automated dispatch? [0/1]"),
@@ -3944,6 +3974,18 @@ static PyMethodDef Revenue_methods[] = {
 };
 
 static PyObject *
+Revenue_get_mp_ancserv1_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_Revenue_mp_ancserv1_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_ancserv1_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_Revenue_mp_ancserv1_percent_gen_nset, self->data_ptr);
+}
+
+static PyObject *
 Revenue_get_mp_ancserv1_revenue_single(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Battery_Revenue_mp_ancserv1_revenue_single_mget, self->data_ptr);
@@ -3953,6 +3995,18 @@ static int
 Revenue_set_mp_ancserv1_revenue_single(VarGroupObject *self, PyObject *value, void *closure)
 {
 		return PySAM_matrix_setter(value, SAM_Battery_Revenue_mp_ancserv1_revenue_single_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_ancserv2_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_Revenue_mp_ancserv2_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_ancserv2_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_Revenue_mp_ancserv2_percent_gen_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -3968,6 +4022,18 @@ Revenue_set_mp_ancserv2_revenue_single(VarGroupObject *self, PyObject *value, vo
 }
 
 static PyObject *
+Revenue_get_mp_ancserv3_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_Revenue_mp_ancserv3_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_ancserv3_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_Revenue_mp_ancserv3_percent_gen_nset, self->data_ptr);
+}
+
+static PyObject *
 Revenue_get_mp_ancserv3_revenue_single(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Battery_Revenue_mp_ancserv3_revenue_single_mget, self->data_ptr);
@@ -3977,6 +4043,18 @@ static int
 Revenue_set_mp_ancserv3_revenue_single(VarGroupObject *self, PyObject *value, void *closure)
 {
 		return PySAM_matrix_setter(value, SAM_Battery_Revenue_mp_ancserv3_revenue_single_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_ancserv4_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_Revenue_mp_ancserv4_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_ancserv4_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_Revenue_mp_ancserv4_percent_gen_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -4063,15 +4141,39 @@ Revenue_set_mp_energy_market_revenue_single(VarGroupObject *self, PyObject *valu
 		return PySAM_matrix_setter(value, SAM_Battery_Revenue_mp_energy_market_revenue_single_mset, self->data_ptr);
 }
 
+static PyObject *
+Revenue_get_mp_market_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_Revenue_mp_market_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_market_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_Revenue_mp_market_percent_gen_nset, self->data_ptr);
+}
+
 static PyGetSetDef Revenue_getset[] = {
+{"mp_ancserv1_percent_gen", (getter)Revenue_get_mp_ancserv1_percent_gen,(setter)Revenue_set_mp_ancserv1_percent_gen,
+	PyDoc_STR("*float*: Percent of demand to copy to cleared capacity array [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_ancserv1_percent_gen=1"),
+ 	NULL},
 {"mp_ancserv1_revenue_single", (getter)Revenue_get_mp_ancserv1_revenue_single,(setter)Revenue_set_mp_ancserv1_revenue_single,
 	PyDoc_STR("*sequence[sequence]*: Ancillary services 1 revenue input\n\n**Info:**\nLifetime x 1[Price($/MWh)]\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_ancserv1_percent_gen=1"),
+ 	NULL},
+{"mp_ancserv2_percent_gen", (getter)Revenue_get_mp_ancserv2_percent_gen,(setter)Revenue_set_mp_ancserv2_percent_gen,
+	PyDoc_STR("*float*: Percent of demand to copy to cleared capacity array [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_ancserv2_percent_gen=1"),
  	NULL},
 {"mp_ancserv2_revenue_single", (getter)Revenue_get_mp_ancserv2_revenue_single,(setter)Revenue_set_mp_ancserv2_revenue_single,
 	PyDoc_STR("*sequence[sequence]*: Ancillary services 2 revenue input\n\n**Info:**\nLifetime x 1[Price($/MWh)]\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_ancserv2_percent_gen=1"),
  	NULL},
+{"mp_ancserv3_percent_gen", (getter)Revenue_get_mp_ancserv3_percent_gen,(setter)Revenue_set_mp_ancserv3_percent_gen,
+	PyDoc_STR("*float*: Percent of demand to copy to cleared capacity array [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_ancserv3_percent_gen=1"),
+ 	NULL},
 {"mp_ancserv3_revenue_single", (getter)Revenue_get_mp_ancserv3_revenue_single,(setter)Revenue_set_mp_ancserv3_revenue_single,
 	PyDoc_STR("*sequence[sequence]*: Ancillary services 3 revenue input\n\n**Info:**\nLifetime x 1[Price($/MWh)]\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_ancserv3_percent_gen=1"),
+ 	NULL},
+{"mp_ancserv4_percent_gen", (getter)Revenue_get_mp_ancserv4_percent_gen,(setter)Revenue_set_mp_ancserv4_percent_gen,
+	PyDoc_STR("*float*: Percent of demand to copy to cleared capacity array [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_ancserv4_percent_gen=1"),
  	NULL},
 {"mp_ancserv4_revenue_single", (getter)Revenue_get_mp_ancserv4_revenue_single,(setter)Revenue_set_mp_ancserv4_revenue_single,
 	PyDoc_STR("*sequence[sequence]*: Ancillary services 4 revenue input\n\n**Info:**\nLifetime x 1[Price($/MWh)]\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_ancserv4_percent_gen=1"),
@@ -4093,6 +4195,9 @@ static PyGetSetDef Revenue_getset[] = {
  	NULL},
 {"mp_energy_market_revenue_single", (getter)Revenue_get_mp_energy_market_revenue_single,(setter)Revenue_set_mp_energy_market_revenue_single,
 	PyDoc_STR("*sequence[sequence]*: Energy market revenue input\n\n**Info:**\nLifetime x 1 [Price($/MWh)]\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_market_percent_gen=1"),
+ 	NULL},
+{"mp_market_percent_gen", (getter)Revenue_get_mp_market_percent_gen,(setter)Revenue_set_mp_market_percent_gen,
+	PyDoc_STR("*float*: Percent of demand to copy to cleared capacity array [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_market_percent_gen=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4468,6 +4573,30 @@ ElectricityRates_set_ur_monthly_min_charge(VarGroupObject *self, PyObject *value
 }
 
 static PyObject *
+ElectricityRates_get_ur_nb_apply_credit_current_month(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_nb_apply_credit_current_month_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nb_apply_credit_current_month(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_nb_apply_credit_current_month_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_nb_credit_expire(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_nb_credit_expire_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nb_credit_expire(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_nb_credit_expire_nset, self->data_ptr);
+}
+
+static PyObject *
 ElectricityRates_get_ur_nm_credit_month(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_nm_credit_month_nget, self->data_ptr);
@@ -4614,6 +4743,12 @@ static PyGetSetDef ElectricityRates_getset[] = {
  	NULL},
 {"ur_monthly_min_charge", (getter)ElectricityRates_get_ur_monthly_min_charge,(setter)ElectricityRates_set_ur_monthly_min_charge,
 	PyDoc_STR("*float*: Monthly minimum charge [$]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_nb_apply_credit_current_month", (getter)ElectricityRates_get_ur_nb_apply_credit_current_month,(setter)ElectricityRates_set_ur_nb_apply_credit_current_month,
+	PyDoc_STR("*float*: Apply earned credits to balance before rolling over excess         [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_nb_credit_expire", (getter)ElectricityRates_get_ur_nb_credit_expire,(setter)ElectricityRates_set_ur_nb_credit_expire,
+	PyDoc_STR("*float*: Credit is lost upon end of year         [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_nm_credit_month", (getter)ElectricityRates_get_ur_nm_credit_month,(setter)ElectricityRates_set_ur_nm_credit_month,
 	PyDoc_STR("*float*: Month of year end payout (true-up) [mn]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=11\n\n**Required:**\nFalse. Automatically set to 11 if not assigned explicitly or loaded from defaults."),
@@ -5076,7 +5211,7 @@ static PyGetSetDef HybridCosts_getset[] = {
 	PyDoc_STR("*sequence*: Annual AC degradation [%]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"land_area", (getter)HybridCosts_get_land_area,(setter)HybridCosts_set_land_area,
-	PyDoc_STR("*float*: Total land area [acres]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of ``land_area`` depends on the following variables:\n\n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n\t - batt_power_discharge_max_kwac\n"),
+	PyDoc_STR("*float*: Total land area [acres]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_batt_capacity_cost", (getter)HybridCosts_get_om_batt_capacity_cost,(setter)HybridCosts_set_om_batt_capacity_cost,
 	PyDoc_STR("*sequence*: Battery capacity-based System Costs amount [$/kWcap]\n\n**Info:**\nbattery\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
@@ -5341,6 +5476,12 @@ Outputs_get_batt_annual_energy_system_loss(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_batt_availability_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_Outputs_batt_availability_loss_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_batt_bank_installed_capacity(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Battery_Outputs_batt_bank_installed_capacity_nget, self->data_ptr);
@@ -5398,6 +5539,12 @@ static PyObject *
 Outputs_get_batt_dispatch_sched(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Battery_Outputs_batt_dispatch_sched_mget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_grid_charge_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_Outputs_batt_grid_charge_percent_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -5602,6 +5749,18 @@ static PyObject *
 Outputs_get_batt_voltage_cell(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battery_Outputs_batt_voltage_cell_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_year1_charge_from_grid(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_Outputs_batt_year1_charge_from_grid_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_year1_charge_from_system(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_Outputs_batt_year1_charge_from_system_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -5962,6 +6121,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"batt_annual_energy_system_loss", (getter)Outputs_get_batt_annual_energy_system_loss,(setter)0,
 	PyDoc_STR("*sequence*: Battery annual system energy loss [kWh]"),
  	NULL},
+{"batt_availability_loss", (getter)Outputs_get_batt_availability_loss,(setter)0,
+	PyDoc_STR("*sequence*: Battery availability loss [%]"),
+ 	NULL},
 {"batt_bank_installed_capacity", (getter)Outputs_get_batt_bank_installed_capacity,(setter)0,
 	PyDoc_STR("*float*: Battery bank installed capacity [kWh]"),
  	NULL},
@@ -5991,6 +6153,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"batt_dispatch_sched", (getter)Outputs_get_batt_dispatch_sched,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Battery dispatch schedule"),
+ 	NULL},
+{"batt_grid_charge_percent", (getter)Outputs_get_batt_grid_charge_percent,(setter)0,
+	PyDoc_STR("*float*: Battery charge energy charged from grid [%]"),
  	NULL},
 {"batt_power", (getter)Outputs_get_batt_power,(setter)0,
 	PyDoc_STR("*sequence*: Electricity to/from battery AC [kW]"),
@@ -6093,6 +6258,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"batt_voltage_cell", (getter)Outputs_get_batt_voltage_cell,(setter)0,
 	PyDoc_STR("*sequence*: Battery cell voltage [V]"),
+ 	NULL},
+{"batt_year1_charge_from_grid", (getter)Outputs_get_batt_year1_charge_from_grid,(setter)0,
+	PyDoc_STR("*float*: Battery annual energy charged from grid (year 1) [kWh]"),
+ 	NULL},
+{"batt_year1_charge_from_system", (getter)Outputs_get_batt_year1_charge_from_system,(setter)0,
+	PyDoc_STR("*float*: Battery annual energy charged from system (year 1) [kWh]"),
  	NULL},
 {"capacity_factor_sales", (getter)Outputs_get_capacity_factor_sales,(setter)0,
 	PyDoc_STR("*float*: Capacity factor based on AC electricity to grid [%]"),
@@ -6358,6 +6529,21 @@ newBatteryObject(void* data_ptr)
 	PyObject* Revenue_obj = Revenue_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Revenue", Revenue_obj);
 	Py_DECREF(Revenue_obj);
+
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+
+	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
+	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
+	Py_XDECREF(data_cap);
+	Py_XDECREF(AdjustmentFactorsModule);
+
+	if (!Adjust_obj){
+		PyErr_SetString(PyExc_Exception, "Couldn't create AdjustmentFactorsObject\n");
+		return NULL;
+	}
+
+	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
+	Py_DECREF(Adjust_obj);
 
 	PyObject* ElectricityRates_obj = ElectricityRates_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "ElectricityRates", ElectricityRates_obj);
@@ -6641,7 +6827,7 @@ static PyMethodDef BatteryModule_methods[] = {
 		{"new",             Battery_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Battery")},
 		{"default",             Battery_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Battery\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"FuelCellCommercial\"*\n\n		- *\"FuelCellSingleOwner\"*\n\n		- *\"GenericBatteryAllEquityPartnershipFlip\"*\n\n		- *\"GenericBatteryCommercial\"*\n\n		- *\"GenericBatteryHostDeveloper\"*\n\n		- *\"GenericBatteryLeveragedPartnershipFlip\"*\n\n		- *\"GenericBatteryMerchantPlant\"*\n\n		- *\"GenericBatteryResidential\"*\n\n		- *\"GenericBatterySaleLeaseback\"*\n\n		- *\"GenericBatterySingleOwner\"*\n\n		- *\"GenericBatteryThirdParty\"*\n\n		- *\"GenericPVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"GenericPVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"MEwaveBatterySingleOwner\"*\n\n		- *\"PVWattsWindBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"PhotovoltaicWindBatteryHybridHostDeveloper\"*\n\n		- *\"PhotovoltaicWindBatteryHybridSingleOwner\"*\n\n		- *\"StandaloneBatteryAllEquityPartnershipFlip\"*\n\n		- *\"StandaloneBatteryCommercial\"*\n\n		- *\"StandaloneBatteryHostDeveloper\"*\n\n		- *\"StandaloneBatteryLeveragedPartnershipFlip\"*\n\n		- *\"StandaloneBatteryMerchantPlant\"*\n\n		- *\"StandaloneBatteryResidential\"*\n\n		- *\"StandaloneBatterySaleLeaseback\"*\n\n		- *\"StandaloneBatterySingleOwner\"*\n\n		- *\"StandaloneBatteryThirdParty\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> Battery\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"CustomGenerationBatteryAllEquityPartnershipFlip\"*\n\n		- *\"CustomGenerationBatteryCommercial\"*\n\n		- *\"CustomGenerationBatteryHostDeveloper\"*\n\n		- *\"CustomGenerationBatteryLeveragedPartnershipFlip\"*\n\n		- *\"CustomGenerationBatteryMerchantPlant\"*\n\n		- *\"CustomGenerationBatteryResidential\"*\n\n		- *\"CustomGenerationBatterySaleLeaseback\"*\n\n		- *\"CustomGenerationBatterySingleOwner\"*\n\n		- *\"CustomGenerationBatteryThirdParty\"*\n\n		- *\"CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"FuelCellCommercial\"*\n\n		- *\"FuelCellSingleOwner\"*\n\n		- *\"MEwaveBatterySingleOwner\"*\n\n		- *\"PVWattsWindBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"PhotovoltaicWindBatteryHybridHostDeveloper\"*\n\n		- *\"PhotovoltaicWindBatteryHybridSingleOwner\"*\n\n		- *\"StandaloneBatteryAllEquityPartnershipFlip\"*\n\n		- *\"StandaloneBatteryCommercial\"*\n\n		- *\"StandaloneBatteryHostDeveloper\"*\n\n		- *\"StandaloneBatteryLeveragedPartnershipFlip\"*\n\n		- *\"StandaloneBatteryMerchantPlant\"*\n\n		- *\"StandaloneBatteryResidential\"*\n\n		- *\"StandaloneBatterySaleLeaseback\"*\n\n		- *\"StandaloneBatterySingleOwner\"*\n\n		- *\"StandaloneBatteryThirdParty\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Battery_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Battery\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Battery_from_existing,        METH_VARARGS,

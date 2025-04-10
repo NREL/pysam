@@ -509,6 +509,30 @@ ElectricityRates_set_ur_monthly_min_charge(VarGroupObject *self, PyObject *value
 }
 
 static PyObject *
+ElectricityRates_get_ur_nb_apply_credit_current_month(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Utilityrate5_ElectricityRates_ur_nb_apply_credit_current_month_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nb_apply_credit_current_month(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Utilityrate5_ElectricityRates_ur_nb_apply_credit_current_month_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_nb_credit_expire(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Utilityrate5_ElectricityRates_ur_nb_credit_expire_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nb_credit_expire(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Utilityrate5_ElectricityRates_ur_nb_credit_expire_nset, self->data_ptr);
+}
+
+static PyObject *
 ElectricityRates_get_ur_nm_credit_month(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Utilityrate5_ElectricityRates_ur_nm_credit_month_nget, self->data_ptr);
@@ -658,6 +682,12 @@ static PyGetSetDef ElectricityRates_getset[] = {
  	NULL},
 {"ur_monthly_min_charge", (getter)ElectricityRates_get_ur_monthly_min_charge,(setter)ElectricityRates_set_ur_monthly_min_charge,
 	PyDoc_STR("*float*: Monthly minimum charge [$]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_nb_apply_credit_current_month", (getter)ElectricityRates_get_ur_nb_apply_credit_current_month,(setter)ElectricityRates_set_ur_nb_apply_credit_current_month,
+	PyDoc_STR("*float*: Apply earned credits to balance before rolling over excess         [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ur_nb_credit_expire", (getter)ElectricityRates_get_ur_nb_credit_expire,(setter)ElectricityRates_set_ur_nb_credit_expire,
+	PyDoc_STR("*float*: Credit is lost upon end of year         [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_nm_credit_month", (getter)ElectricityRates_get_ur_nm_credit_month,(setter)ElectricityRates_set_ur_nm_credit_month,
 	PyDoc_STR("*float*: Month of year end payout (true-up) [mn]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=11\n\n**Required:**\nFalse. Automatically set to 11 if not assigned explicitly or loaded from defaults."),
@@ -1714,30 +1744,6 @@ Outputs_get_charge_wo_sys_minimum_ym(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_elec_cost_with_system(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Utilityrate5_Outputs_elec_cost_with_system_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_elec_cost_with_system_year1(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Utilityrate5_Outputs_elec_cost_with_system_year1_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_elec_cost_without_system(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Utilityrate5_Outputs_elec_cost_without_system_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_elec_cost_without_system_year1(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Utilityrate5_Outputs_elec_cost_without_system_year1_nget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_energy_w_sys_ec_apr_tp(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Utilityrate5_Outputs_energy_w_sys_ec_apr_tp_mget, self->data_ptr);
@@ -2026,6 +2032,12 @@ Outputs_get_utility_bill_w_sys(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_utility_bill_w_sys_year1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Utilityrate5_Outputs_utility_bill_w_sys_year1_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_utility_bill_w_sys_ym(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Utilityrate5_Outputs_utility_bill_w_sys_ym_mget, self->data_ptr);
@@ -2035,6 +2047,12 @@ static PyObject *
 Outputs_get_utility_bill_wo_sys(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Utilityrate5_Outputs_utility_bill_wo_sys_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_utility_bill_wo_sys_year1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Utilityrate5_Outputs_utility_bill_wo_sys_year1_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2455,18 +2473,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"charge_wo_sys_minimum_ym", (getter)Outputs_get_charge_wo_sys_minimum_ym,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Minimum charge without system [$]"),
  	NULL},
-{"elec_cost_with_system", (getter)Outputs_get_elec_cost_with_system,(setter)0,
-	PyDoc_STR("*sequence*: Electricity bill with system [$/yr]"),
- 	NULL},
-{"elec_cost_with_system_year1", (getter)Outputs_get_elec_cost_with_system_year1,(setter)0,
-	PyDoc_STR("*float*: Electricity bill with system (year 1) [$/yr]"),
- 	NULL},
-{"elec_cost_without_system", (getter)Outputs_get_elec_cost_without_system,(setter)0,
-	PyDoc_STR("*sequence*: Electricity bill without system [$/yr]"),
- 	NULL},
-{"elec_cost_without_system_year1", (getter)Outputs_get_elec_cost_without_system_year1,(setter)0,
-	PyDoc_STR("*float*: Electricity bill without system (year 1) [$/yr]"),
- 	NULL},
 {"energy_w_sys_ec_apr_tp", (getter)Outputs_get_energy_w_sys_ec_apr_tp,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Electricity usage with system Apr [kWh]"),
  	NULL},
@@ -2611,11 +2617,17 @@ static PyGetSetDef Outputs_getset[] = {
 {"utility_bill_w_sys", (getter)Outputs_get_utility_bill_w_sys,(setter)0,
 	PyDoc_STR("*sequence*: Electricity bill with system [$]"),
  	NULL},
+{"utility_bill_w_sys_year1", (getter)Outputs_get_utility_bill_w_sys_year1,(setter)0,
+	PyDoc_STR("*float*: Electricity bill with system (year 1) [$/yr]"),
+ 	NULL},
 {"utility_bill_w_sys_ym", (getter)Outputs_get_utility_bill_w_sys_ym,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Electricity bill with system [$]"),
  	NULL},
 {"utility_bill_wo_sys", (getter)Outputs_get_utility_bill_wo_sys,(setter)0,
 	PyDoc_STR("*sequence*: Electricity bill without system [$]"),
+ 	NULL},
+{"utility_bill_wo_sys_year1", (getter)Outputs_get_utility_bill_wo_sys_year1,(setter)0,
+	PyDoc_STR("*float*: Electricity bill without system (year 1) [$/yr]"),
  	NULL},
 {"utility_bill_wo_sys_ym", (getter)Outputs_get_utility_bill_wo_sys_ym,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Electricity bill without system [$]"),
@@ -3100,7 +3112,7 @@ static PyMethodDef Utilityrate5Module_methods[] = {
 		{"new",             Utilityrate5_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Utilityrate5")},
 		{"default",             Utilityrate5_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Utilityrate5\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"BiopowerAllEquityPartnershipFlip\"*\n\n		- *\"BiopowerLeveragedPartnershipFlip\"*\n\n		- *\"BiopowerMerchantPlant\"*\n\n		- *\"BiopowerSaleLeaseback\"*\n\n		- *\"BiopowerSingleOwner\"*\n\n		- *\"DSLFAllEquityPartnershipFlip\"*\n\n		- *\"DSLFCommercial\"*\n\n		- *\"DSLFLeveragedPartnershipFlip\"*\n\n		- *\"DSLFMerchantPlant\"*\n\n		- *\"DSLFSaleLeaseback\"*\n\n		- *\"DSLFSingleOwner\"*\n\n		- *\"EmpiricalTroughAllEquityPartnershipFlip\"*\n\n		- *\"EmpiricalTroughCommercial\"*\n\n		- *\"EmpiricalTroughLeveragedPartnershipFlip\"*\n\n		- *\"EmpiricalTroughMerchantPlant\"*\n\n		- *\"EmpiricalTroughSaleLeaseback\"*\n\n		- *\"EmpiricalTroughSingleOwner\"*\n\n		- *\"FlatPlatePVAllEquityPartnershipFlip\"*\n\n		- *\"FlatPlatePVCommercial\"*\n\n		- *\"FlatPlatePVHostDeveloper\"*\n\n		- *\"FlatPlatePVLeveragedPartnershipFlip\"*\n\n		- *\"FlatPlatePVMerchantPlant\"*\n\n		- *\"FlatPlatePVResidential\"*\n\n		- *\"FlatPlatePVSaleLeaseback\"*\n\n		- *\"FlatPlatePVSingleOwner\"*\n\n		- *\"FlatPlatePVThirdParty\"*\n\n		- *\"FuelCellCommercial\"*\n\n		- *\"FuelCellSingleOwner\"*\n\n		- *\"GenericBatteryAllEquityPartnershipFlip\"*\n\n		- *\"GenericBatteryCommercial\"*\n\n		- *\"GenericBatteryHostDeveloper\"*\n\n		- *\"GenericBatteryLeveragedPartnershipFlip\"*\n\n		- *\"GenericBatteryMerchantPlant\"*\n\n		- *\"GenericBatteryResidential\"*\n\n		- *\"GenericBatterySaleLeaseback\"*\n\n		- *\"GenericBatterySingleOwner\"*\n\n		- *\"GenericBatteryThirdParty\"*\n\n		- *\"GenericCSPSystemAllEquityPartnershipFlip\"*\n\n		- *\"GenericCSPSystemCommercial\"*\n\n		- *\"GenericCSPSystemLeveragedPartnershipFlip\"*\n\n		- *\"GenericCSPSystemMerchantPlant\"*\n\n		- *\"GenericCSPSystemSaleLeaseback\"*\n\n		- *\"GenericCSPSystemSingleOwner\"*\n\n		- *\"GenericPVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"GenericPVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"GenericSystemAllEquityPartnershipFlip\"*\n\n		- *\"GenericSystemCommercial\"*\n\n		- *\"GenericSystemHostDeveloper\"*\n\n		- *\"GenericSystemLeveragedPartnershipFlip\"*\n\n		- *\"GenericSystemMerchantPlant\"*\n\n		- *\"GenericSystemResidential\"*\n\n		- *\"GenericSystemSaleLeaseback\"*\n\n		- *\"GenericSystemSingleOwner\"*\n\n		- *\"GenericSystemThirdParty\"*\n\n		- *\"GeothermalPowerAllEquityPartnershipFlip\"*\n\n		- *\"GeothermalPowerLeveragedPartnershipFlip\"*\n\n		- *\"GeothermalPowerMerchantPlant\"*\n\n		- *\"GeothermalPowerSaleLeaseback\"*\n\n		- *\"GeothermalPowerSingleOwner\"*\n\n		- *\"HighXConcentratingPVAllEquityPartnershipFlip\"*\n\n		- *\"HighXConcentratingPVLeveragedPartnershipFlip\"*\n\n		- *\"HighXConcentratingPVMerchantPlant\"*\n\n		- *\"HighXConcentratingPVSaleLeaseback\"*\n\n		- *\"HighXConcentratingPVSingleOwner\"*\n\n		- *\"MEwaveBatterySingleOwner\"*\n\n		- *\"MEwaveSingleOwner\"*\n\n		- *\"MSLFAllEquityPartnershipFlip\"*\n\n		- *\"MSLFLeveragedPartnershipFlip\"*\n\n		- *\"MSLFMerchantPlant\"*\n\n		- *\"MSLFSaleLeaseback\"*\n\n		- *\"MSLFSingleOwner\"*\n\n		- *\"MSPTAllEquityPartnershipFlip\"*\n\n		- *\"MSPTLeveragedPartnershipFlip\"*\n\n		- *\"MSPTMerchantPlant\"*\n\n		- *\"MSPTSaleLeaseback\"*\n\n		- *\"MSPTSingleOwner\"*\n\n		- *\"PVBatteryAllEquityPartnershipFlip\"*\n\n		- *\"PVBatteryCommercial\"*\n\n		- *\"PVBatteryHostDeveloper\"*\n\n		- *\"PVBatteryLeveragedPartnershipFlip\"*\n\n		- *\"PVBatteryMerchantPlant\"*\n\n		- *\"PVBatteryResidential\"*\n\n		- *\"PVBatterySaleLeaseback\"*\n\n		- *\"PVBatterySingleOwner\"*\n\n		- *\"PVBatteryThirdParty\"*\n\n		- *\"PVWattsBatteryCommercial\"*\n\n		- *\"PVWattsBatteryHostDeveloper\"*\n\n		- *\"PVWattsBatteryResidential\"*\n\n		- *\"PVWattsBatteryThirdParty\"*\n\n		- *\"PVWattsWindBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsAllEquityPartnershipFlip\"*\n\n		- *\"PVWattsCommercial\"*\n\n		- *\"PVWattsHostDeveloper\"*\n\n		- *\"PVWattsLeveragedPartnershipFlip\"*\n\n		- *\"PVWattsMerchantPlant\"*\n\n		- *\"PVWattsResidential\"*\n\n		- *\"PVWattsSaleLeaseback\"*\n\n		- *\"PVWattsSingleOwner\"*\n\n		- *\"PVWattsThirdParty\"*\n\n		- *\"PhotovoltaicWindBatteryHybridHostDeveloper\"*\n\n		- *\"PhotovoltaicWindBatteryHybridSingleOwner\"*\n\n		- *\"PhysicalTroughAllEquityPartnershipFlip\"*\n\n		- *\"PhysicalTroughLeveragedPartnershipFlip\"*\n\n		- *\"PhysicalTroughMerchantPlant\"*\n\n		- *\"PhysicalTroughSaleLeaseback\"*\n\n		- *\"PhysicalTroughSingleOwner\"*\n\n		- *\"SolarWaterHeatingCommercial\"*\n\n		- *\"SolarWaterHeatingResidential\"*\n\n		- *\"StandaloneBatteryAllEquityPartnershipFlip\"*\n\n		- *\"StandaloneBatteryCommercial\"*\n\n		- *\"StandaloneBatteryHostDeveloper\"*\n\n		- *\"StandaloneBatteryLeveragedPartnershipFlip\"*\n\n		- *\"StandaloneBatteryMerchantPlant\"*\n\n		- *\"StandaloneBatteryResidential\"*\n\n		- *\"StandaloneBatterySaleLeaseback\"*\n\n		- *\"StandaloneBatterySingleOwner\"*\n\n		- *\"StandaloneBatteryThirdParty\"*\n\n		- *\"WindPowerAllEquityPartnershipFlip\"*\n\n		- *\"WindPowerCommercial\"*\n\n		- *\"WindPowerLeveragedPartnershipFlip\"*\n\n		- *\"WindPowerMerchantPlant\"*\n\n		- *\"WindPowerResidential\"*\n\n		- *\"WindPowerSaleLeaseback\"*\n\n		- *\"WindPowerSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> Utilityrate5\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"BiopowerAllEquityPartnershipFlip\"*\n\n		- *\"BiopowerLeveragedPartnershipFlip\"*\n\n		- *\"BiopowerMerchantPlant\"*\n\n		- *\"BiopowerSaleLeaseback\"*\n\n		- *\"BiopowerSingleOwner\"*\n\n		- *\"CustomGenerationBatteryAllEquityPartnershipFlip\"*\n\n		- *\"CustomGenerationBatteryCommercial\"*\n\n		- *\"CustomGenerationBatteryHostDeveloper\"*\n\n		- *\"CustomGenerationBatteryLeveragedPartnershipFlip\"*\n\n		- *\"CustomGenerationBatteryMerchantPlant\"*\n\n		- *\"CustomGenerationBatteryResidential\"*\n\n		- *\"CustomGenerationBatterySaleLeaseback\"*\n\n		- *\"CustomGenerationBatterySingleOwner\"*\n\n		- *\"CustomGenerationBatteryThirdParty\"*\n\n		- *\"CustomGenerationProfileAllEquityPartnershipFlip\"*\n\n		- *\"CustomGenerationProfileCommercial\"*\n\n		- *\"CustomGenerationProfileHostDeveloper\"*\n\n		- *\"CustomGenerationProfileLeveragedPartnershipFlip\"*\n\n		- *\"CustomGenerationProfileMerchantPlant\"*\n\n		- *\"CustomGenerationProfileResidential\"*\n\n		- *\"CustomGenerationProfileSaleLeaseback\"*\n\n		- *\"CustomGenerationProfileSingleOwner\"*\n\n		- *\"CustomGenerationProfileThirdParty\"*\n\n		- *\"CustomGenerationPVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"CustomGenerationPVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"DSGLIPHSingleOwner\"*\n\n		- *\"DSLFAllEquityPartnershipFlip\"*\n\n		- *\"DSLFCommercial\"*\n\n		- *\"DSLFLeveragedPartnershipFlip\"*\n\n		- *\"DSLFMerchantPlant\"*\n\n		- *\"DSLFSaleLeaseback\"*\n\n		- *\"DSLFSingleOwner\"*\n\n		- *\"EmpiricalTroughAllEquityPartnershipFlip\"*\n\n		- *\"EmpiricalTroughCommercial\"*\n\n		- *\"EmpiricalTroughLeveragedPartnershipFlip\"*\n\n		- *\"EmpiricalTroughMerchantPlant\"*\n\n		- *\"EmpiricalTroughSaleLeaseback\"*\n\n		- *\"EmpiricalTroughSingleOwner\"*\n\n		- *\"FlatPlatePVAllEquityPartnershipFlip\"*\n\n		- *\"FlatPlatePVCommercial\"*\n\n		- *\"FlatPlatePVHostDeveloper\"*\n\n		- *\"FlatPlatePVLeveragedPartnershipFlip\"*\n\n		- *\"FlatPlatePVMerchantPlant\"*\n\n		- *\"FlatPlatePVResidential\"*\n\n		- *\"FlatPlatePVSaleLeaseback\"*\n\n		- *\"FlatPlatePVSingleOwner\"*\n\n		- *\"FlatPlatePVThirdParty\"*\n\n		- *\"FuelCellCommercial\"*\n\n		- *\"FuelCellSingleOwner\"*\n\n		- *\"GenericCSPSystemAllEquityPartnershipFlip\"*\n\n		- *\"GenericCSPSystemCommercial\"*\n\n		- *\"GenericCSPSystemLeveragedPartnershipFlip\"*\n\n		- *\"GenericCSPSystemMerchantPlant\"*\n\n		- *\"GenericCSPSystemSaleLeaseback\"*\n\n		- *\"GenericCSPSystemSingleOwner\"*\n\n		- *\"GeothermalPowerAllEquityPartnershipFlip\"*\n\n		- *\"GeothermalPowerLeveragedPartnershipFlip\"*\n\n		- *\"GeothermalPowerMerchantPlant\"*\n\n		- *\"GeothermalPowerSaleLeaseback\"*\n\n		- *\"GeothermalPowerSingleOwner\"*\n\n		- *\"HighXConcentratingPVAllEquityPartnershipFlip\"*\n\n		- *\"HighXConcentratingPVLeveragedPartnershipFlip\"*\n\n		- *\"HighXConcentratingPVMerchantPlant\"*\n\n		- *\"HighXConcentratingPVSaleLeaseback\"*\n\n		- *\"HighXConcentratingPVSingleOwner\"*\n\n		- *\"MEwaveBatterySingleOwner\"*\n\n		- *\"MEwaveSingleOwner\"*\n\n		- *\"MSLFIPHCommercial\"*\n\n		- *\"MSLFIPHSingleOwner\"*\n\n		- *\"MSLFAllEquityPartnershipFlip\"*\n\n		- *\"MSLFLeveragedPartnershipFlip\"*\n\n		- *\"MSLFMerchantPlant\"*\n\n		- *\"MSLFSaleLeaseback\"*\n\n		- *\"MSLFSingleOwner\"*\n\n		- *\"MSPTIPHSingleOwner\"*\n\n		- *\"MSPTAllEquityPartnershipFlip\"*\n\n		- *\"MSPTLeveragedPartnershipFlip\"*\n\n		- *\"MSPTMerchantPlant\"*\n\n		- *\"MSPTSaleLeaseback\"*\n\n		- *\"MSPTSingleOwner\"*\n\n		- *\"PVBatteryAllEquityPartnershipFlip\"*\n\n		- *\"PVBatteryCommercial\"*\n\n		- *\"PVBatteryHostDeveloper\"*\n\n		- *\"PVBatteryLeveragedPartnershipFlip\"*\n\n		- *\"PVBatteryMerchantPlant\"*\n\n		- *\"PVBatteryResidential\"*\n\n		- *\"PVBatterySaleLeaseback\"*\n\n		- *\"PVBatterySingleOwner\"*\n\n		- *\"PVBatteryThirdParty\"*\n\n		- *\"PVWattsBatteryCommercial\"*\n\n		- *\"PVWattsBatteryHostDeveloper\"*\n\n		- *\"PVWattsBatteryResidential\"*\n\n		- *\"PVWattsBatteryThirdParty\"*\n\n		- *\"PVWattsWindBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridSingleOwner\"*\n\n		- *\"PVWattsAllEquityPartnershipFlip\"*\n\n		- *\"PVWattsCommercial\"*\n\n		- *\"PVWattsHostDeveloper\"*\n\n		- *\"PVWattsLeveragedPartnershipFlip\"*\n\n		- *\"PVWattsMerchantPlant\"*\n\n		- *\"PVWattsResidential\"*\n\n		- *\"PVWattsSaleLeaseback\"*\n\n		- *\"PVWattsSingleOwner\"*\n\n		- *\"PVWattsThirdParty\"*\n\n		- *\"PhotovoltaicWindBatteryHybridHostDeveloper\"*\n\n		- *\"PhotovoltaicWindBatteryHybridSingleOwner\"*\n\n		- *\"PhysicalTroughIPHCommercial\"*\n\n		- *\"PhysicalTroughIPHSingleOwner\"*\n\n		- *\"PhysicalTroughAllEquityPartnershipFlip\"*\n\n		- *\"PhysicalTroughCommercial\"*\n\n		- *\"PhysicalTroughLeveragedPartnershipFlip\"*\n\n		- *\"PhysicalTroughMerchantPlant\"*\n\n		- *\"PhysicalTroughSaleLeaseback\"*\n\n		- *\"PhysicalTroughSingleOwner\"*\n\n		- *\"SolarWaterHeatingCommercial\"*\n\n		- *\"SolarWaterHeatingResidential\"*\n\n		- *\"StandaloneBatteryAllEquityPartnershipFlip\"*\n\n		- *\"StandaloneBatteryCommercial\"*\n\n		- *\"StandaloneBatteryHostDeveloper\"*\n\n		- *\"StandaloneBatteryLeveragedPartnershipFlip\"*\n\n		- *\"StandaloneBatteryMerchantPlant\"*\n\n		- *\"StandaloneBatteryResidential\"*\n\n		- *\"StandaloneBatterySaleLeaseback\"*\n\n		- *\"StandaloneBatterySingleOwner\"*\n\n		- *\"StandaloneBatteryThirdParty\"*\n\n		- *\"WindPowerAllEquityPartnershipFlip\"*\n\n		- *\"WindPowerCommercial\"*\n\n		- *\"WindPowerLeveragedPartnershipFlip\"*\n\n		- *\"WindPowerMerchantPlant\"*\n\n		- *\"WindPowerResidential\"*\n\n		- *\"WindPowerSaleLeaseback\"*\n\n		- *\"WindPowerSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Utilityrate5_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Utilityrate5\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Utilityrate5_from_existing,        METH_VARARGS,

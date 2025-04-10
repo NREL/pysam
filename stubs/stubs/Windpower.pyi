@@ -57,6 +57,7 @@ class Windpower(object):
 		pass
 
 		wind_resource_shear = float
+		wind_turbine_ct_curve = tuple
 		wind_turbine_hub_ht = float
 		wind_turbine_max_cp = float
 		wind_turbine_powercurve_powerout = tuple
@@ -76,7 +77,9 @@ class Windpower(object):
 
 
 		max_turbine_override = float
+		park_wake_decay_constant = float
 		system_capacity = float
+		wake_loss_multiplier = float
 		wind_farm_wake_model = float
 		wind_farm_xCoordinates = tuple
 		wind_farm_yCoordinates = tuple
@@ -107,6 +110,7 @@ class Windpower(object):
 		env_icing_loss = float
 		icing_cutoff_rh = float
 		icing_cutoff_temp = float
+		icing_persistence_timesteps = float
 		low_temp_cutoff = float
 		ops_env_loss = float
 		ops_grid_loss = float
@@ -131,27 +135,27 @@ class Windpower(object):
 		def __init__(self, *args, **kwargs): # real signature unknown
 			pass
 	
-		constant = float
-		en_hourly = float
-		en_periods = float
-		en_timeindex = float
-		hourly = tuple
-		periods = tuple
-		imeindex = tuple
-		dc_constant = float
-		dc_en_hourly = float
-		dc_en_periods = float
-		dc_en_timeindex = float
-		dc_hourly = tuple
-		dc_periods = tuple
-		dc_imeindex = tuple
-		sf_constant = float
-		sf_en_hourly = float
-		sf_en_periods = float
-		sf_en_timeindex = float
-		sf_hourly = tuple
-		sf_periods = tuple
-		sf_timeindex = tuple
+		adjust_constant = float
+		adjust_en_hourly = float
+		adjust_en_periods = float
+		adjust_en_timeindex = float
+		adjust_hourly = tuple
+		adjust_periods = tuple
+		adjust_timeindex = tuple
+		dc_adjust_constant = float
+		dc_adjust_en_hourly = float
+		dc_adjust_en_periods = float
+		dc_adjust_en_timeindex = float
+		dc_adjust_hourly = tuple
+		dc_adjust_periods = tuple
+		dc_adjust_timeindex = tuple
+		sf_adjust_constant = float
+		sf_adjust_en_hourly = float
+		sf_adjust_en_periods = float
+		sf_adjust_en_timeindex = float
+		sf_adjust_hourly = tuple
+		sf_adjust_periods = tuple
+		sf_adjust_timeindex = tuple
 
 	class Uncertainty(object):
 		def assign(self): 
@@ -208,6 +212,9 @@ class Windpower(object):
 		annual_energy_p90 = float
 		annual_energy_p95 = float
 		annual_gross_energy = float
+		annual_wake_loss_internal_kWh = float
+		annual_wake_loss_internal_percent = float
+		annual_wake_loss_total_percent = float
 		avail_losses = float
 		capacity_factor = float
 		cf_battery_replacement_cost_schedule = tuple
@@ -233,7 +240,8 @@ class Windpower(object):
 		temp = tuple
 		turb_losses = float
 		turbine_output_by_windspeed_bin = tuple
-		wake_losses = float
+		wake_loss_internal_kW = tuple
+		wake_loss_internal_percent = tuple
 		wind_direction = tuple
 		wind_speed = tuple
 		wind_speed_average = float

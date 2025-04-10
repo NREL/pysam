@@ -1285,6 +1285,12 @@ Outputs_get_snow(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_snow_cover(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv7_Outputs_snow_cover_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_solrad_annual(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvwattsv7_Outputs_solrad_annual_nget, self->data_ptr);
@@ -1443,6 +1449,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"snow", (getter)Outputs_get_snow,(setter)0,
 	PyDoc_STR("*sequence*: Weather file snow depth [cm]"),
+ 	NULL},
+{"snow_cover", (getter)Outputs_get_snow_cover,(setter)0,
+	PyDoc_STR("*sequence*: Fraction of row covered by snow [0..1]"),
  	NULL},
 {"solrad_annual", (getter)Outputs_get_solrad_annual,(setter)0,
 	PyDoc_STR("*float*: Daily average solar irradiance [kWh/m2/day]"),
