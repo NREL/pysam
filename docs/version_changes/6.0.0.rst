@@ -3,6 +3,8 @@
 Version 6.0.0
 ===============================================
 
+Version 6.0.0, released Dec 12, 2024, corresponds to SAM 2024.12.12, SSC 298.
+
 This page compares the PySAM Modules' input variables and the defaults for these input variables 
 between the current release and the last release.
 
