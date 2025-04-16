@@ -26,7 +26,7 @@ class FresnelPhysicalIph(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	class SysControl(object):
+	class SystemControl(object):
 		def assign(self, dict): 
 			pass
 	
@@ -40,17 +40,7 @@ class FresnelPhysicalIph(object):
 			pass
 
 
-		aux_array = tuple
-		bop_array = tuple
-		disp_frequency = float
-		disp_horizon = float
 		disp_inventory_incentive = float
-		disp_max_iter = float
-		disp_mip_gap = float
-		disp_time_weighting = float
-		disp_timeout = float
-		is_dispatch = float
-		pb_fixed_par = float
 		sim_type = float
 
 
@@ -285,6 +275,32 @@ class FresnelPhysicalIph(object):
 		timestep_load_fractions = tuple
 		weekday_schedule = tuple
 		weekend_schedule = tuple
+
+
+	class SysControl(object):
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		aux_array = tuple
+		bop_array = tuple
+		disp_frequency = float
+		disp_horizon = float
+		disp_max_iter = float
+		disp_mip_gap = float
+		disp_time_weighting = float
+		disp_timeout = float
+		is_dispatch = float
+		pb_fixed_par = float
 
 
 	class FinancialModel(object):

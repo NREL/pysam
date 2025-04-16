@@ -1,5 +1,11 @@
 # Release Notes
 
+## Version 6.0.0, Apr, 17 2025 - SAM 2025.4.16, SSC Version 302
+* [SAM Release updates for Version 2025.4.16](https://nrel.github.io/SAM/doc/releasenotes.html)
+* Added GETEM model and equations for Geothermal (#189)
+* Fixed AdjustmentFactors to be specific to the module (#188)
+* Dropped Python 3.8 support
+
 ## Version 6.0.0, Dec 12, 2024 - SAM 2024.12.12, SSC Version 298
 * [SAM Release updates for Version 2024.12.12](https://nrel.github.io/SAM/doc/releasenotes.html)
 * GenericSystem renamed to CustomGeneration

@@ -3013,18 +3013,6 @@ Tou_set_dispatch_factors_ts(VarGroupObject *self, PyObject *value, void *closure
 }
 
 static PyObject *
-Tou_get_dispatch_tod_factors(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_FresnelPhysical_Tou_dispatch_tod_factors_aget, self->data_ptr);
-}
-
-static int
-Tou_set_dispatch_tod_factors(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_FresnelPhysical_Tou_dispatch_tod_factors_aset, self->data_ptr);
-}
-
-static PyObject *
 Tou_get_f_turb_tou_periods(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_FresnelPhysical_Tou_f_turb_tou_periods_aget, self->data_ptr);
@@ -3129,9 +3117,6 @@ static PyGetSetDef Tou_getset[] = {
  	NULL},
 {"dispatch_factors_ts", (getter)Tou_get_dispatch_factors_ts,(setter)Tou_set_dispatch_factors_ts,
 	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n**Required:**\nRequired if ppa_multiplier_model=1&csp_financial_model<5&is_dispatch=1"),
- 	NULL},
-{"dispatch_tod_factors", (getter)Tou_get_dispatch_tod_factors,(setter)Tou_set_dispatch_tod_factors,
-	PyDoc_STR("*sequence*: TOD factors for periods 1 through 9\n\n**Info:**\nWe added this array input after SAM 2022.12.21 to replace the functionality of former single value inputs dispatch_factor1 through dispatch_factor9\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
 {"f_turb_tou_periods", (getter)Tou_get_f_turb_tou_periods,(setter)Tou_set_f_turb_tou_periods,
 	PyDoc_STR("*sequence*: Dispatch logic for turbine load fraction [-]\n\n**Required:**\nTrue"),
@@ -3950,12 +3935,27 @@ TimeOfDeliveryFactors_set_dispatch_sched_weekend(VarGroupObject *self, PyObject 
 		return PySAM_matrix_setter(value, SAM_FresnelPhysical_TimeOfDeliveryFactors_dispatch_sched_weekend_mset, self->data_ptr);
 }
 
+static PyObject *
+TimeOfDeliveryFactors_get_dispatch_tod_factors(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysical_TimeOfDeliveryFactors_dispatch_tod_factors_aget, self->data_ptr);
+}
+
+static int
+TimeOfDeliveryFactors_set_dispatch_tod_factors(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_FresnelPhysical_TimeOfDeliveryFactors_dispatch_tod_factors_aset, self->data_ptr);
+}
+
 static PyGetSetDef TimeOfDeliveryFactors_getset[] = {
 {"dispatch_sched_weekday", (getter)TimeOfDeliveryFactors_get_dispatch_sched_weekday,(setter)TimeOfDeliveryFactors_set_dispatch_sched_weekday,
 	PyDoc_STR("*sequence[sequence]*: PPA pricing weekday schedule, 12x24\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
 {"dispatch_sched_weekend", (getter)TimeOfDeliveryFactors_get_dispatch_sched_weekend,(setter)TimeOfDeliveryFactors_set_dispatch_sched_weekend,
 	PyDoc_STR("*sequence[sequence]*: PPA pricing weekend schedule, 12x24\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
+ 	NULL},
+{"dispatch_tod_factors", (getter)TimeOfDeliveryFactors_get_dispatch_tod_factors,(setter)TimeOfDeliveryFactors_set_dispatch_tod_factors,
+	PyDoc_STR("*sequence*: TOD factors for periods 1 through 9\n\n**Info:**\nWe added this array input after SAM 2022.12.21 to replace the functionality of former single value inputs dispatch_factor1 through dispatch_factor9\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

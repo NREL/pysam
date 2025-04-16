@@ -7,34 +7,34 @@
 
 
 /*
- * SysControl Group
+ * SystemControl Group
  */ 
 
-static PyTypeObject SysControl_Type;
+static PyTypeObject SystemControl_Type;
 
 static PyObject *
-SysControl_new(SAM_FresnelPhysicalIph data_ptr)
+SystemControl_new(SAM_FresnelPhysicalIph data_ptr)
 {
-	PyObject* new_obj = SysControl_Type.tp_alloc(&SysControl_Type,0);
+	PyObject* new_obj = SystemControl_Type.tp_alloc(&SystemControl_Type,0);
 
-	VarGroupObject* SysControl_obj = (VarGroupObject*)new_obj;
+	VarGroupObject* SystemControl_obj = (VarGroupObject*)new_obj;
 
-	SysControl_obj->data_ptr = (SAM_table)data_ptr;
+	SystemControl_obj->data_ptr = (SAM_table)data_ptr;
 
 	return new_obj;
 }
 
-/* SysControl methods */
+/* SystemControl methods */
 
 static PyObject *
-SysControl_assign(VarGroupObject *self, PyObject *args)
+SystemControl_assign(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "FresnelPhysicalIph", "SysControl")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "FresnelPhysicalIph", "SystemControl")){
 		return NULL;
 	}
 
@@ -43,15 +43,15 @@ SysControl_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-SysControl_replace(VarGroupObject *self, PyObject *args)
+SystemControl_replace(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
-	PyTypeObject* tp = &SysControl_Type;
+	PyTypeObject* tp = &SystemControl_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "FresnelPhysicalIph", "SysControl")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "FresnelPhysicalIph", "SystemControl")){
 		return NULL;
 	}
 
@@ -60,212 +60,62 @@ SysControl_replace(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-SysControl_export(VarGroupObject *self, PyObject *args)
+SystemControl_export(VarGroupObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &SysControl_Type;
+	PyTypeObject* tp = &SystemControl_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef SysControl_methods[] = {
-		{"assign",            (PyCFunction)SysControl_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SysControl_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)SysControl_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SysControl_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)SysControl_export,  METH_VARARGS,
+static PyMethodDef SystemControl_methods[] = {
+		{"assign",            (PyCFunction)SystemControl_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SystemControl_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SystemControl_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SystemControl_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)SystemControl_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-SysControl_get_aux_array(VarGroupObject *self, void *closure)
+SystemControl_get_disp_inventory_incentive(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_FresnelPhysicalIph_SysControl_aux_array_aget, self->data_ptr);
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SystemControl_disp_inventory_incentive_nget, self->data_ptr);
 }
 
 static int
-SysControl_set_aux_array(VarGroupObject *self, PyObject *value, void *closure)
+SystemControl_set_disp_inventory_incentive(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_SysControl_aux_array_aset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SystemControl_disp_inventory_incentive_nset, self->data_ptr);
 }
 
 static PyObject *
-SysControl_get_bop_array(VarGroupObject *self, void *closure)
+SystemControl_get_sim_type(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_FresnelPhysicalIph_SysControl_bop_array_aget, self->data_ptr);
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SystemControl_sim_type_nget, self->data_ptr);
 }
 
 static int
-SysControl_set_bop_array(VarGroupObject *self, PyObject *value, void *closure)
+SystemControl_set_sim_type(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_SysControl_bop_array_aset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SystemControl_sim_type_nset, self->data_ptr);
 }
 
-static PyObject *
-SysControl_get_disp_frequency(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_frequency_nget, self->data_ptr);
-}
-
-static int
-SysControl_set_disp_frequency(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_frequency_nset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_disp_horizon(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_horizon_nget, self->data_ptr);
-}
-
-static int
-SysControl_set_disp_horizon(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_horizon_nset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_disp_inventory_incentive(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_inventory_incentive_nget, self->data_ptr);
-}
-
-static int
-SysControl_set_disp_inventory_incentive(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_inventory_incentive_nset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_disp_max_iter(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_max_iter_nget, self->data_ptr);
-}
-
-static int
-SysControl_set_disp_max_iter(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_max_iter_nset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_disp_mip_gap(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_mip_gap_nget, self->data_ptr);
-}
-
-static int
-SysControl_set_disp_mip_gap(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_mip_gap_nset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_disp_time_weighting(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_time_weighting_nget, self->data_ptr);
-}
-
-static int
-SysControl_set_disp_time_weighting(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_time_weighting_nset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_disp_timeout(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_timeout_nget, self->data_ptr);
-}
-
-static int
-SysControl_set_disp_timeout(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_timeout_nset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_is_dispatch(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_is_dispatch_nget, self->data_ptr);
-}
-
-static int
-SysControl_set_is_dispatch(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_is_dispatch_nset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_pb_fixed_par(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_pb_fixed_par_nget, self->data_ptr);
-}
-
-static int
-SysControl_set_pb_fixed_par(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_pb_fixed_par_nset, self->data_ptr);
-}
-
-static PyObject *
-SysControl_get_sim_type(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_sim_type_nget, self->data_ptr);
-}
-
-static int
-SysControl_set_sim_type(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_sim_type_nset, self->data_ptr);
-}
-
-static PyGetSetDef SysControl_getset[] = {
-{"aux_array", (getter)SysControl_get_aux_array,(setter)SysControl_set_aux_array,
-	PyDoc_STR("*sequence*: Aux heater, boiler parasitic\n\n**Required:**\nTrue"),
- 	NULL},
-{"bop_array", (getter)SysControl_get_bop_array,(setter)SysControl_set_bop_array,
-	PyDoc_STR("*sequence*: Balance of plant parasitic power fraction\n\n**Required:**\nTrue"),
- 	NULL},
-{"disp_frequency", (getter)SysControl_get_disp_frequency,(setter)SysControl_set_disp_frequency,
-	PyDoc_STR("*float*: Frequency for dispatch optimization calculations [hour]\n\n**Required:**\nRequired if is_dispatch=1"),
- 	NULL},
-{"disp_horizon", (getter)SysControl_get_disp_horizon,(setter)SysControl_set_disp_horizon,
-	PyDoc_STR("*float*: Time horizon for dispatch optimization [hour]\n\n**Required:**\nRequired if is_dispatch=1"),
- 	NULL},
-{"disp_inventory_incentive", (getter)SysControl_get_disp_inventory_incentive,(setter)SysControl_set_disp_inventory_incentive,
+static PyGetSetDef SystemControl_getset[] = {
+{"disp_inventory_incentive", (getter)SystemControl_get_disp_inventory_incentive,(setter)SystemControl_set_disp_inventory_incentive,
 	PyDoc_STR("*float*: Dispatch storage terminal inventory incentive multiplier\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
-{"disp_max_iter", (getter)SysControl_get_disp_max_iter,(setter)SysControl_set_disp_max_iter,
-	PyDoc_STR("*float*: Max. no. dispatch optimization iterations [-]\n\n**Required:**\nRequired if is_dispatch=1"),
- 	NULL},
-{"disp_mip_gap", (getter)SysControl_get_disp_mip_gap,(setter)SysControl_set_disp_mip_gap,
-	PyDoc_STR("*float*: Dispatch optimization solution tolerance [-]\n\n**Required:**\nRequired if is_dispatch=1"),
- 	NULL},
-{"disp_time_weighting", (getter)SysControl_get_disp_time_weighting,(setter)SysControl_set_disp_time_weighting,
-	PyDoc_STR("*float*: Dispatch optimization future time discounting factor [-]\n\n**Required:**\nFalse. Automatically set to 0.99 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"disp_timeout", (getter)SysControl_get_disp_timeout,(setter)SysControl_set_disp_timeout,
-	PyDoc_STR("*float*: Max. dispatch optimization solve duration [s]\n\n**Required:**\nRequired if is_dispatch=1"),
- 	NULL},
-{"is_dispatch", (getter)SysControl_get_is_dispatch,(setter)SysControl_set_is_dispatch,
-	PyDoc_STR("*float*: Allow dispatch optimization? [-]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"pb_fixed_par", (getter)SysControl_get_pb_fixed_par,(setter)SysControl_set_pb_fixed_par,
-	PyDoc_STR("*float*: Fixed parasitic load - runs at all times\n\n**Required:**\nTrue"),
- 	NULL},
-{"sim_type", (getter)SysControl_get_sim_type,(setter)SysControl_set_sim_type,
+{"sim_type", (getter)SystemControl_get_sim_type,(setter)SystemControl_set_sim_type,
 	PyDoc_STR("*float*: 1 (default): timeseries, 2: design only\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject SysControl_Type = {
+static PyTypeObject SystemControl_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"FresnelPhysicalIph.SysControl",             /*tp_name*/
+		"FresnelPhysicalIph.SystemControl",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -292,9 +142,9 @@ static PyTypeObject SysControl_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		SysControl_methods,         /*tp_methods*/
+		SystemControl_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		SysControl_getset,          /*tp_getset*/
+		SystemControl_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -2964,6 +2814,278 @@ static PyTypeObject Tou_Type = {
 		Tou_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		Tou_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * SysControl Group
+ */ 
+
+static PyTypeObject SysControl_Type;
+
+static PyObject *
+SysControl_new(SAM_FresnelPhysicalIph data_ptr)
+{
+	PyObject* new_obj = SysControl_Type.tp_alloc(&SysControl_Type,0);
+
+	VarGroupObject* SysControl_obj = (VarGroupObject*)new_obj;
+
+	SysControl_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* SysControl methods */
+
+static PyObject *
+SysControl_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "FresnelPhysicalIph", "SysControl")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+SysControl_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SysControl_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "FresnelPhysicalIph", "SysControl")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+SysControl_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &SysControl_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef SysControl_methods[] = {
+		{"assign",            (PyCFunction)SysControl_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SysControl_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SysControl_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SysControl_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)SysControl_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+SysControl_get_aux_array(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_SysControl_aux_array_aget, self->data_ptr);
+}
+
+static int
+SysControl_set_aux_array(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_SysControl_aux_array_aset, self->data_ptr);
+}
+
+static PyObject *
+SysControl_get_bop_array(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysicalIph_SysControl_bop_array_aget, self->data_ptr);
+}
+
+static int
+SysControl_set_bop_array(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_FresnelPhysicalIph_SysControl_bop_array_aset, self->data_ptr);
+}
+
+static PyObject *
+SysControl_get_disp_frequency(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_frequency_nget, self->data_ptr);
+}
+
+static int
+SysControl_set_disp_frequency(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_frequency_nset, self->data_ptr);
+}
+
+static PyObject *
+SysControl_get_disp_horizon(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_horizon_nget, self->data_ptr);
+}
+
+static int
+SysControl_set_disp_horizon(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_horizon_nset, self->data_ptr);
+}
+
+static PyObject *
+SysControl_get_disp_max_iter(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_max_iter_nget, self->data_ptr);
+}
+
+static int
+SysControl_set_disp_max_iter(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_max_iter_nset, self->data_ptr);
+}
+
+static PyObject *
+SysControl_get_disp_mip_gap(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_mip_gap_nget, self->data_ptr);
+}
+
+static int
+SysControl_set_disp_mip_gap(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_mip_gap_nset, self->data_ptr);
+}
+
+static PyObject *
+SysControl_get_disp_time_weighting(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_time_weighting_nget, self->data_ptr);
+}
+
+static int
+SysControl_set_disp_time_weighting(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_time_weighting_nset, self->data_ptr);
+}
+
+static PyObject *
+SysControl_get_disp_timeout(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_disp_timeout_nget, self->data_ptr);
+}
+
+static int
+SysControl_set_disp_timeout(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_disp_timeout_nset, self->data_ptr);
+}
+
+static PyObject *
+SysControl_get_is_dispatch(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_is_dispatch_nget, self->data_ptr);
+}
+
+static int
+SysControl_set_is_dispatch(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_is_dispatch_nset, self->data_ptr);
+}
+
+static PyObject *
+SysControl_get_pb_fixed_par(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_SysControl_pb_fixed_par_nget, self->data_ptr);
+}
+
+static int
+SysControl_set_pb_fixed_par(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_SysControl_pb_fixed_par_nset, self->data_ptr);
+}
+
+static PyGetSetDef SysControl_getset[] = {
+{"aux_array", (getter)SysControl_get_aux_array,(setter)SysControl_set_aux_array,
+	PyDoc_STR("*sequence*: Aux heater, boiler parasitic\n\n**Required:**\nTrue"),
+ 	NULL},
+{"bop_array", (getter)SysControl_get_bop_array,(setter)SysControl_set_bop_array,
+	PyDoc_STR("*sequence*: Balance of plant parasitic power fraction\n\n**Required:**\nTrue"),
+ 	NULL},
+{"disp_frequency", (getter)SysControl_get_disp_frequency,(setter)SysControl_set_disp_frequency,
+	PyDoc_STR("*float*: Frequency for dispatch optimization calculations [hour]\n\n**Required:**\nRequired if is_dispatch=1"),
+ 	NULL},
+{"disp_horizon", (getter)SysControl_get_disp_horizon,(setter)SysControl_set_disp_horizon,
+	PyDoc_STR("*float*: Time horizon for dispatch optimization [hour]\n\n**Required:**\nRequired if is_dispatch=1"),
+ 	NULL},
+{"disp_max_iter", (getter)SysControl_get_disp_max_iter,(setter)SysControl_set_disp_max_iter,
+	PyDoc_STR("*float*: Max. no. dispatch optimization iterations [-]\n\n**Required:**\nRequired if is_dispatch=1"),
+ 	NULL},
+{"disp_mip_gap", (getter)SysControl_get_disp_mip_gap,(setter)SysControl_set_disp_mip_gap,
+	PyDoc_STR("*float*: Dispatch optimization solution tolerance [-]\n\n**Required:**\nRequired if is_dispatch=1"),
+ 	NULL},
+{"disp_time_weighting", (getter)SysControl_get_disp_time_weighting,(setter)SysControl_set_disp_time_weighting,
+	PyDoc_STR("*float*: Dispatch optimization future time discounting factor [-]\n\n**Required:**\nFalse. Automatically set to 0.99 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"disp_timeout", (getter)SysControl_get_disp_timeout,(setter)SysControl_set_disp_timeout,
+	PyDoc_STR("*float*: Max. dispatch optimization solve duration [s]\n\n**Required:**\nRequired if is_dispatch=1"),
+ 	NULL},
+{"is_dispatch", (getter)SysControl_get_is_dispatch,(setter)SysControl_set_is_dispatch,
+	PyDoc_STR("*float*: Allow dispatch optimization? [-]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"pb_fixed_par", (getter)SysControl_get_pb_fixed_par,(setter)SysControl_set_pb_fixed_par,
+	PyDoc_STR("*float*: Fixed parasitic load - runs at all times\n\n**Required:**\nTrue"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject SysControl_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"FresnelPhysicalIph.SysControl",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		SysControl_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		SysControl_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -7456,9 +7578,9 @@ newFresnelPhysicalIphObject(void* data_ptr)
 
 	PySAM_TECH_ATTR()
 
-	PyObject* SysControl_obj = SysControl_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "SysControl", SysControl_obj);
-	Py_DECREF(SysControl_obj);
+	PyObject* SystemControl_obj = SystemControl_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "SystemControl", SystemControl_obj);
+	Py_DECREF(SystemControl_obj);
 
 	PyObject* Weather_obj = Weather_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
@@ -7487,6 +7609,10 @@ newFresnelPhysicalIphObject(void* data_ptr)
 	PyObject* Tou_obj = Tou_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Tou", Tou_obj);
 	Py_DECREF(Tou_obj);
+
+	PyObject* SysControl_obj = SysControl_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "SysControl", SysControl_obj);
+	Py_DECREF(SysControl_obj);
 
 	PyObject* FinancialModel_obj = FinancialModel_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "FinancialModel", FinancialModel_obj);
@@ -7623,9 +7749,9 @@ static PyMethodDef FresnelPhysicalIph_methods[] = {
 		{"execute",           (PyCFunction)FresnelPhysicalIph_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)FresnelPhysicalIph_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Sys_Control': { var: val, ...}, ...}``")},
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'System Control': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)FresnelPhysicalIph_replace,  METH_VARARGS,
-				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Sys_Control': { var: val, ...}, ...}``")},
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'System Control': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)FresnelPhysicalIph_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)FresnelPhysicalIph_value, METH_VARARGS,
@@ -7815,12 +7941,12 @@ FresnelPhysicalIphModule_exec(PyObject *m)
 	FresnelPhysicalIph_Type.tp_dict = PyDict_New();
 	if (!FresnelPhysicalIph_Type.tp_dict) { goto fail; }
 
-	/// Add the SysControl type object to FresnelPhysicalIph_Type
-	if (PyType_Ready(&SysControl_Type) < 0) { goto fail; }
+	/// Add the SystemControl type object to FresnelPhysicalIph_Type
+	if (PyType_Ready(&SystemControl_Type) < 0) { goto fail; }
 	PyDict_SetItemString(FresnelPhysicalIph_Type.tp_dict,
-				"SysControl",
-				(PyObject*)&SysControl_Type);
-	Py_DECREF(&SysControl_Type);
+				"SystemControl",
+				(PyObject*)&SystemControl_Type);
+	Py_DECREF(&SystemControl_Type);
 
 	/// Add the Weather type object to FresnelPhysicalIph_Type
 	if (PyType_Ready(&Weather_Type) < 0) { goto fail; }
@@ -7870,6 +7996,13 @@ FresnelPhysicalIphModule_exec(PyObject *m)
 				"Tou",
 				(PyObject*)&Tou_Type);
 	Py_DECREF(&Tou_Type);
+
+	/// Add the SysControl type object to FresnelPhysicalIph_Type
+	if (PyType_Ready(&SysControl_Type) < 0) { goto fail; }
+	PyDict_SetItemString(FresnelPhysicalIph_Type.tp_dict,
+				"SysControl",
+				(PyObject*)&SysControl_Type);
+	Py_DECREF(&SysControl_Type);
 
 	/// Add the FinancialModel type object to FresnelPhysicalIph_Type
 	if (PyType_Ready(&FinancialModel_Type) < 0) { goto fail; }
