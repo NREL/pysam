@@ -3,6 +3,8 @@
 Version 4.2.0
 ===============================================
 
+Version 4.2.0, released June 30, 2023, corresponds to SAM 2022.11.21, Revision 3, SSC 280.
+
 This page compares the PySAM Modules' input variables and the defaults for these input variables 
 between the current release and the last release.
 

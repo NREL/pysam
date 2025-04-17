@@ -3,6 +3,8 @@
 Version 3.0.1
 ===============================================
 
+Version 3.0.1, released Mar 4, 2022, corresponds to SAM 2021.12.02, Revision 1, SSC 268.
+
 This page compares the PySAM Modules' input variables and the defaults for these input variables 
 between the current release and the last release.
 
