@@ -1,0 +1,183 @@
+.. 7.0.0:
+
+Version 7.0.0
+===============================================
+
+Version 7.0.0, released Apr 17, 2025, corresponds to SAM 2025.4.16., SSC 302.
+
+This page compares the PySAM Modules' input variables and the defaults for these input variables 
+between the current release and the last release.
+
+This helps track which variables and defaults have changed between releases to make it easier to notify users during version upgrade.
+
+Below are lists for each PySAM Module:
+    1. New Default configurations
+    2. Removed Default configurations
+    3. Modified Variables: New variables, Removed variables and Type-changed variables
+    4. Modified Default Values
+
+Cashloan
+************************************************
+
+:doc:`../modules/Cashloan` Modified Input Variables:
+
+    Removed variables:
+
+         - elec_cost_with_system
+         - elec_cost_without_system
+
+
+CashloanHeat
+************************************************
+
+:doc:`../modules/CashloanHeat` Modified Input Variables:
+
+    Removed variables:
+
+         - elec_cost_with_system
+         - elec_cost_without_system
+
+
+FresnelPhysicalIph
+************************************************
+
+:doc:`../modules/FresnelPhysicalIph` Modified Input Variables:
+
+    New variables:
+
+         - hs_htf_mdot_max_frac
+
+    Removed variables:
+
+         - disp_rsu_cost_rel
+         - hs_phys_N_sub
+         - hs_phys_f_mdot_steam_max
+         - hs_phys_f_mdot_steam_min
+         - hs_phys_tol
+         - q_rec_heattrace
+         - q_rec_standby
+
+
+Geothermal
+************************************************
+
+:doc:`../modules/Geothermal` Modified Input Variables:
+
+    New variables:
+
+         - stimulation_type
+
+
+GeothermalCosts
+************************************************
+
+:doc:`../modules/GeothermalCosts` Modified Input Variables:
+
+    New variables:
+
+         - geotherm.cost.conf_multiplier
+         - geotherm.cost.conf_non_drill
+         - geotherm.cost.conf_num_wells
+         - geotherm.cost.expl_multiplier
+         - geotherm.cost.expl_non_drill
+         - geotherm.cost.expl_num_wells
+         - geotherm.cost.pump_casing_cost
+         - geotherm.cost.pump_fixed
+         - geotherm.cost.pump_per_foot
+         - geotherm.cost.stim_non_drill
+         - inj_pump_hp
+         - num_wells_getem
+         - num_wells_getem_inj_drilled
+         - num_wells_getem_prod_drilled
+         - num_wells_getem_prod_failed
+         - pump_depth_ft
+         - pump_size_hp
+         - stimulation_type
+
+    Removed variables:
+
+         - geotherm.cost.inj_wells_drilled
+         - geotherm.cost.prod_wells_drilled
+
+
+HostDeveloper
+************************************************
+
+:doc:`../modules/HostDeveloper` Modified Input Variables:
+
+    Removed variables:
+
+         - elec_cost_with_system
+         - elec_cost_without_system
+
+
+MhkCosts
+************************************************
+
+:doc:`../modules/MhkCosts` Modified Input Variables:
+
+    New variables:
+
+         - lib_tidal_device
+
+
+MsptIph
+************************************************
+
+:doc:`../modules/MsptIph` Modified Input Variables:
+
+    New variables:
+
+         - hs_htf_mdot_max_frac
+
+    Removed variables:
+
+         - hs_phys_N_sub
+         - hs_phys_f_mdot_steam_max
+         - hs_phys_f_mdot_steam_min
+         - hs_phys_tol
+
+
+SingleownerHeat
+************************************************
+
+:doc:`../modules/SingleownerHeat` Modified Input Variables:
+
+    New variables:
+
+         - dispatch_factors_ts
+         - dispatch_sched_weekday
+         - dispatch_sched_weekend
+         - dispatch_tod_factors
+         - ppa_multiplier_model
+
+
+Thirdpartyownership
+************************************************
+
+:doc:`../modules/Thirdpartyownership` Modified Input Variables:
+
+    Removed variables:
+
+         - elec_cost_with_system
+         - elec_cost_without_system
+
+
+TroughPhysicalIph
+************************************************
+
+:doc:`../modules/TroughPhysicalIph` Modified Input Variables:
+
+    New variables:
+
+         - disp_inventory_incentive
+         - hs_htf_mdot_max_frac
+
+    Removed variables:
+
+         - hs_phys_N_sub
+         - hs_phys_f_mdot_steam_max
+         - hs_phys_f_mdot_steam_min
+         - hs_phys_tol
+
+

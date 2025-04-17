@@ -3,6 +3,8 @@
 Version 5.1.0
 ===============================================
 
+Version 5.1.0, released Mar 13, 2024, corresponds to SAM 2023.12.17 Revision 1, SSC 290.
+
 This page compares the PySAM Modules' input variables and the defaults for these input variables 
 between the current release and the last release.
 

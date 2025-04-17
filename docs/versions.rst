@@ -5,11 +5,10 @@ For a list of PySAM versions and their equivalent SAM and SSC versions, see http
 
 The list below tracks changes in variables between consecutive PySAM versions.
 
-For a list of 
-
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
+    version_changes/7.0.0.rst
     version_changes/6.0.0.rst
     version_changes/5.1.0.rst
     version_changes/5.0.0.rst

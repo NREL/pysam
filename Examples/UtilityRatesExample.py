@@ -6,7 +6,7 @@ This example requires an NREL developer key, which can be obtained from https://
 Additional financial models, inputs, and outputs can be found at:
 * PV: https://nrel-pysam.readthedocs.io/en/master/modules/Utilityrate5.html
 
-Most recently tested against PySAM 6.0.0
+Most recently tested against PySAM 76.0.0
 Requires: nrel-pysam, requests
 
 @author: brtietz
@@ -82,7 +82,7 @@ if __name__ == "__main__":
 
     ur.execute() # Run the utility rate module
 
-    print("Total utility bill without system ($): ", ur.Outputs.elec_cost_without_system_year1) 
-    print("Average $/kW", ur.Outputs.elec_cost_without_system_year1 / sum(load))
+    print("Total utility bill without system ($): ", ur.Outputs.utility_bill_wo_sys_year1) 
+    print("Average $/kW", ur.Outputs.utility_bill_wo_sys_year1 / sum(load))
 
 

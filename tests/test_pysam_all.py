@@ -445,7 +445,7 @@ def assign_values(mod, i):
 def test_run_all():
     # only run test on first Python version to be built, since this test is very time consuming
     minor_ver = sys.version_info[1]
-    if minor_ver != 8:
+    if minor_ver != 9:
         return
     techs = (
         "Battery", "Battwatts", "Biomass", "EtesElectricResistance", "Geothermal", 
@@ -453,7 +453,7 @@ def test_run_all():
         "LinearFresnelDsgIph", "MhkTidal", "MhkWave",
         "MsptIph",
         "Pvsamv1", "Pvwattsv8", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "CustomGeneration", "Grid",
-        "TcsMSLF", "TcsgenericSolar", "TcslinearFresnel", "TcstroughEmpirical",
+        "TcsgenericSolar", "TcslinearFresnel", "TcstroughEmpirical",
         "TroughPhysical", "TroughPhysicalIph", "Windpower")
     for mod in techs:
         mod_name = "PySAM." + mod

@@ -300,7 +300,6 @@ class FresnelPhysical(object):
 		disp_spec_scaling = float
 		disp_steps_per_hour = float
 		dispatch_factors_ts = tuple
-		dispatch_tod_factors = tuple
 		f_turb_tou_periods = tuple
 		is_timestep_load_fractions = float
 		is_tod_pc_target_also_pc_max = float
@@ -393,6 +392,7 @@ class FresnelPhysical(object):
 
 		dispatch_sched_weekday = tuple
 		dispatch_sched_weekend = tuple
+		dispatch_tod_factors = tuple
 
 
 	class FinancialSolutionMode(object):

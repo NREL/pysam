@@ -6310,7 +6310,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Utility IBI income [$]"),
  	NULL},
 {"irr", (getter)Outputs_get_irr,(setter)0,
-	PyDoc_STR("*float*: IRR Internal rate of return [$]"),
+	PyDoc_STR("*float*: IRR Internal rate of return [%]"),
  	NULL},
 {"itc_total", (getter)Outputs_get_itc_total,(setter)0,
 	PyDoc_STR("*float*: Total ITC income [$]"),

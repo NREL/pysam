@@ -23,10 +23,10 @@ Functions
 .. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph
 	:members:
 
-SysControl Group
------------------
+SystemControl Group
+--------------------
 
-.. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.SysControl
+.. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.SystemControl
 	:members:
 
 Weather Group
@@ -69,6 +69,12 @@ Tou Group
 ----------
 
 .. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.Tou
+	:members:
+
+SysControl Group
+-----------------
+
+.. autoclass:: PySAM.FresnelPhysicalIph.FresnelPhysicalIph.SysControl
 	:members:
 
 FinancialModel Group

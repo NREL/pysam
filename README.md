@@ -10,7 +10,7 @@ https://nrel-pysam.readthedocs.io
 
 
 ## Requirements
-1. Python 3.8 - 3.13, 64 bit
+1. Python 3.9 - 3.13, 64 bit
 2. Operating system:
 	- MacOSX 10.7+
 	- Most Linux
