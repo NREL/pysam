@@ -1,6 +1,6 @@
 # Release Notes
 
-## Version 6.0.0, Apr, 17 2025 - SAM 2025.4.16, SSC Version 302
+## Version 7.0.0, Apr, 17 2025 - SAM 2025.4.16, SSC Version 302
 * [SAM Release updates for Version 2025.4.16](https://nrel.github.io/SAM/doc/releasenotes.html)
 * Added GETEM model and equations for Geothermal (#189)
 * Fixed AdjustmentFactors to be specific to the module (#188)
