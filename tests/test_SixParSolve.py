@@ -4,7 +4,7 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 from files.SixParSolve import *
 
-def test_default_sam_cec_user():
+def define_default_model(set_initial_values=True):
     # SunPower SPR-E19-310-COM
     Vmp = 54.7
     Imp = 5.67
@@ -15,13 +15,6 @@ def test_default_sam_cec_user():
     gamma = -0.386
     # Tref = 46 + 273.15
     Tref = 25 + 273.15
-
-    a = 2.5776
-    Il = 6.054
-    Io = 8.360453e-11
-    Rs = 3.081202e-01
-    Rsh = 500.069
-    Adj = 22.909
 
     model = create_model()
     m = model.solver
@@ -34,21 +27,32 @@ def test_default_sam_cec_user():
     m.gPmp.set_value(gamma)
     m.Tref.set_value(Tref)
 
-    m.par.a.set_value(a)
-    m.par.Il.set_value(Il)
-    m.par.Io.set_value(Io)
-    m.par.Rs.set_value(Rs)
-    m.par.Rsh.set_value(Rsh)
-    m.par.Adj.set_value(Adj)
+    if set_initial_values:
+        a = 2.5776
+        Il = 6.054
+        Io = 8.360453e-11
+        Rs = 3.081202e-01
+        Rsh = 500.069
+        Adj = 22.909
+        m.par.a.set_value(a)
+        m.par.Il.set_value(Il)
+        m.par.Io.set_value(Io)
+        m.par.Rs.set_value(Rs)
+        m.par.Rsh.set_value(Rsh)
+        m.par.Adj.set_value(Adj)
+    return model
 
-    IL_oper, IO_oper, Rs, A_oper, Rsh_oper = cec_model_params_at_condition(m, 1000, 25+275.15)
+def test_default_sam_cec_user():
+    model = define_default_model()
+
+    IL_oper, IO_oper, Rs, A_oper, Rsh_oper = cec_model_params_at_condition(model, 1000, 25+275.15)
     assert IL_oper == approx(6.059759, rel=1e-5) 
     assert IO_oper == approx(1.1674203993060455e-10, rel=1e-5) 
     assert Rs == approx(0.3081202, rel=1e-5) 
     assert A_oper == approx(2.5948906, rel=1e-5) 
     assert Rsh_oper == approx(500.069, rel=1e-5) 
 
-    plot_iv_curve(m)
+    plot_iv_curve(model)
 
 
 def test_cec_model_ivcurve_default():
@@ -75,5 +79,26 @@ def test_cec_model_ivcurve_default():
     assert y_I[1] == approx(6.04913, rel=1e-3) 
     assert y_I[-1] == approx(5.770225265737295e-06, rel=1e-3) 
 
-test_cec_model_ivcurve_default()
-test_default_sam_cec_user()
+
+def test_cec_model_solve(set_initial_values=True):
+    model = define_default_model(set_initial_values)
+
+    solver = pyo.SolverFactory('ipopt')
+    solver.options["max_iter"] = 5000
+    solver.options["halt_on_ampl_error"] = 'no'
+
+    res, scaled_model = solve_model(model, solver, tee=True)
+    a = pyo.value(scaled_model.solver.par.scaled_a)
+    Il = pyo.value(scaled_model.solver.par.scaled_Il)
+    Io = pyo.value(scaled_model.solver.par.scaled_Io / IL_SCALING)
+    Rs = pyo.value(scaled_model.solver.par.scaled_Rs)
+    Rsh = pyo.value(scaled_model.solver.par.scaled_Rsh / RSH_SCALING)
+    Adj = pyo.value(scaled_model.solver.par.scaled_Adj)
+
+    plot_iv_curve(model)
+
+# fig = plt.figure()
+# test_default_sam_cec_user()
+
+# test_cec_model_solve(set_initial_values=False)
+# plt.show()
