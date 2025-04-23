@@ -1,3 +1,5 @@
+from pathlib import Path
+import os
 import pyomo.environ as pyo
 import pandas as pd
 import numpy as np
@@ -74,25 +76,240 @@ def cec_model_ivcurve(model, Irr, T_cell_K, vmax, npts):
         y_I.append(I)
     return V, y_I
     
-def plot_iv_curve(model):
+def plot_iv_curve(model, linestyle='solid', label=None, plot_anchors=False):
     curves = [ [ 1000, 25, 'black' ],
                [ 800,  25, 'blue' ],
                [ 600,  25, 'red' ],
                [ 400,  25, 'green' ],
                [ 200,  25, 'orange' ] ]
+
+    curves = [ [ 1000, 0, 'black' ],
+               [ 1000,  25, 'red' ],
+               [ 1000,  50, 'orange' ],
+            #    [ 800,  25, 'blue' ],
+            #    [ 400,  25, 'green' ],
+               ]
         
     vmax = pyo.value(model.solver.Voc)
+    alpha_sc = pyo.value(model.solver.aIsc)
+    I_sc_ref = pyo.value(model.solver.Isc)
+    beta_oc = pyo.value(model.solver.bVoc)
+    V_oc_ref = pyo.value(model.solver.Voc)
+    gamma_r = pyo.value(model.solver.gPmp)
+    V_mp_ref = pyo.value(model.solver.Vmp)
+    I_mp_ref = pyo.value(model.solver.Imp)
+
+    # if plot_anchors:
+        # plt.plot(0, I_sc_ref, marker="o", markersize=15, alpha=0.5)
+        # plt.plot(V_oc_ref, 0, marker="v", markersize=15, alpha=0.5)
+        # plt.plot(V_mp_ref, I_mp_ref, marker="*", markersize=15, alpha=0.5)
 
     npts = 150
     for curve in curves:
         Irr = curve[0]
         Tc = curve[1]
 
-        x_V, y_I = cec_model_ivcurve(model, Irr, Tc + 273.15, vmax, npts)
-        plt.plot(x_V, y_I, label=f"{Irr} W/m^2", color=curve[2])
+        V_oc = beta_oc * (Tc - 25) + V_oc_ref
+        x_V, y_I = cec_model_ivcurve(model, Irr, Tc + 273.15, V_oc, npts)
+        plt.plot(x_V, y_I, label=f"{label} {Irr} W/m^2 {Tc} C", color=curve[2], linestyle=linestyle)
+
+        if plot_anchors and Irr == 1000:
+            I_sc = alpha_sc * (Tc - 25) + I_sc_ref
+            plt.plot(0, I_sc, marker="o", markersize=10, alpha=0.5, color=curve[2])
+            plt.plot(V_oc, 0, marker="v", markersize=10, alpha=0.5, color=curve[2])
+            
+            P_mp = (gamma_r * (Tc - 25) * 1e-2 + 1) * (V_mp_ref * I_mp_ref)
+            mp_ind = np.argmax(x_V * y_I)
+            I_mp = y_I[mp_ind]
+            V_mp = P_mp / I_mp
+            # V_mp = x_V[mp_ind]
+            # I_mp = P_mp / V_mp
+            plt.plot(V_mp, I_mp, marker="*", markersize=10, alpha=0.5, color=curve[2])
 
 
 def create_model():
+    model = pyo.ConcreteModel()
+    model.solver = pyo.Block()
+    m = model.solver
+
+    m.Vmp = pyo.Param(domain=pyo.NonNegativeReals, mutable=True)
+    m.Imp = pyo.Param(domain=pyo.NonNegativeReals, mutable=True)
+    m.Voc = pyo.Param(domain=pyo.NonNegativeReals, mutable=True)
+    m.Isc = pyo.Param(domain=pyo.NonNegativeReals, mutable=True)
+    m.aIsc = pyo.Param(domain=pyo.Reals, mutable=True)
+    m.bVoc = pyo.Param(domain=pyo.Reals, mutable=True)
+    m.gPmp = pyo.Param(domain=pyo.Reals, mutable=True)
+    m.Egref = pyo.Param(domain=pyo.NonNegativeReals, mutable=True, initialize=1.121)
+    m.Tref = pyo.Param(domain=pyo.NonNegativeReals, mutable=True, units=pyo.units.K)
+
+    # Module6ParNonlinear
+    m.par = pyo.Block()
+    m.par.a = pyo.Var(domain=pyo.NonNegativeReals, bounds=(0.05, 15), initialize=7.75)
+    m.par.Il = pyo.Var(domain=pyo.NonNegativeReals, bounds=(0.5, 20), initialize=10.25)
+    m.par.Io = pyo.Var(domain=pyo.NonNegativeReals, bounds=(1e-13, 1e-7), initialize=5e-8) # might need to scale
+    m.par.Rs = pyo.Var(domain=pyo.NonNegativeReals, bounds=(0.001, 75), initialize=32.5)
+    m.par.Rsh = pyo.Var(domain=pyo.NonNegativeReals, bounds=(1, 1e6), initialize=5e5)
+    m.par.Adj = pyo.Var(domain=pyo.Reals, bounds=(-100, 100), initialize=1)
+
+    m.par.f0 = pyo.Constraint(expr=m.par.Il - m.par.Io*( pyo.exp( m.Isc*m.par.Rs / m.par.a ) - 1 ) - m.Isc*m.par.Rs/m.par.Rsh - m.Isc == 0)
+    m.par.f1 = pyo.Constraint(expr=m.par.Io*( pyo.exp( m.Voc/m.par.a ) - 1 ) + m.Voc/m.par.Rsh -m.par.Il == 0)
+    m.par.f2 = pyo.Constraint(expr=m.par.Il - m.par.Io*( pyo.exp( (m.Vmp + m.Imp*m.par.Rs) / m.par.a ) - 1 ) - (m.Vmp + m.Imp*m.par.Rs)/m.par.Rsh - m.Imp == 0)
+    m.par.f3 = pyo.Constraint(expr=m.Imp - m.Vmp*(
+        ( m.par.Io/m.par.a*pyo.exp( (m.Vmp + m.Imp*m.par.Rs)/m.par.a ) + 1/m.par.Rsh )
+        /( 1 + m.par.Io*m.par.Rs/m.par.a*pyo.exp( (m.Vmp + m.Imp*m.par.Rs)/m.par.a ) + m.par.Rs/m.par.Rsh ) ) == 0)
+
+    m.par.dT = pyo.Param(initialize=5)
+
+    m.par.aT = pyo.Expression(expr=m.par.a*(m.Tref+m.par.dT)/m.Tref)
+    m.par.VocT = pyo.Expression(expr=m.bVoc*(1+m.par.Adj/100.0)*m.par.dT + m.Voc)
+    m.par.Eg = pyo.Expression(expr=(1-0.0002677*m.par.dT)*m.Egref)
+    m.par.IoT = pyo.Expression(expr=m.par.Io*( (m.Tref+m.par.dT)/m.Tref )**3 *pyo.exp( 11600 * (m.Egref/m.Tref - m.par.Eg/(m.Tref+m.par.dT))))
+    m.par.f4 = pyo.Constraint(expr=m.par.Il+m.aIsc*(1-m.par.Adj/100)*m.par.dT - m.par.IoT*(pyo.exp( m.par.VocT/m.par.aT ) - 1 ) - m.par.VocT/m.par.Rsh == 0)
+
+    # mod6par_gamma_approx
+    temperatures = np.arange(-10 + 273.15, 50 + 273.15, 15)
+    def gamma_expr(b, t):
+        return (b.pt[t].Pmax_Tc-b.pt[t-1].Pmax_Tc)*100/(m.Vmp*m.Imp*(b.pt[t].Tc-b.pt[t-1].Tc))
+
+    def gamma_blocks(b, i):
+        b.Tc = pyo.Param(initialize=temperatures[i - 1])
+        b.V_Tc = pyo.Var(domain=pyo.NonNegativeReals)
+        b.I_Tc = pyo.Var(domain=pyo.NonNegativeReals)
+
+        # PTnonlinear
+        b.a_Tc = pyo.Expression(expr=m.par.a * b.Tc / m.Tref)
+        b.Io_Tc = pyo.Expression(expr=m.par.Io* ( b.Tc/m.Tref)**3 * pyo.exp( 11600 * (m.Egref/m.Tref - m.par.Eg/b.Tc)))
+        b.Il_Tc = pyo.Expression(expr=m.par.Il + (m.aIsc*(1-m.par.Adj/100))*(b.Tc-m.Tref))
+        b.f_5 = pyo.Constraint(expr=b.V_Tc *( b.Io_Tc/b.a_Tc*pyo.exp( (b.V_Tc+b.I_Tc*m.par.Rs)/b.a_Tc ) + 1/m.par.Rsh ) 
+                            / ( 1 + m.par.Rs/m.par.Rsh + b.Io_Tc*m.par.Rs/b.a_Tc*pyo.exp( (b.V_Tc+b.I_Tc*m.par.Rs)/b.a_Tc ) ) - b.I_Tc == 0)
+        b.f_6 = pyo.Constraint(expr=b.Il_Tc - b.Io_Tc*(pyo.exp( (b.V_Tc+b.I_Tc*m.par.Rs)/b.a_Tc ) - 1) - (b.V_Tc + b.I_Tc*m.par.Rs)/m.par.Rsh - b.I_Tc == 0)
+        b.Pmax_Tc = pyo.Expression(expr=b.V_Tc * b.I_Tc)
+
+    nTc = len(temperatures)
+    m.gamma = pyo.Block()
+    g = m.gamma
+    g.i = pyo.RangeSet(nTc)
+    g.d_i = pyo.RangeSet(2, nTc)
+    g.pt = pyo.Block(g.i, rule=gamma_blocks)
+
+    g.gamma_Tc = pyo.Expression(g.d_i, rule=gamma_expr)
+    g.gamma_avg = pyo.Expression(expr=pyo.summation(g.gamma_Tc) / len(g.d_i))
+
+    g.f_7 = pyo.Constraint(expr=(g.gamma_avg - m.gPmp) == 0)
+
+    # Sanity checks on current
+    model.sanity = pyo.Block()
+    s = model.sanity
+
+    s.Imp_calc = pyo.Var(domain=pyo.NonNegativeReals)
+    s.f_8 = pyo.Constraint(expr=m.par.Il - s.Imp_calc - m.par.Io * (pyo.exp((m.Vmp + s.Imp_calc * m.par.Rs) / m.par.a) - 1.0) - (m.Vmp + s.Imp_calc * m.par.Rs) / m.par.Rsh == 0)
+
+    s.Ioc_calc = pyo.Var(domain=pyo.NonNegativeReals, initialize=0)
+    s.f_9 = pyo.Constraint(expr=m.par.Il - s.Ioc_calc - m.par.Io * (pyo.exp((m.Voc + s.Ioc_calc * m.par.Rs) / m.par.a) - 1.0) - (m.Voc + s.Ioc_calc * m.par.Rs) / m.par.Rsh == 0)
+
+    # Sanity checks on max_slope
+    # v_range = np.linspace(0.015 * m.Voc.value, 0.98 * m.Voc.value, 100)
+    model.slope = pyo.Block()
+    
+
+    # examine solved modules
+    model.scaling_factor = pyo.Suffix(direction=pyo.Suffix.EXPORT)
+    return model
+
+
+def create_partly_relaxed_model():
+    model = pyo.ConcreteModel()
+    model.solver = pyo.Block()
+    m = model.solver
+
+    m.Vmp = pyo.Param(domain=pyo.NonNegativeReals, mutable=True)
+    m.Imp = pyo.Param(domain=pyo.NonNegativeReals, mutable=True)
+    m.Voc = pyo.Param(domain=pyo.NonNegativeReals, mutable=True)
+    m.Isc = pyo.Param(domain=pyo.NonNegativeReals, mutable=True)
+    m.aIsc = pyo.Param(domain=pyo.Reals, mutable=True)
+    m.bVoc = pyo.Param(domain=pyo.Reals, mutable=True)
+    m.gPmp = pyo.Param(domain=pyo.Reals, mutable=True)
+    m.Egref = pyo.Param(domain=pyo.NonNegativeReals, mutable=True, initialize=1.121)
+    m.Tref = pyo.Param(domain=pyo.NonNegativeReals, mutable=True, units=pyo.units.K)
+
+    # Module6ParNonlinear
+    m.par = pyo.Block()
+    m.par.a = pyo.Var(domain=pyo.NonNegativeReals, bounds=(0.05, 15), initialize=7.75)
+    m.par.Il = pyo.Var(domain=pyo.NonNegativeReals, bounds=(0.5, 20), initialize=10.25)
+    m.par.Io = pyo.Var(domain=pyo.NonNegativeReals, bounds=(1e-13, 1e-7), initialize=5e-8) # might need to scale
+    m.par.Rs = pyo.Var(domain=pyo.NonNegativeReals, bounds=(0.001, 75), initialize=32.5)
+    m.par.Rsh = pyo.Var(domain=pyo.NonNegativeReals, bounds=(1, 1e6), initialize=5e5)
+    m.par.Adj = pyo.Var(domain=pyo.Reals, bounds=(-100, 100), initialize=1)
+
+    m.par.f0 = pyo.Expression(expr=m.par.Il - m.par.Io*( pyo.exp( m.Isc*m.par.Rs / m.par.a ) - 1 ) - m.Isc*m.par.Rs/m.par.Rsh - m.Isc)
+    # m.par.f0 = pyo.Constraint(expr=m.par.Il - m.par.Io*( pyo.exp( m.Isc*m.par.Rs / m.par.a ) - 1 ) - m.Isc*m.par.Rs/m.par.Rsh - m.Isc == 0)
+    m.par.f1 = pyo.Constraint(expr=m.par.Io*( pyo.exp( m.Voc/m.par.a ) - 1 ) + m.Voc/m.par.Rsh -m.par.Il == 0)
+    m.par.f2 = pyo.Constraint(expr=m.par.Il - m.par.Io*( pyo.exp( (m.Vmp + m.Imp*m.par.Rs) / m.par.a ) - 1 ) - (m.Vmp + m.Imp*m.par.Rs)/m.par.Rsh - m.Imp == 0)
+    m.par.f3 = pyo.Constraint(expr=m.Imp - m.Vmp*(
+        ( m.par.Io/m.par.a*pyo.exp( (m.Vmp + m.Imp*m.par.Rs)/m.par.a ) + 1/m.par.Rsh )
+        /( 1 + m.par.Io*m.par.Rs/m.par.a*pyo.exp( (m.Vmp + m.Imp*m.par.Rs)/m.par.a ) + m.par.Rs/m.par.Rsh ) ) == 0)
+
+    m.par.dT = pyo.Param(initialize=5)
+
+    m.par.aT = pyo.Expression(expr=m.par.a*(m.Tref+m.par.dT)/m.Tref)
+    m.par.VocT = pyo.Expression(expr=m.bVoc*(1+m.par.Adj/100.0)*m.par.dT + m.Voc)
+    m.par.Eg = pyo.Expression(expr=(1-0.0002677*m.par.dT)*m.Egref)
+    m.par.IoT = pyo.Expression(expr=m.par.Io*( (m.Tref+m.par.dT)/m.Tref )**3 *pyo.exp( 11600 * (m.Egref/m.Tref - m.par.Eg/(m.Tref+m.par.dT))))
+    m.par.f4 = pyo.Constraint(expr=m.par.Il+m.aIsc*(1-m.par.Adj/100)*m.par.dT - m.par.IoT*(pyo.exp( m.par.VocT/m.par.aT ) - 1 ) - m.par.VocT/m.par.Rsh == 0)
+
+    # mod6par_gamma_approx
+    temperatures = np.arange(-10 + 273.15, 50 + 273.15, 3)
+    def gamma_expr(b, t):
+        return (b.pt[t].Pmax_Tc-b.pt[t-1].Pmax_Tc)*100/(m.Vmp*m.Imp*(b.pt[t].Tc-b.pt[t-1].Tc))
+
+    def gamma_blocks(b, i):
+        b.Tc = pyo.Param(initialize=temperatures[i - 1])
+        b.V_Tc = pyo.Var(domain=pyo.NonNegativeReals)
+        b.I_Tc = pyo.Var(domain=pyo.NonNegativeReals)
+
+        # PTnonlinear
+        b.a_Tc = pyo.Expression(expr=m.par.a * b.Tc / m.Tref)
+        b.Io_Tc = pyo.Expression(expr=m.par.Io* ( b.Tc/m.Tref)**3 * pyo.exp( 11600 * (m.Egref/m.Tref - m.par.Eg/b.Tc)))
+        b.Il_Tc = pyo.Expression(expr=m.par.Il + (m.aIsc*(1-m.par.Adj/100))*(b.Tc-m.Tref))
+        b.f_5 = pyo.Constraint(expr=b.V_Tc *( b.Io_Tc/b.a_Tc*pyo.exp( (b.V_Tc+b.I_Tc*m.par.Rs)/b.a_Tc ) + 1/m.par.Rsh ) 
+                            / ( 1 + m.par.Rs/m.par.Rsh + b.Io_Tc*m.par.Rs/b.a_Tc*pyo.exp( (b.V_Tc+b.I_Tc*m.par.Rs)/b.a_Tc ) ) - b.I_Tc == 0)
+        b.f_6 = pyo.Constraint(expr=b.Il_Tc - b.Io_Tc*(pyo.exp( (b.V_Tc+b.I_Tc*m.par.Rs)/b.a_Tc ) - 1) - (b.V_Tc + b.I_Tc*m.par.Rs)/m.par.Rsh - b.I_Tc == 0)
+        b.Pmax_Tc = pyo.Expression(expr=b.V_Tc * b.I_Tc)
+
+    nTc = len(temperatures)
+    m.gamma = pyo.Block()
+    g = m.gamma
+    g.i = pyo.RangeSet(nTc)
+    g.d_i = pyo.RangeSet(2, nTc)
+    g.pt = pyo.Block(g.i, rule=gamma_blocks)
+
+    g.gamma_Tc = pyo.Expression(g.d_i, rule=gamma_expr)
+    g.gamma_avg = pyo.Expression(expr=pyo.summation(g.gamma_Tc) / len(g.d_i))
+
+    g.f_7 = pyo.Expression(expr=(g.gamma_avg - m.gPmp) ** 2)
+    m.f_0_penalty = pyo.Param(initialize=10, mutable=True)
+    m.f_0 = pyo.Expression(expr=m.par.f0 ** 2 * m.f_0_penalty)
+
+    # Sanity checks on current
+    model.sanity = pyo.Block()
+    s = model.sanity
+
+    s.Imp_calc = pyo.Var(domain=pyo.NonNegativeReals)
+    s.f_8 = pyo.Constraint(expr=m.par.Il - s.Imp_calc - m.par.Io * (pyo.exp((m.Vmp + s.Imp_calc * m.par.Rs) / m.par.a) - 1.0) - (m.Vmp + s.Imp_calc * m.par.Rs) / m.par.Rsh == 0)
+
+    s.Ioc_calc = pyo.Var(domain=pyo.NonNegativeReals, initialize=0)
+    s.f_9 = pyo.Constraint(expr=m.par.Il - s.Ioc_calc - m.par.Io * (pyo.exp((m.Voc + s.Ioc_calc * m.par.Rs) / m.par.a) - 1.0) - (m.Voc + s.Ioc_calc * m.par.Rs) / m.par.Rsh == 0)
+
+    # Sanity checks on max_slope
+    # v_range = np.linspace(0.015 * m.Voc.value, 0.98 * m.Voc.value, 100)
+    model.slope = pyo.Block()
+    
+
+    # examine solved modules
+    model.scaling_factor = pyo.Suffix(direction=pyo.Suffix.EXPORT)
+    return model
+
+def create_full_relaxed_model():
     model = pyo.ConcreteModel()
     model.solver = pyo.Block()
     m = model.solver
@@ -116,12 +333,12 @@ def create_model():
     m.par.Rsh = pyo.Var(domain=pyo.NonNegativeReals, bounds=(1, 1e6), initialize=5e5)
     m.par.Adj = pyo.Var(domain=pyo.Reals, bounds=(-100, 100), initialize=1)
 
-    m.par.f0 = pyo.Constraint(expr=m.par.Il - m.par.Io*( pyo.exp( m.Isc*m.par.Rs / m.par.a ) - 1 ) - m.Isc*m.par.Rs/m.par.Rsh - m.Isc == 0)
-    m.par.f1 = pyo.Constraint(expr=m.par.Io*( pyo.exp( m.Voc/m.par.a ) - 1 ) + m.Voc/m.par.Rsh -m.par.Il == 0)
-    m.par.f2 = pyo.Constraint(expr=m.par.Il - m.par.Io*( pyo.exp( (m.Vmp + m.Imp*m.par.Rs) / m.par.a ) - 1 ) - (m.Vmp + m.Imp*m.par.Rs)/m.par.Rsh - m.Imp == 0)
-    m.par.f3 = pyo.Constraint(expr=m.Imp - m.Vmp*(
+    m.par.f0 = pyo.Expression(expr=(m.par.Il - m.par.Io*( pyo.exp( m.Isc*m.par.Rs / m.par.a ) - 1 ) - m.Isc*m.par.Rs/m.par.Rsh - m.Isc))
+    m.par.f1 = pyo.Expression(expr=m.par.Io*( pyo.exp( m.Voc/m.par.a ) - 1 ) + m.Voc/m.par.Rsh -m.par.Il)
+    m.par.f2 = pyo.Expression(expr=m.par.Il - m.par.Io*( pyo.exp( (m.Vmp + m.Imp*m.par.Rs) / m.par.a ) - 1 ) - (m.Vmp + m.Imp*m.par.Rs)/m.par.Rsh - m.Imp)
+    m.par.f3 = pyo.Expression(expr=m.Imp - m.Vmp*(
         ( m.par.Io/m.par.a*pyo.exp( (m.Vmp + m.Imp*m.par.Rs)/m.par.a ) + 1/m.par.Rsh )
-        /( 1 + m.par.Io*m.par.Rs/m.par.a*pyo.exp( (m.Vmp + m.Imp*m.par.Rs)/m.par.a ) + m.par.Rs/m.par.Rsh ) ) == 0)
+        /( 1 + m.par.Io*m.par.Rs/m.par.a*pyo.exp( (m.Vmp + m.Imp*m.par.Rs)/m.par.a ) + m.par.Rs/m.par.Rsh ) ))
 
     m.par.dT = pyo.Param(initialize=5)
 
@@ -129,13 +346,12 @@ def create_model():
     m.par.VocT = pyo.Expression(expr=m.bVoc*(1+m.par.Adj/100.0)*m.par.dT + m.Voc)
     m.par.Eg = pyo.Expression(expr=(1-0.0002677*m.par.dT)*m.Egref)
     m.par.IoT = pyo.Expression(expr=m.par.Io*( (m.Tref+m.par.dT)/m.Tref )**3 *pyo.exp( 11600 * (m.Egref/m.Tref - m.par.Eg/(m.Tref+m.par.dT))))
-    m.par.f4 = pyo.Constraint(expr=m.par.Il+m.aIsc*(1-m.par.Adj/100)*m.par.dT - m.par.IoT*(pyo.exp( m.par.VocT/m.par.aT ) - 1 ) - m.par.VocT/m.par.Rsh == 0)
+    m.par.f4 = pyo.Expression(expr=(m.par.Il+m.aIsc*(1-m.par.Adj/100)*m.par.dT - m.par.IoT*(pyo.exp( m.par.VocT/m.par.aT ) - 1 ) - m.par.VocT/m.par.Rsh))
+
 
     # mod6par_gamma_approx
     temperatures = np.arange(-10 + 273.15, 50 + 273.15, 3)
     def gamma_expr(b, t):
-        if t == 1:
-            return 0
         return (b.pt[t].Pmax_Tc-b.pt[t-1].Pmax_Tc)*100/(m.Vmp*m.Imp*(b.pt[t].Tc-b.pt[t-1].Tc))
 
     def gamma_blocks(b, i):
@@ -156,12 +372,18 @@ def create_model():
     m.gamma = pyo.Block()
     g = m.gamma
     g.i = pyo.RangeSet(nTc)
+    g.d_i = pyo.RangeSet(2, nTc)
     g.pt = pyo.Block(g.i, rule=gamma_blocks)
 
-    g.gamma_Tc = pyo.Expression(g.i, rule=gamma_expr)
-    g.gamma_avg = pyo.Expression(expr=pyo.summation(g.gamma_Tc) / (nTc - 1))
+    g.gamma_Tc = pyo.Expression(g.d_i, rule=gamma_expr)
+    g.gamma_avg = pyo.Expression(expr=pyo.summation(g.gamma_Tc) / len(g.d_i))
 
-    g.f_7 = pyo.Expression(expr=(g.gamma_avg - m.gPmp) ** 2)
+    g.f_7 = pyo.Expression(expr=(g.gamma_avg - m.gPmp) ** 4)
+
+    m.relaxed_obj = pyo.Objective(expr=(10 * m.par.f0 ** 2 + m.par.f1 ** 2 + m.par.f2 ** 2 + m.par.f3 ** 2 + m.par.f4 ** 2 + m.gamma.f_7) ** 0.5
+                                #   + sum([m.gamma.pt[i].f_5 ** 2 / nTc for i in g.i]) ** 0.5 
+                                #   + sum([m.gamma.pt[i].f_6 ** 2 / nTc for i in g.i]) ** 0.5
+                                  )
 
     # Sanity checks on current
     model.sanity = pyo.Block()
@@ -170,17 +392,12 @@ def create_model():
     s.Imp_calc = pyo.Var(domain=pyo.NonNegativeReals)
     s.f_8 = pyo.Constraint(expr=m.par.Il - s.Imp_calc - m.par.Io * (pyo.exp((m.Vmp + s.Imp_calc * m.par.Rs) / m.par.a) - 1.0) - (m.Vmp + s.Imp_calc * m.par.Rs) / m.par.Rsh == 0)
 
-    s.Ioc_calc = pyo.Var(domain=pyo.NonNegativeReals)
+    s.Ioc_calc = pyo.Var(domain=pyo.NonNegativeReals, initialize=0)
     s.f_9 = pyo.Constraint(expr=m.par.Il - s.Ioc_calc - m.par.Io * (pyo.exp((m.Voc + s.Ioc_calc * m.par.Rs) / m.par.a) - 1.0) - (m.Voc + s.Ioc_calc * m.par.Rs) / m.par.Rsh == 0)
 
-    # Sanity checks on max_slope
-    # v_range = np.linspace(0.015 * m.Voc.value, 0.98 * m.Voc.value, 100)
-    model.slope = pyo.Block()
-    
-
-    # examine solved modules
     model.scaling_factor = pyo.Suffix(direction=pyo.Suffix.EXPORT)
     return model
+
 
 def solve_model(model, solver, tee=False):
     model.scaling_factor[model.solver.par.Io] = IL_SCALING
@@ -197,6 +414,7 @@ def solve_model(model, solver, tee=False):
             log_infeasible_bounds(scaled_model, logger=solve_log, tol=1e-7)
             log_infeasible_constraints(scaled_model, logger=solve_log, tol=1e-7)
         if res:
+            pyo.TransformationFactory('core.scale_model').propagate_solution(scaled_model, model)
             return res, scaled_model
         else:
             return None, scaled_model
@@ -220,13 +438,14 @@ def solve_model(model, solver, tee=False):
                     log_infeasible_bounds(scaled_model, logger=solve_log, tol=1e-7)
                     log_infeasible_constraints(scaled_model, logger=solve_log, tol=1e-7)
                 if res:
+                    pyo.TransformationFactory('core.scale_model').propagate_solution(scaled_model, model)
                     return res, scaled_model
                 else:
                     return None, scaled_model
 
     scaled_model.del_component("obj_zero")
 
-    scaled_model.obj_gamma = pyo.Objective(rule=scaled_model.solver.gamma.f_7)
+    scaled_model.obj_gamma = pyo.Objective(rule=scaled_model.solver.gamma.f_7 ** 2)
 
     if pyo.value(scaled_model.solver.gamma.f_7) > abs(pyo.value(scaled_model.solver.gPmp)) * .1:
         res = None
@@ -250,6 +469,7 @@ def solve_model(model, solver, tee=False):
                 log_infeasible_bounds(scaled_model, logger=solve_log, tol=1e-7)
                 log_infeasible_constraints(scaled_model, logger=solve_log, tol=1e-7)
             if res:
+                pyo.TransformationFactory('core.scale_model').propagate_solution(scaled_model, model)
                 return res, scaled_model
             else:
                 return None, scaled_model
@@ -258,48 +478,134 @@ def solve_model(model, solver, tee=False):
     pyo.TransformationFactory('core.scale_model').propagate_solution(scaled_model, model)
     return res, scaled_model
 
+def get_iterations(log_file):
+    with open(log_file, 'r') as f:
+        for line in f:
+            if "Number of Iterations....:" in line:
+                it = line.split(": ")[1]
+                it_n = int(it)
+                return it_n
 
-def run_solved_modules():
-    solver = pyo.SolverFactory('ipopt')
-    solver.options["max_iter"] = 5000
+def get_constraint_infeas(model):
+    if hasattr(model.solver.par, 'f0'):
+        vals = (pyo.value(model.solver.par.f0), pyo.value(model.solver.par.f1), pyo.value(model.solver.par.f2), pyo.value(model.solver.par.f3), pyo.value(model.solver.par.f4), pyo.value(model.solver.gamma.f_7))
+    else:
+        if hasattr(model.solver.gamma, 'f_7'):
+            vals = (pyo.value(model.solver.par.scaled_f0), pyo.value(model.solver.par.scaled_f1), pyo.value(model.solver.par.scaled_f2), pyo.value(model.solver.par.scaled_f3), pyo.value(model.solver.par.scaled_f4), pyo.value(model.solver.gamma.f_7))
+        else:
+            vals = (pyo.value(model.solver.par.scaled_f0), pyo.value(model.solver.par.scaled_f1), pyo.value(model.solver.par.scaled_f2), pyo.value(model.solver.par.scaled_f3), pyo.value(model.solver.par.scaled_f4))
+    return [abs(v) for v in vals]
 
-    filename = "/Users/dguittet/Projects/SAM/sam/samples/CEC Module and Inverter Libraries/CEC Modules/CEC Modules 2024-11-14/CEC Modules 2024-Nov-15_09-53.csv"
-    cec_modules_df = pd.read_csv(filename, skiprows=[1, 2])
+def solve_model_best_solution(model, solver, tee=False):
+    try:
+        il_scaling = 10**min(12, -int(np.log10(pyo.value(model.solver.par.Io))))
+        rsh_scaling = 10**min(5, -int(np.log10(pyo.value(model.solver.par.Rsh))))
+    except:
+        il_scaling = IL_SCALING
+        rsh_scaling = RSH_SCALING
+    model.scaling_factor[model.solver.par.Io] = il_scaling
+    model.scaling_factor[model.solver.par.Rsh] = rsh_scaling
+    
+    scaled_model = pyo.TransformationFactory('core.scale_model').create_using(model)
 
-    param_comparison = {
-        "index": [],
-        "a_ssc": [],
-        "Il_ssc": [],
-        "Io_ssc": [],
-        "Rs_ssc": [],
-        "Rsh_ssc": [],
-        "Adj_ssc": [],
-        "a_py": [],
-        "Il_py": [],
-        "Io_py": [],
-        "Rs_py": [],
-        "Rsh_py": [],
-        "Adj_py": []
-    }
+    if hasattr(scaled_model.solver, "f_0"):
+        scaled_model.obj_gamma = pyo.Objective(rule=scaled_model.solver.gamma.f_7 ** 0.5 + scaled_model.solver.f_0 ** 0.5)
+    elif hasattr(scaled_model.solver.gamma, "f_7"):
+        scaled_model.obj_gamma = pyo.Objective(rule=scaled_model.solver.gamma.f_7 ** 0.5)
 
-    tee = False
+    scaled_model.sanity.scaled_f_9.deactivate()
+    
+    res = None
+    try:
+        res = solver.solve(scaled_model, tee=tee, logfile='ipopt_output.log')
+    except Exception as e:
+        pass
 
-    for n, r in cec_modules_df.iterrows():
-        model = create_model()
-        m = model.solver
-        tech = r['Technology']
+    if res is not None and res.solver.status == "ok":
+        pyo.TransformationFactory('core.scale_model').propagate_solution(scaled_model, model)
+        return res, scaled_model
 
-        # if r['I_mp_ref'] < r['I_sc_ref']:
-            # raise ValueError
+    it_n = get_iterations('ipopt_output.log')
 
-        param_comparison['index'].append(n)
-        param_comparison['a_ssc'].append(r['a_ref'])
-        param_comparison['Il_ssc'].append(r['I_L_ref'])
-        param_comparison['Io_ssc'].append(r['I_o_ref'])
-        param_comparison['Rs_ssc'].append(r['R_s'])
-        param_comparison['Rsh_ssc'].append(r['R_sh_ref'])
-        param_comparison['Adj_ssc'].append(r['Adjust'])
+    solver.options['max_iter'] = it_n - 1             
 
+    try:
+        res = solver.solve(scaled_model, tee=tee, logfile='ipopt_output.log')
+    except:
+        pass
+
+    while 'infeasible' in res.solver.message:
+        it_n = get_iterations('ipopt_output.log')
+        solver.options['max_iter'] = it_n - 1     
+        res = solver.solve(scaled_model, tee=tee, logfile='ipopt_output.log')
+
+    pyo.TransformationFactory('core.scale_model').propagate_solution(scaled_model, model)
+
+    # get somewhat stable params
+    infeas_old = np.inf
+
+    infeas = sum(get_constraint_infeas(model))
+    # while infeas_old >= infeas:
+    attempts = 0
+    while infeas > 10 and attempts < 10:
+        res = solver.solve(scaled_model, tee=tee, logfile='ipopt_output.log')
+        infeas = sum(get_constraint_infeas(scaled_model))
+        pyo.TransformationFactory('core.scale_model').propagate_solution(scaled_model, model)
+
+    return res, scaled_model
+
+
+def solve_relaxed_model(model, solver, tee=False):
+    model.scaling_factor[model.solver.par.Io] = 10**min(12, -int(np.log10(pyo.value(model.solver.par.Io))))
+    model.scaling_factor[model.solver.par.Rsh] = 10**min(5, -int(np.log10(pyo.value(model.solver.par.Rsh))))
+    
+    scaled_model = pyo.TransformationFactory('core.scale_model').create_using(model)
+
+    res = None
+    solver.options['max_iter'] = 3000
+    try:
+        res = solver.solve(scaled_model, tee=tee)
+        pyo.TransformationFactory('core.scale_model').propagate_solution(scaled_model, model)
+        
+    except Exception as e:
+        if tee:
+            log_infeasible_bounds(scaled_model, logger=solve_log, tol=1e-7)
+            log_infeasible_constraints(scaled_model, logger=solve_log, tol=1e-7)
+        if res:
+            pyo.TransformationFactory('core.scale_model').propagate_solution(scaled_model, model)
+            return res, scaled_model
+        else:
+            return None, scaled_model
+
+    if res.solver.status != "ok":
+        try:
+            res = solver.solve(scaled_model, tee=tee)
+        except:
+            return None, scaled_model
+
+        if res.solver.status != "ok":
+            scaled_model.solver.gamma.deactivate()
+            try:
+                res = solver.solve(scaled_model, tee=tee)
+            except:
+                return None, scaled_model
+
+            scaled_model.solver.gamma.activate()
+            if res.solver.status != "ok":
+                if tee:
+                    log_infeasible_bounds(scaled_model, logger=solve_log, tol=1e-7)
+                    log_infeasible_constraints(scaled_model, logger=solve_log, tol=1e-7)
+                if res:
+                    pyo.TransformationFactory('core.scale_model').propagate_solution(scaled_model, model)
+                    return res, scaled_model
+                else:
+                    return None, scaled_model
+
+    pyo.TransformationFactory('core.scale_model').propagate_solution(scaled_model, model)
+    return res, scaled_model
+
+def set_parameters(m, r):
+    try:
         m.Vmp.set_value(r['V_mp_ref'])
         m.Imp.set_value(r['I_mp_ref'])
         m.Voc.set_value(r['V_oc_ref'])
@@ -308,69 +614,23 @@ def run_solved_modules():
         m.bVoc.set_value(r['beta_oc'])
         m.gPmp.set_value(r['gamma_r'])
         m.Tref.set_value(25 + 273.15)
+        return True
+    except:
+        return False
 
-        # m.par.a.set_value(r['a_ref'])
-        # m.par.Il.set_value(r['I_L_ref'])
-        # m.par.Io.set_value(r['I_o_ref'])
-        # m.par.Rs.set_value(r['R_s'])
-        # m.par.Rsh.set_value(r['R_sh_ref'])
-        # m.par.Adj.set_value(r['Adjust'])
-
-        res, scaled_model = solve_model(model, solver, tee)
-
-        if res is None or res.solver.status != 'ok':
-            # log_infeasible_constraints(scaled_model, logger=solve_log, tol=1e-5, log_expression=True, log_variables=True)
-            # log_infeasible_bounds(scaled_model, logger=solve_log,  tol=1e-5)
-            # print(n, pyo.value(scaled_model.solver.gamma.gamma_avg), pyo.value(scaled_model.solver.gPmp))
-            # print(pyo.value(scaled_model.solver.gamma.obj))
-            param_comparison['a_py'].append(None)
-            param_comparison['Il_py'].append(None)
-            param_comparison['Io_py'].append(None)
-            param_comparison['Rs_py'].append(None)
-            param_comparison['Rsh_py'].append(None)
-            param_comparison['Adj_py'].append(None)
-        else:
-
-            a = pyo.value(scaled_model.solver.par.scaled_a)
-            Il = pyo.value(scaled_model.solver.par.scaled_Il)
-            Io = pyo.value(scaled_model.solver.par.scaled_Io / IL_SCALING)
-            Rs = pyo.value(scaled_model.solver.par.scaled_Rs)
-            Rsh = pyo.value(scaled_model.solver.par.scaled_Rsh / RSH_SCALING)
-            Adj = pyo.value(scaled_model.solver.par.scaled_Adj)
-
-            param_comparison['a_py'].append(a)
-            param_comparison['Il_py'].append(Il)
-            param_comparison['Io_py'].append(Io)
-            param_comparison['Rs_py'].append(Rs)
-            param_comparison['Rsh_py'].append(Rsh)
-            param_comparison['Adj_py'].append(Adj)
-
-        if n % 10 == 0:
-            comparison_df = pd.DataFrame(param_comparison).set_index('index')
-            comparison_df['d_a'] = ((comparison_df['a_py'] - comparison_df['a_ssc'])/comparison_df['a_ssc']).abs()
-            comparison_df['d_Il'] = ((comparison_df['Il_py'] - comparison_df['Il_ssc'])/comparison_df['Il_ssc']).abs()
-            comparison_df['d_Io'] = ((comparison_df['Io_py'] - comparison_df['Io_ssc'])/comparison_df['Io_ssc']).abs()
-            comparison_df['d_Rs'] = ((comparison_df['Rs_py'] - comparison_df['Rs_ssc'])/comparison_df['Rs_ssc']).abs()
-            comparison_df['d_Rsh'] = ((comparison_df['Rsh_py'] - comparison_df['Rsh_ssc'])/comparison_df['Rsh_ssc']).abs()
-            comparison_df['d_Adj'] = ((comparison_df['Adj_py'] - comparison_df['Adj_ssc'])/comparison_df['Adj_ssc']).abs()
-
-            comparison_df.to_csv("param_comparison.csv")
-
-
-
-if __name__ == "__main__":
-
-    solver = pyo.SolverFactory('ipopt')
-    solver.options["max_iter"] = 8000
-
-    all_cec_modules_df = pd.read_csv("cec_modules_params.csv")
-    unsolved_df = all_cec_modules_df[all_cec_modules_df['Rsh_py'] == None]
-
-    df = all_cec_modules_df
-    model = create_model()
+def set_initial_guess(model, a, Il, Io, Rs, Rsh, Adj):
     m = model.solver
-    for i, r in unsolved_df.iterrows():
-        diff = (
+    m.par.a.set_value(a)
+    m.par.Il.set_value(Il)
+    m.par.Io.set_value(Io)
+    m.par.Rs.set_value(Rs)
+    m.par.Rsh.set_value(Rsh)
+    m.par.Adj.set_value(Adj)
+    model.sanity.Imp_calc.set_value(pyo.value(m.Imp))
+    # model.sanity.Ioc_calc.set_value(pyo.value(m.par.c))
+
+def find_closest(df, r):
+    diff = (
             (df['V_mp_ref'] - r['V_mp_ref']) ** 2 + 
             (df['I_mp_ref'] - r['I_mp_ref']) ** 2 + 
             (df['V_oc_ref'] - r['V_oc_ref']) ** 2 + 
@@ -379,38 +639,138 @@ if __name__ == "__main__":
             (df['beta_oc'] - r['beta_oc']) ** 2 +
             (df['gamma_r'] - r['gamma_r']) ** 2)
         
-        cec_closest = all_cec_modules_df.iloc[diff.argmin()]
+    cec_closest = df.iloc[diff.argmin()]
+    return cec_closest
 
-        m.Vmp.set_value(r['V_mp_ref'])
-        m.Imp.set_value(r['I_mp_ref'])
-        m.Voc.set_value(r['V_oc_ref'])
-        m.Isc.set_value(r['I_sc_ref'])
-        m.aIsc.set_value(r['alpha_sc'])
-        m.bVoc.set_value(r['beta_oc'])
-        m.gPmp.set_value(r['gamma_r'])
-        m.Tref.set_value(25 + 273.15)
+def get_params_from_model(model):
+    if hasattr(model.solver.par, 'scaled_a'):
+        a = pyo.value(model.solver.par.scaled_a)
+        Il = pyo.value(model.solver.par.scaled_Il)
+        Io = pyo.value(model.solver.par.scaled_Io / IL_SCALING)
+        Rs = pyo.value(model.solver.par.scaled_Rs)
+        Rsh = pyo.value(model.solver.par.scaled_Rsh / RSH_SCALING)
+        Adj = pyo.value(model.solver.par.scaled_Adj)
+    else:
+        a = pyo.value(model.solver.par.a)
+        Il = pyo.value(model.solver.par.Il)
+        Io = pyo.value(model.solver.par.Io)
+        Rs = pyo.value(model.solver.par.Rs)
+        Rsh = pyo.value(model.solver.par.Rsh)
+        Adj = pyo.value(model.solver.par.Adj)
+    return a, Il, Io, Rs, Rsh, Adj
 
-        m.par.a.set_value(cec_closest['a_ref'])
-        m.par.Il.set_value(cec_closest['I_L_ref'])
-        m.par.Io.set_value(cec_closest['I_o_ref'])
-        m.par.Rs.set_value(cec_closest['R_s'])
-        m.par.Rsh.set_value(cec_closest['R_sh_ref'])
-        m.par.Adj.set_value(cec_closest['Adjust'])
 
-        res, scaled_model = solve_model(model, solver, False)
+def copy_over_vars(model, scaled_model, model_rel):
+    pyo.TransformationFactory('core.scale_model').propagate_solution(scaled_model, model)
 
-        if res is None or res.solver.status != 'ok':
+    set_initial_guess(model_rel, *get_params_from_model(scaled_model))
+    for i, gamma_block in model.solver.gamma.pt.items():
+        model_rel.solver.gamma.pt[i].V_Tc.set_value(pyo.value(gamma_block.V_Tc))
+        model_rel.solver.gamma.pt[i].I_Tc.set_value(pyo.value(gamma_block.I_Tc))
+
+def get_curve_diffs(r, model):
+    x_V, y_I = cec_model_ivcurve(model, 1000, 25 + 273.15, r['V_oc_ref'], 150)
+    p = x_V * y_I
+    mp_ind = np.argmax(p)
+    d_I_sc = (y_I[0] - r['I_sc_ref']) / r['I_sc_ref']
+    d_I_mp = (y_I[mp_ind] - r['I_mp_ref']) / r['I_mp_ref']
+    d_V_mp = (x_V[mp_ind] - r['V_mp_ref']) / r['V_mp_ref']
+    d_P_mp = (p[mp_ind] - r['V_mp_ref'] * r['I_mp_ref']) / (r['V_mp_ref'] * r['I_mp_ref'])
+    return d_I_sc, d_I_mp, d_V_mp, d_P_mp
+
+
+if __name__ == "__main__":
+
+    output_path = Path(__file__).parent / "6parsolve_output"
+    if not (output_path).exists():
+        os.mkdir(output_path)
+
+    solver = pyo.SolverFactory('ipopt')
+
+    filename = "/Users/dguittet/Projects/SAM/sam/samples/CEC Module and Inverter Libraries/CEC Modules/CEC Modules 2024-11-14/CEC Modules 2024-Nov-15_09-53.csv"
+    sam_solved_modules_df = pd.read_csv(filename, skiprows=[1, 2])
+
+    all_cec_modules_df = pd.read_csv("cec_modules_params_approx.csv")
+    unsolved_df = all_cec_modules_df[all_cec_modules_df['Rsh_py'].isna()]
+
+    solved_df = all_cec_modules_df[~all_cec_modules_df['Rsh_py'].isna()]
+
+    diff_cols = ['d_Isc', 'd_Imp', 'd_Vmp', 'd_Pmp']
+    for i, r in unsolved_df.iterrows():
+        if r['V_mp_ref'] < 0:
+            all_cec_modules_df['Error'] = "Vmp < 0"
             continue
+        if r['V_oc_ref'] < r['V_mp_ref']:
+            all_cec_modules_df['Error'] = "Voc < Vmp"
+            continue
+
+        model = create_model()
+        if not set_parameters(model.solver, r):
+            all_cec_modules_df['Error'] = "Parameter missing or out of bounds"
+            continue
+
+        plt.figure()
+        solver.options["max_iter"] = 3000
+
+        # plot SAM one
+        r_sam = sam_solved_modules_df[(sam_solved_modules_df['Manufacturer'] == r['Manufacturer'].replace(",", "")) 
+                                          & (sam_solved_modules_df['Name'].str.contains(r['Model Number'], regex=False))
+                                          & (sam_solved_modules_df['PTC'] == r['PTC'])].drop_duplicates()
+        if len(r_sam):
+            r_sam = r_sam.to_dict('records')[0]
+            set_initial_guess(model, r_sam['a_ref'], r_sam['I_L_ref'], r_sam['I_o_ref'], r_sam['R_s'], r_sam['R_sh_ref'], r_sam['Adjust'])
+            plot_iv_curve(model, linestyle='dashed', label="SAM")
+        if True:
+            cec_closest = find_closest(solved_df, r)
+            set_initial_guess(model, *cec_closest[param_cols])
+            plot_iv_curve(model, linestyle=(0, (1, 10)), label="Closest Guess")
+
+        res, scaled_model = solve_model_best_solution(model, solver, True)
+        
+        print(get_constraint_infeas(model))
+        if res and res.solver.status == 'ok':
+            plot_iv_curve(model, linestyle='-', label="Optimal", plot_anchors=True)
         else:
-            a = pyo.value(scaled_model.solver.par.scaled_a)
-            Il = pyo.value(scaled_model.solver.par.scaled_Il)
-            Io = pyo.value(scaled_model.solver.par.scaled_Io / IL_SCALING)
-            Rs = pyo.value(scaled_model.solver.par.scaled_Rs)
-            Rsh = pyo.value(scaled_model.solver.par.scaled_Rsh / RSH_SCALING)
-            Adj = pyo.value(scaled_model.solver.par.scaled_Adj)
+            plot_iv_curve(model, linestyle='dotted', label="Approx", plot_anchors=True)
 
-            all_cec_modules_df.loc[i, param_cols] = [a, Il, Io, Rs, Rsh, Adj]
+        # if res is None or res.solver.status != 'ok':
+            # solver.options['max_iter'] = 1938
+            # res = solver.solve(scaled_model, tee=True)
 
+            # model_rel = create_full_relaxed_model()
+            # set_parameters(model_rel.solver, r)
+
+            # copy_over_vars(model, scaled_model, model_rel)
+
+            # res_rel, scaled_model_rel = solve_relaxed_model(model_rel, solver, True)
+            
+            # print(get_constraint_infeas(model_rel))
+            # plot_iv_curve(model_rel, linestyle='-', label="Closest", plot_anchors=True)
+
+            # if res_rel is None or res_rel.solver.status != 'ok':
+                # continue
+
+        d_I_sc, d_I_mp, d_V_mp, d_P_mp = get_curve_diffs(r, model)
+
+        infeas_sum = np.abs([d_I_sc, d_I_mp, d_V_mp, d_P_mp]).sum()
+        infeas_max = np.abs([d_I_sc, d_I_mp, d_V_mp, d_P_mp]).max()
+
+        if infeas_max > 0.5 or infeas_sum > 0.5:
+            continue
+
+        a, Il, Io, Rs, Rsh, Adj = get_params_from_model(scaled_model)
+        all_cec_modules_df.loc[i, diff_cols] = [d_I_sc, d_I_mp, d_V_mp, d_P_mp]
+        all_cec_modules_df.loc[i, param_cols] = [a, Il, Io, Rs, Rsh, Adj]
+
+        plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+        plt.xlabel("Voltage")
+        plt.ylabel("Current")
+        plt.title(f"{r['Manufacturer']} {r['Model Number']}")
+        plt.tight_layout()
+        plt.savefig(output_path / f"IV_curve_{'nosam' if not len(r_sam) else '_'}{i}.png")
+        plt.close()
+
+    all_cec_modules_df.to_csv("cec_modules_params_approx.csv")
     exit()
 
     filename = "/Users/dguittet/Projects/SAM/sam/samples/CEC Module and Inverter Libraries/CEC Modules/CEC Modules 2024-11-14/CEC Modules 2024-Nov-15_09-53.csv"
@@ -462,30 +822,30 @@ if __name__ == "__main__":
         all_cec_modules_df[col] = None
 
     for i, row in all_cec_modules_df.iterrows():
-        df_solved = cec_modules_solved_df[(cec_modules_solved_df['Manufacturer'] == row['Manufacturer'].replace(",", "")) 
+        r_sam = cec_modules_solved_df[(cec_modules_solved_df['Manufacturer'] == row['Manufacturer'].replace(",", "")) 
                                           & (cec_modules_solved_df['Name'].str.contains(row['Model Number'], regex=False))
                                           & (cec_modules_solved_df['PTC'] == row['PTC'])].drop_duplicates()
-        if len(df_solved) > 1:
-            df_solved = df_solved[df_solved['Name'].str.endswith(row['Model Number'])]
-            if len(df_solved) > 1:
+        if len(r_sam) > 1:
+            r_sam = r_sam[r_sam['Name'].str.endswith(row['Model Number'])]
+            if len(r_sam) > 1:
                 print("Duplicate: ", i, row)
                 continue
-        if len(df_solved) == 1:
-            param_row = solved_modules_df.loc[df_solved.index]
+        if len(r_sam) == 1:
+            param_row = solved_modules_df.loc[r_sam.index]
 
-        if len(df_solved) == 0:
-            df_solved = cec_bad_modules_solved_df[(cec_bad_modules_solved_df['Manufacturer'] == row['Manufacturer'].replace(",", "")) 
+        if len(r_sam) == 0:
+            r_sam = cec_bad_modules_solved_df[(cec_bad_modules_solved_df['Manufacturer'] == row['Manufacturer'].replace(",", "")) 
                                                   & (cec_bad_modules_solved_df['Name'].str.contains(row['Model Number'], regex=False))
                                                   ].drop_duplicates()
-            if len(df_solved) > 1:
-                df_solved = df_solved[df_solved['Name'].str.endswith(row['Model Number'])]
-                if len(df_solved) > 1:
+            if len(r_sam) > 1:
+                r_sam = r_sam[r_sam['Name'].str.endswith(row['Model Number'])]
+                if len(r_sam) > 1:
                     print("Duplicate: ", i, row)
                     continue
-            if len(df_solved) == 1:
-                param_row = solved_bad_modules_df.loc[df_solved.index]
+            if len(r_sam) == 1:
+                param_row = solved_bad_modules_df.loc[r_sam.index]
         
-        if len(df_solved) == 0:
+        if len(r_sam) == 0:
             continue
 
         all_cec_modules_df.loc[i, param_cols] = param_row[param_cols].values[0]
@@ -670,4 +1030,101 @@ if __name__ == "__main__":
         if n % 10 == 0:
             comparison_df = pd.DataFrame(param_comparison).set_index('index')
             comparison_df.to_csv("bad_modules_param.csv")
-    
+
+
+def run_solved_modules():
+    solver = pyo.SolverFactory('ipopt')
+    solver.options["max_iter"] = 5000
+
+    filename = "/Users/dguittet/Projects/SAM/sam/samples/CEC Module and Inverter Libraries/CEC Modules/CEC Modules 2024-11-14/CEC Modules 2024-Nov-15_09-53.csv"
+    cec_modules_df = pd.read_csv(filename, skiprows=[1, 2])
+
+    param_comparison = {
+        "index": [],
+        "a_ssc": [],
+        "Il_ssc": [],
+        "Io_ssc": [],
+        "Rs_ssc": [],
+        "Rsh_ssc": [],
+        "Adj_ssc": [],
+        "a_py": [],
+        "Il_py": [],
+        "Io_py": [],
+        "Rs_py": [],
+        "Rsh_py": [],
+        "Adj_py": []
+    }
+
+    tee = False
+
+    for n, r in cec_modules_df.iterrows():
+        model = create_model()
+        m = model.solver
+        tech = r['Technology']
+
+        # if r['I_mp_ref'] < r['I_sc_ref']:
+            # raise ValueError
+
+        param_comparison['index'].append(n)
+        param_comparison['a_ssc'].append(r['a_ref'])
+        param_comparison['Il_ssc'].append(r['I_L_ref'])
+        param_comparison['Io_ssc'].append(r['I_o_ref'])
+        param_comparison['Rs_ssc'].append(r['R_s'])
+        param_comparison['Rsh_ssc'].append(r['R_sh_ref'])
+        param_comparison['Adj_ssc'].append(r['Adjust'])
+
+        m.Vmp.set_value(r['V_mp_ref'])
+        m.Imp.set_value(r['I_mp_ref'])
+        m.Voc.set_value(r['V_oc_ref'])
+        m.Isc.set_value(r['I_sc_ref'])
+        m.aIsc.set_value(r['alpha_sc'])
+        m.bVoc.set_value(r['beta_oc'])
+        m.gPmp.set_value(r['gamma_r'])
+        m.Tref.set_value(25 + 273.15)
+
+        # m.par.a.set_value(r['a_ref'])
+        # m.par.Il.set_value(r['I_L_ref'])
+        # m.par.Io.set_value(r['I_o_ref'])
+        # m.par.Rs.set_value(r['R_s'])
+        # m.par.Rsh.set_value(r['R_sh_ref'])
+        # m.par.Adj.set_value(r['Adjust'])
+
+        res, scaled_model = solve_model(model, solver, tee)
+
+        if res is None or res.solver.status != 'ok':
+            # log_infeasible_constraints(scaled_model, logger=solve_log, tol=1e-5, log_expression=True, log_variables=True)
+            # log_infeasible_bounds(scaled_model, logger=solve_log,  tol=1e-5)
+            # print(n, pyo.value(scaled_model.solver.gamma.gamma_avg), pyo.value(scaled_model.solver.gPmp))
+            # print(pyo.value(scaled_model.solver.gamma.obj))
+            param_comparison['a_py'].append(None)
+            param_comparison['Il_py'].append(None)
+            param_comparison['Io_py'].append(None)
+            param_comparison['Rs_py'].append(None)
+            param_comparison['Rsh_py'].append(None)
+            param_comparison['Adj_py'].append(None)
+        else:
+
+            a = pyo.value(scaled_model.solver.par.scaled_a)
+            Il = pyo.value(scaled_model.solver.par.scaled_Il)
+            Io = pyo.value(scaled_model.solver.par.scaled_Io / IL_SCALING)
+            Rs = pyo.value(scaled_model.solver.par.scaled_Rs)
+            Rsh = pyo.value(scaled_model.solver.par.scaled_Rsh / RSH_SCALING)
+            Adj = pyo.value(scaled_model.solver.par.scaled_Adj)
+
+            param_comparison['a_py'].append(a)
+            param_comparison['Il_py'].append(Il)
+            param_comparison['Io_py'].append(Io)
+            param_comparison['Rs_py'].append(Rs)
+            param_comparison['Rsh_py'].append(Rsh)
+            param_comparison['Adj_py'].append(Adj)
+
+        if n % 10 == 0:
+            comparison_df = pd.DataFrame(param_comparison).set_index('index')
+            comparison_df['d_a'] = ((comparison_df['a_py'] - comparison_df['a_ssc'])/comparison_df['a_ssc']).abs()
+            comparison_df['d_Il'] = ((comparison_df['Il_py'] - comparison_df['Il_ssc'])/comparison_df['Il_ssc']).abs()
+            comparison_df['d_Io'] = ((comparison_df['Io_py'] - comparison_df['Io_ssc'])/comparison_df['Io_ssc']).abs()
+            comparison_df['d_Rs'] = ((comparison_df['Rs_py'] - comparison_df['Rs_ssc'])/comparison_df['Rs_ssc']).abs()
+            comparison_df['d_Rsh'] = ((comparison_df['Rsh_py'] - comparison_df['Rsh_ssc'])/comparison_df['Rsh_ssc']).abs()
+            comparison_df['d_Adj'] = ((comparison_df['Adj_py'] - comparison_df['Adj_ssc'])/comparison_df['Adj_ssc']).abs()
+
+            comparison_df.to_csv("param_comparison.csv")
