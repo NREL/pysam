@@ -83,11 +83,11 @@ def plot_iv_curve(model, linestyle='solid', label=None, plot_anchors=False):
                [ 400,  25, 'green' ],
                [ 200,  25, 'orange' ] ]
 
-    curves = [ [ 1000, 0, 'black' ],
+    curves = [ [ 1000, 2, 'black' ],
                [ 1000,  25, 'red' ],
-               [ 1000,  50, 'orange' ],
-            #    [ 800,  25, 'blue' ],
-            #    [ 400,  25, 'green' ],
+               [ 1000,  47, 'orange' ],
+               [ 800,  0, 'blue' ],
+               [ 400,  0, 'green' ],
                ]
         
     vmax = pyo.value(model.solver.Voc)
@@ -127,7 +127,7 @@ def plot_iv_curve(model, linestyle='solid', label=None, plot_anchors=False):
             plt.plot(V_mp, I_mp, marker="*", markersize=10, alpha=0.5, color=curve[2])
 
 
-def create_model():
+def create_model(gamma_curve_dt=3):
     model = pyo.ConcreteModel()
     model.solver = pyo.Block()
     m = model.solver
@@ -167,7 +167,7 @@ def create_model():
     m.par.f4 = pyo.Constraint(expr=m.par.Il+m.aIsc*(1-m.par.Adj/100)*m.par.dT - m.par.IoT*(pyo.exp( m.par.VocT/m.par.aT ) - 1 ) - m.par.VocT/m.par.Rsh == 0)
 
     # mod6par_gamma_approx
-    temperatures = np.arange(-10 + 273.15, 50 + 273.15, 15)
+    temperatures = np.arange(-10 + 273.15, 50 + 273.15, gamma_curve_dt)
     def gamma_expr(b, t):
         return (b.pt[t].Pmax_Tc-b.pt[t-1].Pmax_Tc)*100/(m.Vmp*m.Imp*(b.pt[t].Tc-b.pt[t-1].Tc))
 
@@ -443,11 +443,11 @@ def solve_model(model, solver, tee=False):
                 else:
                     return None, scaled_model
 
-    scaled_model.del_component("obj_zero")
+    # scaled_model.del_component("obj_zero")
 
-    scaled_model.obj_gamma = pyo.Objective(rule=scaled_model.solver.gamma.f_7 ** 2)
+    # scaled_model.obj_gamma = pyo.Objective(rule=scaled_model.solver.gamma.f_7 ** 2)
 
-    if pyo.value(scaled_model.solver.gamma.f_7) > abs(pyo.value(scaled_model.solver.gPmp)) * .1:
+    if res is None or res.solver.status != 'ok':
         res = None
         try:
             res = solver.solve(scaled_model, tee=tee)
@@ -679,6 +679,127 @@ def get_curve_diffs(r, model):
     return d_I_sc, d_I_mp, d_V_mp, d_P_mp
 
 
+def format_cec_datasheet(filename):
+    all_cec_modules_df = pd.read_excel(filename, skiprows=list(range(0, 16)) + [17])
+    all_cec_modules_df = all_cec_modules_df.drop(columns=["Description", 'Safety Certification',
+       'Nameplate Pmax', 'Notes',
+       'Design Qualification Certification\n(Optional Submission)',
+       'Performance Evaluation (Optional Submission)', 'Family', 
+       'N_p',  'αIpmax', 'βVpmax', 'IPmax, low', 'VPmax, low', 'IPmax, NOCT',
+       'VPmax, NOCT', 'Mounting', 'Type', 'Short Side', 'Long Side',
+       'Geometric Multiplier', 'P2/Pref', 'CEC Listing Date', 'Last Update'])
+    all_cec_modules_df = all_cec_modules_df.rename(columns={
+        'Nameplate Isc': "I_sc_ref", 'Nameplate Voc': "V_oc_ref",
+       'Nameplate Ipmax': "I_mp_ref", 'Nameplate Vpmax': "V_mp_ref", 'Average NOCT': "T_NOCT", 
+       'γPmax': "gamma_r", 'αIsc': "alpha_sc",
+       'βVoc': "beta_oc",
+    })
+    num_cols = ['A_c', 'N_s', 'I_sc_ref', 'V_oc_ref', 'I_mp_ref', 'V_mp_ref', 'T_NOCT',
+       'gamma_r', 'alpha_sc', 'beta_oc']
+    all_cec_modules_df[num_cols] = all_cec_modules_df[num_cols].astype(float)
+    all_cec_modules_df['alpha_sc'] *= all_cec_modules_df['I_sc_ref'] * 1e-2
+    all_cec_modules_df['beta_oc'] *= all_cec_modules_df['V_oc_ref'] * 1e-2
+    all_cec_modules_df = all_cec_modules_df.drop_duplicates()
+    return all_cec_modules_df
+
+
+def solve_all_without_guess(all_cec_modules_df, plotting):
+    for i, r in all_cec_modules_df.iterrows():
+        if r['V_mp_ref'] < 0:
+            all_cec_modules_df.loc[i, 'Error'] = "Vmp < 0"
+            continue
+        if r['V_oc_ref'] < r['V_mp_ref']:
+            all_cec_modules_df.loc[i, 'Error'] = "Voc < Vmp"
+            continue
+
+        model = create_model()
+        if not set_parameters(model.solver, r):
+            all_cec_modules_df.loc[i, 'Error'] = "Parameter missing or out of bounds"
+            continue
+
+        if plotting:
+            plt.figure()
+        solver.options["max_iter"] = 3000
+
+        res, scaled_model = solve_model(model, solver, tee=False)
+        
+        print(get_constraint_infeas(model))
+        if plotting:
+            if res and res.solver.status == 'ok':
+                plot_iv_curve(model, linestyle='-', label="Optimal", plot_anchors=True)
+            else:
+                plot_iv_curve(model, linestyle='dotted', label="Approx", plot_anchors=True)
+
+        if res is None or res.solver.status != 'ok':
+            continue
+
+        a, Il, Io, Rs, Rsh, Adj = get_params_from_model(scaled_model)
+        all_cec_modules_df.loc[i, param_cols] = [a, Il, Io, Rs, Rsh, Adj]
+    all_cec_modules_df.to_csv("cec_modules_params.csv", index=False)
+
+
+def solve_all_with_guess(all_cec_modules_df, plotting):
+    diff_cols = ['d_Isc', 'd_Imp', 'd_Vmp', 'd_Pmp']
+
+    unsolved_df = all_cec_modules_df[all_cec_modules_df['Rsh_py'].isna()]
+    solved_df = all_cec_modules_df[~all_cec_modules_df['Rsh_py'].isna()]
+    for i, r in unsolved_df.iterrows():
+        if r['V_mp_ref'] < 0:
+            all_cec_modules_df.loc[i, 'Error'] = "Vmp < 0"
+            continue
+        if r['V_oc_ref'] < r['V_mp_ref']:
+            all_cec_modules_df.loc[i, 'Error'] = "Voc < Vmp"
+            continue
+
+        model = create_model(gamma_curve_dt=15)
+        if not set_parameters(model.solver, r):
+            all_cec_modules_df.loc[i, 'Error'] = "Parameter missing or out of bounds"
+            continue
+
+        if plotting:
+            plt.figure()
+        solver.options["max_iter"] = 3000
+
+        cec_closest = find_closest(solved_df, r)
+        set_initial_guess(model, *cec_closest[param_cols])
+        if plotting:
+            plot_iv_curve(model, linestyle=(0, (1, 10)), label="Closest Guess")
+
+        res, scaled_model = solve_model_best_solution(model, solver, tee=False)
+        
+        print(get_constraint_infeas(model))
+        if plotting:
+            if res and res.solver.status == 'ok':
+                plot_iv_curve(model, linestyle='-', label="Optimal", plot_anchors=True)
+            else:
+                plot_iv_curve(model, linestyle='dotted', label="Approx", plot_anchors=True)
+
+        d_I_sc, d_I_mp, d_V_mp, d_P_mp = get_curve_diffs(r, model)
+
+        infeas_sum = np.abs([d_I_sc, d_I_mp, d_V_mp, d_P_mp]).sum()
+        infeas_max = np.abs([d_I_sc, d_I_mp, d_V_mp, d_P_mp]).max()
+
+        if infeas_max > 0.5 or infeas_sum > 0.5:
+            all_cec_modules_df.loc[i, 'Error'] = "Infeasibility > 0.5"
+            if plotting:
+                plt.close()
+            continue
+
+        a, Il, Io, Rs, Rsh, Adj = get_params_from_model(scaled_model)
+        all_cec_modules_df.loc[i, diff_cols] = [d_I_sc, d_I_mp, d_V_mp, d_P_mp]
+        all_cec_modules_df.loc[i, param_cols] = [a, Il, Io, Rs, Rsh, Adj]
+
+        if plotting:
+            plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+            plt.xlabel("Voltage")
+            plt.ylabel("Current")
+            plt.title(f"{r['Manufacturer']} {r['Model Number']}")
+            plt.tight_layout()
+            plt.savefig(output_path / f"IV_curve_{'nosam' if not len(r_sam) else '_'}{i}.png")
+            plt.close()
+
+    all_cec_modules_df.to_csv("cec_modules_params_approx.csv", index=False)
+
 if __name__ == "__main__":
 
     output_path = Path(__file__).parent / "6parsolve_output"
@@ -691,25 +812,29 @@ if __name__ == "__main__":
     sam_solved_modules_df = pd.read_csv(filename, skiprows=[1, 2])
 
     all_cec_modules_df = pd.read_csv("cec_modules_params_approx.csv")
+
     unsolved_df = all_cec_modules_df[all_cec_modules_df['Rsh_py'].isna()]
 
     solved_df = all_cec_modules_df[~all_cec_modules_df['Rsh_py'].isna()]
 
     diff_cols = ['d_Isc', 'd_Imp', 'd_Vmp', 'd_Pmp']
-    for i, r in unsolved_df.iterrows():
+
+    plotting = True
+    for i, r in all_cec_modules_df.iterrows():
         if r['V_mp_ref'] < 0:
-            all_cec_modules_df['Error'] = "Vmp < 0"
+            all_cec_modules_df.loc[i, 'Error'] = "Vmp < 0"
             continue
         if r['V_oc_ref'] < r['V_mp_ref']:
-            all_cec_modules_df['Error'] = "Voc < Vmp"
+            all_cec_modules_df.loc[i, 'Error'] = "Voc < Vmp"
             continue
 
-        model = create_model()
+        model = create_model(gamma_curve_dt=15)
         if not set_parameters(model.solver, r):
-            all_cec_modules_df['Error'] = "Parameter missing or out of bounds"
+            all_cec_modules_df.loc[i, 'Error'] = "Parameter missing or out of bounds"
             continue
 
-        plt.figure()
+        if plotting:
+            plt.figure()
         solver.options["max_iter"] = 3000
 
         # plot SAM one
@@ -719,19 +844,23 @@ if __name__ == "__main__":
         if len(r_sam):
             r_sam = r_sam.to_dict('records')[0]
             set_initial_guess(model, r_sam['a_ref'], r_sam['I_L_ref'], r_sam['I_o_ref'], r_sam['R_s'], r_sam['R_sh_ref'], r_sam['Adjust'])
-            plot_iv_curve(model, linestyle='dashed', label="SAM")
+            if plotting:
+                plot_iv_curve(model, linestyle='dashed', label="SAM")
         if True:
             cec_closest = find_closest(solved_df, r)
             set_initial_guess(model, *cec_closest[param_cols])
-            plot_iv_curve(model, linestyle=(0, (1, 10)), label="Closest Guess")
+            if plotting:
+                plot_iv_curve(model, linestyle=(0, (1, 10)), label="Closest Guess")
 
-        res, scaled_model = solve_model_best_solution(model, solver, True)
+        # res, scaled_model = solve_model_best_solution(model, solver, tee=False)
+        res, scaled_model = solve_model(model, solver, tee=False)
         
         print(get_constraint_infeas(model))
-        if res and res.solver.status == 'ok':
-            plot_iv_curve(model, linestyle='-', label="Optimal", plot_anchors=True)
-        else:
-            plot_iv_curve(model, linestyle='dotted', label="Approx", plot_anchors=True)
+        if plotting:
+            if res and res.solver.status == 'ok':
+                plot_iv_curve(model, linestyle='-', label="Optimal", plot_anchors=True)
+            else:
+                plot_iv_curve(model, linestyle='dotted', label="Approx", plot_anchors=True)
 
         # if res is None or res.solver.status != 'ok':
             # solver.options['max_iter'] = 1938
@@ -756,22 +885,31 @@ if __name__ == "__main__":
         infeas_max = np.abs([d_I_sc, d_I_mp, d_V_mp, d_P_mp]).max()
 
         if infeas_max > 0.5 or infeas_sum > 0.5:
+            all_cec_modules_df.loc[i, 'Error'] = "Infeasibility > 0.5"
+            if plotting:
+                plt.close()
             continue
 
         a, Il, Io, Rs, Rsh, Adj = get_params_from_model(scaled_model)
         all_cec_modules_df.loc[i, diff_cols] = [d_I_sc, d_I_mp, d_V_mp, d_P_mp]
         all_cec_modules_df.loc[i, param_cols] = [a, Il, Io, Rs, Rsh, Adj]
 
-        plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
-        plt.xlabel("Voltage")
-        plt.ylabel("Current")
-        plt.title(f"{r['Manufacturer']} {r['Model Number']}")
-        plt.tight_layout()
-        plt.savefig(output_path / f"IV_curve_{'nosam' if not len(r_sam) else '_'}{i}.png")
-        plt.close()
+        if plotting:
+            plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+            plt.xlabel("Voltage")
+            plt.ylabel("Current")
+            plt.title(f"{r['Manufacturer']} {r['Model Number']}")
+            plt.tight_layout()
+            plt.savefig(output_path / f"IV_curve_{'nosam' if not len(r_sam) else '_'}{i}.png")
+            plt.close()
 
-    all_cec_modules_df.to_csv("cec_modules_params_approx.csv")
+    all_cec_modules_df.to_csv("cec_modules_params_approx.csv", index=False)
     exit()
+
+
+
+
+
 
     filename = "/Users/dguittet/Projects/SAM/sam/samples/CEC Module and Inverter Libraries/CEC Modules/CEC Modules 2024-11-14/CEC Modules 2024-Nov-15_09-53.csv"
     cec_modules_df = pd.read_csv(filename, skiprows=[1, 2])
@@ -853,6 +991,10 @@ if __name__ == "__main__":
 
     exit()
 
+
+
+
+
     param_comparison = {
         "index": [],
         "a_ssc": [],
@@ -912,7 +1054,7 @@ if __name__ == "__main__":
         m.par.Rsh.set_value(cec_closest['R_sh_ref'])
         m.par.Adj.set_value(cec_closest['Adjust'])
 
-        res, scaled_model = solve_model(model, solver, False)
+        res, scaled_model = solve_model(model, solver, tee=False)
 
         if res is None or res.solver.status != 'ok':
             # log_infeasible_constraints(scaled_model, logger=solve_log, tol=1e-5, log_expression=True, log_variables=True)
@@ -998,7 +1140,7 @@ if __name__ == "__main__":
         m.gPmp.set_value(r['gamma_pmp'])
         m.Tref.set_value(25 + 273.15)
 
-        res, scaled_model = solve_model(model, solver, tee)
+        res, scaled_model = solve_model(model, solver, tee=tee)
 
         if res is None or res.solver.status != 'ok':
             # log_infeasible_constraints(scaled_model, logger=solve_log, tol=1e-5, log_expression=True, log_variables=True)
@@ -1089,7 +1231,7 @@ def run_solved_modules():
         # m.par.Rsh.set_value(r['R_sh_ref'])
         # m.par.Adj.set_value(r['Adjust'])
 
-        res, scaled_model = solve_model(model, solver, tee)
+        res, scaled_model = solve_model(model, solver, tee=tee)
 
         if res is None or res.solver.status != 'ok':
             # log_infeasible_constraints(scaled_model, logger=solve_log, tol=1e-5, log_expression=True, log_variables=True)
