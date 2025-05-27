@@ -38,6 +38,7 @@ jobs:
           pip install -r requirements.txt
           pip install -r tests/requirements.txt
           pip install nrel-pysam==${{ env.VERSION }}
+          conda install -c conda-forge ipopt
 
       - uses: actions/checkout@v3
       - name: Checkout SAM
@@ -89,6 +90,7 @@ jobs:
           pip install -r requirements.txt
           pip install -r tests/requirements.txt
           pip install nrel-pysam==$VER
+          conda install -c conda-forge ipopt
       
       - uses: actions/checkout@v3
       - name: Checkout SAM
@@ -142,6 +144,7 @@ jobs:
           pip install -r requirements.txt
           pip install -r tests/requirements.txt
           pip install nrel-pysam==$VER
+          conda install -c conda-forge ipopt
       
       - uses: actions/checkout@v3
       - name: Checkout SAM

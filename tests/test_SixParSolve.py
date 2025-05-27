@@ -96,9 +96,3 @@ def test_cec_model_solve(set_initial_values=True):
     Adj = pyo.value(scaled_model.solver.par.scaled_Adj)
 
     plot_iv_curve(model)
-
-# fig = plt.figure()
-# test_default_sam_cec_user()
-
-# test_cec_model_solve(set_initial_values=False)
-# plt.show()
