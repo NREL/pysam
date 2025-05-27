@@ -2,6 +2,7 @@ matplotlib
 mypy
 numpy
 pandas
+pint
 pyomo
 pytest
 python-dotenv
