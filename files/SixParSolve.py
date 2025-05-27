@@ -11,7 +11,10 @@ import logging
 from datetime import datetime
 
 logging.getLogger('pyomo.core').setLevel(logging.ERROR)
-solve_log = idaeslog.getInitLogger("infeasibility", idaeslog.INFO, tag="properties")
+solve_log = logging.getLogger('solve_log')
+solve_log.setLevel(logging.INFO)
+solve_log = logging.LoggerAdapter(solve_log, {"tag": solve_log})
+
 IL_SCALING = 1e8
 RSH_SCALING = 1e-3
 test_data_cols = ['A_c', 'N_s', 'I_sc_ref', 'V_oc_ref', 'I_mp_ref', 'V_mp_ref', 'T_NOCT',

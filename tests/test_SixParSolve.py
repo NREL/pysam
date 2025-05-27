@@ -1,4 +1,4 @@
-from pytest import approx
+import pytest
 import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
@@ -46,11 +46,11 @@ def test_default_sam_cec_user():
     model = define_default_model()
 
     IL_oper, IO_oper, Rs, A_oper, Rsh_oper = cec_model_params_at_condition(model, 1000, 25+275.15)
-    assert IL_oper == approx(6.059759, rel=1e-5) 
-    assert IO_oper == approx(1.1674203993060455e-10, rel=1e-5) 
-    assert Rs == approx(0.3081202, rel=1e-5) 
-    assert A_oper == approx(2.5948906, rel=1e-5) 
-    assert Rsh_oper == approx(500.069, rel=1e-5) 
+    assert IL_oper == pytest.approx(6.059759, rel=1e-5) 
+    assert IO_oper == pytest.approx(1.1674203993060455e-10, rel=1e-5) 
+    assert Rs == pytest.approx(0.3081202, rel=1e-5) 
+    assert A_oper == pytest.approx(2.5948906, rel=1e-5) 
+    assert Rsh_oper == pytest.approx(500.069, rel=1e-5) 
 
     plot_iv_curve(model)
 
@@ -73,13 +73,14 @@ def test_cec_model_ivcurve_default():
         I = current_at_voltage_cec( v, IL_oper, IO_oper, Rs, A_oper, Rsh_oper, I_mp_ref )	
         y_I.append(I)
 
-    assert V[1] == approx(0.43221, rel=1e-3) 
-    assert V[-1] == approx(64.4, rel=1e-3) 
-    assert y_I[0] == approx(6.05, rel=1e-3) 
-    assert y_I[1] == approx(6.04913, rel=1e-3) 
-    assert y_I[-1] == approx(5.770225265737295e-06, rel=1e-3) 
+    assert V[1] == pytest.approx(0.43221, rel=1e-3) 
+    assert V[-1] == pytest.approx(64.4, rel=1e-3) 
+    assert y_I[0] == pytest.approx(6.05, rel=1e-3) 
+    assert y_I[1] == pytest.approx(6.04913, rel=1e-3) 
+    assert y_I[-1] == pytest.approx(5.770225265737295e-06, rel=1e-3) 
 
 
+@pytest.mark.skipif(not pyo.SolverFactory('ipopt').available(), reason="requires ipopt solver")
 def test_cec_model_solve(set_initial_values=True):
     model = define_default_model(set_initial_values)
 
