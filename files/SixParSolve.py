@@ -5,7 +5,6 @@ import pyomo.environ as pyo
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import idaes.logger as idaeslog
 from pyomo.util.infeasible import log_infeasible_constraints, log_infeasible_bounds, log_close_to_bounds
 import logging
 from datetime import datetime
