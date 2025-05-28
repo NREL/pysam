@@ -925,7 +925,7 @@ if __name__ == "__main__":
     # solve with bootstrapping
     print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}: Starting Second Pass Solve")
     df = parallel_run_solve_bootstrapping(solved_df, unsolved_df, plotting)
-    all_cec_modules_df = pd.concat([solved_df, df])
+    all_cec_modules_df = pd.concat([solved_df, df]).sort_index()
     all_cec_modules_df.to_csv(f"cec_modules_params_{filename_date}.csv", index=False)
 
     solved_df = all_cec_modules_df[~all_cec_modules_df['Rsh_py'].isna()]
@@ -935,7 +935,7 @@ if __name__ == "__main__":
     # solve with bootstrapping & reduced number of temperature samples
     print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}: Starting Final Pass Solve")
     df = parallel_run_solve_bootstrapping_reduced(solved_df, unsolved_df, plotting)
-    all_cec_modules_df = pd.concat([solved_df, df])
+    all_cec_modules_df = pd.concat([solved_df, df]).sort_index()
     all_cec_modules_df.to_csv(f"cec_modules_params_{filename_date}.csv", index=False)
 
     solved_df = all_cec_modules_df[~all_cec_modules_df['Rsh_py'].isna()]
