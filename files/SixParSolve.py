@@ -892,6 +892,9 @@ def create_model_with_solution(sol_row):
 
 
 if __name__ == "__main__":
+    if not pyo.SolverFactory('ipopt').available():
+        raise RuntimeError("IPOPT solver not available. Install it to your Python environment from conda: `conda install -c conda-forge ipopt`")
+
     filename = None
 
     if len(sys.argv) > 1:
