@@ -25,10 +25,14 @@ model_param_cols = ["a_py", "Il_py", "Io_py", "Rs_py", "Rsh_py", "Adj_py"]
 model_param_cols_ssc = ["a_ssc", "Il_ssc", "Io_ssc","Rs_ssc","Rsh_ssc","Adj_ssc"]
 iv_diff_cols = ['d_Isc', 'd_Imp', 'd_Vmp', 'd_Pmp']
 
-# 6par_solve.h L 423
+
 def current_at_voltage_cec(Vmodule, IL_ref, IO_ref, RS, A_ref, RSH_ref, I_mp_ref):
     """
     Solve for the current at the voltage Vmodule, given the single diode parameters which could have been modified for non-STC condition
+
+    Used for plotting only, so numerical precision is only 1e-4. Adapted from ssc/shared/6par_solve.h L 423
+
+    For better stability and precision, use pvlib.pvsystem.i_from_v(v, IL_oper, IO_oper, Rs, Rsh_oper, A_oper)
     """
     F = 0
     Fprime = 0
@@ -73,8 +77,9 @@ def cec_model_params_at_condition(model, Irr, T_cell_K):
     
     A_oper = a * T_cell_K / Tc_ref
     EG = eg0 * (1-0.0002677*(T_cell_K-Tc_ref))
+    k = pyo.value(m.k)     # Boltzmann constant eV/K
     # instead of 1/KB, is 11600 in L129
-    IO_oper = Io * np.power(T_cell_K/Tc_ref, 3) * np.exp( 11600 *(eg0/Tc_ref - EG/T_cell_K) )
+    IO_oper = Io * np.power(T_cell_K/Tc_ref, 3) * np.exp(eg0 / (k*(Tc_ref)) - (EG / (k*(T_cell_K))))
     
     Rsh_oper = Rsh*(I_ref/Irr)
     IL_oper = Irr/I_ref *( Il + muIsc*(T_cell_K-Tc_ref) )
@@ -170,6 +175,7 @@ def create_model(gamma_curve_dt=3):
     m.bVoc = pyo.Param(domain=pyo.Reals, mutable=True, units=pyo.units.V/pyo.units.K)
     m.gPmp = pyo.Param(domain=pyo.Reals, mutable=True, units=pyo.units.percent/pyo.units.K)
     m.Egref = pyo.Param(domain=pyo.NonNegativeReals, mutable=True, initialize=1.121)
+    m.k = pyo.Param(domain=pyo.NonNegativeReals, mutable=True, initialize=8.617332478e-05, units=pyo.units.eV/pyo.units.K)
     m.Tref = pyo.Param(domain=pyo.NonNegativeReals, mutable=True, units=pyo.units.K)
 
     # Module6ParNonlinear
@@ -209,7 +215,7 @@ def create_model(gamma_curve_dt=3):
         # PTnonlinear
         b.a_Tc = pyo.Expression(expr=m.par.a * b.Tc / m.Tref)
         b.Eg_Tc = pyo.Expression(expr=m.Egref * (1-0.0002677*(b.Tc-m.Tref)))
-        b.Io_Tc = pyo.Expression(expr=m.par.Io* ( b.Tc/m.Tref)**3 * pyo.exp( 11600 * (m.Egref/m.Tref - b.Eg_Tc/b.Tc)))
+        b.Io_Tc = pyo.Expression(expr=m.par.Io* ( b.Tc/m.Tref)**3 * pyo.exp(b.Eg_Tc / (m.k*(m.Tref)) - (m.Egref / (m.k*(b.Tc)))))
         b.Il_Tc = pyo.Expression(expr=m.par.Il + (m.aIsc*(1-m.par.Adj/100))*(b.Tc-m.Tref))
         b.f_5 = pyo.Constraint(expr=b.Vmp_Tc *( b.Io_Tc/b.a_Tc*pyo.exp( (b.Vmp_Tc+b.Imp_Tc*m.par.Rs)/b.a_Tc ) + 1/m.par.Rsh ) 
                             / ( 1 + m.par.Rs/m.par.Rsh + b.Io_Tc*m.par.Rs/b.a_Tc*pyo.exp( (b.Vmp_Tc+b.Imp_Tc*m.par.Rs)/b.a_Tc ) ) - b.Imp_Tc == 0)

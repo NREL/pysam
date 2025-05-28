@@ -45,11 +45,11 @@ def define_default_model(set_initial_values=True):
 def test_default_sam_cec_user():
     model = define_default_model()
 
-    IL_oper, IO_oper, Rs, A_oper, Rsh_oper = cec_model_params_at_condition(model, 1000, 25+275.15)
-    assert IL_oper == pytest.approx(6.059759, rel=1e-5) 
-    assert IO_oper == pytest.approx(1.1674203993060455e-10, rel=1e-5) 
+    IL_oper, IO_oper, Rs, A_oper, Rsh_oper = cec_model_params_at_condition(model, 1000, 30+273.15)
+    assert IL_oper == pytest.approx(6.0683977849785, rel=1e-5) 
+    assert IO_oper == pytest.approx(1.9115026653318136e-10, rel=1e-5) 
     assert Rs == pytest.approx(0.3081202, rel=1e-5) 
-    assert A_oper == pytest.approx(2.5948906, rel=1e-5) 
+    assert A_oper == pytest.approx(2.6208265638101627, rel=1e-5) 
     assert Rsh_oper == pytest.approx(500.069, rel=1e-5) 
 
     plot_iv_curve(model)
