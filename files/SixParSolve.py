@@ -8,6 +8,9 @@ import matplotlib.pyplot as plt
 from pyomo.util.infeasible import log_infeasible_constraints, log_infeasible_bounds, log_close_to_bounds
 import logging
 from datetime import datetime
+import multiprocessing as mp
+
+NUM_OF_WORKERS = mp.cpu_count() // 2
 
 logging.getLogger('pyomo.core').setLevel(logging.ERROR)
 solve_log = logging.getLogger('solve_log')
@@ -555,189 +558,246 @@ def read_prepare_file(xlsx_file):
     return all_cec_modules_df
 
 
-def run_solve_first_pass(all_cec_modules_df):
+def run_solve_first_pass(i, r, plotting=False, solver=None):
     """
     Solve for all the modules in the DataFrame, using the empirical initial guess
     """
+    if solver is None:
+        solver = pyo.SolverFactory('ipopt')
+
+    if r['V_mp_ref'] < 0:
+        r['Error'] = "Vmp < 0"
+        return r
+    if r['V_oc_ref'] < r['V_mp_ref']:
+        r['Error'] = "Voc < Vmp"
+        return r
+
+    model = create_model(gamma_curve_dt=3)
+    if not set_parameters(model.solver, r):
+        r['Error'] = f"Parameter missing or out of bounds for row {i}"
+        return r
+
+    if plotting:
+        plt.figure()
+    solver.options["max_iter"] = 3000
+
+    set_empirical_initial_guess(model)
+
+    res, scaled_model = solve_model(model, solver, tee=False)
+    
+    if plotting:
+        if res and res.solver.status == 'ok':
+            plot_iv_curve(model, linestyle='-', label="Optimal", plot_anchors=True)
+        else:
+            plot_iv_curve(model, linestyle='dotted', label="Approx", plot_anchors=True)
+
+    d_I_sc, d_I_mp, d_V_mp, d_P_mp = get_curve_diffs(r, model)
+
+    infeas_sum = np.abs([d_I_sc, d_I_mp, d_V_mp, d_P_mp]).sum()
+    infeas_max = np.abs([d_I_sc, d_I_mp, d_V_mp, d_P_mp]).max()
+
+    if infeas_max > 0.5 or infeas_sum > 0.5:
+        r['Error'] = "Infeasibility > 0.5"
+        if plotting:
+            plt.close()
+        return r
+
+    a, Il, Io, Rs, Rsh, Adj = get_params_from_model(scaled_model)
+    for col, val in zip(iv_diff_cols, [d_I_sc, d_I_mp, d_V_mp, d_P_mp]):
+        r[col] = val
+    for col, val in zip(model_param_cols, [a, Il, Io, Rs, Rsh, Adj]):
+        r[col] = val
+
+    if plotting:
+        plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+        plt.xlabel("Voltage")
+        plt.ylabel("Current")
+        plt.title(f"{r['Manufacturer']} {r['Model Number']}")
+        plt.tight_layout()
+        plt.savefig(plot_output_path / f"IV_curve_{i}.png")
+        plt.close()
+    return r
+
+
+def parallel_run_solve_first_pass(all_cec_modules_df, plotting):
+    with mp.Pool(NUM_OF_WORKERS) as pool:
+        results = [pool.apply_async(run_solve_first_pass, [idx, row, plotting]) for idx, row in all_cec_modules_df.iterrows()]
+        results = [row.get() for row in results]
+        df = pd.DataFrame(results)
+    return df
+
+def sequential_run_solve_first_pass(all_cec_modules_df, plotting=False):
     solver = pyo.SolverFactory('ipopt')
 
+    results = []
     for i, r in all_cec_modules_df.iterrows():
-        if r['V_mp_ref'] < 0:
-            all_cec_modules_df.loc[i, 'Error'] = "Vmp < 0"
-            continue
-        if r['V_oc_ref'] < r['V_mp_ref']:
-            all_cec_modules_df.loc[i, 'Error'] = "Voc < Vmp"
-            continue
-
-        model = create_model(gamma_curve_dt=3)
-        if not set_parameters(model.solver, r):
-            all_cec_modules_df.loc[i, 'Error'] = f"Parameter missing or out of bounds for row {i}"
-            continue
-
-        if plotting:
-            plt.figure()
-        solver.options["max_iter"] = 3000
-
-        set_empirical_initial_guess(model)
-
-        res, scaled_model = solve_model(model, solver, tee=False)
-        
-        if plotting:
-            if res and res.solver.status == 'ok':
-                plot_iv_curve(model, linestyle='-', label="Optimal", plot_anchors=True)
-            else:
-                plot_iv_curve(model, linestyle='dotted', label="Approx", plot_anchors=True)
-
-        d_I_sc, d_I_mp, d_V_mp, d_P_mp = get_curve_diffs(r, model)
-
-        infeas_sum = np.abs([d_I_sc, d_I_mp, d_V_mp, d_P_mp]).sum()
-        infeas_max = np.abs([d_I_sc, d_I_mp, d_V_mp, d_P_mp]).max()
-
-        if infeas_max > 0.5 or infeas_sum > 0.5:
-            all_cec_modules_df.loc[i, 'Error'] = "Infeasibility > 0.5"
-            if plotting:
-                plt.close()
-            continue
-
-        a, Il, Io, Rs, Rsh, Adj = get_params_from_model(scaled_model)
-        all_cec_modules_df.loc[i, iv_diff_cols] = [d_I_sc, d_I_mp, d_V_mp, d_P_mp]
-        all_cec_modules_df.loc[i, model_param_cols] = [a, Il, Io, Rs, Rsh, Adj]
-
-        if plotting:
-            plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
-            plt.xlabel("Voltage")
-            plt.ylabel("Current")
-            plt.title(f"{r['Manufacturer']} {r['Model Number']}")
-            plt.tight_layout()
-            plt.savefig(plot_output_path / f"IV_curve_{i}.png")
-            plt.close()
-    return all_cec_modules_df
+        row = run_solve_first_pass(i, r, plotting, solver)
+        results.append(row)
+    return pd.DataFrame(results)
 
 
-def run_solve_bootstrapping(all_cec_modules_df, solved_df, unsolved_df):
+def run_solve_bootstrapping(i, r, solved_df, plotting=False, solver=None):
     """
     Solve for all the modules in the DataFrame, using the `find_closest` to provide the initial guess
     """
+    if solver is None:
+        solver = pyo.SolverFactory('ipopt')
+    solver.options["max_iter"] = 3000
+
+    if r['V_mp_ref'] < 0:
+        r['Error'] = "Vmp < 0"
+        return r
+    if r['V_oc_ref'] < r['V_mp_ref']:
+        r['Error'] = "Voc < Vmp"
+        return r
+
+    model = create_model(gamma_curve_dt=3)
+    if not set_parameters(model.solver, r):
+        r['Error'] = f"Parameter missing or out of bounds for row {i}"
+        return r
+
+    if plotting:
+        plt.figure()
+
+    cec_closest = find_closest(solved_df, r)
+    set_initial_guess(model, *cec_closest[model_param_cols])
+    if plotting:
+        plot_iv_curve(model, linestyle=(0, (1, 10)), label="Closest Guess")
+
+    res, scaled_model = solve_model(model, solver, tee=False)
+    
+    if plotting:
+        if res and res.solver.status == 'ok':
+            plot_iv_curve(model, linestyle='-', label="Optimal", plot_anchors=True)
+        else:
+            plot_iv_curve(model, linestyle='dotted', label="Approx", plot_anchors=True)
+
+    d_I_sc, d_I_mp, d_V_mp, d_P_mp = get_curve_diffs(r, model)
+
+    infeas_sum = np.abs([d_I_sc, d_I_mp, d_V_mp, d_P_mp]).sum()
+    infeas_max = np.abs([d_I_sc, d_I_mp, d_V_mp, d_P_mp]).max()
+
+    if infeas_max > 0.5 or infeas_sum > 0.5:
+        r['Error'] = "Infeasibility > 0.5"
+        if plotting:
+            plt.close()
+        return r
+
+    a, Il, Io, Rs, Rsh, Adj = get_params_from_model(scaled_model)
+    for col, val in zip(iv_diff_cols, [d_I_sc, d_I_mp, d_V_mp, d_P_mp]):
+        r[col] = val
+    for col, val in zip(model_param_cols, [a, Il, Io, Rs, Rsh, Adj]):
+        r[col] = val
+    r['Error'] = None
+
+    if plotting:
+        plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+        plt.xlabel("Voltage")
+        plt.ylabel("Current")
+        plt.title(f"{r['Manufacturer']} {r['Model Number']}")
+        plt.tight_layout()
+        plt.savefig(plot_output_path / f"IV_curve_{i}.png")
+        plt.close()
+    return r
+
+
+def parallel_run_solve_bootstrapping(solved_df, unsolved_df, plotting=False):
+    with mp.Pool(NUM_OF_WORKERS) as pool:
+        results = [pool.apply_async(run_solve_bootstrapping, [idx, row, solved_df, plotting]) for idx, row in unsolved_df.iterrows()]
+        results = [row.get() for row in results]
+        df = pd.DataFrame(results)
+    return df
+
+def sequential_run_solve_bootstrapping(solved_df, unsolved_df, plotting=False):
     solver = pyo.SolverFactory('ipopt')
 
+    results = []
     for i, r in unsolved_df.iterrows():
-        if r['V_mp_ref'] < 0:
-            all_cec_modules_df.loc[i, 'Error'] = "Vmp < 0"
-            continue
-        if r['V_oc_ref'] < r['V_mp_ref']:
-            all_cec_modules_df.loc[i, 'Error'] = "Voc < Vmp"
-            continue
-
-        model = create_model(gamma_curve_dt=3)
-        if not set_parameters(model.solver, r):
-            all_cec_modules_df.loc[i, 'Error'] = f"Parameter missing or out of bounds for row {i}"
-            continue
-
-        if plotting:
-            plt.figure()
-        solver.options["max_iter"] = 3000
-
-        cec_closest = find_closest(solved_df, r)
-        set_initial_guess(model, *cec_closest[model_param_cols])
-        if plotting:
-            plot_iv_curve(model, linestyle=(0, (1, 10)), label="Closest Guess")
-
-        res, scaled_model = solve_model(model, solver, tee=False)
-        
-        if plotting:
-            if res and res.solver.status == 'ok':
-                plot_iv_curve(model, linestyle='-', label="Optimal", plot_anchors=True)
-            else:
-                plot_iv_curve(model, linestyle='dotted', label="Approx", plot_anchors=True)
-
-        d_I_sc, d_I_mp, d_V_mp, d_P_mp = get_curve_diffs(r, model)
-
-        infeas_sum = np.abs([d_I_sc, d_I_mp, d_V_mp, d_P_mp]).sum()
-        infeas_max = np.abs([d_I_sc, d_I_mp, d_V_mp, d_P_mp]).max()
-
-        if infeas_max > 0.5 or infeas_sum > 0.5:
-            all_cec_modules_df.loc[i, 'Error'] = "Infeasibility > 0.5"
-            if plotting:
-                plt.close()
-            continue
-
-        a, Il, Io, Rs, Rsh, Adj = get_params_from_model(scaled_model)
-        all_cec_modules_df.loc[i, iv_diff_cols] = [d_I_sc, d_I_mp, d_V_mp, d_P_mp]
-        all_cec_modules_df.loc[i, model_param_cols] = [a, Il, Io, Rs, Rsh, Adj]
-        all_cec_modules_df.loc[i, 'Error'] = None
-
-        if plotting:
-            plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
-            plt.xlabel("Voltage")
-            plt.ylabel("Current")
-            plt.title(f"{r['Manufacturer']} {r['Model Number']}")
-            plt.tight_layout()
-            plt.savefig(plot_output_path / f"IV_curve_{i}.png")
-            plt.close()
-    return all_cec_modules_df
+        row = run_solve_bootstrapping(i, r, solved_df, plotting, solver)
+        results.append(row)
+    return pd.DataFrame(results)
 
 
-def run_solve_bootstrapping_reduced(all_cec_modules_df, solved_df, unsolved_df):
+def run_solve_bootstrapping_reduced(i, r, solved_df, plotting=False, solver=None):
     """
     Solve for all the modules in the DataFrame, using the closest initial guess and reducing the number of temperature samples to fit gamma
     """
+    if solver is None:
+        solver = pyo.SolverFactory('ipopt')
+    solver.options["max_iter"] = 3000
+
+    if r['V_mp_ref'] < 0:
+        r['Error'] = "Vmp < 0"
+        return r
+    if r['V_oc_ref'] < r['V_mp_ref']:
+        r['Error'] = "Voc < Vmp"
+        return r
+
+    model = create_model(gamma_curve_dt=15)
+    if not set_parameters(model.solver, r):
+        r['Error'] = f"Parameter missing or out of bounds for row {i}"
+        return r
+
+    if plotting:
+        plt.figure()
+
+    cec_closest = find_closest(solved_df, r)
+    set_initial_guess(model, *cec_closest[model_param_cols])
+    if plotting:
+        plot_iv_curve(model, linestyle=(0, (1, 10)), label="Closest Guess")
+
+    res, scaled_model = solve_model(model, solver, tee=False)
+    
+    if plotting:
+        if res and res.solver.status == 'ok':
+            plot_iv_curve(model, linestyle='-', label="Optimal", plot_anchors=True)
+        else:
+            plot_iv_curve(model, linestyle='dotted', label="Approx", plot_anchors=True)
+
+    d_I_sc, d_I_mp, d_V_mp, d_P_mp = get_curve_diffs(r, model)
+
+    infeas_sum = np.abs([d_I_sc, d_I_mp, d_V_mp, d_P_mp]).sum()
+    infeas_max = np.abs([d_I_sc, d_I_mp, d_V_mp, d_P_mp]).max()
+
+    if infeas_max > 0.5 or infeas_sum > 0.5:
+        r['Error'] = "Infeasibility > 0.5"
+        if plotting:
+            plt.close()
+        return r
+
+    a, Il, Io, Rs, Rsh, Adj = get_params_from_model(scaled_model)
+    for col, val in zip(iv_diff_cols, [d_I_sc, d_I_mp, d_V_mp, d_P_mp]):
+        r[col] = val
+    for col, val in zip(model_param_cols, [a, Il, Io, Rs, Rsh, Adj]):
+        r[col] = val
+    r['Error'] = None
+
+    if plotting:
+        plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+        plt.xlabel("Voltage")
+        plt.ylabel("Current")
+        plt.title(f"{r['Manufacturer']} {r['Model Number']}")
+        plt.tight_layout()
+        plt.savefig(plot_output_path / f"IV_curve_{i}.png")
+        plt.close()
+    return r
+
+
+def parallel_run_solve_bootstrapping_reduced(solved_df, unsolved_df, plotting=False):
+    with mp.Pool(NUM_OF_WORKERS) as pool:
+        results = [pool.apply_async(run_solve_bootstrapping_reduced, [idx, row, solved_df, plotting]) for idx, row in unsolved_df.iterrows()]
+        results = [row.get() for row in results]
+        df = pd.DataFrame(results)
+    return df
+
+def sequential_run_solve_bootstrapping_reduced(solved_df, unsolved_df, plotting=False):
     solver = pyo.SolverFactory('ipopt')
 
+    results = []
     for i, r in unsolved_df.iterrows():
-        if r['V_mp_ref'] < 0:
-            all_cec_modules_df.loc[i, 'Error'] = "Vmp < 0"
-            continue
-        if r['V_oc_ref'] < r['V_mp_ref']:
-            all_cec_modules_df.loc[i, 'Error'] = "Voc < Vmp"
-            continue
-
-        model = create_model(gamma_curve_dt=15)
-        if not set_parameters(model.solver, r):
-            all_cec_modules_df.loc[i, 'Error'] = f"Parameter missing or out of bounds for row {i}"
-            continue
-
-        if plotting:
-            plt.figure()
-        solver.options["max_iter"] = 3000
-
-        cec_closest = find_closest(solved_df, r)
-        set_initial_guess(model, *cec_closest[model_param_cols])
-        if plotting:
-            plot_iv_curve(model, linestyle=(0, (1, 10)), label="Closest Guess")
-
-        res, scaled_model = solve_model(model, solver, tee=False)
-        
-        if plotting:
-            if res and res.solver.status == 'ok':
-                plot_iv_curve(model, linestyle='-', label="Optimal", plot_anchors=True)
-            else:
-                plot_iv_curve(model, linestyle='dotted', label="Approx", plot_anchors=True)
-
-        d_I_sc, d_I_mp, d_V_mp, d_P_mp = get_curve_diffs(r, model)
-
-        infeas_sum = np.abs([d_I_sc, d_I_mp, d_V_mp, d_P_mp]).sum()
-        infeas_max = np.abs([d_I_sc, d_I_mp, d_V_mp, d_P_mp]).max()
-
-        if infeas_max > 0.5 or infeas_sum > 0.5:
-            all_cec_modules_df.loc[i, 'Error'] = "Infeasibility > 0.5"
-            if plotting:
-                plt.close()
-            continue
-
-        a, Il, Io, Rs, Rsh, Adj = get_params_from_model(scaled_model)
-        all_cec_modules_df.loc[i, iv_diff_cols] = [d_I_sc, d_I_mp, d_V_mp, d_P_mp]
-        all_cec_modules_df.loc[i, model_param_cols] = [a, Il, Io, Rs, Rsh, Adj]
-        all_cec_modules_df.loc[i, 'Error'] = None
-
-        if plotting:
-            plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
-            plt.xlabel("Voltage")
-            plt.ylabel("Current")
-            plt.title(f"{r['Manufacturer']} {r['Model Number']}")
-            plt.tight_layout()
-            plt.savefig(plot_output_path / f"IV_curve_{i}.png")
-            plt.close()
-    return all_cec_modules_df
+        row = run_solve_bootstrapping_reduced(i, r, solved_df, plotting, solver)
+        results.append(row)
+    return pd.DataFrame(results)
 
 
 def solve_bootstrapping_reduced_approx(all_cec_modules_df, solved_df, unsolved_df):
@@ -848,8 +908,8 @@ if __name__ == "__main__":
     print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}: Solving for {len(all_cec_modules_df)} Modules")
 
     # solve attempt #1
-    print("Starting First Pass Solve")
-    all_cec_modules_df = run_solve_first_pass(all_cec_modules_df)
+    print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}: Starting First Pass Solve")
+    all_cec_modules_df = parallel_run_solve_first_pass(all_cec_modules_df, plotting)
     all_cec_modules_df.to_csv(f"cec_modules_params_{filename_date}.csv", index=False)
     
     solved_df = all_cec_modules_df[~all_cec_modules_df['Rsh_py'].isna()]
@@ -857,8 +917,9 @@ if __name__ == "__main__":
     print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}: Solved {len(solved_df)}. {len(unsolved_df)} remaining.")
 
     # solve with bootstrapping
-    print("{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}: Starting Second Pass Solve")
-    all_cec_modules_df = run_solve_bootstrapping(all_cec_modules_df, solved_df, unsolved_df)
+    print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}: Starting Second Pass Solve")
+    df = parallel_run_solve_bootstrapping(solved_df, unsolved_df, plotting)
+    all_cec_modules_df = pd.concat([solved_df, df])
     all_cec_modules_df.to_csv(f"cec_modules_params_{filename_date}.csv", index=False)
 
     solved_df = all_cec_modules_df[~all_cec_modules_df['Rsh_py'].isna()]
@@ -866,8 +927,9 @@ if __name__ == "__main__":
     print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}: Solved {len(solved_df)}. {len(unsolved_df)} remaining.")
 
     # solve with bootstrapping & reduced number of temperature samples
-    print("{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}: Starting Final Pass Solve")
-    all_cec_modules_df = run_solve_bootstrapping_reduced(all_cec_modules_df, solved_df, unsolved_df)
+    print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}: Starting Final Pass Solve")
+    df = parallel_run_solve_bootstrapping_reduced(solved_df, unsolved_df, plotting)
+    all_cec_modules_df = pd.concat([solved_df, df])
     all_cec_modules_df.to_csv(f"cec_modules_params_{filename_date}.csv", index=False)
 
     solved_df = all_cec_modules_df[~all_cec_modules_df['Rsh_py'].isna()]
