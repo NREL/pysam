@@ -19,26 +19,32 @@ def test_adjustment_factors():
     m = CustomGeneration.new()
     adj = m.AdjustmentFactors
     adj.adjust_constant = 0
-    adj.adjust_en_hourly = 0
-    adj.adjust_hourly = [0]
+    adj.adjust_en_timeindex = 0
+    adj.adjust_timeindex = [0]
     adj.adjust_en_periods = 0
     adj.adjust_periods = [[0, 0]]
     adj.adjust_en_timeindex = 0
     adj.adjust_timeindex = [0]
+
+    m = battery.new()
+    adj = m.AdjustmentFactors
+    adj.batt_adjust_constant = 0
+    adj.batt_adjust_en_timeindex = 0
+    adj.batt_adjust_timeindex = [0]
+    adj.batt_adjust_en_periods = 0
+    adj.batt_adjust_periods = [[0, 0]]
+    adj.batt_adjust_en_timeindex = 0
+    adj.batt_adjust_timeindex = [0]
+
+    m = pvsamv1.new()
+    adj = m.AdjustmentFactors
     adj.dc_adjust_constant = 0
-    adj.dc_adjust_en_hourly = 0
-    adj.dc_adjust_hourly = [0]
+    adj.dc_adjust_en_timeindex = 0
+    adj.dc_adjust_timeindex = [0]
     adj.dc_adjust_en_periods = 0
     adj.dc_adjust_periods = [[0, 0]]
     adj.dc_adjust_en_timeindex = 0
     adj.dc_adjust_timeindex = [0]
-    adj.sf_adjust_constant = 0
-    adj.sf_adjust_en_hourly = 0
-    adj.sf_adjust_hourly = [0]
-    adj.sf_adjust_en_periods = 0
-    adj.sf_adjust_periods = [[0, 0]]
-    adj.sf_adjust_en_timeindex = 0
-    adj.sf_adjust_timeindex = [0]
     adj.export()
 
 @pytest.mark.parametrize("execution_number", range(10))
@@ -195,8 +201,8 @@ def test_functionality():
         assert(d.adjust_constant == 1)
         n_tests_passed += 1
 
-        d.adjust_hourly = (1, 2)
-        assert(d.adjust_hourly == (1, 2))
+        d.adjust_timeindex = (1, 2)
+        assert(d.adjust_timeindex == (1, 2))
         n_tests_passed += 1
 
         d.adjust_periods = ((1, 2), (3, 4))
@@ -204,32 +210,37 @@ def test_functionality():
         n_tests_passed += 1
 
         try:
-            d.periods = ((1, 2))
+            d.adjust_periods = ((1, 2))
         except:
             n_tests_passed += 1
 
         ValDict = d.export()
-        assert(ValDict['adjust_constant'] == 1 and ValDict['adjust_hourly'] == (1, 2) and ValDict['adjust_periods'] == ((1, 2), (3, 4)))
+        assert(ValDict['adjust_constant'] == 1 and ValDict['adjust_timeindex'] == (1, 2) and ValDict['adjust_periods'] == ((1, 2), (3, 4)))
         n_tests_passed += 1
 
-        ValDict = {'adjust_constant': 10, "adjust_hourly": (10, 20), "adjust_periods": ((10, 20), (30, 40))}
+        ValDict = {'adjust_constant': 10, "adjust_timeindex": (10, 20), "adjust_periods": ((10, 20), (30, 40))}
         d.assign(ValDict)
-        assert(ValDict['adjust_constant'] == 10 and ValDict['adjust_hourly'] == (10, 20) and ValDict['adjust_periods'] == ((10, 20), (30, 40)))
+        assert(ValDict['adjust_constant'] == 10 and ValDict['adjust_timeindex'] == (10, 20) and ValDict['adjust_periods'] == ((10, 20), (30, 40)))
         n_tests_passed += 1
 
-        # Test nested dictionary assignment and export
-
+        # Test nested dictionary assignment, replacement and export
         TechDict = {'Plant': {'derate': 100,
                                    'energy_output_array': (100, 200)},
-                    'AdjustmentFactors': {'adjust_constant': 100, "adjust_hourly": (100, 200), "adjust_periods": ((100, 200), (300, 400))}}
+                    'AdjustmentFactors': {'adjust_constant': 100, "adjust_timeindex": (100, 200), "adjust_periods": ((100, 200), (300, 400))}}
         a.assign(TechDict)
         ValDict = a.Plant.export()
         assert (ValDict['derate'] == 100 and ValDict['energy_output_array'] == (100, 200))
         n_tests_passed += 1
 
         ValDict = a.AdjustmentFactors.export()
-        assert (ValDict['adjust_constant'] == 100 and ValDict['adjust_hourly'] == (100, 200) and ValDict['adjust_periods'] == (
+        assert (ValDict['adjust_constant'] == 100 and ValDict['adjust_timeindex'] == (100, 200) and ValDict['adjust_periods'] == (
         (100, 200), (300, 400)))
+        n_tests_passed += 1
+
+        TechDict = {'AdjustmentFactors': {'adjust_constant': 0}}
+        a.replace(TechDict)
+        ValDict = a.AdjustmentFactors.export()
+        assert (ValDict['adjust_constant'] == 0 and len(ValDict) == 1)
         n_tests_passed += 1
 
         # Test reading from PySSC
@@ -434,7 +445,7 @@ def assign_values(mod, i):
 def test_run_all():
     # only run test on first Python version to be built, since this test is very time consuming
     minor_ver = sys.version_info[1]
-    if minor_ver != 8:
+    if minor_ver != 9:
         return
     techs = (
         "Battery", "Battwatts", "Biomass", "EtesElectricResistance", "Geothermal", 
@@ -442,7 +453,7 @@ def test_run_all():
         "LinearFresnelDsgIph", "MhkTidal", "MhkWave",
         "MsptIph",
         "Pvsamv1", "Pvwattsv8", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "CustomGeneration", "Grid",
-        "TcsMSLF", "TcsgenericSolar", "TcslinearFresnel", "TcstroughEmpirical",
+        "TcsgenericSolar", "TcslinearFresnel", "TcstroughEmpirical",
         "TroughPhysical", "TroughPhysicalIph", "Windpower")
     for mod in techs:
         mod_name = "PySAM." + mod

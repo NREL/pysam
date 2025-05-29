@@ -9,7 +9,7 @@
 	"system_use_lifetime_output" : 0,
 	"analysis_period" : 25,
 	"generic_degradation" : [ 0 ],
-	"adjust:constant" : 0,
+	"adjust_constant" : 0,
 	"en_batt" : 0,
 	"batt_replacement_option" : 0,
 	"batt_chem" : 1,

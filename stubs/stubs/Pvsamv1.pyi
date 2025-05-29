@@ -2,6 +2,9 @@ class Pvsamv1(object):
 	def assign(self, dict):
 		pass
 
+	def replace(self, dict):
+		pass
+
 	def value(self, name, value=None):
 		pass
 
@@ -26,7 +29,10 @@ class Pvsamv1(object):
 	def Reopt_size_battery_post(self, args):
 		pass
 	class SolarResource(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -47,7 +53,10 @@ class Pvsamv1(object):
 
 
 	class Losses(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -105,7 +114,10 @@ class Pvsamv1(object):
 
 
 	class Lifetime(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -127,7 +139,10 @@ class Pvsamv1(object):
 
 
 	class SystemDesign(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -214,7 +229,10 @@ class Pvsamv1(object):
 
 
 	class Shading(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -271,7 +289,10 @@ class Pvsamv1(object):
 
 
 	class Layout(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -297,7 +318,10 @@ class Pvsamv1(object):
 
 
 	class Module(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -311,7 +335,10 @@ class Pvsamv1(object):
 
 
 	class SimpleEfficiencyModuleModel(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -348,7 +375,10 @@ class Pvsamv1(object):
 
 
 	class CECPerformanceModelWithModuleDatabase(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -396,7 +426,10 @@ class Pvsamv1(object):
 
 
 	class CECPerformanceModelWithUserEnteredSpecifications(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -427,7 +460,10 @@ class Pvsamv1(object):
 
 
 	class SandiaPVArrayPerformanceModelWithModuleDatabase(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -483,7 +519,10 @@ class Pvsamv1(object):
 
 
 	class IEC61853SingleDiodeModel(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -522,7 +561,10 @@ class Pvsamv1(object):
 
 
 	class MermoudLejeuneSingleDiodeModel(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -590,7 +632,10 @@ class Pvsamv1(object):
 
 
 	class Inverter(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -616,7 +661,10 @@ class Pvsamv1(object):
 
 
 	class InverterCECDatabase(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -640,7 +688,10 @@ class Pvsamv1(object):
 
 
 	class InverterCECCoefficientGenerator(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -664,7 +715,10 @@ class Pvsamv1(object):
 
 
 	class InverterDatasheet(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -684,7 +738,10 @@ class Pvsamv1(object):
 
 
 	class InverterPartLoadCurve(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -705,7 +762,10 @@ class Pvsamv1(object):
 
 
 	class InverterMermoudLejeuneModel(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -754,7 +814,10 @@ class Pvsamv1(object):
 
 
 	class BatterySystem(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -796,7 +859,10 @@ class Pvsamv1(object):
 
 
 	class Load(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -815,7 +881,10 @@ class Pvsamv1(object):
 
 
 	class PVLosses(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -831,39 +900,41 @@ class Pvsamv1(object):
 
 
 	class AdjustmentFactors(object):
-		def assign(self): 
+		def assign(self, dict): 
 			pass
 	
-		def export(self): 
-			return {}
-	
-		def __init__(self, *args, **kwargs): # real signature unknown
+		def replace(self, dict): 
 			pass
 	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
 		adjust_constant = float
-		adjust_en_hourly = float
 		adjust_en_periods = float
 		adjust_en_timeindex = float
-		adjust_hourly = tuple
 		adjust_periods = tuple
 		adjust_timeindex = tuple
+		batt_adjust_constant = float
+		batt_adjust_en_periods = float
+		batt_adjust_en_timeindex = float
+		batt_adjust_periods = tuple
+		batt_adjust_timeindex = tuple
 		dc_adjust_constant = float
-		dc_adjust_en_hourly = float
 		dc_adjust_en_periods = float
 		dc_adjust_en_timeindex = float
-		dc_adjust_hourly = tuple
 		dc_adjust_periods = tuple
 		dc_adjust_timeindex = tuple
-		sf_adjust_constant = float
-		sf_adjust_en_hourly = float
-		sf_adjust_en_periods = float
-		sf_adjust_en_timeindex = float
-		sf_adjust_hourly = tuple
-		sf_adjust_periods = tuple
-		sf_adjust_timeindex = tuple
+
 
 	class BatteryCell(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -911,7 +982,10 @@ class Pvsamv1(object):
 
 
 	class BatteryDispatch(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -972,7 +1046,10 @@ class Pvsamv1(object):
 
 
 	class SystemCosts(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -989,7 +1066,10 @@ class Pvsamv1(object):
 
 
 	class FuelCell(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -1003,7 +1083,10 @@ class Pvsamv1(object):
 
 
 	class PriceSignal(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -1034,7 +1117,10 @@ class Pvsamv1(object):
 
 
 	class Revenue(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -1062,7 +1148,10 @@ class Pvsamv1(object):
 
 
 	class ElectricityRates(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -1105,7 +1194,10 @@ class Pvsamv1(object):
 
 
 	class GridLimits(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -1121,7 +1213,10 @@ class Pvsamv1(object):
 
 
 	class HybridCosts(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -1144,7 +1239,10 @@ class Pvsamv1(object):
 
 
 	class Outputs(object):
-		def assign(self): 
+		def assign(self, dict): 
+			pass
+	
+		def replace(self, dict): 
 			pass
 	
 		def export(self) -> dict:
@@ -1296,6 +1394,7 @@ class Pvsamv1(object):
 		batt_conversion_loss = tuple
 		batt_cost_to_cycle = tuple
 		batt_cycles = tuple
+		batt_dispatch_period = tuple
 		batt_dispatch_sched = tuple
 		batt_grid_charge_percent = float
 		batt_power = tuple

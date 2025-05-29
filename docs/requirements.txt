@@ -1,3 +1,3 @@
-NREL-PySAM==6.0.1
+NREL-PySAM==7.0.0
 pandas
 sphinx_rtd_theme

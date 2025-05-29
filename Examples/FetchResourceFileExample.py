@@ -10,7 +10,7 @@ to `data`.
 To use the `FetchResourceFile` function, register an email address to receive a
 free API key at at https://developer.nrel.gov/signup/.
 
-Most recently tested against PySAM 6.0.0
+Most recently tested against PySAM 7.0.0
 
 @authors: skoeb, cpaulgilman
 '''

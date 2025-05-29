@@ -42,9 +42,8 @@ Load Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
+.. autoclass:: PySAM.Battwatts.Battwatts.AdjustmentFactors
 	:members:
-	:noindex:
 
 GridLimits Group
 -----------------
