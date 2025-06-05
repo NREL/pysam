@@ -1189,6 +1189,12 @@ Outputs_get_stim_cost_per_well(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_stim_total_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_stim_total_cost_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_total_drilling_cost(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_total_drilling_cost_nget, self->data_ptr);
@@ -1284,6 +1290,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"stim_cost_per_well", (getter)Outputs_get_stim_cost_per_well,(setter)0,
 	PyDoc_STR("*float*: Stimulation cost per well [$/well]"),
+ 	NULL},
+{"stim_total_cost", (getter)Outputs_get_stim_total_cost,(setter)0,
+	PyDoc_STR("*float*: Stimulation Total costs [$]"),
  	NULL},
 {"total_drilling_cost", (getter)Outputs_get_total_drilling_cost,(setter)0,
 	PyDoc_STR("*float*: Total drilling cost [$]"),

@@ -722,6 +722,7 @@ class FresnelPhysical(object):
 		q_pc_startup = tuple
 		q_tes_heater = tuple
 		rec_thermal_eff = tuple
+		rec_time_in_startup = tuple
 		recirculating = tuple
 		rh = tuple
 		sales_tax_total = float

@@ -137,6 +137,7 @@ class GeothermalCosts(object):
 		pump_only_cost = float
 		stim_cost_non_drill = float
 		stim_cost_per_well = float
+		stim_total_cost = float
 		total_drilling_cost = float
 		total_gathering_cost = float
 		total_pump_cost = float

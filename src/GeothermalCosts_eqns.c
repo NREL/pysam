@@ -14,6 +14,11 @@ char getem_om_cost_calc_doc[] =
     "     'pump_type': double [units] \\n"
     "     'pump_depth': double \\n"
     "Output: key-value pairs added to var_table\\n"
+    "     'labor_om_cost': double [$]"
+    "     'plant_maintenance_om_cost': double [$]"
+    "     'well_maintenance_om_cost': double [$]"
+    "     'gathering_system_maintenance_om_cost': double [$]"
+    "     'water_makeup_om_cost': double [$]"
     "     'total_getem_om_cost': double [$]";
 
 static PyObject* getem_om_cost_calc(PyObject *self, PyObject *args, PyObject *keywds)
@@ -99,13 +104,26 @@ static PyObject* getem_om_cost_calc(PyObject *self, PyObject *args, PyObject *ke
     }
 
     error = new_error();
-    double total_getem_om_cost = SAM_table_get_num(data, "total_getem_om_cost", &error);
-
+//    double total_getem_om_cost = SAM_table_get_num(data, "total_getem_om_cost", &error);
+    PyObject* dict_obj = NULL;
+    
     if (PySAM_has_error(error)){
         return NULL;
     }
 
-    SAM_table_destruct(data, NULL);
+//    SAM_table results = SAM_table_construct(NULL);
+//    SAM_table_set_table(results, "reopt_post", reopt_post, NULL);
+ //   SAM_table_set_string(results, "messages", log_msg, NULL);
+    dict_obj = PySAM_table_to_dict(data);
+ //   SAM_table_destruct(results, NULL);
+    SAM_table_destruct(data, NULL); // either assign all outputs to new table or return entire table
 
-    return PyFloat_FromDouble(total_getem_om_cost);
+//    cleanup:
+ //   SAM_table_unassign_entry(data, "reopt_scenario", NULL);
+ //   SAM_table_unassign_entry(data, "log", NULL);
+    return dict_obj;
+
+
+
+   // return PyFloat_FromDouble(total_getem_om_cost);
 }
