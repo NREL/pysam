@@ -1834,6 +1834,12 @@ Outputs_get_lp_flash_pressure(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_max_brine_effectiveness(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_Outputs_max_brine_effectiveness_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_monthly_energy(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Geothermal_Outputs_monthly_energy_aget, self->data_ptr);
@@ -2139,6 +2145,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"lp_flash_pressure", (getter)Outputs_get_lp_flash_pressure,(setter)0,
 	PyDoc_STR("*float*: LP Flash Pressure [psia]"),
+ 	NULL},
+{"max_brine_effectiveness", (getter)Outputs_get_max_brine_effectiveness,(setter)0,
+	PyDoc_STR("*float*: Maximum brine effectiveness [w-h/lb]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
 	PyDoc_STR("*sequence*: Monthly AC energy in Year 1 [kWh/mo]"),

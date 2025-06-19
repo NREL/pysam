@@ -186,6 +186,7 @@ class Geothermal(object):
 		kwh_per_kw = float
 		lifetime_output = float
 		lp_flash_pressure = float
+		max_brine_effectiveness = float
 		monthly_energy = tuple
 		monthly_energy_lifetime = tuple
 		monthly_power = tuple
