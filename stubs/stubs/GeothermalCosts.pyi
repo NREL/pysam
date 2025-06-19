@@ -118,6 +118,7 @@ class GeothermalCosts(object):
 		baseline_cost = float
 		conf_drilling_cost = float
 		conf_total_cost = float
+		engineering_cost = float
 		expl_drilling_cost = float
 		expl_total_cost = float
 		field_gathering_num_wells = float
@@ -139,6 +140,8 @@ class GeothermalCosts(object):
 		stim_cost_per_well = float
 		stim_total_cost = float
 		total_drilling_cost = float
+		total_drilling_permitting = float
+		total_expl_permitting = float
 		total_gathering_cost = float
 		total_pump_cost = float
 		total_pump_gathering_cost = float

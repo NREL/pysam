@@ -168,11 +168,13 @@ class Geothermal(object):
 		annual_energy = float
 		annual_energy_distribution_time = tuple
 		bottom_hole_pressure = float
+		brine_effectiveness = float
 		capacity_factor = float
 		condensate_pump_power = float
 		cw_pump_head = float
 		cw_pump_work = float
 		cwflow = float
+		dt_rock_well_head = float
 		eff_secondlaw = float
 		first_year_output = float
 		flash_count = float
