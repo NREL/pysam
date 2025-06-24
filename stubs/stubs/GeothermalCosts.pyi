@@ -115,6 +115,9 @@ class GeothermalCosts(object):
 			pass
 
 
+		atb_drilling_cost = float
+		atb_exploration_cost = float
+		atb_plant_cost = float
 		baseline_cost = float
 		conf_drilling_cost = float
 		conf_total_cost = float
