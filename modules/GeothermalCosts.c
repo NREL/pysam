@@ -1057,24 +1057,6 @@ static PyMethodDef Outputs_methods[] = {
 };
 
 static PyObject *
-Outputs_get_atb_drilling_cost(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_atb_drilling_cost_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_atb_exploration_cost(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_atb_exploration_cost_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_atb_plant_cost(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_atb_plant_cost_nget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_baseline_cost(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_baseline_cost_nget, self->data_ptr);
@@ -1090,12 +1072,6 @@ static PyObject *
 Outputs_get_conf_total_cost(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_conf_total_cost_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_engineering_cost(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_engineering_cost_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1213,27 +1189,9 @@ Outputs_get_stim_cost_per_well(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_stim_total_cost(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_stim_total_cost_nget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_total_drilling_cost(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_total_drilling_cost_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_total_drilling_permitting(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_total_drilling_permitting_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_total_expl_permitting(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_GeothermalCosts_Outputs_total_expl_permitting_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1261,15 +1219,6 @@ Outputs_get_total_surface_equipment_cost(VarGroupObject *self, void *closure)
 }
 
 static PyGetSetDef Outputs_getset[] = {
-{"atb_drilling_cost", (getter)Outputs_get_atb_drilling_cost,(setter)0,
-	PyDoc_STR("*float*: Drilling cost for ATB comparison [$]"),
- 	NULL},
-{"atb_exploration_cost", (getter)Outputs_get_atb_exploration_cost,(setter)0,
-	PyDoc_STR("*float*: Exploration cost for ATB comparison [$]"),
- 	NULL},
-{"atb_plant_cost", (getter)Outputs_get_atb_plant_cost,(setter)0,
-	PyDoc_STR("*float*: Plant cost for ATB comparison [$]"),
- 	NULL},
 {"baseline_cost", (getter)Outputs_get_baseline_cost,(setter)0,
 	PyDoc_STR("*float*: Baseline cost [$/kW]"),
  	NULL},
@@ -1278,9 +1227,6 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"conf_total_cost", (getter)Outputs_get_conf_total_cost,(setter)0,
 	PyDoc_STR("*float*: Confirmation total costs [$]"),
- 	NULL},
-{"engineering_cost", (getter)Outputs_get_engineering_cost,(setter)0,
-	PyDoc_STR("*float*: Engineering cost [$]"),
  	NULL},
 {"expl_drilling_cost", (getter)Outputs_get_expl_drilling_cost,(setter)0,
 	PyDoc_STR("*float*: Exploration drilling costs [$]"),
@@ -1339,17 +1285,8 @@ static PyGetSetDef Outputs_getset[] = {
 {"stim_cost_per_well", (getter)Outputs_get_stim_cost_per_well,(setter)0,
 	PyDoc_STR("*float*: Stimulation cost per well [$/well]"),
  	NULL},
-{"stim_total_cost", (getter)Outputs_get_stim_total_cost,(setter)0,
-	PyDoc_STR("*float*: Stimulation Total costs [$]"),
- 	NULL},
 {"total_drilling_cost", (getter)Outputs_get_total_drilling_cost,(setter)0,
 	PyDoc_STR("*float*: Total drilling cost [$]"),
- 	NULL},
-{"total_drilling_permitting", (getter)Outputs_get_total_drilling_permitting,(setter)0,
-	PyDoc_STR("*float*: Drilling permitting total costs [$]"),
- 	NULL},
-{"total_expl_permitting", (getter)Outputs_get_total_expl_permitting,(setter)0,
-	PyDoc_STR("*float*: Exploration permitting total costs [$]"),
  	NULL},
 {"total_gathering_cost", (getter)Outputs_get_total_gathering_cost,(setter)0,
 	PyDoc_STR("*float*: Total gathering well cost [$]"),

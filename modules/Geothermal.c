@@ -1726,12 +1726,6 @@ Outputs_get_bottom_hole_pressure(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_brine_effectiveness(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Geothermal_Outputs_brine_effectiveness_nget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_capacity_factor(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Geothermal_Outputs_capacity_factor_nget, self->data_ptr);
@@ -1759,12 +1753,6 @@ static PyObject *
 Outputs_get_cwflow(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Geothermal_Outputs_cwflow_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_dt_rock_well_head(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Geothermal_Outputs_dt_rock_well_head_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1831,12 +1819,6 @@ static PyObject *
 Outputs_get_lp_flash_pressure(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Geothermal_Outputs_lp_flash_pressure_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_max_brine_effectiveness(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Geothermal_Outputs_max_brine_effectiveness_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2092,9 +2074,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"bottom_hole_pressure", (getter)Outputs_get_bottom_hole_pressure,(setter)0,
 	PyDoc_STR("*float*: Bottom hole pres calculated by GETEM"),
  	NULL},
-{"brine_effectiveness", (getter)Outputs_get_brine_effectiveness,(setter)0,
-	PyDoc_STR("*float*: Brine effectiveness used in calculations [w-h/lb]"),
- 	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
 	PyDoc_STR("*float*: Capacity factor"),
  	NULL},
@@ -2109,9 +2088,6 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"cwflow", (getter)Outputs_get_cwflow,(setter)0,
 	PyDoc_STR("*float*: Cooling Water Flow [lb/h]"),
- 	NULL},
-{"dt_rock_well_head", (getter)Outputs_get_dt_rock_well_head,(setter)0,
-	PyDoc_STR("*float*: dT used in calculations [C]"),
  	NULL},
 {"eff_secondlaw", (getter)Outputs_get_eff_secondlaw,(setter)0,
 	PyDoc_STR("*float*: Second Law Efficiency [C]"),
@@ -2145,9 +2121,6 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"lp_flash_pressure", (getter)Outputs_get_lp_flash_pressure,(setter)0,
 	PyDoc_STR("*float*: LP Flash Pressure [psia]"),
- 	NULL},
-{"max_brine_effectiveness", (getter)Outputs_get_max_brine_effectiveness,(setter)0,
-	PyDoc_STR("*float*: Maximum brine effectiveness [w-h/lb]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
 	PyDoc_STR("*sequence*: Monthly AC energy in Year 1 [kWh/mo]"),
