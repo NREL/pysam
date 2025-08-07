@@ -248,6 +248,18 @@ GeoHourly_set_geotherm_cost_conf_num_wells(VarGroupObject *self, PyObject *value
 }
 
 static PyObject *
+GeoHourly_get_geotherm_cost_expl_lump_sum(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_GeoHourly_geotherm_cost_expl_lump_sum_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_geotherm_cost_expl_lump_sum(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_GeothermalCosts_GeoHourly_geotherm_cost_expl_lump_sum_nset, self->data_ptr);
+}
+
+static PyObject *
 GeoHourly_get_geotherm_cost_expl_multiplier(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_GeothermalCosts_GeoHourly_geotherm_cost_expl_multiplier_nget, self->data_ptr);
@@ -805,6 +817,9 @@ static PyGetSetDef GeoHourly_getset[] = {
  	NULL},
 {"geotherm_cost_conf_num_wells", (getter)GeoHourly_get_geotherm_cost_conf_num_wells,(setter)GeoHourly_set_geotherm_cost_conf_num_wells,
 	PyDoc_STR("*float*: Number of confirmation wells\n\n**Required:**\nRequired if calc_drill_costs=1"),
+ 	NULL},
+{"geotherm_cost_expl_lump_sum", (getter)GeoHourly_get_geotherm_cost_expl_lump_sum,(setter)GeoHourly_set_geotherm_cost_expl_lump_sum,
+	PyDoc_STR("*float*: Exploration cost lump sum\n\n**Required:**\nRequired if calc_drill_costs=1"),
  	NULL},
 {"geotherm_cost_expl_multiplier", (getter)GeoHourly_get_geotherm_cost_expl_multiplier,(setter)GeoHourly_set_geotherm_cost_expl_multiplier,
 	PyDoc_STR("*float*: Exploration cost multiplier\n\n**Required:**\nRequired if calc_drill_costs=1"),

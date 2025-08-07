@@ -56,6 +56,7 @@ class GeothermalCosts(object):
 		geotherm_cost_conf_multiplier = float
 		geotherm_cost_conf_non_drill = float
 		geotherm_cost_conf_num_wells = float
+		geotherm_cost_expl_lump_sum = float
 		geotherm_cost_expl_multiplier = float
 		geotherm_cost_expl_non_drill = float
 		geotherm_cost_expl_num_wells = float
