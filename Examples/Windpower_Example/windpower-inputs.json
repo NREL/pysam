@@ -36,6 +36,6 @@
 	"turb_hysteresis_loss" : 0.40000000000000002,
 	"turb_perf_loss" : 1.1000000000000001,
 	"turb_specific_loss" : 0.81000000000000005,
-	"constant" : 0,
+	"adjust_constant" : 0,
 	"total_uncert" : 12.085000000000001
 }

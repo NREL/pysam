@@ -15,7 +15,7 @@ The forecast code looks at the step-by-step (default hourly) costs of the rate, 
 This can either be run with all of the steps at once (single call to execute()) to generate an array of prices
 or by calling execute repeateadly, potentially in the loop with a model-predictive controller for energy storage
 
-Most recently tested against PySAM 7.0.0
+Most recently tested against PySAM 7.1.0
 """
 
 # Get a key from https://api.openei.org:443

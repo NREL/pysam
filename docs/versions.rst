@@ -8,6 +8,7 @@ The list below tracks changes in variables between consecutive PySAM versions.
 .. toctree::
     :maxdepth: 1
 
+    version_changes/7.1.0.rst
     version_changes/7.0.0.rst
     version_changes/6.0.0.rst
     version_changes/5.1.0.rst

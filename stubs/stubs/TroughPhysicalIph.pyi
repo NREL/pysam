@@ -914,6 +914,7 @@ class TroughPhysicalIph(object):
 		q_tes = float
 		q_tes_heater = tuple
 		qinc_costh = tuple
+		rec_time_in_startup = tuple
 		recirculating = tuple
 		required_number_of_loops_for_SM1 = float
 		rh = tuple

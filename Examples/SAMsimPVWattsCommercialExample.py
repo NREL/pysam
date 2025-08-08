@@ -13,7 +13,7 @@ The steps are:
     Run the simulations.
     Print the results.
 
-Most recently tested against PySAM 7.0.0
+Most recently tested against PySAM 7.1.0
 
 @author: frohro
 """
@@ -38,7 +38,7 @@ verbose = True  # Make False if you don't want all the debugging info.
 # in the added simulation case.  Choose "JSON for inputs" and a .json file
 # with the title of your simulation case will be created where you select with
 # the "Open" button on the file dialog.
-json_file_path = 'Examples/100kW_PVWatts.json'  # Change this file name to yours!
+json_file_path = Path(__file__).parent / '100kW_PVWatts.json'  # Change this file name to yours!
 with open(json_file_path) as f:
         dic = json.load(f)
 # The next seven lines are needed to load the PySAM data structures with the

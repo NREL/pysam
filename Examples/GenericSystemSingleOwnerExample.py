@@ -3,18 +3,19 @@
 """
 Created on Wed Mar  4 13:47:58 2020
 
-Most recently tested against PySAM 7.0.0
+Most recently tested against PySAM 7.1.0
 
 @author: frohro
 """
 import json
+from pathlib import Path
 import PySAM.CustomGeneration as CustomGeneration
 import PySAM.Grid as Grid
 import PySAM.Singleowner as Singleowner
 import PySAM.PySSC as pssc
 
 ssc = pssc.PySSC()
-with open("Examples/100mW_Generic.json") as f:
+with open(Path(__file__).parent / "100mW_Generic.json") as f:
     dic = json.load(f)
     gs_dat = pssc.dict_to_ssc_table(dic, "custom_generation")
     grid_dat = pssc.dict_to_ssc_table(dic, "grid")
