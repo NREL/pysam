@@ -8059,6 +8059,12 @@ Outputs_get_rec_op_mode_final(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_rec_time_in_startup(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysical_Outputs_rec_time_in_startup_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_recirculating(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysical_Outputs_recirculating_aget, self->data_ptr);
@@ -9066,6 +9072,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"rec_op_mode_final", (getter)Outputs_get_rec_op_mode_final,(setter)0,
 	PyDoc_STR("*sequence*: Final receiver operating mode 0: off, 1: startup, 2: on [-]"),
+ 	NULL},
+{"rec_time_in_startup", (getter)Outputs_get_rec_time_in_startup,(setter)0,
+	PyDoc_STR("*sequence*: Field time at startup [min]"),
  	NULL},
 {"recirculating", (getter)Outputs_get_recirculating,(setter)0,
 	PyDoc_STR("*sequence*: Field recirculating (bypass valve open) [-]"),

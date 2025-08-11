@@ -6501,6 +6501,12 @@ Outputs_get_rec_thermal_eff(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_rec_time_in_startup(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_FresnelPhysical_Outputs_rec_time_in_startup_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_recirculating(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_FresnelPhysical_Outputs_recirculating_aget, self->data_ptr);
@@ -7265,6 +7271,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"rec_thermal_eff", (getter)Outputs_get_rec_thermal_eff,(setter)0,
 	PyDoc_STR("*sequence*: Receiver thermal efficiency"),
+ 	NULL},
+{"rec_time_in_startup", (getter)Outputs_get_rec_time_in_startup,(setter)0,
+	PyDoc_STR("*sequence*: Field time at startup [min]"),
  	NULL},
 {"recirculating", (getter)Outputs_get_recirculating,(setter)0,
 	PyDoc_STR("*sequence*: Field recirculating (bypass valve open) [-]"),
