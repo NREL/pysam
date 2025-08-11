@@ -17,7 +17,8 @@ if [[ $OS_NAME == 'other' ]]; then
   exit 1
 fi
 
-pattern=$DIST_DIR/NREL_PySAM-*$VERSION*"${PYTHONVER//.}"*$OS_NAME*whl
+# pattern=$DIST_DIR/NREL_PySAM-*$VERSION*"${PYTHONVER//.}"*$OS_NAME*whl
+pattern=$DIST_DIR/nrel_pysam-*$VERSION*"${PYTHONVER//.}"*$OS_NAME*whl
 FILE=( $pattern )
 
 if [ -f "$FILE" ]; then
