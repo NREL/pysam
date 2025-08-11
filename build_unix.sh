@@ -58,7 +58,7 @@ fi
 
 rename -s linux manylinux2014 $PYSAMDIR/dist/*-linux_*
 docker pull continuumio/anaconda3
-docker run --rm --env PYSAMDIR=/io/pysam -v $(pwd):/io continuumio/anaconda /io/pysam/build_conda.sh
+docker run --rm --env PYSAMDIR=/io/pysam -v $(pwd):/io continuumio/anaconda3 /io/pysam/build_conda.sh
 
 # anaconda upload -u nrel $PYSAMDIR/dist/osx-64/*.tar.bz2
 # anaconda upload -u nrel $PYSAMDIR/dist/linux-64/*.tar.bz2
