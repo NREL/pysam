@@ -63,7 +63,7 @@ class Windpower(object):
 			pass
 
 		def calculate_powercurve(self, args):
-		pass
+			pass
 
 		wind_resource_shear = float
 		wind_turbine_ct_curve = tuple
